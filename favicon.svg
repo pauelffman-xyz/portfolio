@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" shape-rendering="crispEdges">
+  <style>.c{fill:#24242C}.f{fill:#F4F4F6}@media (prefers-color-scheme:dark){.c{fill:#F4F4F6}.f{fill:#24242C}}</style>
+  <path class="c" d="M5 0h6v1h2v1h1v1h1v2h1v6h-1v2h-1v1h-1v1h-2v1h-6v-1h-2v-1h-1v-1h-1v-2h-1v-6h1v-2h1v-1h1v-1h2z"/>
+  <path class="f" d="M5 4h2v3h-2zM9 4h2v3h-2zM3 9h2v1h6v-1h2v1h-1v1h-1v1h-6v-1h-1v-1h-1z"/>
+</svg>
