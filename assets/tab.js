@@ -1,24 +1,28 @@
 /* -------------------------------------------------------------
    Paula Elffman - identidad de pestana (el mismo icono en todo el sitio)
-   1. El icono es una carita: los dos ojos y la sonrisa salen de las
-      letras de "Pau" (ver el loader de la home). Al abrir la pagina
+   1. El icono es una carita pixelada: un circulo de pixeles con dos
+      ojos y una sonrisa, en una grilla de 16 x 16 (cada pixel de la
+      grilla es un pixel real de la pestana, por eso se ve nitido).
+      Es la misma idea del loader de la home. Al abrir la pagina
       guina un ojo una vez.
+      Circulo oscuro con cara clara; si el navegador esta en modo
+      oscuro se invierte solo (circulo claro, cara oscura).
    2. La barra del navegador en mobile toma el color de fondo de la pagina
       (y lo sigue al cambiar entre claro y oscuro).
    Uso, dentro del <head>:  <script src="assets/tab.js" defer></script>
-   Sin JS queda el favicon fijo de assets/favicon.svg.
+   Sin JS queda el favicon fijo de assets/favicon.svg (mismo dibujo).
    ------------------------------------------------------------- */
 (function () {
-  var TILE = '#24242C', INK = '#F4F4F6';
+  var INK = '#24242C', PAPER = '#F4F4F6';
+  var CIRCLE = 'M5 0h6v1h2v1h1v1h1v2h1v6h-1v2h-1v1h-1v1h-2v1h-6v-1h-2v-1h-1v-1h-1v-2h-1v-6h1v-2h1v-1h1v-1h2z';
+  var EYE_L = 'M5 4h2v3h-2z', EYE_R = 'M9 4h2v3h-2z', WINK = 'M8 5h4v1h-4z';
+  var SMILE = 'M3 9h2v1h6v-1h2v1h-1v1h-1v1h-6v-1h-1v-1h-1z';
 
   function svg(wink) {
-    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">' +
-      '<rect width="32" height="32" rx="8" fill="' + TILE + '"/>' +
-      '<circle cx="10.5" cy="11.5" r="2.7" fill="none" stroke="' + INK + '" stroke-width="2.6"/>' +
-      (wink
-        ? '<path d="M17 11.5h9" fill="none" stroke="' + INK + '" stroke-width="3"/>'
-        : '<circle cx="21.5" cy="11.5" r="2.7" fill="none" stroke="' + INK + '" stroke-width="2.6"/>') +
-      '<path d="M8.5 17a7.5 7.5 0 0 0 15 0" fill="none" stroke="' + INK + '" stroke-width="4"/></svg>';
+    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" shape-rendering="crispEdges">' +
+      '<style>.c{fill:' + INK + '}.f{fill:' + PAPER + '}@media (prefers-color-scheme:dark){.c{fill:' + PAPER + '}.f{fill:' + INK + '}}</style>' +
+      '<path class="c" d="' + CIRCLE + '"/>' +
+      '<path class="f" d="' + EYE_L + (wink ? WINK : EYE_R) + SMILE + '"/></svg>';
   }
 
   /* 1 - guino: abierto, cerrado un instante, abierto */
@@ -37,7 +41,7 @@
     [[900, true], [1250, false]].forEach(function (f) { setTimeout(function () { paint(f[1]); }, f[0]); });
   }
 
-  /* 2 · color de la barra del navegador = fondo de la página */
+  /* 2 - color de la barra del navegador = fondo de la pagina */
   var meta = document.querySelector('meta[name="theme-color"]');
   if (!meta) { meta = document.createElement('meta'); meta.name = 'theme-color'; document.head.appendChild(meta); }
   function syncBar() {
