@@ -321,7 +321,6 @@ body.dark-mode .panel,body.dark-mode .wf-strip .wf{border-color:transparent;}
 .mspec > div:last-child{border-bottom:1px solid var(--line2);}
 .mspec dt{font-weight:700;font-size:1rem;margin-bottom:.25rem;}
 .mspec dd{font-size:.9375rem;line-height:1.55;color:var(--ash);}
-.mspec dd b{color:var(--paper);font-weight:600;}
 .mctl{display:flex;flex-wrap:wrap;align-items:center;gap:.75rem 1rem;margin-top:1.5rem;}
 .mbtn{font:inherit;font-size:.875rem;font-weight:600;min-height:44px;padding:0 1.125rem;border-radius:100px;border:1px solid var(--line2);background:transparent;color:var(--paper);cursor:pointer;transition:background .2s var(--press),border-color .2s var(--press);}
 .mbtn:hover{background:var(--bg3);}
@@ -427,8 +426,6 @@ body.dark-mode .panel,body.dark-mode .wf-strip .wf{border-color:transparent;}
 .rsend:active{transform:scale(.98);background:#1a2668;}
 .star:focus-visible,.chip:focus-visible,.rsend:focus-visible{outline:2px solid #ff6200;outline-offset:2px;}
 
-@media(min-width:761px){.tbl.motion tbody th{width:46%;}}
-@media(max-width:600px){.tbl.motion td::before{margin-top:.5rem;}}
 
 
 /* ─── Growth pairs + levers ─── */
@@ -1241,21 +1238,21 @@ body.dark-mode .sketch{--sk-paper:#2C2C2F;}
     <div class="split">
       <h2 class="h2 wide" id="motion-h">Motion that explains the wait</h2>
       <div>
-        <p class="prose">Waiting is the hardest moment in a ride app, so motion here has one job: answer the question before the passenger asks it. Is it working? Where am I? What happens next?</p>
-        <p class="prose">These are recreated in code from the prototype's real timings, so you can watch them without opening Figma. The map is stylized; the timings are not.</p>
+        <p class="prose">The wait is the most critical moment in a ride-hailing app, so movement here serves a single purpose: to answer the question before the passenger even asks it. Is it working? Where am I? What happens next?</p>
+        <p class="prose">We help users eliminate anxiety during the wait through subtle micro-interactions.</p>
       </div>
     </div>
 
     <div class="motion-hero">
       <div>
         <h3 class="h3">Searching for a driver</h3>
-        <p class="prose" style="margin-top:.75rem">Five things move at once, and each has a different job.</p>
+        <p class="prose" style="margin-top:.75rem">Five things move at once, and each one calms a different worry.</p>
         <dl class="mspec">
-          <div><dt>Map camera</dt><dd>Overview, origin, destination, origin. It holds <b>2.5 s, 2.5 s, 2 s, 2 s</b>, then moves on a <b>Gentle spring (1.02 s)</b>. It tells the passenger the app knows both ends of the trip.</dd></div>
-          <div><dt>Route trace</dt><dd>The highlighted line runs along the streets to the destination and back, about <b>5 s</b> per round trip (my approximation of the prototype). It says the route is known and the trip is alive.</dd></div>
-          <div><dt>Ripple at pickup</dt><dd>Three states loop every <b>1.8 s</b>, each change <b>0.3 s ease-out</b>. It says we are searching around you.</dd></div>
-          <div><dt>Location ping</dt><dd>A ring grows over <b>1.25 s</b> on a slow spring, then snaps back in <b>0.3 s</b>. It says this is you, and it's live.</dd></div>
-          <div><dt>Skeleton shimmer</dt><dd>A highlight sweeps in <b>1 s (ease-out)</b> every <b>2 s</b>. It says content is coming, and the sheet won't jump when it arrives.</dd></div>
+          <div><dt>Map camera</dt><dd>The map travels between the pickup and the destination, so the passenger can see the app knows both ends of the trip.</dd></div>
+          <div><dt>Route trace</dt><dd>A highlight runs along the streets to the destination and back. The route is known, and the trip already feels alive.</dd></div>
+          <div><dt>Ripple at pickup</dt><dd>A soft pulse spreads out from the pickup point. We are searching around you.</dd></div>
+          <div><dt>Location ping</dt><dd>A ring breathes around the passenger's dot. This is you, and it's live.</dd></div>
+          <div><dt>Skeleton shimmer</dt><dd>Placeholders hold the shape of what is coming, so nothing jumps when the driver's details arrive.</dd></div>
         </dl>
         <div class="mctl" data-for="hero">
           <button class="mbtn" type="button" data-ctl="pause" aria-pressed="false">Pause</button>
@@ -1293,7 +1290,7 @@ body.dark-mode .sketch{--sk-paper:#2C2C2F;}
     <div class="pair">
       <div class="mdemo">
         <h3 class="h3">Skeleton to categories</h3>
-        <p class="small">The sheet holds its shape while availability loads. After <b>2 s</b> the real categories rise in on a <b>Gentle spring (1.02 s)</b>, and the skeleton fades out.</p>
+        <p class="small">The sheet holds its shape while availability loads, then the real categories rise gently into place. Nothing jumps, so the passenger never loses their place.</p>
         <div class="dev plain" data-stage="cat" data-w="393" data-h="440" role="img" aria-label="Animated recreation: grey placeholder rows in a bottom sheet are replaced by the Economy, Muv, Comfort and Moto category cards, with their car illustrations, and a Confirm trip button">
           <div class="stage">
             <div class="cat" id="cat">
@@ -1321,7 +1318,7 @@ body.dark-mode .sketch{--sk-paper:#2C2C2F;}
 
       <div class="mdemo">
         <h3 class="h3">Rating that adapts</h3>
-        <p class="small">Try it. The tags change with the score, chips answer a tap in <b>0.2 s</b>, and on submit the card leaves after a <b>0.2 s</b> pause on a <b>1.28 s</b> Gentle spring.</p>
+        <p class="small">Try it. The tags change with the score, every chip answers the tap right away, and the card leaves softly once the passenger is done.</p>
         <div class="dev plain" data-stage="rate" data-w="360" data-h="590">
           <div class="stage">
             <div class="rate" id="rate">
@@ -1343,26 +1340,6 @@ body.dark-mode .sketch{--sk-paper:#2C2C2F;}
         </div>
         <div class="mctl" data-for="rate"><button class="mbtn" type="button" data-ctl="replay">Replay the demo</button></div>
       </div>
-    </div>
-
-    <div>
-      <h3 class="h3" style="margin-bottom:.5rem">The motion system behind it</h3>
-      <p class="small" style="max-width:62ch;margin-bottom:1.25rem">Two rules keep it calm: touch feedback is fast and sharp, and state changes are soft and spring-based. Values read straight from the prototype.</p>
-      <table class="tbl motion">
-        <caption>Motion tokens used across the passenger prototype</caption>
-        <thead><tr><th scope="col">Where</th><th scope="col">Duration</th><th scope="col">Easing</th></tr></thead>
-        <tbody>
-          <tr><th scope="row">Buttons, inputs, icons: hover and press</th><td data-h="Duration">0.2 s</td><td data-h="Easing">cubic-bezier(0.2, 0, 0, 1)</td></tr>
-          <tr><th scope="row">Sheets and modals sliding in</th><td data-h="Duration">0.3 s</td><td data-h="Easing">Ease-out</td></tr>
-          <tr><th scope="row">Splash and dissolves</th><td data-h="Duration">0.3 s</td><td data-h="Easing">Ease-in-out</td></tr>
-          <tr><th scope="row">Tabs</th><td data-h="Duration">0.6 s</td><td data-h="Easing">Ease-out</td></tr>
-          <tr><th scope="row">Ripple states</th><td data-h="Duration">0.3 s</td><td data-h="Easing">Ease-out</td></tr>
-          <tr><th scope="row">Skeleton shimmer</th><td data-h="Duration">1 s, every 2 s</td><td data-h="Easing">Ease-out</td></tr>
-          <tr><th scope="row">Location ping</th><td data-h="Duration">1.25 s</td><td data-h="Easing">Slow spring</td></tr>
-          <tr><th scope="row">Screen and state changes: camera, skeleton to content</th><td data-h="Duration">1.02 s</td><td data-h="Easing">Gentle spring</td></tr>
-          <tr><th scope="row">Rating submit</th><td data-h="Duration">1.28 s, after 0.2 s</td><td data-h="Easing">Gentle spring</td></tr>
-        </tbody>
-      </table>
     </div>
 
   </div>
