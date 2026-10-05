@@ -1,0 +1,2018 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>muv: an easier way to get a ride · Case study · Paula Elffman</title>
+<link rel="canonical" href="https://www.paulaelffman.com/muv-case.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Paula Elffman">
+<meta property="og:title" content="muv: an easier way to get a ride · Case study">
+<meta property="og:description" content="Case study: end-to-end redesign of muv's passenger app, a Paraguayan ride-hailing marketplace. Onboarding from 21 steps to 6, and a ride flow that shows what is happening at every state.">
+<meta property="og:url" content="https://www.paulaelffman.com/muv-case.html">
+<meta property="og:image" content="https://www.paulaelffman.com/assets/og/og-muv.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="muv: an easier way to get a ride · Case study">
+<meta name="twitter:description" content="Case study: end-to-end redesign of muv's passenger app, a Paraguayan ride-hailing marketplace. Onboarding from 21 steps to 6, and a ride flow that shows what is happening at every state.">
+<meta name="twitter:image" content="https://www.paulaelffman.com/assets/og/og-muv.jpg">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="alternate icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<script src="assets/tab.js" defer></script>
+<meta name="description" content="Case study: end-to-end redesign of muv's passenger app, a Paraguayan ride-hailing marketplace. Onboarding from 21 steps to 6, and a ride flow that shows what is happening at every state.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Inter:wght@500;600&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+/* ════════════════════════════════════════════════════════════
+   muv case study · v2
+   Tokens keep the names used by the rest of the portfolio
+   (--bg, --paper, --ash, --line…) so the dock and dark mode work.
+   ════════════════════════════════════════════════════════════ */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#FFFFFF; --bg2:#F6F6F5; --bg3:#EDEDEB;
+  --paper:#141414;
+  --ash:rgba(20,20,20,.66);          /* 5.9:1 on --bg — safe for body text */
+  --ash2:rgba(20,20,20,.15);
+  --line:rgba(20,20,20,.08); --line2:rgba(20,20,20,.14);
+  --orange:#FF6200;                  /* fills, route lines, highlights — never small text */
+  --orange-ink:#B93E05;              /* orange for text: 5.1:1 on --bg */
+  --navy:#0B1445;                    /* primary actions: 17:1 with white */
+  --green-ink:#096B4B; --amber-ink:#8F5200;
+  --ease:cubic-bezier(0.22,1,0.36,1);
+  --r:12px; --r-sm:8px;
+  --wrap:1200px;
+  --gutter:clamp(20px,4vw,64px);
+  --sec:clamp(64px,9vw,128px);
+  /* legacy aliases used by the shared dock block */
+  --panel-light:#FFFFFF;
+  --ghost:var(--bg2); --ghost-2:var(--bg3); --accent:var(--orange); --line-md:var(--line2); --ash-2:var(--ash2);
+}
+html{font-size:16px;scroll-behavior:smooth;}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
+body{
+  font-family:'Geist',system-ui,-apple-system,'Segoe UI',sans-serif;
+  background:var(--bg);color:var(--paper);
+  line-height:1.65;-webkit-font-smoothing:antialiased;
+}
+img,video{display:block;max-width:100%;height:auto;}
+a{color:inherit;}
+:focus-visible{outline:2px solid var(--orange-ink);outline-offset:3px;border-radius:4px;}
+
+#wipe-overlay{position:fixed;inset:0;z-index:99999;background:var(--bg);pointer-events:none;clip-path:circle(0% at 50% 50%);}
+#wipe-overlay.animate{transition:clip-path .6s cubic-bezier(.65,0,.35,1);}
+#wipe-overlay.dark{background:#24242C;}
+
+/* ─── Layout ─── */
+.wrap{max-width:var(--wrap);margin:0 auto;padding-inline:var(--gutter);}
+.sec{padding-block:var(--sec);scroll-margin-top:56px;}
+.sec.tint{background:var(--bg2);}
+.sec > .wrap > * + *{margin-top:clamp(40px,5vw,72px);}
+
+/* ─── Type ─── */
+.h1{font-size:clamp(2.75rem,7.2vw,6.25rem);font-weight:800;letter-spacing:-.045em;line-height:.98;}
+.h1 .mute{color:var(--ash);}
+.h1 .accent{color:#F05A00;}   /* brand orange nudged for 3:1 on cream (large text) */
+body.dark-mode .h1 .accent{color:#FF6200;}
+.h2{font-size:clamp(1.75rem,3.2vw,2.75rem);font-weight:800;letter-spacing:-.035em;line-height:1.05;max-width:20ch;}
+.h2.wide{max-width:24ch;}
+.h3{font-size:1.375rem;font-weight:700;letter-spacing:-.02em;line-height:1.25;}
+.lede{font-size:clamp(1.125rem,1.6vw,1.375rem);line-height:1.5;letter-spacing:-.01em;color:var(--paper);max-width:34ch;}
+.prose{max-width:62ch;color:var(--ash);font-size:1.0625rem;}
+.prose + .prose{margin-top:1.25em;}
+.prose strong,.prose em{color:var(--paper);}
+.prose strong{font-weight:600;}
+.kicker{font-size:.9375rem;font-weight:500;color:var(--ash);}
+.small{font-size:.875rem;line-height:1.55;color:var(--ash);}
+.label{font-size:.875rem;font-weight:600;color:var(--paper);}
+.es{font-style:normal;}
+
+/* ─── Back nav (sticky) ─── */
+.back-nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+  padding:.875rem var(--gutter);
+  display:flex;align-items:center;justify-content:space-between;gap:1.5rem;
+  font-size:.875rem;
+}
+.back-btn{display:inline-flex;align-items:center;gap:.5rem;font-weight:600;color:var(--orange-ink);text-decoration:none;white-space:nowrap;transition:gap .2s var(--ease);min-height:44px;}
+.back-btn:hover{gap:.875rem;}
+.toc{display:flex;gap:1.75rem;list-style:none;}
+.toc a{color:var(--ash);text-decoration:none;font-weight:500;padding:.5rem 0;transition:color .2s;}
+.toc a:hover{color:var(--paper);}
+.back-nav-right{color:var(--ash);white-space:nowrap;}
+@media(max-width:960px){.toc{display:none;}}
+@media(max-width:640px){.back-nav-right{display:none;}}
+body.dark-mode .back-nav{background:rgba(36,36,44,.92);}
+
+/* ─── Hero ─── */
+.hero{padding-top:clamp(48px,7vw,96px);}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:clamp(32px,5vw,80px);align-items:end;}
+.hero .kicker{margin-bottom:1.5rem;}
+.meta{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:1.5rem 2rem;margin-top:clamp(40px,5vw,72px);padding-top:1.5rem;border-top:1px solid var(--line2);}
+.meta dt{font-size:.8125rem;color:var(--ash);margin-bottom:.25rem;}
+.meta dd{font-size:.9375rem;font-weight:500;line-height:1.4;}
+.hero-video{margin-top:clamp(40px,5vw,72px);}
+.frame{border-radius:var(--r);overflow:hidden;background:var(--bg3);}
+.frame video,.frame img{width:100%;}
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr;align-items:start;}
+  .meta{grid-template-columns:repeat(2,minmax(0,1fr));}
+}
+
+/* ─── Two-column split ─── */
+.split{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(32px,5vw,96px);align-items:start;}
+.split.rev{grid-template-columns:minmax(0,6fr) minmax(0,5fr);}
+@media(max-width:900px){.split,.split.rev{grid-template-columns:1fr;}}
+
+/* ─── Survey bars ─── */
+.evidence-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:.5rem 2rem;margin-bottom:1.5rem;}
+.bars{list-style:none;display:flex;flex-direction:column;gap:1.125rem;}
+.bars li{display:grid;grid-template-columns:minmax(0,1fr) 3.25rem;grid-template-areas:"l v" "t t";gap:.375rem 1rem;align-items:baseline;}
+.bar-label{grid-area:l;font-size:1rem;line-height:1.35;}
+.bar-val{grid-area:v;font-size:1.375rem;font-weight:800;letter-spacing:-.03em;text-align:right;font-variant-numeric:tabular-nums;}
+.bar-track{grid-area:t;height:8px;border-radius:4px;background:var(--bg3);overflow:hidden;}
+.bar-fill{display:block;height:100%;width:var(--v);background:var(--navy);border-radius:4px;transform-origin:left;}
+.js .bar-fill{transform:scaleX(0);transition:transform 1s var(--ease);}
+.js .bars.in .bar-fill{transform:scaleX(1);}
+.js .bars.in li:nth-child(2) .bar-fill{transition-delay:.08s}.js .bars.in li:nth-child(3) .bar-fill{transition-delay:.16s}
+.js .bars.in li:nth-child(4) .bar-fill{transition-delay:.24s}.js .bars.in li:nth-child(5) .bar-fill{transition-delay:.32s}
+.js .bars.in li:nth-child(6) .bar-fill{transition-delay:.4s}
+@media (prefers-reduced-motion:reduce){.js .bar-fill{transform:none;transition:none;}}
+
+/* ─── Quotes ─── */
+.quotes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(24px,3vw,48px);}
+.quote{border-top:2px solid var(--paper);padding-top:1.25rem;}
+.quote p{font-size:1.25rem;line-height:1.35;letter-spacing:-.015em;font-weight:500;}
+.quote .en{display:block;margin-top:.75rem;font-size:.9375rem;font-weight:400;letter-spacing:0;color:var(--ash);}
+.quote cite{display:block;margin-top:1rem;font-style:normal;font-size:.8125rem;color:var(--ash);}
+@media(max-width:900px){.quotes{grid-template-columns:1fr;}}
+
+/* ─── Two signals ─── */
+.signals{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line2);border-radius:var(--r);overflow:hidden;background:var(--bg);}
+.signal{padding:clamp(24px,3vw,40px);}
+.signal + .signal{border-left:1px solid var(--line2);}
+.signal .label{color:var(--ash);font-weight:500;margin-bottom:.75rem;}
+.signal p:not(.label){font-size:1.125rem;line-height:1.45;letter-spacing:-.01em;}
+.signal strong{font-weight:700;}
+@media(max-width:760px){.signals{grid-template-columns:1fr;}.signal + .signal{border-left:0;border-top:1px solid var(--line2);}}
+
+/* ─── Figures ─── */
+figure figcaption{margin-top:.875rem;font-size:.875rem;line-height:1.5;color:var(--ash);max-width:70ch;}
+.panel{background:#fff;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);}
+.panel img{width:100%;}
+.panel.scroll{overflow-x:auto;}
+.panel.scroll img{min-width:720px;}
+.narrow-fig{max-width:920px;margin-inline:auto;}
+.duo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(20px,3vw,40px);}
+@media(max-width:760px){.duo{grid-template-columns:1fr;}}
+
+/* ─── Goals + scope ─── */
+.goals{list-style:none;display:grid;gap:0;}
+.goals li{padding:1rem 0;border-top:1px solid var(--line2);font-size:1.0625rem;line-height:1.45;}
+.goals li:last-child{border-bottom:1px solid var(--line2);}
+.scope{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem 3rem;margin-top:1.5rem;}
+.scope h4{font-size:1rem;font-weight:600;margin-bottom:.25rem;}
+.scope p{font-size:.9375rem;color:var(--ash);line-height:1.5;}
+@media(max-width:600px){.scope{grid-template-columns:1fr;}}
+
+/* ─── State stepper (a real sequence) ─── */
+.states{list-style:none;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;counter-reset:st;}
+.states li{position:relative;padding:0 1.25rem 0 0;counter-increment:st;}
+.states li::before{
+  content:counter(st);display:grid;place-items:center;
+  width:32px;height:32px;border-radius:50%;
+  background:var(--navy);color:#fff;font-size:.875rem;font-weight:700;
+  position:relative;z-index:1;margin-bottom:1rem;
+}
+.states li::after{content:'';position:absolute;top:15px;left:32px;right:0;height:2px;background:var(--line2);}
+.states li:last-child::after{display:none;}
+.states h3{font-size:1rem;font-weight:700;letter-spacing:-.01em;line-height:1.3;margin-bottom:.5rem;}
+.states p{font-size:.9375rem;line-height:1.5;color:var(--ash);}
+.states .say{display:block;margin-top:.5rem;color:var(--paper);font-weight:500;}
+@media(max-width:900px){
+  .states{grid-template-columns:1fr;gap:1.75rem;}
+  .states li{padding:0 0 0 3rem;}
+  .states li::before{position:absolute;left:0;top:0;margin:0;}
+  .states li::after{top:32px;bottom:-1.75rem;left:15px;right:auto;width:2px;height:auto;}
+}
+
+/* ─── Phone frames ─── */
+.phone{border-radius:22px;overflow:hidden;background:#fff;box-shadow:0 0 0 1px var(--line2),0 16px 40px rgba(26,24,20,.12);}
+.phone img{width:100%;}
+.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(16px,2.5vw,40px);align-items:start;}
+.step h3{font-size:1rem;font-weight:700;margin-top:1.25rem;line-height:1.3;}
+.step .es-tag{display:inline-block;margin-top:1rem;font-size:.8125rem;font-weight:600;color:var(--ash);}
+.step p{margin-top:.375rem;font-size:.9375rem;line-height:1.5;color:var(--ash);}
+.step .es-tag + h3{margin-top:.25rem;}
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .7s var(--ease),transform .7s var(--ease);}
+.reveal.in{opacity:1;transform:none;}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none;}}
+@media(max-width:900px){.flow{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:40px;}}
+@media(max-width:480px){.flow{grid-template-columns:1fr;max-width:300px;margin-inline:auto;}}
+
+.wf-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(12px,2vw,24px);}
+.wf-strip .wf{background:#fff;border:1px solid var(--line);border-radius:var(--r-sm);overflow:hidden;}
+@media(max-width:600px){.wf-strip{grid-template-columns:repeat(2,minmax(0,1fr));}}
+
+/* ─── Decisions ─── */
+.decision{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(32px,5vw,96px);align-items:center;padding-block:clamp(40px,5vw,72px);border-top:1px solid var(--line2);}
+.decisions .decision:last-child{border-bottom:1px solid var(--line2);}
+.decision h3{margin-bottom:1rem;}
+.decision .prose{color:var(--ash);}
+.decision .stack > * + *{margin-top:1rem;}
+.decision .media{background:var(--panel-light);border-radius:var(--r);padding:clamp(20px,3vw,40px);display:grid;place-items:center;}
+.decision .media img{height:auto;max-width:100%;border-radius:var(--r-sm);box-shadow:0 12px 32px rgba(26,24,20,.14);}
+.decision:nth-child(even) .stack{order:2;}
+@media(max-width:900px){.decision{grid-template-columns:1fr;}.decision:nth-child(even) .stack{order:0;}}
+
+/* ─── Test table ─── */
+.tbl{width:100%;border-collapse:collapse;font-size:1rem;}
+.tbl caption{text-align:left;font-size:.875rem;color:var(--ash);padding-bottom:1rem;}
+.tbl th,.tbl td{text-align:left;vertical-align:top;padding:1.25rem 1.5rem 1.25rem 0;border-top:1px solid var(--line2);line-height:1.5;}
+.tbl thead th{border-top:0;padding-top:0;font-size:.875rem;font-weight:600;color:var(--ash);}
+.tbl tbody th{font-weight:700;width:20%;}
+.tbl tbody tr:last-child > *{border-bottom:1px solid var(--line2);}
+.ok::before,.warn::before{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;margin-right:.625rem;font-size:.75rem;font-weight:800;color:#fff;vertical-align:1px;}
+.ok::before{content:'✓';background:var(--green-ink);}
+.warn::before{content:'!';background:var(--amber-ink);}
+.tbl p + p{margin-top:.5rem;}
+@media(max-width:760px){
+  .tbl thead{position:absolute;left:-9999px;}
+  .tbl,.tbl tbody,.tbl tr,.tbl th,.tbl td{display:block;width:100%!important;}
+  .tbl tr{border-top:1px solid var(--line2);padding:1.25rem 0;}
+  .tbl th,.tbl td{border:0!important;padding:.25rem 0;}
+  .tbl td::before{content:attr(data-h);display:block;font-size:.8125rem;font-weight:600;color:var(--ash);margin:.75rem 0 .25rem;}
+}
+
+/* ─── Prototype ─── */
+.lottie-frame{aspect-ratio:800/600;background:var(--bg2);border-radius:var(--r);overflow:hidden;box-shadow:0 20px 56px rgba(26,24,20,.12);}
+
+/* ─── Results ─── */
+.impact{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(24px,4vw,64px);}
+.impact div{border-top:2px solid var(--paper);padding-top:1.25rem;}
+.impact .num{font-size:clamp(2.75rem,6vw,5rem);font-weight:800;letter-spacing:-.05em;line-height:1;}
+.impact .cap{margin-top:.75rem;font-size:1rem;color:var(--ash);max-width:32ch;}
+@media(max-width:600px){.impact{grid-template-columns:1fr;}}
+.baseline{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem clamp(24px,4vw,64px);}
+.baseline dt{font-size:2rem;font-weight:800;letter-spacing:-.04em;line-height:1;}
+.baseline dd{margin-top:.5rem;font-size:.9375rem;color:var(--ash);max-width:34ch;}
+@media(max-width:600px){.baseline{grid-template-columns:1fr;}}
+.learn{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(24px,3vw,48px);}
+.learn > div{border-top:1px solid var(--line2);padding-top:1.25rem;}
+.learn h4{font-size:1.125rem;font-weight:700;letter-spacing:-.015em;line-height:1.3;margin-bottom:.5rem;}
+.learn p{font-size:.9375rem;color:var(--ash);line-height:1.55;}
+@media(max-width:900px){.learn{grid-template-columns:1fr;}}
+.callout{background:var(--navy);color:#fff;border-radius:var(--r);padding:clamp(32px,5vw,72px);}
+.callout p.big{font-size:clamp(1.5rem,3vw,2.5rem);font-weight:700;letter-spacing:-.03em;line-height:1.15;max-width:22ch;}
+.callout p.sub{margin-top:1.25rem;max-width:52ch;color:rgba(255,255,255,.78);font-size:1rem;}
+.next{list-style:none;display:grid;gap:0;max-width:70ch;}
+.next li{padding:1rem 0;border-top:1px solid var(--line2);font-size:1.0625rem;line-height:1.5;}
+.next li:last-child{border-bottom:1px solid var(--line2);}
+.next strong{font-weight:600;}
+
+/* ─── Component library (collapsed by default) ─── */
+details.lib{border-top:1px solid var(--line2);border-bottom:1px solid var(--line2);}
+details.lib summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.5rem 0;min-height:44px;}
+details.lib summary::-webkit-details-marker{display:none;}
+details.lib summary .h3{max-width:none;}
+details.lib summary .sub{display:block;margin-top:.25rem;font-size:.9375rem;font-weight:400;color:var(--ash);letter-spacing:0;}
+details.lib summary .ico{flex:none;width:32px;height:32px;border-radius:50%;border:1px solid var(--line2);display:grid;place-items:center;font-size:1.25rem;line-height:1;transition:transform .3s var(--ease);}
+details.lib[open] summary .ico{transform:rotate(45deg);}
+.lib-body{padding:1rem 0 clamp(40px,5vw,72px);display:flex;flex-direction:column;gap:clamp(40px,5vw,64px);}
+.principles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(24px,3vw,48px);}
+.principles h3{font-size:1rem;font-weight:700;margin-bottom:.375rem;}
+.principles p{font-size:.9375rem;color:var(--ash);line-height:1.55;}
+.comp-group h3{font-size:1.125rem;font-weight:700;letter-spacing:-.015em;margin-bottom:.375rem;}
+.comp-group > p{font-size:.9375rem;color:var(--ash);max-width:62ch;margin-bottom:1.5rem;}
+.comp-grid{display:grid;gap:clamp(16px,2vw,24px);}
+.comp-grid.c2{grid-template-columns:repeat(2,minmax(0,1fr));}
+.comp-grid.c3{grid-template-columns:repeat(3,minmax(0,1fr));}
+.comp{background:var(--bg2);border-radius:var(--r);padding:1.25rem;display:flex;flex-direction:column;gap:.875rem;}
+.comp .thumb{display:grid;place-items:center;background:var(--bg3);border-radius:var(--r-sm);padding:1rem;min-height:120px;}
+.comp .thumb img{width:100%;height:auto;border-radius:6px;}
+.comp .thumb.narrow img{max-width:300px;}
+.comp .cap{font-size:.875rem;line-height:1.45;color:var(--ash);}
+.comp .cap strong{display:block;color:var(--paper);font-weight:600;margin-bottom:.125rem;}
+@media(max-width:900px){.principles,.comp-grid.c2,.comp-grid.c3{grid-template-columns:1fr;}}
+
+/* ─── Footer ─── */
+.footer{padding:2rem var(--gutter) 7rem;border-top:1px solid var(--line2);display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;font-size:.875rem;color:var(--ash);}
+
+/* ─── Dark mode adjustments for navy elements ─── */
+body.dark-mode .bar-fill{background:var(--paper);}
+body.dark-mode .states li::before{background:var(--paper);color:#0B1445;}
+body.dark-mode .ok::before,body.dark-mode .warn::before{color:#0B1445;}
+body.dark-mode .callout{border:1px solid rgba(244,244,246,.14);}
+body.dark-mode .panel,body.dark-mode .wf-strip .wf{border-color:transparent;}
+
+/* ═════════ MOTION / MICROINTERACTIONS ═════════ */
+:root{--gentle:cubic-bezier(.34,1.3,.64,1);--press:cubic-bezier(.2,0,0,1);}
+.motion-hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,340px);gap:clamp(32px,6vw,96px);align-items:start;}
+@media(max-width:900px){.motion-hero{grid-template-columns:1fr;}.motion-hero .stage-col{order:-1;max-width:340px;margin-inline:auto;width:100%;}}
+.mspec{display:grid;gap:0;margin-top:1.5rem;}
+.mspec > div{padding:1rem 0;border-top:1px solid var(--line2);}
+.mspec > div:last-child{border-bottom:1px solid var(--line2);}
+.mspec dt{font-weight:700;font-size:1rem;margin-bottom:.25rem;}
+.mspec dd{font-size:.9375rem;line-height:1.55;color:var(--ash);}
+.mspec dd b{color:var(--paper);font-weight:600;}
+.mctl{display:flex;flex-wrap:wrap;align-items:center;gap:.75rem 1rem;margin-top:1.5rem;}
+.mbtn{font:inherit;font-size:.875rem;font-weight:600;min-height:44px;padding:0 1.125rem;border-radius:100px;border:1px solid var(--line2);background:transparent;color:var(--paper);cursor:pointer;transition:background .2s var(--press),border-color .2s var(--press);}
+.mbtn:hover{background:var(--bg3);}
+.mbtn[aria-pressed="true"]{background:var(--paper);color:var(--bg);border-color:var(--paper);}
+.mlink{font-size:.875rem;font-weight:600;color:var(--orange-ink);text-underline-offset:3px;}
+.pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(24px,4vw,64px);align-items:start;}
+@media(max-width:900px){.pair{grid-template-columns:1fr;}}
+.mdemo h3{margin-bottom:.5rem;}
+.mdemo .small{max-width:52ch;margin-bottom:1.25rem;}
+.mdemo .mctl{margin-top:1rem;}
+
+/* device + scaled stage */
+.dev{position:relative;width:100%;border-radius:32px;overflow:hidden;background:#f1f1ef;box-shadow:0 0 0 1px var(--line2),0 24px 56px rgba(26,24,20,.16);}
+.dev.plain{background:#EFEFEE;border-radius:var(--r);}
+.stage{position:absolute;left:0;top:0;transform-origin:0 0;font-family:'Inter','Geist',system-ui,sans-serif;color:#1b1b1b;}
+.stage *{box-sizing:border-box;}
+.dev.is-paused .stage *,.dev.is-paused .stage *::after{animation-play-state:paused!important;}
+
+/* searching-driver stage (393×852 design px) */
+.stage .world{position:absolute;left:0;top:0;width:393px;height:852px;transform-origin:0 0;}
+.stage .map{position:absolute;max-width:none;display:block;}
+.stage .anchor{position:absolute;left:0;top:0;will-change:transform;}
+.stage .ripple{width:351px;height:351px;margin:-175.5px 0 0 -175.5px;pointer-events:none;}
+.stage .ripple i{position:absolute;left:50%;top:50%;border-radius:50%;translate:-50% -50%;transition:width .3s ease-out,height .3s ease-out,opacity .3s ease-out,background-color .3s ease-out;}
+.ripple .e24{width:143px;height:143px;background:rgba(255,98,0,.06);}
+.ripple .e25{width:97px;height:97px;opacity:0;background:rgba(255,98,0,.12);}
+.ripple .e26{width:269px;height:269px;opacity:0;background:rgba(255,98,0,.12);}
+.ripple[data-s="2"] .e24{width:171px;height:171px;background:rgba(255,98,0,.12);}
+.ripple[data-s="2"] .e25{opacity:1;}
+.ripple[data-s="3"] .e24{width:331px;height:331px;background:rgba(136,136,136,.06);}
+.ripple[data-s="3"] .e25{opacity:1;width:143px;height:143px;}
+.ripple[data-s="3"] .e26{opacity:1;}
+.stage .pin{width:27px;height:27px;margin:-13.5px 0 0 -13.5px;}
+.stage .pin i{position:absolute;left:50%;top:50%;border-radius:50%;translate:-50% -50%;}
+.pin.o i:nth-child(1){width:27px;height:27px;background:rgba(255,98,0,.3);}
+.pin.o i:nth-child(2){width:13px;height:13px;background:#fff;}
+.pin.o i:nth-child(3){width:7px;height:7px;background:#ff6200;}
+.pin.d i:nth-child(1){width:28px;height:28px;background:rgba(118,118,118,.12);}
+.pin.d i:nth-child(2){width:16px;height:16px;background:#ff6200;}
+.pin.d i:nth-child(3){width:8px;height:8px;background:#ff6200;box-shadow:0 0 0 1px #ff6200;}
+.stage .dot{width:50px;height:50px;margin:-25px 0 0 -25px;}
+.dot i{position:absolute;left:50%;top:50%;border-radius:50%;translate:-50% -50%;}
+.dot .halo{width:30px;height:30px;background:rgba(66,133,244,.16);}
+.dot .ring{width:28px;height:28px;border:1px solid #4285f4;background:rgba(66,133,244,.14);animation:ping 1.85s infinite;}
+.dot .core{width:16px;height:16px;background:#4285f4;border:1px solid #f5f9fd;box-shadow:0 1px 2px rgba(0,0,0,.28);}
+@keyframes ping{0%,16%{transform:scale(.5714);opacity:0;animation-timing-function:cubic-bezier(.2,.7,.2,1);}84%{transform:scale(1);opacity:1;animation-timing-function:ease-in;}100%{transform:scale(.5714);opacity:0;}}
+.stage .pill{display:flex;align-items:center;gap:6px;height:26px;padding:0 11px 0 9px;border-radius:13px;color:#fff;font:500 10px/1 'Inter','Geist',sans-serif;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.14);}
+.pill svg{width:12px;height:12px;flex:none;}
+.pill.o{background:#ff6200;margin:-13px 0 0 20px;}
+.pill.d{background:#3b3b3b;translate:-100% 0;margin:20px 0 0 14px;}
+.stage .status{position:absolute;left:0;top:0;width:393px;height:59px;}
+.status .isl{position:absolute;left:50%;top:11px;width:124px;height:36px;border-radius:20px;background:#000;translate:-50% 0;}
+.status .tm{position:absolute;left:52px;top:17px;font:600 17px/1 'Inter','Geist',sans-serif;color:#000;}
+.stage .back{position:absolute;left:16px;top:70px;width:28px;height:28px;}
+.sheet{position:absolute;left:0;top:558px;width:393px;height:294px;background:#fdfdfd;border-radius:24px 24px 0 0;box-shadow:0 -6px 30px rgba(39,43,41,.14);overflow:hidden;}
+.sheet .grab{position:absolute;left:50%;top:20px;width:32px;height:4px;border-radius:100px;background:#c7c7c7;translate:-50% 0;}
+.sheet .msg{position:absolute;left:0;right:0;top:32px;height:20px;text-align:center;font:500 14px/20px 'Inter','Geist',sans-serif;color:#2b2b2b;}
+.sheet .ind{position:absolute;left:129px;top:281px;width:135px;height:5px;border-radius:100px;background:#000;}
+/* skeleton shimmer: bar #e0e0e0, highlight 151px wide sweeps 1s ease-out every 2s (Start→End 1s, hold .8s, reset .2s) */
+.sk{position:absolute;background:#e0e0e0;overflow:hidden;}
+.sk::after{content:'';position:absolute;top:-30px;bottom:-30px;left:0;width:151px;background:linear-gradient(90deg,#e0e0e0 0%,#ebebeb 25%,#f1f1f1 65%,#e0e0e0 100%);transform:translateX(-159px);animation:shim 2s infinite;}
+@keyframes shim{0%,40%{transform:translateX(-159px);animation-timing-function:ease-out;}90%,100%{transform:translateX(calc(var(--w) + 9px));}}
+@media (prefers-reduced-motion:reduce){.dot .ring,.sk::after{animation:none;}}
+
+/* categories: skeleton → content (after 2s, Gentle spring 1.02s) */
+.cat{position:absolute;left:0;right:0;bottom:0;height:412px;background:#fdfdfd;border-radius:24px 24px 0 0;box-shadow:0 -6px 30px rgba(39,43,41,.12);}
+.cat .grab{position:absolute;left:50%;top:14px;width:32px;height:4px;border-radius:100px;background:#c7c7c7;translate:-50% 0;}
+.cat .skel{transition:opacity .3s ease-out;}
+.cat.on .skel{opacity:0;}
+.cat .real .row,.cat .cta{opacity:0;transform:translateY(14px);transition:opacity .4s ease-out,transform 1.02s var(--gentle);}
+.cat.on .real .row,.cat.on .cta{opacity:1;transform:none;}
+.cat.on .real .row:nth-child(2){transition-delay:.06s,.06s;}
+.cat.on .real .row:nth-child(3){transition-delay:.12s,.12s;}
+.cat.on .real .row:nth-child(4){transition-delay:.18s,.18s;}
+.cat.on .cta{transition-delay:.24s,.24s;}
+.row{position:absolute;left:16px;width:361px;height:76px;border-radius:14px;border:1px solid #dcdcd8;background:#fff;display:flex;align-items:center;gap:12px;padding:0 16px;}
+.row.sel{border:2px solid #0b1445;}
+.row > svg{width:52px;height:26px;flex:none;color:#9a9aa8;}
+.row .t svg{width:11px;height:11px;flex:none;color:#8a8a94;}
+.row .p{white-space:nowrap;}
+.row .n{font-weight:600;font-size:15px;line-height:1.2;}
+.row .t{display:flex;align-items:center;gap:4px;font-size:12px;color:#6d6d75;margin-top:3px;}
+.row .p{margin-left:auto;text-align:right;font-weight:600;font-size:15px;}
+.row .p small{display:block;font-weight:400;font-size:10px;color:#6d6d75;margin-top:2px;}
+.row .tag{position:absolute;right:14px;top:-9px;background:#0b1445;color:#fff;font-size:10px;font-weight:600;padding:3px 8px;border-radius:100px;}
+.cta{position:absolute;left:16px;width:361px;height:52px;border-radius:14px;background:#0b1445;color:#fff;font:600 15px/52px 'Inter','Geist',sans-serif;text-align:center;}
+
+/* rating (interactive) */
+.rate{position:absolute;left:12px;right:12px;top:16px;background:#fff;border-radius:22px;padding:18px 18px 20px;box-shadow:0 10px 30px rgba(0,0,0,.08);}
+.rate .top{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:#6d6d75;margin-bottom:14px;}
+.rate .top b{font-size:15px;color:#1b1b1b;font-weight:600;}
+.rate .q{font-size:20px;font-weight:600;letter-spacing:-.01em;text-align:center;}
+.stars{display:flex;justify-content:center;gap:6px;margin:14px 0 6px;}
+.star{width:48px;height:48px;border:0;background:none;display:grid;place-items:center;cursor:pointer;border-radius:12px;}
+.star svg{width:32px;height:32px;fill:none;stroke:#0b1445;stroke-width:1.6;stroke-linejoin:round;transition:fill .2s var(--press),stroke .2s var(--press);}
+.star.on svg{fill:#ff6200;stroke:#ff6200;}
+.rlabel{text-align:center;font-size:15px;font-weight:500;min-height:22px;margin-bottom:10px;}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;min-height:118px;align-content:flex-start;}
+.chip{font:inherit;font-size:12.5px;line-height:1;padding:9px 12px;border-radius:100px;border:1px solid #d8d8d6;background:#fff;color:#1b1b1b;cursor:pointer;transition:background .2s var(--press),color .2s var(--press),border-color .2s var(--press);}
+.chip[aria-pressed="true"]{background:#0b1445;border-color:#0b1445;color:#fff;}
+.rfield{margin-top:14px;border:1px solid #d8d8d6;border-radius:12px;padding:12px 14px;font-size:13px;color:#6d6d75;}
+.rsend{margin-top:14px;width:100%;border:0;border-radius:14px;height:50px;background:#0b1445;color:#fff;font:600 15px/1 'Inter','Geist',sans-serif;cursor:pointer;transition:transform .2s var(--press),background .2s var(--press);}
+.rsend:active{transform:scale(.98);background:#1a2668;}
+.star:focus-visible,.chip:focus-visible,.rsend:focus-visible{outline:2px solid #ff6200;outline-offset:2px;}
+
+@media(min-width:761px){.tbl.motion tbody th{width:46%;}}
+@media(max-width:600px){.tbl.motion td::before{margin-top:.5rem;}}
+
+
+/* ─── Growth pairs + levers ─── */
+.pairs{display:grid;gap:0;}
+.pairs > div{display:grid;grid-template-columns:minmax(6rem,10rem) minmax(0,1fr);gap:1rem 2rem;align-items:center;padding:1.5rem 0;border-top:1px solid var(--line2);}
+.pairs > div:last-child{border-bottom:1px solid var(--line2);}
+.pairs dt{font-size:1rem;font-weight:600;}
+.pairs dd{display:grid;grid-template-columns:minmax(9rem,15rem) auto minmax(0,1fr);gap:1.5rem;align-items:center;}
+.pairs b{display:block;font-size:clamp(1.75rem,3.6vw,3rem);font-weight:800;letter-spacing:-.04em;line-height:1;white-space:nowrap;}
+.pairs small{display:block;margin-top:.375rem;font-size:.875rem;color:var(--ash);}
+.pairs .from b{color:var(--ash);}
+.pairs .arr{font-size:1.5rem;color:var(--ash);}
+@media(max-width:640px){.pairs > div{grid-template-columns:1fr;gap:.5rem;}}
+.levers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(24px,4vw,64px);margin-top:2rem;}
+.levers h4{font-size:1rem;font-weight:700;margin-bottom:.5rem;}
+.levers ul{list-style:none;}
+.levers li{padding:.625rem 0;border-top:1px solid var(--line2);font-size:.9375rem;line-height:1.45;color:var(--ash);}
+.levers li:last-child{border-bottom:1px solid var(--line2);}
+@media(max-width:700px){.levers{grid-template-columns:1fr;}}
+.flag{display:inline-block;vertical-align:-1px;margin-right:.5rem;border-radius:2px;box-shadow:0 0 0 1px rgba(26,24,20,.16);}
+.row .was{text-decoration:line-through;font-size:11px;}
+.panel.scroll img{min-width:900px;}
+.wf-item figcaption{margin-top:.625rem;font-size:.875rem;font-weight:600;color:var(--paper);}
+@media(max-width:640px){.pairs dd{grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:.75rem;}.pairs b{font-size:1.5rem;}}
+.hero-video video{aspect-ratio:16/9;object-fit:cover;}
+body.dark-mode{--panel-light:#2C2C36;}
+.decision .media img.bare{width:100%;max-width:560px;height:auto;box-shadow:none;border-radius:0;}
+.step .mock{width:100%;height:auto;filter:drop-shadow(0 16px 26px rgba(26,24,20,.16));}
+.step .es-tag{margin-top:1.25rem;}
+.ph{display:grid;place-items:center;text-align:center;width:100%;background:var(--bg3);border:1.5px dashed var(--line2);border-radius:var(--r);color:var(--ash);font-size:.875rem;line-height:1.5;padding:1.5rem;}
+.ph b{display:block;margin-top:.25rem;font-weight:600;color:var(--paper);max-width:26ch;}
+.decision .media{border:1px solid var(--line);}
+body.dark-mode .decision .media{border-color:transparent;}
+.cat .list{position:absolute;left:0;right:0;top:0;height:322px;overflow:hidden;}
+.cat .list::after{content:'';position:absolute;left:0;right:0;bottom:0;height:36px;background:linear-gradient(rgba(253,253,253,0),#fdfdfd);pointer-events:none;}
+.row .carbox{flex:none;width:88px;display:grid;place-items:center;}
+.row .carbox img{display:block;height:auto;max-width:none;}
+.pair .dev.plain{width:90%;}
+@media(max-width:900px){.pair .dev.plain{width:100%;}}
+.route-run{animation:trace 5s ease-in-out infinite;}
+@keyframes trace{0%{stroke-dashoffset:78;}42%{stroke-dashoffset:0;}58%{stroke-dashoffset:0;}100%{stroke-dashoffset:78;}}
+@media (prefers-reduced-motion:reduce){.route-run{animation:none;stroke-dashoffset:35;}}
+.decision .media.details{display:flex;gap:1.5rem;}
+.decision .media.details figure{width:min(100%,400px);}
+.decision .media.details img{width:100%;height:auto;border-radius:var(--r-sm);box-shadow:0 0 0 1px var(--line2),0 10px 28px rgba(20,20,20,.10);background:#fff;}
+.decision .media.details figcaption{margin-top:.625rem;font-size:.8125rem;color:var(--ash);text-align:center;}
+img.envio{width:100%;height:auto;}
+img.legacy{width:100%;height:auto;}
+
+/* ─── Sketch scenes (storytelling illustrations) ───
+   Graphite + two brand accents. Swap --sk-o / --sk-n per case. */
+.sketch-fig{margin-block:clamp(32px,5vw,56px);}
+.sketch{
+  --sk-paper:#FBF9F4; --sk-grid:rgba(20,20,20,.05);
+  --sk-ink:#2B2B2B; --sk-soft:rgba(43,43,43,.38);
+  --sk-o:#FF6200; --sk-o-ink:#B93E05; --sk-n:#0B1445;
+  --sk-user:#EFEEEA; --sk-app:#E9ECF8; --sk-idea:#FBEFB8;
+  border-radius:var(--r);overflow-x:auto;border:1px solid var(--line);background:var(--sk-paper);
+}
+.sketch svg{display:block;width:100%;min-width:760px;height:auto;}
+body.dark-mode .sketch{
+  --sk-paper:#2A2A33; --sk-grid:rgba(244,244,246,.045);
+  --sk-ink:#E6E6EC; --sk-soft:rgba(230,230,236,.34);
+  --sk-o:#FF7A2E; --sk-o-ink:#FF9A6B; --sk-n:#AFBBFF;
+  --sk-user:#34343E; --sk-app:#2F3350; --sk-idea:#5A4E1E;
+  border-color:transparent;
+}
+.sketch .sk-paper{fill:var(--sk-paper);}
+.sketch .sk-gridline{stroke:var(--sk-grid);stroke-width:1;}
+.sketch .sk-wash-o{fill:var(--sk-o);opacity:.13;}
+.sketch .sk-wash-n{fill:var(--sk-n);opacity:.10;}
+.sketch .sk-ink{stroke:var(--sk-ink);}
+.sketch .sk-soft{stroke:var(--sk-soft);}
+.sketch .sk-o{stroke:var(--sk-o);}
+.sketch .sk-n{stroke:var(--sk-n);}
+.sketch .sk-on-n{stroke:var(--sk-paper);}
+.sketch .sk-fill-paper{fill:var(--sk-paper);}
+.sketch .sk-fill-ink{fill:var(--sk-ink);}
+.sketch .sk-fill-o{fill:var(--sk-o);}
+.sketch .sk-fill-n{fill:var(--sk-n);}
+.sketch .sk-bubble-user{fill:var(--sk-user);}
+.sketch .sk-pill-user{fill:var(--sk-user);}
+.sketch .sk-pill-app{fill:var(--sk-app);stroke:var(--sk-n);}
+.sketch .sk-pill-idea{fill:var(--sk-idea);}
+.sketch .sk-hand{font-family:'Caveat','Segoe Print','Comic Sans MS',cursive;font-weight:600;fill:var(--sk-ink);}
+.sketch .sk-t-n{fill:var(--sk-n);}
+.sketch .sk-t-o{fill:var(--sk-o-ink);}
+.sketch .sk-t-soft{fill:var(--sk-ink);opacity:.7;}
+.sketch .ripple circle{transform-box:fill-box;transform-origin:center;}
+.sketch .flow{animation:sk-march 1.4s linear infinite;}
+.sketch .ripple .r1,.sketch .ripple .r2{animation:sk-ripple 2.4s var(--ease) infinite;}
+.sketch .ripple .r2{animation-delay:.8s;}
+@keyframes sk-march{to{stroke-dashoffset:-32;}}
+@keyframes sk-ripple{0%{opacity:.9;transform:scale(.6);}100%{opacity:0;transform:scale(1.35);}}
+@media (prefers-reduced-motion:reduce){.sketch .flow,.sketch .ripple circle{animation:none;}}
+
+/* ════════════════════════════════════════════════════════════
+   v3 · Portfolio principles (apply to every case)
+   1. Motion with a pause   2. More air
+   3. Apple-style shadows   4. Apple-style gradients
+   ════════════════════════════════════════════════════════════ */
+:root{
+  /* 2 · spacing */
+  --sec:clamp(96px,12vw,176px);
+  --stack:clamp(56px,7vw,112px);
+
+  /* 3 · shadows: soft, wide, low opacity, no hard edge */
+  --sh-card:0 1px 2px rgba(0,0,0,.03),2px 4px 12px rgba(0,0,0,.08);
+  --sh-float:0 2px 6px rgba(0,0,0,.04),0 12px 24px rgba(0,0,0,.06),0 32px 72px rgba(0,0,0,.10);
+  --sh-ring:0 0 0 1px rgba(0,0,0,.04);
+
+  /* 4 · gradients: a tint at the top that melts into the page */
+  --grad-neutral:linear-gradient(180deg,#F5F5F7 0%,#FAFAFB 55%,#FFFFFF 100%);
+  --grad-warm:linear-gradient(180deg,#FFEEE2 0%,#FFF7F1 45%,#FFFFFF 100%);
+  --grad-cool:linear-gradient(180deg,#E9EDF8 0%,#F4F6FB 50%,#FFFFFF 100%);
+  --grad-subtle:linear-gradient(180deg,#F7F7F8 0%,#FBFBFC 50%,#FFFFFF 100%);
+  --grad-navy:radial-gradient(120% 140% at 0% 0%,#22328A 0%,#111C5C 45%,#0B1445 100%);
+  --grad-accent:linear-gradient(100deg,#F05A00 0%,#E04F00 50%,#C94400 100%);   /* every stop ≥3:1 on the warm hero */
+
+  /* 1 · motion: slow start, long settle */
+  --ease-apple:cubic-bezier(.28,.11,.32,1);
+}
+body.dark-mode{
+  --sh-card:0 0 0 1px rgba(255,255,255,.06),0 8px 24px rgba(0,0,0,.35);
+  --sh-float:0 0 0 1px rgba(255,255,255,.06),0 16px 40px rgba(0,0,0,.40),0 40px 90px rgba(0,0,0,.35);
+  --sh-ring:0 0 0 1px rgba(255,255,255,.06);
+  --grad-neutral:linear-gradient(180deg,#2C2C35 0%,#26262E 55%,#24242C 100%);
+  --grad-warm:linear-gradient(180deg,#352822 0%,#2A2527 45%,#24242C 100%);
+  --grad-cool:linear-gradient(180deg,#262B45 0%,#252838 50%,#24242C 100%);
+  --grad-subtle:linear-gradient(180deg,#29292F 0%,#26262D 50%,#24242C 100%);
+  --grad-accent:linear-gradient(100deg,#FFA066 0%,#FF7A2E 50%,#FF6200 100%);
+}
+
+/* 2 · more air */
+.sec > .wrap > * + *{margin-top:var(--stack);}
+.split{gap:clamp(40px,6vw,120px);}
+.decision{padding-block:clamp(56px,7vw,112px);}
+.quotes,.learn,.principles{gap:clamp(32px,4vw,64px);}
+.hero .meta,.hero-video{margin-top:clamp(56px,7vw,104px);}
+.prose + .prose{margin-top:1.25em;}
+
+/* 4 · gradients */
+.hero{background:var(--grad-warm);}
+.sec.tint{background:var(--grad-neutral);}
+#motion{background:var(--grad-subtle);}
+/* two tinted sections in a row: only the first one carries the gradient, the second continues on the page colour */
+.sec.tint + .sec.tint{background:var(--bg);}
+.callout{background:var(--grad-navy);}
+.h1 .accent{background:var(--grad-accent);-webkit-background-clip:text;background-clip:text;color:transparent;}
+body.dark-mode .h1 .accent{color:transparent;}
+
+/* 3 · shadows (borders out, depth in) */
+.panel{border:0;box-shadow:var(--sh-card);}
+.frame{box-shadow:var(--sh-card);}
+.phone{box-shadow:var(--sh-ring),var(--sh-float);}
+.dev{box-shadow:var(--sh-ring),var(--sh-float);}
+.lottie-frame{box-shadow:var(--sh-float);}
+.decision .media{border:0;box-shadow:var(--sh-card);}
+.decision .media img{box-shadow:var(--sh-card);}
+.decision .media img.bare{box-shadow:none;}
+.decision .media.details img{box-shadow:var(--sh-ring),var(--sh-card);}
+.wf-strip .wf{border:0;box-shadow:var(--sh-card);}
+.sketch{border:0;box-shadow:var(--sh-card);}
+
+/* 1 · motion with a pause */
+.reveal{transition:opacity 1s var(--ease-apple),transform 1s var(--ease-apple);}
+.sketch .flow{animation:sk-march 3s linear infinite;}
+.sketch .ripple .r1,.sketch .ripple .r2{animation:sk-ripple-rest 3.6s var(--ease-apple) infinite;}
+.sketch .ripple .r2{animation-delay:.5s;}
+@keyframes sk-ripple-rest{
+  0%{opacity:0;transform:scale(.6);}
+  10%{opacity:.9;}
+  55%{opacity:0;transform:scale(1.35);}
+  100%{opacity:0;transform:scale(1.35);}   /* hold: the pause */
+}
+@media (prefers-reduced-motion:reduce){.reveal{transition:none;}.sketch .flow,.sketch .ripple circle{animation:none;}}
+
+/* sketch scenes: vertical version on phones (same drawing, stacked) */
+.sketch svg.sk-mobile{display:none;}
+@media(max-width:640px){.sketch svg.sk-desktop{display:none;}.sketch svg.sk-mobile{display:block;min-width:0;}}
+
+/* sketch scene: 20% smaller, grayscale, plain paper (no grid) */
+.sketch-fig{max-width:80%;margin-inline:auto;}
+@media(max-width:640px){.sketch-fig{max-width:none;}}
+.sketch{--sk-paper:#FAFAFA;}
+body.dark-mode .sketch{--sk-paper:#2C2C2F;}
+.sketch svg{filter:grayscale(1);}
+.sketch .sk-gridline{stroke:none;}
+
+/* screen carousel (.shots): a row on desktop, a swipeable carousel on phones.
+   One exported phone screen per <img>. See bible → mobile image rules. */
+.shots{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:clamp(12px,2vw,24px);align-items:start;}
+.shots img{width:100%;height:auto;display:block;}
+@media(max-width:640px){
+  .shots{grid-auto-columns:74%;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:13%;padding:4px 13% 12px;margin-inline:calc(-1 * var(--gutter));scrollbar-width:none;}
+  .shots::-webkit-scrollbar{display:none;}
+  .shots > *{scroll-snap-align:center;}
+}
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js');</script>
+<div id="wipe-overlay"></div>
+
+<nav class="back-nav" aria-label="Case study">
+  <a class="back-btn" id="back-to-portfolio" href="index.html"><span aria-hidden="true">←</span> Back to portfolio</a>
+  <ul class="toc">
+    <li><a href="#problem">Problem</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#solution">Solution</a></li>
+    <li><a href="#motion">Motion</a></li>
+    <li><a href="#decisions">Decisions</a></li>
+    <li><a href="#testing">Testing</a></li>
+    <li><a href="#results">Results</a></li>
+  </ul>
+  <div class="back-nav-right">Paula Elffman · Sr Product Designer</div>
+</nav>
+
+<main>
+
+<!-- ═════════ HERO ═════════ -->
+<header class="sec hero" style="padding-bottom:0">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <p class="kicker">Case study · Passenger app · Ride-hailing in Paraguay</p>
+        <h1 class="h1"><span class="mute">muv:</span><br><span class="accent">an easier way to get a ride</span></h1>
+      </div>
+      <p class="lede">I designed muv's passenger app end to end, from survey and funnel analysis to a launched app. Onboarding went from 21 steps to 6, and the ride flow now says what is happening at every state.</p>
+    </div>
+
+    <dl class="meta">
+      <div><dt>Role</dt><dd>Sr Product Designer: research, UX, UI, design system, dev QA</dd></div>
+      <div><dt>Team</dt><dd>Passengers: Nathalia (PM), engineering, data</dd></div>
+      <div><dt>Company</dt><dd><svg class="flag" viewBox="0 0 24 16" width="18" height="12" role="img" aria-label="Paraguay"><rect width="24" height="5.34" fill="#D52B1E"/><rect y="5.33" width="24" height="5.34" fill="#fff"/><rect y="10.66" width="24" height="5.34" fill="#0038A8"/><circle cx="12" cy="8" r="2.2" fill="none" stroke="#5a7d2a" stroke-width=".7"/></svg>muv</dd></div>
+      <div><dt>Timeline</dt><dd>One quarter: research, design, test</dd></div>
+      <div><dt>Launch</dt><dd>May 2026, iOS and Android</dd></div>
+    </dl>
+
+    <div class="hero-video frame" style="background:#efe5cd">
+      <video src="muv-assets/muv-cover.mp4" poster="muv-assets/muv-cover-poster.jpg" width="960" height="540" autoplay muted loop playsinline preload="auto" aria-label="Animated cover: two phones showing the new muv passenger app, the home with an active trip and the category list"></video>
+    </div>
+  </div>
+</header>
+
+<!-- ═════════ PROBLEM ═════════ -->
+<section class="sec" id="problem" aria-labelledby="problem-h">
+  <div class="wrap">
+
+    <div class="split rev">
+      <h2 class="h2 wide" id="problem-h">People liked muv once they were in the car. Getting there was the problem.</h2>
+      <div>
+        <p class="prose">muv is a Paraguayan ride-hailing marketplace. Riders place it between Uber, the safe and established option, and Bolt, the cheap one: muv is the good service, with a fair price for the quality, good drivers and a car that is easy to spot.</p>
+        <p class="prose">The business was growing fast on the legacy app, from 1,000 to 6,000+ drivers and from 2,000 to 39,000 passengers since 2024. But in a June 2025 survey, overall satisfaction came out at <strong>5.99 out of 10</strong>: neutral, with nothing that builds loyalty.</p>
+      </div>
+    </div>
+    <!-- drivers 1K→6K+ and passengers 2K→39K come from the "metrics now" slide (Q4 2025 vs 2024) -->
+
+    <div class="split rev">
+      <div>
+        <div class="evidence-head">
+          <h3 class="h3">Where the survey said it hurt</h3>
+          <p class="small">% of respondents</p>
+        </div>
+        <ul class="bars" id="bars">
+          <li><span class="bar-label">Say waiting-time estimates aren't accurate</span><span class="bar-val">67%</span><span class="bar-track"><span class="bar-fill" style="--v:67%"></span></span></li>
+          <li><span class="bar-label">Say the cars shown as available aren't accurate</span><span class="bar-val">60%</span><span class="bar-track"><span class="bar-fill" style="--v:60%"></span></span></li>
+          <li><span class="bar-label">Disagree that booking a car is fast</span><span class="bar-val">50%</span><span class="bar-track"><span class="bar-fill" style="--v:50%"></span></span></li>
+          <li><span class="bar-label">Disagree that the car's location is reliable</span><span class="bar-val">46%</span><span class="bar-track"><span class="bar-fill" style="--v:46%"></span></span></li>
+          <li><span class="bar-label">Find searching and booking a car difficult</span><span class="bar-val">39%</span><span class="bar-track"><span class="bar-fill" style="--v:39%"></span></span></li>
+          <li><span class="bar-label">Find the map and the route hard to see</span><span class="bar-val">31%</span><span class="bar-track"><span class="bar-fill" style="--v:31%"></span></span></li>
+        </ul>
+        <p class="small" style="margin-top:1.5rem;max-width:56ch">Survey, June 2025, 120–148 answers per question. The sample was mostly customers of B2B brands, so it leans towards corporate users.</p>
+        <!-- TODO(Paula): n is derived from the pie-chart percentages (e.g. 8/148 = 5.41%). Confirm real n per question. -->
+      </div>
+      <div class="stack">
+        <p class="prose">Most of this was technical and about driver availability, not about the interface. Design couldn't make an ETA accurate, but it could stop leaving people guessing.</p>
+        <p class="prose">That became the brief: make every state of a ride explicit, predictable and trustworthy.</p>
+      </div>
+    </div>
+
+    <div class="quotes">
+      <blockquote class="quote">
+        <p>"The app says 1 minute and it's really 10 or more."</p>
+        <cite>Survey respondent, June 2025</cite>
+      </blockquote>
+      <blockquote class="quote">
+        <p>"Good fares, but nobody ever accepts your ride."</p>
+        <cite>Survey respondent, June 2025</cite>
+      </blockquote>
+      <blockquote class="quote">
+        <p>"In Asunción very few drivers accept trips. In Encarnación I always get good service."</p>
+        <cite>Survey respondent, June 2025</cite>
+      </blockquote>
+    </div>
+
+    <div>
+      <h3 class="h3" style="margin-bottom:1.25rem;max-width:none">Two sources, two problems</h3>
+      <div class="signals">
+        <div class="signal">
+          <p class="label">The survey</p>
+          <p>Registering and logging in were rated easy. The trouble was <strong>using the app</strong>: finding, booking and following a car.</p>
+        </div>
+        <div class="signal">
+          <p class="label">The funnel</p>
+          <p>Onboarding had <strong>21 steps</strong>, and only <strong>25%</strong> of the people who started it finished it.</p>
+        </div>
+      </div>
+      <p class="small" style="margin-top:1rem;max-width:70ch">The survey only reached people who had already made it in, so it couldn't see the drop-off. The funnel could. Onboarding had to bring more people in, and the ride flow had to keep them.</p>
+    </div>
+
+    <figure class="narrow-fig">
+      <img class="legacy" src="muv-assets/muv-legacy-app.webp" width="1600" height="1096" loading="lazy" decoding="async" alt="The legacy muv app in three screens: a chooser asking whether to send or receive a package, a trip in progress with a numbered multi-stop route, an arrival banner and the driver card with call and message buttons, and a home asking where to go with a route search field and recent addresses">
+      <figcaption>The legacy app: a home built around a route search field and recent addresses, a send or receive chooser, and a trip view with numbered stops, the driver card and the payment method.</figcaption>
+    </figure>
+
+    <div class="split">
+      <div>
+        <h3 class="h3" style="margin-bottom:1.25rem">What we set out to do</h3>
+        <ul class="goals">
+          <li>Get to a first successful ride faster.</li>
+          <li>Make ride states explicit and predictable, with real-time feedback people can trust.</li>
+          <li>Keep the UI aligned with the backend states, so the screen says what is actually happening.</li>
+          <li>Show promotions across the interface.</li>
+          <li>Build a reusable system for future features.</li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="h3" style="margin-bottom:1.25rem">What I redesigned</h3>
+        <div class="scope" style="margin-top:0">
+          <div><h4>Onboarding</h4><p>Includes the Unid integration and the value proposition, with a basic profile setup.</p></div>
+          <div><h4>Home and navigation</h4><p>A hybrid navigation model.</p></div>
+          <div><h4>Trip and send</h4><p>Requesting a ride, and sending or receiving packages.</p></div>
+          <div><h4>Reviews</h4><p>A new section to gather feedback and improve the product.</p></div>
+        </div>
+        <p class="small" style="margin-top:1.5rem">Secondary flows: account, favorites, payment methods, my trips and promotions.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═════════ PROCESS ═════════ -->
+<section class="sec tint" id="process" aria-labelledby="process-h">
+  <div class="wrap">
+
+    <div class="split">
+      <h2 class="h2 wide" id="process-h">Designing the ride as a set of states</h2>
+      <p class="prose">A ride is a real-time system, so what the passenger sees has to match what the backend is doing. Before opening Figma I mapped the whole journey as five states, and wrote what the passenger should read in each one.</p>
+    </div>
+
+    <!-- ─── Sketch scene 3 · "What you see = what's happening" ─── -->
+    <figure class="sketch-fig">
+      <div class="sketch">
+        <svg class="sk-desktop" viewBox="0 0 1200 580" role="img" aria-labelledby="sk3-t sk3-d">
+          <title id="sk3-t">What you see is what's happening</title>
+          <desc id="sk3-d">A passenger waits on the sidewalk looking at her phone, thinking "OK, it's finding me a driver". Her screen, shown large, reads "Waiting for the driver to confirm…" with a free-cancellation countdown. A dashed arrow carries the request to a driver in a muv car, who sees a new-trip card, and a second arrow brings the status back to her screen. The label in the middle reads: what you see equals what's happening.</desc>
+          <defs>
+            <filter id="sk-wobble" x="-5%" y="-5%" width="110%" height="110%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="4"/>
+              <feDisplacementMap in="SourceGraphic" scale="3"/>
+            </filter>
+            <filter id="sk-wash" x="-20%" y="-20%" width="140%" height="140%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="3" seed="9"/>
+              <feDisplacementMap in="SourceGraphic" scale="18"/>
+              <feGaussianBlur stdDeviation="3"/>
+            </filter>
+            <pattern id="sk-grid" width="28" height="28" patternUnits="userSpaceOnUse">
+              <path d="M28 0H0V28" fill="none" class="sk-gridline"/>
+            </pattern>
+            <marker id="sk-head-o" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+              <path d="M1 1L8 5L1 9" fill="none" class="sk-o" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </marker>
+            <marker id="sk-head-n" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+              <path d="M1 1L8 5L1 9" fill="none" class="sk-n" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </marker>
+            <clipPath id="sk-screen"><rect x="496" y="78" width="208" height="404" rx="24"/></clipPath>
+          </defs>
+
+          <!-- paper -->
+          <rect width="1200" height="580" class="sk-paper"/>
+          <rect width="1200" height="580" fill="url(#sk-grid)"/>
+
+          <!-- watercolor washes -->
+          <g filter="url(#sk-wash)" aria-hidden="true">
+            <ellipse cx="600" cy="330" rx="170" ry="120" class="sk-wash-o"/>
+            <ellipse cx="986" cy="186" rx="140" ry="64" class="sk-wash-n"/>
+          </g>
+
+          <g filter="url(#sk-wobble)" class="sk-ink" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+
+            <!-- ── LEFT · passenger on the sidewalk ── -->
+            <g class="sk-soft" stroke-width="1.6">
+              <!-- tree -->
+              <path d="M78 468V330"/><path d="M78 380l-18-22M78 360l16-18"/>
+              <path d="M44 330c-18-10-14-40 8-42c-2-26 30-34 42-14c20-10 42 8 32 28c18 12 6 40-16 36c-8 16-34 16-44 4c-12 8-30 0-22-12z"/>
+              <!-- lamp -->
+              <path d="M338 468V250q0-16 16-16h14"/><path d="M362 234l10 0l4 10h-18z"/>
+            </g>
+            <!-- sidewalk -->
+            <path d="M30 470H400" stroke-width="2.2"/>
+            <path d="M30 480H400" class="sk-soft" stroke-width="1.2"/>
+            <path d="M70 490l12-10M150 490l12-10M230 490l12-10M310 490l12-10" class="sk-soft" stroke-width="1.2"/>
+
+            <!-- passenger -->
+            <g stroke-width="2.4">
+              <!-- legs -->
+              <path d="M196 360l-6 104M210 360l-2 104M228 360l4 104M244 360l6 104"/>
+              <path d="M182 466h28M226 466h30" stroke-width="3.4"/>
+              <!-- coat -->
+              <path d="M186 240q34-18 66 0l12 122q-46 10-92 0z" class="sk-fill-paper"/>
+              <path d="M219 232l-2 128" class="sk-soft" stroke-width="1.4"/>
+              <path d="M186 240l-10 72q-2 10 6 12" />
+              <!-- front arm holding phone -->
+              <path d="M252 246q14 30 10 54q-2 8-12 6l-22-14"/>
+              <!-- small phone -->
+              <rect x="226" y="262" width="18" height="30" rx="4" transform="rotate(-14 235 277)" class="sk-fill-n" stroke-width="2"/>
+              <!-- neck + head -->
+              <path d="M212 210v22M228 210v22"/>
+              <path d="M200 176q0-40 32-40q30 0 30 36q0 10 6 16q-6 4-8 4q2 14-10 18q-8 3-20 2q-30-4-30-36z" class="sk-fill-paper"/>
+              <!-- hair + bun -->
+              <path d="M200 180q-8-44 36-46q24 0 28 20q-18-6-34 4q-8 6-12 24q-6-4-10 0q-4 4-8-2z" class="sk-fill-ink"/>
+              <circle cx="196" cy="140" r="13" class="sk-fill-ink"/>
+              <!-- face, looking down at the phone -->
+              <path d="M246 180q4 2 8 0" stroke-width="2"/>
+              <path d="M248 198q4 2 7-1" stroke-width="1.8"/>
+            </g>
+
+            <!-- thought bubble (user voice: neutral) -->
+            <g stroke-width="2" class="sk-bubble-user">
+              <path d="M60 64q0-22 24-22h206q24 0 24 22v34q0 22-24 22h-206q-24 0-24-22z"/>
+              <circle cx="228" cy="136" r="6"/><circle cx="236" cy="152" r="3.5"/>
+            </g>
+
+            <!-- zoom lines from her phone to the big phone -->
+            <path d="M246 262L490 96M250 296L490 468" class="sk-soft" stroke-width="1.2" stroke-dasharray="3 7"/>
+
+            <!-- ── CENTER · her screen, large ── -->
+            <rect x="488" y="70" width="224" height="420" rx="32" class="sk-fill-paper" stroke-width="3"/>
+            <rect x="496" y="78" width="208" height="404" rx="24" stroke-width="1.4" class="sk-soft"/>
+            <rect x="572" y="88" width="56" height="14" rx="7" class="sk-fill-ink" stroke-width="1.5"/>
+
+            <!-- map fragment -->
+            <g clip-path="url(#sk-screen)">
+              <g class="sk-soft" stroke-width="1.2">
+                <path d="M496 150H704M496 196H704M496 242H704M540 110V300M600 110V300M660 110V300"/>
+              </g>
+              <path d="M540 268V196H600V150H660" class="sk-o route" stroke-width="4.5"/>
+              <circle cx="540" cy="268" r="7" class="sk-fill-n" stroke-width="2"/>
+              <path d="M660 150q-11-12-11-22a11 11 0 0 1 22 0q0 10-11 22z" class="sk-fill-o sk-o" stroke-width="2"/>
+            </g>
+
+            <!-- bottom sheet -->
+            <path d="M496 300q0-14 14-14h180q14 0 14 14v158q0 24-24 24h-160q-24 0-24-24z" class="sk-fill-paper" stroke-width="2"/>
+            <path d="M584 298h32" class="sk-soft" stroke-width="3"/>
+            <!-- ripple: matching in progress -->
+            <g class="ripple">
+              <circle cx="600" cy="336" r="10" class="sk-fill-o sk-o" stroke-width="2"/>
+              <circle cx="600" cy="336" r="20" class="sk-o r1" stroke-width="1.8"/>
+              <circle cx="600" cy="336" r="30" class="sk-o r2" stroke-width="1.4"/>
+            </g>
+            <!-- progress bar -->
+            <path d="M522 450H678" class="sk-soft" stroke-width="5"/>
+            <path d="M522 450H588" class="sk-o" stroke-width="5"/>
+
+            <!-- ── RIGHT · the driver ── -->
+            <g class="sk-soft" stroke-width="1.5">
+              <!-- buildings -->
+              <path d="M820 470V248h86v222M906 470V200h92v270M998 470V270h84v200M1082 470V230h70v240"/>
+              <path d="M836 270h18v22h-18zM868 270h18v22h-18zM926 222h20v24h-20zM960 222h20v24h-20zM1016 292h18v22h-18zM1048 292h18v22h-18zM1098 252h16v20h-16zM1124 252h16v20h-16z"/>
+            </g>
+            <path d="M800 470H1180" stroke-width="2.2"/>
+            <!-- car (facing left) -->
+            <g stroke-width="2.4">
+              <path d="M842 446l4-34q16-8 50-10l34-36q10-8 28-8h86q20 0 32 12l26 30q18 4 20 18v28z" class="sk-fill-paper"/>
+              <path d="M940 374h60v28h-84zM1010 374h42q10 2 18 10l16 18h-76z" stroke-width="2"/>
+              <circle cx="968" cy="390" r="9" class="sk-fill-ink" stroke-width="1.5"/>
+              <path d="M862 424H1116" class="sk-o" stroke-width="4"/>
+              <circle cx="892" cy="450" r="22" class="sk-fill-paper"/><circle cx="892" cy="450" r="8"/>
+              <circle cx="1070" cy="450" r="22" class="sk-fill-paper"/><circle cx="1070" cy="450" r="8"/>
+            </g>
+
+            <!-- driver's new-trip card (app voice: navy) -->
+            <g class="sk-n" stroke-width="2.2">
+              <rect x="870" y="138" width="232" height="92" rx="14" class="sk-fill-paper"/>
+              <path d="M960 230l12 18l12-18" class="sk-fill-paper"/>
+              <circle cx="1032" cy="196" r="15" class="sk-fill-n"/>
+              <path d="M1025 196l5 5l9-10" class="sk-on-n" stroke-width="2.4"/>
+              <circle cx="1074" cy="196" r="15"/>
+              <path d="M1068 190l12 12M1080 190l-12 12" stroke-width="2.2"/>
+            </g>
+
+            <!-- ── flow arrows ── -->
+            <path d="M716 170C770 110 820 120 862 160" class="sk-o flow" stroke-width="2.2" stroke-dasharray="8 8" marker-end="url(#sk-head-o)"/>
+            <path d="M866 250C830 320 790 366 722 382" class="sk-n flow" stroke-width="2.2" stroke-dasharray="8 8" marker-end="url(#sk-head-n)"/>
+
+            <!-- ── labels ── -->
+            <rect x="60" y="518" width="300" height="42" rx="10" class="sk-pill-user" stroke-width="1.8"/>
+            <path d="M414 530l-18-8M414 540l-22 0M414 550l-18 8M786 530l18-8M786 540l22 0M786 550l18 8" stroke-width="2"/>
+            <path d="M428 519q172-8 344 0l2 42q-174 8-348 0z" class="sk-pill-idea" stroke-width="1.8"/>
+            <rect x="840" y="518" width="300" height="42" rx="10" class="sk-pill-app" stroke-width="1.8"/>
+          </g>
+
+          <!-- ── real text, kept outside the wobble so it stays crisp ── -->
+          <g class="sk-hand">
+            <text x="187" y="90" text-anchor="middle" font-size="24">OK, it's finding</text>
+            <text x="187" y="114" text-anchor="middle" font-size="24">me a driver.</text>
+
+            <text x="600" y="385" text-anchor="middle" font-size="19" class="sk-t-n">Waiting for the driver</text>
+            <text x="600" y="406" text-anchor="middle" font-size="19" class="sk-t-n">to confirm…</text>
+            <text x="600" y="434" text-anchor="middle" font-size="16" class="sk-t-soft">4:32 · free cancellation</text>
+            <text x="518" y="100" font-size="14" class="sk-t-soft">9:41</text>
+
+            <text x="890" y="170" font-size="21" class="sk-t-n">New trip</text>
+            <text x="890" y="202" font-size="18" class="sk-t-soft">1.2 km away</text>
+
+            <text x="786" y="112" text-anchor="middle" font-size="19" class="sk-t-o">request</text>
+            <text x="770" y="318" text-anchor="middle" font-size="20" class="sk-t-n" transform="rotate(-24 770 318)">live status</text>
+
+            <text x="210" y="546" text-anchor="middle" font-size="19" letter-spacing="1">PASSENGER: CALM, INFORMED</text>
+            <text x="600" y="547" text-anchor="middle" font-size="20" letter-spacing="1">WHAT YOU SEE = WHAT'S HAPPENING</text>
+            <text x="990" y="546" text-anchor="middle" font-size="19" letter-spacing="1">DRIVER: DECIDING, 5 MIN</text>
+          </g>
+        </svg>
+        <svg class="sk-mobile" viewBox="0 0 600 1690" role="img" aria-labelledby="sk3m-t sk3m-d">
+          <title id="sk3m-t">What you see is what's happening</title>
+          <desc id="sk3m-d">A passenger waits on the sidewalk thinking "OK, it's finding me a driver". Below, her screen reads "Waiting for the driver to confirm…" with a free-cancellation countdown. Below that, a driver in a muv car sees a new-trip card. An orange arrow carries the request down to the driver and a navy arrow brings the live status back up to her screen. The closing label reads: what you see equals what's happening.</desc>
+          <defs>
+            <filter id="skm-wobble" x="-5%" y="-5%" width="110%" height="110%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="4"/>
+              <feDisplacementMap in="SourceGraphic" scale="3"/>
+            </filter>
+            <filter id="skm-wash" x="-20%" y="-20%" width="140%" height="140%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="3" seed="9"/>
+              <feDisplacementMap in="SourceGraphic" scale="18"/>
+              <feGaussianBlur stdDeviation="3"/>
+            </filter>
+            <pattern id="skm-grid" width="28" height="28" patternUnits="userSpaceOnUse">
+              <path d="M28 0H0V28" fill="none" class="sk-gridline"/>
+            </pattern>
+            <marker id="skm-head-o" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+              <path d="M1 1L8 5L1 9" fill="none" class="sk-o" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </marker>
+            <marker id="skm-head-n" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+              <path d="M1 1L8 5L1 9" fill="none" class="sk-n" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </marker>
+            <clipPath id="skm-screen"><rect x="496" y="78" width="208" height="404" rx="24"/></clipPath>
+          </defs>
+
+
+          <rect width="600" height="1690" class="sk-paper"/>
+          <rect width="600" height="1690" fill="url(#skm-grid)"/>
+          <g filter="url(#skm-wash)" aria-hidden="true">
+            <ellipse cx="300" cy="850" rx="190" ry="150" class="sk-wash-o"/>
+            <ellipse cx="286" cy="1190" rx="160" ry="70" class="sk-wash-n"/>
+          </g>
+          <g filter="url(#skm-wobble)" class="sk-ink" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <g transform="translate(100 0)">
+            <!-- ── LEFT · passenger on the sidewalk ── -->
+            <g class="sk-soft" stroke-width="1.6">
+              <!-- tree -->
+              <path d="M78 468V330"/><path d="M78 380l-18-22M78 360l16-18"/>
+              <path d="M44 330c-18-10-14-40 8-42c-2-26 30-34 42-14c20-10 42 8 32 28c18 12 6 40-16 36c-8 16-34 16-44 4c-12 8-30 0-22-12z"/>
+              <!-- lamp -->
+              <path d="M338 468V250q0-16 16-16h14"/><path d="M362 234l10 0l4 10h-18z"/>
+            </g>
+            <!-- sidewalk -->
+            <path d="M30 470H400" stroke-width="2.2"/>
+            <path d="M30 480H400" class="sk-soft" stroke-width="1.2"/>
+            <path d="M70 490l12-10M150 490l12-10M230 490l12-10M310 490l12-10" class="sk-soft" stroke-width="1.2"/>
+
+            <!-- passenger -->
+            <g stroke-width="2.4">
+              <!-- legs -->
+              <path d="M196 360l-6 104M210 360l-2 104M228 360l4 104M244 360l6 104"/>
+              <path d="M182 466h28M226 466h30" stroke-width="3.4"/>
+              <!-- coat -->
+              <path d="M186 240q34-18 66 0l12 122q-46 10-92 0z" class="sk-fill-paper"/>
+              <path d="M219 232l-2 128" class="sk-soft" stroke-width="1.4"/>
+              <path d="M186 240l-10 72q-2 10 6 12" />
+              <!-- front arm holding phone -->
+              <path d="M252 246q14 30 10 54q-2 8-12 6l-22-14"/>
+              <!-- small phone -->
+              <rect x="226" y="262" width="18" height="30" rx="4" transform="rotate(-14 235 277)" class="sk-fill-n" stroke-width="2"/>
+              <!-- neck + head -->
+              <path d="M212 210v22M228 210v22"/>
+              <path d="M200 176q0-40 32-40q30 0 30 36q0 10 6 16q-6 4-8 4q2 14-10 18q-8 3-20 2q-30-4-30-36z" class="sk-fill-paper"/>
+              <!-- hair + bun -->
+              <path d="M200 180q-8-44 36-46q24 0 28 20q-18-6-34 4q-8 6-12 24q-6-4-10 0q-4 4-8-2z" class="sk-fill-ink"/>
+              <circle cx="196" cy="140" r="13" class="sk-fill-ink"/>
+              <!-- face, looking down at the phone -->
+              <path d="M246 180q4 2 8 0" stroke-width="2"/>
+              <path d="M248 198q4 2 7-1" stroke-width="1.8"/>
+            </g>
+
+            <!-- thought bubble (user voice: neutral) -->
+            <g stroke-width="2" class="sk-bubble-user">
+              <path d="M60 64q0-22 24-22h206q24 0 24 22v34q0 22-24 22h-206q-24 0-24-22z"/>
+              <circle cx="228" cy="136" r="6"/><circle cx="236" cy="152" r="3.5"/>
+            </g>
+
+            </g>
+            <path d="M346 262L188 594M350 296L412 594" class="sk-soft" stroke-width="1.2" stroke-dasharray="3 7"/>
+            <g transform="translate(-300 520)">
+            <!-- ── CENTER · her screen, large ── -->
+            <rect x="488" y="70" width="224" height="420" rx="32" class="sk-fill-paper" stroke-width="3"/>
+            <rect x="496" y="78" width="208" height="404" rx="24" stroke-width="1.4" class="sk-soft"/>
+            <rect x="572" y="88" width="56" height="14" rx="7" class="sk-fill-ink" stroke-width="1.5"/>
+
+            <!-- map fragment -->
+            <g clip-path="url(#skm-screen)">
+              <g class="sk-soft" stroke-width="1.2">
+                <path d="M496 150H704M496 196H704M496 242H704M540 110V300M600 110V300M660 110V300"/>
+              </g>
+              <path d="M540 268V196H600V150H660" class="sk-o route" stroke-width="4.5"/>
+              <circle cx="540" cy="268" r="7" class="sk-fill-n" stroke-width="2"/>
+              <path d="M660 150q-11-12-11-22a11 11 0 0 1 22 0q0 10-11 22z" class="sk-fill-o sk-o" stroke-width="2"/>
+            </g>
+
+            <!-- bottom sheet -->
+            <path d="M496 300q0-14 14-14h180q14 0 14 14v158q0 24-24 24h-160q-24 0-24-24z" class="sk-fill-paper" stroke-width="2"/>
+            <path d="M584 298h32" class="sk-soft" stroke-width="3"/>
+            <!-- ripple: matching in progress -->
+            <g class="ripple">
+              <circle cx="600" cy="336" r="10" class="sk-fill-o sk-o" stroke-width="2"/>
+              <circle cx="600" cy="336" r="20" class="sk-o r1" stroke-width="1.8"/>
+              <circle cx="600" cy="336" r="30" class="sk-o r2" stroke-width="1.4"/>
+            </g>
+            <!-- progress bar -->
+            <path d="M522 450H678" class="sk-soft" stroke-width="5"/>
+            <path d="M522 450H588" class="sk-o" stroke-width="5"/>
+
+            </g>
+            <g transform="translate(-700 1000)">
+            <!-- ── RIGHT · the driver ── -->
+            <g class="sk-soft" stroke-width="1.5">
+              <!-- buildings -->
+              <path d="M820 470V248h86v222M906 470V200h92v270M998 470V270h84v200M1082 470V230h70v240"/>
+              <path d="M836 270h18v22h-18zM868 270h18v22h-18zM926 222h20v24h-20zM960 222h20v24h-20zM1016 292h18v22h-18zM1048 292h18v22h-18zM1098 252h16v20h-16zM1124 252h16v20h-16z"/>
+            </g>
+            <path d="M800 470H1180" stroke-width="2.2"/>
+            <!-- car (facing left) -->
+            <g stroke-width="2.4">
+              <path d="M842 446l4-34q16-8 50-10l34-36q10-8 28-8h86q20 0 32 12l26 30q18 4 20 18v28z" class="sk-fill-paper"/>
+              <path d="M940 374h60v28h-84zM1010 374h42q10 2 18 10l16 18h-76z" stroke-width="2"/>
+              <circle cx="968" cy="390" r="9" class="sk-fill-ink" stroke-width="1.5"/>
+              <path d="M862 424H1116" class="sk-o" stroke-width="4"/>
+              <circle cx="892" cy="450" r="22" class="sk-fill-paper"/><circle cx="892" cy="450" r="8"/>
+              <circle cx="1070" cy="450" r="22" class="sk-fill-paper"/><circle cx="1070" cy="450" r="8"/>
+            </g>
+
+            <!-- driver's new-trip card (app voice: navy) -->
+            <g class="sk-n" stroke-width="2.2">
+              <rect x="870" y="138" width="232" height="92" rx="14" class="sk-fill-paper"/>
+              <path d="M960 230l12 18l12-18" class="sk-fill-paper"/>
+              <circle cx="1032" cy="196" r="15" class="sk-fill-n"/>
+              <path d="M1025 196l5 5l9-10" class="sk-on-n" stroke-width="2.4"/>
+              <circle cx="1074" cy="196" r="15"/>
+              <path d="M1068 190l12 12M1080 190l-12 12" stroke-width="2.2"/>
+            </g>
+
+            </g>
+            <path d="M418 770C570 820 570 1110 412 1176" class="sk-o flow" stroke-width="2.4" stroke-dasharray="8 8" marker-end="url(#skm-head-o)"/>
+            <path d="M166 1200C24 1140 24 870 182 836" class="sk-n flow" stroke-width="2.4" stroke-dasharray="8 8" marker-end="url(#skm-head-n)"/>
+            <rect x="80" y="498" width="440" height="54" rx="12" class="sk-pill-user" stroke-width="1.8"/>
+            <rect x="80" y="1500" width="440" height="54" rx="12" class="sk-pill-app" stroke-width="1.8"/>
+            <path d="M44 1612l-18-8M44 1624l-22 0M44 1636l-18 8M556 1612l18-8M556 1624l22 0M556 1636l18 8" stroke-width="2"/>
+            <path d="M58 1596q242-8 484 0l2 56q-244 8-488 0z" class="sk-pill-idea" stroke-width="1.8"/>
+          </g>
+          <g class="sk-hand">
+            <text x="287" y="90" text-anchor="middle" font-size="26">OK, it's finding</text>
+            <text x="287" y="116" text-anchor="middle" font-size="26">me a driver.</text>
+            <text x="300" y="905" text-anchor="middle" font-size="20" class="sk-t-n">Waiting for the driver</text>
+            <text x="300" y="927" text-anchor="middle" font-size="20" class="sk-t-n">to confirm…</text>
+            <text x="300" y="954" text-anchor="middle" font-size="17" class="sk-t-soft">4:32 · free cancellation</text>
+            <text x="218" y="620" font-size="15" class="sk-t-soft">9:41</text>
+            <text x="190" y="1170" font-size="23" class="sk-t-n">New trip</text>
+            <text x="190" y="1203" font-size="19" class="sk-t-soft">1.2 km away</text>
+            <text x="556" y="975" text-anchor="middle" font-size="22" class="sk-t-o" transform="rotate(90 556 975)">request</text>
+            <text x="44" y="1020" text-anchor="middle" font-size="22" class="sk-t-n" transform="rotate(-90 44 1020)">live status</text>
+            <text x="300" y="533" text-anchor="middle" font-size="26" letter-spacing="1">PASSENGER: CALM, INFORMED</text>
+            <text x="300" y="1535" text-anchor="middle" font-size="26" letter-spacing="1">DRIVER: DECIDING, 5 MIN</text>
+            <text x="300" y="1633" text-anchor="middle" font-size="25" letter-spacing=".5">WHAT YOU SEE = WHAT'S HAPPENING</text>
+          </g>
+        </svg>
+      </div>
+      <figcaption>The principle behind the five states: the screen only says what the system is actually doing, on both sides of the request.</figcaption>
+    </figure>
+
+    <ol class="states">
+      <li>
+        <h3>Request initiated</h3>
+        <p>Route on the map. A skeleton loader shows while availability is calculated.</p>
+      </li>
+      <li>
+        <h3>Matching in progress</h3>
+        <p>A five-minute free-cancellation countdown runs while the driver decides.</p>
+        <span class="say">"Waiting for the driver to confirm…"<br>"Widening the search radius"</span>
+      </li>
+      <li>
+        <h3>Driver assigned</h3>
+        <span class="say">"Driver confirmed ✨ · Juan is on his way · ACG 546TY"</span>
+      </li>
+      <li>
+        <h3>Ride in progress</h3>
+        <span class="say">"Juan started your trip · 10 min to arrive"</span>
+      </li>
+      <li>
+        <h3>Ride completed or cancelled</h3>
+        <p>Review with preset comments and trip characteristics.</p>
+      </li>
+    </ol>
+    <!-- TODO(Paula): confirm what the UI shows on cancellation, if you want it named here -->
+
+    <figure>
+      <!-- MOBILE (pending image): wrap the img in <picture><source media="(max-width:640px)" srcset="muv-assets/muv-full-flow-mobile.webp" width="1080" height="1350"> … </picture> and drop "scroll" from the panel -->
+      <div class="panel scroll" style="padding:clamp(8px,2vw,24px)"><img src="muv-assets/muv-full-flow.webp" width="2012" height="926" loading="lazy" decoding="async" alt="The whole passenger app across its states: saved-card prompt, trip summary and review, matching with the search route, the home with the driver-confirmed banner and services, the category list with the Recommended option, and the driver card with the five-minute free wait"></div>
+      <figcaption>The whole passenger app, from home and categories to matching, driver assigned and review.</figcaption>
+    </figure>
+
+    <div class="split">
+      <div>
+        <h3 class="h3" style="margin-bottom:1rem">Home: photo or map?</h3>
+        <p class="prose">I put two low-fidelity homes in front of users: a photo header, and a live map. The map won.</p>
+        <p class="prose">It wasn't about looks. People think about a ride spatially: where am I, where is the car. So the map became the home, and the services sit in a sheet over it.</p>
+      </div>
+      <figure>
+        <div class="panel"><img src="muv-assets/muv-homes-ab.jpg" width="1400" height="1310" loading="lazy" decoding="async" alt="Two low-fidelity home screens side by side: a photo header (Photo) and a map header (Map), with the map option marked as the winner"></div>
+        <figcaption>Photo header vs map header. The map option is the one we kept.</figcaption>
+      </figure>
+    </div>
+
+    <div>
+      <h3 class="h3" style="margin-bottom:1.25rem">Low-fidelity, four key screens</h3>
+      <div class="wf-strip">
+        <figure class="wf-item"><div class="wf"><img src="muv-assets/muv-wf-home.jpg" width="720" height="1610" loading="lazy" decoding="async" alt="Low-fidelity home: search field, Ride and Send services, a promotions carousel, a coupon entry and a four-item tab bar"></div><figcaption>Home</figcaption></figure>
+        <figure class="wf-item"><div class="wf"><img src="muv-assets/muv-wf-categories.jpg" width="720" height="1392" loading="lazy" decoding="async" alt="Low-fidelity trip screen: route with Origin and Destination, three category cards with the first marked Recommended, card and coupon options, and a Confirm trip button"></div><figcaption>Categories</figcaption></figure>
+        <figure class="wf-item"><div class="wf"><img src="muv-assets/muv-wf-trip.jpg" width="720" height="1766" loading="lazy" decoding="async" alt="Low-fidelity in-trip state: route on the map, driver card with a message button, trip summary from Origin to Destination, payment method and total, and a Cancel trip button"></div><figcaption>In trip</figcaption></figure>
+        <figure class="wf-item"><div class="wf"><img src="muv-assets/muv-wf-review.jpg" width="720" height="1806" loading="lazy" decoding="async" alt="Low-fidelity review screen: five rating dots with Excellent selected, reason chips, a comment field and an Enviar button"></div><figcaption>Review</figcaption></figure>
+      </div>
+      <p class="small" style="margin-top:1rem">Home, trip category selection, in-trip driver state and review. Validating hierarchy and state transitions here caught edge cases before visual design.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═════════ SOLUTION ═════════ -->
+<section class="sec" id="solution" aria-labelledby="solution-h">
+  <div class="wrap">
+
+    <div class="split">
+      <h2 class="h2 wide" id="solution-h">From destination to confirmation in four screens</h2>
+      <p class="prose">Destination, categories, searching, confirmed. Every screen tells the passenger what the app is doing, so nothing feels stuck.</p>
+    </div>
+
+    <div class="flow" id="flow">
+      <div class="step reveal">
+        <img class="mock" src="muv-assets/muv-app-destination.webp" width="640" height="1256" loading="lazy" decoding="async" alt="Destination screen: origin Home and destination fields, recent places, favorites, the ueno bank savings banner and a Confirm trip button">
+        <span class="es-tag">Enter your destination</span>
+        <h3>Destination</h3>
+        <p>Origin and destination, with recents and favorites one tap away. The ueno rebate is already visible.</p>
+      </div>
+      <div class="step reveal">
+        <img class="mock" src="muv-assets/muv-app-categories.webp" width="640" height="1256" loading="lazy" decoding="async" alt="Category screen: route on the map, Economy marked Recommended, Muv and Comfort with time, seats and price, the ueno rebate line, card and coupon, and a Confirm trip button">
+        <span class="es-tag">Confirm trip</span>
+        <h3>Categories</h3>
+        <p>Economy, Muv and Comfort with time, seats and price. "Recommended" is preselected, and the rebate sits above the payment method.</p>
+      </div>
+      <div class="step reveal">
+        <img class="mock" src="muv-assets/muv-app-searching.webp" width="640" height="1231" loading="lazy" decoding="async" alt="Searching screen: concentric orange ripples around the pickup pin, the message We're waiting for the driver to confirm, a progress bar, a tip card and Cancel trip">
+        <span class="es-tag">Waiting for confirmation</span>
+        <h3>Searching</h3>
+        <p>Ripples spread around the pickup while the driver decides. A card fills the wait, and cancelling stays one tap away.</p>
+      </div>
+      <div class="step reveal">
+        <img class="mock" src="muv-assets/muv-app-confirmed.webp" width="640" height="1230" loading="lazy" decoding="async" alt="Confirmed screen: estimated arrival Arriving in about 5 minutes, payment method and total, the trip from origin to destination, and the driver card with car, plate and a message button">
+        <span class="es-tag">Arriving in 5 minutes</span>
+        <h3>Driver confirmed</h3>
+        <p>The ETA leads, then payment and the trip. The driver card shows who is coming, in which car, with the plate and one button to message.</p>
+      </div>
+    </div>
+
+    <div>
+      <div class="split rev" style="margin-bottom:clamp(24px,3vw,40px)">
+        <h3 class="h3">The same flow, for sending a package</h3>
+        <p class="prose">Send reuses the trip flow and its components: address entry, categories with a recommended option, and one clear action. Sending needs a card, so the home asks for one first. After the details step comes the delivery, and the same rating.</p>
+      </div>
+      <!-- TODO(Paula): the small text inside this composite looks soft/warped at full width; if you have a clean export from Figma, swap it in -->
+      <figure>
+        <!-- MOBILE (pending images): replace the strip below with one image per screen:
+        <div class="shots">
+          <img src="muv-assets/muv-envio-01.webp" width="780" height="1690" loading="lazy" decoding="async" alt="Home asking to add a card">
+          <img src="muv-assets/muv-envio-02.webp" width="780" height="1690" loading="lazy" decoding="async" alt="Addresses">
+          <img src="muv-assets/muv-envio-03.webp" width="780" height="1690" loading="lazy" decoding="async" alt="Categories: Moto, Economy, Muv">
+          <img src="muv-assets/muv-envio-04.webp" width="780" height="1690" loading="lazy" decoding="async" alt="Package details">
+          <img src="muv-assets/muv-envio-05.webp" width="780" height="1690" loading="lazy" decoding="async" alt="Delivery rating">
+        </div> -->
+        <img class="envio" src="muv-assets/muv-envio-flow.webp" width="1600" height="691" loading="lazy" decoding="async" alt="The Send flow in five screens: the home asking to add a card and showing the Ride and Send services, the address entry titled Your delivery with muv, the category list with Moto, Economy and Muv and their prices, the package details with Send and Receive tabs, and the delivered screen with a rating prompt">
+        <figcaption>Send: add a card, enter the addresses, pick a category (Moto, Economy or Muv), review the package details, and rate the delivery.</figcaption>
+      </figure>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═════════ MOTION ═════════ -->
+<section class="sec tint" id="motion" aria-labelledby="motion-h">
+  <div class="wrap">
+
+    <div class="split">
+      <h2 class="h2 wide" id="motion-h">Motion that explains the wait</h2>
+      <div>
+        <p class="prose">Waiting is the hardest moment in a ride app, so motion here has one job: answer the question before the passenger asks it. Is it working? Where am I? What happens next?</p>
+        <p class="prose">These are recreated in code from the prototype's real timings, so you can watch them without opening Figma. The map is stylized; the timings are not.</p>
+      </div>
+    </div>
+
+    <div class="motion-hero">
+      <div>
+        <h3 class="h3">Searching for a driver</h3>
+        <p class="prose" style="margin-top:.75rem">Five things move at once, and each has a different job.</p>
+        <dl class="mspec">
+          <div><dt>Map camera</dt><dd>Overview, origin, destination, origin. It holds <b>2.5 s, 2.5 s, 2 s, 2 s</b>, then moves on a <b>Gentle spring (1.02 s)</b>. It tells the passenger the app knows both ends of the trip.</dd></div>
+          <div><dt>Route trace</dt><dd>The highlighted line runs along the streets to the destination and back, about <b>5 s</b> per round trip (my approximation of the prototype). It says the route is known and the trip is alive.</dd></div>
+          <div><dt>Ripple at pickup</dt><dd>Three states loop every <b>1.8 s</b>, each change <b>0.3 s ease-out</b>. It says we are searching around you.</dd></div>
+          <div><dt>Location ping</dt><dd>A ring grows over <b>1.25 s</b> on a slow spring, then snaps back in <b>0.3 s</b>. It says this is you, and it's live.</dd></div>
+          <div><dt>Skeleton shimmer</dt><dd>A highlight sweeps in <b>1 s (ease-out)</b> every <b>2 s</b>. It says content is coming, and the sheet won't jump when it arrives.</dd></div>
+        </dl>
+        <div class="mctl" data-for="hero">
+          <button class="mbtn" type="button" data-ctl="pause" aria-pressed="false">Pause</button>
+          <button class="mbtn" type="button" data-ctl="replay">Replay</button>
+          <a class="mlink" href="https://www.figma.com/proto/io8XEuCz4DprO7lK40L17a/muv-app?node-id=1-38654&t=hsuCgtYJiZIko83g-1&scaling=min-zoom&content-scaling=fixed&page-id=1%3A8829" target="_blank" rel="noopener">Open the original prototype in Figma</a>
+        </div>
+        <!-- TODO(Paula): the Figma link needs "anyone with the link can view" to work for visitors -->
+      </div>
+      <div class="stage-col">
+        <div class="dev" data-stage="hero" data-w="393" data-h="852" role="img" aria-label="Animated recreation of the searching-for-a-driver screen: the map zooms between pickup and destination, a ripple pulses around the pickup pin, and skeleton placeholders shimmer in the bottom sheet">
+          <div class="stage">
+            <div class="world" id="mh-world"><svg class="map" viewBox="-100 -150 700 1150" width="700" height="1150" style="left:-100px;top:-150px" aria-hidden="true"><rect x="-100" y="-150" width="700" height="1150" fill="#f1f1ef"/><rect x="112" y="142" width="100" height="84" fill="#f5efdf"/><rect x="-50" y="4" width="46" height="84" fill="#eeece7"/><rect x="274" y="188" width="100" height="130" fill="#eeece7"/><rect x="58" y="464" width="154" height="130" fill="#ecebe6"/><rect x="328" y="556" width="100" height="130" fill="#eeece7"/><rect x="4" y="280" width="46" height="38" fill="#eeece7"/><rect x="220" y="372" width="46" height="84" fill="#eeece7"/><rect x="328" y="96" width="46" height="38" fill="#dfeadb"/><rect x="58" y="326" width="46" height="38" fill="#dfeadb"/><rect x="166" y="694" width="100" height="38" fill="#dfeadb"/><rect x="-50" y="280" width="46" height="38" fill="#dfeadb"/><g stroke="#fff" stroke-linecap="butt" fill="none"><line x1="-100" y1="-184" x2="600" y2="-184" stroke-width="7"/><line x1="-100" y1="-138" x2="600" y2="-138" stroke-width="3.6"/><line x1="-100" y1="-92" x2="600" y2="-92" stroke-width="3.6"/><line x1="-100" y1="-46" x2="600" y2="-46" stroke-width="3.6"/><line x1="-100" y1="0" x2="600" y2="0" stroke-width="7"/><line x1="-100" y1="46" x2="600" y2="46" stroke-width="3.6"/><line x1="-100" y1="92" x2="600" y2="92" stroke-width="3.6"/><line x1="-100" y1="138" x2="600" y2="138" stroke-width="3.6"/><line x1="-100" y1="184" x2="600" y2="184" stroke-width="7"/><line x1="-100" y1="230" x2="600" y2="230" stroke-width="3.6"/><line x1="-100" y1="276" x2="600" y2="276" stroke-width="3.6"/><line x1="-100" y1="322" x2="600" y2="322" stroke-width="3.6"/><line x1="-100" y1="368" x2="600" y2="368" stroke-width="7"/><line x1="-100" y1="414" x2="600" y2="414" stroke-width="3.6"/><line x1="-100" y1="460" x2="600" y2="460" stroke-width="3.6"/><line x1="-100" y1="506" x2="600" y2="506" stroke-width="3.6"/><line x1="-100" y1="552" x2="600" y2="552" stroke-width="7"/><line x1="-100" y1="598" x2="600" y2="598" stroke-width="3.6"/><line x1="-100" y1="644" x2="600" y2="644" stroke-width="3.6"/><line x1="-100" y1="690" x2="600" y2="690" stroke-width="3.6"/><line x1="-100" y1="736" x2="600" y2="736" stroke-width="7"/><line x1="-100" y1="782" x2="600" y2="782" stroke-width="3.6"/><line x1="-100" y1="828" x2="600" y2="828" stroke-width="3.6"/><line x1="-100" y1="874" x2="600" y2="874" stroke-width="3.6"/><line x1="-100" y1="920" x2="600" y2="920" stroke-width="7"/><line x1="-100" y1="966" x2="600" y2="966" stroke-width="3.6"/><line x1="-100" y1="1012" x2="600" y2="1012" stroke-width="3.6"/><line x1="-100" y1="1058" x2="600" y2="1058" stroke-width="3.6"/><line x1="-108" y1="-150" x2="-108" y2="1000" stroke-width="7"/><line x1="-54" y1="-150" x2="-54" y2="1000" stroke-width="3.6"/><line x1="0" y1="-150" x2="0" y2="1000" stroke-width="3.6"/><line x1="54" y1="-150" x2="54" y2="1000" stroke-width="3.6"/><line x1="108" y1="-150" x2="108" y2="1000" stroke-width="7"/><line x1="162" y1="-150" x2="162" y2="1000" stroke-width="3.6"/><line x1="216" y1="-150" x2="216" y2="1000" stroke-width="3.6"/><line x1="270" y1="-150" x2="270" y2="1000" stroke-width="3.6"/><line x1="324" y1="-150" x2="324" y2="1000" stroke-width="7"/><line x1="378" y1="-150" x2="378" y2="1000" stroke-width="3.6"/><line x1="432" y1="-150" x2="432" y2="1000" stroke-width="3.6"/><line x1="486" y1="-150" x2="486" y2="1000" stroke-width="3.6"/><line x1="540" y1="-150" x2="540" y2="1000" stroke-width="7"/><line x1="594" y1="-150" x2="594" y2="1000" stroke-width="3.6"/></g><path d="M 378 -150 L 378 60 Q 378 92 410 92 L 600 92" stroke="#f8e7ae" stroke-width="10" fill="none" stroke-linecap="round"/><text x="-60" y="187" font-family="Inter,Geist,sans-serif" font-size="8.5" font-weight="500" fill="#8f8f8a">Alfarez Silva</text><text x="120" y="325" font-family="Inter,Geist,sans-serif" font-size="8.5" font-weight="500" fill="#8f8f8a">Teniente Héctor Vera</text><text x="330" y="371" font-family="Inter,Geist,sans-serif" font-size="8.5" font-weight="500" fill="#8f8f8a">Lisboa</text><text x="130" y="49" font-family="Inter,Geist,sans-serif" font-size="8.5" font-weight="500" fill="#8f8f8a">Londres</text><text x="165" y="362" font-family="Inter,Geist,sans-serif" font-size="9" font-weight="500" fill="#8f8f8a" transform="rotate(-90 165 362)">Av. Colón</text><text x="381" y="300" font-family="Inter,Geist,sans-serif" font-size="8.5" font-weight="500" fill="#8f8f8a" transform="rotate(-90 381 300)">Testanova</text><text x="57" y="300" font-family="Inter,Geist,sans-serif" font-size="8.5" font-weight="500" fill="#8f8f8a" transform="rotate(-90 57 300)">Bartolomé Coronel</text><text x="118" y="213" font-family="Inter,Geist,sans-serif" font-size="8.5" font-weight="500" fill="#8f8f8a">Palacio de Justicia</text><text x="58" y="352" font-family="Inter,Geist,sans-serif" font-size="8.5" font-weight="500" fill="#8f8f8a">Estadio ueno</text><text x="58" y="362" font-family="Inter,Geist,sans-serif" font-size="8.5" font-weight="500" fill="#8f8f8a">Defensores del Chaco</text><text x="384" y="146" font-family="Inter,Geist,sans-serif" font-size="8.5" font-weight="500" fill="#8f8f8a">Nissan Paraguay</text><defs><linearGradient id="rg" gradientUnits="userSpaceOnUse" x1="108" y1="92" x2="324" y2="414"><stop offset="0" stop-color="#ff6200"/><stop offset=".55" stop-color="#ffa166"/><stop offset="1" stop-color="#ffc099"/></linearGradient></defs><g fill="none" stroke-linecap="round" stroke-linejoin="round"><path class="route-base" d="M 108 92 L 108 138 L 216 138 L 216 276 L 270 276 L 270 414 L 324 414" stroke="#f8d1b9" stroke-width="5" pathLength="100"/><path class="route-run" d="M 108 92 L 108 138 L 216 138 L 216 276 L 270 276 L 270 414 L 324 414" stroke="url(#rg)" stroke-width="5" pathLength="100" stroke-dasharray="100 200" stroke-dashoffset="60"/></g></svg></div>
+            <div class="anchor ripple" id="mh-ripple" data-s="1"><i class="e24"></i><i class="e25"></i><i class="e26"></i></div>
+            <div class="anchor pin d" id="mh-pin-d"><i></i><i></i><i></i></div>
+            <div class="anchor pin o" id="mh-pin-o"><i></i><i></i><i></i></div>
+            <div class="anchor dot" id="mh-dot"><i class="halo"></i><i class="ring"></i><i class="core"></i></div>
+            <div class="anchor" id="mh-pill-o"><div class="pill o"><svg viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="1.2"><circle cx="6" cy="6" r="3.4"/><circle cx="6" cy="6" r=".9" fill="#fff"/><path d="M6 .8v1.6M6 9.6v1.6M.8 6h1.6M9.6 6h1.6"/></svg>Paseo de la Galería • 5 min</div></div>
+            <div class="anchor" id="mh-pill-d"><div class="pill d"><svg viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="1.2"><path d="M6 11s3.6-3.2 3.6-5.8a3.6 3.6 0 1 0-7.2 0C2.4 7.8 6 11 6 11z"/><circle cx="6" cy="5.2" r="1.2"/></svg>Destination • 15:10</div></div>
+            <div class="status"><i class="isl"></i><span class="tm">9:41</span></div>
+            <svg class="back" viewBox="0 0 28 28" fill="none" stroke="#1b1b1b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 14H6M13 7l-7 7 7 7"/></svg>
+            <div class="sheet">
+              <i class="grab"></i>
+              <div class="msg">We're waiting for the driver to confirm...</div>
+              <i class="sk" style="left:16px;top:62px;width:361px;height:12px;border-radius:100px;--w:361px"></i>
+              <i class="sk" style="left:16px;top:101px;width:342px;height:88px;border-radius:16px;--w:342px"></i>
+              <i class="sk" style="left:372px;top:101px;width:342px;height:88px;border-radius:16px;--w:342px"></i>
+              <i class="sk" style="left:16px;top:216px;width:361px;height:48px;border-radius:8px;--w:361px"></i>
+              <i class="ind"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pair">
+      <div class="mdemo">
+        <h3 class="h3">Skeleton to categories</h3>
+        <p class="small">The sheet holds its shape while availability loads. After <b>2 s</b> the real categories rise in on a <b>Gentle spring (1.02 s)</b>, and the skeleton fades out.</p>
+        <div class="dev plain" data-stage="cat" data-w="393" data-h="440" role="img" aria-label="Animated recreation: grey placeholder rows in a bottom sheet are replaced by the Economy, Muv, Comfort and Moto category cards, with their car illustrations, and a Confirm trip button">
+          <div class="stage">
+            <div class="cat" id="cat">
+              <i class="grab"></i>
+              <div class="list">
+                <div class="skel">
+                  <i class="sk" style="left:16px;top:40px;width:361px;height:76px;border-radius:14px;--w:361px"></i>
+                  <i class="sk" style="left:16px;top:124px;width:361px;height:76px;border-radius:14px;--w:361px"></i>
+                  <i class="sk" style="left:16px;top:208px;width:361px;height:76px;border-radius:14px;--w:361px"></i>
+                  <i class="sk" style="left:16px;top:292px;width:361px;height:76px;border-radius:14px;--w:361px"></i>
+                </div>
+                <div class="real">
+                  <div class="row sel" style="top:40px"><span class="tag">Recommended</span><span class="carbox"><img src="muv-assets/car-economy.png" width="86" height="55" alt=""></span><div><div class="n">Economy</div><div class="t"><svg viewBox="0 0 12 12" width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><circle cx="6" cy="6" r="4.6"/><path d="M6 3.4V6l1.8 1"/></svg> 5 min &nbsp;<svg viewBox="0 0 12 12" width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><circle cx="6" cy="4" r="2"/><path d="M2.2 10.2c.4-2 1.9-3 3.8-3s3.4 1 3.8 3"/></svg> 4</div></div><div class="p">Gs. 32,000<small class="was">Gs. 38,000</small></div></div>
+                  <div class="row" style="top:124px"><span class="carbox"><img src="muv-assets/car-muv.png" width="61" height="39" alt=""></span><div><div class="n">Muv</div><div class="t"><svg viewBox="0 0 12 12" width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><circle cx="6" cy="6" r="4.6"/><path d="M6 3.4V6l1.8 1"/></svg> 5 min &nbsp;<svg viewBox="0 0 12 12" width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><circle cx="6" cy="4" r="2"/><path d="M2.2 10.2c.4-2 1.9-3 3.8-3s3.4 1 3.8 3"/></svg> 4</div></div><div class="p">Gs. 36,000<small class="was">Gs. 38,000</small></div></div>
+                  <div class="row" style="top:208px"><span class="carbox"><img src="muv-assets/car-comfort.png" width="61" height="39" alt=""></span><div><div class="n">Comfort</div><div class="t"><svg viewBox="0 0 12 12" width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><circle cx="6" cy="6" r="4.6"/><path d="M6 3.4V6l1.8 1"/></svg> 5 min &nbsp;<svg viewBox="0 0 12 12" width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><circle cx="6" cy="4" r="2"/><path d="M2.2 10.2c.4-2 1.9-3 3.8-3s3.4 1 3.8 3"/></svg> 4</div></div><div class="p">Gs. 45,000</div></div>
+                  <div class="row" style="top:292px"><span class="carbox"><img src="muv-assets/car-moto.png" width="61" height="39" alt=""></span><div><div class="n">Moto</div></div></div>
+                </div>
+              </div>
+              <div class="cta" style="top:336px">Confirm trip</div>
+            </div>
+          </div>
+        </div>
+        <div class="mctl" data-for="cat"><button class="mbtn" type="button" data-ctl="pause" aria-pressed="false">Pause</button><button class="mbtn" type="button" data-ctl="replay">Replay</button></div>
+      </div>
+
+      <div class="mdemo">
+        <h3 class="h3">Rating that adapts</h3>
+        <p class="small">Try it. The tags change with the score, chips answer a tap in <b>0.2 s</b>, and on submit the card leaves after a <b>0.2 s</b> pause on a <b>1.28 s</b> Gentle spring.</p>
+        <div class="dev plain" data-stage="rate" data-w="360" data-h="590">
+          <div class="stage">
+            <div class="rate" id="rate">
+              <div class="top"><b>Rating</b><span>Close</span></div>
+              <div class="q">How was your trip?</div>
+              <div class="stars" role="radiogroup" aria-label="Trip rating">
+                <button class="star" type="button" role="radio" aria-checked="false" aria-label="1 star"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 16.8 6.6 19.7l1-6.1L3.2 9.3l6.1-.9z"/></svg></button>
+                <button class="star" type="button" role="radio" aria-checked="false" aria-label="2 stars"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 16.8 6.6 19.7l1-6.1L3.2 9.3l6.1-.9z"/></svg></button>
+                <button class="star" type="button" role="radio" aria-checked="false" aria-label="3 stars"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 16.8 6.6 19.7l1-6.1L3.2 9.3l6.1-.9z"/></svg></button>
+                <button class="star" type="button" role="radio" aria-checked="false" aria-label="4 stars"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 16.8 6.6 19.7l1-6.1L3.2 9.3l6.1-.9z"/></svg></button>
+                <button class="star" type="button" role="radio" aria-checked="false" aria-label="5 stars"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 16.8 6.6 19.7l1-6.1L3.2 9.3l6.1-.9z"/></svg></button>
+              </div>
+              <div class="rlabel" id="rlabel" aria-live="polite">Not rated</div>
+              <div class="chips" id="chips"></div>
+              <div class="rfield">Want to leave a comment?</div>
+              <button class="rsend" type="button" id="rsend">Done</button>
+            </div>
+          </div>
+        </div>
+        <div class="mctl" data-for="rate"><button class="mbtn" type="button" data-ctl="replay">Replay the demo</button></div>
+      </div>
+    </div>
+
+    <div>
+      <h3 class="h3" style="margin-bottom:.5rem">The motion system behind it</h3>
+      <p class="small" style="max-width:62ch;margin-bottom:1.25rem">Two rules keep it calm: touch feedback is fast and sharp, and state changes are soft and spring-based. Values read straight from the prototype.</p>
+      <table class="tbl motion">
+        <caption>Motion tokens used across the passenger prototype</caption>
+        <thead><tr><th scope="col">Where</th><th scope="col">Duration</th><th scope="col">Easing</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Buttons, inputs, icons: hover and press</th><td data-h="Duration">0.2 s</td><td data-h="Easing">cubic-bezier(0.2, 0, 0, 1)</td></tr>
+          <tr><th scope="row">Sheets and modals sliding in</th><td data-h="Duration">0.3 s</td><td data-h="Easing">Ease-out</td></tr>
+          <tr><th scope="row">Splash and dissolves</th><td data-h="Duration">0.3 s</td><td data-h="Easing">Ease-in-out</td></tr>
+          <tr><th scope="row">Tabs</th><td data-h="Duration">0.6 s</td><td data-h="Easing">Ease-out</td></tr>
+          <tr><th scope="row">Ripple states</th><td data-h="Duration">0.3 s</td><td data-h="Easing">Ease-out</td></tr>
+          <tr><th scope="row">Skeleton shimmer</th><td data-h="Duration">1 s, every 2 s</td><td data-h="Easing">Ease-out</td></tr>
+          <tr><th scope="row">Location ping</th><td data-h="Duration">1.25 s</td><td data-h="Easing">Slow spring</td></tr>
+          <tr><th scope="row">Screen and state changes: camera, skeleton to content</th><td data-h="Duration">1.02 s</td><td data-h="Easing">Gentle spring</td></tr>
+          <tr><th scope="row">Rating submit</th><td data-h="Duration">1.28 s, after 0.2 s</td><td data-h="Easing">Gentle spring</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═════════ DECISIONS ═════════ -->
+<section class="sec tint" id="decisions" aria-labelledby="decisions-h">
+  <div class="wrap">
+    <h2 class="h2 wide" id="decisions-h">Three decisions that shaped the product</h2>
+
+    <div class="decisions">
+      <article class="decision">
+        <div class="stack">
+          <h3 class="h3">Map first, one search field</h3>
+          <p class="prose">The home is a live map with a single "Where do you want to go?" field. The two services, Ride and Send, sit in a sheet over it, and the sheet changes with what is happening: an active trip, a pending rating, or recent destinations. It came straight from the test: people think about a ride spatially.</p>
+        </div>
+        <div class="media"><img class="bare" src="muv-assets/muv-shipped-homes.webp" width="1200" height="1040" loading="lazy" decoding="async" alt="Three shipped home screens in different states: an active trip with the driver-confirmed banner, a pending rating prompt with Rate trip, and recent destinations, all with the search field, the Ride and Send services and the ueno bank promotion over a live map"></div>
+      </article>
+
+      <article class="decision">
+        <div class="stack">
+          <h3 class="h3">Always say what's happening</h3>
+          <p class="prose">60% of respondents didn't trust the cars the app showed, and accuracy wasn't something design could fix. So every wait has a name and an end: a skeleton while availability is calculated, "Waiting for confirmation", "Widening the search radius", and a five-minute free-cancellation countdown while the driver decides.</p>
+        </div>
+        <div class="media" style="background:#0A0A10"><img src="muv-search.gif" width="800" height="600" style="width:min(100%,420px);box-shadow:none" loading="lazy" decoding="async" alt="Animation of the searching state: the app widens the search radius while it looks for a driver"></div>
+      </article>
+
+      <article class="decision">
+        <div class="stack">
+          <h3 class="h3">Recommend one category, show the reward where the decision happens</h3>
+          <p class="prose">Preselecting "Recommended" (Economy) lets a passenger confirm in one tap, and steers demand towards the category the business wants to grow. The other categories stay in the same list.</p>
+          <p class="prose">Credit cards were the first payment method in the survey, so the ueno bank rebate (40% back with a credit card, 20% with debit) shows on the destination screen and again above the payment method, instead of on a separate promo screen.</p>
+        </div>
+        <div class="media details" style="flex-direction:column">
+          <figure><img src="muv-assets/muv-detail-destination.webp" width="564" height="270" loading="lazy" decoding="async" alt="Destination screen detail: origin and destination fields under a banner that reads Save up to 40% paying with ueno bank cards"><figcaption>On the destination screen</figcaption></figure>
+          <figure><img src="muv-assets/muv-detail-categories.webp" width="564" height="666" loading="lazy" decoding="async" alt="Categories screen detail: Economy marked Recommended, Muv and Comfort, the line ueno rebates: 40% with credit and 20% with debit above the card, the coupon row and the Confirm trip button"><figcaption>Again above the payment method</figcaption></figure>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ TESTING ═════════ -->
+<section class="sec" id="testing" aria-labelledby="testing-h">
+  <div class="wrap">
+    <div class="split">
+      <h2 class="h2 wide" id="testing-h">What testing told us</h2>
+      <p class="prose">I tested the prototype on two tasks: requesting a trip, and taking a trip with stops and rating it.</p>
+      <!-- TODO(Paula): add method + number of participants here (not in the deck) -->
+    </div>
+
+    <table class="tbl">
+      <caption>Results by task</caption>
+      <thead><tr><th scope="col">Task</th><th scope="col">What worked</th><th scope="col">What needs work</th></tr></thead>
+      <tbody>
+        <tr>
+          <th scope="row">Request a trip</th>
+          <td data-h="What worked"><p class="ok">The search-bar request flow and the confirmation step.</p><p class="ok">The search animation and placing the pin by hand on the map.</p></td>
+          <td data-h="What needs work"><p class="warn">Search should prioritise results near the user (Asunción), so trips don't resolve to addresses in other cities.</p></td>
+        </tr>
+        <tr>
+          <th scope="row">Trip with stops</th>
+          <td data-h="What worked"><p class="ok">The search animation.</p></td>
+          <td data-h="What needs work"><p class="warn">People found the feature, but the logic confused them: where the stop goes, and an icon-only entry point. They preferred text over an icon alone.</p></td>
+        </tr>
+        <tr>
+          <th scope="row">Rating</th>
+          <td data-h="What worked"><p class="ok">Preset comments, emojis and three trip characteristics. The characteristics helped people give a better rating.</p><p class="ok">Ratings skew to 5 stars when the ride is fast and uninterrupted, and bad ones show up only after extreme experiences.</p></td>
+          <td data-h="What needs work"><p class="warn">Continuing without writing a comment needs a clearer path.</p></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ═════════ PROTOTYPE ═════════ -->
+<section class="sec tint" id="prototype" aria-labelledby="prototype-h">
+  <div class="wrap">
+    <div class="split">
+      <h2 class="h2 wide" id="prototype-h">See it move</h2>
+      <p class="prose">The full passenger journey, screen by screen: from opening the app to rating the ride.</p>
+    </div>
+    <!-- TODO(Paula): add "Open the Figma prototype" link if it can be public -->
+    <div class="lottie-frame" style="max-width:880px;margin-inline:auto">
+      <div id="muv-experience-lottie" role="img" aria-label="muv passenger app, full experience animated screen by screen" style="width:100%;height:100%"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ RESULTS ═════════ -->
+<section class="sec" id="results" aria-labelledby="results-h">
+  <div class="wrap">
+
+    <h2 class="h2 wide" id="results-h">What changed</h2>
+
+    <div class="impact">
+      <div><p class="num">21 → 6</p><p class="cap">Steps in onboarding.</p></div>
+      <div><p class="num">25% → 36%</p><p class="cap">Of people who started onboarding finished it: +11 percentage points.</p></div>
+    </div>
+    <!-- TODO(Paula): "reduce time to first successful ride" was a goal but has no result yet. Add the post-launch numbers for first-trip (59%) and 4th-trip retention (52%) if you have them. -->
+
+    <div>
+      <h3 class="h3" style="margin-bottom:.75rem">The business after launch</h3>
+      <p class="prose" style="margin-bottom:2rem">The new passenger app launched in May 2026 and the numbers moved. But it didn't move them alone: the app is one of five levers.</p>
+      <dl class="pairs">
+        <div><dt>Passengers</dt><dd><span class="from"><b>39K</b><small>Q4 2025</small></span><span class="arr" aria-hidden="true">→</span><span class="to"><b>81K</b><small>2026</small></span></dd></div>
+        <div><dt>Trips</dt><dd><span class="from"><b>2.2M+</b><small>Q4 2025</small></span><span class="arr" aria-hidden="true">→</span><span class="to"><b>5.1M+</b><small>2026</small></span></dd></div>
+        <div><dt>GMV</dt><dd><span class="from"><b>Gs 40.1B</b><small>Q4 2025</small></span><span class="arr" aria-hidden="true">→</span><span class="to"><b>Gs 94.6B</b><small>2026</small></span></dd></div>
+      </dl>
+      <!-- TODO(Paula): state the exact period behind "2026" (e.g. Jan–Aug, or Q3). Q4 2025 is one quarter, so the pairs are only comparable if the periods match. GMV given as 40.100M / 94.642M (millions of guaraníes) = 40.1B / 94.6B. -->
+      <div class="levers">
+        <div>
+          <h4>Product and design</h4>
+          <ul>
+            <li>New passenger app, with UNID: one login across the ecosystem</li>
+            <li>Ueno Bank integrated as a payment method</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Business and supply</h4>
+          <ul>
+            <li>Positive commission across Paraguay</li>
+            <li>Driver app stabilization</li>
+            <li>Automatic dynamic pricing</li>
+          </ul>
+        </div>
+      </div>
+      <p class="small" style="margin-top:1.5rem;max-width:62ch">Design shaped the first two levers: onboarding and login, and how payment and rewards show up in the flow. The other three are business and supply work, and I'm not claiming them.</p>
+    </div>
+
+    <div>
+      <h3 class="h3" style="margin-bottom:1rem">The funnel baseline still to re-measure</h3>
+      <p class="small" style="margin-bottom:1.5rem;max-width:62ch">Q4 2025, on the legacy app. These two are the funnel numbers the new app should beat.</p>
+      <dl class="baseline">
+        <div><dt>59%</dt><dd>Of registered passengers take a first trip.</dd></div>
+        <div><dt>52%</dt><dd>Of those who take a first trip are still riding by their fourth.</dd></div>
+      </dl>
+    </div>
+
+    <div>
+      <h3 class="h3" style="margin-bottom:1.5rem">What I learned</h3>
+      <div class="learn">
+        <div>
+          <h4>State management is the design</h4>
+          <p>Mapping every state before opening Figma saved weeks of rework and made the experience coherent from end to end.</p>
+        </div>
+        <div>
+          <h4>Test the direction, not the detail</h4>
+          <p>The map vs photo test wasn't about visual preference. It was about mental model, and that settled the whole home.</p>
+        </div>
+        <div>
+          <h4>Visual QA in Dev Mode is collaboration</h4>
+          <p>Annotating design against implementation in Figma Dev Mode turned QA from a confrontation into a shared task.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═════════ COMPONENT LIBRARY (collapsed) ═════════ -->
+<section class="sec tint" aria-labelledby="lib-h" style="padding-block:clamp(40px,6vw,80px)">
+  <div class="wrap">
+    <details class="lib">
+      <summary>
+        <span><span class="h3" id="lib-h">Component library</span><span class="sub">Driver card, category card, ride-state alerts and toasts</span></span>
+        <span class="ico" aria-hidden="true">+</span>
+      </summary>
+      <div class="lib-body">
+
+        <div class="principles">
+          <div><h3>State-driven</h3><p>Every component maps to a backend state, so there is no ambiguity between the UI and the system.</p></div>
+          <div><h3>Information hierarchy</h3><p>Driver, ETA and plate are always prominent. Payment and route are contextual.</p></div>
+          <div><h3>Reusable by design</h3><p>States are props on one component, not separate components.</p></div>
+        </div>
+
+        <div class="comp-group">
+          <h3>Driver card</h3>
+          <p>Two variants that follow the ride phase. While waiting: a free-cancellation countdown. In transit: a live ETA.</p>
+          <div class="comp-grid c2">
+            <figure class="comp"><div class="thumb narrow"><img data-img-id="muv_case_010" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 500'%3E%3Crect width='600' height='500' fill='%23E4E1DA'/%3E%3C/svg%3E" loading="lazy" alt="Driver card while waiting for confirmation"></div><figcaption class="cap"><strong>Waiting</strong>Countdown, driver photo and rating, message, trip and payment summary.</figcaption></figure>
+            <figure class="comp"><div class="thumb narrow"><img data-img-id="muv_case_011" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 500'%3E%3Crect width='600' height='500' fill='%23E4E1DA'/%3E%3C/svg%3E" loading="lazy" alt="Driver card during the trip, with ETA"></div><figcaption class="cap"><strong>In transit</strong>Highlighted ETA, payment summary, route detail, message and cancel.</figcaption></figure>
+          </div>
+        </div>
+
+        <div class="comp-group">
+          <h3>Category card</h3>
+          <p>The core decision unit of the request flow. Selected ("Recommended", navy highlight) and unselected (with a promo badge), showing price, ETA and seats at a glance.</p>
+          <div class="comp-grid c3">
+            <figure class="comp"><div class="thumb"><img data-img-id="muv_case_012" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 300'%3E%3Crect width='600' height='300' fill='%23E4E1DA'/%3E%3C/svg%3E" loading="lazy" alt="Category card, selected"></div><figcaption class="cap"><strong>Selected</strong>Recommended badge, navy border, price emphasis.</figcaption></figure>
+            <figure class="comp"><div class="thumb"><img data-img-id="muv_case_013" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 300'%3E%3Crect width='600' height='300' fill='%23E4E1DA'/%3E%3C/svg%3E" loading="lazy" alt="Category card, unselected, with promo"></div><figcaption class="cap"><strong>Unselected</strong>Discount badge, struck-through original price.</figcaption></figure>
+            <figure class="comp"><div class="thumb"><img data-img-id="muv_case_014" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 500'%3E%3Crect width='600' height='500' fill='%23E4E1DA'/%3E%3C/svg%3E" loading="lazy" alt="Category listing with all options"></div><figcaption class="cap"><strong>Listing</strong>Economy, Muv and Comfort in one list.</figcaption></figure>
+          </div>
+        </div>
+
+        <div class="comp-group">
+          <h3>Ride-state alerts</h3>
+          <p>Real-time messages for every state change, including when the app is in the background.</p>
+          <div class="comp-grid c3">
+            <figure class="comp"><div class="thumb"><img data-img-id="muv_case_015" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 300'%3E%3Crect width='600' height='300' fill='%23E4E1DA'/%3E%3C/svg%3E" loading="lazy" alt="Searching state with an animated progress bar"></div><figcaption class="cap"><strong>Searching</strong>Animated progress bar shows the search is active.</figcaption></figure>
+            <figure class="comp"><div class="thumb"><img data-img-id="muv_case_016" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 300'%3E%3Crect width='600' height='300' fill='%23E4E1DA'/%3E%3C/svg%3E" loading="lazy" alt="In-transit state with a car moving along a progress bar"></div><figcaption class="cap"><strong>In transit</strong>A car moves along the bar, with a real ETA.</figcaption></figure>
+            <figure class="comp"><div class="thumb"><img data-img-id="muv_case_017" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 300'%3E%3Crect width='600' height='300' fill='%23E4E1DA'/%3E%3C/svg%3E" loading="lazy" alt="Permission request asking to allow real-time trip alerts"></div><figcaption class="cap"><strong>Permission</strong>"Want real-time trip alerts?" appears at the moment it is useful.</figcaption></figure>
+          </div>
+        </div>
+        <!-- TODO(Paula): the old page called these "Push notifications". Confirm whether they are OS notifications, in-app banners or Live Activities and rename if needed. -->
+
+        <div class="comp-group">
+          <h3>Toasts</h3>
+          <p>Instant feedback for payment and system events. Three semantic variants, one structure: icon, message and an optional inline action.</p>
+          <div class="comp-grid c3">
+            <figure class="comp"><div class="thumb"><img data-img-id="muv_case_019" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 200'%3E%3Crect width='600' height='200' fill='%23E4E1DA'/%3E%3C/svg%3E" loading="lazy" alt="Error toast: payment failed"></div><figcaption class="cap"><strong>Error</strong>Payment failed, with an inline "Edit" action.</figcaption></figure>
+            <figure class="comp"><div class="thumb"><img data-img-id="muv_case_020" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 200'%3E%3Crect width='600' height='200' fill='%23E4E1DA'/%3E%3C/svg%3E" loading="lazy" alt="Warning toast: outstanding debt"></div><figcaption class="cap"><strong>Warning</strong>Outstanding debt, with an inline "Show debt" action.</figcaption></figure>
+            <figure class="comp"><div class="thumb"><img data-img-id="muv_case_018" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 200'%3E%3Crect width='600' height='200' fill='%23E4E1DA'/%3E%3C/svg%3E" loading="lazy" alt="Success toast with a checkmark"></div><figcaption class="cap"><strong>Success</strong>Checkmark, dismissible.</figcaption></figure>
+          </div>
+        </div>
+
+      </div>
+    </details>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <span>muv · Passenger app · 2025–2026</span>
+  <span>Paula Elffman · Sr Product Designer</span>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.13.0/lottie.min.js"></script>
+<script>
+var REDUCED = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* WIPE TRANSITION (shared with the rest of the portfolio) */
+(function(){
+  var overlay=document.getElementById('wipe-overlay');
+  function coverFrom(x,y,dark,cb){
+    overlay.classList.toggle('dark',!!dark);
+    overlay.style.clipPath='circle(0% at '+x+'px '+y+'px)';
+    overlay.classList.remove('animate');
+    void overlay.offsetWidth;
+    overlay.classList.add('animate');
+    requestAnimationFrame(function(){ overlay.style.clipPath='circle(150% at '+x+'px '+y+'px)'; });
+    setTimeout(cb,600);
+  }
+  function revealFrom(x,y){
+    overlay.style.clipPath='circle(150% at '+x+'px '+y+'px)';
+    overlay.classList.remove('animate');
+    void overlay.offsetWidth;
+    overlay.classList.add('animate');
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){ overlay.style.clipPath='circle(0% at '+x+'px '+y+'px)'; }); });
+  }
+  var entry=sessionStorage.getItem('wipeEntry');
+  if(entry){
+    sessionStorage.removeItem('wipeEntry');
+    try{ var p=JSON.parse(entry); revealFrom(p.x,p.y); }catch(e){}
+  }
+  var backBtn=document.getElementById('back-to-portfolio');
+  if(backBtn){
+    backBtn.addEventListener('click',function(e){
+      e.preventDefault();
+      var x=e.clientX,y=e.clientY;
+      sessionStorage.setItem('wipeEntry',JSON.stringify({x:x,y:y}));
+      coverFrom(x,y,true,function(){ window.location.href='index.html'; });
+    });
+  }
+})();
+
+/* ONE ORCHESTRATED MOMENT: the survey bars draw once, the four request screens cascade in once */
+(function(){
+  var bars=document.getElementById('bars');
+  var steps=document.querySelectorAll('.step.reveal');
+  steps.forEach(function(el,i){ el.style.transitionDelay=(i*110)+'ms'; });
+  if(!('IntersectionObserver' in window)){
+    if(bars) bars.classList.add('in');
+    steps.forEach(function(el){ el.classList.add('in'); });
+    return;
+  }
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+    });
+  },{threshold:.25,rootMargin:'0px 0px -40px 0px'});
+  if(bars) io.observe(bars);
+  steps.forEach(function(el){ io.observe(el); });
+})();
+
+/* Respect reduced motion for the hero video: no autoplay, show controls */
+(function(){
+  if(!REDUCED) return;
+  document.querySelectorAll('video[autoplay]').forEach(function(v){
+    v.removeAttribute('autoplay'); v.pause(); v.controls=true;
+  });
+})();
+
+/* EXPERIENCE LOTTIE: lazy init */
+(function(){
+  var el=document.getElementById('muv-experience-lottie');
+  if(!el || typeof lottie==='undefined') return;
+  var started=false;
+  function start(){
+    if(started) return; started=true;
+    function render(){
+      lottie.loadAnimation({container:el,renderer:'svg',loop:!REDUCED,autoplay:!REDUCED,animationData:window.MUV_EXPERIENCE_DATA});
+    }
+    if(window.MUV_EXPERIENCE_DATA){ render(); }
+    else{
+      var s=document.createElement('script');
+      s.src='muv-experience-data.js'; s.onload=render;
+      document.head.appendChild(s);
+    }
+  }
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(en){ if(en.isIntersecting){ start(); io.disconnect(); } });
+  },{rootMargin:'400px 0px'});
+  io.observe(el);
+})();
+
+/* LAZY LOAD of the existing screen images (muv-case-images.js keyed by data-img-id) */
+(function(){
+  var IMG_STORE=window.MUV_CASE_IMAGES;
+  function applyImages(){
+    if(!window.MUV_CASE_IMAGES) return;
+    IMG_STORE=window.MUV_CASE_IMAGES;
+    document.querySelectorAll('[data-img-id]').forEach(function(el){
+      if(el.__loaded) return;
+      var id=el.getAttribute('data-img-id');
+      var src=IMG_STORE[id];
+      if(!src) return;
+      var io=new IntersectionObserver(function(entries){
+        entries.forEach(function(en){
+          if(en.isIntersecting){ el.src=src; el.__loaded=true; io.disconnect(); }
+        });
+      },{rootMargin:'400px 0px'});
+      io.observe(el);
+    });
+  }
+  if(window.MUV_CASE_IMAGES){ applyImages(); }
+  else{
+    var s=document.createElement('script');
+    s.src='muv-case-images.js'; s.onload=applyImages;
+    document.head.appendChild(s);
+  }
+})();
+</script>
+
+<script>
+/* ═════════ MICROINTERACTIONS · recreated from the Figma prototype's reactions ═════════ */
+(function(){
+  var STOP={};
+  function spring(k,c,T,n){
+    var w=Math.sqrt(k),z=c/(2*w),pts=[];
+    for(var i=0;i<=n;i++){
+      var t=T*i/n,x;
+      if(z<1){var wd=w*Math.sqrt(1-z*z);x=1-Math.exp(-z*w*t)*(Math.cos(wd*t)+(z*w/wd)*Math.sin(wd*t));}
+      else{var s=Math.sqrt(z*z-1),r1=w*(z-s),r2=w*(z+s);x=1-(r2*Math.exp(-r1*t)-r1*Math.exp(-r2*t))/(r2-r1);}
+      pts.push(x.toFixed(4));
+    }
+    pts[n]='1';return 'linear('+pts.join(',')+')';
+  }
+  var OK=window.CSS&&CSS.supports&&CSS.supports('animation-timing-function','linear(0,1)');
+  var GENTLE=OK?spring(100,15,1.02,40):'cubic-bezier(.34,1.3,.64,1)';   // Figma "Gentle": stiffness 100, damping 15
+  var GENTLE_128=OK?spring(100,15,1.28,48):'cubic-bezier(.34,1.3,.64,1)';
+  document.documentElement.style.setProperty('--gentle',GENTLE);
+
+  function tick(ms){return new Promise(function(r){setTimeout(r,ms);});}
+
+  /* Runner: plays only while visible, respects Pause, and starts paused under reduced motion */
+  function Runner(dev,body){
+    var self=this;
+    this.dev=dev;this.tok=0;this.user=!!window.REDUCED;this.vis=false;this.anims=[];
+    this.active=function(){return self.vis&&!self.user&&!document.hidden;};
+    this.sleep=function(ms,tok){
+      return (async function(){
+        var t=0;
+        while(t<ms){
+          if(tok!==self.tok)throw STOP;
+          if(!self.active()){await tick(100);continue;}
+          var d=Math.min(50,ms-t);await tick(d);t+=d;
+        }
+        if(tok!==self.tok)throw STOP;
+      })();
+    };
+    this.track=function(a){self.anims.push(a);return a;};
+    this.sync=function(){
+      var act=self.active();
+      self.anims=self.anims.filter(function(a){return a.playState==='running'||a.playState==='paused';});
+      self.anims.forEach(function(a){try{act?a.play():a.pause();}catch(e){}});
+      dev.classList.toggle('is-paused',!act);
+    };
+    this.start=function(){var tok=++self.tok;self.sync();body(self,tok).catch(function(e){if(e!==STOP)console.error(e);});};
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){self.vis=e.isIntersecting;self.sync();});},{threshold:.25});
+    io.observe(dev);
+    document.addEventListener('visibilitychange',self.sync);
+    var ctl=document.querySelector('.mctl[data-for="'+dev.getAttribute('data-stage')+'"]');
+    if(ctl){
+      var pb=ctl.querySelector('[data-ctl="pause"]'),rb=ctl.querySelector('[data-ctl="replay"]');
+      function label(){if(pb){pb.textContent=self.user?'Play':'Pause';pb.setAttribute('aria-pressed',self.user?'true':'false');}}
+      if(pb)pb.addEventListener('click',function(){self.user=!self.user;label();if(!self.user&&!self.tok){self.start();}else{self.sync();}});
+      if(rb)rb.addEventListener('click',function(){self.user=false;label();self.start();});
+      label();
+    }
+    dev.classList.toggle('is-paused',true);
+  }
+
+  /* scale each 393-px-wide stage to the width of its frame */
+  function fit(){
+    document.querySelectorAll('.dev[data-w]').forEach(function(d){
+      var s=d.clientWidth/parseFloat(d.getAttribute('data-w'));
+      d.style.height=(parseFloat(d.getAttribute('data-h'))*s)+'px';
+      var st=d.querySelector('.stage');st.style.width=d.getAttribute('data-w')+'px';st.style.height=d.getAttribute('data-h')+'px';
+      st.style.transform='scale('+s+')';
+    });
+  }
+  fit();
+  if('ResizeObserver' in window){var ro=new ResizeObserver(fit);document.querySelectorAll('.dev[data-w]').forEach(function(d){ro.observe(d);});}
+  else window.addEventListener('resize',fit);
+
+  /* ── 1 · SEARCHING FOR A DRIVER ── */
+  (function(){
+    var dev=document.querySelector('[data-stage="hero"]');if(!dev)return;
+    var $=function(i){return document.getElementById(i);};
+    var world=$('mh-world'),ripple=$('mh-ripple');
+    var P={o:[108,92],d:[324,414],u:[70,116]};                 // pickup, drop-off, "you" in map coordinates
+    var A=[['o',$('mh-ripple')],['o',$('mh-pin-o')],['d',$('mh-pin-d')],['u',$('mh-dot')],['o',$('mh-pill-o')],['d',$('mh-pill-d')]];
+    // camera views and how long each one holds (prototype: 2.5s, 2.5s, 2s, 2s)
+    var V=[{s:1,x:0,y:0,h:2500},{s:2,x:-20,y:96,h:2500},{s:2,x:-448,y:-528,h:2000},{s:2,x:-20,y:96,h:2000},{s:1.25,x:-74,y:-26,h:2500}];
+    function T(v){return 'translate('+v.x+'px,'+v.y+'px) scale('+v.s+')';}
+    function at(k,v){return 'translate('+(P[k][0]*v.s+v.x)+'px,'+(P[k][1]*v.s+v.y)+'px)';}
+    function place(v){world.style.transform=T(v);[].forEach.call(world.querySelectorAll('.route-base,.route-run'),function(p){p.style.strokeWidth=5/v.s;});A.forEach(function(a){a[1].style.transform=at(a[0],v);});}
+    function move(r,a,b){
+      function go(el,from,to){
+        var an=el.animate([{transform:from},{transform:to}],{duration:1020,easing:GENTLE,fill:'both'});
+        an.onfinish=function(){el.style.transform=to;an.cancel();};
+        r.track(an);
+      }
+      go(world,T(a),T(b));
+      [].forEach.call(document.querySelectorAll('#mh-world .route-base,#mh-world .route-run'),function(p){
+        var an=p.animate([{strokeWidth:5/a.s},{strokeWidth:5/b.s}],{duration:1020,easing:GENTLE,fill:'both'});
+        an.onfinish=function(){p.style.strokeWidth=5/b.s;an.cancel();};
+        r.track(an);
+      });
+      A.forEach(function(x){go(x[1],at(x[0],a),at(x[0],b));});
+    }
+    var r=new Runner(dev,async function(r,tok){
+      place(V[0]);ripple.setAttribute('data-s','1');
+      // ripple: state 1 (0.2s) → 2 (0.8s) → 3 (0.8s), each change 0.3s ease-out (CSS transition)
+      (async function(){var S=[[1,200],[2,800],[3,800]];while(true){for(var i=0;i<3;i++){ripple.setAttribute('data-s',S[i][0]);await r.sleep(S[i][1],tok);}}})().catch(function(){});
+      while(true){
+        for(var i=0;i<V.length;i++){
+          await r.sleep(V[i].h,tok);
+          move(r,V[i],V[(i+1)%V.length]);
+          await r.sleep(1020,tok);
+        }
+      }
+    });
+    place(V[0]);
+    if(!window.REDUCED)r.start();else r.sync();
+  })();
+
+  /* ── 2 · SKELETON → CATEGORIES ── */
+  (function(){
+    var dev=document.querySelector('[data-stage="cat"]');if(!dev)return;
+    var cat=document.getElementById('cat');
+    var r=new Runner(dev,async function(r,tok){
+      cat.classList.remove('on');
+      while(true){
+        await r.sleep(2000,tok);cat.classList.add('on');            // prototype: after 2s
+        await r.sleep(1020+3200,tok);cat.classList.remove('on');
+        await r.sleep(700,tok);
+      }
+    });
+    if(!window.REDUCED)r.start();
+  })();
+
+  /* ── 3 · RATING (interactive) ── */
+  (function(){
+    var dev=document.querySelector('[data-stage="rate"]');if(!dev)return;
+    var card=document.getElementById('rate'),chips=document.getElementById('chips'),lab=document.getElementById('rlabel'),send=document.getElementById('rsend');
+    var stars=[].slice.call(card.querySelectorAll('.star'));
+    var LABELS=['Terrible','Fair','Good 😊','Very good','Excellent 🥰'];
+    var NEG=['Didn’t finish the trip on time','Bad attitude','Inappropriate behavior','Took a wrong route','Reckless','Driver doesn’t match the photo'];
+    var MID=['Drives too fast','Dirty car','Talked on the phone during the trip','Took a different route','Reckless','Driver doesn’t match the photo'];
+    var POS=['Excellent driving','Spotless car','Friendly','Excellent service','Attentive driver','Took the right route','Driver matches the photo'];
+    var EASE='cubic-bezier(.2,0,0,1)',cur=0;
+    function fade(el){el.animate([{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'none'}],{duration:200,easing:EASE});}
+    function setRating(n,silent){
+      cur=n;
+      stars.forEach(function(s,i){var on=i<n;s.classList.toggle('on',on);s.setAttribute('aria-checked',i===n-1?'true':'false');});
+      if(!silent&&n){var s=stars[n-1];s.animate([{transform:'scale(1)'},{transform:'scale(1.22)'},{transform:'scale(1)'}],{duration:200,easing:EASE});}
+      lab.textContent=n?LABELS[n-1]:'Not rated';fade(lab);
+      var set=n<=2?NEG:(n<=4?MID:POS);
+      chips.innerHTML='';
+      if(n){set.forEach(function(t){var b=document.createElement('button');b.type='button';b.className='chip';b.textContent=t;b.setAttribute('aria-pressed','false');b.addEventListener('click',function(){userTouch();b.setAttribute('aria-pressed',b.getAttribute('aria-pressed')==='true'?'false':'true');});chips.appendChild(b);});fade(chips);}
+    }
+    function chip(i,on){var c=chips.children[i];if(c)c.setAttribute('aria-pressed',on?'true':'false');}
+    function submit(r){
+      var an=card.animate([{transform:'none',opacity:1},{transform:'translateY(115%)',opacity:1}],{duration:1280,delay:200,easing:GENTLE_128,fill:'forwards'});
+      if(r)r.track(an);
+      return an.finished.then(function(){
+        return tick(700);
+      }).then(function(){an.cancel();setRating(0,true);card.animate([{opacity:0,transform:'translateY(10px)'},{opacity:1,transform:'none'}],{duration:400,easing:EASE});});
+    }
+    var auto=null;
+    function userTouch(){if(auto){auto.tok++;}}
+    stars.forEach(function(s,i){
+      s.addEventListener('click',function(){userTouch();setRating(i+1);});
+      s.addEventListener('keydown',function(e){
+        if(e.key==='ArrowRight'||e.key==='ArrowUp'){e.preventDefault();var n=Math.min(5,(cur||0)+1);setRating(n);stars[n-1].focus();}
+        if(e.key==='ArrowLeft'||e.key==='ArrowDown'){e.preventDefault();var m=Math.max(1,(cur||1)-1);setRating(m);stars[m-1].focus();}
+      });
+    });
+    send.addEventListener('click',function(){userTouch();submit(null);});
+    setRating(0,true);
+    // one gentle auto-demo so the interaction is discoverable; any touch from the visitor stops it
+    auto=new Runner(dev,async function(r,tok){
+      setRating(0,true);
+      await r.sleep(900,tok);setRating(2);
+      await r.sleep(1500,tok);setRating(5);
+      await r.sleep(1200,tok);chip(0,true);await r.sleep(350,tok);chip(2,true);
+      await r.sleep(1200,tok);await submit(r);
+      await r.sleep(1500,tok);
+    });
+    if(!window.REDUCED)auto.start();
+  })();
+})();
+</script>
+<!-- Portfolio Navigation Dock -->
+<style>
+#portfolio-dock{
+  position:fixed;
+  bottom:2rem;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:9700;
+  display:flex;
+  align-items:center;
+  gap:0;
+  background:rgba(240,239,236,0.85);
+  backdrop-filter:blur(24px);
+  -webkit-backdrop-filter:blur(24px);
+  border:1px solid rgba(26,26,34,0.1);
+  border-radius:100px;
+  padding:.375rem .5rem;
+  font-family:'Inter','Geist',sans-serif;
+}
+body.dark-mode #portfolio-dock{
+  background:rgba(26,25,22,0.85);
+  border-color:rgba(244,244,246,0.13);
+}
+#portfolio-dock .pd-btn{
+  padding:.5rem 1.25rem;
+  font-size:.8125rem;
+  font-weight:500;
+  color:#6B6B7A;
+  background:transparent;
+  border:none;
+  border-radius:100px;
+  cursor:pointer;
+  text-decoration:none;
+  transition:color .3s cubic-bezier(0.22,1,0.36,1), background .3s cubic-bezier(0.22,1,0.36,1);
+  white-space:nowrap;
+}
+#portfolio-dock .pd-btn:hover{color:#1A1A22;background:rgba(26,26,34,0.06);}
+body.dark-mode #portfolio-dock .pd-btn{color:#7A7A90;}
+body.dark-mode #portfolio-dock .pd-btn:hover{color:#F4F4F6;background:rgba(244,244,246,0.07);}
+#portfolio-dock .pd-sep{width:1px;height:20px;background:rgba(26,26,34,0.13);margin:0 .25rem;}
+body.dark-mode #portfolio-dock .pd-sep{background:rgba(244,244,246,0.13);}
+#portfolio-dock .pd-link{
+  display:flex;align-items:center;justify-content:center;
+  padding:.5rem .75rem;
+  font-size:.8125rem;font-weight:500;
+  color:#6B6B7A;text-decoration:none;
+  border-radius:100px;
+  transition:color .3s, background .3s;
+  white-space:nowrap;
+}
+#portfolio-dock .pd-link:hover{color:#1A1A22;background:rgba(26,26,34,0.06);}
+body.dark-mode #portfolio-dock .pd-link{color:#7A7A90;}
+body.dark-mode #portfolio-dock .pd-link:hover{color:#F4F4F6;background:rgba(244,244,246,0.07);}
+#portfolio-dock .pd-theme{
+  display:flex;align-items:center;justify-content:center;
+  width:36px;height:36px;border-radius:50%;border:none;
+  background:transparent;color:#6B6B7A;cursor:pointer;
+  transition:color .3s, background .3s;margin-left:.25rem;
+}
+#portfolio-dock .pd-theme:hover{color:#1A1A22;background:rgba(26,26,34,0.06);}
+body.dark-mode #portfolio-dock .pd-theme{color:#7A7A90;}
+body.dark-mode #portfolio-dock .pd-theme:hover{color:#F4F4F6;background:rgba(244,244,246,0.07);}
+#portfolio-dock .pd-theme svg{width:18px;height:18px;}
+body:not(.dark-mode) #portfolio-dock .icon-sun{display:inline;}
+body:not(.dark-mode) #portfolio-dock .icon-moon{display:none;}
+body.dark-mode #portfolio-dock .icon-sun{display:none;}
+body.dark-mode #portfolio-dock .icon-moon{display:inline;}
+
+/* Dark mode case overrides */
+body.dark-mode{
+  --bg:#24242C; --bg2:#1E1E26; --bg3:#2C2C36;
+  --ghost:#2C2C36; --ghost-2:#32323E;
+  --paper:#F4F4F6; --paper-2:#DDDDE6;
+  --ash:#A9A9BC; --ash-2:#7A7A90; --orange-ink:#FF9A6B; --green-ink:#5FD3A5; --amber-ink:#F2B450;
+  --ash2:rgba(244,244,246,0.15);
+  --line:rgba(244,244,246,0.07); --line-md:rgba(244,244,246,0.13);
+  --line2:rgba(244,244,246,0.14);
+  background:var(--bg); color:var(--paper);
+}
+</style>
+<nav id="portfolio-dock">
+  <a class="pd-btn" href="index.html" title="Back to Home">Home</a>
+  <a class="pd-btn" href="index.html#about" title="About Me">About Me</a>
+  <div class="pd-sep"></div>
+  <button class="pd-theme" onclick="document.body.classList.toggle('dark-mode');try{localStorage.setItem('pe-theme',document.body.classList.contains('dark-mode')?'dark':'light')}catch(e){}" aria-label="Toggle light/dark mode">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+</nav>
+<script>(function(){try{if(localStorage.getItem('pe-theme')==='dark')document.body.classList.add('dark-mode')}catch(e){}})()</script>
+<script>
+// Fallback for iOS/mobile blocking native autoplay (Low Power Mode, Reduce Motion,
+// "Auto-Play Video Previews" off, etc). Tries play() on load; if blocked, retries
+// on the first user gesture anywhere on the page — a real tap always unlocks it.
+(function(){
+  function tryPlayAll(){
+    document.querySelectorAll('video[autoplay]').forEach(function(v){
+      var p = v.play();
+      if (p && typeof p.catch === 'function') p.catch(function(){ /* still blocked, wait for gesture */ });
+    });
+  }
+  tryPlayAll();
+  ['touchstart','click'].forEach(function(evt){
+    document.addEventListener(evt, tryPlayAll, { once: true, passive: true });
+  });
+})();
+</script>
+
+<script>
+/* BFCACHE FIX: al volver con atras/adelante el navegador restaura la pagina tal como
+   quedo, con el overlay del wipe todavia tapando todo (pantalla en blanco).
+   Cuando la pagina vuelve de esa cache, se destapa el overlay. */
+(function(){
+  var ov=document.getElementById('wipe-overlay');
+  if(!ov) return;
+  window.addEventListener('pageshow',function(e){
+    if(!e.persisted) return;
+    ov.classList.remove('animate');
+    ov.classList.remove('dark');
+    ov.style.clipPath='circle(0% at 50% 50%)';
+    try{ sessionStorage.removeItem('wipeEntry'); }catch(err){}
+  });
+})();
+</script>
+</body>
+</html>

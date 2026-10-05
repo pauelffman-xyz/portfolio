@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fancy Monas · Design Showcase · Paula Elffman</title>
+<meta name="description" content="Home, shop and checkout for Fancy Monas, the first NFT collection on BAG's platform: 1942 unique works by artist Edgardo Giménez.">
+<link rel="canonical" href="https://www.paulaelffman.com/fancymonas-case.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Paula Elffman">
+<meta property="og:title" content="Fancy Monas · Design Showcase">
+<meta property="og:description" content="Home, shop and checkout for Fancy Monas, the first NFT collection on BAG's platform: 1942 unique works by artist Edgardo Giménez.">
+<meta property="og:url" content="https://www.paulaelffman.com/fancymonas-case.html">
+<meta property="og:image" content="https://www.paulaelffman.com/assets/og/og-fancymonas.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Fancy Monas · Design Showcase">
+<meta name="twitter:description" content="Home, shop and checkout for Fancy Monas, the first NFT collection on BAG's platform: 1942 unique works by artist Edgardo Giménez.">
+<meta name="twitter:image" content="https://www.paulaelffman.com/assets/og/og-fancymonas.jpg">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="alternate icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<script src="assets/tab.js" defer></script>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#FFFFFF;
+  --bg2:#FAFAFA;
+  --bg3:#F0F0F0;
+  --paper:#0D0D0D;
+  --ash:rgba(13,13,13,.55);
+  --ash2:rgba(13,13,13,.15);
+  --pink:#F2A6D0;
+  --celeste:#7FD8E3;
+  --yellow:#F5C93B;
+  --gold:var(--pink);
+  --gold-soft:var(--yellow);
+  --navy:#111318;
+  --green:#5C8A6B;
+  --line:rgba(13,13,13,.08);
+  --line2:rgba(13,13,13,.14);
+  --ease:cubic-bezier(0.22,1,0.36,1);
+  --ghost:var(--bg2);
+  --ghost-2:var(--bg3);
+  --accent:var(--pink);
+  --accent-soft:var(--yellow);
+  --line-md:var(--line2);
+  --ash-2:var(--ash2);
+}
+html{font-size:16px;}
+body{
+  font-family:'Geist',sans-serif;
+  background:var(--bg);
+  color:var(--paper);
+  -webkit-font-smoothing:antialiased;
+}
+#wipe-overlay{
+  position:fixed; inset:0; z-index:99999;
+  background:var(--bg);
+  pointer-events:none;
+  clip-path:circle(0% at 50% 50%);
+}
+#wipe-overlay.animate{ transition:clip-path .6s cubic-bezier(.65,0,.35,1); }
+#wipe-overlay.dark{ background:#24242C; }
+
+/* ─── SHARED ─── */
+.mono{font-family:'Space Grotesk',sans-serif;}
+.gold{color:var(--gold);}
+
+/* ─── SECTION WRAPPER ─── */
+.section{padding:5rem 4rem;}
+.section + .section{border-top:1px solid var(--line2);}
+
+/* ─── EYEBROW ─── */
+.eyebrow{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:.5625rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ash);margin-bottom:1rem;
+  display:flex;align-items:center;gap:.75rem;
+}
+.eyebrow::before{content:'';width:20px;height:1px;background:var(--gold);flex-shrink:0;}
+
+/* ─── SECTION DIVIDER LABEL ─── */
+.section-label{display:flex;align-items:center;gap:1.5rem;margin-bottom:3rem;}
+.sl-text{font-family:'Space Grotesk',sans-serif;font-size:.5875rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ash2);white-space:nowrap;}
+.sl-line{flex:1;height:1px;background:var(--line);}
+
+/* ─── SECTION 01: OVERVIEW ─── */
+.overview-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:3rem;align-items:start;}
+.ov-title{font-size:clamp(2.5rem,4vw,4rem);font-weight:800;letter-spacing:-.04em;line-height:1;margin-bottom:1.5rem;}
+.ov-body{font-size:.9375rem;line-height:1.75;color:var(--ash);font-weight:300;}
+.ov-body strong{color:var(--paper);font-weight:500;}
+.stats-col{display:flex;flex-direction:column;gap:0;}
+.stat-item{padding:1.25rem 0;border-bottom:1px solid var(--line);display:flex;align-items:baseline;gap:.875rem;}
+.stat-val{font-size:2.25rem;font-weight:800;letter-spacing:-.04em;color:var(--paper);}
+.stat-lbl{font-size:.8125rem;color:var(--ash);line-height:1.4;}
+.accent-card{background:var(--gold);border-radius:8px;padding:2rem;}
+.ac-lbl{font-family:'Space Grotesk',sans-serif;font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(13,13,13,.55);margin-bottom:.875rem;}
+.ac-val{font-size:2rem;font-weight:800;letter-spacing:-.03em;color:#0D0D0D;line-height:1.15;margin-bottom:.5rem;}
+.ac-desc{font-size:.8125rem;color:rgba(13,13,13,.75);line-height:1.6;}
+.ac-sub{margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(13,13,13,.18);display:flex;gap:1.5rem;flex-wrap:wrap;}
+.acsub-item .acsub-v{font-size:1.25rem;font-weight:800;letter-spacing:-.03em;color:#0D0D0D;}
+.acsub-item .acsub-l{font-size:.625rem;color:rgba(13,13,13,.6);}
+
+/* ─── FULL IMAGE BLOCKS ─── */
+.img-frame{border-radius:16px;overflow:hidden;box-shadow:0 24px 64px rgba(13,13,13,.1);background:#fff;border:1px solid var(--line);}
+.img-frame img{display:block;width:100%;height:auto;}
+.img-caption{margin-top:1rem;font-family:'Space Grotesk',sans-serif;font-size:.5625rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ash);text-align:center;}
+
+/* ─── DECISIONS / CONTENT-TYPE GRID ─── */
+.decisions-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-top:3rem;}
+.dec{background:var(--bg2);padding:2rem 1.75rem;}
+.dec-n{font-family:'Space Grotesk',sans-serif;font-size:.45rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ash);margin-bottom:.875rem;}
+.dec-t{font-size:1rem;font-weight:700;color:var(--paper);letter-spacing:-.02em;margin-bottom:.5rem;}
+.dec-d{font-size:.8125rem;line-height:1.65;color:var(--ash);}
+
+/* ─── INSIGHTS / LEARNINGS ─── */
+.insights-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:3rem;}
+.ins{padding:1.75rem;border:1px solid var(--line);border-radius:8px;background:var(--bg2);}
+.ins-n{font-family:'Space Grotesk',sans-serif;font-size:.45rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ash);margin-bottom:.75rem;}
+.ins-t{font-size:.9375rem;font-weight:700;color:var(--paper);letter-spacing:-.02em;margin-bottom:.375rem;}
+.ins-d{font-size:.8125rem;line-height:1.6;color:var(--ash);}
+
+/* ─── NAVY CALLOUT ─── */
+.callout{background:var(--navy);border-radius:16px;padding:2.5rem;}
+.co-lbl{font-family:'Space Grotesk',sans-serif;font-size:.45rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:1rem;}
+.co-t{font-size:1.25rem;font-weight:700;letter-spacing:-.02em;line-height:1.3;margin-bottom:.875rem;color:#fff;font-style:italic;}
+.co-d{font-size:.8125rem;line-height:1.7;color:rgba(255,255,255,.65);}
+.co-stats{margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.1);display:flex;gap:2rem;flex-wrap:wrap;}
+.cos-v{font-size:1.25rem;font-weight:800;letter-spacing:-.03em;color:var(--gold-soft);}
+.cos-l{font-size:.625rem;color:rgba(255,255,255,.45);margin-top:.125rem;}
+
+/* ─── ATTRIBUTE TAGS (obra characteristics) ─── */
+.attr-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:3rem;align-items:center;margin-top:3rem;}
+.attr-tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem;}
+.attr-tag{font-family:'Space Grotesk',sans-serif;font-size:.625rem;letter-spacing:.06em;padding:.375rem .75rem;border-radius:100px;background:var(--bg3);color:var(--paper);border:1px solid var(--line2);}
+.attr-quote{font-size:1.0625rem;font-style:italic;font-weight:500;line-height:1.55;color:var(--paper);border-left:2px solid var(--gold);padding-left:1.25rem;margin:1.25rem 0;}
+.attr-cols{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;margin-top:1.5rem;}
+.attr-col-t{font-family:'Space Grotesk',sans-serif;font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ash);margin-bottom:.625rem;}
+.attr-col ul{list-style:none;display:flex;flex-direction:column;gap:.5rem;}
+.attr-col li{font-size:.8125rem;line-height:1.5;color:var(--ash);padding-left:.875rem;position:relative;}
+.attr-col li::before{content:'';position:absolute;left:0;top:.5em;width:4px;height:4px;border-radius:50%;background:var(--gold);}
+
+/* ─── FLOW STEPS ─── */
+.dd-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-top:3rem;}
+.dd-step{background:var(--bg2);padding:1.75rem 1.5rem;}
+.dd-n{font-family:'Space Grotesk',sans-serif;font-size:.45rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ash);margin-bottom:.75rem;}
+.dd-t{font-size:.9375rem;font-weight:700;color:var(--paper);letter-spacing:-.01em;margin-bottom:.375rem;}
+.dd-d{font-size:.75rem;line-height:1.55;color:var(--ash);}
+
+/* ─── VIDEO FRAME ─── */
+.video-frame{border-radius:16px;overflow:hidden;box-shadow:0 24px 64px rgba(13,13,13,.14);background:#0A0A10;max-width:820px;margin:0 auto;}
+.video-frame video{display:block;width:100%;height:auto;}
+
+/* ─── FINAL UI FLOW LABELS ─── */
+.ui-flow-labels{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:1.5rem;}
+.ui-label{padding:1rem 1.125rem;background:var(--bg2);border-radius:8px;border:1px solid var(--line);}
+.ui-label-n{font-family:'Space Grotesk',sans-serif;font-size:.45rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ash);margin-bottom:.5rem;}
+.ui-label-t{font-size:.8125rem;font-weight:700;color:var(--paper);margin-bottom:.25rem;}
+.ui-label-d{font-size:.6875rem;line-height:1.5;color:var(--ash);}
+
+/* ─── FOOTER ─── */
+.footer{padding:2rem 4rem;border-top:1px solid var(--line2);display:flex;justify-content:space-between;align-items:center;}
+.footer-l,.footer-r{font-family:'Space Grotesk',sans-serif;font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ash);}
+
+/* ─── COVER ─── */
+.cover{display:grid;grid-template-columns:1fr auto;gap:4rem;align-items:end;padding:5rem 4rem 4rem;}
+.cover-title{font-size:clamp(5rem,11vw,12rem);font-weight:800;letter-spacing:-.06em;line-height:.85;color:var(--paper);}
+.cover-title .dim{color:rgba(13,13,13,.15);}
+.cover-meta{display:flex;flex-direction:column;gap:1.25rem;padding-bottom:.5rem;}
+.cm-label{font-family:'Space Grotesk',sans-serif;font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ash);margin-bottom:.25rem;}
+.cm-val{font-size:.875rem;font-weight:500;color:var(--paper);}
+
+/* ─── BACK NAV ─── */
+.back-nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(13,13,13,.08);padding:1rem 4rem;display:flex;justify-content:space-between;align-items:center;}
+.back-btn{display:inline-flex;align-items:center;gap:.625rem;font-family:'Space Grotesk',sans-serif;font-size:.5625rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ash);background:none;border:none;cursor:pointer;text-decoration:none;transition:gap .2s;}
+.back-btn:hover{gap:1rem;}
+.back-btn span{font-size:.875rem;}
+.back-nav-title{font-family:'Space Grotesk',sans-serif;font-size:.5625rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(13,13,13,.4);}
+.back-nav-right{font-family:'Space Grotesk',sans-serif;font-size:.5625rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(13,13,13,.3);}
+
+/* reveal on scroll */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s var(--ease),transform .7s var(--ease);}
+.reveal.in-view{opacity:1;transform:translateY(0);}
+@media (prefers-reduced-motion:reduce){ .reveal{opacity:1;transform:none;transition:none;} }
+
+/* ═══ MOBILE PASS ═══ */
+@media(max-width:768px){
+  .section{padding:3rem 20px;}
+  .cover{grid-template-columns:1fr;align-items:start;gap:2rem;padding:2.5rem 20px 2rem;}
+  .back-nav{padding:1rem 20px;}
+  .footer{padding:1.5rem 20px;flex-direction:column;align-items:flex-start;gap:.5rem;}
+  .overview-grid{grid-template-columns:1fr;gap:2rem;}
+  .decisions-grid,.dd-grid{grid-template-columns:1fr;}
+  .insights-grid{grid-template-columns:1fr;}
+  .attr-grid{grid-template-columns:1fr;gap:2rem;}
+  .attr-cols{grid-template-columns:1fr;}
+  .ui-flow-labels{grid-template-columns:1fr 1fr;}
+}
+
+/* ─── DARK MODE ─── */
+body.dark-mode{
+  --bg:#0A0A0A; --bg2:#151515; --bg3:#202020;
+  --paper:#FFFFFF; --ash:rgba(255,255,255,.55); --ash2:rgba(255,255,255,.15);
+  --line:rgba(255,255,255,.08); --line2:rgba(255,255,255,.14);
+  background:var(--bg); color:var(--paper);
+}
+body.dark-mode .back-nav{background:rgba(10,10,10,0.9);border-bottom-color:rgba(255,255,255,.08);}
+body.dark-mode .back-nav-title{color:rgba(255,255,255,.4);}
+body.dark-mode .back-nav-right{color:rgba(255,255,255,.3);}
+body.dark-mode .cover-title .dim{color:rgba(255,255,255,.12);}
+body.dark-mode .accent-card{background:var(--gold-soft);}
+body.dark-mode .img-frame{background:#111;border-color:rgba(255,255,255,.1);}
+body.dark-mode .video-frame{background:#000;}
+</style>
+<style id="v3-principles">
+/* ════════════════════════════════════════════════════════════
+   v3 · Portfolio principles (adapter for the .section/.cover template)
+   Same rules as muv-case.html: 1. motion with a pause  2. more air
+   3. Apple-style shadows (borders out, depth in)  4. Apple-style gradients
+   Per case: only --brand (and the page colour) changes.
+   ════════════════════════════════════════════════════════════ */
+:root{
+  
+  --brand:#F2A6D0;
+  --sec:clamp(96px,12vw,176px);
+  --stack:clamp(48px,6vw,96px);
+  --r-card:16px;
+  --card:#FFFFFF;
+  --sh-card:0 1px 2px rgba(0,0,0,.03),2px 4px 12px rgba(0,0,0,.08);
+  --sh-float:0 2px 6px rgba(0,0,0,.04),0 12px 24px rgba(0,0,0,.06),0 32px 72px rgba(0,0,0,.10);
+  --sh-ring:0 0 0 1px rgba(0,0,0,.04);
+  --ease-apple:cubic-bezier(.28,.11,.32,1);
+}
+/* gradients live on body so they follow the dark-mode --bg */
+body{
+  --grad-hero:linear-gradient(180deg,color-mix(in srgb,var(--brand) 14%,var(--bg)) 0%,color-mix(in srgb,var(--brand) 5%,var(--bg)) 45%,var(--bg) 100%);
+  --grad-neutral:linear-gradient(180deg,color-mix(in srgb,#8E8E93 9%,var(--bg)) 0%,color-mix(in srgb,#8E8E93 3%,var(--bg)) 55%,var(--bg) 100%);
+}
+body.dark-mode{
+  --card:var(--bg3);
+  --sh-card:0 0 0 1px rgba(255,255,255,.06),0 8px 24px rgba(0,0,0,.35);
+  --sh-float:0 0 0 1px rgba(255,255,255,.06),0 16px 40px rgba(0,0,0,.40),0 40px 90px rgba(0,0,0,.35);
+  --sh-ring:0 0 0 1px rgba(255,255,255,.06);
+}
+
+/* 2 · more air */
+.section{padding-top:var(--sec);padding-bottom:var(--sec);}
+.section + .section{border-top:0;}
+.cover{padding-top:clamp(96px,12vw,160px);padding-bottom:clamp(72px,9vw,128px);}
+.section-label{margin-bottom:clamp(40px,5vw,72px);}
+.eyebrow{margin-bottom:1.5rem;}
+.decisions-grid,.dec-grid,.dd-grid,.insights-grid,.ins-grid,.impact-grid,.panel-grid,
+.sketch-strip,.persona-grid,.attr-grid,.collision,.compare-row,.fix-table,.ui-flow-labels{margin-top:var(--stack);}
+.overview-grid{gap:clamp(40px,6vw,96px);}
+
+/* 4 · gradients: a brand tint at the top that melts into the page */
+.cover{background:var(--grad-hero);}
+.cover + div[style*="height:1px"]{display:none;}
+.section[style*="background:var(--bg2)"]{background:var(--grad-neutral)!important;}
+/* two tinted sections in a row: only the first carries the gradient */
+.section[style*="background:var(--bg2)"] + .section[style*="background:var(--bg2)"]{background:var(--bg)!important;}
+/* dark brand boxes keep their colour and gain a soft top-left light */
+.callout,.quote-block,.accent-card,.panel-foot{
+  background-image:radial-gradient(120% 140% at 0% 0%,rgba(255,255,255,.16) 0%,rgba(255,255,255,0) 55%);
+  border-radius:20px;
+}
+
+/* 3 · shadows: hairline grids become separate floating cards */
+.decisions-grid,.dec-grid,.dd-grid,.metrics-bento,.impact-strip,.quotes-grid,.principles-row{
+  gap:clamp(12px,1.5vw,20px);background:transparent;border:0;border-radius:0;overflow:visible;
+}
+.decisions-grid > *,.dec-grid > *,.dd-grid > *,.metrics-bento > *,.impact-strip > *,.quotes-grid > *,.principles-row > *{
+  background:var(--card);border-radius:var(--r-card);box-shadow:var(--sh-card);
+}
+.ins,.ui-label,.panel-card,.impact-card,.col-card,.step-card,.direction-card,.unlock-card,.email-card,
+.pill-card,.audit-item,.goal-item,.use-case{
+  background:var(--card);border-color:transparent;border-radius:var(--r-card);box-shadow:var(--sh-card);
+}
+.sketch-item,.wire-shell-full,.wire-shell,.fix-table,.bench-shell,.roles-mini,.config-panel,.ds-comp,.vds-comp-card,
+.ds-type-card,.ds-principles,.comp-grid,.diag-grid,.pillars-grid,.layer-card,.norte-card,.proto-demo,.reaction-pair{
+  border-color:transparent;box-shadow:var(--sh-card);
+}
+/* media: frames get the card shadow, devices float */
+.img-frame,.browser-shell,.shot-frame,.proto-embed-frame,.cover-video-frame,.video-frame{
+  border:0;border-radius:var(--r-card);box-shadow:var(--sh-card);
+}
+.phone-shell,.phone-shell-sm,.otp-phone,.hugo-phone,.proto-phone,.device-phone,.device-laptop{
+  border-color:transparent;box-shadow:var(--sh-ring),var(--sh-float);
+}
+
+/* 1 · motion with a pause: slow start, long settle (delays are kept) */
+.reveal{transition-duration:1s;transition-timing-function:var(--ease-apple);}
+@media (prefers-reduced-motion:reduce){.reveal{transition:none;}}
+
+/* ═══ MOBILE: no horizontal scroll (Oct 2026) ═══ */
+.split-2{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;}
+.dd-grid-4{grid-template-columns:repeat(4,1fr);}
+@media(max-width:768px){
+  /* the label row was a nowrap flex line wider than the screen */
+  .section-label{flex-direction:column;align-items:flex-start;gap:.5rem;}
+  .section-label .sl-line{display:none;}
+  .sl-text{white-space:normal;}
+  /* two-column blocks collapse to one column */
+  .split-2{grid-template-columns:1fr;gap:2rem;}
+  .dd-grid,.dd-grid-4{grid-template-columns:1fr;}
+  /* sections with inline desktop padding */
+  .section[style*="padding:3.5rem 4rem"]{padding:2.5rem 20px!important;}
+  /* top bar: three labels do not fit on a phone, keep back link + case name */
+  .back-nav-right{display:none;}
+}
+
+/* dark-mode leftovers from the old template */
+body.dark-mode .cover-title .dim{color:rgba(244,244,246,.14);}
+body.dark-mode .section[style*="#fff 100%"]{background:var(--bg)!important;}
+body.dark-mode .back-nav{background:color-mix(in srgb,var(--bg) 90%,transparent);border-bottom-color:rgba(244,244,246,.08);}
+body.dark-mode .nav-right,body.dark-mode .back-nav-right{color:rgba(244,244,246,.4);}
+.browser-bar,.browser-topbar{background:var(--bg2);}
+
+</style>
+</head>
+<body>
+<div id="wipe-overlay"></div>
+
+<nav class="back-nav">
+  <a class="back-btn" id="back-to-portfolio" href="index.html">
+    <span>←</span> Back to portfolio
+  </a>
+  <div class="back-nav-title">Fancy Monas · Case Study</div>
+  <div class="back-nav-right">Paula Elffman · Product Designer</div>
+</nav>
+
+<!-- ══════════════════════════════════════════
+     COVER
+══════════════════════════════════════════ -->
+<div class="cover">
+  <div>
+    <div class="eyebrow" style="margin-bottom:2rem;">🐒 NFT Marketplace · Product Design · BAG · Beyond Art Group · 2025</div>
+    <div class="cover-title">Fancy<br>Monas<span class="dim">.</span></div>
+  </div>
+  <div class="cover-meta">
+    <div class="cm-row"><div class="cm-label">Client</div><div class="cm-val">BAG · Beyond Art Group</div></div>
+    <div class="cm-row"><div class="cm-label">Artist</div><div class="cm-val">Edgardo Giménez</div></div>
+    <div class="cm-row"><div class="cm-label">Role</div><div class="cm-val">Product Design: Home, Shop, Artwork &amp; Checkout</div></div>
+    <div class="cm-row"><div class="cm-label">Platform</div><div class="cm-val">fancymonas.io</div></div>
+  </div>
+</div>
+<div style="height:1px;background:var(--line);"></div>
+
+<!-- ══════════════════════════════════════════
+     SHOWCASE — Hero visual
+══════════════════════════════════════════ -->
+<div class="section" style="padding:3.5rem 4rem;background:var(--bg2);">
+  <div class="img-frame" style="max-width:1100px;margin:0 auto;">
+    <img src="fancymonas-images/fancymonas-hero.png" alt="Fancy Monas: home, categories, filters and checkout of the full experience">
+  </div>
+  <div class="img-caption">Editorial home · Artwork categories · Filters · Checkout of the full experience</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 01 — OVERVIEW & CONTEXTO
+══════════════════════════════════════════ -->
+<div class="section">
+  <div class="eyebrow">🍌 Overview &amp; Context</div>
+  <div class="overview-grid">
+    <div class="ov-left">
+      <div class="ov-title">NFTs.<br><span class="gold">Democratized.</span></div>
+      <p class="ov-body">BAG is making its way into the ever-growing world of NFTs, <strong>democratizing access to art</strong> for artists and the general public alike.<br><br>Fancy Monas is the first collection on the platform: <strong>1942 unique works created by Edgardo Giménez</strong>, one of Argentina's most recognized visual artists, available as a digital piece and as a physical fine art print.<br><br>The design challenge: build the experience of discovering, choosing and buying a work end to end, without crypto and NFT jargon getting between the artist and someone buying digital art for the first time.</p>
+    </div>
+    <div class="stats-col">
+      <div class="stat-item"><div class="stat-val">1942</div><div class="stat-lbl">Unique works in the collection</div></div>
+      <div class="stat-item"><div class="stat-val">1</div><div class="stat-lbl">Artist: Edgardo Giménez</div></div>
+      <div class="stat-item"><div class="stat-val">2</div><div class="stat-lbl">Formats: NFT + Fine Art Print</div></div>
+      <div class="stat-item"><div class="stat-val">4</div><div class="stat-lbl">Surfaces designed: Home, Shop, Artwork, Checkout</div></div>
+    </div>
+    <div class="accent-card">
+      <div class="ac-lbl">The artist behind the collection</div>
+      <div class="ac-val">Edgardo Giménez</div>
+      <div class="ac-desc">Painting, graphics, architecture, furniture, sculpture and set design condensed into one character: the Mona.</div>
+      <div class="ac-sub">
+        <div class="acsub-item"><div class="acsub-v">BAG</div><div class="acsub-l">Beyond Art Group</div></div>
+        <div class="acsub-item"><div class="acsub-v">2025</div><div class="acsub-l">Launch</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 02 — GOAL / HOME VERSÁTIL
+══════════════════════════════════════════ -->
+<div class="section" style="--gold:var(--celeste);">
+  <div class="eyebrow">🌈 Goal</div>
+  <p class="ov-body" style="max-width:760px;">We rethought the artbag home from scratch, creating <strong>a versatile home that can host different kinds of content</strong> (editorial, commercial and collection) without losing sight of the number one priority: selling art.</p>
+  <div class="decisions-grid">
+    <div class="dec">
+      <div class="dec-n">Content 01</div>
+      <div class="dec-t">Editorial</div>
+      <div class="dec-d">The artist and the story of the collection up front: who Edgardo Giménez is and why this work matters.</div>
+    </div>
+    <div class="dec">
+      <div class="dec-n">Content 02</div>
+      <div class="dec-t">Commercial</div>
+      <div class="dec-d">Direct access to the shop, real-time availability and the price always visible, with no friction on the way to buying.</div>
+    </div>
+    <div class="dec">
+      <div class="dec-n">Content 03</div>
+      <div class="dec-t">Collection</div>
+      <div class="dec-d">Favorites, saved works and the "my purchase" status live alongside everything else without competing for attention.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 03 — HOME
+══════════════════════════════════════════ -->
+<div class="section" style="background:var(--bg2);--gold:var(--yellow);">
+  <div class="eyebrow">⭐ Home</div>
+  <div class="section-label">
+    <div class="sl-text">fancymonas.io</div>
+    <div class="sl-line"></div>
+    <div class="sl-text">Editorial hero + cart access</div>
+  </div>
+  <p class="ov-body" style="max-width:760px;margin-bottom:2rem;">The home combines the hero of the featured work ("1942 unique works, created by Edgardo") with a direct CTA to the shop. It always keeps the summary of the purchase in progress at hand: price per work by quantity, volume discounts and the detail of what each piece includes (NFT + fine art print).</p>
+  <div style="max-width:560px;margin:0 auto 2.5rem;background:#0D0D0D;border-radius:16px;padding:2.5rem 2rem;text-align:center;">
+    <div style="font-family:'Geist',sans-serif;font-weight:800;font-size:clamp(1.375rem,2.8vw,2rem);line-height:1.18;letter-spacing:-.02em;">
+      <span style="color:var(--pink);">🐒 1942 UNIQUE WORKS,</span><br>
+      <span style="color:var(--celeste);">CREATED</span> 🍌<br>
+      <span style="color:#fff;">BY</span> ⭐<br>
+      <span style="color:var(--yellow);">EDGARDO GIMÉNEZ</span> 🌈
+    </div>
+  </div>
+  <div class="img-frame">
+    <img src="fancymonas-images/fancymonas-home.png" alt="Fancy Monas: home with editorial hero and purchase panel">
+  </div>
+  <div class="img-caption">Collection hero · Artwork grid · "My purchase" summary with volume pricing</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 04 — SHOP CON FILTROS
+══════════════════════════════════════════ -->
+<div class="section">
+  <div class="eyebrow">🍌 Shop · fancymonas.io/works</div>
+  <div class="section-label">
+    <div class="sl-text">1942 works, one discovery experience</div>
+    <div class="sl-line"></div>
+    <div class="sl-text">Grid · List · Filters</div>
+  </div>
+  <p class="ov-body" style="max-width:760px;margin-bottom:2rem;">With a collection of 1942 pieces, the shop needed two things: <strong>speed to explore</strong> and <strong>clarity about what is available</strong>. We designed two views (a dense grid and a list with a large preview), filters by attribute, and an "Available" toggle that is always visible, so nobody wastes time on works that are already sold.</p>
+  <div class="img-frame">
+    <img src="fancymonas-images/fancymonas-shop.png" alt="Fancy Monas: shop with grid view, list view and filters">
+  </div>
+  <div class="img-caption">Grid view · List view with preview · Availability toggle and favorites</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 05 — OBRA & COLECCIÓN
+══════════════════════════════════════════ -->
+<div class="section" style="background:var(--bg2);--gold:var(--celeste);">
+  <div class="eyebrow">🌈 Artwork · fancymonas.io/collection</div>
+  <div class="attr-grid">
+    <div class="img-frame">
+      <img src="fancymonas-images/fancymonas-obra.png" alt="Fancy Monas: artwork page, favorites and purchase confirmation">
+    </div>
+    <div>
+      <div class="ov-title" style="font-size:clamp(2rem,3vw,3rem);margin-bottom:1rem;">Fancy Mona <span class="gold">#113</span></div>
+      <p class="ov-body">Each work is unique and defined by its own generative attributes. The artwork page presents those attributes as the main selling point, lets you try the work "in a space" before buying, and uses a favorites modal to guide anyone who hasn't yet decided which one to pick among 1942 options.</p>
+      <div class="attr-quote">"You've successfully bought your Fancy Mona! Within 24 hours you'll get an email with news about your purchase and shipping."</div>
+      <div class="attr-tags">
+        <span class="attr-tag" style="background:var(--pink);border-color:var(--pink);">Background: violet</span>
+        <span class="attr-tag" style="background:var(--celeste);border-color:var(--celeste);">Fur: blue</span>
+        <span class="attr-tag" style="background:var(--yellow);border-color:var(--yellow);">Suit: awesome</span>
+        <span class="attr-tag">Hat: Flintstone hairdo</span>
+      </div>
+      <div class="attr-cols">
+        <div class="attr-col">
+          <div class="attr-col-t">On the artwork page</div>
+          <ul>
+            <li>Price and generative traits</li>
+            <li>"View in a space" and "try it" before buying</li>
+            <li>Fine art print: 60×60cm, Hahnemühle paper</li>
+          </ul>
+        </div>
+        <div class="attr-col">
+          <div class="attr-col-t">After buying</div>
+          <ul>
+            <li>Clear confirmation of the next steps</li>
+            <li>Option to create an account or continue as a guest</li>
+            <li>Favorites modal to keep exploring the collection</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 06 — FLUJO DE COMPRA
+══════════════════════════════════════════ -->
+<div class="section" style="--gold:var(--yellow);">
+  <div class="eyebrow">⭐ Purchase flow</div>
+  <p class="ov-body" style="max-width:760px;">From 1942 works to a single purchase decision, in four frictionless steps.</p>
+  <div class="dd-grid dd-grid-4">
+    <div class="dd-step">
+      <div class="dd-n">Step 1</div>
+      <div class="dd-t">Discover</div>
+      <div class="dd-d">Editorial home with the artist's story and direct access to the shop.</div>
+    </div>
+    <div class="dd-step">
+      <div class="dd-n">Step 2</div>
+      <div class="dd-t">Explore</div>
+      <div class="dd-d">Shop with filters, grid and list views, and real-time availability.</div>
+    </div>
+    <div class="dd-step">
+      <div class="dd-n">Step 3</div>
+      <div class="dd-t">Choose the work</div>
+      <div class="dd-d">Artwork page with attributes, favorites and view in a space.</div>
+    </div>
+    <div class="dd-step">
+      <div class="dd-n">Step 4</div>
+      <div class="dd-t">Buy</div>
+      <div class="dd-d">Checkout with volume pricing and instant confirmation.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 07 — VIDEO PRESENTACIÓN
+══════════════════════════════════════════ -->
+<div class="section" style="background:var(--bg2);text-align:center;">
+  <div class="eyebrow" style="justify-content:center;">🔥 Video · Project presentation</div>
+  <div style="font-size:clamp(1.5rem,2.6vw,2.25rem);font-weight:800;letter-spacing:-.03em;line-height:1.2;max-width:640px;margin:0 auto 2rem;">Edgardo Giménez and the universe of the Fancy Monas.</div>
+  <div class="video-frame">
+    <video controls preload="metadata" poster="fancymonas-images/fancymonas-hero.png">
+      <source src="fancymonas-images/fancymonas-video.mp4" type="video/mp4">
+      Your browser doesn't support video playback.
+    </video>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 08 — APRENDIZAJES + CALLOUT
+══════════════════════════════════════════ -->
+<div class="section" style="--gold:var(--celeste);">
+  <div class="eyebrow">🐒 Learnings</div>
+  <div class="split-2">
+    <div class="insights-grid" style="grid-template-columns:1fr;margin-top:0;">
+      <div class="ins">
+        <div class="ins-n">Learning 01</div>
+        <div class="ins-t">Design for scale, not for a single piece</div>
+        <div class="ins-d">With 1942 unique works, every UI pattern (grid, filter, artwork page) had to hold up at the extreme, not just in the demo case.</div>
+      </div>
+      <div class="ins">
+        <div class="ins-n">Learning 02</div>
+        <div class="ins-t">Lowering the barrier to crypto</div>
+        <div class="ins-d">Democratizing access to art meant hiding NFT complexity behind a familiar e-commerce flow: price, cart, checkout.</div>
+      </div>
+      <div class="ins">
+        <div class="ins-n">Learning 03</div>
+        <div class="ins-t">One home, several jobs</div>
+        <div class="ins-d">Content versatility isn't just aesthetic: it gives BAG one space to launch future collections without redesigning from scratch.</div>
+      </div>
+    </div>
+    <div class="callout">
+      <div class="co-lbl">BAG · Beyond Art Group</div>
+      <div class="co-t">"Democratize access to art, for artists and for the general public."</div>
+      <div class="co-d">Fancy Monas is the first collection launched on BAG's platform, and it was designed as the starting point of a broader product: the same home, the same shop and the same checkout had to be able to host future artists and future collections.</div>
+      <div class="co-stats">
+        <div><div class="cos-v">Edgardo Giménez</div><div class="cos-l">Artist · Fancy Monas collection</div></div>
+        <div><div class="cos-v">1942</div><div class="cos-l">Unique works</div></div>
+        <div><div class="cos-v">2025</div><div class="cos-l">Launch</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     CLOSING — LINKS
+══════════════════════════════════════════ -->
+<div class="section" style="text-align:center;">
+  <div class="eyebrow" style="justify-content:center;">🔥 Project material</div>
+  <div style="font-size:clamp(1.75rem,3vw,2.5rem);font-weight:800;letter-spacing:-.04em;line-height:1.15;max-width:640px;margin:0 auto 1.5rem;">1942 unique works. One place to find them.</div>
+  <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+    <a href="https://fancymonas.io/" target="_blank" rel="noopener" style="font-family:'Space Grotesk',sans-serif;font-size:.6875rem;letter-spacing:.1em;text-transform:uppercase;padding:.875rem 1.5rem;border-radius:100px;background:var(--pink);color:#0D0D0D;text-decoration:none;font-weight:600;">Visit fancymonas.io</a>
+    <a href="https://fancymonas.io/works" target="_blank" rel="noopener" style="font-family:'Space Grotesk',sans-serif;font-size:.6875rem;letter-spacing:.1em;text-transform:uppercase;padding:.875rem 1.5rem;border-radius:100px;border:1px solid var(--celeste);color:var(--paper);text-decoration:none;font-weight:600;">View shop</a>
+    <a href="https://fancymonas.io/collection" target="_blank" rel="noopener" style="font-family:'Space Grotesk',sans-serif;font-size:.6875rem;letter-spacing:.1em;text-transform:uppercase;padding:.875rem 1.5rem;border-radius:100px;border:1px solid var(--yellow);color:var(--paper);text-decoration:none;font-weight:600;">View collection</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-l">Fancy Monas · NFT Marketplace · BAG · Beyond Art Group · 2025</div>
+  <div class="footer-r">Product Designer · Paula Elffman</div>
+</div>
+
+<script>
+/* WIPE TRANSITION */
+(function(){
+  var overlay=document.getElementById('wipe-overlay');
+  var backBtn=document.getElementById('back-to-portfolio');
+  if(backBtn){
+    backBtn.addEventListener('click',function(e){
+      e.preventDefault();
+      var x=e.clientX,y=e.clientY;
+      try{ sessionStorage.setItem('wipeEntry',JSON.stringify({x:x,y:y})); }catch(err){}
+      overlay.style.clipPath='circle(0% at '+x+'px '+y+'px)';
+      overlay.classList.remove('animate');
+      void overlay.offsetWidth;
+      overlay.classList.add('animate');
+      requestAnimationFrame(function(){
+        overlay.style.clipPath='circle(150% at '+x+'px '+y+'px)';
+      });
+      setTimeout(function(){ window.location.href='index.html'; },600);
+    });
+  }
+})();
+
+/* SCROLL REVEAL */
+(function(){
+  var targets=document.querySelectorAll('.reveal');
+  if(!targets.length) return;
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){ entry.target.classList.add('in-view'); io.unobserve(entry.target); }
+    });
+  },{threshold:.2,rootMargin:'0px 0px -60px 0px'});
+  targets.forEach(function(el){ io.observe(el); });
+})();
+</script>
+
+<!-- Portfolio Navigation Dock -->
+<style>
+#portfolio-dock{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);z-index:9700;display:flex;align-items:center;gap:0;background:rgba(255,255,255,0.85);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid rgba(13,13,13,0.1);border-radius:100px;padding:.375rem .5rem;font-family:'Inter','Geist',sans-serif;}
+body.dark-mode #portfolio-dock{background:rgba(10,10,10,0.85);border-color:rgba(255,255,255,0.13);}
+#portfolio-dock .pd-btn{padding:.5rem 1.25rem;font-size:.8125rem;font-weight:500;color:#6B6B6B;background:transparent;border:none;border-radius:100px;cursor:pointer;text-decoration:none;transition:color .3s var(--ease),background .3s var(--ease);white-space:nowrap;}
+#portfolio-dock .pd-btn:hover{color:#0D0D0D;background:rgba(13,13,13,0.06);}
+body.dark-mode #portfolio-dock .pd-btn{color:#A0A0A0;}
+body.dark-mode #portfolio-dock .pd-btn:hover{color:#FFFFFF;background:rgba(255,255,255,0.07);}
+#portfolio-dock .pd-sep{width:1px;height:20px;background:rgba(13,13,13,0.13);margin:0 .25rem;}
+body.dark-mode #portfolio-dock .pd-sep{background:rgba(255,255,255,0.13);}
+#portfolio-dock .pd-link{display:flex;align-items:center;justify-content:center;padding:.5rem .75rem;font-size:.8125rem;font-weight:500;color:#6B6B6B;text-decoration:none;border-radius:100px;transition:color .3s, background .3s;white-space:nowrap;}
+#portfolio-dock .pd-link:hover{color:#0D0D0D;background:rgba(13,13,13,0.06);}
+body.dark-mode #portfolio-dock .pd-link{color:#A0A0A0;}
+body.dark-mode #portfolio-dock .pd-link:hover{color:#FFFFFF;background:rgba(255,255,255,0.07);}
+#portfolio-dock .pd-theme{display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;border:none;background:transparent;color:#6B6B6B;cursor:pointer;transition:color .3s, background .3s;margin-left:.25rem;}
+#portfolio-dock .pd-theme:hover{color:#0D0D0D;background:rgba(13,13,13,0.06);}
+body.dark-mode #portfolio-dock .pd-theme{color:#A0A0A0;}
+body.dark-mode #portfolio-dock .pd-theme:hover{color:#FFFFFF;background:rgba(255,255,255,0.07);}
+#portfolio-dock .pd-theme svg{width:18px;height:18px;}
+body:not(.dark-mode) #portfolio-dock .icon-sun{display:inline;}
+body:not(.dark-mode) #portfolio-dock .icon-moon{display:none;}
+body.dark-mode #portfolio-dock .icon-sun{display:none;}
+body.dark-mode #portfolio-dock .icon-moon{display:inline;}
+</style>
+<nav id="portfolio-dock">
+  <a class="pd-btn" href="index.html" title="Back to Home">Home</a>
+  <a class="pd-btn" href="index.html#about" title="About Me">About Me</a>
+  <div class="pd-sep"></div>
+  <button class="pd-theme" onclick="document.body.classList.toggle('dark-mode');try{localStorage.setItem('pe-theme',document.body.classList.contains('dark-mode')?'dark':'light')}catch(e){}" aria-label="Toggle light/dark mode">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+</nav>
+<script>(function(){try{if(localStorage.getItem('pe-theme')==='dark')document.body.classList.add('dark-mode')}catch(e){}})()</script>
+
+</body>
+</html>
