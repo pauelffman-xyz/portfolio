@@ -2306,7 +2306,7 @@ De paso, en `foody-case.html` se tradujo al inglés la sección del prototipo an
 
 ### Elektra: sin datos de la base de SukuPay
 
-Se sacaron los tamaños de muestra, porcentajes de segmento y monto mensual (n=581, n=125, n=338, 22%, 58%, $177). Los segmentos quedan descritos de forma cualitativa. Los puntajes del panel (confianza, probabilidad de completar) se mantienen. **Regla:** ningún case publica métricas internas de la base de usuarios de SukuPay.
+Se sacaron los tamaños de muestra, porcentajes de segmento y monto mensual (las cifras no se anotan acá a propósito: este archivo se publica junto con el sitio). Los segmentos quedan descritos de forma cualitativa. Los puntajes del panel (confianza, probabilidad de completar) se mantienen. **Regla:** ningún case publica métricas internas de la base de usuarios de SukuPay.
 
 ### Hotaru: La Nave Madrid
 
