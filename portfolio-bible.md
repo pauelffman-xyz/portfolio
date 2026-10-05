@@ -1,6 +1,6 @@
 # Paula Elffman — Portfolio OS · Design Bible
 
-*Última actualización: 5 de octubre de 2026 — **About: limpieza y datos de experiencia.** Se quitaron dos textos (el tagline bajo el statement y la frase "My primary tools are Figma & Claude…"), y los 21 chips verdes del timeline de Experience (`.dv-tag`) pasaron a ser **datos** (`.dv-facts`: valor arriba, etiqueta abajo, sin píldora ni verde). De paso, fechas y ciudad del timeline y el rótulo "My superpower" quedaron alineados a la regla Editorial. Ver "About: limpieza y datos de experiencia" en AJUSTES RÁPIDOS POST-REVIEW. El mismo día, **el icono de la pestaña pasó a ser una carita pixelada** (círculo de píxeles, 16×16), ver "Pestaña: carita pixelada que guiña".*
+*Última actualización: 5 de octubre de 2026 — **About: limpieza y datos de experiencia.** Se quitaron dos textos (el tagline bajo el statement y la frase "My primary tools are Figma & Claude…"), y los 21 chips verdes del timeline de Experience (`.dv-tag`) pasaron a ser **datos** (`.dv-facts`: valor arriba, etiqueta abajo, sin píldora ni verde). De paso, fechas y ciudad del timeline y el rótulo "My superpower" quedaron alineados a la regla Editorial. Ver "About: limpieza y datos de experiencia" en AJUSTES RÁPIDOS POST-REVIEW. El mismo día, **el icono de la pestaña pasó a ser una carita pixelada** (círculo de píxeles, 16×16), ver "Pestaña: carita pixelada que guiña". También ese día, **el header de los 16 cases pasó a ser transparente arriba de todo y glass al scrollear**, ver "Cases: header transparente arriba, glass al scrollear".*
 
 *Última actualización previa: Octubre 2026 — **etiquetas «Editorial» en todo el sitio**: se eliminó el tratamiento de micro-etiqueta en mayúsculas (8–11px, mono o Space Grotesk, tracking .12–.18em, rayita de color adelante) en la home y en los 14 cases del template viejo. Ahora todas las etiquetas siguen el modelo de `muv-case.html` y `vendor-tool-case.html`: tipografía del cuerpo (Geist, o Inter en los cases que usan Inter), minúsculas con mayúscula inicial, sin tracking, gris `--ash`, sin rayita. Ver la sección nueva "ETIQUETAS — ESTILO EDITORIAL" dentro de DESIGN TOKENS. También en esta pasada: limpieza de 90 archivos sin uso (65 MB) e imagen nueva en la tarjeta de Foody de la home (`assets/foody-home.webp`).*
 
@@ -2148,6 +2148,19 @@ Los 14 `.tile-arrow-label` dicen "View case study" sin flecha (↗ significa lin
 **Alineado a la regla Editorial** (se habían escapado): `.dv-period` (fechas) y `.dv-job-loc` (ciudad) pasaron de JetBrains Mono 8–9px con tracking a Geist `.8125rem` sin tracking; `.hs-eyebrow-lg` ("My superpower") pasó de 700 con tracking `.14em` a `.9375rem` / 500 / `letter-spacing:0`.
 
 **Pendiente, sin decidir:** Core strengths sigue con sus 13 pills. El dev sugirió sacarlas o buscar otro enfoque, y linkear "I bridge the gap" a un case. Hay una propuesta dibujada (fortaleza + una línea de evidencia + link al case), todavía no aplicada.
+
+### Cases: header transparente arriba, glass al scrollear (5 de octubre)
+
+*Pedido por Paula. Antes el header (`.back-nav`) era siempre una franja blanca semitransparente, y arriba de todo no coincidía con el fondo del hero (blanco sobre durazno en MUV, blanco sobre gris en SukuPay Prototyper, etc.).*
+
+- **Arriba de todo (scroll < 8px):** el header es transparente, sin blur ni línea inferior. Se ve el fondo del hero, degradé incluido.
+- **Al scrollear:** vuelve el glass que ya tenía cada case (fondo semitransparente + `backdrop-filter:blur(16px)` + línea inferior), con una transición de .35s. No se tocaron esos colores ni las reglas de dark mode.
+- **Cómo:** un bloque idéntico en los 16 cases, justo antes de `</head>`: `<style id="nav-glass">` + un `<script>` corto.
+  - El script pone la clase `nav-top` en `<html>` mientras la página está arriba, y mantiene `--nav-h` igual al alto real del header.
+  - Para que el fondo del hero llegue hasta el borde superior, el header se monta sobre el hero (`margin-bottom:calc(-1 * var(--nav-h))`) y el hero compensa con un `border-top` transparente del mismo alto y `background-origin:border-box`. El contenido no se mueve ni un píxel (verificado en los 16 cases, desktop y mobile).
+  - Sin JS, el header queda con el glass de siempre.
+- **Regla para un case nuevo:** copiar el bloque `nav-glass` tal cual, y respetar la estructura: `.back-nav` como hijo directo de `<body>`, seguido inmediatamente por `.cover` (template clásico) o por `<main>` cuyo primer hijo es el hero (template MUV / Vendor Tool). No pintarle al header un color fijo para "igualar" el hero.
+- **Sin unificar todavía:** la opacidad del glass varía entre cases (.82 en la mayoría; .92 en Fancy Monas, Foody, Hotaru, Monchis, MUV y Vendor Tool, donde el blur casi no se nota).
 
 ### Metadata y Open Graph
 
