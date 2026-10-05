@@ -73,16 +73,15 @@ body{
 
 /* ─── EYEBROW ─── */
 .eyebrow{
-  font-family:'Space Grotesk',sans-serif;
-  font-size:.5625rem;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--gold);margin-bottom:1rem;
-  display:flex;align-items:center;gap:.75rem;
-}
-.eyebrow::before{content:'';width:20px;height:1px;background:var(--gold);flex-shrink:0;}
+  font-family:'Geist',sans-serif;
+  font-size:.9375rem;letter-spacing:0;text-transform:none;
+  color:var(--ash);margin-bottom:1rem;
+  display:flex;align-items:center;gap:.75rem;font-weight:500;}
+.eyebrow::before{content:'';width:20px;height:1px;background:var(--gold);flex-shrink:0;display:none;}
 
 /* ─── SECTION DIVIDER LABEL ─── */
 .section-label{display:flex;align-items:center;gap:1.5rem;margin-bottom:3rem;}
-.sl-text{font-family:'Space Grotesk',sans-serif;font-size:.5875rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ash2);white-space:nowrap;}
+.sl-text{font-family:'Geist',sans-serif;font-size:.875rem;letter-spacing:0;text-transform:none;color:var(--ash2);white-space:nowrap;font-weight:500;}
 .sl-line{flex:1;height:1px;background:var(--line);}
 
 /* ─── SECTION 01: OVERVIEW ─── */
@@ -95,7 +94,7 @@ body{
 .stat-val{font-size:2.25rem;font-weight:800;letter-spacing:-.04em;color:var(--paper);}
 .stat-lbl{font-size:.8125rem;color:var(--ash);line-height:1.4;}
 .accent-card{background:var(--gold);border-radius:8px;padding:2rem;}
-.ac-lbl{font-family:'Space Grotesk',sans-serif;font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(36,31,25,.55);margin-bottom:.875rem;}
+.ac-lbl{font-family:'Geist',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:rgba(36,31,25,.55);margin-bottom:.875rem;}
 .ac-val{font-size:2rem;font-weight:800;letter-spacing:-.03em;color:#241F19;line-height:1.15;margin-bottom:.5rem;}
 .ac-desc{font-size:.8125rem;color:rgba(36,31,25,.75);line-height:1.6;}
 .ac-sub{margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(36,31,25,.18);display:flex;gap:1.5rem;flex-wrap:wrap;}
@@ -105,25 +104,25 @@ body{
 /* ─── FULL IMAGE BLOCKS ─── */
 .img-frame{border-radius:16px;overflow:hidden;box-shadow:0 24px 64px rgba(36,31,25,.14);background:#fff;}
 .img-frame img{display:block;width:100%;height:auto;}
-.img-caption{margin-top:1rem;font-family:'Space Grotesk',sans-serif;font-size:.5625rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ash);text-align:center;}
+.img-caption{margin-top:1rem;font-family:'Geist',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--ash);text-align:center;}
 
 /* ─── SECTION 04: HMW / DECISIONS GRID ─── */
 .decisions-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-top:3rem;}
 .dec{background:var(--bg2);padding:2rem 1.75rem;}
-.dec-n{font-family:'Space Grotesk',sans-serif;font-size:.45rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:.875rem;}
+.dec-n{font-family:'Geist',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;color:var(--gold);margin-bottom:.875rem;}
 .dec-t{font-size:1rem;font-weight:700;color:var(--paper);letter-spacing:-.02em;margin-bottom:.5rem;}
 .dec-d{font-size:.8125rem;line-height:1.65;color:var(--ash);}
 
 /* ─── INSIGHTS ─── */
 .insights-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:3rem;}
 .ins{padding:1.75rem;border:1px solid var(--line);border-radius:8px;background:var(--bg2);}
-.ins-n{font-family:'Space Grotesk',sans-serif;font-size:.45rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ash);margin-bottom:.75rem;}
+.ins-n{font-family:'Geist',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;color:var(--ash);margin-bottom:.75rem;}
 .ins-t{font-size:.9375rem;font-weight:700;color:var(--paper);letter-spacing:-.02em;margin-bottom:.375rem;}
 .ins-d{font-size:.8125rem;line-height:1.6;color:var(--ash);}
 
 /* ─── NAVY CALLOUT ─── */
 .callout{background:var(--navy);border-radius:16px;padding:2.5rem;}
-.co-lbl{font-family:'Space Grotesk',sans-serif;font-size:.45rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:1rem;}
+.co-lbl{font-family:'Geist',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;color:rgba(255,255,255,.4);margin-bottom:1rem;}
 .co-t{font-size:1.25rem;font-weight:700;letter-spacing:-.02em;line-height:1.3;margin-bottom:.875rem;color:#fff;font-style:italic;}
 .co-d{font-size:.8125rem;line-height:1.7;color:rgba(255,255,255,.65);}
 .co-stats{margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.1);display:flex;gap:2rem;flex-wrap:wrap;}
@@ -136,7 +135,7 @@ body{
 .persona-tag{font-family:'Space Grotesk',sans-serif;font-size:.625rem;letter-spacing:.06em;padding:.375rem .75rem;border-radius:100px;background:var(--bg3);color:var(--paper);border:1px solid var(--line2);}
 .persona-quote{font-size:1.0625rem;font-style:italic;font-weight:500;line-height:1.55;color:var(--paper);border-left:2px solid var(--gold);padding-left:1.25rem;margin:1.25rem 0;}
 .persona-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:1.5rem;}
-.persona-col-t{font-family:'Space Grotesk',sans-serif;font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:.625rem;}
+.persona-col-t{font-family:'Geist',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--gold);margin-bottom:.625rem;}
 .persona-col ul{list-style:none;display:flex;flex-direction:column;gap:.5rem;}
 .persona-col li{font-size:.8125rem;line-height:1.5;color:var(--ash);padding-left:.875rem;position:relative;}
 .persona-col li::before{content:'';position:absolute;left:0;top:.5em;width:4px;height:4px;border-radius:50%;background:var(--gold);}
@@ -144,7 +143,7 @@ body{
 /* ─── PROCESS STEPS (double diamond) ─── */
 .dd-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-top:3rem;}
 .dd-step{background:var(--bg2);padding:1.75rem 1.5rem;}
-.dd-n{font-family:'Space Grotesk',sans-serif;font-size:.45rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:.75rem;}
+.dd-n{font-family:'Geist',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;color:var(--gold);margin-bottom:.75rem;}
 .dd-t{font-size:.9375rem;font-weight:700;color:var(--paper);letter-spacing:-.01em;margin-bottom:.375rem;}
 .dd-d{font-size:.75rem;line-height:1.55;color:var(--ash);}
 
@@ -152,34 +151,34 @@ body{
 .sketch-strip{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.25rem;margin-top:3rem;}
 .sketch-item{border-radius:12px;overflow:hidden;background:#fff;border:1px solid var(--line2);}
 .sketch-item img{display:block;width:100%;height:auto;}
-.sketch-lbl{padding:.875rem 1rem;font-family:'Space Grotesk',sans-serif;font-size:.5625rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ash);border-top:1px solid var(--line);}
+.sketch-lbl{padding:.875rem 1rem;font-family:'Geist',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--ash);border-top:1px solid var(--line);}
 
 /* ─── FINAL UI FLOW LABELS ─── */
 .ui-flow-labels{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;margin-top:1.5rem;}
 .ui-label{padding:1rem 1.125rem;background:var(--bg2);border-radius:8px;border:1px solid var(--line);}
-.ui-label-n{font-family:'Space Grotesk',sans-serif;font-size:.45rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;}
+.ui-label-n{font-family:'Geist',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;color:var(--gold);margin-bottom:.5rem;}
 .ui-label-t{font-size:.8125rem;font-weight:700;color:var(--paper);margin-bottom:.25rem;}
 .ui-label-d{font-size:.6875rem;line-height:1.5;color:var(--ash);}
 
 /* ─── FOOTER ─── */
 .footer{padding:2rem 4rem;border-top:1px solid var(--line2);display:flex;justify-content:space-between;align-items:center;}
-.footer-l,.footer-r{font-family:'Space Grotesk',sans-serif;font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ash);}
+.footer-l,.footer-r{font-family:'Geist',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--ash);}
 
 /* ─── COVER ─── */
 .cover{display:grid;grid-template-columns:1fr auto;gap:4rem;align-items:end;padding:5rem 4rem 4rem;}
 .cover-title{font-size:clamp(5rem,11vw,12rem);font-weight:800;letter-spacing:-.06em;line-height:.85;color:var(--paper);}
 .cover-title .dim{color:rgba(36,31,25,.15);}
 .cover-meta{display:flex;flex-direction:column;gap:1.25rem;padding-bottom:.5rem;}
-.cm-label{font-family:'Space Grotesk',sans-serif;font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ash);margin-bottom:.25rem;}
+.cm-label{font-family:'Geist',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--ash);margin-bottom:.25rem;}
 .cm-val{font-size:.875rem;font-weight:500;color:var(--paper);}
 
 /* ─── BACK NAV ─── */
 .back-nav{position:sticky;top:0;z-index:100;background:rgba(246,241,230,0.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(36,31,25,.08);padding:1rem 4rem;display:flex;justify-content:space-between;align-items:center;}
-.back-btn{display:inline-flex;align-items:center;gap:.625rem;font-family:'Space Grotesk',sans-serif;font-size:.5625rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);background:none;border:none;cursor:pointer;text-decoration:none;transition:gap .2s;}
+.back-btn{display:inline-flex;align-items:center;gap:.625rem;font-family:'Geist',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--gold);background:none;border:none;cursor:pointer;text-decoration:none;transition:gap .2s;}
 .back-btn:hover{gap:1rem;}
 .back-btn span{font-size:.875rem;}
-.back-nav-title{font-family:'Space Grotesk',sans-serif;font-size:.5625rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(36,31,25,.4);}
-.back-nav-right{font-family:'Space Grotesk',sans-serif;font-size:.5625rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(36,31,25,.3);}
+.back-nav-title{font-family:'Geist',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:rgba(36,31,25,.4);}
+.back-nav-right{font-family:'Geist',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:rgba(36,31,25,.3);}
 
 /* reveal on scroll */
 .reveal{opacity:0;transform:translateY(20px);transition:opacity .7s var(--ease),transform .7s var(--ease);}
@@ -328,7 +327,7 @@ body.dark-mode .nav-right,body.dark-mode .back-nav-right{color:rgba(244,244,246,
   <a class="back-btn" id="back-to-portfolio" href="index.html">
     <span>←</span> Back to portfolio
   </a>
-  <div class="back-nav-title">Hotaru · Case Study</div>
+  <div class="back-nav-title">Hotaru · Case study</div>
   <div class="back-nav-right">Paula Elffman · Product Designer</div>
 </nav>
 
@@ -337,7 +336,7 @@ body.dark-mode .nav-right,body.dark-mode .back-nav-right{color:rgba(244,244,246,
 ══════════════════════════════════════════ -->
 <div class="cover">
   <div>
-    <div class="eyebrow" style="margin-bottom:2rem;">Wellness App · UX Challenge · UXER School · 2020</div>
+    <div class="eyebrow" style="margin-bottom:2rem;">Wellness app · UX challenge · UXER School · 2020</div>
     <div class="cover-title">Hotaru<br><span class="dim">light your way</span></div>
   </div>
   <div class="cover-meta">
@@ -363,7 +362,7 @@ body.dark-mode .nav-right,body.dark-mode .back-nav-right{color:rgba(244,244,246,
      SECTION 01 — OVERVIEW & CONTEXT
 ══════════════════════════════════════════ -->
 <div class="section">
-  <div class="eyebrow">Overview &amp; Context</div>
+  <div class="eyebrow">Overview &amp; context</div>
   <div class="overview-grid">
     <div class="ov-left">
       <div class="ov-title">Isolation.<br><span class="gold">Reconnection.</span></div>
@@ -393,7 +392,7 @@ body.dark-mode .nav-right,body.dark-mode .back-nav-right{color:rgba(244,244,246,
 <div class="section">
   <div class="eyebrow">Process · Double Diamond</div>
   <div class="section-label">
-    <div class="sl-text">Understand & Define → Think Up → Decide → Prototype</div>
+    <div class="sl-text">Understand & define → Think up → Decide → Prototype</div>
     <div class="sl-line"></div>
     <div class="sl-text">UXER methodology</div>
   </div>
@@ -425,7 +424,7 @@ body.dark-mode .nav-right,body.dark-mode .back-nav-right{color:rgba(244,244,246,
      SECTION 03 — RESEARCH: USER PERSONA
 ══════════════════════════════════════════ -->
 <div class="section">
-  <div class="eyebrow">Research · User Persona</div>
+  <div class="eyebrow">Research · User persona</div>
   <div class="persona-grid">
     <div class="img-frame">
       <img src="hotaru-images/hotaru-persona.png" alt="User persona: María Gómez Martín">
@@ -474,7 +473,7 @@ body.dark-mode .nav-right,body.dark-mode .back-nav-right{color:rgba(244,244,246,
      SECTION 04 — CUSTOMER JOURNEY MAP
 ══════════════════════════════════════════ -->
 <div class="section">
-  <div class="eyebrow">Customer Journey Map</div>
+  <div class="eyebrow">Customer journey map</div>
   <div class="section-label">
     <div class="sl-text">From uncertainty to confidence</div>
     <div class="sl-line"></div>
@@ -628,14 +627,14 @@ body.dark-mode .nav-right,body.dark-mode .back-nav-right{color:rgba(244,244,246,
   <div class="eyebrow" style="justify-content:center;">Project material</div>
   <div style="font-size:clamp(1.75rem,3vw,2.5rem);font-weight:800;letter-spacing:-.04em;line-height:1.15;max-width:640px;margin:0 auto 1.5rem;">Light your way.</div>
   <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
-    <a href="https://www.canva.com/design/DAEawFhldPw/FQdjkjZFYVzSxCGbM5Inbw/view" target="_blank" rel="noopener" style="font-family:'Space Grotesk',sans-serif;font-size:.6875rem;letter-spacing:.1em;text-transform:uppercase;padding:.875rem 1.5rem;border-radius:100px;background:var(--gold);color:#241F19;text-decoration:none;font-weight:600;">View full deck</a>
-    <a href="https://www.youtube.com/watch?v=AtlR0FOaa5E" target="_blank" rel="noopener" style="font-family:'Space Grotesk',sans-serif;font-size:.6875rem;letter-spacing:.1em;text-transform:uppercase;padding:.875rem 1.5rem;border-radius:100px;border:1px solid var(--line2);color:var(--paper);text-decoration:none;font-weight:600;">Watch product video</a>
+    <a href="https://www.canva.com/design/DAEawFhldPw/FQdjkjZFYVzSxCGbM5Inbw/view" target="_blank" rel="noopener" style="font-family:'Geist',sans-serif;font-size:.875rem;letter-spacing:0;text-transform:none;padding:.875rem 1.5rem;border-radius:100px;background:var(--gold);color:#241F19;text-decoration:none;font-weight:600;">View full deck</a>
+    <a href="https://www.youtube.com/watch?v=AtlR0FOaa5E" target="_blank" rel="noopener" style="font-family:'Geist',sans-serif;font-size:.875rem;letter-spacing:0;text-transform:none;padding:.875rem 1.5rem;border-radius:100px;border:1px solid var(--line2);color:var(--paper);text-decoration:none;font-weight:600;">Watch product video</a>
   </div>
 </div>
 
 <!-- FOOTER -->
 <div class="footer">
-  <div class="footer-l">Hotaru · Wellness App · UXER School × La Nave Madrid · 2020</div>
+  <div class="footer-l">Hotaru · Wellness app · UXER School × La Nave Madrid · 2020</div>
   <div class="footer-r">Product Designer · Paula Elffman</div>
 </div>
 

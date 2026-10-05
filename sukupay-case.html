@@ -71,12 +71,11 @@ body{
 
 /* ─── EYEBROW ─── */
 .eyebrow{
-  font-family:'Space Grotesk',sans-serif;
-  font-size:.5625rem;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--accent);margin-bottom:1rem;
-  display:flex;align-items:center;gap:.75rem;
-}
-.eyebrow::before{content:'';width:20px;height:1px;background:var(--accent);flex-shrink:0;}
+  font-family:'Inter',sans-serif;
+  font-size:.9375rem;letter-spacing:0;text-transform:none;
+  color:var(--ash);margin-bottom:1rem;
+  display:flex;align-items:center;gap:.75rem;font-weight:500;}
+.eyebrow::before{content:'';width:20px;height:1px;background:var(--accent);flex-shrink:0;display:none;}
 
 /* ─── PHONES ─── */
 .phone-wrap{display:flex;flex-direction:column;align-items:center;}
@@ -90,15 +89,15 @@ body{
   margin-top:-12px;position:relative;z-index:5;
   display:inline-flex;align-items:center;gap:.4rem;
   padding:.3rem .875rem;border-radius:100px;
-  font-family:'Space Grotesk',sans-serif;
-  font-size:.45rem;letter-spacing:.1em;text-transform:uppercase;
+  font-family:'Inter',sans-serif;
+  font-size:.75rem;letter-spacing:0;text-transform:none;
 }
 .badge-a{background:var(--accent);color:#fff;}
 .badge-g{background:var(--bg2);color:var(--ash);border:1px solid var(--line2);}
 .badge-l{background:rgba(174,235,59,.18);color:#5B7A0E;border:1px solid rgba(174,235,59,.4);}
 
 .plabel{margin-top:1.5rem;text-align:center;max-width:210px;}
-.pl-n{font-family:'Space Grotesk',sans-serif;font-size:.45rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:.375rem;}
+.pl-n{font-family:'Inter',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;color:var(--accent);margin-bottom:.375rem;}
 .pl-t{font-size:.875rem;font-weight:700;color:var(--paper);letter-spacing:-.02em;margin-bottom:.25rem;}
 .pl-d{font-size:.75rem;line-height:1.55;color:var(--ash);}
 
@@ -118,8 +117,8 @@ body{
 .arr-dot{width:5px;height:5px;border-radius:50%;background:var(--accent);}
 .arr-line{width:1px;height:28px;background:linear-gradient(to bottom,var(--accent),rgba(21,33,25,0));}
 .arr-lbl{
-  font-family:'Space Grotesk',sans-serif;
-  font-size:.4rem;letter-spacing:.1em;text-transform:uppercase;
+  font-family:'Inter',sans-serif;
+  font-size:.6875rem;letter-spacing:0;text-transform:none;
   color:var(--accent);writing-mode:vertical-rl;margin-top:.25rem;
 }
 
@@ -141,7 +140,7 @@ body{
   display:flex;flex-direction:column;gap:1.25rem;
   padding-bottom:.5rem;
 }
-.cm-label{font-family:'Space Grotesk',sans-serif;font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ash);margin-bottom:.25rem;}
+.cm-label{font-family:'Inter',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--ash);margin-bottom:.25rem;}
 .cm-val{font-size:.875rem;font-weight:500;color:var(--paper);}
 
 /* ─── SECTION 01: OVERVIEW ─── */
@@ -170,7 +169,7 @@ body{
   background:var(--accent);
   border-radius:12px;padding:2rem;
 }
-.ac-lbl{font-family:'Space Grotesk',sans-serif;font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:.875rem;}
+.ac-lbl{font-family:'Inter',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:rgba(255,255,255,.6);margin-bottom:.875rem;}
 .ac-val{font-size:1.375rem;font-weight:700;letter-spacing:-.02em;color:#fff;line-height:1.35;margin-bottom:.75rem;}
 .ac-desc{font-size:.8125rem;color:rgba(255,255,255,.82);line-height:1.65;}
 
@@ -200,7 +199,7 @@ body{
 }
 .comp-card{background:var(--bg2);padding:1.75rem 1.5rem;display:flex;flex-direction:column;}
 .comp-name{font-size:1rem;font-weight:800;letter-spacing:-.02em;color:var(--paper);margin-bottom:.25rem;}
-.comp-owns{font-family:'Space Grotesk',sans-serif;font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;}
+.comp-owns{font-family:'Inter',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--accent);margin-bottom:1rem;}
 .comp-list{list-style:none;display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.25rem;flex:1;}
 .comp-list li{font-size:.75rem;line-height:1.5;color:var(--ash);padding-left:.875rem;position:relative;}
 .comp-list li::before{content:'';position:absolute;left:0;top:.5em;width:4px;height:4px;border-radius:50%;background:var(--ash-2);}
@@ -208,20 +207,20 @@ body{
   padding-top:1rem;border-top:1px solid var(--line);
   font-size:.75rem;line-height:1.55;color:var(--paper);font-weight:500;
 }
-.comp-insight span{font-family:'Space Grotesk',sans-serif;font-size:.4375rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ash-2);display:block;margin-bottom:.375rem;font-weight:400;}
+.comp-insight span{font-family:'Inter',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;color:var(--ash-2);display:block;margin-bottom:.375rem;font-weight:400;}
 
 .opportunity-box{
   margin-top:1.5rem;background:var(--dark);border-radius:12px;padding:1.75rem 2rem;
   text-align:center;
 }
-.opportunity-box .co-lbl{font-family:'Space Grotesk',sans-serif;font-size:.45rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:.75rem;}
+.opportunity-box .co-lbl{font-family:'Inter',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;color:rgba(255,255,255,.4);margin-bottom:.75rem;}
 .opportunity-box .co-t{font-size:1.125rem;font-weight:600;letter-spacing:-.01em;line-height:1.5;color:#fff;max-width:760px;margin:0 auto;}
 .opportunity-box .co-t .lime{color:var(--lime);font-weight:700;}
 
 /* ─── OLD XP CAROUSEL (multi-item marquee) ─── */
 .oldxp-block{margin-bottom:3rem;}
 .oldxp-tag{
-  font-family:'Space Grotesk',sans-serif;font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;
+  font-family:'Inter',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;
   color:var(--ash);text-align:center;margin-bottom:1.5rem;
 }
 .oldxp-carousel{
@@ -275,7 +274,7 @@ body{
 .pc-box{border-radius:12px;padding:1.5rem 1.75rem;}
 .pc-pros{background:rgba(14,107,74,.06);border:1px solid rgba(14,107,74,.18);}
 .pc-cons{background:rgba(232,80,80,.05);border:1px solid rgba(232,80,80,.16);}
-.pc-lbl{font-family:'Space Grotesk',sans-serif;font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.875rem;}
+.pc-lbl{font-family:'Inter',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;margin-bottom:.875rem;}
 .pc-pros .pc-lbl{color:var(--accent);}
 .pc-cons .pc-lbl{color:#C0392B;}
 .pc-box ul{list-style:none;display:flex;flex-direction:column;gap:.625rem;}
@@ -291,7 +290,7 @@ body{
 /* ─── TWO DIRECTIONS ─── */
 .directions-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;margin-top:3rem;}
 .direction-card{background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:2.5rem;display:flex;flex-direction:column;}
-.dir-tag{display:inline-flex;align-self:flex-start;padding:.3rem .875rem;border-radius:100px;background:var(--accent);color:#fff;font-family:'Space Grotesk',sans-serif;font-size:.45rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.25rem;}
+.dir-tag{display:inline-flex;align-self:flex-start;padding:.3rem .875rem;border-radius:100px;background:var(--accent);color:#fff;font-family:'Inter',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;margin-bottom:1.25rem;}
 .dir-tag.dir-tag-2{background:var(--dark);}
 .dir-title{font-size:1.5rem;font-weight:800;letter-spacing:-.03em;margin-bottom:1rem;}
 .dir-body{font-size:.8438rem;line-height:1.72;color:var(--ash);font-weight:300;margin-bottom:1.75rem;}
@@ -301,7 +300,7 @@ body{
 .dir-shot.dir-shot-wide .phone-shell{width:auto;max-width:100%;box-shadow:none;border-radius:12px;}
 .proto-embed{margin-top:2.5rem;}
 .proto-embed-label{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;margin-bottom:1.25rem;}
-.proto-embed-tag{display:inline-flex;align-items:center;gap:.5rem;padding:.3rem .875rem;border-radius:100px;background:var(--dark);color:#fff;font-family:'Space Grotesk',sans-serif;font-size:.45rem;letter-spacing:.1em;text-transform:uppercase;flex-shrink:0;}
+.proto-embed-tag{display:inline-flex;align-items:center;gap:.5rem;padding:.3rem .875rem;border-radius:100px;background:var(--dark);color:#fff;font-family:'Inter',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;flex-shrink:0;}
 .proto-embed-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--lime);}
 .proto-embed-hint{font-size:.8125rem;line-height:1.6;color:var(--ash);font-weight:300;max-width:34rem;}
 .proto-embed-frame{border:1px solid var(--line);border-radius:20px;overflow:hidden;background:#F1F0EC;box-shadow:0 24px 60px -32px rgba(11,42,32,.25);}
@@ -327,7 +326,7 @@ body{
   margin-top:3rem;
 }
 .dec{background:var(--bg2);padding:2rem 1.75rem;}
-.dec-n{font-family:'Space Grotesk',sans-serif;font-size:.45rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:.875rem;}
+.dec-n{font-family:'Inter',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;color:var(--accent);margin-bottom:.875rem;}
 .dec-t{font-size:1rem;font-weight:700;color:var(--paper);letter-spacing:-.02em;margin-bottom:.5rem;}
 .dec-d{font-size:.8125rem;line-height:1.65;color:var(--ash);}
 
@@ -347,7 +346,7 @@ body{
   margin-top:3rem;
 }
 .ins{padding:1.75rem;border:1px solid var(--line);border-radius:12px;background:var(--bg2);}
-.ins-n{font-family:'Space Grotesk',sans-serif;font-size:.45rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ash);margin-bottom:.75rem;}
+.ins-n{font-family:'Inter',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;color:var(--ash);margin-bottom:.75rem;}
 .ins-t{font-size:.9375rem;font-weight:700;color:var(--paper);letter-spacing:-.02em;margin-bottom:.375rem;}
 .ins-d{font-size:.8125rem;line-height:1.6;color:var(--ash);}
 
@@ -355,7 +354,7 @@ body{
 .callout{
   background:var(--dark);border-radius:16px;padding:2.5rem;
 }
-.co-lbl{font-family:'Space Grotesk',sans-serif;font-size:.45rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:1rem;}
+.co-lbl{font-family:'Inter',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;color:rgba(255,255,255,.35);margin-bottom:1rem;}
 .co-t{font-size:1.375rem;font-weight:700;letter-spacing:-.025em;line-height:1.3;margin-bottom:.875rem;color:#fff;}
 .co-d{font-size:.8125rem;line-height:1.7;color:rgba(255,255,255,.6);}
 .co-stats{margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.1);display:flex;gap:1.5rem;flex-wrap:wrap;}
@@ -369,8 +368,8 @@ body{
   display:flex;justify-content:space-between;align-items:center;
 }
 .footer-l,.footer-r{
-  font-family:'Space Grotesk',sans-serif;
-  font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ash);
+  font-family:'Inter',sans-serif;
+  font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--ash);
 }
 
 /* ─── BACK NAV ─── */
@@ -388,8 +387,8 @@ body{
 }
 .back-btn{
   display:inline-flex;align-items:center;gap:.625rem;
-  font-family:'Space Grotesk',sans-serif;
-  font-size:.5625rem;letter-spacing:.14em;text-transform:uppercase;
+  font-family:'Inter',sans-serif;
+  font-size:.8125rem;letter-spacing:0;text-transform:none;
   color:var(--accent);
   background:none;border:none;cursor:pointer;
   text-decoration:none;
@@ -398,13 +397,13 @@ body{
 .back-btn:hover{gap:1rem;}
 .back-btn span{font-size:.875rem;}
 .back-nav-title{
-  font-family:'Space Grotesk',sans-serif;
-  font-size:.5625rem;letter-spacing:.14em;text-transform:uppercase;
+  font-family:'Inter',sans-serif;
+  font-size:.8125rem;letter-spacing:0;text-transform:none;
   color:rgba(21,33,25,.4);
 }
 .back-nav-right{
-  font-family:'Space Grotesk',sans-serif;
-  font-size:.5625rem;letter-spacing:.1em;text-transform:uppercase;
+  font-family:'Inter',sans-serif;
+  font-size:.8125rem;letter-spacing:0;text-transform:none;
   color:var(--ash);
 }
 
@@ -414,10 +413,9 @@ body{
   margin-bottom:3rem;
 }
 .sl-text{
-  font-family:'Space Grotesk',sans-serif;
-  font-size:.5875rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ash-2);
-  white-space:nowrap;
-}
+  font-family:'Inter',sans-serif;
+  font-size:.875rem;letter-spacing:0;text-transform:none;color:var(--ash-2);
+  white-space:nowrap;font-weight:500;}
 .sl-line{flex:1;height:1px;background:var(--line);}
 
 @media(max-width:900px){
@@ -475,8 +473,8 @@ body{
 }
 .ds-comp:hover { border-color:var(--line-md); }
 .ds-comp-label {
-  font-family:'Space Grotesk',sans-serif;font-size:.5rem;
-  letter-spacing:.12em;text-transform:uppercase;
+  font-family:'Inter',sans-serif;font-size:.8125rem;
+  letter-spacing:0;text-transform:none;
   color:var(--ash);padding:.875rem 1.25rem;
   border-bottom:1px solid var(--line);
 }
@@ -497,8 +495,8 @@ body{
 .ds-tag {
   padding:.25rem .75rem;border-radius:100px;
   border:1px solid var(--line-md);
-  font-family:'Space Grotesk',sans-serif;font-size:.45rem;
-  letter-spacing:.08em;text-transform:uppercase;color:var(--ash-2);
+  font-family:'Inter',sans-serif;font-size:.75rem;
+  letter-spacing:0;text-transform:none;color:var(--ash-2);
 }
 .ds-tag-accent { border-color:rgba(174,235,59,.5);color:#5B7A0E; }
 .ds-tag-green { border-color:rgba(14,107,74,.35);color:var(--accent); }
@@ -659,7 +657,7 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
   <a class="back-btn" id="back-to-portfolio" href="index.html">
     <span>←</span> Back to portfolio
   </a>
-  <div class="back-nav-title">SukuPay · Case Study</div>
+  <div class="back-nav-title">SukuPay · Case study</div>
   <div class="back-nav-right">Paula Elffman · Sr Product Designer</div>
 </nav>
 
@@ -668,7 +666,7 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
 ══════════════════════════════════════════ -->
 <div class="cover">
   <div>
-    <div class="eyebrow" style="margin-bottom:2rem;">Remittance App · Fintech · SukuPay · 2026</div>
+    <div class="eyebrow" style="margin-bottom:2rem;">Remittance app · Fintech · SukuPay · 2026</div>
     <div class="cover-title">
       suku<span class="dim">pay</span><br><span class="dim">home xp</span>
     </div>
@@ -687,7 +685,7 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
      SECTION 01 — SITUATION & TASK
 ══════════════════════════════════════════ -->
 <div class="section">
-  <div class="eyebrow">Situation & Task</div>
+  <div class="eyebrow">Situation & task</div>
   <div class="overview-grid">
     <div class="ov-left">
       <div class="ov-title">The most critical<br>conversion <span class="accent">surface.</span></div>
@@ -711,7 +709,7 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
      SECTION 02 — ASSUMPTIONS & BEHAVIOR
 ══════════════════════════════════════════ -->
 <div class="section">
-  <div class="eyebrow">Action · 01 Assumptions & User Behavior</div>
+  <div class="eyebrow">Action · 01 Assumptions & user behavior</div>
   <div class="section-label">
     <div class="sl-text">In remittances</div>
     <div class="sl-line"></div>
@@ -730,7 +728,7 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
      SECTION 03 — COMPETITOR ANALYSIS
 ══════════════════════════════════════════ -->
 <div class="section">
-  <div class="eyebrow">Action · 02 Competitor Analysis</div>
+  <div class="eyebrow">Action · 02 Competitor analysis</div>
   <div class="section-label">
     <div class="sl-text">Four leading remittance apps</div>
     <div class="sl-line"></div>
@@ -739,7 +737,7 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
   <div class="comp-grid">
     <div class="comp-card">
       <div class="comp-name">Remitly</div>
-      <div class="comp-owns">Owns: Speed & repetition</div>
+      <div class="comp-owns">Owns: speed & repetition</div>
       <ul class="comp-list">
         <li>Fast repeat transfers</li>
         <li>Clear delivery promise</li>
@@ -750,7 +748,7 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
     </div>
     <div class="comp-card">
       <div class="comp-name">Wise</div>
-      <div class="comp-owns">Owns: Transparency</div>
+      <div class="comp-owns">Owns: transparency</div>
       <ul class="comp-list">
         <li>Real FX clarity</li>
         <li>Fee breakdown upfront</li>
@@ -761,7 +759,7 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
     </div>
     <div class="comp-card">
       <div class="comp-name">Western Union</div>
-      <div class="comp-owns">Owns: Global trust</div>
+      <div class="comp-owns">Owns: global trust</div>
       <ul class="comp-list">
         <li>Strong brand recognition</li>
         <li>Security perception</li>
@@ -772,7 +770,7 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
     </div>
     <div class="comp-card">
       <div class="comp-name">Zigi</div>
-      <div class="comp-owns">Owns: Local trust & receiving</div>
+      <div class="comp-owns">Owns: local trust & receiving</div>
       <ul class="comp-list">
         <li>Bank-backed (Banco Industrial)</li>
         <li>Instant wallet/bank receive</li>
@@ -792,7 +790,7 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
      SECTION 04 — UX AUDIT
 ══════════════════════════════════════════ -->
 <div class="section">
-  <div class="eyebrow">Action · 03 UX Audit of Current Home</div>
+  <div class="eyebrow">Action · 03 UX audit of current home</div>
   <div class="section-label">
     <div class="sl-text">Clear within 3 seconds</div>
     <div class="sl-line"></div>
@@ -871,7 +869,7 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
      SECTION 05 — DESIGN PRINCIPLES
 ══════════════════════════════════════════ -->
 <div class="section">
-  <div class="eyebrow">Action · 04 Design Principles</div>
+  <div class="eyebrow">Action · 04 Design principles</div>
   <div class="section-label">
     <div class="sl-text">Definition</div>
     <div class="sl-line"></div>
@@ -890,9 +888,9 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
      SECTION 06 — RESULT: TWO DIRECTIONS
 ══════════════════════════════════════════ -->
 <div class="section">
-  <div class="eyebrow">Result · Two Directions Explored</div>
+  <div class="eyebrow">Result · Two directions explored</div>
   <div class="section-label">
-    <div class="sl-text">While challenging the current Home experience</div>
+    <div class="sl-text">While challenging the current home experience</div>
     <div class="sl-line"></div>
     <div class="sl-text">I explored two possible paths</div>
   </div>
@@ -926,9 +924,9 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
      SECTION 07 — FULL HOME PROPOSAL
 ══════════════════════════════════════════ -->
 <div class="section">
-  <div class="eyebrow">Result · Full Home Proposal</div>
+  <div class="eyebrow">Result · Full home proposal</div>
   <div class="section-label">
-    <div class="sl-text">Main box: Send money + secondary actions</div>
+    <div class="sl-text">Main box: send money + secondary actions</div>
     <div class="sl-line"></div>
     <div class="sl-text">Resend · Exchange rate · FAQs</div>
   </div>
@@ -938,7 +936,7 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
       <p style="font-size:.9375rem;line-height:1.75;color:var(--ash);font-weight:300;"><strong style="color:var(--paper);font-weight:600;">New users or without funds:</strong> the priority is funding the account, so the primary action shifts to "Add money" — supporting a successful first transaction as fast as possible.<br><br><strong style="color:var(--paper);font-weight:600;">Returning users:</strong> a Resend card reinforces repeat behavior. As users need sufficient balance to complete the transfer, this moment can seamlessly guide them to add funds and continue sending.</p>
     </div>
     <div style="padding:1.75rem 2rem;background:var(--bg2);border:1px solid var(--line);border-radius:12px;">
-      <div style="font-family:'Space Grotesk',sans-serif;font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ash);margin-bottom:1.25rem;">Next steps</div>
+      <div style="font-family:'Inter',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--ash);margin-bottom:1.25rem;">Next steps</div>
       <div style="display:flex;flex-direction:column;gap:.75rem;">
         <div style="display:flex;align-items:center;gap:.875rem;padding:.875rem 0;border-bottom:1px solid var(--line);"><div style="width:5px;height:5px;border-radius:50%;background:var(--accent);flex-shrink:0;"></div><span style="font-size:.875rem;color:var(--paper);">Bring recent transaction history to the front</span></div>
         <div style="display:flex;align-items:center;gap:.875rem;padding:.875rem 0;border-bottom:1px solid var(--line);"><div style="width:5px;height:5px;border-radius:50%;background:var(--accent);flex-shrink:0;"></div><span style="font-size:.875rem;color:var(--paper);">Elevate Resend as a primary Home element</span></div>
@@ -967,7 +965,7 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
      SECTION 08 — KEY DESIGN DECISIONS
 ══════════════════════════════════════════ -->
 <div class="section">
-  <div class="eyebrow">Key Design Decisions</div>
+  <div class="eyebrow">Key design decisions</div>
   <div class="decisions-grid">
     <div class="dec">
       <div class="dec-n">Decision 01</div>
@@ -1006,7 +1004,7 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
      SECTION 09 — USER TEST / SUPPORT
 ══════════════════════════════════════════ -->
 <div class="section">
-  <div class="eyebrow">User Test · Support Strategy</div>
+  <div class="eyebrow">User test · Support strategy</div>
   <div class="section-label">
     <div class="sl-text">WhatsApp / support visibility test</div>
     <div class="sl-line"></div>
@@ -1028,7 +1026,7 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
      SECTION — DESIGN SYSTEM
 ══════════════════════════════════════════ -->
 <div class="section">
-  <div class="eyebrow">Design System · Components</div>
+  <div class="eyebrow">Design system · Components</div>
   <div class="ds-intro">
     <h2 class="ds-title">Built to scale.<br><em>Documented to ship.</em></h2>
     <p class="ds-sub">Every component was designed with clear states, real content and system logic — from the balance box to the smallest FAQ item — so the Home experience stays consistent as SukuPay grows into a broader financial ecosystem.</p>
@@ -1124,7 +1122,7 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
         </div>
         <div class="ds-comp-meta">
           <span class="ds-tag">Home · Activity · Contacts · Withdraw</span>
-          <span class="ds-tag ds-tag-accent">Floating Send money FAB</span>
+          <span class="ds-tag ds-tag-accent">Floating send money FAB</span>
           <span class="ds-tag">Active state per tab</span>
           <span class="ds-tag">Light & dark surface</span>
         </div>
@@ -1156,7 +1154,7 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
      SECTION — EXPECTED IMPACT
 ══════════════════════════════════════════ -->
 <div class="section">
-  <div class="eyebrow">Expected Impact</div>
+  <div class="eyebrow">Expected impact</div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;">
     <div class="insights-grid" style="grid-template-columns:1fr;margin-top:0;">
       <div class="ins">
@@ -1187,7 +1185,7 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
 
 <!-- FOOTER -->
 <div class="footer">
-  <div class="footer-l">SukuPay · Home XP · UX Audit & Redesign · 2026</div>
+  <div class="footer-l">SukuPay · Home XP · UX audit & redesign · 2026</div>
   <div class="footer-r">Sr Product Designer · Paula Elffman</div>
 </div>
 

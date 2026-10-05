@@ -67,26 +67,25 @@ body{
 }
 .back-btn{
   display:inline-flex;align-items:center;gap:.625rem;
-  font-family:'Space Grotesk',sans-serif;
-  font-size:.5625rem;letter-spacing:.14em;text-transform:uppercase;
+  font-family:'Geist',sans-serif;
+  font-size:.8125rem;letter-spacing:0;text-transform:none;
   color:var(--red);background:none;border:none;cursor:pointer;
   text-decoration:none;transition:gap .2s;
 }
 .back-btn:hover{gap:1rem;}
 .back-btn span{font-size:.875rem;}
-.nav-title{font-family:'Space Grotesk',sans-serif;font-size:.5625rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ash);}
-.nav-right{font-family:'Space Grotesk',sans-serif;font-size:.5625rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(26,24,20,.3);}
+.nav-title{font-family:'Geist',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--ash);}
+.nav-right{font-family:'Geist',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:rgba(26,24,20,.3);}
 
 /* ── SHARED ── */
 .section{padding:5rem 4rem;}
 .section+.section{border-top:1px solid var(--line2);}
 .eyebrow{
-  font-family:'Space Grotesk',sans-serif;
-  font-size:.5625rem;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--red);margin-bottom:1rem;
-  display:flex;align-items:center;gap:.75rem;
-}
-.eyebrow::before{content:'';width:20px;height:1px;background:var(--red);flex-shrink:0;}
+  font-family:'Geist',sans-serif;
+  font-size:.9375rem;letter-spacing:0;text-transform:none;
+  color:var(--ash);margin-bottom:1rem;
+  display:flex;align-items:center;gap:.75rem;font-weight:500;}
+.eyebrow::before{content:'';width:20px;height:1px;background:var(--red);flex-shrink:0;display:none;}
 
 /* ── PHONE FRAME ── */
 .phone-wrap{display:flex;flex-direction:column;align-items:center;}
@@ -108,7 +107,7 @@ body{
 }
 .cover-title .dim{color:rgba(26,24,20,.12);}
 .cover-meta{display:flex;flex-direction:column;gap:1.25rem;padding-bottom:.5rem;}
-.cm-label{font-family:'Space Grotesk',sans-serif;font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ash);margin-bottom:.2rem;}
+.cm-label{font-family:'Geist',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--ash);margin-bottom:.2rem;}
 .cm-val{font-size:.875rem;font-weight:500;color:var(--ink);}
 
 /* ── PROBLEM/WIN ITEMS ── */
@@ -136,7 +135,7 @@ body{
 .quote-item{background:var(--bg);padding:1.5rem 1.75rem;}
 .qi-mark{font-size:1.5rem;opacity:.25;margin-bottom:.5rem;}
 .qi-text{font-size:.9rem;line-height:1.7;color:var(--ink);font-style:italic;margin-bottom:.75rem;}
-.qi-tag{font-family:'Space Grotesk',sans-serif;font-size:.45rem;letter-spacing:.1em;text-transform:uppercase;color:var(--red);}
+.qi-tag{font-family:'Geist',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;color:var(--red);}
 
 /* ── METRICS BENTO ── */
 .metrics-bento{
@@ -159,18 +158,18 @@ body{
   margin-top:3rem;
 }
 .dec{background:var(--bg);padding:2rem 1.75rem;}
-.dec-n{font-family:'Space Grotesk',sans-serif;font-size:.45rem;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-bottom:.875rem;}
+.dec-n{font-family:'Geist',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;color:var(--red);margin-bottom:.875rem;}
 .dec-t{font-size:1rem;font-weight:700;color:var(--ink);letter-spacing:-.02em;margin-bottom:.5rem;}
 .dec-d{font-size:.8125rem;line-height:1.65;color:var(--ash);}
 
 /* ── INSIGHTS + CALLOUT ── */
 .ins-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:3rem;}
 .ins{padding:1.75rem;border:1px solid var(--line2);border-radius:8px;background:var(--bg);}
-.ins-n{font-family:'Space Grotesk',sans-serif;font-size:.45rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ash);margin-bottom:.75rem;}
+.ins-n{font-family:'Geist',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;color:var(--ash);margin-bottom:.75rem;}
 .ins-t{font-size:.9375rem;font-weight:700;color:var(--ink);letter-spacing:-.02em;margin-bottom:.375rem;}
 .ins-d{font-size:.8125rem;line-height:1.6;color:var(--ash);}
 .callout{background:var(--red);border-radius:8px;padding:2.5rem;}
-.co-l{font-family:'Space Grotesk',sans-serif;font-size:.45rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:1rem;}
+.co-l{font-family:'Geist',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;color:rgba(255,255,255,.5);margin-bottom:1rem;}
 .co-t{font-size:1.375rem;font-weight:700;letter-spacing:-.025em;line-height:1.25;margin-bottom:.875rem;color:#fff;}
 .co-d{font-size:.8125rem;line-height:1.7;color:rgba(255,255,255,.7);}
 .co-stats{margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.15);display:flex;gap:2rem;}
@@ -188,8 +187,8 @@ body{
   flex-shrink:0;position:relative;
 }
 .flow-step-num{
-  font-family:'Space Grotesk',sans-serif;font-size:.5rem;
-  letter-spacing:.14em;text-transform:uppercase;
+  font-family:'Geist',sans-serif;font-size:.8125rem;
+  letter-spacing:0;text-transform:none;
   color:var(--red);
   background:rgba(232,20,60,.06);
   border:1px solid rgba(232,20,60,.15);
@@ -222,8 +221,8 @@ body{
 }
 .ffr-item{display:flex;flex-direction:column;align-items:center;gap:1rem;}
 .ffr-num{
-  font-family:'Space Grotesk',sans-serif;font-size:.45rem;
-  letter-spacing:.12em;text-transform:uppercase;
+  font-family:'Geist',sans-serif;font-size:.75rem;
+  letter-spacing:0;text-transform:none;
   color:#fff;background:var(--red);
   width:22px;height:22px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
@@ -237,7 +236,7 @@ body{
   padding:2rem 4rem;border-top:1px solid var(--line2);
   display:flex;justify-content:space-between;align-items:center;
 }
-.footer-t{font-family:'Space Grotesk',sans-serif;font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ash);}
+.footer-t{font-family:'Geist',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--ash);}
 
 @media(max-width:768px){
   .back-nav{padding:1rem 1.5rem;}
@@ -380,14 +379,14 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
   <a class="back-btn" id="back-to-portfolio" href="index.html">
     <span>←</span> Back to portfolio
   </a>
-  <div class="nav-title">monchis drivers · App Redesign</div>
+  <div class="nav-title">monchis drivers · App redesign</div>
   <div class="nav-right">Paula Elffman · Sr Product Designer</div>
 </nav>
 
 <!-- COVER -->
 <div class="cover">
   <div>
-    <div class="eyebrow" style="margin-bottom:2rem;">Delivery Operations · Itti · Q1 2026</div>
+    <div class="eyebrow" style="margin-bottom:2rem;">Delivery operations · Itti · Q1 2026</div>
     <div class="cover-title">monchis<br><span class="dim">drivers.</span></div>
   </div>
   <div class="cover-meta">
@@ -402,7 +401,7 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
 
 <!-- SECTION 01 — CONTEXT -->
 <div class="section">
-  <div class="eyebrow">Context & Problem</div>
+  <div class="eyebrow">Context & problem</div>
   <div style="font-size:clamp(2rem,3.5vw,3.5rem);font-weight:800;letter-spacing:-.04em;line-height:1;margin-bottom:1.25rem;">
     Our drivers were the backbone.<br><span style="color:var(--red);">Their app was an afterthought.</span>
   </div>
@@ -432,7 +431,7 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
 
 <!-- SECTION 02 — USER VOICES -->
 <div class="section">
-  <div class="eyebrow">Active Listening</div>
+  <div class="eyebrow">Active listening</div>
   <div style="font-size:clamp(2rem,3.5vw,3rem);font-weight:800;letter-spacing:-.04em;line-height:1;margin-bottom:3rem;">What drivers told us.</div>
   <div class="quotes-grid">
     <div class="quote-item">
@@ -472,7 +471,7 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
      SECTION 03 — FULL DELIVERY FLOW
 ══════════════════════════════════════ -->
 <div class="section" style="background:linear-gradient(180deg,var(--bg) 0%,#fff 100%);">
-  <div class="eyebrow">Full Flow · End-to-End Delivery</div>
+  <div class="eyebrow">Full flow · End-to-end delivery</div>
   <div style="font-size:clamp(1.75rem,3.2vw,2.75rem);font-weight:800;letter-spacing:-.04em;line-height:1.1;margin-bottom:1rem;">From push notification to<br><span style="color:var(--red);">delivered, in one flow.</span></div>
   <p style="font-size:.9375rem;line-height:1.75;color:var(--ash);font-weight:300;max-width:720px;margin-bottom:3rem;">
     Every screen was designed around the real-world delivery sequence. Here's the full journey a driver follows — from the moment a new order arrives to marking it as delivered.
@@ -535,7 +534,7 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
 
 <!-- SECTION 04 — HOME CONNECTED + ORDERS LIST -->
 <div class="section">
-  <div class="eyebrow">Feature Focus · Home & Orders</div>
+  <div class="eyebrow">Feature focus · Home & orders</div>
   <div class="feat-grid">
     <div>
       <div style="font-size:clamp(2rem,3vw,3rem);font-weight:800;letter-spacing:-.04em;line-height:1;margin-bottom:1.25rem;">
@@ -572,7 +571,7 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
 
 <!-- SECTION 05 — ORDER DETAIL DEEP DIVE -->
 <div class="section">
-  <div class="eyebrow">Feature Focus · Order Pipeline</div>
+  <div class="eyebrow">Feature focus · Order pipeline</div>
   <div class="feat-grid reverse">
     <div>
       <div style="font-size:clamp(2rem,3vw,3rem);font-weight:800;letter-spacing:-.04em;line-height:1;margin-bottom:1.25rem;">
@@ -609,7 +608,7 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
 
 <!-- SECTION 06 — NAVIGATION & MAP -->
 <div class="section">
-  <div class="eyebrow">Feature Focus · Navigation</div>
+  <div class="eyebrow">Feature focus · Navigation</div>
   <div class="feat-grid">
     <div>
       <div style="font-size:clamp(2rem,3vw,3rem);font-weight:800;letter-spacing:-.04em;line-height:1;margin-bottom:1.25rem;">
@@ -646,7 +645,7 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
 
 <!-- SECTION 07 — SHIFT + MENU + PAUSE -->
 <div class="section">
-  <div class="eyebrow">Feature Focus · Shift Management & Profile</div>
+  <div class="eyebrow">Feature focus · Shift management & profile</div>
   <div class="feat-grid reverse">
     <div>
       <div style="font-size:clamp(2rem,3vw,3rem);font-weight:800;letter-spacing:-.04em;line-height:1;margin-bottom:1.25rem;">
@@ -684,7 +683,7 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
 
 <!-- SECTION 08 — IMPACT -->
 <div class="section">
-  <div class="eyebrow">Impact & Outcomes</div>
+  <div class="eyebrow">Impact & outcomes</div>
   <div style="font-size:clamp(2rem,3.5vw,3rem);font-weight:800;letter-spacing:-.04em;line-height:1;margin-bottom:3rem;">Designed for speed.<br><span style="color:var(--red);">Measured by trust.</span></div>
 
   <div class="metrics-bento" style="margin-bottom:2rem;">
@@ -709,19 +708,19 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
   <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line2);border:1px solid var(--line2);border-radius:8px;overflow:hidden;">
     <div style="background:var(--bg);padding:1.75rem;text-align:center;">
       <div style="font-size:2rem;font-weight:800;letter-spacing:-.04em;color:var(--red);">5</div>
-      <div style="font-family:'Space Grotesk',sans-serif;font-size:.45rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ash);margin-top:.25rem;">Nav tabs</div>
+      <div style="font-family:'Geist',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;color:var(--ash);margin-top:.25rem;">Nav tabs</div>
     </div>
     <div style="background:var(--bg);padding:1.75rem;text-align:center;">
       <div style="font-size:2rem;font-weight:800;letter-spacing:-.04em;color:var(--ink);">4</div>
-      <div style="font-family:'Space Grotesk',sans-serif;font-size:.45rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ash);margin-top:.25rem;">Pipeline stages</div>
+      <div style="font-family:'Geist',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;color:var(--ash);margin-top:.25rem;">Pipeline stages</div>
     </div>
     <div style="background:var(--bg);padding:1.75rem;text-align:center;">
       <div style="font-size:2rem;font-weight:800;letter-spacing:-.04em;color:var(--ink);">1</div>
-      <div style="font-family:'Space Grotesk',sans-serif;font-size:.45rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ash);margin-top:.25rem;">Tap to call</div>
+      <div style="font-family:'Geist',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;color:var(--ash);margin-top:.25rem;">Tap to call</div>
     </div>
     <div style="background:var(--bg);padding:1.75rem;text-align:center;">
       <div style="font-size:2rem;font-weight:800;letter-spacing:-.04em;color:var(--ink);">0</div>
-      <div style="font-family:'Space Grotesk',sans-serif;font-size:.45rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ash);margin-top:.25rem;">App switches needed</div>
+      <div style="font-family:'Geist',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;color:var(--ash);margin-top:.25rem;">App switches needed</div>
     </div>
   </div>
 </div>
@@ -729,7 +728,7 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
 
 <!-- SECTION 09 — DECISIONS + LEARNINGS -->
 <div class="section">
-  <div class="eyebrow">Key Design Decisions</div>
+  <div class="eyebrow">Key design decisions</div>
   <div class="dec-grid">
     <div class="dec"><div class="dec-n">Decision 01</div><div class="dec-t">Dark UI for outdoor use</div><div class="dec-d">Drivers work in bright sunlight. A dark interface with high-contrast text and colored CTAs reduces glare and improves readability on the road.</div></div>
     <div class="dec"><div class="dec-n">Decision 02</div><div class="dec-t">Visual order pipeline</div><div class="dec-d">Replaced invisible state changes with a 4-step color-coded pipeline. Drivers always know where they are — Aceptado, Retirado, En camino, Entregado.</div></div>
@@ -760,7 +759,7 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
 
 <!-- FOOTER -->
 <div class="footer">
-  <div class="footer-t">monchis drivers · App Redesign · Q1 2026</div>
+  <div class="footer-t">monchis drivers · App redesign · Q1 2026</div>
   <div class="footer-t">Sr Product Designer · Paula Elffman</div>
 </div>
 

@@ -77,16 +77,15 @@ body{
 
 /* ─── EYEBROW ─── */
 .eyebrow{
-  font-family:'Space Grotesk',sans-serif;
-  font-size:.5625rem;letter-spacing:.18em;text-transform:uppercase;
+  font-family:'Geist',sans-serif;
+  font-size:.9375rem;letter-spacing:0;text-transform:none;
   color:var(--ash);margin-bottom:1rem;
-  display:flex;align-items:center;gap:.75rem;
-}
-.eyebrow::before{content:'';width:20px;height:1px;background:var(--gold);flex-shrink:0;}
+  display:flex;align-items:center;gap:.75rem;font-weight:500;}
+.eyebrow::before{content:'';width:20px;height:1px;background:var(--gold);flex-shrink:0;display:none;}
 
 /* ─── SECTION DIVIDER LABEL ─── */
 .section-label{display:flex;align-items:center;gap:1.5rem;margin-bottom:3rem;}
-.sl-text{font-family:'Space Grotesk',sans-serif;font-size:.5875rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ash2);white-space:nowrap;}
+.sl-text{font-family:'Geist',sans-serif;font-size:.875rem;letter-spacing:0;text-transform:none;color:var(--ash2);white-space:nowrap;font-weight:500;}
 .sl-line{flex:1;height:1px;background:var(--line);}
 
 /* ─── SECTION 01: OVERVIEW ─── */
@@ -99,7 +98,7 @@ body{
 .stat-val{font-size:2.25rem;font-weight:800;letter-spacing:-.04em;color:var(--paper);}
 .stat-lbl{font-size:.8125rem;color:var(--ash);line-height:1.4;}
 .accent-card{background:var(--gold);border-radius:8px;padding:2rem;}
-.ac-lbl{font-family:'Space Grotesk',sans-serif;font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(13,13,13,.55);margin-bottom:.875rem;}
+.ac-lbl{font-family:'Geist',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:rgba(13,13,13,.55);margin-bottom:.875rem;}
 .ac-val{font-size:2rem;font-weight:800;letter-spacing:-.03em;color:#0D0D0D;line-height:1.15;margin-bottom:.5rem;}
 .ac-desc{font-size:.8125rem;color:rgba(13,13,13,.75);line-height:1.6;}
 .ac-sub{margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(13,13,13,.18);display:flex;gap:1.5rem;flex-wrap:wrap;}
@@ -109,25 +108,25 @@ body{
 /* ─── FULL IMAGE BLOCKS ─── */
 .img-frame{border-radius:16px;overflow:hidden;box-shadow:0 24px 64px rgba(13,13,13,.1);background:#fff;border:1px solid var(--line);}
 .img-frame img{display:block;width:100%;height:auto;}
-.img-caption{margin-top:1rem;font-family:'Space Grotesk',sans-serif;font-size:.5625rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ash);text-align:center;}
+.img-caption{margin-top:1rem;font-family:'Geist',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--ash);text-align:center;}
 
 /* ─── DECISIONS / CONTENT-TYPE GRID ─── */
 .decisions-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-top:3rem;}
 .dec{background:var(--bg2);padding:2rem 1.75rem;}
-.dec-n{font-family:'Space Grotesk',sans-serif;font-size:.45rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ash);margin-bottom:.875rem;}
+.dec-n{font-family:'Geist',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;color:var(--ash);margin-bottom:.875rem;}
 .dec-t{font-size:1rem;font-weight:700;color:var(--paper);letter-spacing:-.02em;margin-bottom:.5rem;}
 .dec-d{font-size:.8125rem;line-height:1.65;color:var(--ash);}
 
 /* ─── INSIGHTS / LEARNINGS ─── */
 .insights-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:3rem;}
 .ins{padding:1.75rem;border:1px solid var(--line);border-radius:8px;background:var(--bg2);}
-.ins-n{font-family:'Space Grotesk',sans-serif;font-size:.45rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ash);margin-bottom:.75rem;}
+.ins-n{font-family:'Geist',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;color:var(--ash);margin-bottom:.75rem;}
 .ins-t{font-size:.9375rem;font-weight:700;color:var(--paper);letter-spacing:-.02em;margin-bottom:.375rem;}
 .ins-d{font-size:.8125rem;line-height:1.6;color:var(--ash);}
 
 /* ─── NAVY CALLOUT ─── */
 .callout{background:var(--navy);border-radius:16px;padding:2.5rem;}
-.co-lbl{font-family:'Space Grotesk',sans-serif;font-size:.45rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:1rem;}
+.co-lbl{font-family:'Geist',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;color:rgba(255,255,255,.4);margin-bottom:1rem;}
 .co-t{font-size:1.25rem;font-weight:700;letter-spacing:-.02em;line-height:1.3;margin-bottom:.875rem;color:#fff;font-style:italic;}
 .co-d{font-size:.8125rem;line-height:1.7;color:rgba(255,255,255,.65);}
 .co-stats{margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.1);display:flex;gap:2rem;flex-wrap:wrap;}
@@ -140,7 +139,7 @@ body{
 .attr-tag{font-family:'Space Grotesk',sans-serif;font-size:.625rem;letter-spacing:.06em;padding:.375rem .75rem;border-radius:100px;background:var(--bg3);color:var(--paper);border:1px solid var(--line2);}
 .attr-quote{font-size:1.0625rem;font-style:italic;font-weight:500;line-height:1.55;color:var(--paper);border-left:2px solid var(--gold);padding-left:1.25rem;margin:1.25rem 0;}
 .attr-cols{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;margin-top:1.5rem;}
-.attr-col-t{font-family:'Space Grotesk',sans-serif;font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ash);margin-bottom:.625rem;}
+.attr-col-t{font-family:'Geist',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--ash);margin-bottom:.625rem;}
 .attr-col ul{list-style:none;display:flex;flex-direction:column;gap:.5rem;}
 .attr-col li{font-size:.8125rem;line-height:1.5;color:var(--ash);padding-left:.875rem;position:relative;}
 .attr-col li::before{content:'';position:absolute;left:0;top:.5em;width:4px;height:4px;border-radius:50%;background:var(--gold);}
@@ -148,7 +147,7 @@ body{
 /* ─── FLOW STEPS ─── */
 .dd-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-top:3rem;}
 .dd-step{background:var(--bg2);padding:1.75rem 1.5rem;}
-.dd-n{font-family:'Space Grotesk',sans-serif;font-size:.45rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ash);margin-bottom:.75rem;}
+.dd-n{font-family:'Geist',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;color:var(--ash);margin-bottom:.75rem;}
 .dd-t{font-size:.9375rem;font-weight:700;color:var(--paper);letter-spacing:-.01em;margin-bottom:.375rem;}
 .dd-d{font-size:.75rem;line-height:1.55;color:var(--ash);}
 
@@ -159,29 +158,29 @@ body{
 /* ─── FINAL UI FLOW LABELS ─── */
 .ui-flow-labels{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:1.5rem;}
 .ui-label{padding:1rem 1.125rem;background:var(--bg2);border-radius:8px;border:1px solid var(--line);}
-.ui-label-n{font-family:'Space Grotesk',sans-serif;font-size:.45rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ash);margin-bottom:.5rem;}
+.ui-label-n{font-family:'Geist',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;color:var(--ash);margin-bottom:.5rem;}
 .ui-label-t{font-size:.8125rem;font-weight:700;color:var(--paper);margin-bottom:.25rem;}
 .ui-label-d{font-size:.6875rem;line-height:1.5;color:var(--ash);}
 
 /* ─── FOOTER ─── */
 .footer{padding:2rem 4rem;border-top:1px solid var(--line2);display:flex;justify-content:space-between;align-items:center;}
-.footer-l,.footer-r{font-family:'Space Grotesk',sans-serif;font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ash);}
+.footer-l,.footer-r{font-family:'Geist',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--ash);}
 
 /* ─── COVER ─── */
 .cover{display:grid;grid-template-columns:1fr auto;gap:4rem;align-items:end;padding:5rem 4rem 4rem;}
 .cover-title{font-size:clamp(5rem,11vw,12rem);font-weight:800;letter-spacing:-.06em;line-height:.85;color:var(--paper);}
 .cover-title .dim{color:rgba(13,13,13,.15);}
 .cover-meta{display:flex;flex-direction:column;gap:1.25rem;padding-bottom:.5rem;}
-.cm-label{font-family:'Space Grotesk',sans-serif;font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ash);margin-bottom:.25rem;}
+.cm-label{font-family:'Geist',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--ash);margin-bottom:.25rem;}
 .cm-val{font-size:.875rem;font-weight:500;color:var(--paper);}
 
 /* ─── BACK NAV ─── */
 .back-nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(13,13,13,.08);padding:1rem 4rem;display:flex;justify-content:space-between;align-items:center;}
-.back-btn{display:inline-flex;align-items:center;gap:.625rem;font-family:'Space Grotesk',sans-serif;font-size:.5625rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ash);background:none;border:none;cursor:pointer;text-decoration:none;transition:gap .2s;}
+.back-btn{display:inline-flex;align-items:center;gap:.625rem;font-family:'Geist',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--ash);background:none;border:none;cursor:pointer;text-decoration:none;transition:gap .2s;}
 .back-btn:hover{gap:1rem;}
 .back-btn span{font-size:.875rem;}
-.back-nav-title{font-family:'Space Grotesk',sans-serif;font-size:.5625rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(13,13,13,.4);}
-.back-nav-right{font-family:'Space Grotesk',sans-serif;font-size:.5625rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(13,13,13,.3);}
+.back-nav-title{font-family:'Geist',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:rgba(13,13,13,.4);}
+.back-nav-right{font-family:'Geist',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:rgba(13,13,13,.3);}
 
 /* reveal on scroll */
 .reveal{opacity:0;transform:translateY(20px);transition:opacity .7s var(--ease),transform .7s var(--ease);}
@@ -330,7 +329,7 @@ body.dark-mode .nav-right,body.dark-mode .back-nav-right{color:rgba(244,244,246,
   <a class="back-btn" id="back-to-portfolio" href="index.html">
     <span>←</span> Back to portfolio
   </a>
-  <div class="back-nav-title">Fancy Monas · Case Study</div>
+  <div class="back-nav-title">Fancy Monas · Case study</div>
   <div class="back-nav-right">Paula Elffman · Product Designer</div>
 </nav>
 
@@ -339,7 +338,7 @@ body.dark-mode .nav-right,body.dark-mode .back-nav-right{color:rgba(244,244,246,
 ══════════════════════════════════════════ -->
 <div class="cover">
   <div>
-    <div class="eyebrow" style="margin-bottom:2rem;">🐒 NFT Marketplace · Product Design · BAG · Beyond Art Group · 2025</div>
+    <div class="eyebrow" style="margin-bottom:2rem;">🐒 NFT marketplace · Product design · BAG · Beyond Art Group · 2025</div>
     <div class="cover-title">Fancy<br>Monas<span class="dim">.</span></div>
   </div>
   <div class="cover-meta">
@@ -365,7 +364,7 @@ body.dark-mode .nav-right,body.dark-mode .back-nav-right{color:rgba(244,244,246,
      SECTION 01 — OVERVIEW & CONTEXTO
 ══════════════════════════════════════════ -->
 <div class="section">
-  <div class="eyebrow">🍌 Overview &amp; Context</div>
+  <div class="eyebrow">🍌 Overview &amp; context</div>
   <div class="overview-grid">
     <div class="ov-left">
       <div class="ov-title">NFTs.<br><span class="gold">Democratized.</span></div>
@@ -584,15 +583,15 @@ body.dark-mode .nav-right,body.dark-mode .back-nav-right{color:rgba(244,244,246,
   <div class="eyebrow" style="justify-content:center;">🔥 Project material</div>
   <div style="font-size:clamp(1.75rem,3vw,2.5rem);font-weight:800;letter-spacing:-.04em;line-height:1.15;max-width:640px;margin:0 auto 1.5rem;">1942 unique works. One place to find them.</div>
   <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
-    <a href="https://fancymonas.io/" target="_blank" rel="noopener" style="font-family:'Space Grotesk',sans-serif;font-size:.6875rem;letter-spacing:.1em;text-transform:uppercase;padding:.875rem 1.5rem;border-radius:100px;background:var(--pink);color:#0D0D0D;text-decoration:none;font-weight:600;">Visit fancymonas.io</a>
-    <a href="https://fancymonas.io/works" target="_blank" rel="noopener" style="font-family:'Space Grotesk',sans-serif;font-size:.6875rem;letter-spacing:.1em;text-transform:uppercase;padding:.875rem 1.5rem;border-radius:100px;border:1px solid var(--celeste);color:var(--paper);text-decoration:none;font-weight:600;">View shop</a>
-    <a href="https://fancymonas.io/collection" target="_blank" rel="noopener" style="font-family:'Space Grotesk',sans-serif;font-size:.6875rem;letter-spacing:.1em;text-transform:uppercase;padding:.875rem 1.5rem;border-radius:100px;border:1px solid var(--yellow);color:var(--paper);text-decoration:none;font-weight:600;">View collection</a>
+    <a href="https://fancymonas.io/" target="_blank" rel="noopener" style="font-family:'Geist',sans-serif;font-size:.875rem;letter-spacing:0;text-transform:none;padding:.875rem 1.5rem;border-radius:100px;background:var(--pink);color:#0D0D0D;text-decoration:none;font-weight:600;">Visit fancymonas.io</a>
+    <a href="https://fancymonas.io/works" target="_blank" rel="noopener" style="font-family:'Geist',sans-serif;font-size:.875rem;letter-spacing:0;text-transform:none;padding:.875rem 1.5rem;border-radius:100px;border:1px solid var(--celeste);color:var(--paper);text-decoration:none;font-weight:600;">View shop</a>
+    <a href="https://fancymonas.io/collection" target="_blank" rel="noopener" style="font-family:'Geist',sans-serif;font-size:.875rem;letter-spacing:0;text-transform:none;padding:.875rem 1.5rem;border-radius:100px;border:1px solid var(--yellow);color:var(--paper);text-decoration:none;font-weight:600;">View collection</a>
   </div>
 </div>
 
 <!-- FOOTER -->
 <div class="footer">
-  <div class="footer-l">Fancy Monas · NFT Marketplace · BAG · Beyond Art Group · 2025</div>
+  <div class="footer-l">Fancy Monas · NFT marketplace · BAG · Beyond Art Group · 2025</div>
   <div class="footer-r">Product Designer · Paula Elffman</div>
 </div>
 

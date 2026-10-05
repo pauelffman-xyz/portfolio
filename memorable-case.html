@@ -78,12 +78,11 @@ body{
 
 /* ─── EYEBROW ─── */
 .eyebrow{
-  font-family:'Space Grotesk',sans-serif;
-  font-size:.5625rem;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--accent);margin-bottom:1rem;
-  display:flex;align-items:center;gap:.75rem;
-}
-.eyebrow::before{content:'';width:20px;height:1px;background:var(--accent);flex-shrink:0;}
+  font-family:'Inter',sans-serif;
+  font-size:.9375rem;letter-spacing:0;text-transform:none;
+  color:var(--ash);margin-bottom:1rem;
+  display:flex;align-items:center;gap:.75rem;font-weight:500;}
+.eyebrow::before{content:'';width:20px;height:1px;background:var(--accent);flex-shrink:0;display:none;}
 
 /* ─── SECTION LABEL ─── */
 .section-label{
@@ -91,10 +90,9 @@ body{
   margin-bottom:3rem;
 }
 .sl-text{
-  font-family:'Space Grotesk',sans-serif;
-  font-size:.5875rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ash-2);
-  white-space:nowrap;flex-shrink:0;
-}
+  font-family:'Inter',sans-serif;
+  font-size:.875rem;letter-spacing:0;text-transform:none;color:var(--ash-2);
+  white-space:nowrap;flex-shrink:0;font-weight:500;}
 .sl-line{flex:1;height:1px;background:var(--line);}
 
 /* ─── IMAGE SHELLS ─── */
@@ -107,8 +105,8 @@ body{
 .wire-shell-full{border-radius:12px;overflow:hidden;background:var(--bg2);border:1px solid var(--line);}
 .wire-shell-full img{display:block;width:100%;height:auto;}
 .img-caption{
-  font-family:'Space Grotesk',sans-serif;
-  font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;
+  font-family:'Inter',sans-serif;
+  font-size:.8125rem;letter-spacing:0;text-transform:none;
   color:var(--ash-2);margin-top:.875rem;
 }
 
@@ -127,8 +125,8 @@ body{
 }
 .back-btn{
   display:inline-flex;align-items:center;gap:.625rem;
-  font-family:'Space Grotesk',sans-serif;
-  font-size:.5625rem;letter-spacing:.14em;text-transform:uppercase;
+  font-family:'Inter',sans-serif;
+  font-size:.8125rem;letter-spacing:0;text-transform:none;
   color:var(--accent);
   background:none;border:none;cursor:pointer;
   text-decoration:none;
@@ -137,8 +135,8 @@ body{
 .back-btn:hover{gap:1rem;}
 .back-btn span{font-size:.875rem;}
 .back-nav-title{
-  font-family:'Space Grotesk',sans-serif;
-  font-size:.5625rem;letter-spacing:.14em;text-transform:uppercase;
+  font-family:'Inter',sans-serif;
+  font-size:.8125rem;letter-spacing:0;text-transform:none;
   color:rgba(26,26,31,.4);
 }
 
@@ -160,7 +158,7 @@ body{
   display:flex;flex-direction:column;gap:1.25rem;
   padding-bottom:.5rem;
 }
-.cm-label{font-family:'Space Grotesk',sans-serif;font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ash);margin-bottom:.25rem;}
+.cm-label{font-family:'Inter',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--ash);margin-bottom:.25rem;}
 .cm-val{font-size:.875rem;font-weight:500;color:var(--paper);}
 .cm-row{display:flex;flex-direction:column;}
 
@@ -192,7 +190,7 @@ body{
   background:var(--grad);
   border-radius:12px;padding:2rem;
 }
-.ac-lbl{font-family:'Space Grotesk',sans-serif;font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:.875rem;}
+.ac-lbl{font-family:'Inter',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:rgba(255,255,255,.6);margin-bottom:.875rem;}
 .ac-val{font-size:1.375rem;font-weight:700;letter-spacing:-.02em;color:#fff;line-height:1.35;margin-bottom:.75rem;}
 .ac-desc{font-size:.8125rem;color:rgba(255,255,255,.82);line-height:1.65;}
 
@@ -215,7 +213,7 @@ body{
 /* ─── COMPARISON GRID ─── */
 .directions-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;margin-top:3rem;}
 .direction-card{background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:2.5rem;display:flex;flex-direction:column;}
-.dir-tag{display:inline-flex;align-self:flex-start;padding:.3rem .875rem;border-radius:100px;background:var(--grad);color:#fff;font-family:'Space Grotesk',sans-serif;font-size:.45rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.25rem;}
+.dir-tag{display:inline-flex;align-self:flex-start;padding:.3rem .875rem;border-radius:100px;background:var(--grad);color:#fff;font-family:'Inter',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;margin-bottom:1.25rem;}
 .dir-tag.dir-tag-2{background:var(--dark);}
 .dir-title{font-size:1.5rem;font-weight:800;letter-spacing:-.03em;margin-bottom:1rem;}
 .dir-body{font-size:.8438rem;line-height:1.72;color:var(--ash);font-weight:300;margin-bottom:1.75rem;}
@@ -231,7 +229,7 @@ body{
   margin-top:3rem;
 }
 .ins{padding:1.75rem;border:1px solid var(--line);border-radius:12px;background:var(--bg2);}
-.ins-n{font-family:'Space Grotesk',sans-serif;font-size:.45rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ash);margin-bottom:.75rem;}
+.ins-n{font-family:'Inter',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;color:var(--ash);margin-bottom:.75rem;}
 .ins-t{font-size:.9375rem;font-weight:700;color:var(--paper);letter-spacing:-.02em;margin-bottom:.375rem;}
 .ins-d{font-size:.8125rem;line-height:1.6;color:var(--ash);}
 
@@ -247,7 +245,7 @@ body{
   margin-top:3rem;
 }
 .dec{background:var(--bg2);padding:2rem 1.75rem;}
-.dec-n{font-family:'Space Grotesk',sans-serif;font-size:.45rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:.875rem;}
+.dec-n{font-family:'Inter',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;color:var(--accent);margin-bottom:.875rem;}
 .dec-t{font-size:1rem;font-weight:700;color:var(--paper);letter-spacing:-.02em;margin-bottom:.5rem;}
 .dec-d{font-size:.8125rem;line-height:1.65;color:var(--ash);}
 
@@ -255,7 +253,7 @@ body{
 .callout{
   background:var(--dark);border-radius:16px;padding:2.5rem;
 }
-.co-lbl{font-family:'Space Grotesk',sans-serif;font-size:.45rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:1rem;}
+.co-lbl{font-family:'Inter',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;color:rgba(255,255,255,.35);margin-bottom:1rem;}
 .co-t{font-size:1.375rem;font-weight:700;letter-spacing:-.025em;line-height:1.3;margin-bottom:.875rem;color:#fff;}
 .co-d{font-size:.8125rem;line-height:1.7;color:rgba(255,255,255,.6);}
 .co-stats{margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.1);display:flex;gap:1.5rem;flex-wrap:wrap;}
@@ -279,8 +277,8 @@ body{
 }
 .quote-block cite{
   display:block;margin-top:.75rem;
-  font-family:'Space Grotesk',sans-serif;
-  font-style:normal;font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;
+  font-family:'Inter',sans-serif;
+  font-style:normal;font-size:.8125rem;letter-spacing:0;text-transform:none;
   color:var(--ash);
 }
 
@@ -318,8 +316,8 @@ body{
   display:flex;justify-content:space-between;align-items:center;
 }
 .footer-l,.footer-r{
-  font-family:'Space Grotesk',sans-serif;
-  font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ash);
+  font-family:'Inter',sans-serif;
+  font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--ash);
 }
 
 /* ─── HIFI CAROUSEL ─── */
@@ -545,7 +543,7 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
      SECTION 02 — THE CHALLENGE
 ══════════════════════════════════════════ -->
 <div class="section">
-  <div class="eyebrow">The Challenge</div>
+  <div class="eyebrow">The challenge</div>
   <div class="section-label">
     <div class="sl-text">Three friction points</div>
     <div class="sl-line"></div>
@@ -574,7 +572,7 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
      SECTION 04 — TWO DIRECTIONS
 ══════════════════════════════════════════ -->
 <div class="section">
-  <div class="eyebrow">Action · 02 Design Exploration</div>
+  <div class="eyebrow">Action · 02 Design exploration</div>
   <div class="section-label">
     <div class="sl-text">Two approaches</div>
     <div class="sl-line"></div>
@@ -623,7 +621,7 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
      SECTION 06 — IN-APP EDITOR
 ══════════════════════════════════════════ -->
 <div class="section">
-  <div class="eyebrow">Action · 04 Key Feature</div>
+  <div class="eyebrow">Action · 04 Key feature</div>
   <div class="section-label">
     <div class="sl-text">The in-app editor</div>
     <div class="sl-line"></div>
@@ -635,7 +633,7 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
       <p class="ov-body">Users had to leave Memorable to edit their creatives in external tools, then re-upload and re-test. I designed an integrated editor that lets users make adjustments directly — <strong>crop, rotate, resize, and adjust colors</strong> — and immediately re-run the pretest.<br><br>The editor opens as a modal that preserves context: users see their creative alongside the pretest results, so every edit is informed by the AI feedback.</p>
     </div>
     <div style="padding:1.75rem 2rem;background:var(--bg2);border:1px solid var(--line);border-radius:12px;">
-      <div style="font-family:'Space Grotesk',sans-serif;font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ash);margin-bottom:1.25rem;">Editor capabilities</div>
+      <div style="font-family:'Inter',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--ash);margin-bottom:1.25rem;">Editor capabilities</div>
       <div style="display:flex;flex-direction:column;gap:.75rem;">
         <div style="display:flex;align-items:center;gap:.875rem;padding:.875rem 0;border-bottom:1px solid var(--line);"><div style="width:5px;height:5px;border-radius:50%;background:var(--accent);flex-shrink:0;"></div><span style="font-size:.875rem;color:var(--paper);">Crop with zoom, straighten, and resize sliders</span></div>
         <div style="display:flex;align-items:center;gap:.875rem;padding:.875rem 0;border-bottom:1px solid var(--line);"><div style="width:5px;height:5px;border-radius:50%;background:var(--accent);flex-shrink:0;"></div><span style="font-size:.875rem;color:var(--paper);">Color adjustments — brightness, contrast, saturation</span></div>
@@ -650,7 +648,7 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
      SECTION 07 — HIGH FIDELITY
 ══════════════════════════════════════════ -->
 <div class="section">
-  <div class="eyebrow">Result · High-Fidelity Design</div>
+  <div class="eyebrow">Result · High-fidelity design</div>
   <div class="section-label">
     <div class="sl-text">Production-ready</div>
     <div class="sl-line"></div>
@@ -711,7 +709,7 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
      SECTION 09 — USER TESTING
 ══════════════════════════════════════════ -->
 <div class="section">
-  <div class="eyebrow">Validation · User Testing</div>
+  <div class="eyebrow">Validation · User testing</div>
   <div class="section-label">
     <div class="sl-text">2 users tested</div>
     <div class="sl-line"></div>
@@ -758,7 +756,7 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
      SECTION 10 — DECISION & NEXT STEPS
 ══════════════════════════════════════════ -->
 <div class="section">
-  <div class="eyebrow">Decision & Next Steps</div>
+  <div class="eyebrow">Decision & next steps</div>
   <div class="section-label">
     <div class="sl-text">A hybrid version</div>
     <div class="sl-line"></div>
@@ -792,7 +790,7 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
      SECTION 11 — LEARNINGS
 ══════════════════════════════════════════ -->
 <div class="section">
-  <div class="eyebrow">Closing Remarks</div>
+  <div class="eyebrow">Closing remarks</div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;">
     <div class="insights-grid" style="grid-template-columns:1fr;margin-top:0;">
       <div class="ins">
@@ -827,7 +825,7 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
 
 <!-- FOOTER -->
 <div class="footer">
-  <div class="footer-l">Memorable AI · Creative Pretest · Dashboard Redesign · 2024</div>
+  <div class="footer-l">Memorable AI · Creative Pretest · Dashboard redesign · 2024</div>
   <div class="footer-r">Sr Product Designer · Paula Elffman</div>
 </div>
 

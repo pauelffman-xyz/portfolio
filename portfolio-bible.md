@@ -1,6 +1,8 @@
 # Paula Elffman — Portfolio OS · Design Bible
 
-*Última actualización: Octubre 2026 — tres arreglos en la home + un cambio de copy. (1) **Carousel horizontal con auto-avance y arrastre** (dedo o mouse), reescrito en JS: la animación CSS pura se trababa en mobile y no se podía mover a mano. (2) **Pantalla en blanco al volver de un case con «atrás»**: el navegador restauraba la home desde bfcache con el overlay del Wipe todavía tapando todo; ahora un listener `pageshow` lo destapa. (3) **Esquinas inferiores de las cards del carousel cortadas**: no era el `border-radius`, era el `.projects-header` (margen negativo) tapando los últimos 32px (mobile) / 8px (desktop) de cada card; se subió el `padding-bottom` del carousel. Además, el intro de "AI in my workflow" ahora dice "My primary tool is **Figma & Claude**". **Luego se aplicó el mismo arreglo de `pageshow` a los 15 cases con overlay y se arregló el botón volver muerto de `elektra-otp.html`** (ver "Wipe Transition → Volver con «atrás»"). Ver "Carousel — auto-avance + arrastre (Octubre 2026)", "Carousel — esquinas inferiores cortadas", "Wipe Transition → Volver con «atrás»" y "AI in my workflow".*
+*Última actualización: Octubre 2026 — **etiquetas «Editorial» en todo el sitio**: se eliminó el tratamiento de micro-etiqueta en mayúsculas (8–11px, mono o Space Grotesk, tracking .12–.18em, rayita de color adelante) en la home y en los 14 cases del template viejo. Ahora todas las etiquetas siguen el modelo de `muv-case.html` y `vendor-tool-case.html`: tipografía del cuerpo (Geist, o Inter en los cases que usan Inter), minúsculas con mayúscula inicial, sin tracking, gris `--ash`, sin rayita. Ver la sección nueva "ETIQUETAS — ESTILO EDITORIAL" dentro de DESIGN TOKENS. También en esta pasada: limpieza de 90 archivos sin uso (65 MB) e imagen nueva en la tarjeta de Foody de la home (`assets/foody-home.webp`).*
+
+*Última actualización previa: Octubre 2026 — tres arreglos en la home + un cambio de copy. (1) **Carousel horizontal con auto-avance y arrastre** (dedo o mouse), reescrito en JS: la animación CSS pura se trababa en mobile y no se podía mover a mano. (2) **Pantalla en blanco al volver de un case con «atrás»**: el navegador restauraba la home desde bfcache con el overlay del Wipe todavía tapando todo; ahora un listener `pageshow` lo destapa. (3) **Esquinas inferiores de las cards del carousel cortadas**: no era el `border-radius`, era el `.projects-header` (margen negativo) tapando los últimos 32px (mobile) / 8px (desktop) de cada card; se subió el `padding-bottom` del carousel. Además, el intro de "AI in my workflow" ahora dice "My primary tool is **Figma & Claude**". **Luego se aplicó el mismo arreglo de `pageshow` a los 15 cases con overlay y se arregló el botón volver muerto de `elektra-otp.html`** (ver "Wipe Transition → Volver con «atrás»"). Ver "Carousel — auto-avance + arrastre (Octubre 2026)", "Carousel — esquinas inferiores cortadas", "Wipe Transition → Volver con «atrás»" y "AI in my workflow".*
 
 *Última actualización previa: Octubre 2026 — **dark mode accesible en los cases**, empezando por `monchis-case.html`: auditoría WCAG AA automática (238 textos fallaban en dark, 218 en light → 0 en ambos), capa `<style id="theme-a11y">` con tokens nuevos (`--surface`, `--red-fill`, `--green-ink`, `--mock-ink`), regla de "mockups claros en ambos modos" y script `a11y-audit.py`. Ver la sección nueva "DARK MODE ACCESIBLE EN CASES" dentro de CASE STUDIES.*
 
@@ -129,6 +131,23 @@ Se sacó `'JetBrains Mono'` de las labels (eyebrows, section labels, back-nav, m
 - **Pendiente / fuera de este alcance:** `index.html` (home) todavía usa `'JetBrains Mono'` en varios lugares — tokens `dv-`* (AI in my workflow, prompt), design system embebido de `muv`/`sukupay-ds` dentro del home, etc. No se tocó porque no forma parte de los archivos de case study standalone. Si se decide extender el cambio al home, aplicar el mismo swap ahí (buscar `JetBrains` en `index.html`).
 
 ---
+
+### ETIQUETAS — ESTILO EDITORIAL (Octubre 2026) ✅ regla para todo el sitio
+
+**Por qué:** las etiquetas chicas en mayúsculas muy espaciadas, con rayita de color adelante, se leían "hechas por IA" y sin oficio. `muv-case.html` y `vendor-tool-case.html` ya usaban otra cosa (`.kicker`, `.meta dt`, `.label`): ese pasa a ser el estándar.
+
+**La regla (vale para cualquier etiqueta, eyebrow, kicker, caption, badge, pie de página o rótulo):**
+- **Tipografía:** la del cuerpo de la página — `'Geist',sans-serif`, o `'Inter',sans-serif` en los cases que usan Inter (Elektra, Memorable, SukuPay Home, SukuPay Prototyper). Nada de `'JetBrains Mono'` ni `'Space Grotesk'` para etiquetas.
+- **Caja:** `text-transform:none` + `letter-spacing:0`. El texto se escribe en el HTML en *sentence case*: mayúscula solo en la primera palabra y después de un separador (`·`, `—`, `→`). Se respetan siglas (AI, UX, OTP, CVR…), nombres propios y de producto (SukuPay, TheFork, Itti Sports, Foody Match, Master Chef, Creative Pretest…) y cargos (`Sr Product Designer`). Las marcas en minúscula quedan como están (`hugo`, `monchis`, `smartpass`).
+- **Tamaños:** kickers de sección (`.eyebrow`, `.dv-label`, `.work-label`, `.case-eyebrow`) → `.9375rem` / peso 500. Subtítulo de sección (`.sl-text`, `.sl-t`) → `.875rem` / 500. Resto: lo que medía menos de 8px → `.75rem`; 8–9.5px → `.8125rem`; más → `.875rem`. **Nada por debajo de 12px**, salvo los rótulos rotados `.arr-lbl` (`.6875rem`).
+- **Color:** los kickers pasan de color de acento a `var(--ash)`. El resto conserva su color (los que marcan estado —antes/después, error/éxito, número de paso— siguen en su color).
+- **Sin rayita:** `.eyebrow::before`, `.dv-label::before`, `.work-label::before` quedan con `display:none`.
+
+**Excepciones (no se tocan):** textos que imitan la interfaz de un producto dentro de un mockup — `.tp-screen-eyebrow`, `.tp-bal-lbl` (home) y `.proto-ph-eyebrow`, `.proto-ph-bal-lbl` (SukuPay Prototyper). Tampoco los usos de Space Grotesk / JetBrains Mono que no son etiquetas: números, código, hex de color, URLs.
+
+**Al crear un case o una sección nueva:** no volver a escribir `text-transform:uppercase` con tracking en etiquetas. Copiar el patrón de `.kicker` de MUV.
+
+**Alcance del cambio:** 309 reglas CSS + 93 estilos inline, 18 rayitas, 227 textos pasados a sentence case, en `index.html` y 14 cases. De paso se corrigió un typo en Foody ("Fremium" → "Freemium") y se unificó "ITTI" → "Itti".
 
 ## DECISIÓN — Portfolio dark / Cases light + Wipe Transition
 

@@ -69,28 +69,27 @@ body{
 }
 .back-btn{
   display:inline-flex;align-items:center;gap:.625rem;
-  font-family:'Space Grotesk',sans-serif;
-  font-size:.5625rem;letter-spacing:.14em;text-transform:uppercase;
+  font-family:'Geist',sans-serif;
+  font-size:.8125rem;letter-spacing:0;text-transform:none;
   color:var(--green);background:none;border:none;cursor:pointer;
   text-decoration:none;transition:gap .2s;
 }
 .back-btn:hover{gap:1rem;}
 .back-btn span{font-size:.875rem;}
-.nav-title{font-family:'Space Grotesk',sans-serif;font-size:.5625rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ash);}
-.nav-right{font-family:'Space Grotesk',sans-serif;font-size:.5625rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ash);}
+.nav-title{font-family:'Geist',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--ash);}
+.nav-right{font-family:'Geist',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--ash);}
 
 /* ── SHARED ── */
 .section{padding:5rem 4rem;}
 .section+.section{border-top:1px solid var(--line2);}
 .eyebrow{
-  font-family:'Space Grotesk',sans-serif;
-  font-size:.5625rem;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--green);margin-bottom:1rem;
-  display:flex;align-items:center;gap:.75rem;
-}
-.eyebrow::before{content:'';width:20px;height:1px;background:var(--green);flex-shrink:0;}
+  font-family:'Geist',sans-serif;
+  font-size:.9375rem;letter-spacing:0;text-transform:none;
+  color:var(--ash);margin-bottom:1rem;
+  display:flex;align-items:center;gap:.75rem;font-weight:500;}
+.eyebrow::before{content:'';width:20px;height:1px;background:var(--green);flex-shrink:0;display:none;}
 .section-label{display:flex;align-items:center;gap:1.5rem;margin-bottom:3rem;}
-.sl-t{font-family:'Space Grotesk',sans-serif;font-size:.5625rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ash2);white-space:nowrap;}
+.sl-t{font-family:'Geist',sans-serif;font-size:.875rem;letter-spacing:0;text-transform:none;color:var(--ash2);white-space:nowrap;font-weight:500;}
 .sl-l{flex:1;height:1px;background:var(--line);}
 
 /* ── COVER ── */
@@ -104,7 +103,7 @@ body{
 }
 .cover-title .dim{color:rgba(20,21,26,.12);}
 .cover-meta{display:flex;flex-direction:column;gap:1.25rem;padding-bottom:.5rem;}
-.cm-label{font-family:'Space Grotesk',sans-serif;font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ash);margin-bottom:.2rem;}
+.cm-label{font-family:'Geist',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--ash);margin-bottom:.2rem;}
 .cm-val{font-size:.875rem;font-weight:500;color:var(--ink);}
 
 /* ── OVERVIEW ── */
@@ -128,7 +127,7 @@ body{
   border-radius:8px;overflow:hidden;margin-top:3rem;
 }
 .pillar{background:var(--bg);padding:2rem 1.75rem;}
-.pillar-n{font-family:'Space Grotesk',sans-serif;font-size:.45rem;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-bottom:.875rem;}
+.pillar-n{font-family:'Geist',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;color:var(--green);margin-bottom:.875rem;}
 .pillar-t{font-size:1rem;font-weight:700;color:var(--ink);letter-spacing:-.02em;margin-bottom:.75rem;}
 .pillar ul{list-style:none;display:flex;flex-direction:column;gap:.5rem;}
 .pillar li{font-size:.8125rem;line-height:1.55;color:var(--ash);padding-left:1rem;position:relative;}
@@ -193,7 +192,7 @@ body.dark-mode .process-grid .proc-step:nth-child(1) .proc-num{
 }
 .shot-frame img{display:block;width:100%;height:auto;}
 .shot-label{margin-top:1.25rem;}
-.sh-n{font-family:'Space Grotesk',sans-serif;font-size:.45rem;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-bottom:.375rem;}
+.sh-n{font-family:'Geist',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;color:var(--green);margin-bottom:.375rem;}
 .sh-t{font-size:.9375rem;font-weight:700;color:var(--ink);letter-spacing:-.02em;margin-bottom:.25rem;}
 .sh-d{font-size:.8125rem;line-height:1.6;color:var(--ash);}
 
@@ -210,7 +209,7 @@ body.dark-mode .process-grid .proc-step:nth-child(1) .proc-num{
 
 /* Color scales */
 .color-scale{display:flex;flex-direction:column;gap:.625rem;margin-bottom:1.5rem;}
-.color-scale-label{font-family:'Space Grotesk',sans-serif;font-size:.5625rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);font-weight:700;}
+.color-scale-label{font-family:'Geist',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--ink);font-weight:700;}
 .color-swatches{display:grid;grid-template-columns:repeat(11,1fr);gap:.375rem;}
 .swatch{border-radius:6px;overflow:hidden;border:1px solid var(--line);}
 .swatch-color{height:44px;}
@@ -229,10 +228,10 @@ body.dark-mode .process-grid .proc-step:nth-child(1) .proc-num{
 .ds-2col{grid-template-columns:1fr 1fr;}
 .ds-3col{grid-template-columns:repeat(3,1fr);}
 .ds-comp{background:#fff;border:1px solid var(--line2);border-radius:12px;overflow:hidden;}
-.ds-comp-label{font-family:'Space Grotesk',sans-serif;font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ash);padding:.875rem 1.25rem;border-bottom:1px solid var(--line);}
+.ds-comp-label{font-family:'Geist',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--ash);padding:.875rem 1.25rem;border-bottom:1px solid var(--line);}
 .ds-comp-img{padding:1.5rem;background:var(--bg2);display:flex;align-items:center;justify-content:center;min-height:80px;}
 .ds-comp-meta{display:flex;flex-wrap:wrap;gap:.375rem;padding:.875rem 1.25rem;}
-.ds-tag{padding:.25rem .75rem;border-radius:100px;border:1px solid var(--line2);font-family:'Space Grotesk',sans-serif;font-size:.45rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ash);}
+.ds-tag{padding:.25rem .75rem;border-radius:100px;border:1px solid var(--line2);font-family:'Geist',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;color:var(--ash);}
 .ds-tag-green{border-color:rgba(23,162,93,.3);color:var(--green);}
 .ds-tag-red{border-color:rgba(217,45,32,.3);color:var(--red);}
 
@@ -254,25 +253,25 @@ body.dark-mode .process-grid .proc-step:nth-child(1) .proc-num{
 /* ── EMAIL COMMS ── */
 .email-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem;}
 .email-card{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:1.5rem;}
-.email-n{font-family:'Space Grotesk',sans-serif;font-size:.45rem;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:.875rem;}
+.email-n{font-family:'Geist',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;color:var(--green);margin-bottom:.875rem;}
 .email-subject{font-size:.9375rem;font-weight:700;color:var(--ink);letter-spacing:-.01em;margin-bottom:.625rem;line-height:1.35;}
 .email-body{font-size:.8125rem;line-height:1.65;color:var(--ash);}
 
 /* ── KEY DECISIONS ── */
 .decisions-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-top:3rem;}
 .dec{background:var(--bg2);padding:2rem 1.75rem;}
-.dec-n{font-family:'Space Grotesk',sans-serif;font-size:.45rem;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-bottom:.875rem;}
+.dec-n{font-family:'Geist',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;color:var(--green);margin-bottom:.875rem;}
 .dec-t{font-size:1rem;font-weight:700;color:var(--ink);letter-spacing:-.02em;margin-bottom:.5rem;}
 .dec-d{font-size:.8125rem;line-height:1.65;color:var(--ash);}
 
 /* ── INSIGHTS + CALLOUT ── */
 .insights-grid{display:grid;grid-template-columns:repeat(1,1fr);gap:1rem;}
 .ins{padding:1.75rem;border:1px solid var(--line);border-radius:8px;background:var(--bg2);}
-.ins-n{font-family:'Space Grotesk',sans-serif;font-size:.45rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ash);margin-bottom:.75rem;}
+.ins-n{font-family:'Geist',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;color:var(--ash);margin-bottom:.75rem;}
 .ins-t{font-size:.9375rem;font-weight:700;color:var(--ink);letter-spacing:-.02em;margin-bottom:.375rem;}
 .ins-d{font-size:.8125rem;line-height:1.6;color:var(--ash);}
 .callout{background:var(--navy);border-radius:16px;padding:2.5rem;}
-.co-lbl{font-family:'Space Grotesk',sans-serif;font-size:.45rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:1rem;}
+.co-lbl{font-family:'Geist',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;color:rgba(255,255,255,.35);margin-bottom:1rem;}
 .co-t{font-size:1.375rem;font-weight:700;letter-spacing:-.025em;line-height:1.25;margin-bottom:.875rem;color:#fff;}
 .co-d{font-size:.8125rem;line-height:1.7;color:rgba(255,255,255,.6);}
 .co-stats{margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.1);display:flex;gap:2rem;}
@@ -281,7 +280,7 @@ body.dark-mode .process-grid .proc-step:nth-child(1) .proc-num{
 
 /* ── FOOTER ── */
 .footer{padding:2rem 4rem;border-top:1px solid var(--line2);display:flex;justify-content:space-between;align-items:center;}
-.footer-l,.footer-r{font-family:'Space Grotesk',sans-serif;font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ash);}
+.footer-l,.footer-r{font-family:'Geist',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--ash);}
 
 /* ── COVER HERO IMAGE ── */
 .cover-hero{
@@ -295,7 +294,7 @@ body.dark-mode .process-grid .proc-step:nth-child(1) .proc-num{
 
 /* ── FLOW DIAGRAM ── */
 .flow-wrap{padding:3rem 0 0;}
-.flow-section-label{font-family:'Space Grotesk',sans-serif;font-size:.5625rem;letter-spacing:.16em;text-transform:uppercase;color:var(--green);margin-bottom:1.5rem;display:flex;align-items:center;gap:.5rem;}
+.flow-section-label{font-family:'Geist',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--green);margin-bottom:1.5rem;display:flex;align-items:center;gap:.5rem;}
 .flow-section-label::before{content:'';width:16px;height:1px;background:var(--green);}
 .sa-badge{display:inline-flex;align-items:center;padding:.375rem 1rem;border-radius:100px;background:var(--navy);color:#fff;font-size:.75rem;font-weight:600;letter-spacing:-.01em;margin:0 auto;width:fit-content;}
 .flow-node{background:#fff;border:1px solid var(--line2);border-radius:10px;padding:.75rem 1rem;text-align:center;position:relative;box-shadow:0 1px 3px rgba(20,21,26,.04);}
@@ -332,7 +331,7 @@ body.dark-mode .process-grid .proc-step:nth-child(1) .proc-num{
 .lane{display:flex;flex-direction:column;align-items:center;gap:0;}
 .lane-header{width:100%;text-align:center;padding:.625rem;background:var(--bg2);border-radius:8px;margin-bottom:1rem;border:1px solid var(--line);}
 .lane-header-title{font-size:.75rem;font-weight:700;color:var(--ink);letter-spacing:-.01em;}
-.lane-header-sub{font-size:.5625rem;color:var(--ash);margin-top:.125rem;font-family:'Space Grotesk',sans-serif;letter-spacing:.06em;text-transform:uppercase;}
+.lane-header-sub{font-size:.8125rem;color:var(--ash);margin-top:.125rem;font-family:'Geist',sans-serif;letter-spacing:0;text-transform:none;}
 .lane-node{width:90%;max-width:200px;}
 .admin-lane .lane-header{border-left:3px solid var(--green);}
 .gestor-lane .lane-header{border-left:3px solid #2B7FD4;}
@@ -350,7 +349,7 @@ body.dark-mode .process-grid .proc-step:nth-child(1) .proc-num{
 .decision-diamond{width:90%;max-width:180px;background:rgba(43,127,212,.06);border:1.5px solid rgba(43,127,212,.3);border-radius:8px;padding:.5rem .75rem;text-align:center;}
 .decision-diamond .flow-node-title{font-size:.625rem;color:#2B7FD4;font-weight:600;}
 .decision-row{display:flex;align-items:center;gap:.25rem;justify-content:center;width:100%;margin:.25rem 0;}
-.decision-label{font-size:.5625rem;font-family:'Space Grotesk',sans-serif;letter-spacing:.06em;text-transform:uppercase;padding:.125rem .5rem;border-radius:100px;font-weight:500;}
+.decision-label{font-size:.8125rem;font-family:'Geist',sans-serif;letter-spacing:0;text-transform:none;padding:.125rem .5rem;border-radius:100px;font-weight:500;}
 .label-yes{color:var(--green);background:var(--green2);}
 .label-no{color:var(--red);background:rgba(217,45,32,.06);}
 .flow-legend{display:flex;gap:1.25rem;margin-top:2rem;padding-top:1rem;border-top:1px solid var(--line);flex-wrap:wrap;}
@@ -499,7 +498,7 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
   <a class="back-btn" id="back-to-portfolio" href="index.html">
     <span>←</span> Back to portfolio
   </a>
-  <div class="nav-title">smartpass · Case Study</div>
+  <div class="nav-title">smartpass · Case study</div>
   <div class="nav-right">Paula Elffman · Sr Product Designer</div>
 </nav>
 
@@ -508,7 +507,7 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
 ══════════════════════════════════════════ -->
 <div class="cover">
   <div>
-    <div class="eyebrow" style="margin-bottom:2rem;">Access Mobile Ticketing App · Itti Sports · 2025</div>
+    <div class="eyebrow" style="margin-bottom:2rem;">Access mobile ticketing app · Itti Sports · 2025</div>
     <div class="cover-title">
       smart<span class="dim">pass</span>
     </div>
@@ -530,7 +529,7 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
      SECTION 01 — CONTEXT & VALUE PROPOSAL
 ══════════════════════════════════════════ -->
 <div class="section">
-  <div class="eyebrow">Context & Value Proposal</div>
+  <div class="eyebrow">Context & value proposal</div>
   <div class="overview-grid">
     <div>
       <div class="ov-title">Where great<br><span style="color:var(--green);">experiences</span> start.</div>
@@ -555,7 +554,7 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
       </ul>
     </div>
     <div class="pillar">
-      <div class="pillar-n">Management & Automation</div>
+      <div class="pillar-n">Management & automation</div>
       <div class="pillar-t">Less manual work</div>
       <ul>
         <li>Automation of manual tasks</li>
@@ -563,7 +562,7 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
       </ul>
     </div>
     <div class="pillar">
-      <div class="pillar-n">User Experience</div>
+      <div class="pillar-n">User experience</div>
       <div class="pillar-t">Streamlined accreditation</div>
       <ul>
         <li>Improved user experience</li>
@@ -577,7 +576,7 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
      SECTION 02 — GOALS & SUCCESS CRITERIA
 ══════════════════════════════════════════ -->
 <div class="section">
-  <div class="eyebrow">Goals & Success Criteria</div>
+  <div class="eyebrow">Goals & success criteria</div>
   <div class="ov-title" style="margin-bottom:0;">Eliminate manual<br>workload hours.</div>
   <div class="goals-grid">
     <div class="goal-item"><div class="goal-arrow">↑</div><div class="goal-text">Improve inter-party processes</div></div>
@@ -591,7 +590,7 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
      SECTION 03 — PROCESS OVERVIEW
 ══════════════════════════════════════════ -->
 <div class="section">
-  <div class="eyebrow">Process Overview</div>
+  <div class="eyebrow">Process overview</div>
   <div class="ov-title" style="margin-bottom:0;">The design process.</div>
   <div class="process-grid">
     <div class="proc-step"><div class="proc-num">01</div><div class="proc-t">Research & benchmark</div></div>
@@ -607,7 +606,7 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
      SECTION 04 — FLOW & ROLES
 ══════════════════════════════════════════ -->
 <div class="section">
-  <div class="eyebrow">Flow & Roles</div>
+  <div class="eyebrow">Flow & roles</div>
   <div class="ov-title" style="margin-bottom:0;">Four levels.<br><span style="color:var(--green);">One accreditation.</span></div>
   <p class="ov-body" style="max-width:760px;margin-top:1.25rem;">Event management is divided into four levels: the <strong>Super Admin</strong> creates the event and assigns the <strong>Administrator</strong> (responsible for the organization), who validates participants and coordinates physical credentials. The Administrator can delegate tasks to various <strong>Managers</strong>, responsible for uploading and sending data for specific groups of people for final approval. Finally, the <strong>Accredited Participant</strong> is the end user who registers, uploads their profile picture, and receives the physical credential to access the venue.</p>
 
@@ -758,7 +757,7 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
      SECTION 05 — FINAL OUTCOME · SCREENS
 ══════════════════════════════════════════ -->
 <div class="section">
-  <div class="eyebrow">Final Outcome · Proposal & Sign Up</div>
+  <div class="eyebrow">Final outcome · Proposal & sign up</div>
   <div class="section-label">
     <div class="sl-t">Landing & authentication</div>
     <div class="sl-l"></div>
@@ -793,7 +792,7 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
 </div>
 
 <div class="section">
-  <div class="eyebrow">Final Outcome · Admin Dashboard</div>
+  <div class="eyebrow">Final outcome · Admin dashboard</div>
   <div class="section-label">
     <div class="sl-t">Event management</div>
     <div class="sl-l"></div>
@@ -821,7 +820,7 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
      SECTION 06 — DESIGN SYSTEM
 ══════════════════════════════════════════ -->
 <div class="section">
-  <div class="eyebrow">Design System · Foundations</div>
+  <div class="eyebrow">Design system · Foundations</div>
   <div class="ds-intro">
     <h2 class="ds-title">Built to scale.<br><em>Documented to ship.</em></h2>
     <p class="ds-sub">A color and type system with AA/AAA-verified contrast ratios across every step, plus a component library covering the states an access-control product actually needs: success, error, and everything in between.</p>
@@ -944,7 +943,7 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
      SECTION 07 — EMAIL COMMS
 ══════════════════════════════════════════ -->
 <div class="section">
-  <div class="eyebrow">Participant · Email Comms</div>
+  <div class="eyebrow">Participant · Email comms</div>
   <div class="ov-title" style="margin-bottom:0;">Accreditation happens<br>over email too.</div>
   <p class="ov-body" style="max-width:760px;margin-top:1.25rem;">For QR-based access, credentials are activated close to the event date for security. A short lifecycle of transactional emails keeps the accredited participant informed at each step — from confirmation to photo upload to final credential delivery.</p>
   <div class="email-grid">
@@ -970,7 +969,7 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
      SECTION 08 — KEY DECISIONS
 ══════════════════════════════════════════ -->
 <div class="section">
-  <div class="eyebrow">Key Design Decisions</div>
+  <div class="eyebrow">Key design decisions</div>
   <div class="decisions-grid">
     <div class="dec">
       <div class="dec-n">Decision 01</div>
@@ -1043,7 +1042,7 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
 
 <!-- FOOTER -->
 <div class="footer">
-  <div class="footer-l">smartpass · Access & Ticketing App · Itti Sports · 2025</div>
+  <div class="footer-l">smartpass · Access & ticketing app · Itti Sports · 2025</div>
   <div class="footer-r">Sr Product Designer · Paula Elffman</div>
 </div>
 

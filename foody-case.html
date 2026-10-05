@@ -54,12 +54,12 @@ body{font-family:'Geist',sans-serif;background:var(--bg);color:var(--paper);-web
 .section{padding:5rem 4rem;}
 .section + .section{border-top:1px solid var(--line2);}
 
-.eyebrow{font-family:'Space Grotesk',sans-serif;font-size:.5625rem;letter-spacing:.18em;text-transform:uppercase;color:var(--orange);margin-bottom:1rem;display:flex;align-items:center;gap:.75rem;}
-.eyebrow::before{content:'';width:20px;height:1px;background:var(--orange);flex-shrink:0;}
+.eyebrow{font-family:'Geist',sans-serif;font-size:.9375rem;letter-spacing:0;text-transform:none;color:var(--ash);margin-bottom:1rem;display:flex;align-items:center;gap:.75rem;font-weight:500;}
+.eyebrow::before{content:'';width:20px;height:1px;background:var(--orange);flex-shrink:0;display:none;}
 .eyebrow.center{justify-content:center;}
 
 .section-label{display:flex;align-items:center;gap:1.5rem;margin-bottom:3rem;}
-.sl-text{font-family:'Space Grotesk',sans-serif;font-size:.5875rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ash2);white-space:nowrap;}
+.sl-text{font-family:'Geist',sans-serif;font-size:.875rem;letter-spacing:0;text-transform:none;color:var(--ash2);white-space:nowrap;font-weight:500;}
 .sl-line{flex:1;height:1px;background:var(--line);}
 
 /* phone / wireframe shells */
@@ -69,17 +69,17 @@ body{font-family:'Geist',sans-serif;background:var(--bg);color:var(--paper);-web
 .wire-shell{border-radius:10px;overflow:hidden;border:1px solid var(--line2);background:#fff;}
 .wire-shell img{display:block;width:100%;height:auto;}
 
-.badge{margin-top:1rem;display:inline-flex;align-items:center;gap:.4rem;padding:.3rem .875rem;border-radius:100px;font-family:'Space Grotesk',sans-serif;font-size:.45rem;letter-spacing:.1em;text-transform:uppercase;}
+.badge{margin-top:1rem;display:inline-flex;align-items:center;gap:.4rem;padding:.3rem .875rem;border-radius:100px;font-family:'Geist',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;}
 .badge-o{background:var(--orange);color:#fff;}
 .badge-n{background:var(--navy);color:#fff;}
 .badge-gr{background:rgba(26,172,121,.12);color:var(--green);border:1px solid rgba(26,172,121,.25);}
 
 .plabel{margin-top:1.25rem;text-align:center;max-width:190px;}
-.pl-n{font-family:'Space Grotesk',sans-serif;font-size:.45rem;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);margin-bottom:.375rem;}
+.pl-n{font-family:'Geist',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;color:var(--orange);margin-bottom:.375rem;}
 .pl-t{font-size:.875rem;font-weight:700;color:var(--paper);letter-spacing:-.02em;margin-bottom:.25rem;}
 .pl-d{font-size:.75rem;line-height:1.55;color:var(--ash);}
 
-.wf-lbl{margin-top:1.1rem;text-align:center;max-width:200px;font-family:'Space Grotesk',sans-serif;font-size:.45rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ash);}
+.wf-lbl{margin-top:1.1rem;text-align:center;max-width:200px;font-family:'Geist',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;color:var(--ash);}
 .wf-lbl strong{display:block;font-size:.8125rem;font-family:'Geist',sans-serif;font-weight:700;letter-spacing:-.01em;color:var(--paper);margin-bottom:.25rem;text-transform:none;}
 
 .arrow-col{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.375rem;padding-top:5rem;}
@@ -87,7 +87,7 @@ body{font-family:'Geist',sans-serif;background:var(--bg);color:var(--paper);-web
 .arr-line{width:1px;height:28px;background:linear-gradient(to bottom,var(--orange),rgba(37,49,76,0));position:relative;overflow:visible;}
 .arr-line::after{content:'';position:absolute;left:50%;top:0;width:3px;height:3px;border-radius:50%;background:var(--orange);transform:translate(-50%,0);animation:arrFlow 1.8s linear infinite;}
 @keyframes arrFlow{0%{top:0;opacity:0;}15%{opacity:1;}85%{opacity:1;}100%{top:100%;opacity:0;}}
-.arr-lbl{font-family:'Space Grotesk',sans-serif;font-size:.4rem;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);writing-mode:vertical-rl;margin-top:.25rem;}
+.arr-lbl{font-family:'Geist',sans-serif;font-size:.6875rem;letter-spacing:0;text-transform:none;color:var(--orange);writing-mode:vertical-rl;margin-top:.25rem;}
 
 .flow-item,.wf-item,.phone-wrap{opacity:0;transform:translateY(20px);transition:opacity .7s var(--ease),transform .7s var(--ease);}
 .flow-item.in-view,.wf-item.in-view,.phone-wrap.in-view{opacity:1;transform:translateY(0);}
@@ -97,7 +97,7 @@ body{font-family:'Geist',sans-serif;background:var(--bg);color:var(--paper);-web
 .cover-title{font-size:clamp(4.5rem,10vw,10.5rem);font-weight:800;letter-spacing:-.06em;line-height:.85;color:var(--paper);}
 .cover-title .dim{color:rgba(37,49,76,.16);}
 .cover-meta{display:flex;flex-direction:column;gap:1.25rem;padding-bottom:.5rem;}
-.cm-label{font-family:'Space Grotesk',sans-serif;font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ash);margin-bottom:.25rem;}
+.cm-label{font-family:'Geist',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--ash);margin-bottom:.25rem;}
 .cm-val{font-size:.875rem;font-weight:500;color:var(--paper);}
 
 /* overview */
@@ -110,7 +110,7 @@ body{font-family:'Geist',sans-serif;background:var(--bg);color:var(--paper);-web
 .stat-val{font-size:2.1rem;font-weight:800;letter-spacing:-.04em;color:var(--paper);}
 .stat-lbl{font-size:.8125rem;color:var(--ash);line-height:1.4;}
 .accent-card{background:var(--orange);border-radius:12px;padding:2rem;}
-.ac-lbl{font-family:'Space Grotesk',sans-serif;font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(37,26,0,.6);margin-bottom:.875rem;}
+.ac-lbl{font-family:'Geist',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:rgba(37,26,0,.6);margin-bottom:.875rem;}
 .ac-val{font-size:2.5rem;font-weight:800;letter-spacing:-.05em;color:#25190A;line-height:1;margin-bottom:.5rem;}
 .ac-desc{font-size:.8125rem;color:rgba(37,26,0,.75);line-height:1.6;}
 .ac-sub{margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(37,26,0,.15);display:flex;gap:1.25rem;flex-wrap:wrap;}
@@ -138,7 +138,7 @@ body{font-family:'Geist',sans-serif;background:var(--bg);color:var(--paper);-web
 .ptl.in-view .ptl-step{opacity:1;transform:translateY(0);}
 .ptl-dot{position:absolute;top:-1.5rem;left:0;width:10px;height:10px;margin-top:-4px;border-radius:50%;background:var(--bg);border:2px solid var(--orange);transition:background .4s var(--ease) .2s;}
 .ptl.in-view .ptl-dot{background:var(--orange);}
-.ptl-num{font-family:'Space Grotesk',sans-serif;font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);margin-bottom:.625rem;}
+.ptl-num{font-family:'Geist',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--orange);margin-bottom:.625rem;}
 .ptl-title{font-size:1rem;font-weight:800;letter-spacing:-.02em;color:var(--paper);margin-bottom:.5rem;}
 .ptl-desc{font-size:.8125rem;line-height:1.55;color:var(--ash);padding-right:.5rem;}
 @media(max-width:768px){
@@ -154,7 +154,7 @@ body{font-family:'Geist',sans-serif;background:var(--bg);color:var(--paper);-web
 .jmap-mood{width:100%;height:70px;display:block;overflow:visible;}
 .jmap-mood-path{fill:none;stroke:var(--orange);stroke-width:2;stroke-linecap:round;stroke-dasharray:1400;stroke-dashoffset:1400;transition:stroke-dashoffset 1.8s var(--ease);}
 .jmap.in-view .jmap-mood-path{stroke-dashoffset:0;}
-.jmap-mood-labels{display:flex;justify-content:space-between;font-family:'Space Grotesk',sans-serif;font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ash);margin:.25rem 2px 1.75rem;}
+.jmap-mood-labels{display:flex;justify-content:space-between;font-family:'Geist',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--ash);margin:.25rem 2px 1.75rem;}
 .jmap-track{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;}
 .jmap-connector{position:absolute;top:27px;left:calc(12.5% - 1px);right:calc(12.5% - 1px);height:2px;background:var(--line2);z-index:0;overflow:visible;}
 .jmap-connector-fill{position:absolute;top:0;left:0;height:2px;width:0;background:var(--orange);transition:width 1.6s var(--ease) .1s;}
@@ -169,7 +169,7 @@ body{font-family:'Geist',sans-serif;background:var(--bg);color:var(--paper);-web
 .jmap.in-view .jmap-node{background:var(--orange);color:#fff;}
 .jmap-stage{font-size:1.0625rem;font-weight:800;letter-spacing:-.02em;color:var(--paper);margin-bottom:.875rem;}
 .jmap-card{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:1rem 1.125rem;text-align:left;width:100%;}
-.jmap-label{font-family:'Space Grotesk',sans-serif;font-size:.4375rem;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);margin-bottom:.25rem;}
+.jmap-label{font-family:'Geist',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;color:var(--orange);margin-bottom:.25rem;}
 .jmap-action{font-size:.8125rem;color:var(--paper);font-weight:500;margin-bottom:.75rem;line-height:1.45;}
 .jmap-goal{font-size:.75rem;color:var(--ash);line-height:1.55;}
 @media(max-width:768px){
@@ -189,24 +189,24 @@ body{font-family:'Geist',sans-serif;background:var(--bg);color:var(--paper);-web
 
 .decisions-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-top:3rem;}
 .dec{background:var(--bg2);padding:2rem 1.75rem;}
-.dec-n{font-family:'Space Grotesk',sans-serif;font-size:.45rem;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);margin-bottom:.875rem;}
+.dec-n{font-family:'Geist',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;color:var(--orange);margin-bottom:.875rem;}
 .dec-t{font-size:1rem;font-weight:700;color:var(--paper);letter-spacing:-.02em;margin-bottom:.5rem;}
 .dec-d{font-size:.8125rem;line-height:1.65;color:var(--ash);}
 
 .metric-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-top:2rem;}
 .metric{background:var(--bg2);padding:1.75rem;}
-.metric-n{font-family:'Space Grotesk',sans-serif;font-size:.45rem;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-bottom:.75rem;}
+.metric-n{font-family:'Geist',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;color:var(--green);margin-bottom:.75rem;}
 .metric-t{font-size:.9375rem;font-weight:700;color:var(--paper);letter-spacing:-.02em;margin-bottom:.375rem;}
 .metric-d{font-size:.8125rem;line-height:1.6;color:var(--ash);}
 
 .insights-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:3rem;}
 .ins{padding:1.75rem;border:1px solid var(--line);border-radius:10px;background:var(--bg2);}
-.ins-n{font-family:'Space Grotesk',sans-serif;font-size:.45rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ash);margin-bottom:.75rem;}
+.ins-n{font-family:'Geist',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;color:var(--ash);margin-bottom:.75rem;}
 .ins-t{font-size:.9375rem;font-weight:700;color:var(--paper);letter-spacing:-.02em;margin-bottom:.375rem;}
 .ins-d{font-size:.8125rem;line-height:1.6;color:var(--ash);}
 
 .callout{background:var(--navy);border-radius:16px;padding:2.5rem;}
-.co-lbl{font-family:'Space Grotesk',sans-serif;font-size:.45rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:1rem;}
+.co-lbl{font-family:'Geist',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;color:rgba(255,255,255,.4);margin-bottom:1rem;}
 .co-t{font-size:1.375rem;font-weight:700;letter-spacing:-.025em;line-height:1.3;margin-bottom:.875rem;color:#fff;}
 .co-d{font-size:.8125rem;line-height:1.7;color:rgba(255,255,255,.62);}
 .co-stats{margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.12);display:flex;gap:2rem;flex-wrap:wrap;}
@@ -214,26 +214,26 @@ body{font-family:'Geist',sans-serif;background:var(--bg);color:var(--paper);-web
 .cos-l{font-size:.625rem;color:rgba(255,255,255,.45);margin-top:.125rem;}
 
 .footer{padding:2rem 4rem;border-top:1px solid var(--line2);display:flex;justify-content:space-between;align-items:center;}
-.footer-l,.footer-r{font-family:'Space Grotesk',sans-serif;font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ash);}
+.footer-l,.footer-r{font-family:'Geist',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--ash);}
 
 .back-nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(37,49,76,.08);padding:1rem 4rem;display:flex;justify-content:space-between;align-items:center;}
-.back-btn{display:inline-flex;align-items:center;gap:.625rem;font-family:'Space Grotesk',sans-serif;font-size:.5625rem;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);background:none;border:none;cursor:pointer;text-decoration:none;transition:gap .2s;}
+.back-btn{display:inline-flex;align-items:center;gap:.625rem;font-family:'Geist',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--orange);background:none;border:none;cursor:pointer;text-decoration:none;transition:gap .2s;}
 .back-btn:hover{gap:1rem;}
-.back-nav-title{font-family:'Space Grotesk',sans-serif;font-size:.5625rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(37,49,76,.42);}
-.back-nav-right{font-family:'Space Grotesk',sans-serif;font-size:.5625rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(37,49,76,.32);}
+.back-nav-title{font-family:'Geist',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:rgba(37,49,76,.42);}
+.back-nav-right{font-family:'Geist',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:rgba(37,49,76,.32);}
 
 /* two col generic */
 .cs-grid2{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;margin-bottom:3rem;}
 .cs-h2{font-size:clamp(2rem,3.5vw,3rem);font-weight:800;letter-spacing:-.04em;line-height:1.05;margin-bottom:1.25rem;}
 .cs-p{font-size:.9375rem;line-height:1.75;color:var(--ash);font-weight:300;}
 .side-card{padding:2rem;background:var(--bg2);border:1px solid var(--line);border-radius:10px;}
-.side-lbl{font-family:'Space Grotesk',sans-serif;font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ash);margin-bottom:1.25rem;}
+.side-lbl{font-family:'Geist',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--ash);margin-bottom:1.25rem;}
 .side-row{display:flex;align-items:flex-start;gap:.875rem;padding:.875rem 0;border-bottom:1px solid var(--line);}
 .side-row:last-child{border-bottom:none;}
 .side-dot{width:5px;height:5px;border-radius:50%;background:var(--orange);flex-shrink:0;margin-top:.45rem;}
 .side-row span{font-size:.875rem;color:var(--paper);line-height:1.5;}
 
-.chip{display:inline-flex;align-items:center;padding:.3rem .8rem;border-radius:100px;border:1px solid var(--line2);font-family:'Space Grotesk',sans-serif;font-size:.5625rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ash);margin:.2rem .3rem .2rem 0;}
+.chip{display:inline-flex;align-items:center;padding:.3rem .8rem;border-radius:100px;border:1px solid var(--line2);font-family:'Geist',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--ash);margin:.2rem .3rem .2rem 0;}
 .chip-o{border-color:rgba(250,164,26,.4);color:#B4700D;background:rgba(250,164,26,.08);}
 .chip-n{border-color:rgba(37,49,76,.25);color:var(--navy);background:rgba(37,49,76,.05);}
 
@@ -244,7 +244,7 @@ body{font-family:'Geist',sans-serif;background:var(--bg);color:var(--paper);-web
 .comp-card.wide{grid-column:span 3;flex-direction:row;align-items:center;gap:3rem;padding:2.5rem 3rem;}
 .comp-cap{margin-top:1.5rem;text-align:center;}
 .comp-card.wide .comp-cap{margin-top:0;text-align:left;}
-.comp-n{font-family:'Space Grotesk',sans-serif;font-size:.45rem;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);margin-bottom:.5rem;}
+.comp-n{font-family:'Geist',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;color:var(--orange);margin-bottom:.5rem;}
 .comp-t{font-size:1rem;font-weight:800;letter-spacing:-.02em;color:var(--paper);margin-bottom:.5rem;}
 .comp-d{font-size:.8125rem;line-height:1.6;color:var(--ash);max-width:340px;}
 /* Visa-style floating tilt: outer .comp-tilt gets a live 3D tilt from JS on pointermove,
@@ -266,7 +266,7 @@ body{font-family:'Geist',sans-serif;background:var(--bg);color:var(--paper);-web
 
 .gallery3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:2.5rem;}
 .gitem{border-radius:12px;overflow:hidden;border:1px solid var(--line);background:var(--bg2);}
-.gitem-cap{padding:.875rem 1.125rem;font-family:'Space Grotesk',sans-serif;font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ash);border-bottom:1px solid var(--line);}
+.gitem-cap{padding:.875rem 1.125rem;font-family:'Geist',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--ash);border-bottom:1px solid var(--line);}
 .gitem img{display:block;width:100%;height:auto;}
 
 @media(max-width:768px){
@@ -316,14 +316,14 @@ body{font-family:'Geist',sans-serif;background:var(--bg);color:var(--paper);-web
 
 <nav class="back-nav">
   <a class="back-btn" href="index.html"><span>←</span> Back to portfolio</a>
-  <div class="back-nav-title">Foody · Recipe App · Design Challenge</div>
+  <div class="back-nav-title">Foody · Recipe app · Design challenge</div>
   <div class="back-nav-right">Paula Elffman · Product Designer</div>
 </nav>
 
 <!-- COVER -->
 <div class="cover">
   <div>
-    <div class="eyebrow" style="margin-bottom:2rem;">Recipe Mobile App · Design Challenge · 3-Day Sprint · 2026</div>
+    <div class="eyebrow" style="margin-bottom:2rem;">Recipe mobile app · Design challenge · 3-day sprint · 2026</div>
     <div class="cover-title">Foody<br><span class="dim">your buddy chef</span></div>
   </div>
   <div class="cover-meta">
@@ -344,7 +344,7 @@ body{font-family:'Geist',sans-serif;background:var(--bg);color:var(--paper);-web
 
 <!-- SECTION 01 — OVERVIEW -->
 <div class="section">
-  <div class="eyebrow">Overview & Brief</div>
+  <div class="eyebrow">Overview & brief</div>
   <div class="overview-grid">
     <div>
       <div class="ov-title">A recipe app that<br><span class="orange">learns who's cooking.</span></div>
@@ -371,7 +371,7 @@ body{font-family:'Geist',sans-serif;background:var(--bg);color:var(--paper);-web
 
 <!-- SECTION — RESEARCH & PROCESS -->
 <div class="section">
-  <div class="eyebrow">Design Process & Research</div>
+  <div class="eyebrow">Design process & research</div>
   <div class="cs-grid2">
     <div>
       <div class="cs-h2">How I worked<br>through <span class="orange">3 days.</span></div>
@@ -458,7 +458,7 @@ body{font-family:'Geist',sans-serif;background:var(--bg);color:var(--paper);-web
 
 <!-- SECTION — JOURNEY MAP -->
 <div class="section">
-  <div class="eyebrow">Research Artifact · Journey Map</div>
+  <div class="eyebrow">Research artifact · Journey map</div>
   <div class="section-label"><div class="sl-text">Where the user is</div><div class="sl-line"></div><div class="sl-text">Action → Goal</div></div>
   <p class="cs-p" style="max-width:760px;margin-bottom:1rem;">Mapping onboarding, home, filters and the recipe screen against action and goal made the priorities obvious: onboarding exists to <em>know</em> the user, home exists to let them <em>browse</em>, filters exist so they <em>find</em>, and the recipe screen exists so they can <em>share the experience</em> — not just read a list of steps.</p>
 
@@ -537,7 +537,7 @@ body{font-family:'Geist',sans-serif;background:var(--bg);color:var(--paper);-web
         <span class="chip chip-o">Time-of-day aware</span>
         <span class="chip chip-n">Cycle & zodiac tie-in</span>
         <span class="chip chip-n">Beginner → Master Chef</span>
-        <span class="chip">Fremium + community</span>
+        <span class="chip">Freemium + community</span>
       </div>
     </div>
     <div style="display:flex;justify-content:center;align-items:center;">
@@ -545,7 +545,7 @@ body{font-family:'Geist',sans-serif;background:var(--bg);color:var(--paper);-web
         <div style="border-radius:16px;overflow:hidden;box-shadow:0 16px 40px rgba(37,49,76,.14);">
           <img src="assets/onboarding-flow.png" alt="Foody's 4-step onboarding — welcome, recipe type, dish taste and a taste/time/diet slider screen" style="width:100%;height:auto;display:block;">
         </div>
-        <div style="text-align:center;margin-top:1rem;font-family:'Space Grotesk',sans-serif;font-size:.5625rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ash);">4-step onboarding · sliders, not a form</div>
+        <div style="text-align:center;margin-top:1rem;font-family:'Geist',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--ash);">4-step onboarding · sliders, not a form</div>
       </div>
     </div>
   </div>
@@ -554,7 +554,7 @@ body{font-family:'Geist',sans-serif;background:var(--bg);color:var(--paper);-web
     <div style="border-radius:16px;overflow:hidden;box-shadow:0 24px 64px rgba(37,49,76,.16);">
       <img src="assets/home-customizadas.png" alt="Foody Match in practice — three different home screens (John, Isa and Ana), each personalized to what that user set in onboarding" style="width:100%;height:auto;display:block;">
     </div>
-    <div style="text-align:center;margin-top:1rem;font-family:'Space Grotesk',sans-serif;font-size:.5625rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ash);">Foody Match · same app, personalized home per user</div>
+    <div style="text-align:center;margin-top:1rem;font-family:'Geist',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--ash);">Foody Match · same app, personalized home per user</div>
   </div>
 
   <div class="section-label" style="margin-top:3.5rem;"><div class="sl-text">Measuring success</div><div class="sl-line"></div><div class="sl-text">What I'd track post-launch</div>
@@ -594,7 +594,7 @@ body{font-family:'Geist',sans-serif;background:var(--bg);color:var(--paper);-web
     <div class="arrow-col"><div class="arr-dot"></div><div class="arr-line"></div><div class="arr-dot"></div></div>
     <div class="wf-item"><div class="wire-shell"><img src="assets/wf-03.png" alt="Onboarding step 3 wireframe"></div><div class="wf-lbl"><strong>Step 3 · Taste & time</strong>3 quick sliders on cooking, time, diet</div></div>
     <div class="arrow-col"><div class="arr-dot"></div><div class="arr-line"></div><div class="arr-dot"></div></div>
-    <div class="wf-item"><div class="wire-shell"><img src="assets/wf-04.png" alt="Onboarding step 4 results wireframe"></div><div class="wf-lbl"><strong>Step 4 · Results</strong>3 recipes picked for you, straight to Home</div></div>
+    <div class="wf-item"><div class="wire-shell"><img src="assets/wf-04.png" alt="Onboarding step 4 results wireframe"></div><div class="wf-lbl"><strong>Step 4 · Results</strong>3 recipes picked for you, straight to home</div></div>
   </div>
 
   <div style="margin-top:3.5rem;display:grid;grid-template-columns:1fr 36px 1fr;gap:0;align-items:start;max-width:600px;">
@@ -606,7 +606,7 @@ body{font-family:'Geist',sans-serif;background:var(--bg);color:var(--paper);-web
 
 <!-- SECTION 03 — VISUAL DESIGN FLOW 1: SEARCH + FILTERS -->
 <div class="section">
-  <div class="eyebrow">Visual Design · Flow 01</div>
+  <div class="eyebrow">Visual design · Flow 01</div>
   <div class="section-label"><div class="sl-text">Search for recipes</div><div class="sl-line"></div><div class="sl-text">Filters in action</div></div>
   <div class="cs-grid2">
     <div>
@@ -633,18 +633,18 @@ body{font-family:'Geist',sans-serif;background:var(--bg);color:var(--paper);-web
   <div class="gallery3" style="grid-template-columns:1fr 1fr;max-width:640px;">
     <div style="display:flex;flex-direction:column;align-items:center;">
       <div class="phone-shell" style="max-width:280px;"><img src="assets/home-filterapplied.jpg" alt="Filtered results for breakfast"></div>
-      <div style="margin-top:.875rem;font-family:'Space Grotesk',sans-serif;font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ash);text-align:center;">Breakfast time! · filter applied</div>
+      <div style="margin-top:.875rem;font-family:'Geist',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--ash);text-align:center;">Breakfast time! · filter applied</div>
     </div>
     <div style="display:flex;flex-direction:column;align-items:center;">
       <img src="assets/flow-modal.png" alt="Modal celebrating that the user unlocked Master Chef status and can upload recipes" style="width:100%;max-width:280px;height:auto;display:block;">
-      <div style="margin-top:.875rem;font-family:'Space Grotesk',sans-serif;font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ash);text-align:center;">Master Chef unlocked — engagement moment</div>
+      <div style="margin-top:.875rem;font-family:'Geist',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--ash);text-align:center;">Master Chef unlocked — engagement moment</div>
     </div>
   </div>
 </div>
 
 <!-- SECTION 04 — VISUAL DESIGN FLOW 2: COOKING PROCESS -->
 <div class="section">
-  <div class="eyebrow">Visual Design · Flow 02</div>
+  <div class="eyebrow">Visual design · Flow 02</div>
   <div class="section-label"><div class="sl-text">Recipe detail</div><div class="sl-line"></div><div class="sl-text">The cooking process</div></div>
   <div class="cs-grid2" style="align-items:start;">
     <div>
@@ -669,7 +669,7 @@ body{font-family:'Geist',sans-serif;background:var(--bg);color:var(--paper);-web
 
 <!-- SECTION — COMPONENTS -->
 <div class="section">
-  <div class="eyebrow">UI Components · Mini Design System</div>
+  <div class="eyebrow">UI components · Mini design system</div>
   <div class="section-label"><div class="sl-text">Built once</div><div class="sl-line"></div><div class="sl-text">Reused across every screen</div></div>
   <div class="cs-h2" style="max-width:640px;">Not screens —<br><span class="orange">a small system.</span></div>
   <p class="cs-p" style="max-width:640px;">Rather than designing each screen from scratch, I built Foody around a handful of reusable components — a recipe card, a few carousel shapes and a couple of editorial patterns — and let composition do the rest. Same pieces, different shelves.</p>
@@ -708,7 +708,7 @@ body{font-family:'Geist',sans-serif;background:var(--bg);color:var(--paper);-web
 
 <!-- SECTION — KEY DECISIONS -->
 <div class="section">
-  <div class="eyebrow">Key Design Decisions</div>
+  <div class="eyebrow">Key design decisions</div>
   <div class="decisions-grid">
     <div class="dec"><div class="dec-n">Decision 01</div><div class="dec-t">Sliders instead of forms</div><div class="dec-d">Onboarding trades a long questionnaire for 3 quick thumb-sliders — faster to complete, still rich enough to personalize.</div></div>
     <div class="dec"><div class="dec-n">Decision 02</div><div class="dec-t">Filters never dead-end</div><div class="dec-d">Every filter combination returns a result. The goal is discovery, never a blocked "no recipes found" state.</div></div>
@@ -748,7 +748,7 @@ body{font-family:'Geist',sans-serif;background:var(--bg);color:var(--paper);-web
     .anim-frame{position:relative;width:100%;padding-bottom:205%;border-radius:32px;overflow:hidden;background:#f7f2e7;box-shadow:0 0 0 1px rgba(37,49,76,.08), 0 24px 64px rgba(37,49,76,.18), 0 6px 16px rgba(37,49,76,.08);}
     .anim-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block;}
   </style>
-  <div class="eyebrow center">Prototype · Animated Walkthrough</div>
+  <div class="eyebrow center">Prototype · Animated walkthrough</div>
   <div class="cs-h2" style="max-width:640px;margin:0 auto 1.25rem;">The whole journey, <span class="orange">in motion.</span></div>
   <p class="cs-p" style="max-width:560px;margin:0 auto 2.5rem;">Onboarding, personalized home, filters, recipe detail and search: the full Foody flow animated in a loop, just as it feels in the app.</p>
   <div class="anim-frame-wrap">
@@ -760,7 +760,7 @@ body{font-family:'Geist',sans-serif;background:var(--bg);color:var(--paper);-web
 
 <!-- FOOTER -->
 <div class="footer">
-  <div class="footer-l">Foody · Recipe App · Design Challenge · 2026</div>
+  <div class="footer-l">Foody · Recipe app · Design challenge · 2026</div>
   <div class="footer-r">Product Designer · Paula Elffman</div>
 </div>
 

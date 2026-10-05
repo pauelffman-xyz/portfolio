@@ -59,13 +59,13 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);-webki
   border-bottom:1px solid var(--line);padding:1rem 4rem;
   display:flex;justify-content:space-between;align-items:center;
 }
-.back-btn{display:inline-flex;align-items:center;gap:.6rem;font-family:'Space Grotesk',sans-serif;font-size:.5625rem;letter-spacing:.14em;text-transform:uppercase;color:var(--red);text-decoration:none;transition:gap .2s;}
+.back-btn{display:inline-flex;align-items:center;gap:.6rem;font-family:'Inter',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--red);text-decoration:none;transition:gap .2s;}
 .back-btn:hover{gap:.95rem;}
-.back-nav-r{font-family:'Space Grotesk',sans-serif;font-size:.5625rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ash-2);}
+.back-nav-r{font-family:'Inter',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--ash-2);}
 
 /* ── eyebrow ── */
-.eyebrow{font-family:'Space Grotesk',sans-serif;font-size:.5875rem;letter-spacing:.18em;text-transform:uppercase;color:var(--red);margin-bottom:1.1rem;display:flex;align-items:center;gap:.75rem;}
-.eyebrow::before{content:'';width:20px;height:1px;background:var(--red);flex-shrink:0;}
+.eyebrow{font-family:'Inter',sans-serif;font-size:.9375rem;letter-spacing:0;text-transform:none;color:var(--ash);margin-bottom:1.1rem;display:flex;align-items:center;gap:.75rem;font-weight:500;}
+.eyebrow::before{content:'';width:20px;height:1px;background:var(--red);flex-shrink:0;display:none;}
 
 /* ── cover ── */
 .cover{padding:4.5rem 4rem 3.5rem;}
@@ -73,7 +73,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);-webki
 .cover-title .r{color:var(--red);}
 .cover-lede{font-size:1rem;line-height:1.7;color:var(--ash);font-weight:300;max-width:56ch;margin-top:1.5rem;}
 .cover-meta{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:2.75rem;padding-top:2rem;border-top:1px solid var(--line);}
-.cm-label{font-family:'Space Grotesk',sans-serif;font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ash-2);margin-bottom:.35rem;}
+.cm-label{font-family:'Inter',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--ash-2);margin-bottom:.35rem;}
 .cm-val{font-size:.875rem;font-weight:600;color:var(--ink);}
 
 /* ── section titles ── */
@@ -84,20 +84,20 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);-webki
 /* ── collision diagram ── */
 .collision{display:grid;grid-template-columns:1fr auto 1fr;gap:2.5rem;align-items:center;margin-top:3rem;}
 .col-card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:1.75rem;text-align:center;}
-.col-step{font-family:'Space Grotesk',sans-serif;font-size:.5625rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ash-2);margin-bottom:1rem;}
+.col-step{font-family:'Inter',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--ash-2);margin-bottom:1rem;}
 .col-pill{display:inline-block;background:var(--red);color:#fff;font-weight:700;font-size:.9375rem;letter-spacing:-.01em;padding:.75rem 1.75rem;border-radius:100px;margin-bottom:1.25rem;}
 .col-does{font-size:.8125rem;color:var(--ash);line-height:1.55;}
 .col-does b{color:var(--ink);font-weight:600;}
 .col-mid{display:flex;flex-direction:column;align-items:center;gap:.5rem;}
 .col-eq{font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:700;color:var(--red);line-height:1;}
-.col-mid-t{font-family:'Space Grotesk',sans-serif;font-size:.5625rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ash-2);text-align:center;}
+.col-mid-t{font-family:'Inter',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--ash-2);text-align:center;}
 .col-mid-t b{color:var(--red);display:block;font-size:.6875rem;letter-spacing:.06em;margin-top:.2rem;}
 
 /* ── quote ── */
 .quote-block{margin-top:3.5rem;background:var(--ink);border-radius:18px;padding:2.75rem 3rem;display:grid;grid-template-columns:auto 1fr;gap:2.25rem;align-items:center;}
 .quote-mark{font-family:'Space Grotesk',sans-serif;font-size:3.5rem;color:var(--red-bright);line-height:.6;font-weight:700;}
 .quote-txt{font-size:1.3125rem;font-weight:600;color:#fff;line-height:1.5;letter-spacing:-.01em;}
-.quote-src{font-family:'Space Grotesk',sans-serif;font-size:.6875rem;letter-spacing:.04em;color:rgba(255,255,255,.5);margin-top:1rem;}
+.quote-src{font-family:'Inter',sans-serif;font-size:.8125rem;letter-spacing:0;color:rgba(255,255,255,.5);margin-top:1rem;}
 
 /* ── panel ── */
 .panel-note{font-size:.8125rem;color:var(--ash-2);margin-top:-.5rem;margin-bottom:2.25rem;}
@@ -105,17 +105,17 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);-webki
 .panel-card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:2rem;}
 .panel-head{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;margin-bottom:.25rem;}
 .panel-name{font-size:1.0625rem;font-weight:800;letter-spacing:-.015em;color:var(--ink);}
-.panel-dl{font-family:'Space Grotesk',sans-serif;font-size:.5625rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ash-2);white-space:nowrap;padding-top:.2rem;}
-.panel-seg{font-family:'Space Grotesk',sans-serif;font-size:.625rem;letter-spacing:.04em;color:var(--red);margin-bottom:1.4rem;}
+.panel-dl{font-family:'Inter',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--ash-2);white-space:nowrap;padding-top:.2rem;}
+.panel-seg{font-family:'Inter',sans-serif;font-size:.8125rem;letter-spacing:0;color:var(--red);margin-bottom:1.4rem;}
 .pf{margin-bottom:1rem;}
-.pf-k{font-family:'Space Grotesk',sans-serif;font-size:.5625rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ash-2);margin-bottom:.3rem;}
+.pf-k{font-family:'Inter',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--ash-2);margin-bottom:.3rem;}
 .pf-k.fear{color:var(--red);}
 .pf-v{font-size:.8125rem;line-height:1.6;color:var(--ash);}
 .panel-spont{margin-top:1.25rem;background:var(--red-soft);border-radius:10px;padding:1.1rem 1.25rem;font-size:.875rem;font-style:italic;color:var(--ink);line-height:1.55;}
 .panel-spont::before{content:'"';color:var(--red);font-weight:800;margin-right:.15rem;font-style:normal;}
 .pm-row{display:flex;gap:1.75rem;margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid var(--line);}
 .pm-item{flex:1;}
-.pm-label{font-family:'Space Grotesk',sans-serif;font-size:.5625rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ash-2);margin-bottom:.45rem;display:flex;justify-content:space-between;}
+.pm-label{font-family:'Inter',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--ash-2);margin-bottom:.45rem;display:flex;justify-content:space-between;}
 .pm-label b{color:var(--ink);font-weight:700;}
 .pm-bar{height:5px;border-radius:100px;background:var(--bg2);overflow:hidden;}
 .pm-fill{height:100%;border-radius:100px;background:var(--red);}
@@ -125,7 +125,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);-webki
 /* ── compare row / phones ── */
 .compare-row{display:grid;grid-template-columns:1fr auto 1fr;gap:3rem;align-items:start;margin-top:3rem;}
 .compare-col{display:flex;flex-direction:column;align-items:center;}
-.compare-tag{font-family:'Space Grotesk',sans-serif;font-size:.5625rem;letter-spacing:.14em;text-transform:uppercase;padding:.4rem .9rem;border-radius:100px;margin-bottom:1.5rem;}
+.compare-tag{font-family:'Inter',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;padding:.4rem .9rem;border-radius:100px;margin-bottom:1.5rem;}
 .compare-tag.bad{color:var(--red);background:var(--red-soft);}
 .compare-tag.good{color:var(--good);background:var(--good-soft);}
 .compare-arrow{align-self:center;font-size:1.5rem;color:var(--ash-2);margin-top:4rem;}
@@ -147,7 +147,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);-webki
 .otp-cta.wait{background:#F1EBEA;color:rgba(28,21,18,.32);}
 .otp-spinner{width:10px;height:10px;border-radius:50%;border:2px solid rgba(28,21,18,.18);border-top-color:rgba(28,21,18,.55);animation:spin .8s linear infinite;flex-shrink:0;}
 @keyframes spin{to{transform:rotate(360deg);}}
-.otp-state-lbl{font-family:'Space Grotesk',sans-serif;font-size:.5625rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ash-2);text-align:center;margin-top:-.4rem;}
+.otp-state-lbl{font-family:'Inter',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--ash-2);text-align:center;margin-top:-.4rem;}
 
 /* ── fix table ── */
 .fix-table{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:2.75rem;background:var(--paper);}
@@ -155,7 +155,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);-webki
 .fix-row:last-child{border-bottom:none;}
 .fix-row.head{background:var(--bg2);}
 .fix-cell{padding:1.1rem 1.5rem;font-size:.8125rem;line-height:1.55;}
-.fix-row.head .fix-cell{font-family:'Space Grotesk',sans-serif;font-size:.5625rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ash-2);}
+.fix-row.head .fix-cell{font-family:'Inter',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--ash-2);}
 .fix-cell:not(:last-child){border-right:1px solid var(--line);}
 .fix-cell .k{font-weight:700;color:var(--ink);}
 .fix-cell.bad{color:var(--red);text-decoration:line-through;text-decoration-color:rgba(218,41,28,.4);}
@@ -164,7 +164,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);-webki
 /* ── impact ── */
 .impact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:2.75rem;}
 .impact-card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:1.75rem;}
-.impact-n{font-family:'Space Grotesk',sans-serif;font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-bottom:.9rem;}
+.impact-n{font-family:'Inter',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--red);margin-bottom:.9rem;}
 .impact-t{font-size:.9375rem;font-weight:700;color:var(--ink);line-height:1.4;margin-bottom:.6rem;}
 .impact-d{font-size:.8125rem;line-height:1.6;color:var(--ash);}
 .next-note{margin-top:1.75rem;padding:1.25rem 1.5rem;background:var(--bg2);border-radius:12px;font-size:.8125rem;line-height:1.6;color:var(--ash);}
@@ -172,7 +172,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);-webki
 
 /* ── footer ── */
 .footer{padding:2.25rem 4rem;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;}
-.footer-l,.footer-r{font-family:'Space Grotesk',sans-serif;font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ash-2);}
+.footer-l,.footer-r{font-family:'Inter',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--ash-2);}
 
 @media(max-width:900px){
   .section{padding:3rem 1.5rem;}
@@ -291,12 +291,12 @@ body{background:var(--grad-hero) no-repeat 0 0/100% 820px,var(--bg);}
 
 <nav class="back-nav">
   <a class="back-btn" href="index.html"><span>←</span> Back to portfolio</a>
-  <div class="back-nav-r">Elektra × SukuPay · UX Writing</div>
+  <div class="back-nav-r">Elektra × SukuPay · UX writing</div>
 </nav>
 
 <!-- ── COVER ── -->
 <div class="cover wrap">
-  <div class="eyebrow">UX Writing Case Study</div>
+  <div class="eyebrow">UX writing case study</div>
   <div class="cover-title">One word in the CTA<br>can cost you<span class="r"> the conversion.</span></div>
   <p class="cover-lede">In Elektra's login (powered by SukuPay), the button to confirm the verification code said the same thing as the button to request it. A single string for two different actions, and a silent doubt at the most critical step of onboarding.</p>
   <div class="cover-meta">
@@ -331,7 +331,7 @@ body{background:var(--grad-hero) no-repeat 0 0/100% 820px,var(--bg);}
       </div>
       <div class="col-mid">
         <div class="col-eq">=</div>
-        <div class="col-mid-t">same text<b>different actions</b></div>
+        <div class="col-mid-t">Same text<b>different actions</b></div>
       </div>
       <div class="col-card">
         <div class="col-step">Screen 2 · OTP verification</div>
@@ -344,7 +344,7 @@ body{background:var(--grad-hero) no-repeat 0 0/100% 820px,var(--bg);}
       <div class="quote-mark">"</div>
       <div>
         <div class="quote-txt">I can't tell whether the transaction actually went through or not.</div>
-        <div class="quote-src">REAL SUPPORT TICKET, TRANSLATED FROM SPANISH</div>
+        <div class="quote-src">Real support ticket, translated from Spanish</div>
       </div>
     </div>
   </div>
@@ -363,7 +363,7 @@ body{background:var(--grad-hero) no-repeat 0 0/100% 820px,var(--bg);}
           <div class="panel-name">Carmen Villalobos</div>
           <div class="panel-dl">Digital literacy 3/10</div>
         </div>
-        <div class="panel-seg">MAINSTREAM REMITTER · SENDS REGULARLY</div>
+        <div class="panel-seg">Mainstream remitter · Sends regularly</div>
 
         <div class="pf">
           <div class="pf-k">Understanding</div>
@@ -397,7 +397,7 @@ body{background:var(--grad-hero) no-repeat 0 0/100% 820px,var(--bg);}
           <div class="panel-name">Lucas Padilla</div>
           <div class="panel-dl">Digital literacy 4/10</div>
         </div>
-        <div class="panel-seg">CHURNED · SENT ONCE OR TWICE, THEN STOPPED</div>
+        <div class="panel-seg">Churned · Sent once or twice, then stopped</div>
 
         <div class="pf">
           <div class="pf-k">Understanding</div>
@@ -453,7 +453,7 @@ body{background:var(--grad-hero) no-repeat 0 0/100% 820px,var(--bg);}
               <div class="otp-cta on">Enviar código</div>
             </div>
           </div>
-          <div class="otp-state-lbl">active button</div>
+          <div class="otp-state-lbl">Active button</div>
           <div class="otp-phone">
             <div class="otp-screen">
               <div class="otp-notch"></div>
@@ -465,7 +465,7 @@ body{background:var(--grad-hero) no-repeat 0 0/100% 820px,var(--bg);}
               <div class="otp-cta wait"><span class="otp-spinner"></span>Enviar código</div>
             </div>
           </div>
-          <div class="otp-state-lbl">loading: same verb, more doubt</div>
+          <div class="otp-state-lbl">Loading: same verb, more doubt</div>
         </div>
       </div>
 
@@ -485,7 +485,7 @@ body{background:var(--grad-hero) no-repeat 0 0/100% 820px,var(--bg);}
               <div class="otp-cta on">Verificar código</div>
             </div>
           </div>
-          <div class="otp-state-lbl">active button</div>
+          <div class="otp-state-lbl">Active button</div>
           <div class="otp-phone">
             <div class="otp-screen">
               <div class="otp-notch"></div>
@@ -497,7 +497,7 @@ body{background:var(--grad-hero) no-repeat 0 0/100% 820px,var(--bg);}
               <div class="otp-cta wait"><span class="otp-spinner"></span>Verificando</div>
             </div>
           </div>
-          <div class="otp-state-lbl">loading: the verb confirms the real state</div>
+          <div class="otp-state-lbl">Loading: the verb confirms the real state</div>
         </div>
       </div>
     </div>
