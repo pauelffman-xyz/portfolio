@@ -225,24 +225,6 @@ body:not(.light-mode) .theme-toggle .icon-moon { display:none; }
 }
 .dock-btn.active .dock-indicator{opacity:1;}
 
-/* ===== SECTION LABEL (left side) ===== */
-#section-label{
-  position:fixed;
-  left:2rem;
-  top:50%;
-  transform:translateY(-50%);
-  z-index:100;
-  writing-mode:vertical-rl;
-  text-orientation:mixed;
-  font-family:'Geist',sans-serif;
-  font-size:.8125rem;
-  letter-spacing:0;
-  text-transform:none;
-  color:var(--ash-2);
-  opacity:.6;
-  transition:opacity .4s;
-}
-
 /* ===== TOP RIGHT IDENTITY (hidden — replaced by #top-nav) ===== */
 #identity{ display:none; }
 
@@ -1280,7 +1262,6 @@ body:not(.light-mode) .theme-toggle .icon-moon { display:none; }
   .insight-row,.process-row,.impact-strip{grid-template-columns:1fr;}
   .wf-evo{grid-template-columns:1fr;gap:1rem;}
   .wf-arrow{display:none;}
-  #section-label{display:none;}
   #top-nav{padding:1rem 1.25rem;}
   .top-nav-links{gap:1rem;}
   .hello-hero{padding:6rem 1.5rem 2rem; min-height:35vh;}
@@ -2409,10 +2390,8 @@ mark.mk{background:transparent;color:var(--paper);font-weight:500;}
 .dv-passion:nth-child(odd) { padding-right:2rem; border-right:1px solid var(--line); }
 .dv-passion:nth-child(even) { padding-left:2rem; }
 .dv-statement { border-top:1px solid var(--line); padding-top:2.75rem; max-width:920px; }
-.dv-statement-h { font-family:'Geist',sans-serif; font-size:clamp(1.5rem,2.7vw,2.375rem); font-weight:700; letter-spacing:-.03em; line-height:1.28; color:var(--paper); margin-bottom:1.75rem; }
+.dv-statement-h { font-family:'Geist',sans-serif; font-size:clamp(1.5rem,2.7vw,2.375rem); font-weight:700; letter-spacing:-.03em; line-height:1.28; color:var(--paper); margin-bottom:0; }
 .dv-statement-h em { font-style:normal; color:var(--accent); }
-.dv-statement-tags { font-family:'Geist',sans-serif; font-size:.9375rem; letter-spacing:0; text-transform:none; color:var(--ash); }
-.dv-statement-tags span { color:var(--accent); }
 
 .dv-pills { display:flex; flex-wrap:wrap; gap:.75rem; }
 .dv-pill { padding:.625rem 1.5rem; border:1px solid color-mix(in srgb, var(--accent) 35%, transparent); border-radius:100px; font-family:'Geist',sans-serif; font-size:.9375rem; font-weight:500; color:var(--accent); background:transparent; transition:border-color .2s ease, background .2s ease; }
@@ -2424,13 +2403,17 @@ mark.mk{background:transparent;color:var(--paper);font-weight:500;}
 .dv-timeline { border-top:1px solid var(--line); }
 .dv-job { display:grid; grid-template-columns:220px 1fr; gap:4rem; padding:3rem 0; border-bottom:1px solid var(--line); }
 .dv-job:hover .dv-company { color:var(--accent); }
-.dv-period { font-family:'JetBrains Mono',monospace; font-size:.5625rem; letter-spacing:.1em; color:var(--ash-2); margin-bottom:.5rem; }
+.dv-period { font-family:'Geist',sans-serif; font-size:.8125rem; letter-spacing:0; color:var(--ash-2); margin-bottom:.375rem; }
 .dv-company { font-family:'Geist',sans-serif; font-size:1.125rem; font-weight:700; color:var(--paper); letter-spacing:-.02em; transition:color .3s; }
 .dv-role { font-family:'Geist',sans-serif; font-size:1.25rem; font-weight:700; color:var(--paper); letter-spacing:-.025em; margin-bottom:.875rem; }
 .dv-desc { font-family:'Muli',sans-serif; font-size:.9375rem; line-height:1.7; color:var(--ash); font-weight:300; margin-bottom:1rem; }
-.dv-tags { display:flex; flex-wrap:wrap; gap:.5rem; }
-.dv-tag { padding:.3125rem .875rem; border:1px solid var(--accent); border:1px solid color-mix(in srgb, var(--accent) 38%, transparent); border-radius:100px; font-family:'Geist',sans-serif; font-size:.8125rem; letter-spacing:0; text-transform:none; color:var(--accent); background:transparent; background:color-mix(in srgb, var(--accent) 9%, transparent); transition:border-color .2s ease, background-color .2s ease, color .2s ease; }
-.dv-tag:hover { border-color:color-mix(in srgb, var(--accent) 60%, transparent); background:color-mix(in srgb, var(--accent) 15%, transparent); }
+.dv-desc + .dv-facts { margin-top:.5rem; }
+/* Experience facts: value on top, label below. Replaces the green .dv-tag pills (Oct 2026). */
+.dv-facts { list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(3,minmax(0,13rem)); gap:1rem 2rem; }
+.dv-fact { display:flex; flex-direction:column; gap:.125rem; padding-left:1rem; border-left:1px solid var(--line-md); }
+.dv-fact b { font-family:'Geist',sans-serif; font-size:1.125rem; font-weight:600; letter-spacing:-.02em; color:var(--paper); line-height:1.25; }
+.dv-fact span { font-family:'Geist',sans-serif; font-size:.8125rem; letter-spacing:0; color:var(--ash); line-height:1.35; }
+@media(max-width:768px){ .dv-facts { grid-template-columns:1fr; gap:.5rem; padding-left:1rem; border-left:1px solid var(--line-md); } .dv-fact { flex-direction:row; align-items:baseline; gap:.625rem; padding-left:0; border-left:0; } .dv-fact b { font-size:1rem; } }
 
 .dv-human-h { font-family:'Geist',sans-serif; font-size:clamp(2rem,4vw,4rem); font-weight:800; letter-spacing:-.04em; color:var(--paper); line-height:.95; margin-bottom:3rem; }
 .dv-human-h em { font-style:normal; color:var(--accent); }
@@ -2496,7 +2479,7 @@ body.light-mode .tk-logo { filter:none; }
 .hs-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:1rem; }
 .hs-feature { margin-top:2.5rem; background:var(--surface); border:1px solid var(--line-md); border-radius:14px; padding:2.5rem; box-shadow:var(--shadow-card); }
 .hs-eyebrow { font-family:'Geist',sans-serif; font-size:.9375rem; letter-spacing:0; text-transform:none; color:var(--ash); margin-bottom:1rem;font-weight:500;}
-.hs-eyebrow-lg { font-size:clamp(.8125rem,1.1vw,.9375rem); font-weight:700; letter-spacing:.14em; margin-bottom:1.25rem; }
+.hs-eyebrow-lg { font-size:.9375rem; font-weight:500; letter-spacing:0; margin-bottom:1.25rem; }
 .hs-super-title { font-family:'Geist',sans-serif; font-size:clamp(1.75rem,3.2vw,2.75rem); font-weight:800; letter-spacing:-.03em; color:var(--paper); line-height:1.02; margin-bottom:.75rem; min-height:1.15em; }
 .hs-scramble-char { color:var(--accent); opacity:.75; }
 .hs-super-sub { font-family:'Muli',sans-serif; font-size:clamp(.9375rem,1.4vw,1.125rem); line-height:1.65; color:var(--ash); font-weight:300; max-width:620px; margin-bottom:2.5rem; }
@@ -2947,8 +2930,8 @@ body.light-mode .tile-sukupay-ds .tile-name {
   color:var(--ash-2); margin-top:.25rem;
 }
 .dv-job-loc {
-  font-family:'JetBrains Mono',monospace; font-size:.5rem;
-  letter-spacing:.08em; color:var(--ash-2); margin-top:.125rem;
+  font-family:'Geist',sans-serif; font-size:.8125rem;
+  letter-spacing:0; color:var(--ash-2); margin-top:.125rem;
 }
 
 /* ── MOBILE ── */
@@ -3264,8 +3247,7 @@ body.light-mode .work{ --wc-muted:#5E5E6C; }
 })();
 </script>
 
-<!-- Side label -->
-<div id="section-label">Paula Elffman · Portfolio OS</div>
+
 
 <!-- Top Navigation Bar (disabled — consolidated into dock) -->
 <header id="top-nav"></header>
@@ -3522,7 +3504,6 @@ body.light-mode .work{ --wc-muted:#5E5E6C; }
   </div>
   <div class="dv-statement">
     <p class="dv-statement-h">I design <em>complex digital products</em> and use <em>AI</em> to accelerate research, exploration, prototyping and iteration, without losing the <em>human judgment</em> behind the work.</p>
-    <div class="dv-statement-tags">Product Designer<span> · </span>AI-native workflows<span> · </span>FinTech<span> · </span>B2B SaaS</div>
   </div>
 </div>
 
@@ -3531,7 +3512,6 @@ body.light-mode .work{ --wc-muted:#5E5E6C; }
   <h2 class="dv-human-h">AI as a <em>force multiplier.</em></h2>
   <div class="ai-intro">
     <p>AI is <b>deeply integrated</b> into my design workflow. It doesn't replace design thinking. It works as a <span class="ai-accent">force multiplier</span> that lets me spend more time on <b>strategy, user experience</b> and cross-functional collaboration.</p>
-    <p>My primary tools are <b>Figma &amp; Claude</b>, which I use across the whole product design lifecycle. A few of the ways:</p>
   </div>
 
   <div class="ai-lab" id="aiLab">
@@ -3772,7 +3752,7 @@ body.light-mode .work{ --wc-muted:#5E5E6C; }
       <div class="dv-job-r">
         <div class="dv-role">Senior Product Designer</div>
         <p class="dv-desc">Leading product design for a Web3 remittance platform simplifying crypto payments from the US to Latin America. End-to-end design from discovery to delivery.</p>
-        <div class="dv-tags"><span class="dv-tag">Web3 · Fintech</span><span class="dv-tag">Remittances</span><span class="dv-tag">USDC · Blockchain</span></div>
+        <ul class="dv-facts"><li class="dv-fact"><b>Web3</b><span>Fintech</span></li><li class="dv-fact"><b>Remittances</b><span>US to Latin America</span></li><li class="dv-fact"><b>USDC</b><span>Blockchain</span></li></ul>
       </div>
     </div>
 
@@ -3781,7 +3761,7 @@ body.light-mode .work{ --wc-muted:#5E5E6C; }
       <div class="dv-job-r">
         <div class="dv-role">Senior Product Designer</div>
         <p class="dv-desc">Drove the product relaunch and embedded design excellence across Muv (ride-hailing) and Monchis (food delivery). Contributed to the Vendor Tool and Drivers App, and led the end-to-end launch of Smart Pass, the group's flagship smart-venues platform.</p>
-        <div class="dv-tags"><span class="dv-tag">Muv · 2.2M+ trips Q4</span><span class="dv-tag">Monchis · 44.6% CVR</span><span class="dv-tag">Smart Pass · flagship launch</span></div>
+        <ul class="dv-facts"><li class="dv-fact"><b>2.2M+</b><span>Muv trips in Q4</span></li><li class="dv-fact"><b>44.6%</b><span>Monchis CVR</span></li><li class="dv-fact"><b>Smart Pass</b><span>Flagship launch</span></li></ul>
       </div>
     </div>
 
@@ -3790,7 +3770,7 @@ body.light-mode .work{ --wc-muted:#5E5E6C; }
       <div class="dv-job-r">
         <div class="dv-role">Product Designer Consultant</div>
         <p class="dv-desc">Collaborated from zero to 100% with founders to launch the Marketplace. Created functionalities around user needs, introduced agile practices, and designed and implemented features for Tibetpass, the new ticketing vertical.</p>
-        <div class="dv-tags"><span class="dv-tag">0 → 1 marketplace</span><span class="dv-tag">Tibetpass</span><span class="dv-tag">Agile</span></div>
+        <ul class="dv-facts"><li class="dv-fact"><b>0 → 1</b><span>Marketplace</span></li><li class="dv-fact"><b>Tibetpass</b><span>Ticketing vertical</span></li><li class="dv-fact"><b>Agile</b><span>Practices introduced</span></li></ul>
       </div>
     </div>
 
@@ -3799,7 +3779,7 @@ body.light-mode .work{ --wc-muted:#5E5E6C; }
       <div class="dv-job-r">
         <div class="dv-role">Principal Product Designer</div>
         <p class="dv-desc">Reduced design time 30% by implementing a design system for consistency across platforms. Lifted engagement 10% and cut onboarding time 15% with more intuitive screens, and established core design principles to guide product direction.</p>
-        <div class="dv-tags"><span class="dv-tag">−30% design time</span><span class="dv-tag">+10% engagement</span><span class="dv-tag">−15% onboarding</span></div>
+        <ul class="dv-facts"><li class="dv-fact"><b>−30%</b><span>Design time</span></li><li class="dv-fact"><b>+10%</b><span>Engagement</span></li><li class="dv-fact"><b>−15%</b><span>Onboarding time</span></li></ul>
       </div>
     </div>
 
@@ -3808,7 +3788,7 @@ body.light-mode .work{ --wc-muted:#5E5E6C; }
       <div class="dv-job-r">
         <div class="dv-role">Senior Product Designer</div>
         <p class="dv-desc">Proposed new visual guidelines that raised consistency across B2B and B2C products and reworked 100% of the native app flows. Part of the Demand team, lifting CVR 6% with new features for reviews, menus and photo galleries.</p>
-        <div class="dv-tags"><span class="dv-tag">+6% CVR</span><span class="dv-tag">B2B · B2C</span><span class="dv-tag">100% native flows</span></div>
+        <ul class="dv-facts"><li class="dv-fact"><b>+6%</b><span>CVR</span></li><li class="dv-fact"><b>B2B · B2C</b><span>Products</span></li><li class="dv-fact"><b>100%</b><span>Native flows</span></li></ul>
       </div>
     </div>
 
@@ -3817,7 +3797,7 @@ body.light-mode .work{ --wc-muted:#5E5E6C; }
       <div class="dv-job-r">
         <div class="dv-role">Principal Product Designer &amp; Co-Founder</div>
         <p class="dv-desc">Built the product from scratch with the founding team: user research, ideation, prototyping, user testing and the go-to-market plan. Placed 3rd of 12 in the La Nave Madrid accelerator program.</p>
-        <div class="dv-tags"><span class="dv-tag">0 → 1 · Co-founder</span><span class="dv-tag">3rd / 12 · La Nave Madrid</span><span class="dv-tag">End-to-end UX</span></div>
+        <ul class="dv-facts"><li class="dv-fact"><b>0 → 1</b><span>Co-founder</span></li><li class="dv-fact"><b>3rd of 12</b><span>La Nave Madrid</span></li><li class="dv-fact"><b>End-to-end</b><span>UX</span></li></ul>
       </div>
     </div>
 
@@ -3826,7 +3806,7 @@ body.light-mode .work{ --wc-muted:#5E5E6C; }
       <div class="dv-job-r">
         <div class="dv-role">Product Designer</div>
         <p class="dv-desc">Acquired by TheFork · TripAdvisor in 2019. Increased engagement 10% and retention 25% with a new app homepage, designed B2B and B2C features, and helped build the first design system and design-sprint practice.</p>
-        <div class="dv-tags"><span class="dv-tag">+25% retention</span><span class="dv-tag">Acquired by TheFork</span><span class="dv-tag">First design system</span></div>
+        <ul class="dv-facts"><li class="dv-fact"><b>+25%</b><span>Retention</span></li><li class="dv-fact"><b>Acquired</b><span>By TheFork</span></li><li class="dv-fact"><b>First</b><span>Design system</span></li></ul>
       </div>
     </div>
 
@@ -5896,8 +5876,6 @@ function switchView(view){
   var target=document.getElementById(view+'-view');
   if(target) target.classList.add('active');
   window.scrollTo({top:0,behavior:'smooth'});
-  var lbl=document.getElementById('section-label');
-  if(lbl) lbl.textContent=view==='projects'?'Paula Elffman \u00B7 Projects':'Paula Elffman \u00B7 About';
   /* Trigger name animation ONLY on first visit per session */
   if(view==='dashboard'){
     var nameEl = document.getElementById('dv-name-anim');

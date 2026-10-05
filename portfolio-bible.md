@@ -1,6 +1,8 @@
 # Paula Elffman — Portfolio OS · Design Bible
 
-*Última actualización: Octubre 2026 — **etiquetas «Editorial» en todo el sitio**: se eliminó el tratamiento de micro-etiqueta en mayúsculas (8–11px, mono o Space Grotesk, tracking .12–.18em, rayita de color adelante) en la home y en los 14 cases del template viejo. Ahora todas las etiquetas siguen el modelo de `muv-case.html` y `vendor-tool-case.html`: tipografía del cuerpo (Geist, o Inter en los cases que usan Inter), minúsculas con mayúscula inicial, sin tracking, gris `--ash`, sin rayita. Ver la sección nueva "ETIQUETAS — ESTILO EDITORIAL" dentro de DESIGN TOKENS. También en esta pasada: limpieza de 90 archivos sin uso (65 MB) e imagen nueva en la tarjeta de Foody de la home (`assets/foody-home.webp`).*
+*Última actualización: 5 de octubre de 2026 — **About: limpieza y datos de experiencia.** Se quitaron dos textos (el tagline bajo el statement y la frase "My primary tools are Figma & Claude…"), y los 21 chips verdes del timeline de Experience (`.dv-tag`) pasaron a ser **datos** (`.dv-facts`: valor arriba, etiqueta abajo, sin píldora ni verde). De paso, fechas y ciudad del timeline y el rótulo "My superpower" quedaron alineados a la regla Editorial. Ver "About: limpieza y datos de experiencia" en AJUSTES RÁPIDOS POST-REVIEW. El mismo día, **el icono de la pestaña pasó a ser una carita pixelada** (círculo de píxeles, 16×16), ver "Pestaña: carita pixelada que guiña".*
+
+*Última actualización previa: Octubre 2026 — **etiquetas «Editorial» en todo el sitio**: se eliminó el tratamiento de micro-etiqueta en mayúsculas (8–11px, mono o Space Grotesk, tracking .12–.18em, rayita de color adelante) en la home y en los 14 cases del template viejo. Ahora todas las etiquetas siguen el modelo de `muv-case.html` y `vendor-tool-case.html`: tipografía del cuerpo (Geist, o Inter en los cases que usan Inter), minúsculas con mayúscula inicial, sin tracking, gris `--ash`, sin rayita. Ver la sección nueva "ETIQUETAS — ESTILO EDITORIAL" dentro de DESIGN TOKENS. También en esta pasada: limpieza de 90 archivos sin uso (65 MB) e imagen nueva en la tarjeta de Foody de la home (`assets/foody-home.webp`).*
 
 *Última actualización previa: Octubre 2026 — tres arreglos en la home + un cambio de copy. (1) **Carousel horizontal con auto-avance y arrastre** (dedo o mouse), reescrito en JS: la animación CSS pura se trababa en mobile y no se podía mover a mano. (2) **Pantalla en blanco al volver de un case con «atrás»**: el navegador restauraba la home desde bfcache con el overlay del Wipe todavía tapando todo; ahora un listener `pageshow` lo destapa. (3) **Esquinas inferiores de las cards del carousel cortadas**: no era el `border-radius`, era el `.projects-header` (margen negativo) tapando los últimos 32px (mobile) / 8px (desktop) de cada card; se subió el `padding-bottom` del carousel. Además, el intro de "AI in my workflow" ahora dice "My primary tool is **Figma & Claude**". **Luego se aplicó el mismo arreglo de `pageshow` a los 15 cases con overlay y se arregló el botón volver muerto de `elektra-otp.html`** (ver "Wipe Transition → Volver con «atrás»"). Ver "Carousel — auto-avance + arrastre (Octubre 2026)", "Carousel — esquinas inferiores cortadas", "Wipe Transition → Volver con «atrás»" y "AI in my workflow".*
 
@@ -146,6 +148,8 @@ Se sacó `'JetBrains Mono'` de las labels (eyebrows, section labels, back-nav, m
 **Excepciones (no se tocan):** textos que imitan la interfaz de un producto dentro de un mockup — `.tp-screen-eyebrow`, `.tp-bal-lbl` (home) y `.proto-ph-eyebrow`, `.proto-ph-bal-lbl` (SukuPay Prototyper). Tampoco los usos de Space Grotesk / JetBrains Mono que no son etiquetas: números, código, hex de color, URLs.
 
 **Al crear un case o una sección nueva:** no volver a escribir `text-transform:uppercase` con tracking en etiquetas. Copiar el patrón de `.kicker` de MUV.
+
+**Etiqueta lateral eliminada:** se quitó de `index.html` el rótulo vertical fijo del borde izquierdo (`#section-label`, "Paula Elffman · Portfolio OS" / "· Projects" / "· About"), junto con su CSS y la línea de `switchView()` que le cambiaba el texto. No volver a agregarlo.
 
 **Alcance del cambio:** 309 reglas CSS + 93 estilos inline, 18 rayitas, 227 textos pasados a sentence case, en `index.html` y 14 cases. De paso se corrigió un typo en Foody ("Fremium" → "Freemium") y se unificó "ITTI" → "Itti".
 
@@ -836,6 +840,7 @@ En el About, tras el `.dv-story` (los 4 párrafos, sin cambios), se **quitó la 
 
 - `.dv-statement-h` (Geist, ~2.375rem) — frase con las partes clave en verde accent (`em` → `var(--accent)`): *"I design **complex digital products** and use **AI** to accelerate research, exploration, prototyping and iteration — without losing the **human judgment** behind the work."*
 - `.dv-statement-tags` (mono, `--ash-2`) — tagline *Product Designer · AI-native workflows · FinTech · B2B SaaS*, con los separadores `·` en `var(--accent)` (`.dv-statement-tags span`).
+  - ⚠️ **Eliminado el 5 de octubre de 2026** (feedback del dev: sonaba a titular de LinkedIn). El statement queda solo con la frase; `.dv-statement-h` pasó a `margin-bottom:0` y se borró el CSS de `.dv-statement-tags`. No volver a agregarlo.
 
 Highlights vía `var(--accent)` → bright #22F0A4 en dark, teal #009D71 en light. Separado del story por `border-top` (mismo patrón que tenían las passions).
 
@@ -868,6 +873,8 @@ Highlights vía `var(--accent)` → bright #22F0A4 en dark, teal #009D71 en ligh
 > **Títulos del About Me (Agosto 2026, a pedido):** el `.dv-exp-h` pasó de "10 years. *Four chapters.*" → **"10 years *in product.*"**. El `.dv-human-h` de la sección "Beyond the work" pasó de "What feeds *the work.*" → **"Besides being a *product designer…*"** (el label mono "Beyond the work" no cambió).
 
 ### Chips de experiencia (`.dv-tag`) — verde accent en light/dark
+
+> ⚠️ **Reemplazado el 5 de octubre de 2026.** Los chips ya no existen: ver "About: limpieza y datos de experiencia" en AJUSTES RÁPIDOS POST-REVIEW. Lo que sigue queda como historial.
 
 *Agosto 2026 — ✅ corregido a pedido*
 
@@ -2062,12 +2069,17 @@ Los 14 `.tile-arrow-label` dicen "View case study" sin flecha (↗ significa lin
 - `pe-hi-shown` (solo en la primera visita de la sesión) y `prefers-reduced-motion` (no se muestra) siguen igual.
 - Se probó también una variante "Línea" (Pau dibujado en trazo, los círculos de la P y la a pasan a ser ojos y la u la boca). Quedó para la pestaña.
 
-### Pestaña: carita que guiña (4 de octubre)
+### Pestaña: carita pixelada que guiña (5 de octubre)
 
-- **Icono:** `assets/favicon.svg` es una carita sobre el mismo cuadrado oscuro de antes: dos ojos en anillo y una sonrisa en trazo de 4. Es la versión "Línea" del loader. Reemplaza a la P con el punto verde.
-- **`assets/tab.js`:** al abrir cualquier página pinta la carita, guiña a los 900ms y vuelve a los 1250ms. Con reduced motion queda fija. La parte 2 (color de la barra del navegador) no cambió.
-- **PNG:** `assets/favicon-32.png` (32×32, transparente) y `assets/apple-touch-icon.png` (180×180, fondo pleno) regenerados desde el SVG.
-- **Link previews:** las 17 imágenes de `assets/og/` se regeneraron con la carita en vez de la P, y sin el punto verde que acompañaba a "Case study".
+*Decidido por Paula: la carita de trazo sobre cuadrado oscuro (4 de octubre) no le gustó; prefiere el pixel, como el loader.*
+
+- **Icono:** `assets/favicon.svg` es un **círculo pixelado con una carita adentro** (dos ojos de 2×3 y una sonrisa ancha), dibujado en una grilla de **16×16**. Cada celda de la grilla es un píxel real de la pestaña (dos en pantallas retina), por eso se ve nítido y no borroso. Lleva `shape-rendering="crispEdges"`. Ya no hay cuadrado de fondo.
+- **Color:** círculo `#24242C` con cara `#F4F4F6`. Si el navegador está en modo oscuro se invierte solo (círculo claro, cara oscura) con un `@media (prefers-color-scheme:dark)` dentro del SVG, para que no desaparezca sobre la barra de pestañas oscura. Sin verde.
+- **`assets/tab.js`:** al abrir cualquier página pinta la carita, guiña a los 900ms (el ojo derecho pasa a ser una raya de 4×1) y vuelve a los 1250ms. Con reduced motion queda fija. La parte 2 (color de la barra del navegador) no cambió. El archivo es ASCII puro.
+- **PNG:** `assets/favicon-32.png` (32×32, transparente, círculo oscuro) y `assets/apple-touch-icon.png` (180×180, fondo pleno `#24242C` con el círculo claro) regenerados con el mismo dibujo.
+- **Link previews:** las 17 imágenes de `assets/og/` se regeneraron con la carita pixelada (círculo claro) en vez de la de trazo.
+- **Regla:** si se retoca el dibujo, mantener la grilla de 16×16 y trazos de celdas enteras. Una grilla más fina (como la de 13×13 del loader) se ve borrosa a 16px.
+- **Historial:** P con punto verde → carita de trazo sobre cuadrado oscuro (4 de octubre) → carita pixelada (5 de octubre).
 
 ### Hero: roles que ruedan a "lo que quedó" (4 de octubre)
 
@@ -2099,6 +2111,43 @@ Los 14 `.tile-arrow-label` dicen "View case study" sin flecha (↗ significa lin
 - **Causa:** un resto del header sticky viejo. Un `IntersectionObserver` le ponía la clase `.stuck` a `#proj-header` cada vez que no estaba entero en pantalla, y `.stuck` tenía un fondo oscuro fijo (`rgba(36,36,44,.96)`) sin versión para modo claro. Además `.stuck` le cambiaba el alto (107 → 74px en desktop, 95 → 70px en celular), así que la página pegaba un salto al pasar por ahí.
 - **Solución:** se quitó el observer (la franja ya no es sticky, no hacía falta) y el fondo de `.stuck` pasó a `var(--void)` por si alguna vez se vuelve a usar. Ahora el ribbon tiene siempre el fondo de la página y el mismo alto.
 - **Regla:** nada de colores fijos en superficies que cambian con el tema; siempre tokens (`var(--void)`, `var(--paper)`…). Las excepciones documentadas son las de tiles/cards que son oscuras en los dos modos.
+
+### About: limpieza y datos de experiencia (5 de octubre)
+
+**Dos textos eliminados** (feedback del dev):
+- El tagline bajo el statement: *Product Designer · AI-native workflows · FinTech · B2B SaaS* (`.dv-statement-tags`, HTML y CSS borrados).
+- En "AI in my workflow", el segundo párrafo del intro: *"My primary tools are Figma & Claude, which I use across the whole product design lifecycle. A few of the ways:"*. Las herramientas ya están en la sección Toolkit; el intro queda en un solo párrafo y de ahí pasa directo al carrusel.
+
+**Experience: de chips a datos.** Los 21 chips verdes (`.dv-tags` > `.dv-tag`, píldora con relleno y borde de acento) se reemplazaron por una fila de tres datos por empleo:
+
+```html
+<ul class="dv-facts">
+  <li class="dv-fact"><b>2.2M+</b><span>Muv trips in Q4</span></li>
+  <li class="dv-fact"><b>44.6%</b><span>Monchis CVR</span></li>
+  <li class="dv-fact"><b>Smart Pass</b><span>Flagship launch</span></li>
+</ul>
+```
+
+- **Por qué:** la píldora verde se leía como etiqueta de LinkedIn. El dato suelto, con el número grande, se lee como prueba. Es el mismo patrón del Toolkit (nombre + uso).
+- **Estilo:** valor en `<b>` (Geist 600, 1.125rem, `--paper`), etiqueta en `<span>` (Geist .8125rem, `--ash`), filete izquierdo `1px var(--line-md)`. Sin relleno, sin borde redondeado, sin verde. Grilla de 3 columnas (`minmax(0,13rem)`).
+- **Mobile (≤768px):** una columna; valor y etiqueta en la misma línea, con un solo filete izquierdo continuo para los tres.
+- **Contenido (valor / etiqueta):**
+
+| Empleo | Dato 1 | Dato 2 | Dato 3 |
+|---|---|---|---|
+| SukuPay | Web3 / Fintech | Remittances / US to Latin America | USDC / Blockchain |
+| itti | 2.2M+ / Muv trips in Q4 | 44.6% / Monchis CVR | Smart Pass / Flagship launch |
+| Beyond Art Group | 0 → 1 / Marketplace | Tibetpass / Ticketing vertical | Agile / Practices introduced |
+| AutoCloud | −30% / Design time | +10% / Engagement | −15% / Onboarding time |
+| TheFork · TripAdvisor | +6% / CVR | B2B · B2C / Products | 100% / Native flows |
+| Hotaru App | 0 → 1 / Co-founder | 3rd of 12 / La Nave Madrid | End-to-end / UX |
+| Restorando | +25% / Retention | Acquired / By TheFork | First / Design system |
+
+- **Regla:** siempre tres datos por empleo. El valor es lo más corto y fuerte (un número si lo hay); la etiqueta, dos o tres palabras en sentence case. No volver a usar `.dv-tag` ni píldoras en el timeline.
+
+**Alineado a la regla Editorial** (se habían escapado): `.dv-period` (fechas) y `.dv-job-loc` (ciudad) pasaron de JetBrains Mono 8–9px con tracking a Geist `.8125rem` sin tracking; `.hs-eyebrow-lg` ("My superpower") pasó de 700 con tracking `.14em` a `.9375rem` / 500 / `letter-spacing:0`.
+
+**Pendiente, sin decidir:** Core strengths sigue con sus 13 pills. El dev sugirió sacarlas o buscar otro enfoque, y linkear "I bridge the gap" a un case. Hay una propuesta dibujada (fortaleza + una línea de evidencia + link al case), todavía no aplicada.
 
 ### Metadata y Open Graph
 
