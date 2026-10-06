@@ -1,6 +1,8 @@
 # Paula Elffman — Portfolio OS · Design Bible
 
-*Última actualización: 6 de octubre de 2026 — **Cases: header transparente en Vendor Tool y equipo en el hero.** (1) `vendor-tool-case.html` recibió el bloque `#nav-glass` que ya tenía `muv-case.html`: el header de arriba (`.back-nav`) va sin fondo mientras la página está arriba de todo y toma el vidrio al hacer scroll. Le faltaba, por eso seguía con fondo. Ver "Header transparente arriba, vidrio al hacer scroll" dentro de CASE STUDIES. (2) **Equipo en el bloque de datos del hero:** Vendor Tool suma la fila Team (Lucia Giacomelli, Product Manager; Fabian de la Cruz, Engineering Manager) y muv completa la suya (Passengers: Nathalia Torres, PM; Gabriel Vargas, Engineering Manager; data). El degradé del hero (`--grad-warm`) no se tocó: sigue siendo regla.*
+*Última actualización: 6 de octubre de 2026 — **SmartPass: design system como board y header transparente.** (1) La sección Design System de `smartpass-case.html` dejó de ser cuatro grupos apilados (escalas de color, tipografía, toasts, filtros) y pasó a ser **un solo board** con todo a la vista: tipografía, botones, código de verificación, filtro, modal, íconos, colores, toast y badges. Está hecho en HTML/CSS, no es una imagen, y los componentes van **equidistantes**: una sola separación entre todos y un solo margen. Ver "DESIGN SYSTEM COMO BOARD" dentro de CASE STUDIES. (2) `smartpass-case.html` recibió el bloque `#nav-glass`: el header va sin fondo arriba de todo (se ve el degradé del cover) y toma el vidrio al hacer scroll. Ver "Header transparente arriba, vidrio al hacer scroll". (3) **Home: cover nuevo en la card de smartpass** (More work): `assets/smartpass-accreditations.webp`, el teléfono con la pantalla de acreditaciones, en lugar del login provisorio. Ver "Notas de covers" en "Home: grilla de casos".*
+
+*Última actualización previa: 6 de octubre de 2026 — **Cases: header transparente en Vendor Tool y equipo en el hero.** (1) `vendor-tool-case.html` recibió el bloque `#nav-glass` que ya tenía `muv-case.html`: el header de arriba (`.back-nav`) va sin fondo mientras la página está arriba de todo y toma el vidrio al hacer scroll. Le faltaba, por eso seguía con fondo. Ver "Header transparente arriba, vidrio al hacer scroll" dentro de CASE STUDIES. (2) **Equipo en el bloque de datos del hero:** Vendor Tool suma la fila Team (Lucia Giacomelli, Product Manager; Fabian de la Cruz, Engineering Manager) y muv completa la suya (Passengers: Nathalia Torres, PM; Gabriel Vargas, Engineering Manager; data). El degradé del hero (`--grad-warm`) no se tocó: sigue siendo regla.*
 
 *Última actualización previa: 5 de octubre de 2026 — **About: limpieza y datos de experiencia.** Se quitaron dos textos (el tagline bajo el statement y la frase "My primary tools are Figma & Claude…"), y los 21 chips verdes del timeline de Experience (`.dv-tag`) pasaron a ser **datos** (`.dv-facts`: valor arriba, etiqueta abajo, sin píldora ni verde). De paso, fechas y ciudad del timeline y el rótulo "My superpower" quedaron alineados a la regla Editorial. Ver "About: limpieza y datos de experiencia" en AJUSTES RÁPIDOS POST-REVIEW. El mismo día, **el icono de la pestaña pasó a ser una carita pixelada** (círculo de píxeles, 16×16), ver "Pestaña: carita pixelada que guiña".*
 
@@ -1109,7 +1111,51 @@ Lo que aparezca en el resultado y sea un color de **texto** (no un accent de mar
 | --- | --- |
 | `muv-case.html` | ✅ |
 | `vendor-tool-case.html` | ✅ (6 de octubre de 2026) |
+| `smartpass-case.html` | ✅ (6 de octubre de 2026), variante para el template viejo, ver nota |
 | Resto de los cases | Sin verificar |
+
+**Nota para el template viejo (`.section` / `.cover`, sin `<main>`), aplicada en `smartpass-case.html`:** el bloque se rearmó a partir de esta descripción, no se copió de `muv-case.html`. Hace lo mismo con dos diferencias de selector: el "primer bloque" es `.back-nav + .cover` (lleva el `border-top` transparente del alto del header y `background-origin:border-box`, así `--grad-hero` empieza desde el borde de arriba), y el vidrio queda fijado dentro del bloque en los valores de la regla (blanco al 92% en light, `rgba(36,36,44,.92)` en dark) con selectores `html body…`, porque smartpass traía dos fondos viejos del header (`.82` en light y `rgba(30,30,38,.85)` en dark, este último en el `<style>` del final del body). Revisado arriba y con scroll, en light y dark, a 1440, 1100, 820 y 390px. Si se quiere el bloque literal de muv, se puede reemplazar: el comportamiento es el mismo.
+
+### DESIGN SYSTEM COMO BOARD (`.dsb`, octubre 2026)
+
+**Qué es:** la parte de design system de un case se arma como **un solo board**, no como grupos apilados con título, descripción y tarjeta por componente. En una sola pieza se ve la tipografía en grande, los estados de botón, los componentes clave, el set de íconos y los colores. Referencias: el board de ejemplo con Playfair Display + Inter y el frame `example` del archivo de Figma `Muv-landing` (board de SmartPass).
+
+**Aplicado en:** `smartpass-case.html` (6 de octubre de 2026). La sección Design System de `muv-case.html` sigue como está (✅ APROBADO, no tocar sin pedido explícito).
+
+**Reglas:**
+
+- **No es una imagen.** Los componentes se construyen en HTML/CSS con los tokens del Figma (colores, radios, tamaños de texto). Se ven nítidos a cualquier tamaño y en mobile se pueden reordenar.
+- **Equidistante.** Una sola separación entre componentes, igual en horizontal y en vertical (`--g`, 40 en la escala del board), y un solo margen exterior (`--p`, 52). Las columnas quedan al ras arriba y abajo.
+- **Qué absorbe la diferencia de alto:** las piezas que son contenedor y no componente: la tarjeta blanca del código de verificación, la tarjeta blanca de los badges y los swatches de color. Los componentes no se estiran en alto. Excepción en smartpass: el filtro ocupa el ancho de su columna (en Figma mide 174 y dejaba un hueco a su derecha).
+- **Escala:** todas las medidas son px de Figma multiplicados por `--u` (`100cqw / 1170`), así el board escala entero con su contenedor. Para sumar o cambiar un componente se usan los valores de Figma tal cual, multiplicados por `--u`.
+- **Colores fijos, no tokens de página.** El board es un specimen de UI: queda claro también en dark mode (misma excepción que `.flow-node`).
+- **Tipografía del producto:** si el producto usa una fuente que el case no carga, se suma al `<link>` de Google Fonts (smartpass: Inter 400/500/600/700).
+- **Mobile (contenedor de 900px o menos):** el board deja de ser grilla y se apila: tipografía, colores, botones, código, modal, íconos en fila, filtro, toast, badges, con la misma separación entre todos y cada pieza a tamaño de lectura (`--u` de 1px como máximo).
+- **Debajo del board:** una fila de notas cortas con el porqué (smartpass: Color, Type, Feedback, Filters). Cuatro columnas en desktop, dos hasta 900px, una en mobile.
+- **Íconos:** en smartpass son los de Lucide con el mismo nombre que en Figma (`user`, `trash-2`, `eye`, `calendar`, `map-pin`, `check`, `search`, `check-check`, `circle`, `chevron-down`, `x`), inline como SVG.
+
+**Layout de smartpass (desktop):** cuatro columnas: botones + código + filtro · modal + badges · riel de íconos · colores. El título "Font Inter" va arriba a la izquierda y el toast abajo a la derecha, bajo los colores.
+
+**Diferencias con el frame de Figma (smartpass):** el toast y los badges cambiaron de lugar entre sí para que las columnas cierren al ras; el filtro no muestra el tercer botón que asomaba cortado; el texto del badge de éxito se igualó al de warning (en Figma estaba más chico); el copy lleva signos de apertura ("¿No recibiste el código?", "¡Felicitaciones!").
+
+**Qué se eliminó en smartpass:** las escalas de color de 11 pasos con hex, las filas de Display, el toast de error y el empty state, junto con su CSS (`.ds-group`, `.color-scale`, `.swatch`, `.type-row`, `.ds-comp`, `.ds-tag`, `.toast-preview`, `.filter-mock`). Se conservan `.ds-intro`, `.ds-title` y `.ds-sub`.
+
+**CSS classes clave**
+
+```css
+.dsb-wrap      /* figure, contenedor de container queries */
+.dsb           /* el board: grilla, --u, --g, --p */
+.dsb-col       /* columna apilada (a y b); display:contents en mobile */
+.dsb-type      /* specimen tipográfico */
+.dsb-btns / .dsb-btn (.is-primary .is-hover .is-disabled .is-soft .is-loading .is-icon .is-lg .is-secondary)
+.dsb-otp       /* tarjeta del código de verificación */
+.dsb-filter    /* multi-select de empresas */
+.dsb-modal     /* modal de inicio de sesión */
+.dsb-icons     /* riel de íconos */
+.dsb-colors / .dsb-sw (.is-step .is-dark)
+.dsb-toast / .dsb-badges / .dsb-badge (.is-warning .is-success)
+.dsb-notes     /* notas bajo el board */
+```
 
 ### 🐛 BUG CONOCIDO Y CORREGIDO (Septiembre 2026) — `.back-nav` sticky y su meta (`.nav-right` / `.back-nav-right`) fijos al valor de light, sin contraparte en dark
 
@@ -2217,7 +2263,7 @@ Los 14 `.tile-arrow-label` dicen "View case study" sin flecha (↗ significa lin
 
 | # | Card | Línea | Rubro | Cover | Encuadre |
 | --- | --- | --- | --- | --- | --- |
-| 1 | smartpass | Digital ticketing & access. | Access control | `assets/smartpass-phone.webp` (provisorio) | `center 30%` |
+| 1 | smartpass | Digital ticketing & access. | Access control | `assets/smartpass-accreditations.webp` | `center 14%` |
 | 2 | hugo | AI Customer Success agent, vibe coded. | AI agent | `assets/hugo.webm` | `center 4%` |
 | 3 | monchis *drivers* | Shift management for 1,200+ drivers. | Delivery ops | `assets/drivers.webp` | centro |
 | 4 | fancy monas | NFT collection marketplace onboarding. | NFT marketplace | `assets/fancymonas.jpg` | centro |
@@ -2240,7 +2286,7 @@ En las tablas, la palabra en *cursiva* es la que va dentro de `<span>` (se ve at
 - **sukupay prototyper:** no tiene captura. Usa la demo animada del tile original (se tipea el prompt, se enciende `/prototype`, aparece la pantalla). Siempre oscura, en light y en dark.
 - **monchis:** foto de la chica con el teléfono. Se probó el mockup de dos teléfonos inclinados (`assets/monchis_paths_hero.webp`) y Paula volvió a la foto. El archivo `monchis_in_hand.webp` se reemplazó el 4 de octubre por una versión nueva de la misma foto (1872×1248); **el caso de Monchis usa el mismo archivo**, así que cambió ahí también.
 - **vendor tool:** foto del editor de menú en una laptop. Hace par con la de monchis: las dos son fotos de uso real.
-- **smartpass:** teléfono inclinado con el login, **provisorio**. La imagen es vertical (1248×1872) y la card apaisada: se recorta para que entren el logo, el titular y el login. La captura de desktop anterior (`assets/smart.webp`) sigue en la carpeta.
+- **smartpass:** teléfono inclinado con la pantalla de acreditaciones ("Paraguay vs Chile · 2000 acreditaciones totales"), archivo `assets/smartpass-accreditations.webp` (6 de octubre de 2026; original PNG 1248×1872 de 3,9 MB, pasado a WebP calidad 82, 111 KB). Reemplaza al teléfono con el login, que era provisorio. La imagen es vertical y la card apaisada (4:3): con `center 14%` entran el borde de arriba del teléfono con aire, el logo, el titular, los badges, "Solicitar validación", las pestañas y el buscador. `assets/smartpass-phone.webp` (el del login) y `assets/smart.webp` (la captura de desktop) siguen en la carpeta, sin uso en la home.
 - **foody:** teléfono inclinado sobre fondo negro con la home de la app. Es un archivo nuevo (`assets/foody-home.webp`) que usa solo la card de la home; el caso y el link preview siguen con `assets/foody.jpg`.
 - **Carrusel:** sin cambios (suku, monchis, vendor, muv, con sus imágenes de siempre). Los cuatro se repiten en Selected work justo debajo; queda pendiente decidir si se le suma prototyper o se saca.
 

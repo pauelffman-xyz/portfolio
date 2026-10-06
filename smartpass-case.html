@@ -23,7 +23,7 @@
 <link rel="alternate icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <script src="assets/tab.js" defer></script>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;700;800;900&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 :root{
@@ -201,54 +201,152 @@ body.dark-mode .process-grid .proc-step:nth-child(1) .proc-num{
 .ds-title{font-family:'Geist',sans-serif;font-size:clamp(2.5rem,4vw,4rem);font-weight:800;letter-spacing:-.04em;color:var(--ink);line-height:.95;margin-bottom:1rem;}
 .ds-title em{font-style:normal;color:var(--green);}
 .ds-sub{font-family:'Geist',sans-serif;font-size:1rem;line-height:1.75;color:var(--ash);font-weight:300;max-width:680px;}
-.ds-group{margin-bottom:4rem;padding-bottom:4rem;border-bottom:1px solid var(--line);}
-.ds-group:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
-.ds-group-label{display:flex;align-items:center;gap:.875rem;font-family:'Geist',sans-serif;font-size:1.125rem;font-weight:700;color:var(--ink);letter-spacing:-.02em;margin-bottom:.875rem;}
-.ds-group-num{font-family:'Space Grotesk',sans-serif;font-size:.5625rem;letter-spacing:.12em;color:var(--green);border:1px solid rgba(23,162,93,.3);border-radius:100px;padding:.2rem .625rem;}
-.ds-group-desc{font-family:'Geist',sans-serif;font-size:.9375rem;line-height:1.7;color:var(--ash);font-weight:300;max-width:720px;margin-bottom:2rem;}
+/* DS board: one artboard instead of stacked groups. Every size is a Figma px
+   multiplied by --u, so the board scales as a single piece on desktop.
+   Layout rule: ONE gutter (--g) between every component, in both directions, and
+   ONE outer padding (--p). Columns are flush top and bottom: the code card, the
+   swatches and the badge card take up the slack, the components keep their size.
+   Colours are fixed (not page tokens): it is a UI specimen, same exception as .flow-node. */
+.dsb-wrap{container-type:inline-size;margin:0;}
+.dsb{
+  --u:calc(100cqw / 1170);
+  --g:calc(var(--u)*40);--p:calc(var(--u)*52);
+  display:grid;
+  grid-template-columns:calc(var(--u)*306.56) calc(var(--u)*305) calc(var(--u)*24) minmax(0,1fr);
+  grid-template-rows:auto 1fr auto;
+  grid-template-areas:"type type type colors" "a b icons colors" "a b toast toast";
+  gap:var(--g);padding:var(--p);
+  background:#F2F3F5;border-radius:calc(var(--u)*28);
+  font-family:'Inter',system-ui,sans-serif;font-style:normal;
+  color:#181D27;overflow:hidden;
+}
+.dsb *{box-sizing:border-box;}
+.dsb svg{display:block;width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.dsb i{display:block;flex:none;}
+.dsb-col{display:flex;flex-direction:column;gap:var(--g);min-width:0;}
+.dsb-col-a{grid-area:a;}
+.dsb-col-b{grid-area:b;}
 
-/* Color scales */
-.color-scale{display:flex;flex-direction:column;gap:.625rem;margin-bottom:1.5rem;}
-.color-scale-label{font-family:'Geist',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--ink);font-weight:700;}
-.color-swatches{display:grid;grid-template-columns:repeat(11,1fr);gap:.375rem;}
-.swatch{border-radius:6px;overflow:hidden;border:1px solid var(--line);}
-.swatch-color{height:44px;}
-.swatch-meta{padding:.3rem .4rem;background:#fff;}
-.swatch-step{font-family:'Space Grotesk',sans-serif;font-size:.4rem;color:var(--ash);}
-.swatch-hex{font-family:'Space Grotesk',sans-serif;font-size:.4rem;color:var(--ink);}
+/* type: negative margins trim the line box to the cap height, so the gutter is measured from the letters */
+.dsb-type{grid-area:type;font-size:calc(var(--u)*104.6);line-height:1;letter-spacing:calc(var(--u)*-2.09);color:#061C3D;font-weight:400;white-space:nowrap;margin:calc(var(--u)*-14.25) 0 calc(var(--u)*-14.25) calc(var(--u)*-8);}
+.dsb-type b{font-weight:700;}
 
-/* Typography */
-.type-row{display:flex;align-items:baseline;gap:1.5rem;padding:1.25rem 0;border-bottom:1px solid var(--line);}
-.type-row:last-child{border-bottom:none;}
-.type-sample{font-weight:700;letter-spacing:-.02em;color:var(--ink);}
-.type-meta{font-family:'Space Grotesk',sans-serif;font-size:.625rem;color:var(--ash);white-space:nowrap;}
+/* buttons */
+.dsb-btns{display:grid;grid-template-columns:1fr 1fr;gap:calc(var(--u)*20);align-items:center;}
+.dsb-btn{
+  display:flex;align-items:center;justify-content:center;gap:calc(var(--u)*5.73);
+  padding:calc(var(--u)*7.164) calc(var(--u)*12.895);border-radius:calc(var(--u)*8);border:calc(var(--u)*.716) solid transparent;
+  font-size:calc(var(--u)*11.46);line-height:calc(var(--u)*17.194);font-weight:600;white-space:nowrap;
+  box-shadow:0 calc(var(--u)*.716) calc(var(--u)*1.433) rgba(10,13,18,.05);
+}
+.dsb-btn.is-primary{background:#1D252D;border-color:#181D27;color:#fff;}
+.dsb-btn.is-hover{background:#414651;border-color:#414651;color:#fff;box-shadow:0 calc(var(--u)*.716) calc(var(--u)*1.433) rgba(10,13,18,.05),0 0 0 calc(var(--u)*4) rgba(168,169,171,.1);}
+.dsb-btn.is-disabled{background:#D5D7DA;border-color:#D5D7DA;color:#fff;}
+.dsb-btn.is-soft{background:#DCFCEB;border-color:#DCFCEB;color:#17643F;}
+.dsb-btn.is-loading{background:#F0FDF6;border-color:#F0FDF6;color:#4CDC94;}
+.dsb-btn.is-loading i{width:calc(var(--u)*14.33);height:calc(var(--u)*14.33);}
+.dsb-btn.is-icon{width:calc(var(--u)*34.39);height:calc(var(--u)*34.39);padding:0;justify-self:center;background:#DCFCEB;border-color:#DCFCEB;color:#17643F;}
+.dsb-btn.is-icon i{width:calc(var(--u)*14.33);height:calc(var(--u)*14.33);}
 
-/* Components */
-.ds-comp-grid{display:grid;gap:1.5rem;}
-.ds-2col{grid-template-columns:1fr 1fr;}
-.ds-3col{grid-template-columns:repeat(3,1fr);}
-.ds-comp{background:#fff;border:1px solid var(--line2);border-radius:12px;overflow:hidden;}
-.ds-comp-label{font-family:'Geist',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--ash);padding:.875rem 1.25rem;border-bottom:1px solid var(--line);}
-.ds-comp-img{padding:1.5rem;background:var(--bg2);display:flex;align-items:center;justify-content:center;min-height:80px;}
-.ds-comp-meta{display:flex;flex-wrap:wrap;gap:.375rem;padding:.875rem 1.25rem;}
-.ds-tag{padding:.25rem .75rem;border-radius:100px;border:1px solid var(--line2);font-family:'Geist',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;color:var(--ash);}
-.ds-tag-green{border-color:rgba(23,162,93,.3);color:var(--green);}
-.ds-tag-red{border-color:rgba(217,45,32,.3);color:var(--red);}
+/* verification code */
+.dsb-otp{flex:1 0 auto;min-height:calc(var(--u)*113.9);background:#fff;border-radius:calc(var(--u)*14.33);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:calc(var(--u)*12);}
+.dsb-otp-row{display:flex;gap:calc(var(--u)*1.5);width:calc(var(--u)*222.8);}
+.dsb-otp-cell{
+  flex:1;height:calc(var(--u)*33.63);border-radius:calc(var(--u)*8);border:calc(var(--u)*.525) solid #4CDC94;background:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-size:calc(var(--u)*25.22);font-weight:500;letter-spacing:calc(var(--u)*-.5);color:#167F4B;
+  box-shadow:0 calc(var(--u)*.525) calc(var(--u)*.525) rgba(10,13,18,.05);
+}
+.dsb-otp-cell.is-focus{box-shadow:0 0 0 calc(var(--u)*2.1) #BCF6D8;}
+.dsb-otp-cell.is-empty{border-color:#D5D7DA;color:#D5D7DA;}
+.dsb-otp-help{font-size:calc(var(--u)*10.03);line-height:calc(var(--u)*14.33);color:#535862;}
+.dsb-otp-help u{text-underline-offset:calc(var(--u)*2);}
 
-/* Toast previews */
-.toast-preview{display:flex;align-items:center;gap:.75rem;padding:.875rem 1.25rem;border-radius:10px;font-size:.8125rem;width:100%;}
-.toast-success{background:#ECFDF3;border:1px solid #A6F4C5;color:#054F31;}
-.toast-error{background:#FEF3F2;border:1px solid #FECDCA;color:#7A271A;}
-.toast-icon{width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.625rem;flex-shrink:0;color:#fff;}
-.toast-success .toast-icon{background:#17A25D;}
-.toast-error .toast-icon{background:#D92D20;}
+/* filter */
+.dsb-filter{background:#fff;border:calc(var(--u)*.716) solid #E9EAEB;border-radius:calc(var(--u)*8);overflow:hidden;box-shadow:0 calc(var(--u)*8.6) calc(var(--u)*11.46) calc(var(--u)*-4) rgba(10,13,18,.08),0 calc(var(--u)*2.87) calc(var(--u)*4.3) calc(var(--u)*-2) rgba(10,13,18,.03);}
+.dsb-filter-search{padding:calc(var(--u)*11.46) calc(var(--u)*8.6) calc(var(--u)*5.73);}
+.dsb-field-sm{display:flex;align-items:center;gap:calc(var(--u)*5.73);padding:calc(var(--u)*7.164) calc(var(--u)*10.03);border:calc(var(--u)*.716) solid #D5D7DA;border-radius:calc(var(--u)*8);font-size:calc(var(--u)*10.03);line-height:calc(var(--u)*14.33);color:#717680;}
+.dsb-field-sm i{width:calc(var(--u)*14.33);height:calc(var(--u)*14.33);}
+.dsb-opt{display:flex;align-items:center;gap:calc(var(--u)*5.73);padding:calc(var(--u)*7.164) calc(var(--u)*11.46);font-size:calc(var(--u)*10.03);line-height:calc(var(--u)*14.33);font-weight:500;color:#414651;}
+.dsb-check{width:calc(var(--u)*11.46);height:calc(var(--u)*11.46);border-radius:calc(var(--u)*4);border:calc(var(--u)*.716) solid #D5D7DA;background:#fff;flex:none;}
+.dsb-check.is-on{background:#DCFCEB;border-color:#167F4B;color:#167F4B;padding:calc(var(--u)*.8);}
+.dsb-check.is-on svg{stroke-width:3;}
+.dsb-filter-actions{display:flex;gap:calc(var(--u)*8.6);padding:calc(var(--u)*11.46);border-top:calc(var(--u)*.716) solid #E9EAEB;}
+.dsb-btn-sm{display:flex;align-items:center;justify-content:center;flex:1;padding:calc(var(--u)*5.73) calc(var(--u)*10.03);border:calc(var(--u)*.716) solid #D5D7DA;border-radius:calc(var(--u)*8);background:#fff;font-size:calc(var(--u)*10.03);line-height:calc(var(--u)*14.33);font-weight:600;color:#414651;white-space:nowrap;box-shadow:0 calc(var(--u)*.716) calc(var(--u)*1.433) rgba(10,13,18,.05);}
+.dsb-btn-sm.is-icon{flex:none;width:calc(var(--u)*25.79);padding:calc(var(--u)*5.73) 0;}
+.dsb-btn-sm.is-icon i{width:calc(var(--u)*14.33);height:calc(var(--u)*14.33);}
 
-/* Filter dropdown mock */
-.filter-mock{background:#fff;border:1px solid var(--line2);border-radius:10px;padding:1rem;width:220px;font-size:.75rem;}
-.filter-search{border:1px solid var(--line2);border-radius:6px;padding:.4rem .625rem;color:var(--ash);margin-bottom:.75rem;}
-.filter-opt{display:flex;align-items:center;gap:.5rem;padding:.375rem 0;color:var(--ink);}
-.filter-check{width:14px;height:14px;border-radius:3px;border:1px solid var(--line2);flex-shrink:0;}
-.filter-check.checked{background:var(--green);border-color:var(--green);position:relative;}
+/* modal */
+.dsb-modal{position:relative;padding:calc(var(--u)*20.286);background:#fff;border:calc(var(--u)*1) solid #EDE9E9;border-radius:calc(var(--u)*10.14);display:flex;flex-direction:column;align-items:center;gap:calc(var(--u)*20.286);box-shadow:0 calc(var(--u)*16.9) calc(var(--u)*20.29) calc(var(--u)*-3.38) rgba(10,13,18,.08),0 calc(var(--u)*6.76) calc(var(--u)*6.76) calc(var(--u)*-3.38) rgba(10,13,18,.03);}
+.dsb-featured{width:calc(var(--u)*40.57);height:calc(var(--u)*40.57);border-radius:50%;background:#BCF6D8;border:calc(var(--u)*6.76) solid #DCFCEB;padding:calc(var(--u)*3.4);color:#167F4B;}
+.dsb-close{position:absolute;top:calc(var(--u)*19.29);right:calc(var(--u)*19.29);width:calc(var(--u)*27.05);height:calc(var(--u)*27.05);border-radius:50%;background:#fff;padding:calc(var(--u)*6.5);color:#1D252D;box-shadow:0 calc(var(--u)*1) calc(var(--u)*2) rgba(10,13,18,.06),0 calc(var(--u)*3) calc(var(--u)*8) rgba(10,13,18,.12);}
+.dsb-modal-title{font-size:calc(var(--u)*15.21);line-height:calc(var(--u)*23.67);font-weight:600;color:#181D27;text-align:center;}
+.dsb-form{align-self:stretch;display:flex;flex-direction:column;gap:calc(var(--u)*13.52);}
+.dsb-label{font-size:calc(var(--u)*11.83);line-height:calc(var(--u)*16.9);font-weight:500;color:#414651;margin-bottom:calc(var(--u)*5.07);}
+.dsb-input{display:flex;align-items:center;gap:calc(var(--u)*6.76);padding:calc(var(--u)*8.45) calc(var(--u)*11.83);border:calc(var(--u)*.845) solid #D5D7DA;border-radius:calc(var(--u)*8);background:#fff;font-size:calc(var(--u)*13.52);line-height:calc(var(--u)*20.29);color:#717680;box-shadow:0 calc(var(--u)*.845) calc(var(--u)*1.69) rgba(10,13,18,.05);}
+.dsb-input.is-placeholder{color:#A4A7AE;}
+.dsb-input .dsb-cc{display:flex;align-items:center;gap:calc(var(--u)*1);color:#181D27;margin-right:calc(var(--u)*3.4);}
+.dsb-input .dsb-cc i{width:calc(var(--u)*16.9);height:calc(var(--u)*16.9);color:#717680;}
+.dsb-modal-actions{display:flex;flex-direction:column;gap:calc(var(--u)*10.14);margin-top:calc(var(--u)*16.9);}
+.dsb-btn.is-lg{padding:calc(var(--u)*8.45) calc(var(--u)*15.21);font-size:calc(var(--u)*13.52);line-height:calc(var(--u)*20.29);border-width:calc(var(--u)*.845);}
+.dsb-btn.is-secondary{background:#fff;border-color:#D5D7DA;color:#414651;margin-top:calc(var(--u)*3.38);}
+.dsb-link{font-size:calc(var(--u)*13.52);line-height:calc(var(--u)*20.29);font-weight:600;color:#1D252D;text-align:center;}
+
+/* icons: a rail that runs the full height of its row, first and last icon on the row edges */
+.dsb-icons{grid-area:icons;display:flex;flex-direction:column;align-items:center;justify-content:space-between;color:#414651;}
+.dsb-icons i{width:calc(var(--u)*24);height:calc(var(--u)*24);}
+.dsb-icons .dsb-checkbox{width:calc(var(--u)*24);height:calc(var(--u)*24);border-radius:calc(var(--u)*6);border:calc(var(--u)*1) solid #414651;background:#DCFCEB;padding:calc(var(--u)*3.4);}
+
+/* colour */
+.dsb-colors{grid-area:colors;display:flex;flex-direction:column;min-height:0;}
+.dsb-sw{position:relative;flex:3 1 0;min-height:0;}
+.dsb-sw.is-step{flex:1 1 0;}
+.dsb-sw span{position:absolute;left:calc(var(--u)*21.49);bottom:calc(var(--u)*19);font-size:calc(var(--u)*8.6);line-height:1.2;color:#000;white-space:nowrap;}
+.dsb-sw.is-dark span{color:#B3B2B2;}
+
+/* feedback */
+.dsb-toast{grid-area:toast;display:flex;align-items:center;gap:calc(var(--u)*7.16);padding:calc(var(--u)*17.19);background:#D1FADF;border-bottom:calc(var(--u)*3.58) solid #32D583;border-radius:calc(var(--u)*12);font-size:calc(var(--u)*11.46);line-height:1.25;color:#054F31;}
+.dsb-toast i{width:calc(var(--u)*17.19);height:calc(var(--u)*17.19);}
+.dsb-toast b{font-weight:500;}
+.dsb-badges{flex:1 0 auto;min-height:calc(var(--u)*84);background:#fff;border-radius:calc(var(--u)*14.33);display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:calc(var(--u)*10);padding:calc(var(--u)*20) calc(var(--u)*24);box-shadow:0 calc(var(--u)*1.43) calc(var(--u)*2.15) rgba(20,25,26,.08);}
+.dsb-badge{display:flex;align-items:center;gap:calc(var(--u)*5.73);padding:calc(var(--u)*2.87) calc(var(--u)*7.16) calc(var(--u)*2.87) calc(var(--u)*2.87);border-radius:calc(var(--u)*16);font-size:calc(var(--u)*8.6);line-height:calc(var(--u)*12.9);font-weight:500;white-space:nowrap;}
+.dsb-badge em{font-style:normal;padding:calc(var(--u)*1.43) calc(var(--u)*5.73);border-radius:calc(var(--u)*16);background:#fff;border:calc(var(--u)*.716) solid;}
+.dsb-badge.is-warning{background:#FFFAEB;color:#B54708;}
+.dsb-badge.is-warning em{border-color:#FEDF89;}
+.dsb-badge.is-success{background:#DCFCEB;color:#17643F;}
+.dsb-badge.is-success em{border-color:#87EEBA;}
+
+/* notes under the board */
+.dsb-notes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(24px,3vw,48px);margin-top:clamp(40px,5vw,72px);}
+.dsb-note-t{font-size:.9375rem;font-weight:700;letter-spacing:-.01em;color:var(--ink);margin-bottom:.5rem;}
+.dsb-note-d{font-size:.875rem;line-height:1.65;color:var(--ash);}
+
+/* narrow container: the artboard becomes a stack, each piece at reading size, same gutter between all of them */
+@container (max-width:900px){
+  .dsb{
+    --u:min(calc(100cqw / 348),1px);
+    --g:calc(var(--u)*32);--p:calc(var(--u)*24);
+    display:flex;flex-wrap:wrap;justify-content:center;align-items:center;border-radius:20px;
+  }
+  .dsb-col{display:contents;}
+  .dsb > *,.dsb-col > *{max-width:100%;}
+  .dsb-type{order:1;flex:0 0 100%;font-size:calc(var(--u)*66);letter-spacing:calc(var(--u)*-1.3);margin:calc(var(--u)*-9) 0 calc(var(--u)*-9) calc(var(--u)*-4);}
+  .dsb-colors{order:2;flex:0 0 100%;border-radius:calc(var(--u)*14);overflow:hidden;}
+  .dsb-sw{flex:none;height:calc(var(--u)*78);}
+  .dsb-sw.is-step{flex:none;height:calc(var(--u)*30);}
+  .dsb-sw span{left:calc(var(--u)*16);bottom:calc(var(--u)*12);font-size:calc(var(--u)*10);}
+  .dsb-btns{order:3;grid-template-columns:calc(var(--u)*143.28) calc(var(--u)*143.28);gap:calc(var(--u)*14);}
+  .dsb-otp{order:4;flex:none;width:calc(var(--u)*306.56);height:calc(var(--u)*113.9);}
+  .dsb-modal{order:5;width:calc(var(--u)*305);}
+  .dsb-icons{order:6;flex:0 0 100%;flex-direction:row;justify-content:center;gap:calc(var(--u)*26);}
+  .dsb-filter{order:7;width:calc(var(--u)*230);}
+  .dsb-toast{order:8;width:calc(var(--u)*386.86);}
+  .dsb-badges{order:9;flex:none;width:calc(var(--u)*305);align-items:center;}
+  .dsb-badge{white-space:normal;}
+  .dsb-badge em{white-space:nowrap;}
+}
+@media(max-width:900px){.dsb-notes{grid-template-columns:repeat(2,minmax(0,1fr));}}
+@media(max-width:768px){.dsb-notes{grid-template-columns:minmax(0,1fr);gap:1.5rem;}}
 
 /* ── EMAIL COMMS ── */
 .email-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem;}
@@ -365,10 +463,8 @@ body.dark-mode .process-grid .proc-step:nth-child(1) .proc-num{
   .lane{margin-bottom:1.5rem;}
   .branch-row{flex-direction:column;gap:1rem;}
   .branch-row::before{display:none;}
-  .ds-2col,.ds-3col{grid-template-columns:1fr;}
   .email-grid{grid-template-columns:1fr;}
   .decisions-grid{grid-template-columns:1fr;}
-  .color-swatches{grid-template-columns:repeat(4,1fr);}
 }
 </style>
 <style id="v3-principles">
@@ -481,37 +577,32 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
   [style*="grid-template-columns"]{grid-template-columns:minmax(0,1fr)!important;}
   [style*="gap:4rem"],[style*="gap:3rem"]{gap:2rem!important;}
   .cover-title{font-size:clamp(2.75rem,15vw,5rem);}
-  /* type scale: sample above its spec, sizes stepped down so they fit */
-  .type-row{flex-direction:column;align-items:flex-start;gap:.375rem;}
-  .type-sample[style*="4.5rem"]{font-size:3.25rem!important;}
-  .type-sample[style*="3.75rem"]{font-size:2.75rem!important;}
-  .type-sample[style*="3rem"]{font-size:2.25rem!important;}
   @media(max-width:420px){.process-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
 }
 /* ═══ /MOBILE ═══ */
 </style>
-<!-- HEADER: transparent at the top of the page, glass once you scroll (Oct 2026). Same block in every case. -->
+<!-- HEADER: transparent at the top, glass on scroll (see the bible: "Header transparente arriba, vidrio al hacer scroll") -->
 <style id="nav-glass">
-:root{--nav-h:49px;}
-.back-nav{margin-bottom:calc(-1 * var(--nav-h));transition:background-color .35s ease,border-color .35s ease,-webkit-backdrop-filter .35s ease,backdrop-filter .35s ease,box-shadow .35s ease;}
-.back-nav + .cover,.back-nav + main > :first-child{border-top:var(--nav-h) solid transparent;background-origin:border-box;}
-html.nav-top .back-nav{background-color:transparent !important;background-image:none !important;border-bottom-color:transparent !important;-webkit-backdrop-filter:none !important;backdrop-filter:none !important;box-shadow:none !important;}
+/* the header floats over the first block, so the hero gradient starts at the very top of the page */
+.back-nav{margin-bottom:calc(-1 * var(--nav-h,54px));transition:background-color .35s ease,border-color .35s ease,box-shadow .35s ease;}
+.back-nav + .cover{border-top:var(--nav-h,54px) solid transparent;background-origin:border-box;}
+/* scrolled: glass */
+html body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.92);}
+html body.dark-mode .back-nav{background:rgba(36,36,44,.92);}
+/* top of the page: no background, no blur, no line, no shadow */
+html.nav-top body .back-nav{background:transparent;-webkit-backdrop-filter:none;backdrop-filter:none;border-bottom-color:transparent;box-shadow:none;}
 @media (prefers-reduced-motion:reduce){.back-nav{transition:none;}}
 </style>
 <script>
-/* nav-glass: html.nav-top while the page is at the top; --nav-h follows the real header height */
 (function(){
-  var d=document.documentElement;
-  function top(){ d.classList.toggle('nav-top',(window.pageYOffset||d.scrollTop||0)<8); }
-  function size(){ var n=document.querySelector('.back-nav'); if(n) d.style.setProperty('--nav-h',n.offsetHeight+'px'); }
-  top();
-  window.addEventListener('scroll',top,{passive:true});
-  window.addEventListener('pageshow',top);
-  document.addEventListener('DOMContentLoaded',function(){
-    size(); top();
-    var n=document.querySelector('.back-nav');
-    if(n && 'ResizeObserver' in window) new ResizeObserver(size).observe(n); else window.addEventListener('resize',size);
-  });
+  var root=document.documentElement;
+  function atTop(){root.classList.toggle('nav-top',(window.pageYOffset||root.scrollTop||0)<8);}
+  function measure(){var n=document.querySelector('.back-nav');if(n)root.style.setProperty('--nav-h',n.offsetHeight+'px');}
+  atTop();
+  window.addEventListener('scroll',atTop,{passive:true});
+  window.addEventListener('resize',measure);
+  window.addEventListener('load',measure);
+  document.addEventListener('DOMContentLoaded',function(){measure();atTop();});
 })();
 </script>
 </head>
@@ -850,115 +941,101 @@ html.nav-top .back-nav{background-color:transparent !important;background-image:
     <p class="ds-sub">A color and type system with AA/AAA-verified contrast ratios across every step, plus a component library covering the states an access-control product actually needs: success, error, and everything in between.</p>
   </div>
 
-  <!-- COLOR SYSTEM -->
-  <div class="ds-group">
-    <div class="ds-group-label"><span class="ds-group-num">01</span>Color System</div>
-    <p class="ds-group-desc">Five scales — neutral gray, brand emerald, navy secondary, error red and warning amber — each with 11 steps and documented contrast ratios (AA/AAA) against white.</p>
+  <!-- One board: type, colour, buttons, inputs, modal, icons and feedback side by side -->
+  <figure class="dsb-wrap" role="img" aria-label="SmartPass design system board: Inter typeface, brand color swatches, button states, verification code input, company filter, sign-in modal, icon set, success toast and status badges.">
+    <div class="dsb">
+      <div class="dsb-type">Font <b>Inter</b></div>
 
-    <div class="color-scale">
-      <div class="color-scale-label">Gray · Neutral</div>
-      <div class="color-swatches">
-        <div class="swatch"><div class="swatch-color" style="background:#FDFDFD"></div><div class="swatch-meta"><div class="swatch-step">25</div><div class="swatch-hex">#FDFDFD</div></div></div>
-        <div class="swatch"><div class="swatch-color" style="background:#FAFAFA"></div><div class="swatch-meta"><div class="swatch-step">50</div><div class="swatch-hex">#FAFAFA</div></div></div>
-        <div class="swatch"><div class="swatch-color" style="background:#F5F5F5"></div><div class="swatch-meta"><div class="swatch-step">100</div><div class="swatch-hex">#F5F5F5</div></div></div>
-        <div class="swatch"><div class="swatch-color" style="background:#E9EAEB"></div><div class="swatch-meta"><div class="swatch-step">200</div><div class="swatch-hex">#E9EAEB</div></div></div>
-        <div class="swatch"><div class="swatch-color" style="background:#D5D7DA"></div><div class="swatch-meta"><div class="swatch-step">300</div><div class="swatch-hex">#D5D7DA</div></div></div>
-        <div class="swatch"><div class="swatch-color" style="background:#A4A7AE"></div><div class="swatch-meta"><div class="swatch-step">400</div><div class="swatch-hex">#A4A7AE</div></div></div>
-        <div class="swatch"><div class="swatch-color" style="background:#717680"></div><div class="swatch-meta"><div class="swatch-step">500</div><div class="swatch-hex" style="color:#fff">#717680</div></div></div>
-        <div class="swatch"><div class="swatch-color" style="background:#535862"></div><div class="swatch-meta"><div class="swatch-step">600</div><div class="swatch-hex" style="color:#fff">#535862</div></div></div>
-        <div class="swatch"><div class="swatch-color" style="background:#414651"></div><div class="swatch-meta"><div class="swatch-step">700</div><div class="swatch-hex" style="color:#fff">#414651</div></div></div>
-        <div class="swatch"><div class="swatch-color" style="background:#252B37"></div><div class="swatch-meta"><div class="swatch-step">800</div><div class="swatch-hex" style="color:#fff">#252B37</div></div></div>
-        <div class="swatch"><div class="swatch-color" style="background:#101828"></div><div class="swatch-meta"><div class="swatch-step">900</div><div class="swatch-hex" style="color:#fff">#101828</div></div></div>
-      </div>
-    </div>
-
-    <div class="color-scale">
-      <div class="color-scale-label">Brand · Emerald</div>
-      <div class="color-swatches">
-        <div class="swatch"><div class="swatch-color" style="background:#f0fdf6"></div><div class="swatch-meta"><div class="swatch-step">50</div><div class="swatch-hex">#f0fdf6</div></div></div>
-        <div class="swatch"><div class="swatch-color" style="background:#dcfceb"></div><div class="swatch-meta"><div class="swatch-step">100</div><div class="swatch-hex">#dcfceb</div></div></div>
-        <div class="swatch"><div class="swatch-color" style="background:#bcf6d8"></div><div class="swatch-meta"><div class="swatch-step">200</div><div class="swatch-hex">#bcf6d8</div></div></div>
-        <div class="swatch"><div class="swatch-color" style="background:#87eeba"></div><div class="swatch-meta"><div class="swatch-step">300</div><div class="swatch-hex">#87eeba</div></div></div>
-        <div class="swatch"><div class="swatch-color" style="background:#4cdc94"></div><div class="swatch-meta"><div class="swatch-step">Brand</div><div class="swatch-hex">#4cdc94</div></div></div>
-        <div class="swatch"><div class="swatch-color" style="background:#26d07c"></div><div class="swatch-meta"><div class="swatch-step">500</div><div class="swatch-hex">#26d07c</div></div></div>
-        <div class="swatch"><div class="swatch-color" style="background:#17a25d"></div><div class="swatch-meta"><div class="swatch-step">600</div><div class="swatch-hex" style="color:#fff">#17a25d</div></div></div>
-        <div class="swatch"><div class="swatch-color" style="background:#167f4b"></div><div class="swatch-meta"><div class="swatch-step">700</div><div class="swatch-hex" style="color:#fff">#167f4b</div></div></div>
-        <div class="swatch"><div class="swatch-color" style="background:#17643f"></div><div class="swatch-meta"><div class="swatch-step">800</div><div class="swatch-hex" style="color:#fff">#17643f</div></div></div>
-        <div class="swatch"><div class="swatch-color" style="background:#155235"></div><div class="swatch-meta"><div class="swatch-step">900</div><div class="swatch-hex" style="color:#fff">#155235</div></div></div>
-        <div class="swatch"><div class="swatch-color" style="background:#003532"></div><div class="swatch-meta"><div class="swatch-step">950</div><div class="swatch-hex" style="color:#fff">#003532</div></div></div>
-      </div>
-    </div>
-
-    <div class="color-scale">
-      <div class="color-scale-label">Error · Success · Warning</div>
-      <div class="color-swatches">
-        <div class="swatch"><div class="swatch-color" style="background:#F04438"></div><div class="swatch-meta"><div class="swatch-step">Error</div><div class="swatch-hex" style="color:#fff">#F04438</div></div></div>
-        <div class="swatch"><div class="swatch-color" style="background:#D92D20"></div><div class="swatch-meta"><div class="swatch-step">Error 600</div><div class="swatch-hex" style="color:#fff">#D92D20</div></div></div>
-        <div class="swatch"><div class="swatch-color" style="background:#12B76A"></div><div class="swatch-meta"><div class="swatch-step">Success</div><div class="swatch-hex" style="color:#fff">#12B76A</div></div></div>
-        <div class="swatch"><div class="swatch-color" style="background:#039855"></div><div class="swatch-meta"><div class="swatch-step">Success 600</div><div class="swatch-hex" style="color:#fff">#039855</div></div></div>
-        <div class="swatch"><div class="swatch-color" style="background:#F79009"></div><div class="swatch-meta"><div class="swatch-step">Warning</div><div class="swatch-hex" style="color:#fff">#F79009</div></div></div>
-        <div class="swatch"><div class="swatch-color" style="background:#DC6803"></div><div class="swatch-meta"><div class="swatch-step">Warning 600</div><div class="swatch-hex" style="color:#fff">#DC6803</div></div></div>
-        <div class="swatch"><div class="swatch-color" style="background:#517589"></div><div class="swatch-meta"><div class="swatch-step">Navy 500</div><div class="swatch-hex" style="color:#fff">#517589</div></div></div>
-        <div class="swatch"><div class="swatch-color" style="background:#1d252d"></div><div class="swatch-meta"><div class="swatch-step">Navy 950</div><div class="swatch-hex" style="color:#fff">#1d252d</div></div></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- TYPOGRAPHY -->
-  <div class="ds-group">
-    <div class="ds-group-label"><span class="ds-group-num">02</span>Typography</div>
-    <p class="ds-group-desc">A Display scale from lg to 2xl, each weight tested for hierarchy at a glance — headlines that need to work on a stadium-lit phone screen just as well as an admin desktop.</p>
-    <div class="type-row"><div class="type-sample" style="font-size:4.5rem;line-height:1;">Display 2xl</div><div class="type-meta">72px / 90px · LS 2%</div></div>
-    <div class="type-row"><div class="type-sample" style="font-size:3.75rem;line-height:1;">Display xl</div><div class="type-meta">60px / 72px · LS 2%</div></div>
-    <div class="type-row"><div class="type-sample" style="font-size:3rem;line-height:1;">Display lg</div><div class="type-meta">48px / 60px · LS 2%</div></div>
-  </div>
-
-  <!-- COMPONENT STATES -->
-  <div class="ds-group">
-    <div class="ds-group-label"><span class="ds-group-num">03</span>Feedback · Toasts & Alerts</div>
-    <p class="ds-group-desc">Every critical action — creating a password, importing a CSV, adding an accredited person — gets an explicit toast. Success and error share the same anatomy: icon, message, dismiss.</p>
-    <div class="ds-comp-grid ds-2col">
-      <div class="ds-comp">
-        <div class="ds-comp-label">Toast · Success</div>
-        <div class="ds-comp-img">
-          <div class="toast-preview toast-success"><div class="toast-icon">✓</div>¡Felicitaciones! Has creado tu contraseña correctamente</div>
+      <div class="dsb-col dsb-col-a">
+        <div class="dsb-btns">
+          <div class="dsb-btn is-primary">Ingresar</div>
+          <div class="dsb-btn is-soft">Ingresar</div>
+          <div class="dsb-btn is-hover">Registrarme</div>
+          <div class="dsb-btn is-loading">Registrarme<i><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg></i></div>
+          <div class="dsb-btn is-disabled">Ingresar</div>
+          <div class="dsb-btn is-icon"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></i></div>
         </div>
-        <div class="ds-comp-meta"><span class="ds-tag ds-tag-green">Emerald · Success</span><span class="ds-tag">Checkmark icon</span></div>
-      </div>
-      <div class="ds-comp">
-        <div class="ds-comp-label">Toast · Error</div>
-        <div class="ds-comp-img">
-          <div class="toast-preview toast-error"><div class="toast-icon">!</div>Hubo un error. No hemos podido agregar al acreditado.</div>
-        </div>
-        <div class="ds-comp-meta"><span class="ds-tag ds-tag-red">Red · Error</span><span class="ds-tag">Retry guidance</span></div>
-      </div>
-    </div>
-  </div>
 
-  <div class="ds-group">
-    <div class="ds-group-label"><span class="ds-group-num">04</span>Filters · Multi-select</div>
-    <p class="ds-group-desc">The Empresa filter used across the gestores table — search field plus checkbox list plus an explicit "Aplicar filtros" action, so nothing re-renders mid-selection.</p>
-    <div class="ds-comp-grid ds-2col">
-      <div class="ds-comp">
-        <div class="ds-comp-label">Filter · Company multi-select</div>
-        <div class="ds-comp-img">
-          <div class="filter-mock">
-            <div class="filter-search">🔍 Buscar empresa</div>
-            <div class="filter-opt"><div class="filter-check checked"></div>Empresa A</div>
-            <div class="filter-opt"><div class="filter-check"></div>Empresa B</div>
-            <div class="filter-opt"><div class="filter-check"></div>Empresa C</div>
+        <div class="dsb-otp">
+          <div class="dsb-otp-row">
+            <div class="dsb-otp-cell">0</div><div class="dsb-otp-cell">0</div><div class="dsb-otp-cell">0</div><div class="dsb-otp-cell is-focus">0</div><div class="dsb-otp-cell is-empty">0</div><div class="dsb-otp-cell is-empty">0</div>
+          </div>
+          <div class="dsb-otp-help">¿No recibiste el código? <u>Reenviar</u></div>
+        </div>
+
+        <div class="dsb-filter">
+          <div class="dsb-filter-search"><div class="dsb-field-sm"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg></i>Buscar empresa</div></div>
+          <div class="dsb-opt"><span class="dsb-check is-on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>Empresa A</div>
+          <div class="dsb-opt"><span class="dsb-check"></span>Empresa B</div><div class="dsb-opt"><span class="dsb-check"></span>Empresa C</div><div class="dsb-opt"><span class="dsb-check"></span>Empresa D</div><div class="dsb-opt"><span class="dsb-check"></span>Empresa E</div>
+          <div class="dsb-filter-actions">
+            <div class="dsb-btn-sm">Aplicar filtros</div>
+            <div class="dsb-btn-sm is-icon"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></i></div>
           </div>
         </div>
-        <div class="ds-comp-meta"><span class="ds-tag">Search-to-filter</span><span class="ds-tag">Explicit apply</span></div>
       </div>
-      <div class="ds-comp">
-        <div class="ds-comp-label">Empty state · No gestores</div>
-        <div class="ds-comp-img" style="text-align:center;padding:1.5rem;">
-          <div style="font-size:.875rem;font-weight:700;color:var(--ink);margin-bottom:.375rem;">¡Aún no tienes lista de gestores!</div>
-          <div style="font-size:.75rem;color:var(--ash);">Para poder entregar las acreditaciones, debes subir tu lista.</div>
+
+      <div class="dsb-col dsb-col-b">
+        <div class="dsb-modal">
+          <div class="dsb-close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></div>
+          <div class="dsb-featured"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+          <div class="dsb-modal-title">Iniciar sesión</div>
+          <div class="dsb-form">
+            <div>
+              <div class="dsb-label">Número de teléfono</div>
+              <div class="dsb-input"><span class="dsb-cc">PY<i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></i></span>Ingrese el número</div>
+            </div>
+            <div>
+              <div class="dsb-label">Contraseña</div>
+              <div class="dsb-input is-placeholder">Escribir contraseña</div>
+            </div>
+            <div class="dsb-modal-actions">
+              <div class="dsb-btn is-primary is-lg">Ingresar</div>
+              <div class="dsb-link">Olvidé mi contraseña</div>
+              <div class="dsb-btn is-secondary is-lg">Registrarme</div>
+            </div>
+          </div>
         </div>
-        <div class="ds-comp-meta"><span class="ds-tag">Guided next step</span><span class="ds-tag">CSV template link</span></div>
+
+        <div class="dsb-badges">
+          <div class="dsb-badge is-warning"><em>¡Asigna acreditaciones!</em><span>Faltan 10 días para el evento</span></div>
+          <div class="dsb-badge is-success"><em>¡Buen trabajo!</em><span>La foto es válida. Guardá los cambios</span></div>
+        </div>
       </div>
+
+      <div class="dsb-icons">
+        <i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></i><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></i><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg></i><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 2v3"/><path d="M16 2v3"/><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg></i><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg></i>
+        <i class="dsb-checkbox"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></i>
+      </div>
+
+      <div class="dsb-colors">
+        <div class="dsb-sw" style="background:#4CDC94"><span>Brand</span></div>
+        <div class="dsb-sw is-dark" style="background:#1D252D"><span>Secondary</span></div>
+        <div class="dsb-sw" style="background:#D1E0D7"><span>Tertiary</span></div>
+        <div class="dsb-sw is-step" style="background:#DCFCEB"></div>
+        <div class="dsb-sw is-step" style="background:#BCF6D8"></div>
+        <div class="dsb-sw is-step" style="background:#87EEBA"></div>
+      </div>
+
+      <div class="dsb-toast"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 7 17l-5-5"/><path d="m22 10-7.5 7.5L13 16"/></svg></i><span><b>¡Felicitaciones!</b> Has creado tu contraseña correctamente</span></div>
+    </div>
+  </figure>
+
+  <div class="dsb-notes">
+    <div>
+      <div class="dsb-note-t">Color</div>
+      <p class="dsb-note-d">Five scales (neutral gray, brand emerald, navy secondary, error red and warning amber), each with 11 steps and documented AA/AAA contrast against white.</p>
+    </div>
+    <div>
+      <div class="dsb-note-t">Type</div>
+      <p class="dsb-note-d">Inter throughout, with a Display scale from lg to 2xl: headlines that work on a stadium-lit phone screen as well as on an admin desktop.</p>
+    </div>
+    <div>
+      <div class="dsb-note-t">Feedback</div>
+      <p class="dsb-note-d">Every critical action (creating a password, importing a CSV, adding an accredited person) gets an explicit toast or badge.</p>
+    </div>
+    <div>
+      <div class="dsb-note-t">Filters</div>
+      <p class="dsb-note-d">Search plus a checkbox list plus an explicit "Aplicar filtros" action, so nothing re-renders mid-selection.</p>
     </div>
   </div>
 </div>
