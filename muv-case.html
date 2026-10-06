@@ -167,8 +167,6 @@ body.dark-mode .back-nav{background:rgba(36,36,44,.92);}
 figure figcaption{margin-top:.875rem;font-size:.875rem;line-height:1.5;color:var(--ash);max-width:70ch;}
 .panel{background:#fff;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);}
 .panel img{width:100%;}
-.panel.scroll{overflow-x:auto;}
-.panel.scroll img{min-width:720px;}
 .narrow-fig{max-width:920px;margin-inline:auto;}
 .duo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(20px,3vw,40px);}
 @media(max-width:760px){.duo{grid-template-columns:1fr;}}
@@ -447,7 +445,6 @@ body.dark-mode .panel,body.dark-mode .wf-strip .wf{border-color:transparent;}
 @media(max-width:700px){.levers{grid-template-columns:1fr;}}
 .flag{display:inline-block;vertical-align:-1px;margin-right:.5rem;border-radius:2px;box-shadow:0 0 0 1px rgba(26,24,20,.16);}
 .row .was{text-decoration:line-through;font-size:11px;}
-.panel.scroll img{min-width:900px;}
 .wf-item figcaption{margin-top:.625rem;font-size:.875rem;font-weight:600;color:var(--paper);}
 @media(max-width:640px){.pairs dd{grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:.75rem;}.pairs b{font-size:1.5rem;}}
 .hero-video video{aspect-ratio:16/9;object-fit:cover;}
@@ -1165,12 +1162,6 @@ html.nav-top .back-nav{background-color:transparent !important;background-image:
       </li>
     </ol>
     <!-- TODO(Paula): confirm what the UI shows on cancellation, if you want it named here -->
-
-    <figure>
-      <!-- MOBILE (pending image): wrap the img in <picture><source media="(max-width:640px)" srcset="muv-assets/muv-full-flow-mobile.webp" width="1080" height="1350"> … </picture> and drop "scroll" from the panel -->
-      <div class="panel scroll" style="padding:clamp(8px,2vw,24px)"><img src="muv-assets/muv-full-flow.webp" width="2012" height="926" loading="lazy" decoding="async" alt="The whole passenger app across its states: saved-card prompt, trip summary and review, matching with the search route, the home with the driver-confirmed banner and services, the category list with the Recommended option, and the driver card with the five-minute free wait"></div>
-      <figcaption>The whole passenger app, from home and categories to matching, driver assigned and review.</figcaption>
-    </figure>
 
     <div class="split">
       <div>
