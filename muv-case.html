@@ -472,7 +472,9 @@ body.dark-mode .decision .media{border-color:transparent;}
 .decision .media.details figure{width:min(100%,400px);}
 .decision .media.details img{width:100%;height:auto;border-radius:var(--r-sm);box-shadow:0 0 0 1px var(--line2),0 10px 28px rgba(20,20,20,.10);background:#fff;}
 .decision .media.details figcaption{margin-top:.625rem;font-size:.8125rem;color:var(--ash);text-align:center;}
-img.envio{width:100%;height:auto;}
+/* Send composite: a transparent render with white, frameless screens, so it sits on a tinted stage (on the white page the screens had no edge) */
+.envio-stage{padding:clamp(20px,4vw,56px) clamp(12px,3vw,40px);}
+.frame.envio-stage img.envio{display:block;width:100%;max-width:960px;height:auto;margin-inline:auto;}
 img.legacy{width:100%;height:auto;}
 
 /* ─── Sketch scenes (storytelling illustrations) ───
@@ -1237,18 +1239,11 @@ html.nav-top .back-nav{background-color:transparent !important;background-image:
         <h3 class="h3">The same flow, for sending a package</h3>
         <p class="prose">Send reuses the trip flow and its components: address entry, categories with a recommended option, and one clear action. Sending needs a card, so the home asks for one first. After the details step comes the delivery, and the same rating.</p>
       </div>
-      <!-- TODO(Paula): the small text inside this composite looks soft/warped at full width; if you have a clean export from Figma, swap it in -->
+      <!-- TODO(Paula): the UI copy inside this render is warped in places ("Categorio y precio", "Excelenta servicio", "Temé la ruta indicada"); if you have a clean export from Figma, swap it in -->
       <figure>
-        <!-- MOBILE (pending images): replace the strip below with one image per screen:
-        <div class="shots">
-          <img src="muv-assets/muv-envio-01.webp" width="780" height="1690" loading="lazy" decoding="async" alt="Home asking to add a card">
-          <img src="muv-assets/muv-envio-02.webp" width="780" height="1690" loading="lazy" decoding="async" alt="Addresses">
-          <img src="muv-assets/muv-envio-03.webp" width="780" height="1690" loading="lazy" decoding="async" alt="Categories: Moto, Economy, Muv">
-          <img src="muv-assets/muv-envio-04.webp" width="780" height="1690" loading="lazy" decoding="async" alt="Package details">
-          <img src="muv-assets/muv-envio-05.webp" width="780" height="1690" loading="lazy" decoding="async" alt="Delivery rating">
-        </div> -->
-        <img class="envio" src="muv-assets/muv-envio-flow.webp" width="1600" height="691" loading="lazy" decoding="async" alt="The Send flow in five screens: the home asking to add a card and showing the Ride and Send services, the address entry titled Your delivery with muv, the category list with Moto, Economy and Muv and their prices, the package details with Send and Receive tabs, and the delivered screen with a rating prompt">
-        <figcaption>Send: add a card, enter the addresses, pick a category (Moto, Economy or Muv), review the package details, and rate the delivery.</figcaption>
+        <!-- MOBILE (pending image): wrap the img in <picture><source media="(max-width:640px)" srcset="muv-assets/muv-envio-fan-mobile.webp" width="1080" height="1350"> … </picture> (2–3 phones, vertical 4:5) -->
+        <div class="frame envio-stage"><img class="envio" src="muv-assets/muv-envio-fan.webp" width="2000" height="1342" loading="lazy" decoding="async" alt="The Send flow in four screens, fanned out: the home asking to add a card above the Ride and Send services, the category list with Moto marked Recommended next to Economy and Muv, the package details with Send and Receive tabs and the price, and the rating screen with five stars and preset reasons"></div>
+        <figcaption>Send: add a card, pick a category (Moto, Economy or Muv), review the package details, and rate the delivery.</figcaption>
       </figure>
     </div>
 
