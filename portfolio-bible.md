@@ -1,6 +1,8 @@
 # Paula Elffman — Portfolio OS · Design Bible
 
-*Última actualización: 5 de octubre de 2026 — **About: limpieza y datos de experiencia.** Se quitaron dos textos (el tagline bajo el statement y la frase "My primary tools are Figma & Claude…"), y los 21 chips verdes del timeline de Experience (`.dv-tag`) pasaron a ser **datos** (`.dv-facts`: valor arriba, etiqueta abajo, sin píldora ni verde). De paso, fechas y ciudad del timeline y el rótulo "My superpower" quedaron alineados a la regla Editorial. Ver "About: limpieza y datos de experiencia" en AJUSTES RÁPIDOS POST-REVIEW. El mismo día, **el icono de la pestaña pasó a ser una carita pixelada** (círculo de píxeles, 16×16), ver "Pestaña: carita pixelada que guiña". También ese día, **el header de los 16 cases pasó a ser transparente arriba de todo y glass al scrollear**, ver "Cases: header transparente arriba, glass al scrollear".*
+*Última actualización: 6 de octubre de 2026 — **`vendor-tool-case.html`: hero sin fondo y equipo.** (1) Se quitó el degradé del hero (`.hero{background:var(--grad-warm)}` y el token `--grad-warm`, light y dark): el hero queda sobre el color de la página, como ya se había decidido para los cases. **Regla: el hero de los cases no lleva fondo.** El archivo lo conservaba porque la biblia todavía lo indicaba. (2) Se sumó la fila **Team** al bloque de datos del hero: Lucia Giacomelli (Product Manager) y Fabian de la Cruz (Engineering Manager). Ver "Cambios en `vendor-tool-case.html` (6 de octubre de 2026)".*
+
+*Última actualización previa: 5 de octubre de 2026 — **About: limpieza y datos de experiencia.** Se quitaron dos textos (el tagline bajo el statement y la frase "My primary tools are Figma & Claude…"), y los 21 chips verdes del timeline de Experience (`.dv-tag`) pasaron a ser **datos** (`.dv-facts`: valor arriba, etiqueta abajo, sin píldora ni verde). De paso, fechas y ciudad del timeline y el rótulo "My superpower" quedaron alineados a la regla Editorial. Ver "About: limpieza y datos de experiencia" en AJUSTES RÁPIDOS POST-REVIEW. El mismo día, **el icono de la pestaña pasó a ser una carita pixelada** (círculo de píxeles, 16×16), ver "Pestaña: carita pixelada que guiña".*
 
 *Última actualización previa: Octubre 2026 — **etiquetas «Editorial» en todo el sitio**: se eliminó el tratamiento de micro-etiqueta en mayúsculas (8–11px, mono o Space Grotesk, tracking .12–.18em, rayita de color adelante) en la home y en los 14 cases del template viejo. Ahora todas las etiquetas siguen el modelo de `muv-case.html` y `vendor-tool-case.html`: tipografía del cuerpo (Geist, o Inter en los cases que usan Inter), minúsculas con mayúscula inicial, sin tracking, gris `--ash`, sin rayita. Ver la sección nueva "ETIQUETAS — ESTILO EDITORIAL" dentro de DESIGN TOKENS. También en esta pasada: limpieza de 90 archivos sin uso (65 MB) e imagen nueva en la tarjeta de Foody de la home (`assets/foody-home.webp`).*
 
@@ -1317,7 +1319,7 @@ La regla es: **ante la duda, más aire.** Una sección tiene que poder respirar 
 
 | Token | Light | Dark | Dónde |
 | --- | --- | --- | --- |
-| `--grad-warm` | `#FFEEE2 → #FFF7F1 → #FFF` | `#352822 → #2A2527 → #24242C` | Hero (`.hero`). **Por case:** se tiñe con el color de marca. |
+| ~~`--grad-warm`~~ | ~~`#FFEEE2 → #FFF7F1 → #FFF`~~ | ~~`#352822 → #2A2527 → #24242C`~~ | **Retirado (octubre 2026).** Era el fondo del hero (`.hero`). El hero ya no lleva fondo: queda sobre `--bg`. |
 | `--grad-neutral` | `#F5F5F7 → #FAFAFB → #FFF` | `#2C2C35 → #26262E → #24242C` | Todas las `.sec.tint` |
 | `--grad-subtle` | `#F7F7F8 → #FBFBFC → #FFF` | `#29292F → #26262D → #24242C` | Secciones que piden un gris muy sutil (en muv: `#motion`) |
 | `--grad-cool` | `#E9EDF8 → #F4F6FB → #FFF` | `#262B45 → #252838 → #24242C` | Disponible. En muv se probó en Motion y se cambió por `--grad-subtle`. |
@@ -1331,13 +1333,14 @@ La regla es: **ante la duda, más aire.** Una sección tiene que poder respirar 
   .sec.tint + .sec.tint{background:var(--bg);}
   ```
 - **Texto con degradé: cada parada tiene que pasar el contraste por sí sola.** El `--grad-accent` de muv se oscureció (`#FF8A3D` daba 2.1:1). Ahora todas las paradas dan ≥3:1 sobre el hero cálido, que es el mínimo para texto grande. Se verifica con un script, no a ojo.
-- El degradé cálido del hero y el del acento **son por case**: se reemplazan por el color de marca de cada uno. Los grises (`neutral`, `subtle`) son iguales en todos.
+- **El hero no lleva fondo** (octubre 2026): se quitó `.hero{background:var(--grad-warm)}` y queda sobre el color de la página. No volver a ponerlo al copiar el bloque v3 a otro case.
+- El degradé del acento del título **es por case**: se reemplaza por el color de marca de cada uno. Los grises (`neutral`, `subtle`) son iguales en todos.
 
 #### Para aplicarlo a otro case
 
 1. Copiar el bloque `v3 · Portfolio principles` completo desde `muv-case.html`.
-2. Cambiar `--grad-warm` y `--grad-accent` por el color de marca del case, light y dark.
-3. Verificar el contraste de cada parada de `--grad-accent` (≥3:1 en título grande).
+2. Cambiar `--grad-accent` por el color de marca del case, light y dark. El hero va sin fondo: no copiar `--grad-warm` ni la regla `.hero{background:…}`.
+3. Verificar el contraste de cada parada de `--grad-accent` sobre `--bg` (≥3:1 en título grande).
 4. Revisar si hay selectores con `border:1px` propios del case (como `.decision .media` en muv) y pasarlos a `--sh-card`.
 5. Mirar el case en light **y** dark.
 
@@ -1456,6 +1459,12 @@ Prompt base (en inglés):
 - Se **eliminó la decisión "Navy for action, orange for the brand"**: el texto, el placeholder de la review screen y el TODO asociado. La sección pasó de "Four decisions…" a **"Three decisions that shaped the product"**.
 - `.decision .media` y `.wf-strip .wf` pasaron de borde a sombra.
 - Se eliminaron del cierre de Results el callout navy ("Every stakeholder wanted to add. Every user wanted less.") y la lista "If I had more time". Results ahora termina en "What I learned".
+
+### Cambios en `vendor-tool-case.html` (6 de octubre de 2026)
+
+- **Hero sin fondo.** Se eliminó `.hero{background:var(--grad-warm);}` y el token `--grad-warm` (light y dark). El hero queda sobre `--bg` en los dos modos. El título mantiene `--grad-accent`; sobre el fondo de página las paradas dan 4.1 / 4.6 / 5.9:1 en light (`#FFFFFF`) y 6.2 / 5.2 / 4.5:1 en dark (`#24242C`).
+- **Fila Team en `.meta`.** Sexto dato del hero, a todo el ancho debajo de Role / Company / Scope / Timeline / Launch (`.meta-team{grid-column:1/-1}`): nombre en peso 500 y cargo en `--ash`. Lucia Giacomelli (Product Manager) y Fabian de la Cruz (Engineering Manager). En desktop van en una línea; en mobile, uno debajo del otro.
+- **Pendiente:** unificar el formato de Team con `muv-case.html`, que hoy lo muestra como "Passengers: Nathalia (PM), engineering, data".
 
 ### Cambios en `vendor-tool-case.html` (Septiembre 2026)
 
@@ -2148,19 +2157,6 @@ Los 14 `.tile-arrow-label` dicen "View case study" sin flecha (↗ significa lin
 **Alineado a la regla Editorial** (se habían escapado): `.dv-period` (fechas) y `.dv-job-loc` (ciudad) pasaron de JetBrains Mono 8–9px con tracking a Geist `.8125rem` sin tracking; `.hs-eyebrow-lg` ("My superpower") pasó de 700 con tracking `.14em` a `.9375rem` / 500 / `letter-spacing:0`.
 
 **Pendiente, sin decidir:** Core strengths sigue con sus 13 pills. El dev sugirió sacarlas o buscar otro enfoque, y linkear "I bridge the gap" a un case. Hay una propuesta dibujada (fortaleza + una línea de evidencia + link al case), todavía no aplicada.
-
-### Cases: header transparente arriba, glass al scrollear (5 de octubre)
-
-*Pedido por Paula. Antes el header (`.back-nav`) era siempre una franja blanca semitransparente, y arriba de todo no coincidía con el fondo del hero (blanco sobre durazno en MUV, blanco sobre gris en SukuPay Prototyper, etc.).*
-
-- **Arriba de todo (scroll < 8px):** el header es transparente, sin blur ni línea inferior. Se ve el fondo del hero, degradé incluido.
-- **Al scrollear:** vuelve el glass que ya tenía cada case (fondo semitransparente + `backdrop-filter:blur(16px)` + línea inferior), con una transición de .35s. No se tocaron esos colores ni las reglas de dark mode.
-- **Cómo:** un bloque idéntico en los 16 cases, justo antes de `</head>`: `<style id="nav-glass">` + un `<script>` corto.
-  - El script pone la clase `nav-top` en `<html>` mientras la página está arriba, y mantiene `--nav-h` igual al alto real del header.
-  - Para que el fondo del hero llegue hasta el borde superior, el header se monta sobre el hero (`margin-bottom:calc(-1 * var(--nav-h))`) y el hero compensa con un `border-top` transparente del mismo alto y `background-origin:border-box`. El contenido no se mueve ni un píxel (verificado en los 16 cases, desktop y mobile).
-  - Sin JS, el header queda con el glass de siempre.
-- **Regla para un case nuevo:** copiar el bloque `nav-glass` tal cual, y respetar la estructura: `.back-nav` como hijo directo de `<body>`, seguido inmediatamente por `.cover` (template clásico) o por `<main>` cuyo primer hijo es el hero (template MUV / Vendor Tool). No pintarle al header un color fijo para "igualar" el hero.
-- **Sin unificar todavía:** la opacidad del glass varía entre cases (.82 en la mayoría; .92 en Fancy Monas, Foody, Hotaru, Monchis, MUV y Vendor Tool, donde el blur casi no se nota).
 
 ### Metadata y Open Graph
 
