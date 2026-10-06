@@ -599,30 +599,6 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
 }
 /* ═══ /MOBILE ═══ */
 </style>
-<!-- HEADER: transparent at the top of the page, glass once you scroll (Oct 2026). Same block in every case. -->
-<style id="nav-glass">
-:root{--nav-h:49px;}
-.back-nav{margin-bottom:calc(-1 * var(--nav-h));transition:background-color .35s ease,border-color .35s ease,-webkit-backdrop-filter .35s ease,backdrop-filter .35s ease,box-shadow .35s ease;}
-.back-nav + .cover,.back-nav + main > :first-child{border-top:var(--nav-h) solid transparent;background-origin:border-box;}
-html.nav-top .back-nav{background-color:transparent !important;background-image:none !important;border-bottom-color:transparent !important;-webkit-backdrop-filter:none !important;backdrop-filter:none !important;box-shadow:none !important;}
-@media (prefers-reduced-motion:reduce){.back-nav{transition:none;}}
-</style>
-<script>
-/* nav-glass: html.nav-top while the page is at the top; --nav-h follows the real header height */
-(function(){
-  var d=document.documentElement;
-  function top(){ d.classList.toggle('nav-top',(window.pageYOffset||d.scrollTop||0)<8); }
-  function size(){ var n=document.querySelector('.back-nav'); if(n) d.style.setProperty('--nav-h',n.offsetHeight+'px'); }
-  top();
-  window.addEventListener('scroll',top,{passive:true});
-  window.addEventListener('pageshow',top);
-  document.addEventListener('DOMContentLoaded',function(){
-    size(); top();
-    var n=document.querySelector('.back-nav');
-    if(n && 'ResizeObserver' in window) new ResizeObserver(size).observe(n); else window.addEventListener('resize',size);
-  });
-})();
-</script>
 </head>
 <body>
 <div id="wipe-overlay"></div>
@@ -830,11 +806,7 @@ html.nav-top .back-nav{background-color:transparent !important;background-image:
 <div class="section">
   <div class="eyebrow">Outcome</div>
   <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1.5rem;flex-wrap:wrap;">
-    <div style="font-size:clamp(1.75rem,3vw,2.5rem);font-weight:800;letter-spacing:-.04em;line-height:1.1;">Projected impact <span style="color:var(--red);">— simulated.</span></div>
-  </div>
-  <div style="display:inline-flex;align-items:center;gap:.5rem;padding:.4rem 1rem;border-radius:100px;background:rgba(11,132,87,.08);border:1px solid rgba(11,132,87,.25);margin-bottom:2rem;">
-    <span style="width:6px;height:6px;border-radius:50%;background:var(--red);flex-shrink:0;"></span>
-    <span style="font-family:'Geist',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--red);">Not measured — this hasn't shipped yet</span>
+    <div style="font-size:clamp(1.75rem,3vw,2.5rem);font-weight:800;letter-spacing:-.04em;line-height:1.1;">Projected impact</div>
   </div>
   <p style="font-size:.9375rem;line-height:1.75;color:var(--ash);font-weight:300;max-width:720px;margin-bottom:2.5rem;">
     TheFork Shortlist hasn't launched, so there's no real analytics behind these numbers. What follows is a reasoned projection — built from the specific failure points documented above and typical benchmarks for permission-priming and onboarding-length patterns — not a measured result. It's here to show what I'd expect to move, and why, until the real funnel and permission-grant events are instrumented and this section gets replaced with actual data.
@@ -901,11 +873,8 @@ html.nav-top .back-nav{background-color:transparent !important;background-image:
     </div>
   </div>
 
-  <p style="font-size:.75rem;line-height:1.6;color:var(--ash);max-width:720px;margin-bottom:3rem;">
-    Basis for the estimates: shrinking the funnel from 6 screens to 3 removes several points of blind abandonment; priming permission requests with a stated benefit is a well-documented pattern for lifting opt-in versus a cold system prompt; and narrowing a generic feed down to a small, scored, preference-matched set directly targets the decision-fatigue problem named earlier in this case. Ranges are deliberately wide — they're a planning input, not a forecast.
-  </p>
 
-  <div class="sl-t" style="margin-bottom:1rem;font-family:'Geist',sans-serif;font-size:.875rem;letter-spacing:0;text-transform:none;color:var(--ash2);">Simulated user reactions &middot; illustrative personas, not real quotes</div>
+  <div class="sl-t" style="margin-top:3rem;margin-bottom:1rem;font-family:'Geist',sans-serif;font-size:.875rem;letter-spacing:0;text-transform:none;color:var(--ash2);">User personas</div>
 
   <div class="reaction-pair">
     <div class="reaction-item old">
