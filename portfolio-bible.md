@@ -1,6 +1,6 @@
 # Paula Elffman — Portfolio OS · Design Bible
 
-*Última actualización: 6 de octubre de 2026 — **`vendor-tool-case.html`: hero sin fondo y equipo.** (1) Se quitó el degradé del hero (`.hero{background:var(--grad-warm)}` y el token `--grad-warm`, light y dark): el hero queda sobre el color de la página, como ya se había decidido para los cases. **Regla: el hero de los cases no lleva fondo.** El archivo lo conservaba porque la biblia todavía lo indicaba. (2) Se sumó la fila **Team** al bloque de datos del hero: Lucia Giacomelli (Product Manager) y Fabian de la Cruz (Engineering Manager). Ver "Cambios en `vendor-tool-case.html` (6 de octubre de 2026)".*
+*Última actualización: 6 de octubre de 2026 — **Cases: header transparente en Vendor Tool y equipo en el hero.** (1) `vendor-tool-case.html` recibió el bloque `#nav-glass` que ya tenía `muv-case.html`: el header de arriba (`.back-nav`) va sin fondo mientras la página está arriba de todo y toma el vidrio al hacer scroll. Le faltaba, por eso seguía con fondo. Ver "Header transparente arriba, vidrio al hacer scroll" dentro de CASE STUDIES. (2) **Equipo en el bloque de datos del hero:** Vendor Tool suma la fila Team (Lucia Giacomelli, Product Manager; Fabian de la Cruz, Engineering Manager) y muv completa la suya (Passengers: Nathalia Torres, PM; Gabriel Vargas, Engineering Manager; data). El degradé del hero (`--grad-warm`) no se tocó: sigue siendo regla.*
 
 *Última actualización previa: 5 de octubre de 2026 — **About: limpieza y datos de experiencia.** Se quitaron dos textos (el tagline bajo el statement y la frase "My primary tools are Figma & Claude…"), y los 21 chips verdes del timeline de Experience (`.dv-tag`) pasaron a ser **datos** (`.dv-facts`: valor arriba, etiqueta abajo, sin píldora ni verde). De paso, fechas y ciudad del timeline y el rótulo "My superpower" quedaron alineados a la regla Editorial. Ver "About: limpieza y datos de experiencia" en AJUSTES RÁPIDOS POST-REVIEW. El mismo día, **el icono de la pestaña pasó a ser una carita pixelada** (círculo de píxeles, 16×16), ver "Pestaña: carita pixelada que guiña".*
 
@@ -1090,6 +1090,27 @@ Lo que aparezca en el resultado y sea un color de **texto** (no un accent de mar
 
 ---
 
+### Header transparente arriba, vidrio al hacer scroll (`#nav-glass`, octubre 2026)
+
+**Qué es:** el header sticky de los cases (`.back-nav`, el de "← Back to portfolio") **no lleva fondo mientras la página está arriba de todo**: se ve el degradé del hero por detrás. Apenas se hace scroll vuelve a su fondo de vidrio (blanco al 92% con blur en light, `rgba(36,36,44,.92)` en dark) y a su línea inferior.
+
+**Cómo está hecho:** un bloque propio al final del `<head>`, igual en todos los cases: `<style id="nav-glass">` más un script corto.
+
+- El script pone la clase `nav-top` en `<html>` cuando el scroll es menor a 8px y mide el alto real del header en `--nav-h`.
+- `html.nav-top .back-nav` anula fondo, blur, borde y sombra.
+- `.back-nav` lleva `margin-bottom:calc(-1 * var(--nav-h))` y el primer bloque de `<main>` un `border-top` transparente del mismo alto con `background-origin:border-box`, así el degradé del hero empieza desde el borde de arriba y no queda una franja blanca bajo el header.
+- Con `prefers-reduced-motion` no hay transición.
+
+**Para aplicarlo a otro case:** copiar el bloque completo desde `muv-case.html` (del comentario `<!-- HEADER: transparent at the top… -->` hasta el `</script>` anterior a `</head>`). No hay nada que ajustar por case.
+
+**No confundir con el fondo del hero.** Lo que se quitó es el fondo del header de arriba, no el degradé `--grad-warm` del hero, que sigue.
+
+| Archivo | `#nav-glass` |
+| --- | --- |
+| `muv-case.html` | ✅ |
+| `vendor-tool-case.html` | ✅ (6 de octubre de 2026) |
+| Resto de los cases | Sin verificar |
+
 ### 🐛 BUG CONOCIDO Y CORREGIDO (Septiembre 2026) — `.back-nav` sticky y su meta (`.nav-right` / `.back-nav-right`) fijos al valor de light, sin contraparte en dark
 
 **Síntoma:** con el toggle dark activo, el header sticky de arriba (el que tiene "← Back to portfolio" y el nombre del case) se quedaba con el fondo crema de light mode mientras el resto de la página ya estaba oscuro — banda clara pegada arriba de una página oscura. El texto de la derecha del nav ("Paula Elffman · Sr Product Designer") además desaparecía: era un gris oscuro fijo, invisible sobre cualquier fondo oscuro.
@@ -1319,7 +1340,7 @@ La regla es: **ante la duda, más aire.** Una sección tiene que poder respirar 
 
 | Token | Light | Dark | Dónde |
 | --- | --- | --- | --- |
-| ~~`--grad-warm`~~ | ~~`#FFEEE2 → #FFF7F1 → #FFF`~~ | ~~`#352822 → #2A2527 → #24242C`~~ | **Retirado (octubre 2026).** Era el fondo del hero (`.hero`). El hero ya no lleva fondo: queda sobre `--bg`. |
+| `--grad-warm` | `#FFEEE2 → #FFF7F1 → #FFF` | `#352822 → #2A2527 → #24242C` | Hero (`.hero`). **Por case:** se tiñe con el color de marca. |
 | `--grad-neutral` | `#F5F5F7 → #FAFAFB → #FFF` | `#2C2C35 → #26262E → #24242C` | Todas las `.sec.tint` |
 | `--grad-subtle` | `#F7F7F8 → #FBFBFC → #FFF` | `#29292F → #26262D → #24242C` | Secciones que piden un gris muy sutil (en muv: `#motion`) |
 | `--grad-cool` | `#E9EDF8 → #F4F6FB → #FFF` | `#262B45 → #252838 → #24242C` | Disponible. En muv se probó en Motion y se cambió por `--grad-subtle`. |
@@ -1333,14 +1354,13 @@ La regla es: **ante la duda, más aire.** Una sección tiene que poder respirar 
   .sec.tint + .sec.tint{background:var(--bg);}
   ```
 - **Texto con degradé: cada parada tiene que pasar el contraste por sí sola.** El `--grad-accent` de muv se oscureció (`#FF8A3D` daba 2.1:1). Ahora todas las paradas dan ≥3:1 sobre el hero cálido, que es el mínimo para texto grande. Se verifica con un script, no a ojo.
-- **El hero no lleva fondo** (octubre 2026): se quitó `.hero{background:var(--grad-warm)}` y queda sobre el color de la página. No volver a ponerlo al copiar el bloque v3 a otro case.
-- El degradé del acento del título **es por case**: se reemplaza por el color de marca de cada uno. Los grises (`neutral`, `subtle`) son iguales en todos.
+- El degradé cálido del hero y el del acento **son por case**: se reemplazan por el color de marca de cada uno. Los grises (`neutral`, `subtle`) son iguales en todos.
 
 #### Para aplicarlo a otro case
 
 1. Copiar el bloque `v3 · Portfolio principles` completo desde `muv-case.html`.
-2. Cambiar `--grad-accent` por el color de marca del case, light y dark. El hero va sin fondo: no copiar `--grad-warm` ni la regla `.hero{background:…}`.
-3. Verificar el contraste de cada parada de `--grad-accent` sobre `--bg` (≥3:1 en título grande).
+2. Cambiar `--grad-warm` y `--grad-accent` por el color de marca del case, light y dark.
+3. Verificar el contraste de cada parada de `--grad-accent` (≥3:1 en título grande).
 4. Revisar si hay selectores con `border:1px` propios del case (como `.decision .media` en muv) y pasarlos a `--sh-card`.
 5. Mirar el case en light **y** dark.
 
@@ -1460,11 +1480,12 @@ Prompt base (en inglés):
 - `.decision .media` y `.wf-strip .wf` pasaron de borde a sombra.
 - Se eliminaron del cierre de Results el callout navy ("Every stakeholder wanted to add. Every user wanted less.") y la lista "If I had more time". Results ahora termina en "What I learned".
 
-### Cambios en `vendor-tool-case.html` (6 de octubre de 2026)
+### Cambios en `vendor-tool-case.html` y `muv-case.html` (6 de octubre de 2026)
 
-- **Hero sin fondo.** Se eliminó `.hero{background:var(--grad-warm);}` y el token `--grad-warm` (light y dark). El hero queda sobre `--bg` en los dos modos. El título mantiene `--grad-accent`; sobre el fondo de página las paradas dan 4.1 / 4.6 / 5.9:1 en light (`#FFFFFF`) y 6.2 / 5.2 / 4.5:1 en dark (`#24242C`).
-- **Fila Team en `.meta`.** Sexto dato del hero, a todo el ancho debajo de Role / Company / Scope / Timeline / Launch (`.meta-team{grid-column:1/-1}`): nombre en peso 500 y cargo en `--ash`. Lucia Giacomelli (Product Manager) y Fabian de la Cruz (Engineering Manager). En desktop van en una línea; en mobile, uno debajo del otro.
-- **Pendiente:** unificar el formato de Team con `muv-case.html`, que hoy lo muestra como "Passengers: Nathalia (PM), engineering, data".
+- **Vendor Tool, header transparente arriba.** Se agregó el bloque `#nav-glass` copiado de muv. Revisado arriba y con scroll, en light y dark.
+- **Vendor Tool, fila Team en `.meta`.** Sexto dato del hero, a todo el ancho debajo de Role / Company / Scope / Timeline / Launch (`.meta-team{grid-column:1/-1}`): nombre en peso 500 y cargo en `--ash`. Lucia Giacomelli (Product Manager) y Fabian de la Cruz (Engineering Manager). En desktop van en una línea; en mobile, uno debajo del otro.
+- **muv, Team completo.** Pasó de "Passengers: Nathalia (PM), engineering, data" a "Passengers: Nathalia Torres (PM), Gabriel Vargas (Engineering Manager), data". Sigue en su celda de `.meta`.
+- **Pendiente:** los dos cases muestran el equipo con formatos distintos (fila propia en Vendor Tool, celda con texto corrido en muv). Falta elegir uno.
 
 ### Cambios en `vendor-tool-case.html` (Septiembre 2026)
 
