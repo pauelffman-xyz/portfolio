@@ -2400,18 +2400,16 @@ mark.mk{background:transparent;color:var(--paper);font-weight:500;}
 
 .dv-exp-h { font-family:'Geist',sans-serif; font-size:clamp(2.5rem,5vw,5rem); font-weight:800; letter-spacing:-.04em; color:var(--paper); line-height:.95; margin-bottom:4rem; }
 .dv-exp-h em { font-style:normal; color:var(--accent); }
-.dv-timeline { --tl-text:color-mix(in srgb, var(--paper) 74%, var(--void)); --tl-meta:color-mix(in srgb, var(--paper) 62%, var(--void)); --tl-hover:rgba(244,244,246,.045); }
-body.light-mode .dv-timeline { --tl-hover:#F5F5F7; }
-/* each job is a row that tints on hover; the hairlines are inset pseudo-elements so they can step aside for the tint */
+.dv-timeline { --tl-text:color-mix(in srgb, var(--paper) 74%, var(--void)); --tl-meta:color-mix(in srgb, var(--paper) 66%, var(--void)); --tl-zebra:rgba(244,244,246,.035); --tl-hover:rgba(244,244,246,.075); --tl-num:var(--accent); }
+body.light-mode .dv-timeline { --tl-zebra:#F7F7F8; --tl-hover:#F0F0F3; --tl-num:#007A56; }
+/* each job is a row: grey and white alternate so the eye keeps its line, and the row under the cursor goes one step darker */
 .dv-job { position:relative; display:grid; grid-template-columns:220px 1fr; gap:4rem; padding:2.75rem 1.75rem; margin:0 -1.75rem; border-radius:16px; transition:background-color .35s ease; }
-.dv-job::after, .dv-job:first-child::before { content:''; position:absolute; left:1.75rem; right:1.75rem; height:1px; background:var(--line); transition:opacity .35s ease; }
-.dv-job::after { bottom:0; }
-.dv-job:first-child::before { top:0; }
+.dv-job:nth-child(odd) { background:var(--tl-zebra); }
+.dv-fact b { transition:color .35s ease; }
 @media(hover:hover){
   .dv-job:hover { background:var(--tl-hover); }
-  .dv-job:hover::after, .dv-job:hover::before, .dv-job:has(+ .dv-job:hover)::after { opacity:0; }
+  .dv-job:hover .dv-company, .dv-job:hover .dv-fact b { color:var(--tl-num); }
 }
-.dv-job:hover .dv-company { color:var(--accent); }
 .dv-period { font-family:'Geist',sans-serif; font-size:.8125rem; letter-spacing:0; color:var(--tl-meta); margin-bottom:.375rem; }
 .dv-company { font-family:'Geist',sans-serif; font-size:1.125rem; font-weight:700; color:var(--paper); letter-spacing:-.02em; transition:color .3s; }
 .dv-role { font-family:'Geist',sans-serif; font-size:1.25rem; font-weight:700; color:var(--paper); letter-spacing:-.025em; margin-bottom:.875rem; }
@@ -2454,7 +2452,7 @@ body.light-mode .tk-logo { filter:none; }
   .tk-grid { grid-template-columns:repeat(8,4.75rem); }
 }
 @media(max-width:768px){ .tk-grid { grid-template-columns:repeat(4,minmax(0,1fr)); gap:1.25rem .5rem; max-width:22rem; } }
-@media(prefers-reduced-motion:reduce){ .tk-tile, .dv-job, .dv-job::after, .dv-job::before { transition:none; } .tk-item:hover .tk-tile { transform:none; } }
+@media(prefers-reduced-motion:reduce){ .tk-tile, .dv-job, .dv-fact b, .dv-company { transition:none; } .tk-item:hover .tk-tile { transform:none; } }
 
 /* ── AI in my workflow ── */
 .ai-intro { max-width:780px; display:flex; flex-direction:column; gap:1.5rem; margin-bottom:3rem; }
@@ -2586,7 +2584,6 @@ body.light-mode .ai-lab { --ai-dim:var(--ash); }
   .dv-photo-ring { width:100px; height:100px; }
   .dv-section { padding:3.5rem 1.5rem; }
   .dv-job { grid-template-columns:1fr; gap:.75rem; padding:2.25rem 1rem; margin:0 -1rem; }
-  .dv-job::after, .dv-job:first-child::before { left:1rem; right:1rem; }
   .dv-cards { grid-template-columns:repeat(2,1fr); }
   .dv-passions { grid-template-columns:1fr; }
   .dv-passion:nth-child(odd) { border-right:none; padding-right:0; }
