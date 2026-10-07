@@ -25,7 +25,7 @@
 <meta name="description" content="Case study: end-to-end design of Vendor Tool, the self-management dashboard for restaurants and franchises on Monchis, a food delivery app in Paraguay.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Inter:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 /* ════════════════════════════════════════════════════════════
@@ -217,28 +217,163 @@ figure figcaption{margin-top:.875rem;font-size:.875rem;line-height:1.5;color:var
 .next li:last-child{border-bottom:1px solid var(--line2);}
 .next strong{font-weight:600;}
 
-/* ─── Component library (collapsed by default) ─── */
-details.lib{border-top:1px solid var(--line2);border-bottom:1px solid var(--line2);}
-details.lib summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.5rem 0;min-height:44px;}
-details.lib summary::-webkit-details-marker{display:none;}
-details.lib summary .h3{max-width:none;}
-details.lib summary .sub{display:block;margin-top:.25rem;font-size:.9375rem;font-weight:400;color:var(--ash);letter-spacing:0;}
-details.lib summary .ico{flex:none;width:32px;height:32px;border-radius:50%;border:1px solid var(--line2);display:grid;place-items:center;font-size:1.25rem;line-height:1;transition:transform .3s var(--ease);}
-details.lib[open] summary .ico{transform:rotate(45deg);}
-.lib-body{padding:1rem 0 clamp(40px,5vw,72px);display:flex;flex-direction:column;gap:clamp(40px,5vw,64px);}
-.comp-group h3{font-size:1.125rem;font-weight:700;letter-spacing:-.015em;margin-bottom:.375rem;}
-.comp-group > p{font-size:.9375rem;color:var(--ash);max-width:62ch;margin-bottom:1.5rem;}
-.comp-grid{display:grid;gap:clamp(16px,2vw,24px);grid-template-columns:repeat(2,minmax(0,1fr));}
-.comp{background:var(--bg2);border-radius:var(--r);padding:1.25rem;display:flex;flex-direction:column;gap:.875rem;}
-.comp .thumb{display:grid;place-items:center;background:var(--bg3);border-radius:var(--r-sm);padding:1rem;min-height:120px;}
-.comp .thumb img{width:100%;height:auto;border-radius:6px;background:#fff;}
-.comp .cap{font-size:.875rem;line-height:1.45;color:var(--ash);}
-.comp .cap strong{display:block;color:var(--paper);font-weight:600;margin-bottom:.125rem;}
-@media(max-width:900px){.comp-grid{grid-template-columns:1fr;}}
-.stack-comp{display:flex;flex-direction:column;gap:1rem;}
-.comp--wide .thumb{min-height:0;}
-.thumb--pad{padding:1.5rem;}
-.thumb--pad img{width:100%;height:auto;}
+/* ═════════ DESIGN SYSTEM BOARD (.dsb) ═════════
+   One artboard with the real components, rebuilt in HTML/CSS from the Figma frame (not an image).
+   Every size is a Figma px multiplied by --u, so the board scales as a single piece.
+   Layout rule: ONE gutter (--g) between every component, in both directions, and ONE outer padding (--p).
+   Columns are flush top and bottom; the colour swatches take up the slack, the components keep their size.
+   Colours are fixed (not page tokens): it is a UI specimen and stays light in dark mode.
+   Inner classes are prefixed (dsb- structure, vt- components) so they never meet the page's own classes. */
+.dsb-wrap{container-type:inline-size;margin-bottom:0;width:min(1332px,calc(100vw - 2 * var(--gutter)));position:relative;left:50%;transform:translateX(-50%);}
+.dsb{
+  --u:calc(100cqw / 1332);
+  --g:calc(var(--u) * 40);--p:calc(var(--u) * 52);
+  display:grid;grid-template-columns:calc(var(--u)*351) calc(var(--u)*352) calc(var(--u)*56) calc(var(--u)*349);grid-template-rows:auto 1fr;gap:var(--g);padding:var(--p);
+  background:#fff;border-radius:calc(var(--u)*28);box-shadow:var(--sh-card);
+  font-family:'Inter',system-ui,sans-serif;font-style:normal;font-weight:400;color:#262626;text-align:left;
+}
+.dsb *{box-sizing:border-box;}
+.dsb i{display:block;flex:none;width:calc(var(--u)*24);height:calc(var(--u)*24);font-style:normal;}
+.dsb svg{display:block;width:100%;height:100%;}
+.dsb-col{display:flex;flex-direction:column;gap:var(--g);min-width:0;}
+
+/* type: negative margins trim the line box to the cap height, so the gutter is measured from the letters */
+.dsb-type{grid-column:1 / 3;font-size:calc(var(--u)*104.6);line-height:1;letter-spacing:calc(var(--u)*-2.09);color:#8E8E93;white-space:nowrap;margin:calc(var(--u)*-14) 0 calc(var(--u)*-14) calc(var(--u)*-7);}
+.dsb-type b{font-weight:700;}
+
+/* colour */
+.dsb-colors{grid-column:4;grid-row:1 / 3;display:flex;flex-direction:column;min-height:0;border-radius:calc(var(--u)*28);overflow:hidden;}
+.dsb-sw{flex:var(--f,153) 1 0;min-height:0;min-width:0;display:flex;align-items:center;padding:0 calc(var(--u)*22);}
+.dsb-sw span{font-size:calc(var(--u)*10);line-height:1.2;color:#F2F2F7;white-space:nowrap;}
+
+/* buttons: 3 x 2, one inner gap in both directions */
+.vt-btns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:calc(var(--u)*13);}
+.vt-btn{display:flex;align-items:center;justify-content:center;height:calc(var(--u)*40);border-radius:calc(var(--u)*8);border:1px solid transparent;font-size:calc(var(--u)*14);line-height:calc(var(--u)*12);font-weight:500;letter-spacing:calc(var(--u)*.14);white-space:nowrap;color:#fff;}
+.vt-btn.is-primary{border:0;background:linear-gradient(111.9deg,#E6224F 37.084%,#B01135 100%);}
+.vt-btn.is-secondary{background:#fff;border-color:#ADADAD;color:#151918;}
+.vt-btn.is-danger{border:0;background:#FF4D4F;}
+.vt-btn.is-off{border:0;background:#EEE;color:rgba(181,181,181,.65);}
+.vt-btn.is-secondary.is-on{border-color:#151918;box-shadow:0 calc(var(--u)*4) calc(var(--u)*24) rgba(151,151,151,.25);}
+.vt-btn.is-danger.is-line{background:transparent;border:max(1.5px,calc(var(--u)*2)) solid #FF4D4F;color:#FF4D4F;}
+
+/* controls: switch on / off, icon buttons */
+.vt-ctrl{display:flex;align-items:center;gap:calc(var(--u)*12);height:calc(var(--u)*40);}
+.vt-sw{position:relative;flex:none;width:calc(var(--u)*52);height:calc(var(--u)*32);border-radius:calc(var(--u)*100);background:#1DC365;}
+.vt-sw span{position:absolute;top:50%;right:calc(var(--u)*4);display:grid;place-items:center;width:calc(var(--u)*24);height:calc(var(--u)*24);margin-top:calc(var(--u)*-12);border-radius:50%;background:#F5F5F5;color:#5E5E5E;}
+.vt-sw span i{width:calc(var(--u)*15);height:calc(var(--u)*15);}
+.vt-sw.is-off{background:#DFE3E7;box-shadow:inset 0 0 0 max(1.5px,calc(var(--u)*2)) #6F797A;}
+.vt-sw.is-off span{right:auto;left:calc(var(--u)*4);background:#6F797A;color:#DFE3E7;}
+.vt-icon{display:grid;place-items:center;flex:none;width:calc(var(--u)*40);height:calc(var(--u)*40);border-radius:calc(var(--u)*8);background:#fff;border:1px solid #ADADAD;color:#262626;}
+.vt-icon i{width:calc(var(--u)*16);height:calc(var(--u)*16);}
+
+/* category chips */
+.vt-chips{display:flex;align-items:center;justify-content:space-between;gap:calc(var(--u)*8);height:calc(var(--u)*32);}
+.vt-chip{display:flex;align-items:center;gap:calc(var(--u)*7);height:calc(var(--u)*32);padding:0 calc(var(--u)*11);border-radius:calc(var(--u)*1000);background:#fff;border:1px solid #F0F0F0;box-shadow:0 calc(var(--u)*2) 0 rgba(0,0,0,.02);font-size:calc(var(--u)*14);line-height:calc(var(--u)*20);font-weight:500;letter-spacing:calc(var(--u)*.1);color:rgba(0,0,0,.45);white-space:nowrap;}
+.vt-chip.is-add{background:#F5F5F5;border-color:#262626;color:#262626;}
+.vt-chip i{width:calc(var(--u)*20);height:calc(var(--u)*20);}
+
+/* shared: white card */
+.vt-card{background:#fff;border:1px solid #EEE;border-radius:calc(var(--u)*8);padding:calc(calc(var(--u)*24) - 1px);}
+
+/* category search with suggestions (takes the last fraction of slack in its column) */
+.vt-search{flex:1 0 auto;box-shadow:0 0 calc(var(--u)*22) rgba(160,160,160,.25);}
+.vt-box{display:flex;align-items:stretch;height:calc(var(--u)*30);margin-bottom:calc(var(--u)*10);border:1px solid #E6224F;border-radius:calc(var(--u)*8) calc(var(--u)*2) calc(var(--u)*2) calc(var(--u)*8);overflow:hidden;background:#fff;}
+.vt-box p{flex:1;min-width:0;display:flex;align-items:center;padding:0 calc(var(--u)*12);font-size:calc(var(--u)*14);line-height:calc(var(--u)*20);color:#000;}
+.vt-box p em{font-style:normal;color:#E6224F;}
+.vt-box span{display:grid;place-items:center;flex:none;width:calc(var(--u)*46);background:#E6224F;color:#fff;}
+.vt-box span i{width:calc(var(--u)*14);height:calc(var(--u)*14);}
+.vt-opt{display:flex;align-items:center;height:calc(var(--u)*38);padding:0 calc(var(--u)*24);font-size:calc(var(--u)*14);line-height:calc(var(--u)*20);color:rgba(0,0,0,.45);white-space:nowrap;}
+.vt-opt b{font-weight:600;color:rgba(0,0,0,.85);margin-right:.28em;}
+.vt-opt.is-on{height:calc(var(--u)*40);background:#FAFAFA;color:rgba(0,0,0,.85);}
+
+/* order queue tabs */
+.vt-tabs{display:flex;flex-direction:column;align-items:flex-start;gap:calc(var(--u)*16);box-shadow:0 0 calc(var(--u)*44) rgba(160,160,160,.25);}
+.vt-tab{position:relative;display:flex;align-items:center;height:calc(var(--u)*69.84);font-size:calc(var(--u)*21.26);line-height:calc(var(--u)*33.4);color:rgba(0,0,0,.85);white-space:nowrap;}
+.vt-tab i{width:calc(var(--u)*21.26);height:calc(var(--u)*21.26);margin-right:calc(var(--u)*18.22);}
+.vt-tab span{margin-left:calc(var(--u)*6.07);padding:0 calc(var(--u)*12.15);border-radius:calc(var(--u)*100);background:#F0F0F0;font-size:calc(var(--u)*18.22);line-height:calc(var(--u)*30.36);font-variant-numeric:lining-nums tabular-nums;}
+.vt-tab.is-on{font-weight:500;color:#E6224F;}
+.vt-tab.is-on span{background:rgba(255,170,172,.3);font-weight:600;line-height:calc(var(--u)*24.3);}
+.vt-tab.is-on::after{content:"";position:absolute;left:0;right:0;bottom:0;height:calc(var(--u)*3.04);background:#E6224F;}
+
+/* side navigation */
+.vt-rail{grid-column:3;grid-row:1 / 3;align-self:center;display:flex;flex-direction:column;gap:calc(var(--u)*10);}
+.vt-rail div{display:grid;place-items:center;width:calc(var(--u)*56);height:calc(var(--u)*56);border-radius:calc(var(--u)*10);color:#8C8C8C;}
+.vt-rail div i{width:calc(var(--u)*30.85);height:calc(var(--u)*30.85);}
+.vt-rail div:first-child i{width:calc(var(--u)*25.7);height:calc(var(--u)*25.7);}
+.vt-rail div:last-child i{width:calc(var(--u)*27.5);height:calc(var(--u)*27.5);}
+.vt-rail div.is-on{background:#F5F5F5;color:#262626;}
+
+/* medium container: the two component columns and the rail, colour as a band underneath */
+@container (max-width:999px){
+  .dsb{--u:min(calc(100cqw / 943),1px);grid-template-columns:calc(var(--u)*351) calc(var(--u)*352) calc(var(--u)*56);grid-template-rows:auto auto auto;justify-content:center;}
+  .dsb-colors{grid-column:1 / -1;grid-row:3;flex-direction:row;height:calc(var(--u)*132);}
+  .dsb-sw{flex:1 1 0;align-items:flex-end;padding:0 calc(var(--u)*18) calc(var(--u)*16);}
+}
+/* narrow container: one column, same gutter between every piece */
+@container (max-width:699px){
+  .dsb{--u:min(calc(100cqw / 391),1px);--g:calc(var(--u) * 32);--p:calc(var(--u) * 20);display:flex;flex-direction:column;align-items:stretch;gap:var(--g);border-radius:20px;}
+  .dsb-col{display:contents;}
+  .dsb > *,.dsb-col > *{flex:none;}
+  .dsb-type{order:1;margin-top:0;font-size:calc(var(--u)*76);letter-spacing:calc(var(--u)*-1.5);margin:calc(var(--u)*-10) 0 calc(var(--u)*-10) calc(var(--u)*-5);}
+  .dsb-colors{order:2;height:calc(var(--u)*120);border-radius:calc(var(--u)*14);}
+  .dsb-sw{padding:0 calc(var(--u)*12) calc(var(--u)*12);}
+  .vt-btns{order:3;}
+  .vt-ctrl{order:4;}
+  .vt-chips{order:5;}
+  .vt-search{order:6;}
+  .vt-tabs{order:7;}
+  .vt-rail{order:8;align-self:stretch;flex-direction:row;justify-content:space-between;gap:0;}
+}
+
+/* ═════════ ORDER CARDS (.vt-stage / .vt-oc) ═════════
+   The order card in Preparando, on time and past the limit, rebuilt in HTML/CSS from the Figma component (not a screenshot).
+   Real px sizes, fluid width: it stays sharp at any size and reflows below 640px instead of shrinking.
+   Card colours are fixed (UI specimen, stays light in dark mode); the stage follows the page theme. */
+.vt-stage{container-type:inline-size;display:flex;flex-direction:column;align-items:center;gap:16px;padding:clamp(16px,3.2vw,40px);background:var(--bg2);border-radius:var(--r);}
+.vt-oc{width:100%;max-width:920px;display:flex;flex-direction:column;gap:4px;padding-top:11px;background:#fff;border:1px solid #D9D9D9;border-radius:8px;font-family:'Inter',system-ui,sans-serif;font-size:14px;line-height:20px;font-style:normal;font-weight:400;color:rgba(0,0,0,.85);text-align:left;}
+.vt-oc *{box-sizing:border-box;}
+.vt-oc i{display:block;flex:none;width:14px;height:14px;font-style:normal;}
+.vt-oc svg{display:block;width:100%;height:100%;}
+.vt-oc b{font-weight:600;}
+.vt-oc-branch{padding:8px 16px 4px;font-weight:600;}
+.vt-oc-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 16px;padding:0 16px;}
+.vt-oc-id{display:flex;align-items:center;gap:12px;min-width:0;}
+.vt-oc-id > span:first-child{flex:none;width:16px;height:16px;border:1px solid #D9D9D9;border-radius:2px;background:#fff;}
+.vt-oc-id b{font-size:16px;line-height:24px;font-weight:700;white-space:nowrap;}
+.vt-oc-tag{padding:4px 8px;border-radius:10px;background:rgba(34,230,184,.2);font-size:12px;line-height:16px;font-weight:500;color:#279377;}
+.vt-oc-act{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;}
+.vt-oc-time{display:flex;align-items:center;gap:5px;padding:0 8px;border:1px solid #BAE7FF;border-radius:50px;background:#E6F7FF;font-weight:500;color:#002766;}
+.vt-oc-time i{width:15px;height:15px;}
+.vt-oc-btn{display:flex;align-items:center;justify-content:center;height:40px;padding:0 12px;border-radius:8px;background:linear-gradient(127deg,#E6224F 37.084%,#B01135 100%);font-weight:500;letter-spacing:.14px;color:#fff;white-space:nowrap;text-transform:capitalize;}
+.vt-oc-body{display:flex;flex-direction:column;gap:4px;padding:0 16px;}
+.vt-oc-prod{display:flex;align-items:flex-start;gap:8px 24px;padding:12px 16px;color:rgba(0,0,0,.45);}
+.vt-oc-prod p{flex:1;min-width:0;}
+.vt-oc-more{display:inline-flex;align-items:center;gap:8px;margin-left:4px;font-weight:600;color:#E6224F;white-space:nowrap;}
+.vt-oc-more i{width:10px;height:10px;}
+.vt-oc-link{display:flex;align-items:center;gap:8px;flex:none;font-weight:600;color:rgba(0,0,0,.85);white-space:nowrap;}
+.vt-oc-note{display:flex;align-items:center;justify-content:space-between;gap:8px 12px;min-height:46px;padding:7px 8px 7px 16px;border-radius:8px;background:#FAFAFA;}
+.vt-oc-note small{font-size:12px;}
+.vt-oc-print{display:flex;align-items:center;gap:5px;flex:none;height:32px;padding:0 12px;border:1px solid #ADADAD;border-radius:8px;background:#fff;font-size:12px;line-height:12px;font-weight:500;letter-spacing:.12px;color:#151918;}
+.vt-oc-print i{width:12px;height:12px;}
+.vt-oc-foot{padding:13px 16px 12px;}
+/* past the limit: the whole card turns red */
+.vt-oc.is-late{background:#FFF1F0;border-color:#B81B3F;}
+.vt-oc.is-late .vt-oc-time{background:rgba(247,186,200,.5);border-color:rgba(247,186,200,.3);color:#510C1C;}
+.vt-oc.is-late .vt-oc-body{margin-top:4px;}
+.vt-oc.is-late .vt-oc-prod{color:rgba(0,0,0,.85);}
+.vt-oc.is-late .vt-oc-note{background:#FDE9ED;}
+/* narrow container: same card, rows wrap and the main action takes the full width */
+@container (max-width:640px){
+  .vt-oc-branch{padding-inline:12px;}
+  .vt-oc-head{padding-inline:12px;}
+  .vt-oc-act{width:100%;}
+  .vt-oc-btn{flex:1 1 100%;}
+  .vt-oc-body{padding-inline:12px;}
+  .vt-oc-prod{flex-direction:column;padding:8px 0;}
+  .vt-oc-note{flex-wrap:wrap;padding:10px 12px;}
+  .vt-oc-print{margin-left:auto;}
+  .vt-oc-foot{padding-inline:12px;}
+}
 
 /* ─── Reveal (one gentle moment: the three photo tips) ─── */
 .reveal{opacity:0;transform:translateY(16px);transition:opacity .7s var(--ease),transform .7s var(--ease);}
@@ -289,7 +424,6 @@ body.dark-mode{
 .dmedia{margin-top:clamp(40px,5vw,72px);gap:clamp(36px,4.5vw,64px);}
 .learn,.principles,.levers,.impact{gap:clamp(32px,4vw,64px);}
 .hero .meta,.hero-visual{margin-top:clamp(56px,7vw,104px);}
-.lib-body{gap:clamp(56px,7vw,96px);}
 
 /* 4 · gradients */
 .hero{background:var(--grad-warm);}
@@ -303,15 +437,10 @@ body.dark-mode .h1 .accent{color:transparent;}
 .signals{border:0;box-shadow:var(--sh-card);}
 .frame{box-shadow:var(--sh-float);}
 .phone{box-shadow:var(--sh-ring),var(--sh-float);}
-.comp{background:var(--panel-light);box-shadow:var(--sh-card);}
-.comp .thumb{background:var(--bg2);}
-.stack-comp .comp--narrow{align-self:flex-start;width:min(100%,440px);}
-.comp--narrow .thumb img{width:min(100%,260px);}
 .hero-visual + .hero-visual{margin-top:var(--stack);}
 
 /* 1 · motion with a pause */
 .reveal{transition:opacity 1s var(--ease-apple),transform 1s var(--ease-apple);}
-details.lib summary .ico{transition:transform .5s var(--ease-apple);}
 @media (prefers-reduced-motion:reduce){.reveal{transition:none;}}
 </style>
 <!-- HEADER: transparent at the top of the page, glass once you scroll (Oct 2026). Same block in every case. -->
@@ -595,10 +724,36 @@ html.nav-top .back-nav{background-color:transparent !important;background-image:
         <!-- TODO(Paula): update on this one — your original web draft headlined this decision "The order queue that fixed the 7-minute problem," but "7 minutes" doesn't appear anywhere in your source deck (the deck's actual numbers are POS at 0.9 min / 41% of branches, Vendor Tool at 48%, per the Problem slide). So "7 minutes" looks like it was introduced somewhere between the deck and the web copy, not something in your original data. I dropped the causal "fixed X" framing for the same reason as before — no number isolates the queue's effect on cancellations — but now I'd also hold off on "7-minute problem" specifically until you can confirm where that figure came from. -->
         <div class="dmedia">
           <figure>
-            <div class="panel"><img src="vendor-tool-assets/vt-orders-queue.webp" width="1114" height="623" loading="lazy" decoding="async" alt="Pending orders queue with tabs for Pendientes, Preparando, Delivery and Historial. The first order card is red with a timer saying 1 minute 30 seconds left to accept, and lists its products, comment and total. The second order card is neutral with 5 minutes left."></div>
-            <figcaption>The queue. Each order shows how long is left to accept it:
-              <span class="es-note" lang="es">"Te quedan 05:00 min para aceptarla"</span>
-              You have 05:00 min left to accept it.</figcaption>
+            <!-- The order card in two states, built in HTML/CSS from the Figma component (not a screenshot). -->
+            <div class="vt-stage" role="img" aria-label="Two order cards from the Preparando tab, each with the branch, the order number, a Delivery tag, the elapsed time, a Pasar a Pick up / Delivery button, the products, the customer's comment and a print button. The first card is past its time limit: it is tinted red and reads 7 minutes elapsed. The second is on time: it is white and reads 3 minutes elapsed.">
+              <div class="vt-oc is-late">
+                <p class="vt-oc-branch">[Branch name]</p>
+                <div class="vt-oc-head">
+                  <div class="vt-oc-id"><span></span><b>Orden ID #234576</b><span class="vt-oc-tag">Delivery</span></div>
+                  <div class="vt-oc-act"><span class="vt-oc-time"><i><svg viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true"><path d="M354.5-860v-65.5h251v65.5h-251Zm92.87 452.02h65.26v-230.48h-65.26v230.48ZM337.89-98.97q-66.56-28.96-116.35-78.69-49.8-49.73-78.66-116.27-28.86-66.54-28.86-142.01 0-75.47 28.86-142.05 28.86-66.58 78.66-116.42 49.81-49.85 116.38-78.82Q404.5-802.2 480-802.2q67.48 0 127.08 22.5 59.59 22.5 105.83 62.74l53.16-53.15 46.3 46.07-53.15 53.15q36.24 40.48 61.62 97.96 25.38 57.47 25.38 136.95 0 75.52-28.96 142.11-28.95 66.59-78.78 116.28-49.83 49.7-116.44 78.64Q555.43-70 479.94-70T337.89-98.97Zm353.18-126.02q86.78-86.62 86.78-210.95 0-124.32-86.74-211.1-86.75-86.79-211.07-86.79t-211.11 86.75q-86.78 86.74-86.78 211.06 0 124.32 86.74 210.99 86.75 86.66 211.07 86.66t211.11-86.62ZM480-434.98Z"/></svg></i><span>Transcurridos: <b>7 minutos</b></span></span><span class="vt-oc-btn">Pasar a Pick up / Delivery</span></div>
+                </div>
+                <div class="vt-oc-body">
+                  <div class="vt-oc-prod"><p><b>Producto:</b> 1 hamburguesa con lechuga, tomate, jamon y queso, 1 hamburguesa con papas fritas medianas,1 hamburguesa de pollo con papas medianas, 1 combo mediano <span class="vt-oc-more">Ver más<i><svg viewBox="64 64 896 896" fill="currentColor" aria-hidden="true"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z" /></svg></i></span></p><span class="vt-oc-link">Detalle de la órden<i><svg viewBox="64 64 896 896" fill="currentColor" aria-hidden="true"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z" /></svg></i></span></div>
+                  <div class="vt-oc-note"><p><b>Comentario:</b> <small>Quiero que el combo mediano no traiga pepino</small></p><span class="vt-oc-print"><i><svg viewBox="64 64 896 896" fill="currentColor" aria-hidden="true"><path d="M820 436h-40c-4.4 0-8 3.6-8 8v40c0 4.4 3.6 8 8 8h40c4.4 0 8-3.6 8-8v-40c0-4.4-3.6-8-8-8zm32-104H732V120c0-4.4-3.6-8-8-8H300c-4.4 0-8 3.6-8 8v212H172c-44.2 0-80 35.8-80 80v328c0 17.7 14.3 32 32 32h168v132c0 4.4 3.6 8 8 8h424c4.4 0 8-3.6 8-8V772h168c17.7 0 32-14.3 32-32V412c0-44.2-35.8-80-80-80zM360 180h304v152H360V180zm304 664H360V568h304v276zm200-140H732V500H292v204H160V412c0-6.6 5.4-12 12-12h680c6.6 0 12 5.4 12 12v292z" /></svg></i>Imprimir</span></div>
+                </div>
+                <p class="vt-oc-link vt-oc-foot">Datos del cliente<i><svg viewBox="64 64 896 896" fill="currentColor" aria-hidden="true"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z" /></svg></i></p>
+              </div>
+              <div class="vt-oc">
+                <p class="vt-oc-branch">[Branch name]</p>
+                <div class="vt-oc-head">
+                  <div class="vt-oc-id"><span></span><b>Orden ID #234577</b><span class="vt-oc-tag">Delivery</span></div>
+                  <div class="vt-oc-act"><span class="vt-oc-time"><i><svg viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true"><path d="M354.5-860v-65.5h251v65.5h-251Zm92.87 452.02h65.26v-230.48h-65.26v230.48ZM337.89-98.97q-66.56-28.96-116.35-78.69-49.8-49.73-78.66-116.27-28.86-66.54-28.86-142.01 0-75.47 28.86-142.05 28.86-66.58 78.66-116.42 49.81-49.85 116.38-78.82Q404.5-802.2 480-802.2q67.48 0 127.08 22.5 59.59 22.5 105.83 62.74l53.16-53.15 46.3 46.07-53.15 53.15q36.24 40.48 61.62 97.96 25.38 57.47 25.38 136.95 0 75.52-28.96 142.11-28.95 66.59-78.78 116.28-49.83 49.7-116.44 78.64Q555.43-70 479.94-70T337.89-98.97Zm353.18-126.02q86.78-86.62 86.78-210.95 0-124.32-86.74-211.1-86.75-86.79-211.07-86.79t-211.11 86.75q-86.78 86.74-86.78 211.06 0 124.32 86.74 210.99 86.75 86.66 211.07 86.66t211.11-86.62ZM480-434.98Z"/></svg></i><span>13:32 h I Transcurridos: 3 minutos</span></span><span class="vt-oc-btn">Pasar a Pick up / Delivery</span></div>
+                </div>
+                <div class="vt-oc-body">
+                  <div class="vt-oc-prod"><p><b>Producto:</b> 1 hamburguesa con lechuga, tomate, jamon y queso, 1 hamburguesa con papas fritas medianas,1 hamburguesa de pollo con papas medianas, 1 combo mediano <span class="vt-oc-more">Ver más<i><svg viewBox="64 64 896 896" fill="currentColor" aria-hidden="true"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z" /></svg></i></span></p></div>
+                  <div class="vt-oc-note"><p><b>Comentario:</b> <small>Quiero que el combo mediano no traiga pepino</small></p><span class="vt-oc-print"><i><svg viewBox="64 64 896 896" fill="currentColor" aria-hidden="true"><path d="M820 436h-40c-4.4 0-8 3.6-8 8v40c0 4.4 3.6 8 8 8h40c4.4 0 8-3.6 8-8v-40c0-4.4-3.6-8-8-8zm32-104H732V120c0-4.4-3.6-8-8-8H300c-4.4 0-8 3.6-8 8v212H172c-44.2 0-80 35.8-80 80v328c0 17.7 14.3 32 32 32h168v132c0 4.4 3.6 8 8 8h424c4.4 0 8-3.6 8-8V772h168c17.7 0 32-14.3 32-32V412c0-44.2-35.8-80-80-80zM360 180h304v152H360V180zm304 664H360V568h304v276zm200-140H732V500H292v204H160V412c0-6.6 5.4-12 12-12h680c6.6 0 12 5.4 12 12v292z" /></svg></i>Imprimir</span></div>
+                </div>
+                <p class="vt-oc-link vt-oc-foot">Datos del cliente<i><svg viewBox="64 64 896 896" fill="currentColor" aria-hidden="true"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z" /></svg></i></p>
+              </div>
+            </div>
+            <figcaption>Two orders in "Preparando". Each card shows the time elapsed, and turns red once it runs past the limit:
+              <span class="es-note" lang="es">"Transcurridos: 7 minutos"</span>
+              Elapsed: 7 minutes.</figcaption>
           </figure>
           <div class="duo">
             <figure>
@@ -610,7 +765,7 @@ html.nav-top .back-nav{background-color:transparent !important;background-image:
               <figcaption>Detail, with a five-step timeline and a time stamp for each step.</figcaption>
             </figure>
           </div>
-          <!-- TODO(Paula): the history screen has placeholder data (the same order number on several rows, "Gs. 160.000" billed for 40.000 completed orders) and Spanish typos ("Ódenes canceladas"; "Motivo de cancelacion" on the detail). A Spanish-speaking recruiter will see them. Worth fixing in Figma and re-exporting. The queue export is also cropped at the top edge and shows "[Branch name]". -->
+          <!-- TODO(Paula): the history screen has placeholder data (the same order number on several rows, "Gs. 160.000" billed for 40.000 completed orders) and Spanish typos ("Ódenes canceladas"; "Motivo de cancelacion" on the detail). A Spanish-speaking recruiter will see them. Worth fixing in Figma and re-exporting. The two order cards (now live HTML, from the Figma component) still show "[Branch name]" and "Detalle de la órden" with an accent, as in Figma. -->
         </div>
       </article>
 
@@ -742,75 +897,86 @@ html.nav-top .back-nav{background-color:transparent !important;background-image:
   </div>
 </section>
 
-<!-- ═════════ COMPONENT LIBRARY (collapsed) ═════════ -->
-<section class="sec tint" aria-labelledby="lib-h" style="padding-block:clamp(40px,6vw,80px)">
+<!-- ═════════ DESIGN SYSTEM (board, live components) ═════════ -->
+<section class="sec tint" id="system" aria-labelledby="system-h">
   <div class="wrap">
-    <details class="lib">
-      <summary>
-        <span><span class="h3" id="lib-h">Component library</span><span class="sub">Status, cards, lists, pickers and navigation, pulled from across the tool</span></span>
-        <span class="ico" aria-hidden="true">+</span>
-      </summary>
-      <div class="lib-body">
 
-        <div class="principles">
-          <div><h3>Legible statuses</h3><p>Built for a queue, not a dashboard demo: a status has to read at a glance during a busy service.</p></div>
-          <div><h3>Forgiving destructive actions</h3><p>Anything that can't be undone asks for a second step. Switching a product off can be undone with one tap.</p></div>
-          <div><h3>No guessing</h3><p>Every state says what happens next, so the vendor is never left wondering.</p></div>
-        </div>
+    <div class="split">
+      <h2 class="h2 wide" id="system-h">The system behind the tool</h2>
+      <p class="prose">Buttons, switches, the category picker, the queue tabs and the side navigation: built once, and reused across orders, menu and team.</p>
+    </div>
 
-        <div class="comp-group">
-          <h3>Status components</h3>
-          <p>Used across the queue, the history and the order detail.</p>
-          <div class="comp-grid">
-            <figure class="comp"><div class="thumb"><img src="vendor-tool-assets/vt-status-pills.webp" width="735" height="300" loading="lazy" decoding="async" alt="Order table rows with status pills: Cancelada in red, Entregada in green, Rechazada in grey"></div><figcaption class="cap"><strong>Order status pills</strong>Cancelada, Entregada and Rechazada, in the order table.</figcaption></figure>
-            <figure class="comp"><div class="thumb"><img src="vendor-tool-assets/vt-comp-timeline.webp" width="2208" height="188" loading="lazy" decoding="async" alt="Five-step order timeline with time stamps: Pendiente, Confirmada, Preparando, Delivery, Entregada"></div><figcaption class="cap"><strong>Order timeline</strong>The same five states on every order detail, each with a time stamp.</figcaption></figure>
+    <!-- One board: type, colour and the real components side by side. Built in HTML/CSS from the Figma frame, not an image. -->
+    <figure class="dsb-wrap" role="img" aria-label="Vendor Tool design system board: the Inter typeface; primary, secondary and danger buttons in two states; a switch on and off; edit and delete icon buttons; category chips; the category search with its suggestions; the order queue tabs with Pendientes active; the side navigation; and the brand, gradient, accent and neutral colours.">
+      <div class="dsb">
+
+        <p class="dsb-type">Font <b>Inter</b></p>
+
+        <div class="dsb-col dsb-col-a">
+          <div class="vt-btns">
+            <div class="vt-btn is-primary">Primary</div>
+            <div class="vt-btn is-secondary">Secondary</div>
+            <div class="vt-btn is-danger">Danger</div>
+            <div class="vt-btn is-off">Primary</div>
+            <div class="vt-btn is-secondary is-on">Secondary</div>
+            <div class="vt-btn is-danger is-line">Danger</div>
+          </div>
+
+          <div class="vt-chips">
+            <div class="vt-chip">Los más vendidos 🏆</div>
+            <div class="vt-chip is-add"><i><svg viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true"><path d="M445.93-445.93H194.02v-68.14h251.91v-252.15h68.14v252.15h252.15v68.14H514.07v251.91h-68.14v-251.91Z"/></svg></i>Agregar categoria</div>
+          </div>
+
+          <div class="vt-card vt-search">
+            <div class="vt-box"><p>Los<em>I</em></p><span><i><svg viewBox="64 64 896 896" fill="currentColor" aria-hidden="true"><path d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0011.6 0l43.6-43.5a8.2 8.2 0 000-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z" /></svg></i></span></div>
+            <div class="vt-opt"><b>Los</b>más</div>
+            <div class="vt-opt"><b>Los</b>más comprados</div>
+            <div class="vt-opt"><b>Los</b>más saludables</div>
+            <div class="vt-opt is-on"><b>Los</b>más vendidos</div>
           </div>
         </div>
 
-        <div class="comp-group">
-          <h3>Order card</h3>
-          <p>The same card at rest, and under time pressure. Past a threshold, "Cancelar orden" disappears — once time is critical, the only choices left are act or print, not walk away.</p>
-          <div class="stack-comp">
-            <figure class="comp comp--wide"><div class="thumb thumb--pad"><img src="vendor-tool-assets/vt-comp-order-card.webp" width="2288" height="552" loading="lazy" decoding="async" alt="Order card at rest: Doña Angela Pinedo, Delivery tag, Imprimir, Cancelar orden and Accion buttons, order total Gs. 110.000, 7 minutes elapsed"></div><figcaption class="cap"><strong>At rest</strong>Imprimir, Cancelar orden and Accion are all on the table.</figcaption></figure>
-            <figure class="comp comp--wide"><div class="thumb thumb--pad"><img src="vendor-tool-assets/vt-comp-order-card-urgent.webp" width="2288" height="584" loading="lazy" decoding="async" alt="The same order card in an urgent, red-tinted state: the elapsed time is now red, and Cancelar orden is gone, leaving only Imprimir and Accion"></div><figcaption class="cap"><strong>Under time pressure</strong>The card tints red, the elapsed time turns red, and Cancelar orden is gone.</figcaption></figure>
+        <div class="dsb-col dsb-col-b">
+          <div class="vt-ctrl">
+            <div class="vt-sw"><span><i><svg viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true"><path d="M378-232.43 140.43-470l57.14-57.13L378-346.7l383.43-383.43L818.57-673 378-232.43Z"/></svg></i></span></div>
+            <div class="vt-sw is-off"><span><i><svg viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true"><path d="M249-193.43 193.43-249l231-231-231-231L249-766.57l231 231 231-231L766.57-711l-231 231 231 231L711-193.43l-231-231-231 231Z"/></svg></i></span></div>
+            <div class="vt-icon"><i><svg viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true"><path d="M171-101q-32 7-54-15.5T101-171l41-197 226 226-197 41Zm197-41L142-368l472-472q28-28 66.5-28t65.5 28l94 94q28 27 28 65.5T840-614L368-142Zm312-630L254-346l92 92 426-426-92-92Z"/></svg></i></div>
+            <div class="vt-icon"><i><svg viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true"><path d="M253-95q-40.21 0-67.61-27.1Q158-149.2 158-189v-553h-58v-94h231v-48h297v48h232v94h-58v553q0 39.05-27.77 66.53Q746.46-95 707-95H253Zm454-647H253v553h454v-553ZM354-267h77v-399h-77v399Zm175 0h78v-399h-78v399ZM253-742v553-553Z"/></svg></i></div>
+          </div>
+
+          <div class="vt-card vt-tabs">
+            <div class="vt-tab"><i><svg viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true"><path d="M185.09-183.96v-589.82 589.82Zm100-429.82h389.82v-60H285.09v60Zm0 164.91h216.68q18.66-18.09 39.98-33.26 21.32-15.17 44.99-26.74H285.09v60Zm0 164.91h131.92q2.9-16 7.03-30.63 4.13-14.63 10.13-29.37H285.09v60Zm-100 179.79q-32.68 0-55.95-23.44-23.27-23.44-23.27-56.35v-589.82q0-32.68 23.27-55.95Q152.41-853 185.09-853h589.82q32.91 0 56.35 23.27 23.44 23.27 23.44 55.95v266.13q-18.38-9.24-38.54-15.73t-41.25-10.07v-240.33H185.09v589.82h231.87q1.87 21.66 7.43 41.18 5.57 19.52 13.83 38.61H185.09ZM720-21.91q-74.24 0-130.1-45.22t-71.55-111.96h86.87q11.87 33.26 42.61 55.61 30.75 22.35 72.17 22.35 53.55 0 91.41-37.86 37.85-37.85 37.85-91.4 0-53.75-37.89-91.22-37.89-37.48-91.37-37.48-25.25 0-46.6 8.27t-36.7 23.26h51.21v79.78h-186v-186h79.22v47.95q27.24-24.24 62.8-38.64 35.57-14.4 76.07-14.4 86.91 0 147.7 60.79 60.78 60.79 60.78 147.44T867.7-82.95Q806.91-21.91 720-21.91Z"/></svg></i>Historial<span>100</span></div>
+            <div class="vt-tab"><i><svg viewBox="64 64 896 896" fill="currentColor" aria-hidden="true"><path d="M854.6 289.1a362.49 362.49 0 00-79.9-115.7 370.83 370.83 0 00-118.2-77.8C610.7 76.6 562.1 67 512 67c-50.1 0-98.7 9.6-144.5 28.5-44.3 18.3-84 44.5-118.2 77.8A363.6 363.6 0 00169.4 289c-19.5 45-29.4 92.8-29.4 142 0 70.6 16.9 140.9 50.1 208.7 26.7 54.5 64 107.6 111 158.1 80.3 86.2 164.5 138.9 188.4 153a43.9 43.9 0 0022.4 6.1c7.8 0 15.5-2 22.4-6.1 23.9-14.1 108.1-66.8 188.4-153 47-50.4 84.3-103.6 111-158.1C867.1 572 884 501.8 884 431.1c0-49.2-9.9-97-29.4-142zM512 880.2c-65.9-41.9-300-207.8-300-449.1 0-77.9 31.1-151.1 87.6-206.3C356.3 169.5 431.7 139 512 139s155.7 30.5 212.4 85.9C780.9 280 812 353.2 812 431.1c0 241.3-234.1 407.2-300 449.1zm0-617.2c-97.2 0-176 78.8-176 176s78.8 176 176 176 176-78.8 176-176-78.8-176-176-176zm79.2 255.2A111.6 111.6 0 01512 551c-29.9 0-58-11.7-79.2-32.8A111.6 111.6 0 01400 439c0-29.9 11.7-58 32.8-79.2C454 338.6 482.1 327 512 327c29.9 0 58 11.6 79.2 32.8C612.4 381 624 409.1 624 439c0 29.9-11.6 58-32.8 79.2z" /></svg></i>Delivery/Pick up<span>99</span></div>
+            <div class="vt-tab"><i><svg viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true"><path d="M160.48-557.74q1.04-40.26-6.39-69.17-7.44-28.92-36.7-75.26-23.74-39.13-30.89-72.77-7.15-33.63-1.59-79.76h72.83q-3.87 39.26 6.04 70.16 9.92 30.89 39.61 77.8 20.91 35.31 27.85 69.65 6.93 34.35 2.06 79.35h-72.82Zm178.48 0q1.04-40.26-6.4-69.17-7.43-28.92-36.69-75.26-23.74-39.13-30.89-72.77-7.15-33.63-1.59-79.76h72.83q-3.87 39.26 5.54 70.16 9.41 30.89 39.11 77.8 20.91 35.31 28.35 69.65 7.43 34.35 2.56 79.35h-72.82Zm182.43 0q1.04-40.26-6.39-69.17-7.43-28.92-36.7-75.26-23.73-39.13-30.6-72.77-6.87-33.63-1.87-79.76h73.39q-3.87 39.26 5.26 70.16 9.13 30.89 39.39 77.8 20.91 35.31 28.07 69.65 7.15 34.35 2.84 79.35h-73.39ZM200-145.87q-56.65 0-95.39-38.74T65.87-280v-197.74h591.87q2.83-37.09 22.78-67.83 19.96-30.73 55.18-43l180.52-61.73 24.65 75.65-176.56 59.61q-16.09 5.13-22.85 20.58-6.76 15.46-6.76 32.55V-280q0 56.22-39.03 95.17-39.02 38.96-95.67 38.96H200Zm0-79.22h400q23.74 0 39.33-16.08 15.58-16.09 15.58-38.83v-117.96H145.09V-280q0 23.74 15.58 39.33 15.59 15.58 39.33 15.58Zm200-86.43Z"/></svg></i>Preparando<span>99</span></div>
+            <div class="vt-tab is-on"><i><svg viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true"><path d="M224.26-54q-52.32 0-88.55-36.23t-36.23-88.82v-138.86h133.78v-571.7l63.19 62.26 62.5-62.26 62.5 62.26 62.49-62.26 62.5 62.26 62.7-62.26 62.58 62.26 62.58-62.26 62.27 62.26 63.95-62.26v710.83q0 52.32-36.39 88.55Q787.73-54 735.74-54H224.26Zm511.76-79.78q19.72 0 32.22-12.53 12.5-12.54 12.5-32.59v-589.23H312.48v450.22h378.26v139.13q0 20 12.78 32.5t32.5 12.5ZM365.48-606.74v-60h229.26v60H365.48Zm0 134v-60h229.26v60H365.48Zm322.26-134q-12 0-21-9t-9-21q0-12 9-21t21-9q12 0 21 9t9 21q0 12-9 21t-21 9Zm0 129q-12 0-21-9t-9-21q0-12 9-21t21-9q12 0 21 9t9 21q0 12-9 21t-21 9ZM223.26-133.78h388.26v-104.35H179.26v59.35q0 20 12.65 32.5t31.35 12.5Zm-44 0v-104.35 104.35Z"/></svg></i>Pendientes<span>10</span></div>
           </div>
         </div>
 
-        <div class="comp-group">
-          <h3>Queue tabs</h3>
-          <p>The queue's four tabs, each with a live count, sitting under the search and sort controls and above the bulk actions.</p>
-          <div class="stack-comp">
-            <figure class="comp comp--wide"><div class="thumb thumb--pad"><img src="vendor-tool-assets/vt-comp-queue-header.webp" width="2236" height="448" loading="lazy" decoding="async" alt="Listado de órdenes header: a Buscar field and an Ordenar por Más nuevas dropdown; tabs Pendientes 10 (active, red), Preparando 99, Delivery/Pick up 99 and Historial 100; a dismissible notice that bulk cancel and print are not available yet; a Seleccionar todas las órdenes checkbox, a Pasar a preparando button and Pedidos agendados (4)"></div><figcaption class="cap"><strong>In context</strong>Search and sort on top, the tabs, then the actions for the selected orders.</figcaption></figure>
-            <figure class="comp comp--narrow"><div class="thumb thumb--pad"><img src="vendor-tool-assets/vt-comp-queue-tabs.webp" width="568" height="640" loading="lazy" decoding="async" alt="The four tabs close up, each with its icon and count: Pendientes 10 in red with a pink badge and a red underline, then Preparando 99, Delivery/Pick up 99 and Historial 100 in grey"></div><figcaption class="cap"><strong>Active and resting</strong>The active tab turns red, with a tinted badge and an underline. The rest stay neutral.</figcaption></figure>
-          </div>
+        <div class="vt-rail">
+          <div><i><svg viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true"><path d="m695-112 150-149-53-52-97 95-39-39-52 53 91 92ZM249-609h462v-60H249v60ZM723.5-25Q646-25 591-80t-55-132q0-77.43 54.99-133.22Q645.98-401 724-401q77 0 132.5 55.78Q912-289.43 912-212q0 77-55.5 132t-133 55ZM95-40v-729q0-38.77 27.61-66.39Q150.22-863 189-863h582q39.19 0 67.09 27.61Q866-807.77 866-769v352q-21.17-14.86-44.58-24.43Q798-451 771-455.98V-769H189v580h289q.88 32.17 10.94 60.59Q499-100 517-77l-37 37-64.4-64-64.4 64-64.4-64-65.4 64-64.4-64-62 64Zm154-247h238.27Q493-303 500-318t17-29H249v60Zm0-161h382.88q20.12-5 39.73-7.5Q691.22-458 711-460v-48H249v60Zm-60 259v-580 580Z"/></svg></i></div>
+          <div class="is-on"><i><svg viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true"><path d="M560-546v-48q33-14 67.5-21t72.5-7q26 0 51 4t49 10v44q-24-9-48.5-13.5T700-582q-38 0-73 9.5T560-546Zm0 220v-49q33-13.5 67.5-20.25T700-402q26 0 51 4t49 10v44q-24-9-48.5-13.5T700-362q-38 0-73 9t-67 27Zm0-110v-48q33-14 67.5-21t72.5-7q26 0 51 4t49 10v44q-24-9-48.5-13.5T700-472q-38 0-73 9.5T560-436ZM248-272q53.57 0 104.28 12.5Q403-247 452-222v-427q-45-30-97.62-46.5Q301.76-712 248-712q-38 0-74.5 9.5T100-679v434q31-14 70.5-20.5T248-272Zm264 50q50-25 98-37.5T712-272q38 0 78.5 6t69.5 16v-429q-34-18-71.82-25.5Q750.36-712 712-712q-54 0-104.5 16.5T512-649v427Zm-27.82 117Q432-142 372.33-165.5 312.65-189 248-189q-34.15 0-67.07 9.5Q148-170 115-159q-33.1 17-65.55-2.16Q17-180.32 17-219v-462q0-25 11-46.3 11-21.3 33-32.7 44-19.5 90.39-27.75 46.4-8.25 94.56-8.25Q310-796 370-778.5T482-724q51-36 110-54t122.05-18q47.82 0 93.88 9Q854-778 898-760q22 11.4 33.5 32.7Q943-706 943-681v473q0 36.94-33 52.97T844-159q-32-12-64.93-21-32.92-9-67.07-9-63.22 0-119.93 24.5Q535.36-140 484.18-105ZM276-461Z"/></svg></i></div>
+          <div><i><svg viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true"><path d="M623-153q-137 0-232.5-95.68T295-480.17q0-136.99 95.5-232.41Q486-808 623-808q136.16 0 231.58 95.3Q950-617.39 950-480.11 950-344 854.58-248.5T623-153Zm-.35-87q99.85 0 170.1-70T863-480q0-100-70-170.5T623-721q-100 0-170.5 70.19T382-480.35q0 99.85 70.19 170.1T622.65-240ZM710-333l61-61-105-104.57V-639h-87v176l131 130ZM50-597v-87h205v87H50ZM10-437v-87h245v87H10Zm40 160v-87h205v87H50Zm573-203Z"/></svg></i></div>
+          <div><i><svg viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true"><path d="M226-34q-58.92 0-99.46-40.54Q86-115.08 86-174.47V-324h139v-573l65.8 64 64.57-64 64.57 64 64.57-64 64.58 64 64.77-64 64.57 64L743-897l64 64 67-64v723q0 58.92-40.83 99.46Q792.33-34 734-34H226Zm508.5-95q19.5 0 32-12.56T779-174.2V-759H319v435h370v150q0 20 13 32.5t32.5 12.5ZM372-595v-60h221v60H372Zm0 134v-60h221v60H372Zm314-134q-12 0-21-9t-9-21q0-12 9-21t21-9q12 0 21 9t9 21q0 12-9 21t-21 9Zm0 129q-12 0-21-9t-9-21q0-12 9-21t21-9q12 0 21 9t9 21q0 12-9 21t-21 9ZM225-129h370v-100H181v55q0 20 12.65 32.5T225-129Zm-44 0v-100 100Z"/></svg></i></div>
+          <div><i><svg viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true"><path d="M551-443q-50 0-85-35t-35-85q0-50 35-85t85-35q50 0 85 35t35 85q0 50-35 85t-85 35ZM255-280q-39.73 0-67.36-27.64Q160-335.27 160-375v-376q0-39.19 27.64-67.09Q215.27-846 255-846h594q38.77 0 66.39 27.91Q943-790.19 943-751v376q0 39.73-27.61 67.36Q887.77-280 849-280H255Zm88-83h417q0-42 29-71t71-29v-200q-42 0-71-29.5T760-763H343q0 41-29 70.5T243-663v200q42 0 71 29t29 71Zm457 226H111q-38.78 0-66.39-27.61T17-231v-449h94v449h689v94ZM243-363v-400 400Z"/></svg></i></div>
+          <div><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg></i></div>
         </div>
 
-        <div class="comp-group">
-          <h3>List rows</h3>
-          <p>Products and categories share one row: a drag handle to reorder, an on/off switch, and the same edit and delete buttons. A category row adds its item count, its schedule, and a way into its products.</p>
-          <div class="stack-comp">
-            <figure class="comp comp--wide"><div class="thumb thumb--pad"><img src="vendor-tool-assets/vt-comp-list-rows.webp" width="2168" height="968" loading="lazy" decoding="async" alt="Three list rows. A product without a photo, showing an add-image placeholder, its name and Gs. 50.000, switched on. The same product with a burger photo, switched on. A category row, Nombre de la categoría with # items and a Programado de 18 a 20hs chip, switched off, with edit, delete and Ver productos buttons"></div><figcaption class="cap"><strong>Product and category</strong>Without a photo, with a photo, and a scheduled category switched off.</figcaption></figure>
-          </div>
-        </div>
-
-        <div class="comp-group">
-          <h3>Category picker</h3>
-          <p>Adding a category starts with a search. As the vendor types, existing categories show up with the typed part in bold.</p>
-          <div class="comp-grid">
-            <figure class="comp"><div class="thumb thumb--pad"><img src="vendor-tool-assets/vt-comp-category-picker.webp" width="1127" height="664" loading="lazy" decoding="async" alt="A Los más vendidos chip next to an Agregar categoría button. Its dropdown has a search field with Los typed, and four suggestions, Los más, Los más comprados, Los más saludables and Los más vendidos, with Los in bold and the last one highlighted"></div><figcaption class="cap"><strong>Search as you type</strong>Suggestions narrow as the vendor types, matching part in bold.</figcaption></figure>
-          </div>
-        </div>
-
-        <div class="comp-group">
-          <h3>Stat card</h3>
-          <p>The same card shows a total, a count, or a time. Only the label changes.</p>
-          <div class="comp-grid">
-            <figure class="comp"><div class="thumb"><img src="vendor-tool-assets/vt-comp-total-card.webp" width="528" height="208" loading="lazy" decoding="async" alt="A small stat card reading Gs. 807.976, labelled TOTAL"></div><figcaption class="cap"><strong>Total</strong>Gs. 807.976, labelled TOTAL.</figcaption></figure>
-          </div>
+        <div class="dsb-colors">
+          <div class="dsb-sw" style="background:#E6224F"><span>Brand</span></div>
+          <div class="dsb-sw" style="--f:230;background:linear-gradient(102.85deg,#E6224F 37.084%,#B01135 100%)"><span>Gradient</span></div>
+          <div class="dsb-sw" style="--f:180;background:#22E6B8"><span style="color:#393939">Accent</span></div>
+          <div class="dsb-sw" style="--f:130;background:#F0F0F0"><span style="color:#8A8A8A">Neutral</span></div>
         </div>
 
       </div>
-    </details>
+    </figure>
+
+    <div class="principles">
+      <div><h3>Legible statuses</h3><p>Built for a queue, not a dashboard demo: a status has to read at a glance during a busy service.</p></div>
+      <div><h3>Forgiving destructive actions</h3><p>Anything that can't be undone asks for a second step. Switching a product off can be undone with one tap.</p></div>
+      <div><h3>No guessing</h3><p>Every state says what happens next, so the vendor is never left wondering.</p></div>
+    </div>
+
   </div>
 </section>
 
