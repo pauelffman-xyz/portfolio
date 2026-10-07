@@ -109,7 +109,7 @@ body{
   -webkit-backdrop-filter:blur(20px);
   border:1px solid var(--line);
   border-radius:100px;
-  padding:.375rem .5rem;
+  padding:.375rem;   /* same gap on all four sides of the active pill */
 }
 body.light-mode #dock {
   background:rgba(255,255,255,0.9);
@@ -176,7 +176,7 @@ body:not(.light-mode) .theme-toggle .icon-moon { display:none; }
 .dock-link:hover { opacity:1; }
 .dock-pill{
   position:absolute;
-  top:.375rem; left:.5rem;
+  top:.375rem; left:0;   /* left:0 on purpose: moveDockPill() translates by the button's offsetLeft, which already includes the dock padding */
   height:calc(100% - .75rem);
   border-radius:100px;
   background:var(--ghost-2);
