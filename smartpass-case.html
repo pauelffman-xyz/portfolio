@@ -192,6 +192,10 @@ body.dark-mode .process-grid .proc-step:nth-child(1) .proc-num{
 }
 .shot-frame img{display:block;width:100%;height:auto;}
 .shot-label{margin-top:1.25rem;}
+/* single screen, centred in the page on desktop */
+.shot-solo{max-width:72%;margin:0 auto 3rem;}
+.shot-solo.is-narrow{max-width:60%;margin-bottom:0;}
+.shot-solo .shot-label{text-align:center;}
 .sh-n{font-family:'Geist',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;color:var(--green);margin-bottom:.375rem;}
 .sh-t{font-size:.9375rem;font-weight:700;color:var(--ink);letter-spacing:-.02em;margin-bottom:.25rem;}
 .sh-d{font-size:.8125rem;line-height:1.6;color:var(--ash);}
@@ -577,6 +581,9 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
   [style*="grid-template-columns"]{grid-template-columns:minmax(0,1fr)!important;}
   [style*="gap:4rem"],[style*="gap:3rem"]{gap:2rem!important;}
   .cover-title{font-size:clamp(2.75rem,15vw,5rem);}
+  /* single screens: image and text take the full width, text left-aligned like the other screens */
+  .shot-solo,.shot-solo.is-narrow{max-width:none;}
+  .shot-solo .shot-label{text-align:left;}
   @media(max-width:420px){.process-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
 }
 /* ═══ /MOBILE ═══ */
@@ -913,17 +920,17 @@ html.nav-top body .back-nav{background:transparent;-webkit-backdrop-filter:none;
     <div class="sl-l"></div>
     <div class="sl-t">Gestores & acreditaciones</div>
   </div>
-  <div style="max-width:72%;margin:0 auto 3rem;">
+  <div class="shot-solo">
     <div class="shot-frame"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2550 2058'%3E%3Crect width='2550' height='2058' fill='%23EDEAE4'/%3E%3C/svg%3E" data-img-id="smartpass_case_003" alt="Admin events list and event dashboard overview"></div>
-    <div class="shot-label" style="text-align:center;">
+    <div class="shot-label">
       <div class="sh-n">Screen 03</div>
       <div class="sh-t">Events list · Admin home &amp; dashboard</div>
       <div class="sh-d">A simple table surfaces every event the admin manages — name, dates, location — with search and quick view action. Opening one drops into the full event view: accreditation counters, the event card, and the Gestores(100) table populated and paginated.</div>
     </div>
   </div>
-  <div style="max-width:60%;margin:0 auto;">
+  <div class="shot-solo is-narrow">
     <div class="shot-frame"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1720 1760'%3E%3Crect width='1720' height='1760' fill='%23EDEAE4'/%3E%3C/svg%3E" data-img-id="smartpass_case_005" alt="Event dashboard with populated gestores and acreditados sections"></div>
-    <div class="shot-label" style="text-align:center;">
+    <div class="shot-label">
       <div class="sh-n">Screen 04</div>
       <div class="sh-t">Event dashboard · Gestores & Acreditados</div>
       <div class="sh-d">The full event view: accreditation counters up top, the Gestores(100) table populated and paginated, and an Acreditados panel below with its own search — an explicit empty state appears until a gestor accredits someone into it.</div>
