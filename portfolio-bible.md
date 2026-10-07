@@ -856,10 +856,16 @@ document.addEventListener('click', function(e){
 
 - **Layout:** `.dv-about` es una grilla de dos columnas (`minmax(0,780px) max-content`, separadas con `justify-content:space-between`): `.dv-story` a la izquierda y `.tk` a la derecha. El statement sigue debajo, a todo el ancho.
 - **Ficha (`.tk-tile`):** cuadrado de 4.5rem, radio 18px, fondo `--surface`, borde `--line-md` y sombra propia (`--tk-shadow`, más corta que `--shadow-card`). Adentro, el logo a 28px. Al pasar el mouse sube 3px y la sombra crece.
-- **Nombre debajo de cada ficha** (`.tk-name`, .75rem). La referencia era solo ícono, pero dos herramientas no tienen logo (Supertesting y Granola van con su inicial) y varias no se reconocen solo por el ícono. **No quitar los nombres.**
+- **Verde al pasar el cursor (a pedido, mismo día):** el ícono se pinta con `--accent` (verde oscuro `#009D71` en light, verde brillante `#22F0A4` en dark); la inicial de Supertesting también. El nombre de abajo no cambia.
+  - **Cómo:** los logos son `<img>`, así que no se pueden recolorear con `color`. Hay un filtro SVG en línea dentro de `.tk` (`<filter id="tkTint">`: un `feFlood` recortado con la silueta del ícono) y la ficha en hover aplica `filter:url(#tkTint)`. El color del `feFlood` se toma de `--accent` por CSS (`#tkTint feFlood{flood-color:var(--accent)}`), así cambia solo con el modo.
+  - **No se usó `mask-image`** porque con el archivo abierto en local (`file://`) el navegador bloquea las máscaras externas y las fichas quedarían vacías.
+  - **Condición:** funciona porque los logos son de un solo color con huecos transparentes. Un logo con partes blancas opacas quedaría como una mancha verde.
+  - Solo en dispositivos con hover. El cambio de color del logo es instantáneo (un filtro `url()` no se puede animar); la inicial sí hace transición.
+- **Nombre debajo de cada ficha** (`.tk-name`, .75rem). La referencia era solo ícono, pero Supertesting no tiene logo (va con su inicial, `.tk-mono`) y varias no se reconocen solo por el ícono. **No quitar los nombres.**
 - **Uso** ("Design & prototyping", etc.): ya no se muestra. Queda en el `title` de cada ficha (tooltip) y en un `.tk-use` oculto para lectores de pantalla.
 - **Grilla:** 4 columnas en desktop (dos filas). A ≤1100px el Toolkit baja debajo del texto y pasa a una fila de 8; a ≤768px, 4 columnas.
 - **Herramientas y orden, sin cambios:** Figma, Claude, Maze, Supertesting, Granola, Amplitude, Notion, Jira. Los logos siguen siendo los SVG negros de `assets/tools/`, invertidos en dark.
+- **Logo de Granola (`assets/tools/granola.svg`, mismo día):** reemplazó a la inicial "G". Sale del símbolo oficial que pasó Paula (`Granola_AI_Symbol_0.svg`), con dos ajustes para que se comporte como los demás: el relleno pasó de `#1E1E1E` a negro puro (así en dark se invierte a blanco) y el `viewBox` se recortó al dibujo, en cuadrado (el original traía un 13% de margen y a 28px se veía más chico que el resto). **Regla para un logo nuevo:** un solo color, negro, y `viewBox` ajustado al dibujo.
 
 **Para sumar una herramienta:** agregar un `<li class="tk-item" title="Nombre: uso">` con su `.tk-tile` (logo o `.tk-mono` con la inicial), `.tk-name` y `.tk-use`. Con más de 8, revisar la fila única de tablet (`repeat(8,…)`).
 

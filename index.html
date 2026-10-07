@@ -2444,6 +2444,14 @@ body.light-mode .tk { --tk-shadow:0 1px 2px rgba(20,20,35,.04), 0 8px 18px -8px 
 .tk-item:hover .tk-tile { transform:translateY(-3px); box-shadow:var(--tk-shadow-up); }
 .tk-logo { width:28px; height:28px; display:block; object-fit:contain; filter:invert(1); }
 body.light-mode .tk-logo { filter:none; }
+/* hover: the icon takes the site green (--accent: dark green in light, bright green in dark).
+   The logos are <img>, so the colour comes from an SVG filter that floods the icon's shape; see #tkTint in the markup. */
+#tkTint feFlood { flood-color:var(--accent); }
+.tk-mono { transition:color .25s ease; }
+@media(hover:hover){
+  .tk-item:hover .tk-logo, body.light-mode .tk-item:hover .tk-logo { filter:url(#tkTint); }
+  .tk-item:hover .tk-mono { color:var(--accent); }
+}
 .tk-mono { font-family:'Geist',sans-serif; font-size:1.375rem; font-weight:700; letter-spacing:-.03em; color:var(--paper); line-height:1; }
 .tk-name { font-family:'Geist',sans-serif; font-size:.75rem; font-weight:500; color:var(--paper); letter-spacing:0; text-align:center; white-space:nowrap; }
 .tk-use { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
@@ -3564,13 +3572,14 @@ body.light-mode .work{ --wc-muted:#5E5E6C; }
       <p>What excites me most is the moment when <b>business goals and human needs finally align.</b></p>
     </div>
     <div class="tk">
+      <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><filter id="tkTint" color-interpolation-filters="sRGB"><feFlood/><feComposite in2="SourceAlpha" operator="in"/></filter></svg>
       <div class="tk-label">Toolkit</div>
       <ul class="tk-grid">
         <li class="tk-item" title="Figma: Design &amp; prototyping"><span class="tk-tile"><img class="tk-logo" src="assets/tools/figma.svg" alt="" width="28" height="28" loading="lazy" decoding="async"></span><span class="tk-name">Figma</span><span class="tk-use">Design &amp; prototyping</span></li>
         <li class="tk-item" title="Claude: AI across the workflow"><span class="tk-tile"><img class="tk-logo" src="assets/tools/claude.svg" alt="" width="28" height="28" loading="lazy" decoding="async"></span><span class="tk-name">Claude</span><span class="tk-use">AI across the workflow</span></li>
         <li class="tk-item" title="Maze: Usability testing"><span class="tk-tile"><img class="tk-logo" src="assets/tools/maze.svg" alt="" width="28" height="28" loading="lazy" decoding="async"></span><span class="tk-name">Maze</span><span class="tk-use">Usability testing</span></li>
         <li class="tk-item" title="Supertesting: User testing"><span class="tk-tile"><span class="tk-mono" aria-hidden="true">S</span></span><span class="tk-name">Supertesting</span><span class="tk-use">User testing</span></li>
-        <li class="tk-item" title="Granola: Interview &amp; meeting notes"><span class="tk-tile"><span class="tk-mono" aria-hidden="true">G</span></span><span class="tk-name">Granola</span><span class="tk-use">Interview &amp; meeting notes</span></li>
+        <li class="tk-item" title="Granola: Interview &amp; meeting notes"><span class="tk-tile"><img class="tk-logo" src="assets/tools/granola.svg" alt="" width="28" height="28" loading="lazy" decoding="async"></span><span class="tk-name">Granola</span><span class="tk-use">Interview &amp; meeting notes</span></li>
         <li class="tk-item" title="Amplitude: Product analytics"><span class="tk-tile"><img class="tk-logo" src="assets/tools/amplitude.svg" alt="" width="28" height="28" loading="lazy" decoding="async"></span><span class="tk-name">Amplitude</span><span class="tk-use">Product analytics</span></li>
         <li class="tk-item" title="Notion: Docs &amp; specs"><span class="tk-tile"><img class="tk-logo" src="assets/tools/notion.svg" alt="" width="28" height="28" loading="lazy" decoding="async"></span><span class="tk-name">Notion</span><span class="tk-use">Docs &amp; specs</span></li>
         <li class="tk-item" title="Jira: Delivery tracking"><span class="tk-tile"><img class="tk-logo" src="assets/tools/jira.svg" alt="" width="28" height="28" loading="lazy" decoding="async"></span><span class="tk-name">Jira</span><span class="tk-use">Delivery tracking</span></li>
