@@ -163,8 +163,6 @@ body.dark-mode .back-nav{background:rgba(36,36,44,.92);}
 figure figcaption{margin-top:.875rem;font-size:.875rem;line-height:1.5;color:var(--ash);max-width:70ch;}
 .panel{background:#fff;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);}
 .panel img{width:100%;}
-.panel.scroll{overflow-x:auto;}
-@media(max-width:760px){.panel.scroll img{min-width:760px;}}
 .narrow-fig{max-width:920px;margin-inline:auto;}
 .duo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(20px,3vw,40px);}
 .trio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2vw,32px);}
@@ -309,7 +307,7 @@ body.dark-mode .h1 .accent{color:transparent;}
 .comp .thumb{background:var(--bg2);}
 .stack-comp .comp--narrow{align-self:flex-start;width:min(100%,440px);}
 .comp--narrow .thumb img{width:min(100%,260px);}
-.hero-showcase + .hero-visual{margin-top:var(--stack);}
+.hero-visual + .hero-visual{margin-top:var(--stack);}
 
 /* 1 · motion with a pause */
 .reveal{transition:opacity 1s var(--ease-apple),transform 1s var(--ease-apple);}
@@ -381,8 +379,11 @@ html.nav-top .back-nav{background-color:transparent !important;background-image:
       <div class="meta-team"><dt>Team</dt><dd><ul><li>Lucia Giacomelli <span>Product Manager</span></li><li>Fabian de la Cruz <span>Engineering Manager</span></li></ul></dd></div>
     </dl>
 
+    <div class="hero-visual hero-visual--float hero-photo">
+      <div class="frame"><img src="assets/vendor-tool-laptop.webp" width="2000" height="1333" alt="A person working on a laptop at a café table, with the Vendor Tool product editor open on Hamburguesa Bacon: the product photo, its fields and the live preview of the customer's card" style="width:100%;height:auto;display:block;"></div>
+    </div>
     <div class="hero-visual hero-visual--float hero-showcase">
-      <div class="frame"><img src="vendor-tool-assets/vt-hero-showcase.webp" width="1536" height="795" alt="Five Vendor Tool screens laid out on a light grey surface: the order queue with pending orders, the orders list with its totals, the product editor for Hamburguesa Bacon XXX with its live preview, a branch dashboard with the last seven days of metrics, and an order detail" style="width:100%;height:auto;display:block;"></div>
+      <div class="frame"><img src="vendor-tool-assets/vt-hero-showcase.webp" width="1536" height="795" loading="lazy" decoding="async" alt="Five Vendor Tool screens laid out on a light grey surface: the order queue with pending orders, the orders list with its totals, the product editor for Hamburguesa Bacon XXX with its live preview, a branch dashboard with the last seven days of metrics, and an order detail" style="width:100%;height:auto;display:block;"></div>
     </div>
   </div>
 </header>
@@ -504,11 +505,11 @@ html.nav-top .back-nav{background-color:transparent !important;background-image:
       </div>
       <div class="duo">
         <figure>
-          <div class="panel scroll"><img src="vendor-tool-assets/vt-menu-categories.webp" width="1600" height="1097" loading="lazy" decoding="async" alt="Product categories list: Los más vendidos, Promos, Hamburguesas, Lomitos and Papas fritas, each with a visibility schedule and an on/off switch, under a red banner about photos"></div>
+          <div class="panel"><img src="vendor-tool-assets/vt-menu-categories.webp" width="1600" height="1097" loading="lazy" decoding="async" alt="Product categories list: Los más vendidos, Promos, Hamburguesas, Lomitos and Papas fritas, each with a visibility schedule and an on/off switch, under a red banner about photos"></div>
           <figcaption>Categories, each with a visibility schedule and an on/off switch.</figcaption>
         </figure>
         <figure>
-          <div class="panel scroll"><img src="vendor-tool-assets/vt-menu-products.webp" width="1600" height="1040" loading="lazy" decoding="async" alt="Product list inside the Promos category, with photo, name, price and an on/off switch for each burger"></div>
+          <div class="panel"><img src="vendor-tool-assets/vt-menu-products.webp" width="1600" height="1040" loading="lazy" decoding="async" alt="Product list inside the Promos category, with photo, name, price and an on/off switch for each burger"></div>
           <figcaption>Inside a category (Promos): every product has its own switch.</figcaption>
         </figure>
       </div>
@@ -521,7 +522,7 @@ html.nav-top .back-nav{background-color:transparent !important;background-image:
       </div>
       <div class="editor-grid">
         <figure>
-          <div class="panel scroll"><img src="vendor-tool-assets/vt-editor-desktop.webp" width="1600" height="1040" loading="lazy" decoding="async" alt="Product editor for Hamburguesa doble Bacon, with breadcrumb, an enabled switch, category chips, a large photo with a Tips de fotografía button and a Cambiar foto button, and a live preview of the customer's product card on the right"></div>
+          <div class="panel"><img src="vendor-tool-assets/vt-editor-desktop.webp" width="1600" height="1040" loading="lazy" decoding="async" alt="Product editor for Hamburguesa doble Bacon, with breadcrumb, an enabled switch, category chips, a large photo with a Tips de fotografía button and a Cambiar foto button, and a live preview of the customer's product card on the right"></div>
           <figcaption>The editor on desktop, with the photo and a "Tips de fotografía" button, and the live preview on the right.</figcaption>
         </figure>
         <figure class="phone-fig">
@@ -594,18 +595,18 @@ html.nav-top .back-nav{background-color:transparent !important;background-image:
         <!-- TODO(Paula): update on this one — your original web draft headlined this decision "The order queue that fixed the 7-minute problem," but "7 minutes" doesn't appear anywhere in your source deck (the deck's actual numbers are POS at 0.9 min / 41% of branches, Vendor Tool at 48%, per the Problem slide). So "7 minutes" looks like it was introduced somewhere between the deck and the web copy, not something in your original data. I dropped the causal "fixed X" framing for the same reason as before — no number isolates the queue's effect on cancellations — but now I'd also hold off on "7-minute problem" specifically until you can confirm where that figure came from. -->
         <div class="dmedia">
           <figure>
-            <div class="panel scroll"><img src="vendor-tool-assets/vt-orders-queue.webp" width="1114" height="623" loading="lazy" decoding="async" alt="Pending orders queue with tabs for Pendientes, Preparando, Delivery and Historial. The first order card is red with a timer saying 1 minute 30 seconds left to accept, and lists its products, comment and total. The second order card is neutral with 5 minutes left."></div>
+            <div class="panel"><img src="vendor-tool-assets/vt-orders-queue.webp" width="1114" height="623" loading="lazy" decoding="async" alt="Pending orders queue with tabs for Pendientes, Preparando, Delivery and Historial. The first order card is red with a timer saying 1 minute 30 seconds left to accept, and lists its products, comment and total. The second order card is neutral with 5 minutes left."></div>
             <figcaption>The queue. Each order shows how long is left to accept it:
               <span class="es-note" lang="es">"Te quedan 05:00 min para aceptarla"</span>
               You have 05:00 min left to accept it.</figcaption>
           </figure>
           <div class="duo">
             <figure>
-              <div class="panel scroll"><img src="vendor-tool-assets/vt-orders-list.webp" width="1600" height="1039" loading="lazy" decoding="async" alt="Order history with filters by franchise, status, period, payment method and transaction, three summary cards for billed total, completed orders and cancelled orders, and a table of orders with status pills"></div>
+              <div class="panel"><img src="vendor-tool-assets/vt-orders-list.webp" width="1600" height="1039" loading="lazy" decoding="async" alt="Order history with filters by franchise, status, period, payment method and transaction, three summary cards for billed total, completed orders and cancelled orders, and a table of orders with status pills"></div>
               <figcaption>History, with filters, GMV for the period and a status on every order.</figcaption>
             </figure>
             <figure>
-              <div class="panel scroll"><img src="vendor-tool-assets/vt-order-detail.webp" width="1600" height="1040" loading="lazy" decoding="async" alt="Order detail with a five-step timeline, Pendiente, Confirmada, Preparando, Delivery and Entregada, each with a time stamp, then order number, total, payment method and the products"></div>
+              <div class="panel"><img src="vendor-tool-assets/vt-order-detail.webp" width="1600" height="1040" loading="lazy" decoding="async" alt="Order detail with a five-step timeline, Pendiente, Confirmada, Preparando, Delivery and Entregada, each with a time stamp, then order number, total, payment method and the products"></div>
               <figcaption>Detail, with a five-step timeline and a time stamp for each step.</figcaption>
             </figure>
           </div>
@@ -626,7 +627,7 @@ html.nav-top .back-nav{background-color:transparent !important;background-image:
         </div>
         <div class="dmedia">
           <figure>
-            <div class="panel scroll"><img src="vendor-tool-assets/vt-roles.webp" width="1173" height="615" loading="lazy" decoding="async" alt="Roles y permisos screen: buttons to view permissions, remove a user and create a user, filters by franchise, branch and role, a table of users, and an Editar usuario panel open on the right"></div>
+            <div class="panel"><img src="vendor-tool-assets/vt-roles.webp" width="1173" height="615" loading="lazy" decoding="async" alt="Roles y permisos screen: buttons to view permissions, remove a user and create a user, filters by franchise, branch and role, a table of users, and an Editar usuario panel open on the right"></div>
             <figcaption>Roles and permissions: filter by franchise, branch and role, and edit a user in a panel. The roles are Operativo and Gerente.</figcaption>
           </figure>
           <figure style="max-width:480px">

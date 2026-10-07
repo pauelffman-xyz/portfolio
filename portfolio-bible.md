@@ -1,8 +1,6 @@
 # Paula Elffman — Portfolio OS · Design Bible
 
-*Última actualización: 7 de octubre de 2026 — **TheFork Reviews, About de la home y muv.** Reúne lo hecho ese día en dos chats distintos. **TheFork Reviews:** (1) En "The problem" de `thefork-reviews-case.html` el texto va primero (titular, párrafo y las cuatro tarjetas) y la imagen de las tres pantallas queda debajo. (2) Las cuatro tarjetas de problema (`.problem-item`) pasaron del verde de marca a **rojo claro con una cruz**, para leerse como "esto estaba mal". (3) En Research, los tres porcentajes del user journey (30 / 20 / 5%) dejaron de ser una lista chica y son **una tarjeta `.rj-card`** igual a las de al lado, con números de titular que cuentan desde cero y una barra proporcional. (4) El case recibió el bloque `#nav-glass`: le faltaba, por eso el header seguía con fondo blanco arriba de todo. Ver "Cambios en `thefork-reviews-case.html` (7 de octubre de 2026)" y "Header transparente arriba, vidrio al hacer scroll". (5) **Home, About: My superpower suma el tramo de estrategia.** Subtítulo nuevo y un cuarto chip al inicio del flujo ("Vague brief"). Ver "My superpower", Iteración 4. (6) **Home, About: "AI in my workflow" dejó de ser un slider con ventana simulada.** Ahora es un riel con las seis etapas siempre a la vista y un panel que muestra, por etapa, contexto, prompt y resultado. Ver "`.ai-lab`: riel de etapas + panel (7 de octubre de 2026)". (7) **Home y About: fondo blanco en light.** `--void` de `body.light-mode` pasó de crema `#F5F4F0` a `#FFFFFF`, igual que el `--bg` de los cases. Ver la nota "Fondo blanco en light" en DESIGN TOKENS. (8) **About: Toolkit como fichas con ícono, al lado del texto.** Dejó de ser una sección propia con grilla gris. Ver "Toolkit: fichas con ícono junto al About". (9) **About: Experience más legible:** filas alternadas en gris y blanco, y empresa y datos en verde al pasar el cursor. Ver "Experience: filas alternadas, hover y legibilidad". Además, **TheFork y Restorando van unidos en un bloque de "7 years"**, con la adquisición de 2019 dicha en forma explícita, y Hotaru pasó al final. Ver "Timeline de experiencia". (10) **muv:** se corrigieron las pantallas Destination y Categories (mockups nuevos `-v2`) y se le dio margen izquierdo a la imagen de las dos homes. Ver "Cambios en `muv-case.html` (7 de octubre de 2026)". (11) **About: "Beyond the work" rediseñado:** titular a la izquierda y tres facetas (Travel, Hobbies, AI) en lista a la derecha; se quitaron Photography y Cultures. De paso se corrigió una `}` suelta que apilaba esa sección. Ver "Beyond the work: titular a la izquierda, tres facetas a la derecha". (12) **Home: dock con padding parejo.** La píldora del botón activo quedaba corrida; ahora está a 6px del borde en los tres lados. Ver la nota en "Dock unificado (bottom)". (13) **About: story de 3 párrafos.** Se quitó "What excites me most…" y "Latin America, Europe and the US." va en verde. Ver "About — statement de posicionamiento".*
-
-*Última actualización previa: 6 de octubre de 2026 — **SmartPass: design system como board y header transparente.** (1) La sección Design System de `smartpass-case.html` dejó de ser cuatro grupos apilados (escalas de color, tipografía, toasts, filtros) y pasó a ser **un solo board** con todo a la vista: tipografía, botones, código de verificación, filtro, modal, íconos, colores, toast y badges. Está hecho en HTML/CSS, no es una imagen, y los componentes van **equidistantes**: una sola separación entre todos y un solo margen. Ver "DESIGN SYSTEM COMO BOARD" dentro de CASE STUDIES. (2) `smartpass-case.html` recibió el bloque `#nav-glass`: el header va sin fondo arriba de todo (se ve el degradé del cover) y toma el vidrio al hacer scroll. Ver "Header transparente arriba, vidrio al hacer scroll". (3) **Home: cover nuevo en la card de smartpass** (More work): `assets/smartpass-accreditations.webp`, el teléfono con la pantalla de acreditaciones, en lugar del login provisorio. Ver "Notas de covers" en "Home: grilla de casos". (4) **muv: imagen de Envío reemplazada** por el abanico de cuatro pantallas (`muv-assets/muv-envio-fan.webp`) sobre un fondo `--bg3`. También se eliminó de Process la figura del flujo completo (`muv-full-flow.webp`). Ver "Cambios en `vendor-tool-case.html` y `muv-case.html` (6 de octubre de 2026)". (5) **muv: design system como board.** La biblioteca de componentes en imágenes se reemplazó por un board con los componentes reconstruidos en HTML/CSS desde el frame de Figma. Ver "Board de muv". (6) **smartpass, mobile:** Screen 03 y Screen 04 ocupan todo el ancho en el celular (antes quedaban al 72% y 60%). Ver "smartpass-case.html — pantallas sueltas en mobile".*
+*Última actualización: 7 de octubre de 2026 — **SmartPass: design system como board y header transparente.** (1) La sección Design System de `smartpass-case.html` dejó de ser cuatro grupos apilados (escalas de color, tipografía, toasts, filtros) y pasó a ser **un solo board** con todo a la vista: tipografía, botones, código de verificación, filtro, modal, íconos, colores, toast y badges. Está hecho en HTML/CSS, no es una imagen, y los componentes van **equidistantes**: una sola separación entre todos y un solo margen. Ver "DESIGN SYSTEM COMO BOARD" dentro de CASE STUDIES. (2) `smartpass-case.html` recibió el bloque `#nav-glass`: el header va sin fondo arriba de todo (se ve el degradé del cover) y toma el vidrio al hacer scroll. Ver "Header transparente arriba, vidrio al hacer scroll". (3) **Home: cover nuevo en la card de smartpass** (More work): `assets/smartpass-accreditations.webp`, el teléfono con la pantalla de acreditaciones, en lugar del login provisorio. Ver "Notas de covers" en "Home: grilla de casos". (4) **muv: imagen de Envío reemplazada** por el abanico de cuatro pantallas (`muv-assets/muv-envio-fan.webp`) sobre un fondo `--bg3`. También se eliminó de Process la figura del flujo completo (`muv-full-flow.webp`). Ver "Cambios en `vendor-tool-case.html` y `muv-case.html` (6 de octubre de 2026)". (5) **muv: design system como board.** La biblioteca de componentes en imágenes se reemplazó por un board con los componentes reconstruidos en HTML/CSS desde el frame de Figma. Ver "Board de muv". (6) **smartpass, mobile:** Screen 03 y Screen 04 ocupan todo el ancho en el celular (antes quedaban al 72% y 60%). Ver "smartpass-case.html — pantallas sueltas en mobile". (7) **muv, 7 de octubre:** se corrigieron las pantallas Destination y Categories (mockups nuevos `-v2`) y se le dio margen izquierdo a la imagen de las dos homes. Ver "Cambios en `muv-case.html` (7 de octubre de 2026)". (8) **Vendor Tool, 7 de octubre:** el hero abre con la foto de la laptop (la de la card de la home), la composición de cinco pantallas va debajo, y en mobile las capturas se achican en proporción en vez de cortarse con scroll horizontal. Ver "Cambios en `vendor-tool-case.html` (7 de octubre de 2026)".*
 
 *Última actualización previa: 6 de octubre de 2026 — **Cases: header transparente en Vendor Tool y equipo en el hero.** (1) `vendor-tool-case.html` recibió el bloque `#nav-glass` que ya tenía `muv-case.html`: el header de arriba (`.back-nav`) va sin fondo mientras la página está arriba de todo y toma el vidrio al hacer scroll. Le faltaba, por eso seguía con fondo. Ver "Header transparente arriba, vidrio al hacer scroll" dentro de CASE STUDIES. (2) **Equipo en el bloque de datos del hero:** Vendor Tool suma la fila Team (Lucia Giacomelli, Product Manager; Fabian de la Cruz, Engineering Manager) y muv completa la suya (Passengers: Nathalia Torres, PM; Gabriel Vargas, Engineering Manager; data). El degradé del hero (`--grad-warm`) no se tocó: sigue siendo regla.*
 
@@ -97,8 +95,7 @@ El resto (14 assets) se sacó tal cual, sin recomprimir — mismo bytes, solo mo
 --shadow-card: 0 24px 60px -20px rgba(0,0,0,.6), 0 2px 10px rgba(0,0,0,.35)  /* Sombra de tarjeta elevada */
 
 /* === LIGHT MODE (body.light-mode) === */
---void:    #FFFFFF   /* Background principal claro. Blanco desde el 7 de octubre de 2026 (antes crema #F5F4F0) */
---void-2:  #F5F5F7   /* Sin uso hoy; alineado al --bg2 de los cases */
+--void:    #F5F4F0   /* Background principal claro */
 --ghost:   #E8E7E3   /* Background secundario */
 --ghost-2: #DDDCDA   /* Background hover */
 --paper:   #1A1A22   /* Texto principal oscuro */
@@ -411,8 +408,6 @@ El dock bottom (`bottom:2rem`) es ahora el único elemento de navegación fijo. 
 
 **Regla para el futuro:** para agregar un link nuevo (Resume, Dribbble, email), agregarlo como `<a class="dock-link">` después del separador y antes del theme toggle.
 
-> **Padding parejo alrededor de la píldora activa (7 de octubre de 2026, a pedido).** La píldora gris del botón activo quedaba a 16px del borde izquierdo del dock y a 6px de arriba y de abajo. Dos causas: el dock tenía `padding:.375rem .5rem` (6px vertical, 8px horizontal), y la píldora estaba **corrida 8px a la derecha de su botón**: `.dock-pill` tenía `left:.5rem` y además `moveDockPill()` la traslada con el `offsetLeft` del botón, que ya incluye el padding del dock (se sumaba dos veces). **Arreglo:** `#dock{padding:.375rem}` y `.dock-pill{left:0}`. Ahora la píldora coincide exactamente con su botón y queda a 6px del borde arriba, abajo y a la izquierda (medido con Home y con About Me activos, en light y dark); el botón de tema queda a 6px del borde derecho. **No volver a poner `left` en `.dock-pill`:** la posición horizontal la da solo el `translateX` del script. El dock de los cases (`#portfolio-dock`) no tiene píldora deslizante y no se tocó.
-
 ### Dock visible en Case Studies
 
 El dock se muestra por encima de los case studies (`z-index:9700`, arriba del `#case-panel` que tiene `z-index:9500`). Esto permite al usuario volver a Home o About Me sin tener que cerrar el case con la X.
@@ -441,17 +436,10 @@ Los cases son archivos HTML independientes (`memorable-case.html`, `monchis-case
 
 **Decisión:** el home alterna entre light (default) y dark con el toggle del dock. Los case studies siguen siendo siempre light.
 
-**Fondo blanco en light (7 de octubre de 2026, a pedido):** la home y el About dejaron el crema y van sobre blanco. Es un solo cambio de token en `body.light-mode` (`--void: #FFFFFF`); dark no se tocó.
-
-- **Qué arrastra, porque usan `var(--void)`:** el fondo de la página, el header fijo de la home, el loader, el overlay del Wipe (ahora la home y los cases cubren con el mismo blanco) y los chips de My superpower, que pasan a ser blancos con borde.
-- **Tarjetas elevadas (`.ai-lab`, `.hs-feature`):** son `--surface` blanco sobre página blanca. Se despegan por el borde `--line-md` y la sombra `--shadow-card`, no por diferencia de fondo. Es el mismo criterio de los cases (v3: profundidad por sombra).
-- **Pendiente de decidir:** `--ghost` (`#E8E7E3`) y `--ghost-2` (`#DDDCDA`) siguen siendo grises cálidos, pensados para el crema. Sobre blanco se ven un poco más pesados (bloque Toolkit, fondo de las cards de trabajo mientras carga la imagen). Si se quiere, se pueden pasar a los grises neutros de los cases (`#F5F5F7` / `#E8E8ED`).
-- **Regla:** no volver a escribir `#F5F4F0` como fondo en la home. El fondo claro es `var(--void)`.
-
 **Implementación:**
 
 - `body.light-mode` overridea los CSS custom properties en `:root` con una paleta invertida:
-  - `--void: #FFFFFF` (fondo claro; blanco desde el 7 de octubre de 2026, antes crema `#F5F4F0`)
+  - `--void: #F5F4F0` (fondo claro)
   - `--paper: #1A1A22` (texto oscuro)
   - `--ghost/#ghost-2` ajustados a grises claros
   - `--line/--line-md` ajustados para contraste sobre fondo claro
@@ -842,69 +830,17 @@ document.addEventListener('click', function(e){
 **Secciones (en orden):**
 
 1. `.dv-avatar` — Foto + título "About me" · *simplificado Agosto 2026*
-2. `.dv-section` — About (story a la izquierda + Toolkit a la derecha, y debajo el positioning statement) · *statement Agosto 2026; Toolkit sumado el 7 de octubre de 2026*
-3. `.dv-section` — AI in my workflow (riel de etapas + panel, ver subsección abajo) · *nuevo Agosto 2026, rehecho el 7 de octubre de 2026*
+2. `.dv-section` — About (story + positioning statement) · *statement Agosto 2026*
+3. `.dv-section` — AI in my workflow (carousel interactivo — ver subsección abajo) · *nuevo Agosto 2026*
 4. `.dv-section.dv-bg` — Core strengths (pills) + My superpower (bridge), **misma sección** · *fusionadas Agosto 2026, ver nota abajo*
 5. `.dv-section` — Experience (timeline)
-6. `.dv-section.dv-bg` — Beyond the work (titular + tres facetas en lista) · *rediseñado el 7 de octubre de 2026, ver "Beyond the work: titular a la izquierda, tres facetas a la derecha"*
-
-### Toolkit: fichas con ícono junto al About (7 de octubre de 2026)
-
-*✅ a pedido, con referencia: una fila de fichas blancas redondeadas con sombra suave y solo el ícono ("My tech stack").*
-
-**Antes:** sección propia (`.dv-section` con rótulo "Toolkit") entre My superpower y Experience: grilla de 4×2 celdas grises (`--ghost`) con ícono, nombre y uso. **Esa sección ya no existe.**
-
-**Ahora:** el Toolkit vive **dentro de la sección About, a la derecha del texto**, en el espacio que quedaba vacío.
-
-- **Layout:** `.dv-about` es una grilla de dos columnas (`minmax(0,780px) max-content`, separadas con `justify-content:space-between`): `.dv-story` a la izquierda y `.tk` a la derecha. El statement sigue debajo, a todo el ancho.
-- **Ficha (`.tk-tile`):** cuadrado de 4.5rem, radio 18px, fondo `--surface`, borde `--line-md` y sombra propia (`--tk-shadow`, más corta que `--shadow-card`). Adentro, el logo a 28px. Al pasar el mouse sube 3px y la sombra crece.
-- **Verde al pasar el cursor (a pedido, mismo día):** el ícono se pinta con `--accent` (verde oscuro `#009D71` en light, verde brillante `#22F0A4` en dark); la inicial de Supertesting también. El nombre de abajo no cambia.
-  - **Cómo:** los logos son `<img>`, así que no se pueden recolorear con `color`. Hay un filtro SVG en línea dentro de `.tk` (`<filter id="tkTint">`: un `feFlood` recortado con la silueta del ícono) y la ficha en hover aplica `filter:url(#tkTint)`. El color del `feFlood` se toma de `--accent` por CSS (`#tkTint feFlood{flood-color:var(--accent)}`), así cambia solo con el modo.
-  - **No se usó `mask-image`** porque con el archivo abierto en local (`file://`) el navegador bloquea las máscaras externas y las fichas quedarían vacías.
-  - **Condición:** funciona porque los logos son de un solo color con huecos transparentes. Un logo con partes blancas opacas quedaría como una mancha verde.
-  - Solo en dispositivos con hover. El cambio de color del logo es instantáneo (un filtro `url()` no se puede animar); la inicial sí hace transición.
-- **Nombre debajo de cada ficha** (`.tk-name`, .75rem). La referencia era solo ícono, pero Supertesting no tiene logo (va con su inicial, `.tk-mono`) y varias no se reconocen solo por el ícono. **No quitar los nombres.**
-- **Uso** ("Design & prototyping", etc.): ya no se muestra. Queda en el `title` de cada ficha (tooltip) y en un `.tk-use` oculto para lectores de pantalla.
-- **Grilla:** 4 columnas en desktop (dos filas). A ≤1100px el Toolkit baja debajo del texto y pasa a una fila de 8; a ≤768px, 4 columnas.
-- **Herramientas y orden, sin cambios:** Figma, Claude, Maze, Supertesting, Granola, Amplitude, Notion, Jira. Los logos siguen siendo los SVG negros de `assets/tools/`, invertidos en dark.
-- **Logo de Granola (`assets/tools/granola.svg`, mismo día):** reemplazó a la inicial "G". Sale del símbolo oficial que pasó Paula (`Granola_AI_Symbol_0.svg`), con dos ajustes para que se comporte como los demás: el relleno pasó de `#1E1E1E` a negro puro (así en dark se invierte a blanco) y el `viewBox` se recortó al dibujo, en cuadrado (el original traía un 13% de margen y a 28px se veía más chico que el resto). **Regla para un logo nuevo:** un solo color, negro, y `viewBox` ajustado al dibujo.
-
-**Para sumar una herramienta:** agregar un `<li class="tk-item" title="Nombre: uso">` con su `.tk-tile` (logo o `.tk-mono` con la inicial), `.tk-name` y `.tk-use`. Con más de 8, revisar la fila única de tablet (`repeat(8,…)`).
-
-### Experience: filas alternadas, hover y legibilidad (7 de octubre de 2026)
-
-*✅ a pedido, en dos pasos: "está muy minimal y se hace difícil leer; al hacer hover podría tener un gris sutil", y después "un row en gris clarito y uno en blanco hasta completar" y "los números en verde oscuro en light y verde brillante en dark, solo cuando pase el cursor".*
-
-- **Filas alternadas:** una banda en gris claro (`--tl-zebra`) y la siguiente sobre el fondo de la página. Empieza en gris. TheFork y Restorando comparten una banda (ver "Timeline de experiencia"), así que son seis bandas: SukuPay gris, itti blanco, Beyond Art Group gris, AutoCloud blanco, TheFork + Restorando gris, Hotaru blanco. Cada banda tiene radio 16px.
-- **Sin líneas divisorias:** la alternancia ya separa. Se quitaron el `border-bottom` de `.dv-job` y el `border-top` de `.dv-timeline`.
-- **Hover:** la fila bajo el cursor pasa a un gris un paso más oscuro (`--tl-hover`), sea gris o blanca. Solo en dispositivos con hover (`@media(hover:hover)`).
-- **Verde solo al pasar el cursor:** el nombre de la empresa y los valores de los datos (`.dv-fact b`: "Web3", "2.2M+", "44.6%"…) pasan a `--tl-num`. En reposo siguen en `--paper`.
-- **Aire lateral:** para que el gris no quede pegado al texto, la fila lleva `padding` lateral y un `margin` negativo igual (1.75rem; 1rem en mobile). El texto no se movió de lugar.
-- **Descripción (`.dv-desc`):** de .9375rem, peso 300 y `--ash` a **1rem, peso 400** y un gris más oscuro (`--tl-text`). Además se limitó a `max-width:44rem`: a 1440px las líneas pasaban los 150 caracteres.
-- **Datos secundarios** (período, tipo, ciudad y la etiqueta de cada dato): de `--ash-2` a `--tl-meta`. En light `--ash-2` (`#9090A0`) no llegaba a AA.
-
-**Tokens locales, en `.dv-timeline`:**
-
-| Token | Light | Dark |
-| --- | --- | --- |
-| `--tl-zebra` (fila gris) | `#F7F7F8` | blanco al 3.5% |
-| `--tl-hover` (fila bajo el cursor) | `#F0F0F3` | blanco al 7.5% |
-| `--tl-num` (verde del hover) | `#007A56` | `var(--accent)` (`#22F0A4`) |
-| `--tl-text` (descripción) | `--paper` al 74% sobre `--void` | ídem |
-| `--tl-meta` (datos secundarios) | `--paper` al 66% sobre `--void` | ídem |
-
-- **Por qué `--tl-num` no es `var(--accent)` en light:** el `#009D71` da 3.2:1 sobre el gris del hover y ese texto mide 18px. `#007A56` da 4.7:1.
-- **Contraste medido sobre la fila en hover (el peor caso), light / dark:** verde 4.7:1 / 8.4:1, descripción 6.4:1 / 6.7:1, datos secundarios 4.9:1 / 5.6:1.
-- **Sin cambios:** el contenido, el orden y los datos de cada puesto.
-- **Si se agrega o quita un puesto,** la alternancia se recalcula sola (`.dv-timeline > :nth-child(odd)`).
+6. `.dv-section.dv-bg` — Human side (bento: facetas de Pau) · *rediseñado Agosto 2026, superpower removida*
 
 ### About — statement de posicionamiento
 
 *Agosto 2026 — ✅ a pedido (reemplaza el grid de passions)*
 
-> **Story, 7 de octubre de 2026 (a pedido):** el `.dv-story` pasó de 4 párrafos a **3**. Se eliminó el último ("What excites me most is the moment when business goals and human needs finally align."). En el tercero, el cierre **"Latin America, Europe and the US."** va en verde (`<span class="dv-accent">`, `--accent`, peso 500, igual que "force multiplier" en el intro de AI). Nota de contraste: en light `--accent` da 3.5:1 sobre blanco, por debajo de AA para ese tamaño; si se quiere cumplir, usar `#007A56` como en Experience.
-
-En el About, tras el `.dv-story` (en ese momento 4 párrafos, sin cambios), se **quitó la grilla "What I'm especially passionate about"** (`.dv-passions-label` + 6 `.dv-passion`) y se puso un **statement de posicionamiento** (`.dv-statement`):
+En el About, tras el `.dv-story` (los 4 párrafos, sin cambios), se **quitó la grilla "What I'm especially passionate about"** (`.dv-passions-label` + 6 `.dv-passion`) y se puso un **statement de posicionamiento** (`.dv-statement`):
 
 - `.dv-statement-h` (Geist, ~2.375rem) — frase con las partes clave en verde accent (`em` → `var(--accent)`): *"I design **complex digital products** and use **AI** to accelerate research, exploration, prototyping and iteration — without losing the **human judgment** behind the work."*
 - `.dv-statement-tags` (mono, `--ash-2`) — tagline *Product Designer · AI-native workflows · FinTech · B2B SaaS*, con los separadores `·` en `var(--accent)` (`.dv-statement-tags span`).
@@ -924,26 +860,17 @@ Highlights vía `var(--accent)` → bright #22F0A4 en dark, teal #009D71 en ligh
 - **Se quitaron:** el `<p class="dv-roles">` (roles tachados: Graphic, Web, UI, UX, Product Designer) y el `<p class="dv-location">` ("Based in Buenos Aires · Open to remote"). El `.dv-avatar` ahora es solo foto + título "About me", sin subtítulos.
 - Las clases `.dv-roles` / `.dv-location` quedaron en el CSS como **código muerto** (ya no se usan en este bloque) — no borrar sin confirmar que no se reusan en otro lado.
 
-### Timeline de experiencia
+### Timeline de experiencia (en orden cronológico inverso)
 
-*Actualizada Agosto 2026 desde LinkedIn — 7 entries reales. **Orden cambiado el 7 de octubre de 2026** (ver nota abajo).*
+*Actualizada Agosto 2026 desde LinkedIn — 7 entries reales*
 
 1. **SukuPay** — Mar 2026–Present · Senior PD · Miami Beach, FL · Remote
 2. **itti** — Aug 2024–Mar 2026 · Senior PD · Asunción, Paraguay · Remote (Muv, Monchis, Vendoor Tool, Drivers App, Smart Pass)
 3. **Beyond Art Group** — Aug 2021–Aug 2024 · Product Designer Consultant · Seasonal · Buenos Aires
 4. **AutoCloud** — Jul 2023–Apr 2024 · Principal PD · US · Remote
 5. **TheFork · TripAdvisor** — Apr 2019–Jun 2023 · Senior PD · Remote
-6. **Restorando** — Oct 2016–Apr 2019 · Product Designer · Buenos Aires (adquirida por TheFork · TripAdvisor en 2019)
-7. **Hotaru App** — Mar 2020–Jun 2022 · Principal PD & Co-Founder · Seasonal · Buenos Aires
-
-> **TheFork + Restorando, un solo bloque (7 de octubre de 2026, a pedido).** TheFork (una compañía de TripAdvisor) adquirió Restorando en 2019 y Paula siguió ahí: son un tramo continuo y tiene que leerse así. Por eso Restorando va **pegado debajo de TheFork** y Hotaru pasó al final, aunque por fechas iría antes. **El orden ya no es cronológico inverso estricto en los últimos tres: no "corregirlo".**
->
-> - **Markup:** las dos filas van dentro de `<div class="dv-job-group">`, que ocupa un solo lugar en la alternancia gris/blanco (una banda para las dos). Entre ambas hay una línea fina.
-> - **Encabezado del bloque (`.dv-group-head`):** a la izquierda "7 years" y el rango "Oct 2016 – Jun 2023" (`.dv-group-span`); a la derecha la frase "I joined Restorando in 2016. It was acquired by TheFork · TripAdvisor in 2019, and I stayed on until 2023." (`.dv-group-note`).
-> - **La adquisición se dice en forma explícita, es importante para Paula:** debajo del nombre "Restorando" va la línea **"Acquired by TheFork · TripAdvisor (2019)"** (`.dv-job-note`, peso 600, en `--paper`). También sigue el dato "Acquired / By TheFork". **No quitar ninguna de las dos.**
-> - **Descripción de Restorando:** se le sacó la primera oración ("Acquired by TheFork · TripAdvisor in 2019."), porque ahora lo dicen el encabezado y la línea bajo el nombre.
-> - **"7 years":** es el redondeo que pidió Paula. De octubre de 2016 a junio de 2023 son 6 años y 8 meses.
-> - **CSS:** la alternancia pasó de `.dv-job:nth-child(odd)` a `.dv-timeline > :nth-child(odd)`, para que el grupo cuente como una fila.
+6. **Hotaru App** — Mar 2020–Jun 2022 · Principal PD & Co-Founder · Seasonal · Buenos Aires
+7. **Restorando** — Oct 2016–Apr 2019 · Product Designer · Buenos Aires (adquirida por TheFork · TripAdvisor en 2019)
 
 > **Cambios Agosto 2026 (a pedido):** se corrigieron fechas/rol/ubicación de **itti** (antes figuraba "2021–Present · Buenos Aires", real Aug 2024–Mar 2026 · Asunción), **TheFork** (antes "2019–2021 · Product Designer", real Apr 2019–Jun 2023 · Senior PD) y **Restorando** (antes "2017–2019 · UX/UI", real Oct 2016–Apr 2019 · Product Designer). Se **agregó Hotaru App** (Co-Founder) y se **eliminó** el entry fantasma "AutoCloud 2015–2017 · UX Designer" que no existe en el LinkedIn real. Orden = cronológico inverso por fecha de fin (= orden del LinkedIn).
 
@@ -964,8 +891,6 @@ Los 21 chips de estado bajo cada empleo del timeline (ej. `Web3 · Fintech`, `Mu
 **Regla:** los chips derivan su color del token `--accent` vía `color-mix`, así que respetan la regla de "nunca hardcodear colores que cambian entre modos". Es el mismo criterio que `.dv-pill-g`.
 
 ### AI in my workflow — carousel interactivo (arriba de Core strengths)
-
-> ⚠️ **El módulo `.ai-lab` se rehízo el 7 de octubre de 2026.** Lo que sigue sobre `.ai-bar`, `.ai-progress`, `.ai-stage`, flechas y pills describe la versión anterior y queda como historial. La versión vigente está en "`.ai-lab`: riel de etapas + panel (7 de octubre de 2026)", más abajo. El título, el intro y la ubicación de la sección no cambiaron.
 
 *Agosto 2026 — ✅ nuevo, a pedido*
 
@@ -1020,67 +945,7 @@ Sección nueva en el About Me, **entre About y Core strengths**. Muestra cómo P
 
 **Preview aislado:** se generó `ai-section-preview.html` (standalone, con toggle light/dark y los mismos tokens/fuentes) para revisar solo esta sección sin abrir todo el portfolio. **No es parte del deploy** — es solo para review, no va en la tabla de ARCHIVOS.
 
-**Regla para el futuro:** para sumar o quitar una capacidad, ver "Para sumar o quitar una etapa" en "`.ai-lab`: riel de etapas + panel (7 de octubre de 2026)". Desde ese rediseño cada `.ai-slide` lleva también sus filas Context / Prompt / Result; las pestañas se siguen generando solas.
-
-### `.ai-lab`: riel de etapas + panel (7 de octubre de 2026)
-
-*✅ a pedido: "no me termina de cerrar, puede ser un slider pero lo haría más pro".*
-
-**Qué fallaba en la versión anterior:**
-
-- **Ventana simulada** (tres puntos + `claude · design-workflow` en mono): decorado que no decía nada.
-- **Cuatro navegaciones para lo mismo:** segmentos de progreso, flechas, pills y el número `01`…`06` del eyebrow.
-- **Solo texto:** cada slide era título + párrafo + un prompt suelto. Contaba, no mostraba.
-- **Bug visible:** el slide vecino asomaba por el borde derecho (y una franja por el izquierdo), porque `.ai-stage` tenía padding con `overflow:hidden`.
-- **Avance automático cada 5.2s:** cambiaba antes de terminar de leer, y no se detenía aunque la persona ya hubiera elegido un tema.
-- **Desalineado:** la tarjeta iba centrada a 860px y el resto del About va a la izquierda.
-
-**Qué es ahora:** una tarjeta con dos columnas.
-
-- **Riel (`.ai-rail`, izquierda):** las seis etapas siempre a la vista, numeradas (son una secuencia real: el ciclo de diseño). La activa va en `--paper` y peso 600, con una línea vertical de 2px en `--accent` que se llena mientras dura la etapa. Esa línea es el único indicador de progreso.
-- **Panel (`.ai-track`, derecha):** título, descripción y la **corrida** (`dl.ai-run`): tres filas con rótulo a la izquierda.
-  - **Context:** lo que le doy (chips con borde).
-  - **Prompt:** el pedido de ejemplo, en mono, que se tipea solo.
-  - **Result:** lo que vuelve (chips con tilde, fondo `--accent` al 11%). Aparecen cuando el prompt termina de tiparse.
-- Los seis paneles están apilados en la misma celda de la grilla, así la tarjeta **mide siempre lo mismo** y no hay slide vecino que asome. El cambio es un fundido con 10px de subida, no un desplazamiento horizontal.
-- La tarjeta va **alineada a la izquierda**, `max-width:1120px`.
-
-**Contenido de Context / Result.** Sale de las descripciones que ya estaban, no es copy nuevo:
-
-| Etapa | Context | Result |
-| --- | --- | --- |
-| Research | Competitor products | UX patterns · Gaps · Summary of findings |
-| Prototyping | Design System · GitHub repos · Existing components | Functional prototype |
-| Exploration | Current flow · My assumptions | Alternative flows · Interaction patterns |
-| UX writing | Prompt libraries · Brand voice | Copy options per scenario |
-| Critique | User personas · Usability insights · Product metrics | Friction points per persona |
-| Production | Design System | UI explorations · Interactive prototypes |
-
-Títulos, descripciones y prompts son los mismos de antes. Se quitó el eyebrow de cada slide (`01 · Research & benchmarking`): el riel ya nombra la etapa.
-
-**Comportamiento:**
-
-- **Avance automático cada 7s** (`--ai-dur` en `.ai-lab`, **la única variable de velocidad**; antes era `DUR` en el JS). La línea del riel es una animación CSS (`aiFill`) y el paso a la etapa siguiente ocurre en su `animationend`: no hay timers que sincronizar.
-- **Se pausa** con el mouse o el foco encima (`.is-paused`) y cuando la tarjeta sale de pantalla (`.is-off`).
-- **Se detiene para siempre** cuando la persona elige una etapa, con click o teclado (`.is-manual`): la línea queda llena y nada más se mueve solo.
-- **Teclado:** el riel es un `tablist`. Flechas (arriba/abajo/izquierda/derecha), Home y End cambian de etapa; foco visible con `outline` en `--accent`.
-- **Tipeo:** arranca cuando la tarjeta entra en pantalla. El prompt completo va también en un `.ai-ghost` invisible que reserva el alto, así el texto no empuja nada mientras se escribe (importa en mobile, donde ocupa dos líneas).
-- **`prefers-reduced-motion`:** sin avance, sin tipeo, sin cursor; todo visible desde el inicio.
-- **Sin JS:** se ve la primera etapa completa (el prompt está escrito en el HTML).
-
-**Mobile (≤860px):** una columna. El riel pasa a ser una fila de pestañas con scroll horizontal arriba de la tarjeta (la línea de progreso va debajo de la pestaña activa, y la fila se desplaza sola para mostrarla). En la corrida, el rótulo va arriba de su valor.
-
-**Color y contraste:** el texto secundario del módulo usa `--ai-dim`, que es `var(--ash)` en light y `#A3A3B6` en dark (el `--ash` de dark, `#7A7A90`, no llega a AA sobre la tarjeta). El `--accent` no se usa como color de texto chico (en light da 3.5:1): queda para la línea, el `▸` y la tilde. Por eso el número de la etapa activa va en `--paper`.
-
-**IDs y clases:**
-
-- Siguen: `#aiLab`, `#aiTrack`, `.ai-slide`, `data-nav`, `data-prompt`, `.ai-prompt`, `.ai-typed`, `.ai-cursor`, `.ai-caret-glyph`, `.ai-slide-title`, `.ai-slide-desc`.
-- Nuevos: `#aiRail`, `.ai-rail`, `.ai-tab` (`.ai-tab-n`, `.ai-tab-fill`), `.ai-run`, `.ai-run-row`, `.ai-chips`, `.ai-chips-out`, `.ai-ghost`, `.ai-live`. Estados en `.ai-lab`: `.ai-js`, `.is-off`, `.is-paused`, `.is-manual`; en el panel: `.is-active`, `.is-done`.
-- **Ya no existen:** `#aiPrev`, `#aiNext`, `#aiProgress`, `#aiNav`, `.ai-bar`, `.ai-dots`, `.ai-dot`, `.ai-bar-title`, `.ai-arrow`, `.ai-progress`, `.ai-seg`, `.ai-stage`, `.ai-nav-row`, `.ai-nav`, `.ai-nav-item`, `.ai-slide-eyebrow`.
-
-**Para sumar o quitar una etapa:** agregar o quitar un `<article class="ai-slide" data-nav="…">` dentro de `#aiTrack`, con su título, descripción y las tres filas de `dl.ai-run`. El prompt va **dos veces en el HTML** (en `data-prompt` y dentro de `.ai-ghost` y `.ai-typed`): si cambia, cambiar las tres. Las pestañas del riel y su numeración se generan solas. Si un Result lleva más de tres chips, sumar el `transition-delay` del cuarto.
-
-**No volver a agregar:** la barra de ventana, las flechas, los segmentos de progreso ni las pills de abajo.
+**Regla para el futuro:** para sumar/quitar una capacidad, agregar/quitar un `.ai-slide` con su `data-nav` y `data-prompt` dentro de `#aiTrack` — los segmentos de progreso y las pills de nav se generan solos a partir de los slides, no hay que tocar el JS.
 
 ### Core strengths (13 pills, 4 en Emerald)
 
@@ -1099,7 +964,7 @@ Títulos, descripciones y prompts son los mismos de antes. Se quitó el eyebrow 
 - **Fondo blanco + sombra (Agosto 2026, a pedido):** `.hs-feature` usaba `background:var(--ghost-2)` — en light mode eso es un gris que casi no se distingue del `--void` de fondo de la sección (mismo problema que tuvo `.ai-lab`, ver esa sección). Se cambió a los mismos tokens reutilizables `--surface` (blanco puro en light) + `box-shadow:var(--shadow-card)`, para que la card se despegue del fondo. También se quitó el `grid-column:span 5` (CSS muerto — ya no vive dentro de un grid).
 - ~~El id `#hsBridge` sigue siendo único en el documento...~~ *(obsoleto, ver "IDs" en Iteración 3 — `#hsBridge` ya no existe.)*
 
-**Iteración 3 (Septiembre 2026):** rediseño completo del contenido interno de `.hs-feature`, a pedido — Pau no quería el diagrama de línea+nodos y pidió que el título apareciera con el efecto de scramble/decrypt del hero de **oscarhernandez.vercel.app**.
+**Iteración 3 (actual, Septiembre 2026):** rediseño completo del contenido interno de `.hs-feature`, a pedido — Pau no quería el diagrama de línea+nodos y pidió que el título apareciera con el efecto de scramble/decrypt del hero de **oscarhernandez.vercel.app**.
 
 - `.hs-eyebrow` — nuevo modificador `.hs-eyebrow-lg` (se agrega junto a `.hs-eyebrow`, no la reemplaza): sube `font-size` de `.5625rem` a `clamp(.8125rem,1.1vw,.9375rem)` y `font-weight` a 700. Es exclusivo de este eyebrow — el resto de los eyebrows del sitio (Experience, Beyond the work, etc.) siguen en el tamaño base.
 - `.hs-super-title` ("I bridge the gap.") tiene ahora efecto **scramble/decrypt**: al entrar en viewport arranca vacío y cada carácter cicla por un charset random (`!<>-_\/[]{}—=+*^?#$%&01`) antes de resolverse al carácter final; el timing de inicio/fin de cada carácter es aleatorio por índice (no todos resuelven a la vez, efecto "cascada"). Mientras un carácter está scrambleando queda envuelto en `<span class="hs-scramble-char">` (accent, 75% opacidad) para distinguirlo del texto ya resuelto.
@@ -1109,37 +974,12 @@ Títulos, descripciones y prompts son los mismos de antes. Se quitó el eyebrow 
 - Mobile (`≤768px`): `.hs-super-flow` pasa a columna (`flex-direction:column`) y `.hs-super-arrow` se oculta — mismo criterio que tenía `.hs-bridge` (perdía la línea horizontal en mobile).
 - `prefers-reduced-motion`: el scramble se salta (texto final directo, sin animación) y chips/flechas quedan fijos en `opacity:1`, sin transición.
 
-**Iteración 4 (actual, 7 de octubre de 2026):** el superpower contaba solo la mitad de ejecución (stakeholders → dev → producto). Se sumó la mitad de antes: ordenar el caos y convertir un brief vago en una apuesta clara. El título y el efecto scramble no cambiaron.
-
-- **Subtítulo (`.hs-super-sub`):** "When nobody knows where to start, I map the problem and turn a vague brief into a clear bet. Then I keep that intent intact from stakeholder language, to dev handoff, to shipped product."
-- **Flujo (`#hsSuperFlow`), ahora cuatro chips:** `Vague brief → Stakeholder language → Dev handoff → Shipped product`. El chip nuevo va primero.
-- **CSS:** se agregó el delay del cuarto chip (`.hs-super-chip:nth-of-type(7)`, `.45s`) y `.hs-super-flow` pasó de `max-width:620px` a `760px` para que los cuatro entren en una línea. Revisado a 1440, 900 y 390px (en mobile siguen en columna, sin flechas), en light y dark.
-- **De dónde salió:** Pau hizo el test "Radar Skills" de superproductdesigner.com (resultado: perfil estratega). Se tomó la idea, reescrita en su voz y en inglés. **No se publica nada del test:** ni los puntajes, ni el radar, ni el porcentaje de match, ni la etiqueta del perfil, ni el "punto ciego". Motivo: es un quiz de autoevaluación, no una credencial, y varios puntajes contradicen lo que el About afirma (Systems Thinking, Design Systems, AI-assisted Design). No volver a proponerlo.
-
 **IDs — qué cambió:**
 - `#hsBridge` **ya no existe.** La regla de "no duplicarlo" de la Iteración 2 queda obsoleta.
 - Nuevos: `#hsFeature` (contenedor, target del `IntersectionObserver`), `#hsSuperTitle` (el `<h3>`, con `data-text`), `#hsSuperFlow` (contenedor de chips, recibe `.is-live`).
 - El script viejo debajo de "Beyond the work" (el que escucha `#hsGrid`) todavía tiene `var bridge=document.getElementById('hsBridge')` — queda como código muerto inofensivo (`if(bridge)` da `false` siempre). No rompe nada; si en algún momento se limpia ese script, se puede borrar esa línea junto con el `bridge.classList.add('is-live')` de adentro de su `reveal()`.
 
-**Regla para el futuro:** si se necesita otra card "elevada" en el About Me, reusar `--surface`/`--shadow-card` (mismo criterio que `.ai-lab` y `.hs-feature`) en vez de inventar un tercer tratamiento de fondo. Si se agrega un cuarto paso al flow (más allá de los 3 chips), sumar el delay correspondiente en `.hs-super-flow.is-live .hs-super-chip:nth-of-type(n)` — los delays actuales cubren el 3°, 5° y 7° hijo (los chips; los pares son las flechas). Para un quinto chip, sumar `nth-of-type(9)`.
-
-### Beyond the work: titular a la izquierda, tres facetas a la derecha (7 de octubre de 2026)
-
-*✅ a pedido: "no me termina de gustar, no quiero que ocupe todo ese largo, busquemos una opción más atractiva; quitaría Fotografía y Cultura". **Reemplaza al bento.** La sección "Human side — bento" de abajo queda como historial.*
-
-- **Facetas:** quedan tres: **Travel**, **Hobbies** y **AI**. Se quitaron Photography y Cultures. No volver a sumarlas sin pedido.
-  - **Hobbies reemplazó a "Food & Culture" (mismo día, a pedido).** Nombre: "Hobbies: food, sports and diving". Texto: "I love connecting with people, their food and their culture. I'm also a keen diver, with 40+ dives so far." (traducción del texto que dictó Paula en español: le gusta conectarse con las personas, sus comidas y su cultura, y es buceadora aficionada con más de 40 inmersiones). Emoji: 🤿. El texto anterior ("Food is design. Every dish is a set of decisions.") se quitó.
-  - Travel y AI siguen con su texto de siempre.
-- **Layout (`.hs-split`):** dos columnas iguales. A la izquierda el titular "Besides being a *product designer…*"; a la derecha la lista (`#hsGrid`, que ahora es una columna flex, ya no una grilla). Es el mismo esquema del About (texto + Toolkit).
-- **Cada faceta (`.hs-cell`):** una ficha con el emoji (3.75rem, radio 18px, fondo `--surface`, borde y sombra iguales a las fichas del Toolkit), el nombre (Geist 1.25rem, 700) y una línea de texto (1rem). Entre facetas, una línea fina. Sin tarjetas grises.
-- **Hover:** la ficha sube 3px y recupera el color pleno (en reposo el emoji va con 40% de gris), y el nombre pasa a verde (`--hs-green`: `#007A56` en light, `--accent` en dark). Mismos gestos que Toolkit y Experience.
-- **Alto de la sección:** 489px a 1440.
-- **Mobile (≤900px):** una columna, el titular arriba y la lista debajo.
-- **JS:** sin cambios. Sigue siendo el IIFE sobre `#hsGrid` que revela las `.hs-cell` en cascada.
-- **Clases que ya no se usan:** `.hs-cell-travel`, `.hs-cell-food`, `.hs-cell-sm`.
-- **Para sumar o quitar una faceta:** agregar o quitar un `<div class="hs-cell">` con su `.hs-cell-icon`, `.hs-cell-name` y `.hs-cell-desc`. Con más de cuatro, la lista queda más alta que el titular: conviene volver a pensar el layout.
-
-> 🐛 **Bug propio, corregido el mismo día: una `}` de más rompía esta sección.** Al rehacer `.ai-lab` quedó una llave de cierre suelta al final de su bloque de `prefers-reduced-motion`. En CSS, una `}` suelta invalida **la regla siguiente**, que era `.hs-grid`: la grilla dejó de aplicarse y las cinco tarjetas se apilaron a todo el ancho, 896px de alto (eso es lo que se veía en la captura de Paula). **Regla nueva: después de editar CSS por script, contar llaves.** Un control simple alcanza: recorrer cada `<style>` y verificar que la profundidad nunca baje de cero y termine en cero. Se corrió sobre `index.html` y `thefork-reviews-case.html`: los dos quedan en cero.
+**Regla para el futuro:** si se necesita otra card "elevada" en el About Me, reusar `--surface`/`--shadow-card` (mismo criterio que `.ai-lab` y `.hs-feature`) en vez de inventar un tercer tratamiento de fondo. Si se agrega un cuarto paso al flow (más allá de los 3 chips), sumar el delay correspondiente en `.hs-super-flow.is-live .hs-super-chip:nth-of-type(n)` — los delays actuales solo cubren el 3° y 5° hijo (los chips; los pares son las flechas).
 
 ### Human side — bento "Beyond the work" (rediseñado)
 
@@ -1272,12 +1112,9 @@ Lo que aparezca en el resultado y sea un color de **texto** (no un accent de mar
 | `muv-case.html` | ✅ |
 | `vendor-tool-case.html` | ✅ (6 de octubre de 2026) |
 | `smartpass-case.html` | ✅ (6 de octubre de 2026), variante para el template viejo, ver nota |
-| `thefork-reviews-case.html` | ✅ (7 de octubre de 2026), template viejo, ver nota |
 | Resto de los cases | Sin verificar |
 
 **Nota para el template viejo (`.section` / `.cover`, sin `<main>`), aplicada en `smartpass-case.html`:** el bloque se rearmó a partir de esta descripción, no se copió de `muv-case.html`. Hace lo mismo con dos diferencias de selector: el "primer bloque" es `.back-nav + .cover` (lleva el `border-top` transparente del alto del header y `background-origin:border-box`, así `--grad-hero` empieza desde el borde de arriba), y el vidrio queda fijado dentro del bloque en los valores de la regla (blanco al 92% en light, `rgba(36,36,44,.92)` en dark) con selectores `html body…`, porque smartpass traía dos fondos viejos del header (`.82` en light y `rgba(30,30,38,.85)` en dark, este último en el `<style>` del final del body). Revisado arriba y con scroll, en light y dark, a 1440, 1100, 820 y 390px. Si se quiere el bloque literal de muv, se puede reemplazar: el comportamiento es el mismo.
-
-**`thefork-reviews-case.html` (7 de octubre de 2026):** mismo template viejo. El archivo no tenía el bloque, así que el header seguía con su franja blanca sobre el degradé verde del cover. Se agregó el bloque estándar antes de `</head>` (el selector `.back-nav + .cover` ya cubre este template) y, igual que en smartpass, el vidrio quedó fijado dentro del bloque en los valores de la regla, porque el case traía fondos viejos: `.82` en light y `color-mix(in srgb,var(--bg) 90%,transparent)` en dark. Selectores: `html body:not(.dark-mode) .back-nav` y `html body.dark-mode .back-nav`. Revisado arriba y con scroll, en light y dark, a 1440, 820 y 390px: el título del cover queda en la misma posición que antes (262px a 1440, 198px a 390) y no aparece scroll horizontal.
 
 ### DESIGN SYSTEM COMO BOARD (`.dsb`, octubre 2026)
 
@@ -1717,31 +1554,6 @@ Prompt base (en inglés):
 - `.decision .media` y `.wf-strip .wf` pasaron de borde a sombra.
 - Se eliminaron del cierre de Results el callout navy ("Every stakeholder wanted to add. Every user wanted less.") y la lista "If I had more time". Results ahora termina en "What I learned".
 
-### Cambios en `thefork-reviews-case.html` (7 de octubre de 2026)
-
-- **"The problem": texto arriba, imagen abajo.** Orden nuevo de la sección: eyebrow, titular ("Reviews existed, but they weren't doing any convincing."), párrafo, las cuatro tarjetas de problemas y recién después la imagen de las tres pantallas (`.shot-frame`) con su pie (`.shot-cap`). Antes la imagen abría la sección. El pie va siempre pegado a la imagen.
-- **Tarjetas de problema en rojo con cruz (`.problem-item`).** Marcan "esto estaba mal": fondo rojo claro, borde izquierdo rojo y, a la izquierda del título, una cruz blanca dentro de un círculo rojo (`.problem-item::before`, SVG inline, 18px). Dejaron de usar el verde de marca (en este case `--red` es el verde de TheFork, no un rojo). Los colores son tokens propios de la tarjeta, definidos en la misma regla:
-
-  | Token | Light | Dark |
-  | --- | --- | --- |
-  | `--problem` (borde y círculo de la cruz) | `#D93A3A` | `#E5484D` |
-  | `--problem-bg` (fondo) | `#FDEEEE` | `rgba(229,72,77,.14)` |
-
-  La descripción (`.pi-d`) pasó de `var(--ash)` a `color-mix(in srgb,var(--ink) 72%,transparent)`: sobre el fondo rojo, `--ash` no llegaba a AA. Contraste medido (light / dark): título 15.7:1 / 12.2:1, descripción 6.7:1 / 7.1:1, círculo sobre la tarjeta 4.0:1 / 3.4:1, X blanca sobre el círculo 4.6:1 / 3.9:1. En dark el círculo no se aclara: tiene que sostener la X blanca (un rojo más claro, `#F26D6D`, daba 2.9:1).
-  **Regla:** rojo con cruz = problema, verde = solución. Las `.win-item` de más abajo siguen en verde y sin ícono. El rojo se usa solo para ese estado, nunca como color de marca del case.
-- **Research: tarjeta de porcentajes (`.rj-card`).** Los tres datos del user journey ("When diners read reviews": 30%, 20%, 5%) eran una lista de números de 2rem en una columna que quedaba vacía al lado de las cuatro tarjetas `.ins`. Ahora son una tarjeta más (`<div class="ins rj-card">`, hereda fondo, radio y sombra de `.ins`) que ocupa el mismo alto que el bloque de cuatro. Los textos y los valores no cambiaron.
-  - **Estructura:** `.ins-n` (rótulo) + `.rj-rows` con tres `.rj-row.reveal`. Cada fila: `.rj-head` (`.rj-fig` con `<span class="rj-num reveal" data-count>30</span><span class="rj-unit">%</span>` + `.rj-label`) y debajo `.rj-bar > i`.
-  - **Tamaño:** el número va en `--rj: clamp(3.5rem,6vw,5.5rem)`, peso 800, `tabular-nums` para que no baile al contar. El `%` va al 44% de ese tamaño.
-  - **Color:** la fila principal lleva `.is-lead` (número y barra en `--accent-text`); las otras dos van en `--ink`.
-  - **Efecto:** al entrar en pantalla la fila aparece con el `.reveal` de siempre, el número cuenta desde 0 (reusa el script de `[data-count]` que ya tenía el case, sin JS nuevo) y la barra se llena en 1.3s con `--ease-apple`. Las tres filas van en cascada (`--d` de .04s, .16s y .28s). Con `prefers-reduced-motion` todo queda quieto y lleno.
-  - **La barra es honesta:** el ancho es el valor real sobre 100 (`style="--w:30%"`), no relativo al mayor. No escalarla para que "se vea más".
-  - **Gotcha:** el `.rj-num` necesita la clase `.reveal` para que el observer lo vea y dispare el conteo, pero no tiene que animarse por su cuenta. Queda anulado con `.rj-card .rj-num.reveal{opacity:1;transform:none;transition:none;}`.
-  - **Mobile:** una columna (regla general de grids inline), la tarjeta de porcentajes primero y las cuatro `.ins` debajo.
-- **`.ins-grid` como columna de otra grilla: `margin-top:0`.** El adaptador v3 le da `margin-top:var(--stack)` a `.ins-grid` (y a las demás grillas de esa lista), pensado para cuando van debajo de un título. Acá la grilla es la columna derecha de un bloque de dos columnas y ese margen la empujaba hacia abajo: las tarjetas no alineaban arriba con la de la izquierda. Se anuló inline en ese bloque. **Regla:** si una de esas grillas va como columna de otra, lleva `margin-top:0`.
-- **"+20.8% CVR" legible en dark.** El dato tenía `color:var(--red)` inline, que en dark sigue siendo el verde profundo de marca. Pasó a `var(--accent-text)` (7.9:1 sobre la tarjeta en dark, 4.7:1 en light). Regla ya escrita en "DARK MODE ACCESIBLE EN CASES": el color de marca usado como texto va con el token de texto, no con el de relleno.
-- **Header transparente arriba.** Se agregó `#nav-glass`. Detalle en "Header transparente arriba, vidrio al hacer scroll".
-- **Pendiente:** la pasada AA completa del case (no se corrió `a11y-audit.py`, solo se midieron los componentes tocados). Lo que ya se sabe que falla: `--ash` da 3.4:1 en light y 3.3:1 en dark sobre las tarjetas (`.ins-n`, `.ins-d`, `.rj-label` y el resto del texto secundario), y quedan tres reglas que usan `var(--red)` como color de texto en badges (entre ellas `.os-cancelada`). El arreglo es el de monchis: `--ash` a `.68` en light y `#A3A3B6` en dark dentro de un `<style id="theme-a11y">`.
-
 ### Cambios en `vendor-tool-case.html` y `muv-case.html` (6 de octubre de 2026)
 
 - **Vendor Tool, header transparente arriba.** Se agregó el bloque `#nav-glass` copiado de muv. Revisado arriba y con scroll, en light y dark.
@@ -1751,6 +1563,12 @@ Prompt base (en inglés):
 - **muv, imagen de Envío reemplazada.** En "The same flow, for sending a package" salió la tira de cinco teléfonos (`muv-assets/muv-envio-flow.webp`, 1600×691) y entró el abanico de cuatro pantallas (`muv-assets/muv-envio-fan.webp`, 2000×1342, 215 KB): home con el aviso de tarjeta, categorías, detalle del envío y calificación. El original es un PNG transparente de 2528×1696 (2,8 MB); se recortó el margen vacío y se pasó a WebP calidad 86. Como las pantallas son blancas y sin marco, sobre la página blanca no tenían borde: la imagen va dentro de `.frame.envio-stage` (fondo `--bg3`, padding propio, imagen a 960px como máximo y centrada). El epígrafe y el `alt` pasaron de cinco pasos a cuatro (la pantalla de direcciones ya no se muestra). `muv-envio-flow.webp` queda en la carpeta, sin uso. **Pendientes:** la versión mobile del abanico (`muv-envio-fan-mobile.webp`, vertical 4:5, 2–3 teléfonos; quedó el `<picture>` comentado) y el texto de las pantallas, que en este render sale deformado en varios lugares ("Categorio y precio", "Excelenta servicio", "Temé la ruta indicada").
 - **muv, figura del flujo completo eliminada.** Se quitó de Process la imagen de los siete teléfonos (`muv-assets/muv-full-flow.webp`, "The whole passenger app, from home and categories to matching, driver assigned and review"), que estaba de más: la lista de los cinco estados pasa directo a "Home: photo or map?". Con ella salieron el comentario del `<picture>` mobile pendiente y las reglas `.panel.scroll` (ya no las usa nada). El archivo queda en la carpeta, sin uso.
 - **muv, design system como board.** La "Component library" colapsada con capturas pasó a ser la sección `#system` con el board de componentes vivos. Detalle en "DESIGN SYSTEM COMO BOARD" → "Board de muv".
+
+### Cambios en `vendor-tool-case.html` (7 de octubre de 2026)
+
+- **Hero: abre con la foto de la laptop.** La primera imagen del caso pasó a ser `assets/vendor-tool-laptop.webp` (2000×1333), la misma foto que usa la card de Vendor Tool en la home: es el mismo archivo, no hay copia nueva. La composición de cinco pantallas (`vendor-tool-assets/vt-hero-showcase.webp`) bajó un lugar y queda justo debajo, también dentro del hero, con `--stack` de separación (`.hero-visual + .hero-visual`). Si se cambia la foto de la card de la home pisando el archivo, cambia también acá.
+- **Mobile: las capturas ya no se cortan.** Las siete capturas de pantalla de escritorio (categorías, productos, editor, cola de órdenes, listado, detalle y roles) estaban en `.panel.scroll` con `min-width:760px` en pantallas de 760px o menos: se veía solo el lado izquierdo y había que deslizar de costado sin que nada lo indicara. Se quitó la regla y la clase `scroll`: ahora cada captura se achica en proporción hasta entrar entera en el ancho. Es la misma regla de mobile que ya valía para muv ("no se usa `min-width` + scroll horizontal").
+- **Revisado:** hero y capturas a 1440, 768 y 390px, en light y dark, sin scroll horizontal ni imágenes que desborden.
 
 ### Cambios en `muv-case.html` (7 de octubre de 2026)
 
