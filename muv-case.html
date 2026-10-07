@@ -167,6 +167,8 @@ body.dark-mode .back-nav{background:rgba(36,36,44,.92);}
 figure figcaption{margin-top:.875rem;font-size:.875rem;line-height:1.5;color:var(--ash);max-width:70ch;}
 .panel{background:#fff;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);}
 .panel img{width:100%;}
+/* image whose artwork touches its left edge: white room on that side only, so a tinted half can still bleed to the other edges */
+.panel.inset-l{padding-left:7%;}
 .narrow-fig{max-width:920px;margin-inline:auto;}
 .duo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(20px,3vw,40px);}
 @media(max-width:760px){.duo{grid-template-columns:1fr;}}
@@ -1332,7 +1334,7 @@ html.nav-top .back-nav{background-color:transparent !important;background-image:
         <p class="prose">It wasn't about looks. People think about a ride spatially: where am I, where is the car. So the map became the home, and the services sit in a sheet over it.</p>
       </div>
       <figure>
-        <div class="panel"><img src="muv-assets/muv-homes-ab.jpg" width="1400" height="1310" loading="lazy" decoding="async" alt="Two low-fidelity home screens side by side: a photo header (Photo) and a map header (Map), with the map option marked as the winner"></div>
+        <div class="panel inset-l"><img src="muv-assets/muv-homes-ab.jpg" width="1400" height="1310" loading="lazy" decoding="async" alt="Two low-fidelity home screens side by side: a photo header (Photo) and a map header (Map), with the map option marked as the winner"></div>
         <figcaption>Photo header vs map header. The map option is the one we kept.</figcaption>
       </figure>
     </div>
@@ -1362,13 +1364,13 @@ html.nav-top .back-nav{background-color:transparent !important;background-image:
 
     <div class="flow" id="flow">
       <div class="step reveal">
-        <img class="mock" src="muv-assets/muv-app-destination.webp" width="640" height="1256" loading="lazy" decoding="async" alt="Destination screen: origin Home and destination fields, recent places, favorites, the ueno bank savings banner and a Confirm trip button">
+        <img class="mock" src="muv-assets/muv-app-destination-v2.webp" width="640" height="1256" loading="lazy" decoding="async" alt="Destination screen titled My trips: the ueno bank savings banner, origin Home and destination fields, an Add favorite link, recent places, favorites and a Confirm trip button">
         <span class="es-tag">Enter your destination</span>
         <h3>Destination</h3>
         <p>Origin and destination, with recents and favorites one tap away. The ueno rebate is already visible.</p>
       </div>
       <div class="step reveal">
-        <img class="mock" src="muv-assets/muv-app-categories.webp" width="640" height="1256" loading="lazy" decoding="async" alt="Category screen: route on the map, Economy marked Recommended, Muv and Comfort with time, seats and price, the ueno rebate line, card and coupon, and a Confirm trip button">
+        <img class="mock" src="muv-assets/muv-app-categories-v2.webp" width="640" height="1256" loading="lazy" decoding="async" alt="Category screen: route on the map, Economy marked Recommended, Muv and Comfort with time, seats and price, the ueno rebate line, card and coupon, and a Confirm trip button">
         <span class="es-tag">Confirm trip</span>
         <h3>Categories</h3>
         <p>Economy, Muv and Comfort with time, seats and price. "Recommended" is preselected, and the rebate sits above the payment method.</p>
