@@ -2404,7 +2404,17 @@ mark.mk{background:transparent;color:var(--paper);font-weight:500;}
 body.light-mode .dv-timeline { --tl-zebra:#F7F7F8; --tl-hover:#F0F0F3; --tl-num:#007A56; }
 /* each job is a row: grey and white alternate so the eye keeps its line, and the row under the cursor goes one step darker */
 .dv-job { position:relative; display:grid; grid-template-columns:220px 1fr; gap:4rem; padding:2.75rem 1.75rem; margin:0 -1.75rem; border-radius:16px; transition:background-color .35s ease; }
-.dv-job:nth-child(odd) { background:var(--tl-zebra); }
+.dv-timeline > :nth-child(odd) { background:var(--tl-zebra); }
+/* two jobs that are one continuous run (Restorando → TheFork): one shared band, with a short header saying so */
+.dv-job-group { margin:0 -1.75rem; border-radius:16px; }
+.dv-job-group > .dv-job { margin:0; padding-top:2.25rem; padding-bottom:2.25rem; }
+.dv-job-group > .dv-job + .dv-job::before { content:''; position:absolute; left:1.75rem; right:1.75rem; top:0; height:1px; background:var(--line-md); }
+.dv-group-head { display:grid; grid-template-columns:220px 1fr; gap:4rem; align-items:baseline; padding:2.25rem 1.75rem .25rem; }
+.dv-group-span { display:flex; flex-direction:column; gap:.25rem; }
+.dv-group-span b { font-family:'Geist',sans-serif; font-size:1.5rem; font-weight:800; letter-spacing:-.03em; line-height:1; color:var(--paper); }
+.dv-group-span span { font-family:'Geist',sans-serif; font-size:.8125rem; color:var(--tl-meta); }
+.dv-job-note { font-family:'Geist',sans-serif; font-size:.8125rem; font-weight:600; letter-spacing:0; color:var(--paper); margin-top:.375rem; line-height:1.35; }
+.dv-group-note { font-family:'Muli',sans-serif; font-size:1rem; line-height:1.65; font-weight:400; color:var(--tl-text); max-width:44rem; margin:0; }
 .dv-fact b { transition:color .35s ease; }
 @media(hover:hover){
   .dv-job:hover { background:var(--tl-hover); }
@@ -2592,6 +2602,9 @@ body.light-mode .ai-lab { --ai-dim:var(--ash); }
   .dv-photo-ring { width:100px; height:100px; }
   .dv-section { padding:3.5rem 1.5rem; }
   .dv-job { grid-template-columns:1fr; gap:.75rem; padding:2.25rem 1rem; margin:0 -1rem; }
+  .dv-job-group { margin:0 -1rem; }
+  .dv-job-group > .dv-job + .dv-job::before { left:1rem; right:1rem; }
+  .dv-group-head { grid-template-columns:1fr; gap:.625rem; padding:2rem 1rem 0; }
   .dv-cards { grid-template-columns:repeat(2,1fr); }
   .dv-passions { grid-template-columns:1fr; }
   .dv-passion:nth-child(odd) { border-right:none; padding-right:0; }
@@ -3871,12 +3884,27 @@ body.light-mode .work{ --wc-muted:#5E5E6C; }
       </div>
     </div>
 
-    <div class="dv-job">
-      <div class="dv-job-l"><div class="dv-period">Apr 2019 – Jun 2023</div><div class="dv-company">TheFork · TripAdvisor</div><div class="dv-job-type">Full-time · Remote</div><div class="dv-job-loc">Remote</div></div>
-      <div class="dv-job-r">
-        <div class="dv-role">Senior Product Designer</div>
-        <p class="dv-desc">Proposed new visual guidelines that raised consistency across B2B and B2C products and reworked 100% of the native app flows. Part of the Demand team, lifting CVR 6% with new features for reviews, menus and photo galleries.</p>
-        <ul class="dv-facts"><li class="dv-fact"><b>+6%</b><span>CVR</span></li><li class="dv-fact"><b>B2B · B2C</b><span>Products</span></li><li class="dv-fact"><b>100%</b><span>Native flows</span></li></ul>
+    <div class="dv-job-group">
+      <div class="dv-group-head">
+        <div class="dv-group-span"><b>7 years</b><span>Oct 2016 – Jun 2023</span></div>
+        <p class="dv-group-note">I joined Restorando in 2016. It was acquired by TheFork · TripAdvisor in 2019, and I stayed on until 2023.</p>
+      </div>
+      <div class="dv-job">
+        <div class="dv-job-l"><div class="dv-period">Apr 2019 – Jun 2023</div><div class="dv-company">TheFork · TripAdvisor</div><div class="dv-job-type">Full-time · Remote</div><div class="dv-job-loc">Remote</div></div>
+        <div class="dv-job-r">
+          <div class="dv-role">Senior Product Designer</div>
+          <p class="dv-desc">Proposed new visual guidelines that raised consistency across B2B and B2C products and reworked 100% of the native app flows. Part of the Demand team, lifting CVR 6% with new features for reviews, menus and photo galleries.</p>
+          <ul class="dv-facts"><li class="dv-fact"><b>+6%</b><span>CVR</span></li><li class="dv-fact"><b>B2B · B2C</b><span>Products</span></li><li class="dv-fact"><b>100%</b><span>Native flows</span></li></ul>
+        </div>
+      </div>
+
+      <div class="dv-job">
+        <div class="dv-job-l"><div class="dv-period">Oct 2016 – Apr 2019</div><div class="dv-company">Restorando</div><div class="dv-job-note">Acquired by TheFork · TripAdvisor&nbsp;(2019)</div><div class="dv-job-type">Full-time</div><div class="dv-job-loc">Buenos Aires</div></div>
+        <div class="dv-job-r">
+          <div class="dv-role">Product Designer</div>
+          <p class="dv-desc">Increased engagement 10% and retention 25% with a new app homepage, designed B2B and B2C features, and helped build the first design system and design-sprint practice.</p>
+          <ul class="dv-facts"><li class="dv-fact"><b>+25%</b><span>Retention</span></li><li class="dv-fact"><b>Acquired</b><span>By TheFork</span></li><li class="dv-fact"><b>First</b><span>Design system</span></li></ul>
+        </div>
       </div>
     </div>
 
@@ -3886,15 +3914,6 @@ body.light-mode .work{ --wc-muted:#5E5E6C; }
         <div class="dv-role">Principal Product Designer &amp; Co-Founder</div>
         <p class="dv-desc">Built the product from scratch with the founding team: user research, ideation, prototyping, user testing and the go-to-market plan. Placed 3rd of 12 in the La Nave Madrid accelerator program.</p>
         <ul class="dv-facts"><li class="dv-fact"><b>0 → 1</b><span>Co-founder</span></li><li class="dv-fact"><b>3rd of 12</b><span>La Nave Madrid</span></li><li class="dv-fact"><b>End-to-end</b><span>UX</span></li></ul>
-      </div>
-    </div>
-
-    <div class="dv-job">
-      <div class="dv-job-l"><div class="dv-period">Oct 2016 – Apr 2019</div><div class="dv-company">Restorando</div><div class="dv-job-type">Full-time</div><div class="dv-job-loc">Buenos Aires</div></div>
-      <div class="dv-job-r">
-        <div class="dv-role">Product Designer</div>
-        <p class="dv-desc">Acquired by TheFork · TripAdvisor in 2019. Increased engagement 10% and retention 25% with a new app homepage, designed B2B and B2C features, and helped build the first design system and design-sprint practice.</p>
-        <ul class="dv-facts"><li class="dv-fact"><b>+25%</b><span>Retention</span></li><li class="dv-fact"><b>Acquired</b><span>By TheFork</span></li><li class="dv-fact"><b>First</b><span>Design system</span></li></ul>
       </div>
     </div>
 
