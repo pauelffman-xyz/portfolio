@@ -1,6 +1,6 @@
 # Paula Elffman — Portfolio OS · Design Bible
 
-*Última actualización: 7 de octubre de 2026 — **TheFork Reviews: problema en rojo, porcentajes grandes y header transparente.** (1) En "The problem" de `thefork-reviews-case.html` el texto va primero (titular, párrafo y las cuatro tarjetas) y la imagen de las tres pantallas queda debajo. (2) Las cuatro tarjetas de problema (`.problem-item`) pasaron del verde de marca a **rojo claro con una cruz**, para leerse como "esto estaba mal". (3) En Research, los tres porcentajes del user journey (30 / 20 / 5%) dejaron de ser una lista chica y son **una tarjeta `.rj-card`** igual a las de al lado, con números de titular que cuentan desde cero y una barra proporcional. (4) El case recibió el bloque `#nav-glass`: le faltaba, por eso el header seguía con fondo blanco arriba de todo. Ver "Cambios en `thefork-reviews-case.html` (7 de octubre de 2026)" y "Header transparente arriba, vidrio al hacer scroll".*
+*Última actualización: 7 de octubre de 2026 — **TheFork Reviews: problema en rojo, porcentajes grandes y header transparente.** (1) En "The problem" de `thefork-reviews-case.html` el texto va primero (titular, párrafo y las cuatro tarjetas) y la imagen de las tres pantallas queda debajo. (2) Las cuatro tarjetas de problema (`.problem-item`) pasaron del verde de marca a **rojo claro con una cruz**, para leerse como "esto estaba mal". (3) En Research, los tres porcentajes del user journey (30 / 20 / 5%) dejaron de ser una lista chica y son **una tarjeta `.rj-card`** igual a las de al lado, con números de titular que cuentan desde cero y una barra proporcional. (4) El case recibió el bloque `#nav-glass`: le faltaba, por eso el header seguía con fondo blanco arriba de todo. Ver "Cambios en `thefork-reviews-case.html` (7 de octubre de 2026)" y "Header transparente arriba, vidrio al hacer scroll". (5) **Home, About: My superpower suma el tramo de estrategia.** Subtítulo nuevo y un cuarto chip al inicio del flujo ("Vague brief"). Ver "My superpower", Iteración 4. (6) **Home, About: "AI in my workflow" dejó de ser un slider con ventana simulada.** Ahora es un riel con las seis etapas siempre a la vista y un panel que muestra, por etapa, contexto, prompt y resultado. Ver "`.ai-lab`: riel de etapas + panel (7 de octubre de 2026)".*
 
 *Última actualización previa: 6 de octubre de 2026 — **SmartPass: design system como board y header transparente.** (1) La sección Design System de `smartpass-case.html` dejó de ser cuatro grupos apilados (escalas de color, tipografía, toasts, filtros) y pasó a ser **un solo board** con todo a la vista: tipografía, botones, código de verificación, filtro, modal, íconos, colores, toast y badges. Está hecho en HTML/CSS, no es una imagen, y los componentes van **equidistantes**: una sola separación entre todos y un solo margen. Ver "DESIGN SYSTEM COMO BOARD" dentro de CASE STUDIES. (2) `smartpass-case.html` recibió el bloque `#nav-glass`: el header va sin fondo arriba de todo (se ve el degradé del cover) y toma el vidrio al hacer scroll. Ver "Header transparente arriba, vidrio al hacer scroll". (3) **Home: cover nuevo en la card de smartpass** (More work): `assets/smartpass-accreditations.webp`, el teléfono con la pantalla de acreditaciones, en lugar del login provisorio. Ver "Notas de covers" en "Home: grilla de casos". (4) **muv: imagen de Envío reemplazada** por el abanico de cuatro pantallas (`muv-assets/muv-envio-fan.webp`) sobre un fondo `--bg3`. También se eliminó de Process la figura del flujo completo (`muv-full-flow.webp`). Ver "Cambios en `vendor-tool-case.html` y `muv-case.html` (6 de octubre de 2026)". (5) **muv: design system como board.** La biblioteca de componentes en imágenes se reemplazó por un board con los componentes reconstruidos en HTML/CSS desde el frame de Figma. Ver "Board de muv". (6) **smartpass, mobile:** Screen 03 y Screen 04 ocupan todo el ancho en el celular (antes quedaban al 72% y 60%). Ver "smartpass-case.html — pantallas sueltas en mobile".*
 
@@ -894,6 +894,8 @@ Los 21 chips de estado bajo cada empleo del timeline (ej. `Web3 · Fintech`, `Mu
 
 ### AI in my workflow — carousel interactivo (arriba de Core strengths)
 
+> ⚠️ **El módulo `.ai-lab` se rehízo el 7 de octubre de 2026.** Lo que sigue sobre `.ai-bar`, `.ai-progress`, `.ai-stage`, flechas y pills describe la versión anterior y queda como historial. La versión vigente está en "`.ai-lab`: riel de etapas + panel (7 de octubre de 2026)", más abajo. El título, el intro y la ubicación de la sección no cambiaron.
+
 *Agosto 2026 — ✅ nuevo, a pedido*
 
 Sección nueva en el About Me, **entre About y Core strengths**. Muestra cómo Pau integra AI (Claude) en su flujo de diseño, en formato módulo interactivo tipo "stories" (patrón Linear/Stripe), no como texto plano.
@@ -947,7 +949,67 @@ Sección nueva en el About Me, **entre About y Core strengths**. Muestra cómo P
 
 **Preview aislado:** se generó `ai-section-preview.html` (standalone, con toggle light/dark y los mismos tokens/fuentes) para revisar solo esta sección sin abrir todo el portfolio. **No es parte del deploy** — es solo para review, no va en la tabla de ARCHIVOS.
 
-**Regla para el futuro:** para sumar/quitar una capacidad, agregar/quitar un `.ai-slide` con su `data-nav` y `data-prompt` dentro de `#aiTrack` — los segmentos de progreso y las pills de nav se generan solos a partir de los slides, no hay que tocar el JS.
+**Regla para el futuro:** para sumar o quitar una capacidad, ver "Para sumar o quitar una etapa" en "`.ai-lab`: riel de etapas + panel (7 de octubre de 2026)". Desde ese rediseño cada `.ai-slide` lleva también sus filas Context / Prompt / Result; las pestañas se siguen generando solas.
+
+### `.ai-lab`: riel de etapas + panel (7 de octubre de 2026)
+
+*✅ a pedido: "no me termina de cerrar, puede ser un slider pero lo haría más pro".*
+
+**Qué fallaba en la versión anterior:**
+
+- **Ventana simulada** (tres puntos + `claude · design-workflow` en mono): decorado que no decía nada.
+- **Cuatro navegaciones para lo mismo:** segmentos de progreso, flechas, pills y el número `01`…`06` del eyebrow.
+- **Solo texto:** cada slide era título + párrafo + un prompt suelto. Contaba, no mostraba.
+- **Bug visible:** el slide vecino asomaba por el borde derecho (y una franja por el izquierdo), porque `.ai-stage` tenía padding con `overflow:hidden`.
+- **Avance automático cada 5.2s:** cambiaba antes de terminar de leer, y no se detenía aunque la persona ya hubiera elegido un tema.
+- **Desalineado:** la tarjeta iba centrada a 860px y el resto del About va a la izquierda.
+
+**Qué es ahora:** una tarjeta con dos columnas.
+
+- **Riel (`.ai-rail`, izquierda):** las seis etapas siempre a la vista, numeradas (son una secuencia real: el ciclo de diseño). La activa va en `--paper` y peso 600, con una línea vertical de 2px en `--accent` que se llena mientras dura la etapa. Esa línea es el único indicador de progreso.
+- **Panel (`.ai-track`, derecha):** título, descripción y la **corrida** (`dl.ai-run`): tres filas con rótulo a la izquierda.
+  - **Context:** lo que le doy (chips con borde).
+  - **Prompt:** el pedido de ejemplo, en mono, que se tipea solo.
+  - **Result:** lo que vuelve (chips con tilde, fondo `--accent` al 11%). Aparecen cuando el prompt termina de tiparse.
+- Los seis paneles están apilados en la misma celda de la grilla, así la tarjeta **mide siempre lo mismo** y no hay slide vecino que asome. El cambio es un fundido con 10px de subida, no un desplazamiento horizontal.
+- La tarjeta va **alineada a la izquierda**, `max-width:1120px`.
+
+**Contenido de Context / Result.** Sale de las descripciones que ya estaban, no es copy nuevo:
+
+| Etapa | Context | Result |
+| --- | --- | --- |
+| Research | Competitor products | UX patterns · Gaps · Summary of findings |
+| Prototyping | Design System · GitHub repos · Existing components | Functional prototype |
+| Exploration | Current flow · My assumptions | Alternative flows · Interaction patterns |
+| UX writing | Prompt libraries · Brand voice | Copy options per scenario |
+| Critique | User personas · Usability insights · Product metrics | Friction points per persona |
+| Production | Design System | UI explorations · Interactive prototypes |
+
+Títulos, descripciones y prompts son los mismos de antes. Se quitó el eyebrow de cada slide (`01 · Research & benchmarking`): el riel ya nombra la etapa.
+
+**Comportamiento:**
+
+- **Avance automático cada 7s** (`--ai-dur` en `.ai-lab`, **la única variable de velocidad**; antes era `DUR` en el JS). La línea del riel es una animación CSS (`aiFill`) y el paso a la etapa siguiente ocurre en su `animationend`: no hay timers que sincronizar.
+- **Se pausa** con el mouse o el foco encima (`.is-paused`) y cuando la tarjeta sale de pantalla (`.is-off`).
+- **Se detiene para siempre** cuando la persona elige una etapa, con click o teclado (`.is-manual`): la línea queda llena y nada más se mueve solo.
+- **Teclado:** el riel es un `tablist`. Flechas (arriba/abajo/izquierda/derecha), Home y End cambian de etapa; foco visible con `outline` en `--accent`.
+- **Tipeo:** arranca cuando la tarjeta entra en pantalla. El prompt completo va también en un `.ai-ghost` invisible que reserva el alto, así el texto no empuja nada mientras se escribe (importa en mobile, donde ocupa dos líneas).
+- **`prefers-reduced-motion`:** sin avance, sin tipeo, sin cursor; todo visible desde el inicio.
+- **Sin JS:** se ve la primera etapa completa (el prompt está escrito en el HTML).
+
+**Mobile (≤860px):** una columna. El riel pasa a ser una fila de pestañas con scroll horizontal arriba de la tarjeta (la línea de progreso va debajo de la pestaña activa, y la fila se desplaza sola para mostrarla). En la corrida, el rótulo va arriba de su valor.
+
+**Color y contraste:** el texto secundario del módulo usa `--ai-dim`, que es `var(--ash)` en light y `#A3A3B6` en dark (el `--ash` de dark, `#7A7A90`, no llega a AA sobre la tarjeta). El `--accent` no se usa como color de texto chico (en light da 3.5:1): queda para la línea, el `▸` y la tilde. Por eso el número de la etapa activa va en `--paper`.
+
+**IDs y clases:**
+
+- Siguen: `#aiLab`, `#aiTrack`, `.ai-slide`, `data-nav`, `data-prompt`, `.ai-prompt`, `.ai-typed`, `.ai-cursor`, `.ai-caret-glyph`, `.ai-slide-title`, `.ai-slide-desc`.
+- Nuevos: `#aiRail`, `.ai-rail`, `.ai-tab` (`.ai-tab-n`, `.ai-tab-fill`), `.ai-run`, `.ai-run-row`, `.ai-chips`, `.ai-chips-out`, `.ai-ghost`, `.ai-live`. Estados en `.ai-lab`: `.ai-js`, `.is-off`, `.is-paused`, `.is-manual`; en el panel: `.is-active`, `.is-done`.
+- **Ya no existen:** `#aiPrev`, `#aiNext`, `#aiProgress`, `#aiNav`, `.ai-bar`, `.ai-dots`, `.ai-dot`, `.ai-bar-title`, `.ai-arrow`, `.ai-progress`, `.ai-seg`, `.ai-stage`, `.ai-nav-row`, `.ai-nav`, `.ai-nav-item`, `.ai-slide-eyebrow`.
+
+**Para sumar o quitar una etapa:** agregar o quitar un `<article class="ai-slide" data-nav="…">` dentro de `#aiTrack`, con su título, descripción y las tres filas de `dl.ai-run`. El prompt va **dos veces en el HTML** (en `data-prompt` y dentro de `.ai-ghost` y `.ai-typed`): si cambia, cambiar las tres. Las pestañas del riel y su numeración se generan solas. Si un Result lleva más de tres chips, sumar el `transition-delay` del cuarto.
+
+**No volver a agregar:** la barra de ventana, las flechas, los segmentos de progreso ni las pills de abajo.
 
 ### Core strengths (13 pills, 4 en Emerald)
 
@@ -966,7 +1028,7 @@ Sección nueva en el About Me, **entre About y Core strengths**. Muestra cómo P
 - **Fondo blanco + sombra (Agosto 2026, a pedido):** `.hs-feature` usaba `background:var(--ghost-2)` — en light mode eso es un gris que casi no se distingue del `--void` de fondo de la sección (mismo problema que tuvo `.ai-lab`, ver esa sección). Se cambió a los mismos tokens reutilizables `--surface` (blanco puro en light) + `box-shadow:var(--shadow-card)`, para que la card se despegue del fondo. También se quitó el `grid-column:span 5` (CSS muerto — ya no vive dentro de un grid).
 - ~~El id `#hsBridge` sigue siendo único en el documento...~~ *(obsoleto, ver "IDs" en Iteración 3 — `#hsBridge` ya no existe.)*
 
-**Iteración 3 (actual, Septiembre 2026):** rediseño completo del contenido interno de `.hs-feature`, a pedido — Pau no quería el diagrama de línea+nodos y pidió que el título apareciera con el efecto de scramble/decrypt del hero de **oscarhernandez.vercel.app**.
+**Iteración 3 (Septiembre 2026):** rediseño completo del contenido interno de `.hs-feature`, a pedido — Pau no quería el diagrama de línea+nodos y pidió que el título apareciera con el efecto de scramble/decrypt del hero de **oscarhernandez.vercel.app**.
 
 - `.hs-eyebrow` — nuevo modificador `.hs-eyebrow-lg` (se agrega junto a `.hs-eyebrow`, no la reemplaza): sube `font-size` de `.5625rem` a `clamp(.8125rem,1.1vw,.9375rem)` y `font-weight` a 700. Es exclusivo de este eyebrow — el resto de los eyebrows del sitio (Experience, Beyond the work, etc.) siguen en el tamaño base.
 - `.hs-super-title` ("I bridge the gap.") tiene ahora efecto **scramble/decrypt**: al entrar en viewport arranca vacío y cada carácter cicla por un charset random (`!<>-_\/[]{}—=+*^?#$%&01`) antes de resolverse al carácter final; el timing de inicio/fin de cada carácter es aleatorio por índice (no todos resuelven a la vez, efecto "cascada"). Mientras un carácter está scrambleando queda envuelto en `<span class="hs-scramble-char">` (accent, 75% opacidad) para distinguirlo del texto ya resuelto.
@@ -976,12 +1038,19 @@ Sección nueva en el About Me, **entre About y Core strengths**. Muestra cómo P
 - Mobile (`≤768px`): `.hs-super-flow` pasa a columna (`flex-direction:column`) y `.hs-super-arrow` se oculta — mismo criterio que tenía `.hs-bridge` (perdía la línea horizontal en mobile).
 - `prefers-reduced-motion`: el scramble se salta (texto final directo, sin animación) y chips/flechas quedan fijos en `opacity:1`, sin transición.
 
+**Iteración 4 (actual, 7 de octubre de 2026):** el superpower contaba solo la mitad de ejecución (stakeholders → dev → producto). Se sumó la mitad de antes: ordenar el caos y convertir un brief vago en una apuesta clara. El título y el efecto scramble no cambiaron.
+
+- **Subtítulo (`.hs-super-sub`):** "When nobody knows where to start, I map the problem and turn a vague brief into a clear bet. Then I keep that intent intact from stakeholder language, to dev handoff, to shipped product."
+- **Flujo (`#hsSuperFlow`), ahora cuatro chips:** `Vague brief → Stakeholder language → Dev handoff → Shipped product`. El chip nuevo va primero.
+- **CSS:** se agregó el delay del cuarto chip (`.hs-super-chip:nth-of-type(7)`, `.45s`) y `.hs-super-flow` pasó de `max-width:620px` a `760px` para que los cuatro entren en una línea. Revisado a 1440, 900 y 390px (en mobile siguen en columna, sin flechas), en light y dark.
+- **De dónde salió:** Pau hizo el test "Radar Skills" de superproductdesigner.com (resultado: perfil estratega). Se tomó la idea, reescrita en su voz y en inglés. **No se publica nada del test:** ni los puntajes, ni el radar, ni el porcentaje de match, ni la etiqueta del perfil, ni el "punto ciego". Motivo: es un quiz de autoevaluación, no una credencial, y varios puntajes contradicen lo que el About afirma (Systems Thinking, Design Systems, AI-assisted Design). No volver a proponerlo.
+
 **IDs — qué cambió:**
 - `#hsBridge` **ya no existe.** La regla de "no duplicarlo" de la Iteración 2 queda obsoleta.
 - Nuevos: `#hsFeature` (contenedor, target del `IntersectionObserver`), `#hsSuperTitle` (el `<h3>`, con `data-text`), `#hsSuperFlow` (contenedor de chips, recibe `.is-live`).
 - El script viejo debajo de "Beyond the work" (el que escucha `#hsGrid`) todavía tiene `var bridge=document.getElementById('hsBridge')` — queda como código muerto inofensivo (`if(bridge)` da `false` siempre). No rompe nada; si en algún momento se limpia ese script, se puede borrar esa línea junto con el `bridge.classList.add('is-live')` de adentro de su `reveal()`.
 
-**Regla para el futuro:** si se necesita otra card "elevada" en el About Me, reusar `--surface`/`--shadow-card` (mismo criterio que `.ai-lab` y `.hs-feature`) en vez de inventar un tercer tratamiento de fondo. Si se agrega un cuarto paso al flow (más allá de los 3 chips), sumar el delay correspondiente en `.hs-super-flow.is-live .hs-super-chip:nth-of-type(n)` — los delays actuales solo cubren el 3° y 5° hijo (los chips; los pares son las flechas).
+**Regla para el futuro:** si se necesita otra card "elevada" en el About Me, reusar `--surface`/`--shadow-card` (mismo criterio que `.ai-lab` y `.hs-feature`) en vez de inventar un tercer tratamiento de fondo. Si se agrega un cuarto paso al flow (más allá de los 3 chips), sumar el delay correspondiente en `.hs-super-flow.is-live .hs-super-chip:nth-of-type(n)` — los delays actuales cubren el 3°, 5° y 7° hijo (los chips; los pares son las flechas). Para un quinto chip, sumar `nth-of-type(9)`.
 
 ### Human side — bento "Beyond the work" (rediseñado)
 
