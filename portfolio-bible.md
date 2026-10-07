@@ -1,6 +1,6 @@
 # Paula Elffman — Portfolio OS · Design Bible
 
-*Última actualización: 7 de octubre de 2026 — **TheFork Reviews: problema en rojo, porcentajes grandes y header transparente.** (1) En "The problem" de `thefork-reviews-case.html` el texto va primero (titular, párrafo y las cuatro tarjetas) y la imagen de las tres pantallas queda debajo. (2) Las cuatro tarjetas de problema (`.problem-item`) pasaron del verde de marca a **rojo claro con una cruz**, para leerse como "esto estaba mal". (3) En Research, los tres porcentajes del user journey (30 / 20 / 5%) dejaron de ser una lista chica y son **una tarjeta `.rj-card`** igual a las de al lado, con números de titular que cuentan desde cero y una barra proporcional. (4) El case recibió el bloque `#nav-glass`: le faltaba, por eso el header seguía con fondo blanco arriba de todo. Ver "Cambios en `thefork-reviews-case.html` (7 de octubre de 2026)" y "Header transparente arriba, vidrio al hacer scroll". (5) **Home, About: My superpower suma el tramo de estrategia.** Subtítulo nuevo y un cuarto chip al inicio del flujo ("Vague brief"). Ver "My superpower", Iteración 4. (6) **Home, About: "AI in my workflow" dejó de ser un slider con ventana simulada.** Ahora es un riel con las seis etapas siempre a la vista y un panel que muestra, por etapa, contexto, prompt y resultado. Ver "`.ai-lab`: riel de etapas + panel (7 de octubre de 2026)".*
+*Última actualización: 7 de octubre de 2026 — **TheFork Reviews: problema en rojo, porcentajes grandes y header transparente.** (1) En "The problem" de `thefork-reviews-case.html` el texto va primero (titular, párrafo y las cuatro tarjetas) y la imagen de las tres pantallas queda debajo. (2) Las cuatro tarjetas de problema (`.problem-item`) pasaron del verde de marca a **rojo claro con una cruz**, para leerse como "esto estaba mal". (3) En Research, los tres porcentajes del user journey (30 / 20 / 5%) dejaron de ser una lista chica y son **una tarjeta `.rj-card`** igual a las de al lado, con números de titular que cuentan desde cero y una barra proporcional. (4) El case recibió el bloque `#nav-glass`: le faltaba, por eso el header seguía con fondo blanco arriba de todo. Ver "Cambios en `thefork-reviews-case.html` (7 de octubre de 2026)" y "Header transparente arriba, vidrio al hacer scroll". (5) **Home, About: My superpower suma el tramo de estrategia.** Subtítulo nuevo y un cuarto chip al inicio del flujo ("Vague brief"). Ver "My superpower", Iteración 4. (6) **Home, About: "AI in my workflow" dejó de ser un slider con ventana simulada.** Ahora es un riel con las seis etapas siempre a la vista y un panel que muestra, por etapa, contexto, prompt y resultado. Ver "`.ai-lab`: riel de etapas + panel (7 de octubre de 2026)". (7) **Home y About: fondo blanco en light.** `--void` de `body.light-mode` pasó de crema `#F5F4F0` a `#FFFFFF`, igual que el `--bg` de los cases. Ver la nota "Fondo blanco en light" en DESIGN TOKENS.*
 
 *Última actualización previa: 6 de octubre de 2026 — **SmartPass: design system como board y header transparente.** (1) La sección Design System de `smartpass-case.html` dejó de ser cuatro grupos apilados (escalas de color, tipografía, toasts, filtros) y pasó a ser **un solo board** con todo a la vista: tipografía, botones, código de verificación, filtro, modal, íconos, colores, toast y badges. Está hecho en HTML/CSS, no es una imagen, y los componentes van **equidistantes**: una sola separación entre todos y un solo margen. Ver "DESIGN SYSTEM COMO BOARD" dentro de CASE STUDIES. (2) `smartpass-case.html` recibió el bloque `#nav-glass`: el header va sin fondo arriba de todo (se ve el degradé del cover) y toma el vidrio al hacer scroll. Ver "Header transparente arriba, vidrio al hacer scroll". (3) **Home: cover nuevo en la card de smartpass** (More work): `assets/smartpass-accreditations.webp`, el teléfono con la pantalla de acreditaciones, en lugar del login provisorio. Ver "Notas de covers" en "Home: grilla de casos". (4) **muv: imagen de Envío reemplazada** por el abanico de cuatro pantallas (`muv-assets/muv-envio-fan.webp`) sobre un fondo `--bg3`. También se eliminó de Process la figura del flujo completo (`muv-full-flow.webp`). Ver "Cambios en `vendor-tool-case.html` y `muv-case.html` (6 de octubre de 2026)". (5) **muv: design system como board.** La biblioteca de componentes en imágenes se reemplazó por un board con los componentes reconstruidos en HTML/CSS desde el frame de Figma. Ver "Board de muv". (6) **smartpass, mobile:** Screen 03 y Screen 04 ocupan todo el ancho en el celular (antes quedaban al 72% y 60%). Ver "smartpass-case.html — pantallas sueltas en mobile".*
 
@@ -97,7 +97,8 @@ El resto (14 assets) se sacó tal cual, sin recomprimir — mismo bytes, solo mo
 --shadow-card: 0 24px 60px -20px rgba(0,0,0,.6), 0 2px 10px rgba(0,0,0,.35)  /* Sombra de tarjeta elevada */
 
 /* === LIGHT MODE (body.light-mode) === */
---void:    #F5F4F0   /* Background principal claro */
+--void:    #FFFFFF   /* Background principal claro. Blanco desde el 7 de octubre de 2026 (antes crema #F5F4F0) */
+--void-2:  #F5F5F7   /* Sin uso hoy; alineado al --bg2 de los cases */
 --ghost:   #E8E7E3   /* Background secundario */
 --ghost-2: #DDDCDA   /* Background hover */
 --paper:   #1A1A22   /* Texto principal oscuro */
@@ -438,10 +439,17 @@ Los cases son archivos HTML independientes (`memorable-case.html`, `monchis-case
 
 **Decisión:** el home alterna entre light (default) y dark con el toggle del dock. Los case studies siguen siendo siempre light.
 
+**Fondo blanco en light (7 de octubre de 2026, a pedido):** la home y el About dejaron el crema y van sobre blanco. Es un solo cambio de token en `body.light-mode` (`--void: #FFFFFF`); dark no se tocó.
+
+- **Qué arrastra, porque usan `var(--void)`:** el fondo de la página, el header fijo de la home, el loader, el overlay del Wipe (ahora la home y los cases cubren con el mismo blanco) y los chips de My superpower, que pasan a ser blancos con borde.
+- **Tarjetas elevadas (`.ai-lab`, `.hs-feature`):** son `--surface` blanco sobre página blanca. Se despegan por el borde `--line-md` y la sombra `--shadow-card`, no por diferencia de fondo. Es el mismo criterio de los cases (v3: profundidad por sombra).
+- **Pendiente de decidir:** `--ghost` (`#E8E7E3`) y `--ghost-2` (`#DDDCDA`) siguen siendo grises cálidos, pensados para el crema. Sobre blanco se ven un poco más pesados (bloque Toolkit, fondo de las cards de trabajo mientras carga la imagen). Si se quiere, se pueden pasar a los grises neutros de los cases (`#F5F5F7` / `#E8E8ED`).
+- **Regla:** no volver a escribir `#F5F4F0` como fondo en la home. El fondo claro es `var(--void)`.
+
 **Implementación:**
 
 - `body.light-mode` overridea los CSS custom properties en `:root` con una paleta invertida:
-  - `--void: #F5F4F0` (fondo claro)
+  - `--void: #FFFFFF` (fondo claro; blanco desde el 7 de octubre de 2026, antes crema `#F5F4F0`)
   - `--paper: #1A1A22` (texto oscuro)
   - `--ghost/#ghost-2` ajustados a grises claros
   - `--line/--line-md` ajustados para contraste sobre fondo claro
