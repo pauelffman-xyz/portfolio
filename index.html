@@ -2445,8 +2445,8 @@ body.light-mode .dv-timeline { --tl-zebra:#F7F7F8; --tl-hover:#F0F0F3; --tl-num:
 .dv-about { display:grid; grid-template-columns:minmax(0,780px) max-content; justify-content:space-between; align-items:start; gap:3rem 4rem; margin-bottom:3.5rem; }
 .dv-about .dv-story { margin-bottom:0; }
 /* Toolkit: one icon tile per tool, name underneath. Logos are black single-colour SVGs in assets/tools/, inverted to white in dark mode. */
-.tk { --tk-shadow:0 0 0 1px rgba(255,255,255,.04), 0 10px 22px -10px rgba(0,0,0,.55); --tk-shadow-up:0 0 0 1px rgba(255,255,255,.08), 0 16px 28px -10px rgba(0,0,0,.6); }
-body.light-mode .tk { --tk-shadow:0 1px 2px rgba(20,20,35,.04), 0 8px 18px -8px rgba(20,20,35,.14); --tk-shadow-up:0 2px 4px rgba(20,20,35,.05), 0 14px 26px -10px rgba(20,20,35,.2); }
+.tk, .hs-grid { --tk-shadow:0 0 0 1px rgba(255,255,255,.04), 0 10px 22px -10px rgba(0,0,0,.55); --tk-shadow-up:0 0 0 1px rgba(255,255,255,.08), 0 16px 28px -10px rgba(0,0,0,.6); }
+body.light-mode .tk, body.light-mode .hs-grid { --tk-shadow:0 1px 2px rgba(20,20,35,.04), 0 8px 18px -8px rgba(20,20,35,.14); --tk-shadow-up:0 2px 4px rgba(20,20,35,.05), 0 14px 26px -10px rgba(20,20,35,.2); }
 .tk-label { font-family:'Geist',sans-serif; font-size:.9375rem; font-weight:500; color:var(--ash); margin-bottom:1.25rem; }
 .tk-grid { list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(4,4.75rem); gap:1.25rem .875rem; }
 .tk-item { position:relative; display:flex; flex-direction:column; align-items:center; gap:.5rem; }
@@ -2554,10 +2554,12 @@ body.light-mode .ai-lab { --ai-dim:var(--ash); }
   .ai-tab.active .ai-tab-fill { animation:none; transform:none; }
   .ai-cursor { animation:none; display:none; }
 }
-}
 
 /* ── Beyond the work — bento ── */
-.hs-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:1rem; }
+.hs-split { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:3rem 5rem; align-items:start; }
+.hs-split .dv-human-h { margin-bottom:0; }
+.hs-grid { --hs-text:color-mix(in srgb, var(--paper) 72%, var(--void)); --hs-green:var(--accent); display:flex; flex-direction:column; max-width:34rem; }
+body.light-mode .hs-grid { --hs-green:#007A56; }
 .hs-feature { margin-top:2.5rem; background:var(--surface); border:1px solid var(--line-md); border-radius:14px; padding:2.5rem; box-shadow:var(--shadow-card); }
 .hs-eyebrow { font-family:'Geist',sans-serif; font-size:.9375rem; letter-spacing:0; text-transform:none; color:var(--ash); margin-bottom:1rem;font-weight:500;}
 .hs-eyebrow-lg { font-size:.9375rem; font-weight:500; letter-spacing:0; margin-bottom:1.25rem; }
@@ -2582,17 +2584,24 @@ body.light-mode .ai-lab { --ai-dim:var(--ash); }
 .hs-bridge.is-live .hs-node:nth-of-type(3) .hs-node-dot { transition-delay:1s; }
 .hs-bridge.is-live .hs-node-dot { background:var(--accent); border-color:var(--accent); box-shadow:0 0 0 5px color-mix(in srgb, var(--accent) 14%, transparent); }
 .hs-node-label { display:block; margin-top:1rem; font-family:'Geist',sans-serif; font-size:.8125rem; letter-spacing:0; text-transform:none; color:var(--ash); line-height:1.5; white-space:nowrap; }
-.hs-cell { background:var(--ghost); border:1px solid var(--line); border-radius:12px; padding:1.25rem; opacity:0; transform:translateY(16px); transition:opacity .55s ease, transform .55s ease, border-color .25s ease, background-color .25s ease; }
+/* three facets as a quiet list beside the heading: icon tile, name, one line */
+.hs-cell { display:grid; grid-template-columns:auto minmax(0,1fr); column-gap:1.25rem; align-items:center; padding:1.375rem 0; opacity:0; transform:translateY(16px); transition:opacity .55s ease, transform .55s ease; }
+.hs-cell:first-child { padding-top:0; }
+.hs-cell:last-child { padding-bottom:0; }
+.hs-cell + .hs-cell { border-top:1px solid var(--line-md); }
 .hs-cell.is-in { opacity:1; transform:translateY(0); }
-.hs-cell:hover { border-color:color-mix(in srgb, var(--accent) 45%, transparent); background:var(--ghost-2); }
-.hs-cell-travel, .hs-cell-food { grid-column:span 1; }
-.hs-cell-sm { grid-column:span 1; }
-.hs-cell-icon { font-size:1.25rem; display:block; margin-bottom:.625rem; filter:grayscale(40%); transition:filter .3s ease; line-height:1; }
-.hs-cell:hover .hs-cell-icon { filter:grayscale(0%); }
-.hs-cell-name { font-family:'Geist',sans-serif; font-size:.875rem; font-weight:700; color:var(--paper); margin-bottom:.3rem; letter-spacing:-.01em; }
-.hs-cell-desc { font-family:'Muli',sans-serif; font-size:.8125rem; line-height:1.55; color:var(--ash); font-weight:300; }
+.hs-cell-icon { grid-row:1 / span 2; width:3.75rem; height:3.75rem; display:flex; align-items:center; justify-content:center; font-size:1.625rem; line-height:1; border-radius:18px; background:var(--surface); border:1px solid var(--line-md); box-shadow:var(--tk-shadow); filter:grayscale(40%); transition:filter .3s ease, transform .35s var(--ease), box-shadow .35s var(--ease); }
+.hs-cell-name { align-self:end; font-family:'Geist',sans-serif; font-size:1.25rem; font-weight:700; color:var(--paper); letter-spacing:-.025em; line-height:1.2; transition:color .3s ease; }
+.hs-cell-desc { align-self:start; margin:.25rem 0 0; font-family:'Muli',sans-serif; font-size:1rem; line-height:1.5; color:var(--hs-text); font-weight:400; }
+@media(hover:hover){
+  .hs-cell:hover .hs-cell-icon { filter:grayscale(0%); transform:translateY(-3px); box-shadow:var(--tk-shadow-up); }
+  .hs-cell:hover .hs-cell-name { color:var(--hs-green); }
+}
+@media(max-width:900px){ .hs-split { grid-template-columns:minmax(0,1fr); gap:2.5rem; } .hs-grid { max-width:none; } }
 @media(prefers-reduced-motion:reduce){
-  .hs-cell { opacity:1; transform:none; transition:border-color .25s ease, background-color .25s ease; }
+  .hs-cell { opacity:1; transform:none; transition:none; }
+  .hs-cell-icon, .hs-cell-name { transition:none; }
+  .hs-cell:hover .hs-cell-icon { transform:none; }
   .hs-line i, .hs-node-dot { transition:none; }
   .hs-super-chip, .hs-super-arrow { opacity:1 !important; transform:none !important; }
 }
@@ -2609,9 +2618,7 @@ body.light-mode .ai-lab { --ai-dim:var(--ash); }
   .dv-passions { grid-template-columns:1fr; }
   .dv-passion:nth-child(odd) { border-right:none; padding-right:0; }
   .dv-passion:nth-child(even) { padding-left:0; }
-  .hs-grid { grid-template-columns:repeat(3,1fr); }
   .hs-feature { padding:1.75rem; }
-  .hs-cell-travel, .hs-cell-food, .hs-cell-sm { grid-column:span 1; }
   .hs-bridge { grid-template-columns:1fr; max-width:none; }
   .hs-line { display:none; }
   .hs-node { display:flex; align-items:center; gap:.75rem; text-align:left; padding:.4rem 0; }
@@ -2622,7 +2629,6 @@ body.light-mode .ai-lab { --ai-dim:var(--ash); }
 }
 @media(max-width:480px){
   .dv-cards { grid-template-columns:1fr; }
-  .hs-grid { grid-template-columns:1fr; }
 }
 
 /* ── Tile image system ── */
@@ -3922,16 +3928,13 @@ body.light-mode .work{ --wc-muted:#5E5E6C; }
 
 <div class="dv-section dv-bg">
   <div class="dv-label">Beyond the work</div>
-  <h2 class="dv-human-h">Besides being a <em>product designer…</em></h2>
-  <div class="hs-grid" id="hsGrid">
-
-    <div class="hs-cell hs-cell-travel"><span class="hs-cell-icon">✈️</span><div class="hs-cell-name">Travel</div><p class="hs-cell-desc">15+ countries. Every city is a UX study.</p></div>
-    <div class="hs-cell hs-cell-food"><span class="hs-cell-icon">🍷</span><div class="hs-cell-name">Food &amp; Culture</div><p class="hs-cell-desc">Food is design. Every dish is a set of decisions.</p></div>
-
-    <div class="hs-cell hs-cell-sm"><span class="hs-cell-icon">🤖</span><div class="hs-cell-name">AI</div><p class="hs-cell-desc">Exploring AI-native product patterns daily.</p></div>
-    <div class="hs-cell hs-cell-sm"><span class="hs-cell-icon">📷</span><div class="hs-cell-name">Photography</div><p class="hs-cell-desc">Training the eye for light, composition and detail.</p></div>
-    <div class="hs-cell hs-cell-sm"><span class="hs-cell-icon">🌎</span><div class="hs-cell-name">Cultures</div><p class="hs-cell-desc">One market teaches you how much context really matters.</p></div>
-
+  <div class="hs-split">
+    <h2 class="dv-human-h">Besides being a <em>product designer…</em></h2>
+    <div class="hs-grid" id="hsGrid">
+      <div class="hs-cell"><span class="hs-cell-icon" aria-hidden="true">✈️</span><div class="hs-cell-name">Travel</div><p class="hs-cell-desc">15+ countries. Every city is a UX study.</p></div>
+      <div class="hs-cell"><span class="hs-cell-icon" aria-hidden="true">🍷</span><div class="hs-cell-name">Food &amp; Culture</div><p class="hs-cell-desc">Food is design. Every dish is a set of decisions.</p></div>
+      <div class="hs-cell"><span class="hs-cell-icon" aria-hidden="true">🤖</span><div class="hs-cell-name">AI</div><p class="hs-cell-desc">Exploring AI-native product patterns daily.</p></div>
+    </div>
   </div>
 </div>
 
