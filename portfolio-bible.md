@@ -1,6 +1,8 @@
 # Paula Elffman — Portfolio OS · Design Bible
 
-*Última actualización: 8 de octubre de 2026 — **SukuPay Prototyper: Genesis es del equipo de ingeniería, board de componentes y header en el color del link.** (1) `sukupay-proto-case.html` deja en claro que Genesis lo pensaron y construyeron los devs (Alejandro Alvarez, Engineering Manager; Joaquin Beceiro, Frontend; Illan Cohn, Backend) y que Paula lo usa en su proceso de trabajo. Van nombrados en el cover y en el bloque de Genesis. Ver "Cambios en `sukupay-proto-case.html` (8 de octubre de 2026)". (2) El caso pasó a llamarse **SukuPay · Prototyper** (antes "SukuPay · Design system") en el header, la pestaña, el título al compartir y el footer. (3) **Los dos verdes, animados:** los círculos de lima y teal van centrados y casi tocándose, con animación. (4) **Design system como board**, debajo de los círculos. Ver "Board de SukuPay Prototyper". (5) **Regla nueva para todos los cases: el texto del header va en el mismo color que "Back to portfolio"**, ya no en gris. Ver "Texto del header en el color del link de volver (`#nav-ink`)". Aplicado en los 16 cases. (6) **Header transparente en todos:** los 12 cases que no tenían el bloque `#nav-glass` lo recibieron (ver la tabla de "Header transparente arriba, vidrio al hacer scroll"). (7) **SukuPay Home: el UX audit en formato rojo de error.** Las diez cards blancas donde Paula analiza el producto pasaron a ser ítems rojos como la lista de problemas de monchis. Ver "Cambios en `sukupay-case.html` (8 de octubre de 2026)".*
+*Última actualización: 8 de octubre de 2026 — **Home: copy nuevo en el hero y en Selected work.** (1) El párrafo del hero (`.hello-sub`) dice ahora qué diseña Paula, para quién, hace cuánto y dónde está hoy. (2) Las cinco líneas de las cards de Selected work (`.wc-line`) pasaron a ser "qué producto + un dato que el caso sostiene". (3) La meta description de `index.html` (`description`, `og:description`, `twitter:description`) quedó alineada con el hero. No se sacó ni se movió ningún caso. Ver "Copy de la home: hero y Selected work (8 de octubre de 2026)" en AJUSTES RÁPIDOS POST-REVIEW, que incluye las reglas de copy y los pendientes de la revisión.*
+
+*Última actualización previa: 8 de octubre de 2026 — **SukuPay Prototyper: Genesis es del equipo de ingeniería, board de componentes y header en el color del link.** (1) `sukupay-proto-case.html` deja en claro que Genesis lo pensaron y construyeron los devs (Alejandro Alvarez, Engineering Manager; Joaquin Beceiro, Frontend; Illan Cohn, Backend) y que Paula lo usa en su proceso de trabajo. Van nombrados en el cover y en el bloque de Genesis. Ver "Cambios en `sukupay-proto-case.html` (8 de octubre de 2026)". (2) El caso pasó a llamarse **SukuPay · Prototyper** (antes "SukuPay · Design system") en el header, la pestaña, el título al compartir y el footer. (3) **Los dos verdes, animados:** los círculos de lima y teal van centrados y casi tocándose, con animación. (4) **Design system como board**, debajo de los círculos. Ver "Board de SukuPay Prototyper". (5) **Regla nueva para todos los cases: el texto del header va en el mismo color que "Back to portfolio"**, ya no en gris. Ver "Texto del header en el color del link de volver (`#nav-ink`)". Aplicado en los 16 cases. (6) **Header transparente en todos:** los 12 cases que no tenían el bloque `#nav-glass` lo recibieron (ver la tabla de "Header transparente arriba, vidrio al hacer scroll"). (7) **SukuPay Home: el UX audit en formato rojo de error.** Las diez cards blancas donde Paula analiza el producto pasaron a ser ítems rojos como la lista de problemas de monchis. Ver "Cambios en `sukupay-case.html` (8 de octubre de 2026)".*
 
 *Última actualización previa: 7 de octubre de 2026 — **SmartPass: design system como board y header transparente.** (1) La sección Design System de `smartpass-case.html` dejó de ser cuatro grupos apilados (escalas de color, tipografía, toasts, filtros) y pasó a ser **un solo board** con todo a la vista: tipografía, botones, código de verificación, filtro, modal, íconos, colores, toast y badges. Está hecho en HTML/CSS, no es una imagen, y los componentes van **equidistantes**: una sola separación entre todos y un solo margen. Ver "DESIGN SYSTEM COMO BOARD" dentro de CASE STUDIES. (2) `smartpass-case.html` recibió el bloque `#nav-glass`: el header va sin fondo arriba de todo (se ve el degradé del cover) y toma el vidrio al hacer scroll. Ver "Header transparente arriba, vidrio al hacer scroll". (3) **Home: cover nuevo en la card de smartpass** (More work): `assets/smartpass-accreditations.webp`, el teléfono con la pantalla de acreditaciones, en lugar del login provisorio. Ver "Notas de covers" en "Home: grilla de casos". (4) **muv: imagen de Envío reemplazada** por el abanico de cuatro pantallas (`muv-assets/muv-envio-fan.webp`) sobre un fondo `--bg3`. También se eliminó de Process la figura del flujo completo (`muv-full-flow.webp`). Ver "Cambios en `vendor-tool-case.html` y `muv-case.html` (6 de octubre de 2026)". (5) **muv: design system como board.** La biblioteca de componentes en imágenes se reemplazó por un board con los componentes reconstruidos en HTML/CSS desde el frame de Figma. Ver "Board de muv". (6) **smartpass, mobile:** Screen 03 y Screen 04 ocupan todo el ancho en el celular (antes quedaban al 72% y 60%). Ver "smartpass-case.html — pantallas sueltas en mobile". (7) **muv, 7 de octubre:** se corrigieron las pantallas Destination y Categories (mockups nuevos `-v2`) y se le dio margen izquierdo a la imagen de las dos homes. Ver "Cambios en `muv-case.html` (7 de octubre de 2026)". (8) **Vendor Tool, 7 de octubre:** el hero abre con la foto de la laptop (la de la card de la home), la composición de cinco pantallas va debajo, y en mobile las capturas se achican en proporción en vez de cortarse con scroll horizontal. Ver "Cambios en `vendor-tool-case.html` (7 de octubre de 2026)". (9) **Vendor Tool: design system como board.** La "Component library" colapsada con nueve capturas se reemplazó por el board con los componentes en HTML/CSS (botones, switches, chips, buscador de categorías, tabs de la cola, navegación lateral y colores), que en mobile se apila. Ver "Board de Vendor Tool". (10) **Vendor Tool: la captura de la cola de órdenes pasó a ser dos order cards en código.** En la decisión 2 se quitó `vt-orders-queue.webp` (se veía borrosa) y en su lugar van las dos cards de "Preparando", en tiempo y pasada de límite, hechas en HTML/CSS desde Figma, más chicas y sobre un fondo neutro. Ver "Cambios en `vendor-tool-case.html` (7 de octubre de 2026)".*
 
@@ -296,7 +298,7 @@ Sección dentro de `#projects-view`, **antes** del `.project-carousel`. Tres lí
 
 1. **Título:** `<h1 class="hello-word">Hi, I'm Pau.</h1>` — `font-size:clamp(2rem,6vw,4.5rem)`, `font-weight:800`, `letter-spacing:-.03em`.
 2. **Roles:** `<p class="hello-roles">` — Los roles anteriores van tachados con `<s>` (Graphic, Web, UI, UX) en `color:var(--ash-2)` con `opacity:.6`. "Product Designer." va en `<em>` con `font-weight:600`, `color:var(--paper)`. Font-size: `clamp(1.25rem,3vw,2rem)`.
-3. **Subtítulo:** "Based in Buenos Aires · who thinks, tinkers, and breaks boundaries. I design products people actually love using." — `font-size:clamp(1rem,2.5vw,1.375rem)`, `color:var(--ash)`.
+3. **Subtítulo:** `<p class="hello-sub">` "Based in Buenos Aires. I design fintech, mobility and food-tech apps for teams across Latin America, Europe and the US. 10 years in, now leading design at SukuPay." (texto del 8 de octubre de 2026; ver "Copy de la home: hero y Selected work") — `font-size:clamp(1rem,2.5vw,1.375rem)`, `color:var(--ash)`.
 
 - `min-height:55vh`, `padding:10rem 3.5rem 4rem` (mobile: `6rem 1.5rem 2rem`, `min-height:35vh`).
 
@@ -2401,6 +2403,7 @@ Los 14 `.tile-arrow-label` dicen "View case study" sin flecha (↗ significa lin
 - Cada case: `title` sin em dash, `description`, `canonical`, `og:*` y `twitter:card` propios.
 - Imágenes en `assets/og/<slug>.jpg`, 1200×630, JPG (LinkedIn y WhatsApp no siempre leen WebP). El slug es el mismo `data-case` de la home; `home.jpg` para el index.
 - Dominio canónico: `https://www.paulaelffman.com/`.
+- **Descripción de `index.html` (8 de octubre de 2026):** "Senior Product Designer in Buenos Aires. 10 years designing fintech, mobility and food-tech apps for teams across Latin America, Europe and the US." Va igual en `description`, `og:description` y `twitter:description`. **Regla:** la descripción de la home dice lo mismo que el hero; si cambia uno, cambia el otro.
 - **Para un case nuevo:** copiar el bloque de metas de cualquier case, cambiar título, descripción (hasta ~155 caracteres), URL e imagen, y sumar su `assets/og/<slug>.jpg`.
 
 ### Copy
@@ -2408,6 +2411,7 @@ Los 14 `.tile-arrow-label` dicen "View case study" sin flecha (↗ significa lin
 - "Vendoor Tool" → "Vendor Tool". "My primary tool is" → "My primary tools are".
 - El `<title>` ya no dice "Product Design OS"; el side label dice "Paula Elffman · Portfolio OS" / "· Projects" / "· About" (antes "Dashboard").
 - Headlines de tiles: sukupay → "A remittance home built for repeat transfers."; hotaru → "Wellness app, from mentorship to startup."
+- La línea de sukupay home volvió a cambiar el 8 de octubre de 2026 (ver "Copy de la home: hero y Selected work").
 
 ### Home: grilla de casos — ESTADO ACTUAL (4 de octubre de 2026)
 
@@ -2419,12 +2423,13 @@ Los 14 `.tile-arrow-label` dicen "View case study" sin flecha (↗ significa lin
 
 | # | Card | Línea | Rubro | Cover | Encuadre |
 | --- | --- | --- | --- | --- | --- |
-| 1 | muv | Ride-hailing for 2M+ trips in Paraguay. | Mobility | `assets/muv-cover-home.mp4` / `.webm` (poster `muv-assets/muv-cover-poster.jpg`) | video |
-| 2 | sukupay *prototyper* | From zero to prototype, super fast. | Design system · AI | demo animada en CSS (`.wc-cover--demo`, `#tp-sukuds-demo`) | sin imagen |
-| 3 | sukupay *home* | A remittance home built for repeat transfers. | Fintech | `assets/suku.jpg` | `center 18%` |
-| 4 | monchis *home experience* | Food delivery redesign. 44.6% CVR. | Food tech | `assets/monchis_in_hand.webp` | `38% center` |
-| 5 | vendor tool | Restaurants manage their menu without calling support. | B2B · Food tech | `assets/vendor-tool-laptop.webp` | `42% center` |
+| 1 | muv | Ride-hailing in Paraguay. Onboarding cut from 21 steps to 6. | Mobility | `assets/muv-cover-home.mp4` / `.webm` (poster `muv-assets/muv-cover-poster.jpg`) | video |
+| 2 | sukupay *prototyper* | The design system that lets AI prototype with SukuPay's real components. | Design system · AI | demo animada en CSS (`.wc-cover--demo`, `#tp-sukuds-demo`) | sin imagen |
+| 3 | sukupay *home* | US-to-Guatemala remittances. The audit and two directions behind the new home, now going live. | Fintech | `assets/suku.jpg` | `center 18%` |
+| 4 | monchis *home experience* | Food delivery home redesign. Favorite Places converts at 44.6%. | Food tech | `assets/monchis_in_hand.webp` | `38% center` |
+| 5 | vendor tool | Restaurants edit their own menu. Catalog changes: 72 hours → instant. | B2B · Food tech | `assets/vendor-tool-laptop.webp` | `42% center` |
 
+- **Líneas:** son las del 8 de octubre de 2026. El porqué de cada una y la regla para escribir una nueva están en "Copy de la home: hero y Selected work".
 - **Layout:** grid de 6 columnas. Las dos primeras cards `span 3` (fila 1, grandes, cover 16:10); las tres siguientes `span 2` (fila 2, cover 4:3, nombre a 1.5rem).
 - **Bajo 1000px:** todas `span 3` (dos por fila) con cover 16:10. **Bajo 768px:** una por fila.
 - El CTA del hero ("See my work") baja a `#work`.
@@ -2494,6 +2499,68 @@ Todo el CSS de `.gallery` / `.tile*`, el handler de clics de `#gallery`, el para
 1. **3 de octubre, primera versión:** 4 destacados (los del carrusel) + 12 casos en grilla de cuatro por fila. Prototyper iba en la grilla chica con un thumbnail fijo.
 2. **4 de octubre, revisión de Paula:** la grilla chica quedaba muy chica y prototyper tenía que ser destacado. Se evaluaron dos alternativas sin "Selected work" (grilla pareja de a tres, y bento con texto sobre la imagen) y se descartaron: se mantiene Selected work + More work.
 3. **4 de octubre, estado actual:** prototyper pasa a destacado #2 con su demo animada; Elektra sale de la home; More work pasa a tres por fila; covers nuevos en monchis, vendor tool y smartpass; la card de monchis pasa a llamarse "monchis home experience".
+
+### Copy de la home: hero y Selected work (8 de octubre de 2026)
+
+*Decidido por Paula. Sale de una revisión del sitio contra los criterios que publica Aneta Kmiecik (newsletter Be Your Own Design Team), que asesora sobre portfolios de diseño. Toca solo `index.html`. No se sacó ni se movió ningún caso: Paula no quiere sacar casos por ahora.*
+
+**Qué decía la revisión, en dos líneas:** el hero prometía algo que podría firmar cualquier diseñadora, y dos cards mostraban un número atado a algo que el caso no dice. Las dos cosas se arreglan con copy, sin tocar layout.
+
+#### Hero (`.hello-sub`)
+
+| | Texto |
+| --- | --- |
+| Antes | Based in Buenos Aires. I think, tinker, and push past boundaries to design products people actually love using. |
+| Ahora | Based in Buenos Aires. I design fintech, mobility and food-tech apps for teams across Latin America, Europe and the US. 10 years in, now leading design at SukuPay. |
+
+- "Hi, I'm Pau." y la línea de roles tachados no se tocaron.
+- **Por qué:** quien llega tiene que saber en una lectura qué diseña Paula y para quién. El texto nuevo nombra rubros, regiones, años y el puesto actual.
+- Se evaluaron otras dos versiones y se descartaron: una que cerraba con un resultado ("a ride-hailing onboarding cut from 21 steps to 6") y otra centrada en AI (design system primero, prototipos con AI encima). Paula eligió la de audiencia. El 21 → 6 pasó a la card de muv.
+- **En el HTML:** `the&nbsp;US` y `10&nbsp;years` llevan espacio duro para que no queden "US." ni "10" solos al cortar la línea.
+- **Alto:** tres líneas en desktop (1440px) y cinco en celular (390px); antes eran dos y tres. Medido en una copia local sin las fuentes web ni las imágenes: conviene mirarlo una vez en el sitio real.
+
+#### Selected work (`.wc-line`)
+
+| Card | Antes | Ahora | De dónde sale |
+| --- | --- | --- | --- |
+| muv | Ride-hailing for 2M+ trips in Paraguay. | Ride-hailing in Paraguay. Onboarding cut from 21 steps to 6. | Results del caso: 21 → 6 pasos. Los 2M+ viajes son del negocio, no del rediseño. |
+| sukupay *prototyper* | From zero to prototype, super fast. | The design system that lets AI prototype with SukuPay's real components. | Es la idea del caso: Genesis arma el prototipo con los tokens y componentes del design system. |
+| sukupay *home* | A remittance home built for repeat transfers. | US-to-Guatemala remittances. The audit and two directions behind the new home, now going live. | El caso publicado muestra la auditoría y las dos direcciones, no la versión que sale a producción. |
+| monchis *home experience* | Food delivery redesign. 44.6% CVR. | Food delivery home redesign. Favorite Places converts at 44.6%. | El 44.6% es el CVR del carrusel Favorite Places, no el del rediseño completo. |
+| vendor tool | Restaurants self-manage everything. −72 h of manual work. | Restaurants edit their own menu. Catalog changes: 72 hours → instant. | Results del caso: un cambio de catálogo pasó de 72 h (pedido a soporte) a inmediato. |
+
+- **Línea provisoria:** la de sukupay home. La versión nueva de la home de SukuPay sale a producción ahora y todavía no está en el portfolio. Cuando el caso se actualice, la línea pasa a hablar de lo que salió y de lo que pasó después.
+- **Alto:** en desktop, muv va en una línea y las otras cuatro en dos, así que la fila de las tres cards medianas queda pareja. En celular todas van en dos líneas, salvo sukupay home, que va en tres. Misma salvedad que el hero: medido sin las fuentes web.
+- More work no se tocó.
+
+#### Reglas de copy para la home
+
+1. **El hero dice qué, para quién, hace cuánto y dónde hoy.** Nada que otra diseñadora pueda firmar sin cambiar una palabra.
+2. **Cada línea de card es "qué producto + un dato".** El dato tiene que estar en el caso, con el mismo significado.
+3. **Un número va siempre con lo que mide.** "Favorite Places converts at 44.6%", no "44.6% CVR" suelto.
+4. **La línea no promete lo que el caso no muestra.** Si el caso cuenta una propuesta o un proceso, la línea dice eso.
+5. **Largo:** hasta dos líneas en desktop y tres en celular. Probar a 1440 y a 390px.
+6. **Sin em dash** (regla general de la home). La flecha → se usa para antes → después.
+7. **La meta description acompaña al hero** (ver "Metadata y Open Graph").
+
+#### Pendiente de la misma revisión, sin aplicar
+
+Anotado para la revisión de cada caso. Nada de esto se tocó en esta pasada.
+
+| Dónde | Qué |
+| --- | --- |
+| `vendor-tool-case.html` | Un caption de la decisión 3 dice "The guarded second step, found in your source deck.": es una nota de trabajo que quedó publicada. |
+| `index.html`, Experience (itti) | El dato "44.6% / Monchis CVR" tiene el mismo problema que tenía la card: el número es de Favorite Places. |
+| `sukupay-proto-case.html` | El cierre dice "4 Partners themed" y el cuerpo, que está hecho el primer tema de partner. Los resultados son proyectados; conviene abrir con lo ya medido (contraste 1.31:1 → AAA, pipeline funcionando). |
+| `monchis-case.html` | Los contadores animados quedan en "0%" si no corre el JS. Falta un "antes": varios números de impacto son los mismos de la investigación. |
+| `sukupay-case.html` | Termina en "Expected impact". Se rehace cuando entre la versión que sale a producción. |
+| `hugo-case.html` | "+47% engagement" y "−30% response time" no tienen fuente. Falta decir qué parte del código hizo Paula. |
+| `muv-case.html` | El resultado propio es el del onboarding, y el caso casi no muestra el onboarding. |
+| Todos los cases | Terminan en Home / About: no hay "siguiente caso" ni contacto. |
+| About | Los seis bloques de "AI in my workflow" son prompts de ejemplo. Falta un caso real: algo que la AI dio y se conservó, algo que se cortó, y por qué. Core strengths sigue pendiente (ver "About: limpieza y datos de experiencia"). |
+| Titulares de los cases | Varios suenan a plantilla ("Five findings. Five non-negotiables.", "A system without a system."). Misma limpieza que se hizo con las etiquetas. |
+
+**Para el caso nuevo de SukuPay Home:** anotar antes del lanzamiento la apuesta, la métrica que se va a mirar y qué número contaría como que no funcionó. Después no se puede reconstruir. Vale la regla de "Elektra: sin datos de la base de SukuPay": los resultados se cuentan en términos relativos.
 
 ### Imágenes de link preview: prefijo `og-`
 
