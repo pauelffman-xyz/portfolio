@@ -1,6 +1,6 @@
 # Paula Elffman — Portfolio OS · Design Bible
 
-*Última actualización: 8 de octubre de 2026 — **Home: copy nuevo en el hero y en Selected work.** (1) El párrafo del hero (`.hello-sub`) dice ahora qué diseña Paula, para quién, hace cuánto y dónde está hoy. (2) Las cinco líneas de las cards de Selected work (`.wc-line`) pasaron a ser "qué producto + un dato que el caso sostiene". (3) La meta description de `index.html` (`description`, `og:description`, `twitter:description`) quedó alineada con el hero. No se sacó ni se movió ningún caso. Ver "Copy de la home: hero y Selected work (8 de octubre de 2026)" en AJUSTES RÁPIDOS POST-REVIEW, que incluye las reglas de copy y los pendientes de la revisión.*
+*Última actualización: 8 de octubre de 2026 — **Home: copy nuevo en el hero y en Selected work.** (1) El párrafo del hero (`.hello-sub`) dice ahora qué diseña Paula, para quién, hace cuánto y dónde está hoy. (2) Las cinco líneas de las cards de Selected work (`.wc-line`) pasaron a ser "qué producto + un dato que el caso sostiene". (3) La meta description de `index.html` (`description`, `og:description`, `twitter:description`) quedó alineada con el hero. (4) En Experience (itti), el dato "44.6% / Monchis CVR" pasó a "44.6% / Favorite Places CVR", por la misma regla de que un número va con lo que mide. (5) `sukupay-proto-case.html`: "4 Partners" pasó a "3 Brands" en los datos del problema y en el cierre. (6) `vendor-tool-case.html`: se corrigió un caption que era una nota de trabajo, y se resolvieron y borraron las 14 notas `TODO` del código (rol, revisión de fotos por el equipo, un solo dato de 72 h, meta +98%, entre otras). Por eso la línea de vendor tool en la home pasó a "72 h of manual catalog work, down to zero." (7) `monchis-case.html`: los cuatro números animados de la investigación van escritos en el HTML con su valor real, y pasa a ser regla para todos los cases. No se sacó ni se movió ningún caso. Ver "Copy de la home: hero y Selected work (8 de octubre de 2026)" en AJUSTES RÁPIDOS POST-REVIEW, que incluye las reglas de copy y los pendientes de la revisión.*
 
 *Última actualización previa: 8 de octubre de 2026 — **SukuPay Prototyper: Genesis es del equipo de ingeniería, board de componentes y header en el color del link.** (1) `sukupay-proto-case.html` deja en claro que Genesis lo pensaron y construyeron los devs (Alejandro Alvarez, Engineering Manager; Joaquin Beceiro, Frontend; Illan Cohn, Backend) y que Paula lo usa en su proceso de trabajo. Van nombrados en el cover y en el bloque de Genesis. Ver "Cambios en `sukupay-proto-case.html` (8 de octubre de 2026)". (2) El caso pasó a llamarse **SukuPay · Prototyper** (antes "SukuPay · Design system") en el header, la pestaña, el título al compartir y el footer. (3) **Los dos verdes, animados:** los círculos de lima y teal van centrados y casi tocándose, con animación. (4) **Design system como board**, debajo de los círculos. Ver "Board de SukuPay Prototyper". (5) **Regla nueva para todos los cases: el texto del header va en el mismo color que "Back to portfolio"**, ya no en gris. Ver "Texto del header en el color del link de volver (`#nav-ink`)". Aplicado en los 16 cases. (6) **Header transparente en todos:** los 12 cases que no tenían el bloque `#nav-glass` lo recibieron (ver la tabla de "Header transparente arriba, vidrio al hacer scroll"). (7) **SukuPay Home: el UX audit en formato rojo de error.** Las diez cards blancas donde Paula analiza el producto pasaron a ser ítems rojos como la lista de problemas de monchis. Ver "Cambios en `sukupay-case.html` (8 de octubre de 2026)".*
 
@@ -1674,6 +1674,29 @@ Prompt base (en inglés):
   - **Clases:** `.vt-stage` (fondo y container query), `.vt-oc` (`.is-late` = pasada de límite), `.vt-oc-branch`, `.vt-oc-head`, `.vt-oc-id`, `.vt-oc-tag`, `.vt-oc-act`, `.vt-oc-time`, `.vt-oc-btn`, `.vt-oc-body`, `.vt-oc-prod`, `.vt-oc-more`, `.vt-oc-link`, `.vt-oc-note`, `.vt-oc-print`, `.vt-oc-foot`.
   - **Revisado:** contra el render de Figma (mismas alturas, 260 y 256) y a 1440, 1024, 768, 390 y 360px, en light y dark, sin scroll horizontal ni contenido que se salga de la card.
 
+### Cambios en `vendor-tool-case.html` (8 de octubre de 2026)
+
+- **Caption con una nota de trabajo.** En la decisión 3, debajo del modal de confirmación, el caption decía "The guarded second step, found in your source deck.". Era una nota interna que quedó publicada. Ahora dice "The second step before removing a user.".
+- **Las 14 notas `<!-- TODO(Paula): … -->` del HTML, resueltas y borradas.** No se veían en la página, pero las leía cualquiera que abriera el código fuente. Se repasaron una por una con Paula y el caso quedó así:
+
+| Tema | Antes | Ahora |
+| --- | --- | --- |
+| Rol en el cover | Product Designer, end to end | **Sr Product Designer, end to end** (igual que el header y que Experience) |
+| Frase del problema | Cita en cursiva con filete rojo, sin autor | Texto común. La frase es de Paula, no una cita de otra persona |
+| "37k" | Total users | **Monchis users** |
+| Hallazgos → decisiones | Con la duda de si eran una reconstrucción | Confirmado por Paula: son hallazgos reales. Sin cambios |
+| Revisión de fotos | "automated review", "no manual publishing step" | **La foto le llega al equipo de Monchis, que la revisa antes de que la vea el cliente.** El proceso es mixto: el vendor sube la foto y el equipo la aprueba o la rechaza. Corregido en la decisión 1, en "From finding to design decision" y en el aprendizaje de fotos |
+| Módulo de facturación | Con la duda de si era de Vendor Tool | Confirmado: lo diseñó Paula y es parte de Vendor Tool. Sin cambios |
+| Migración | "Beyond Vendor Tool: where the migration landed" | **"Where the migration landed"**. El 100% migrado y los 2 sistemas viejos dados de baja son resultados de Vendor Tool |
+| Los dos "72 h" | "72h → 0 min · Turnaround on a catalog change" y, aparte, "72 h per week" como proyección de Vendors 2.0 | **Un solo dato:** "72 h → 0 · Manual hours spent on catalog changes, removed by the new self-service catalog." Se eliminó el bloque "A separate, still-open projection", que era el mismo número repetido |
+| Meta de vendors | from 545 to 1,080 vendors | from 545 to 1,080 vendors **(+98%)**. El "+45%" de la fuente estaba mal calculado |
+| Testing | Sin sección | Sin sección: hubo pruebas chicas durante el pulido, sin nada concreto para mostrar. "If I had more time" lo sigue diciendo |
+| Order cards (HTML) | Detalle de la órden | Detalle de la **orden** |
+
+- **Se cerraron sin cambios:** la nota del editor en mobile (el caption ya dice "the live preview up close: what the customer sees"), la del "7-minute problem" (ese titular ya no existe) y la de la animación (era un aviso para mirar el loop en el sitio real).
+- **Sigue abierto:** (1) el período de las 72 h (¿por semana?), que hoy va sin unidad de tiempo; (2) el año de la meta de 1,080 vendors; (3) las dos order cards dicen "[Branch name]", falta un nombre de sucursal; (4) las capturas de historial y detalle tienen datos de ejemplo y typos ("Ódenes canceladas", "Motivo de cancelacion", el mismo número de orden repetido, "Gs. 160.000" para 40.000 órdenes): se corrigen en Figma y se vuelven a exportar; (5) si Multicomercio es un tipo de franquicia o un sistema viejo. El texto actual funciona en los dos casos.
+- **Reglas:** un case se publica sin comentarios `TODO` ni notas de trabajo en el HTML. Y una frase propia no va con formato de cita.
+
 ### Cambios en `muv-case.html` (7 de octubre de 2026)
 
 - **Pantallas 1 y 2 de "From destination to confirmation in four screens", corregidas.** Las que estaban tenían errores: Destination mostraba un menú hamburguesa fuera de lugar y Categories un header "Mis viajes" que no corresponde. Paula pasó los exports nuevos (780×1702 y 780×1704) y se armaron dos mockups nuevos: `muv-assets/muv-app-destination-v2.webp` (44 KB) y `muv-assets/muv-app-categories-v2.webp` (73 KB), los dos de 640×1256 con fondo transparente, igual que los anteriores. Llevan nombre nuevo para que no se sirva una copia vieja en caché; `muv-app-destination.webp` y `muv-app-categories.webp` quedan en la carpeta, sin uso.
@@ -1702,6 +1725,7 @@ Prompt base (en inglés):
 - **Los dos verdes, animados (`.duo`).** Reemplaza a `.swatch-row`. Los círculos van centrados y casi tocándose (se pisan un 10%). Al entrar en pantalla, el verde viejo `#00C603` se divide en lima y teal; después se acercan y se separan en un loop de 9 segundos, con pausa en cada extremo. Los textos van debajo, centrados, en dos columnas (una en mobile). Sin JS o con `prefers-reduced-motion` se ve el par quieto.
 - **Design system como board,** debajo de los círculos. Detalle en "DESIGN SYSTEM COMO BOARD" → "Board de SukuPay Prototyper".
 - **Header:** bloques `#nav-glass` y `#nav-ink`. Ver las dos secciones del header dentro de CASE STUDIES.
+- **Tres marcas, no cuatro partners (corrección de datos, 8 de octubre).** El caso decía "4 · Partners to skin on one skeleton" en los datos del problema y "4 · Partners themed" en el cierre. Son **tres marcas** sobre el mismo sistema: SukuPay (en varios países), Zigi y una tercera que todavía no se lanzó. Ahora dice "3 · Brands to skin on one skeleton" y "3 · Brands on one system". Se dice "brands" y no "partners" porque SukuPay es la marca propia. "On one system" no afirma que las tres estén tematizadas de punta a punta. La lista de archivos de tema (`sukupay · zigi · zigi-dark · partner`) no cambió: son archivos, no marcas. **Regla:** la marca sin lanzar no se nombra en el caso hasta que sea pública.
 - **Pendiente de confirmar con Paula:** (1) "ACRs" quedó escrito tal cual, sin aclarar la sigla; (2) el caso ahora nombra "Ideate", cuando el 3 de octubre se habían quitado los nombres de los pasos para no exponer cómo está orquestado Genesis; (3) los SVG de wallet-check y de Zigi.
 
 ### Cambios en `vendor-tool-case.html` (Septiembre 2026)
@@ -1883,6 +1907,14 @@ Cada hallazgo tiene código (F01–F05) y la matriz de decisión los cita. Si se
 - **Decisions & Learnings:** rediseño a `.kd-*` — lista numerada de 7 decisiones (1 línea c/u + dato o etiqueta), franja "The result" con una sola frase (sin repetir métricas de la sección anterior) y 3 aprendizajes en vez de 4.
 - **Mobile:** problemas del carrusel de 4 problemas (`#problem-list`, scroll-snap + dots), regla general "bloque de 2 columnas con imagen → 1 columna, imagen primero" vía selectores de atributo sobre los grids inline, nav reducido a "← Back to portfolio", cover/métricas/search-hero sin overflow. Verificado: `scrollWidth == 390`.
 - **Assets que ya no se usan:** `monchis_path_v1/v2`, `monchis_case_002`, `monchis_case_005`–`010`, `monchis_case_013`.
+
+### 8 de octubre de 2026 — los números de "What the numbers said" van escritos en el HTML
+
+- **Problema:** los cuatro datos de la investigación (`#ri-stats`: 60%, 80%, 67%+, 27%) estaban escritos como "0" en el HTML y era el script el que los subía hasta el valor real. Sin JavaScript, en un lector, en un buscador o en cualquier herramienta que lea la página, el caso decía "0% of users engage with search".
+- **Solución:** el HTML lleva ahora el valor final: el número, el `stroke-dasharray` de los tres donuts y el ancho de las cuatro barras. El script (bloque `Research Insights Animation`) los pone en cero recién cuando arranca y los anima al entrar en pantalla, igual que antes.
+- **De paso:** con `prefers-reduced-motion` o sin `IntersectionObserver` el script no hace nada y los números quedan fijos en su valor.
+- **Probado:** sin JS, con JS (antes y después del scroll) y con movimiento reducido. En los tres casos el valor final es el mismo.
+- **Regla para todos los cases:** un número animado va escrito en el HTML con su valor real. La animación es un agregado que parte de cero por script; nunca al revés.
 
 ---
 
@@ -2371,7 +2403,7 @@ Los 14 `.tile-arrow-label` dicen "View case study" sin flecha (↗ significa lin
 ```html
 <ul class="dv-facts">
   <li class="dv-fact"><b>2.2M+</b><span>Muv trips in Q4</span></li>
-  <li class="dv-fact"><b>44.6%</b><span>Monchis CVR</span></li>
+  <li class="dv-fact"><b>44.6%</b><span>Favorite Places CVR</span></li>
   <li class="dv-fact"><b>Smart Pass</b><span>Flagship launch</span></li>
 </ul>
 ```
@@ -2384,7 +2416,7 @@ Los 14 `.tile-arrow-label` dicen "View case study" sin flecha (↗ significa lin
 | Empleo | Dato 1 | Dato 2 | Dato 3 |
 |---|---|---|---|
 | SukuPay | Web3 / Fintech | Remittances / US to Latin America | USDC / Blockchain |
-| itti | 2.2M+ / Muv trips in Q4 | 44.6% / Monchis CVR | Smart Pass / Flagship launch |
+| itti | 2.2M+ / Muv trips in Q4 | 44.6% / Favorite Places CVR (antes "Monchis CVR", corregido el 8 de octubre de 2026) | Smart Pass / Flagship launch |
 | Beyond Art Group | 0 → 1 / Marketplace | Tibetpass / Ticketing vertical | Agile / Practices introduced |
 | AutoCloud | −30% / Design time | +10% / Engagement | −15% / Onboarding time |
 | TheFork · TripAdvisor | +6% / CVR | B2B · B2C / Products | 100% / Native flows |
@@ -2427,7 +2459,7 @@ Los 14 `.tile-arrow-label` dicen "View case study" sin flecha (↗ significa lin
 | 2 | sukupay *prototyper* | The design system that lets AI prototype with SukuPay's real components. | Design system · AI | demo animada en CSS (`.wc-cover--demo`, `#tp-sukuds-demo`) | sin imagen |
 | 3 | sukupay *home* | US-to-Guatemala remittances. The audit and two directions behind the new home, now going live. | Fintech | `assets/suku.jpg` | `center 18%` |
 | 4 | monchis *home experience* | Food delivery home redesign. Favorite Places converts at 44.6%. | Food tech | `assets/monchis_in_hand.webp` | `38% center` |
-| 5 | vendor tool | Restaurants edit their own menu. Catalog changes: 72 hours → instant. | B2B · Food tech | `assets/vendor-tool-laptop.webp` | `42% center` |
+| 5 | vendor tool | Restaurants edit their own menu. 72 h of manual catalog work, down to zero. | B2B · Food tech | `assets/vendor-tool-laptop.webp` | `42% center` |
 
 - **Líneas:** son las del 8 de octubre de 2026. El porqué de cada una y la regla para escribir una nueva están en "Copy de la home: hero y Selected work".
 - **Layout:** grid de 6 columnas. Las dos primeras cards `span 3` (fila 1, grandes, cover 16:10); las tres siguientes `span 2` (fila 2, cover 4:3, nombre a 1.5rem).
@@ -2527,7 +2559,7 @@ Todo el CSS de `.gallery` / `.tile*`, el handler de clics de `#gallery`, el para
 | sukupay *prototyper* | From zero to prototype, super fast. | The design system that lets AI prototype with SukuPay's real components. | Es la idea del caso: Genesis arma el prototipo con los tokens y componentes del design system. |
 | sukupay *home* | A remittance home built for repeat transfers. | US-to-Guatemala remittances. The audit and two directions behind the new home, now going live. | El caso publicado muestra la auditoría y las dos direcciones, no la versión que sale a producción. |
 | monchis *home experience* | Food delivery redesign. 44.6% CVR. | Food delivery home redesign. Favorite Places converts at 44.6%. | El 44.6% es el CVR del carrusel Favorite Places, no el del rediseño completo. |
-| vendor tool | Restaurants self-manage everything. −72 h of manual work. | Restaurants edit their own menu. Catalog changes: 72 hours → instant. | Results del caso: un cambio de catálogo pasó de 72 h (pedido a soporte) a inmediato. |
+| vendor tool | Restaurants self-manage everything. −72 h of manual work. | Restaurants edit their own menu. 72 h of manual catalog work, down to zero. | Results del caso: las 72 h son horas de trabajo manual que se dejaron de hacer con el catálogo nuevo. Primero se había puesto "Catalog changes: 72 hours → instant", leyendo el 72 como tiempo de espera; Paula aclaró el mismo día que es trabajo manual y se corrigió en la card y en el caso. |
 
 - **Línea provisoria:** la de sukupay home. La versión nueva de la home de SukuPay sale a producción ahora y todavía no está en el portfolio. Cuando el caso se actualice, la línea pasa a hablar de lo que salió y de lo que pasó después.
 - **Alto:** en desktop, muv va en una línea y las otras cuatro en dos, así que la fila de las tres cards medianas queda pareja. En celular todas van en dos líneas, salvo sukupay home, que va en tres. Misma salvedad que el hero: medido sin las fuentes web.
@@ -2549,10 +2581,10 @@ Anotado para la revisión de cada caso. Nada de esto se tocó en esta pasada.
 
 | Dónde | Qué |
 | --- | --- |
-| `vendor-tool-case.html` | Un caption de la decisión 3 dice "The guarded second step, found in your source deck.": es una nota de trabajo que quedó publicada. |
-| `index.html`, Experience (itti) | El dato "44.6% / Monchis CVR" tiene el mismo problema que tenía la card: el número es de Favorite Places. |
-| `sukupay-proto-case.html` | El cierre dice "4 Partners themed" y el cuerpo, que está hecho el primer tema de partner. Los resultados son proyectados; conviene abrir con lo ya medido (contraste 1.31:1 → AAA, pipeline funcionando). |
-| `monchis-case.html` | Los contadores animados quedan en "0%" si no corre el JS. Falta un "antes": varios números de impacto son los mismos de la investigación. |
+| `vendor-tool-case.html` | ✅ **Hecho el 8 de octubre:** el caption de la decisión 3 pasó a "The second step before removing a user." Las 14 notas `TODO(Paula)` del código fuente se repasaron con Paula y se borraron. **Sigue pendiente:** el período de las 72 h, el año de la meta de vendors, el nombre de sucursal de las order cards y las capturas con typos (ver "Cambios en `vendor-tool-case.html` (8 de octubre de 2026)"). |
+| `index.html`, Experience (itti) | ✅ **Hecho el 8 de octubre.** El dato decía "44.6% / Monchis CVR" y tenía el mismo problema que la card: el número es de Favorite Places. Ahora dice "44.6% / Favorite Places CVR". |
+| `sukupay-proto-case.html` | ✅ **Hecho el 8 de octubre:** el "4 Partners" pasó a "3 Brands" en los dos lugares (ver "Cambios en `sukupay-proto-case.html` (8 de octubre de 2026)"). **Sigue pendiente:** los resultados son proyectados; conviene abrir con lo ya medido (contraste 1.31:1 → AAA, pipeline funcionando). |
+| `monchis-case.html` | ✅ **Hecho el 8 de octubre:** los contadores llevan el valor real en el HTML (ver "8 de octubre de 2026 — los números de "What the numbers said" van escritos en el HTML"). **Sigue pendiente:** falta un "antes"; varios números de impacto son los mismos de la investigación. |
 | `sukupay-case.html` | Termina en "Expected impact". Se rehace cuando entre la versión que sale a producción. |
 | `hugo-case.html` | "+47% engagement" y "−30% response time" no tienen fuente. Falta decir qué parte del código hizo Paula. |
 | `muv-case.html` | El resultado propio es el del onboarding, y el caso casi no muestra el onboarding. |

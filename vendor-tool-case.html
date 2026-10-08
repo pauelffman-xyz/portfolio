@@ -504,8 +504,7 @@ html body .back-nav .back-nav-title,html body .back-nav .back-nav-right,html bod
     </div>
 
     <dl class="meta">
-      <div><dt>Role</dt><dd>Product Designer, end to end</dd></div>
-      <!-- TODO(Paula): your source deck's cover literally says "Role: Product designer" — I matched that here, even though your site's nav/footer say "Sr Product Designer". Your call on which title this case should carry; I left the nav/footer as-is since that's your site-wide chrome, not this case's data. -->
+      <div><dt>Role</dt><dd>Sr Product Designer, end to end</dd></div>
       <div><dt>Company</dt><dd><svg class="flag" viewBox="0 0 24 16" width="18" height="12" role="img" aria-label="Paraguay"><rect width="24" height="5.34" fill="#D52B1E"/><rect y="5.33" width="24" height="5.34" fill="#fff"/><rect y="10.66" width="24" height="5.34" fill="#0038A8"/><circle cx="12" cy="8" r="2.2" fill="none" stroke="#5a7d2a" stroke-width=".7"/></svg>Monchis</dd></div>
       <div><dt>Scope</dt><dd>Web dashboard, desktop first, adapted to mobile</dd></div>
       <div><dt>Timeline</dt><dd>One quarter of design (Q1 2025), then continuous improvement</dd></div>
@@ -580,22 +579,16 @@ html body .back-nav .back-nav-title,html body .back-nav .back-nav-right,html bod
         </div>
       </div>
       <p class="small" style="margin-top:1rem;max-width:70ch">That set the brief: vendors needed stability, not just a tool.</p>
-      <blockquote style="margin-top:1.5rem;padding-left:1.25rem;border-left:2px solid var(--red);">
-        <p style="font-size:1.0625rem;line-height:1.5;letter-spacing:-.01em;font-style:italic">"Our previous vendor platform faced two main challenges: management friction and an operating ceiling."</p>
-      </blockquote>
-      <!-- TODO(Paula): these are the exact numbers from your source deck's Problem slide, replacing my earlier "7 minutes / no digital tool / phone calls" framing — that framing doesn't actually appear anywhere in the deck, so I can't tell if it came from somewhere else or was a misremembering when the web copy was first written. Worth resolving before this goes up, since it's a real factual claim.
-           One more thing I can't verify: the deck's own sentence is "Vendor Tool representing 48% of branches" with no acceptance-time number attached (POS gets one, Vendor Tool doesn't) — I read this as "used by 48% of branches" rather than inventing a time for it. If you have Vendor Tool's actual acceptance time from that period, it's worth adding for a direct comparison against POS's 0.9 min.
-           Also: who's being quoted in the pull-quote above — a stakeholder, a brief, you? It needs attribution before this goes up, or a reader will assume it's invented. -->
+      <p class="prose" style="margin-top:1.5rem">Our previous vendor platform faced two main challenges: management friction and an operating ceiling.</p>
     </div>
 
     <div>
       <dl class="impact c3">
         <div><dt class="num">545</dt><dd class="cap">Vendors</dd></div>
         <div><dt class="num">116.6k</dt><dd class="cap">Total orders</dd></div>
-        <div><dt class="num">37k</dt><dd class="cap">Total users</dd></div>
+        <div><dt class="num">37k</dt><dd class="cap">Monchis users</dd></div>
       </dl>
       <p class="small" style="margin-top:1rem">The network at the time of the redesign.</p>
-      <!-- TODO(Paula): your source has the same three numbers with no further definition either. "37k total users" still reads ambiguous (customers, or vendor staff?) to someone outside Monchis — a two-word gloss would help, but not required. -->
     </div>
 
 
@@ -603,10 +596,9 @@ html body .back-nav .back-nav-title,html body .back-nav .back-nav-right,html bod
       <h3 class="h3" style="margin-bottom:1.25rem">From finding to design decision</h3>
       <ul class="goals">
         <li><strong>Order acceptance split unevenly across channels, and Service Level was volatile</strong><span>The queue has to make time visible and the decision fast. Next: the order queue.</span></li>
-        <li><strong>Photo quality varied across 545 independent vendors</strong><span>Coach and check the photo at the moment of upload. Next: photo coaching.</span></li>
+        <li><strong>Photo quality varied across 545 independent vendors</strong><span>Coach the photo at upload, and review it before it goes live. Next: photo coaching.</span></li>
         <li><strong>Franchises had to delegate without losing control</strong><span>Access scoped by franchise and branch, with guarded destructive actions. Next: roles and access.</span></li>
       </ul>
-      <!-- TODO(Paula): heads-up on this whole section: your source draft doesn't have a research phase either — it goes straight from the problem to the three pillars (Self-management, Data & AI, Ecosystem growth) to the solution, no findings, no quotes, no research methods. I built this "Research & insights" section myself, reasoning backward from the problem to what each decision must have responded to. If your framework calls for a real research section, this is the part that needs actual input from you (interviews, data pulls, support-ticket themes) — right now it's my inference, not evidence. -->
     </div>
 
   </div>
@@ -664,7 +656,6 @@ html body .back-nav .back-nav-title,html body .back-nav .back-nav-right,html bod
           <figcaption>The live preview up close: what the customer sees.</figcaption>
         </figure>
       </div>
-      <!-- TODO(Paula): confirmed against your full source now: it explicitly says "the exact same product editor adapts fully to mobile, so a vendor can update a photo or price from the kitchen floor" and captions this exact image "Mobile · Same editor". But the image is the customer's read-only product page (name, description, "Elegí tu bebida REQUERIDO") — there's no editable field in it. So either the mobile editor screenshot was never captured and this image was used as a stand-in, or the claim itself is wrong. I'd rather you catch this than a reviewer: if you have the real mobile editor, swap it in and the claim is fine; if this is genuinely all there is, the honest line is "the live preview is mobile-ready" (true), not "the editor is" (unverified). -->
     </div>
 
     <figure style="max-width:920px">
@@ -691,10 +682,9 @@ html body .back-nav .back-nav-title,html body .back-nav .back-nav-right,html bod
           <div>
             <p class="prose">Monchis' own product copy tells vendors that <strong>2 out of 3 customers decide based on the photo</strong>. Photos were also the hardest thing to keep consistent across 545 independent vendors.</p>
             <p class="prose">So the help sits where the photo is. A "Tips de fotografía" button opens a short guide: framing and the rule of thirds, natural light, and colours and textures that make a dish look good.</p>
-            <p class="prose">Every new photo then goes through automated review, so quality control scales with the vendor base instead of bottlenecking on a support team. While it waits, <strong>the product stays live with the previous photo</strong>. If it is rejected, the vendor sees why and can try again. If it is approved, it goes live by itself, with no manual publishing step.</p>
+            <p class="prose">Every new photo then goes to the Monchis team for review before customers see it. While it waits, <strong>the product stays live with the previous photo</strong>. If it is rejected, the vendor sees why and can try again. If it is approved, it goes live with nothing more for the vendor to do.</p>
           </div>
         </div>
-        <!-- TODO(Paula): one real inconsistency to resolve: your source calls this an "automated review pipeline" that needs "no human reviewer on every upload", which is the line I used above. But the actual in-review screen tells the vendor "mientras nuestro equipo la revisa" — while OUR TEAM reviews it. Those can't both be true as written. Likely one of: the copy is stale from before the pipeline was automated, or it's AI-assisted with a human in the loop and the copy is accurate. Whichever it is, the UI microcopy and the case-study claim should say the same thing. -->
         <div class="dmedia">
           <div class="trio">
             <figure class="reveal">
@@ -726,7 +716,6 @@ html body .back-nav .back-nav-title,html body .back-nav .back-nav-right,html bod
             <p class="prose">The whole order is on the card: products, add-ons, comments and payment method. A busy cashier doesn't have to open anything to decide. Accept and reject are one tap each, and selected orders move to "Preparando" together.</p>
           </div>
         </div>
-        <!-- TODO(Paula): update on this one — your original web draft headlined this decision "The order queue that fixed the 7-minute problem," but "7 minutes" doesn't appear anywhere in your source deck (the deck's actual numbers are POS at 0.9 min / 41% of branches, Vendor Tool at 48%, per the Problem slide). So "7 minutes" looks like it was introduced somewhere between the deck and the web copy, not something in your original data. I dropped the causal "fixed X" framing for the same reason as before — no number isolates the queue's effect on cancellations — but now I'd also hold off on "7-minute problem" specifically until you can confirm where that figure came from. -->
         <div class="dmedia">
           <figure>
             <!-- The order card in two states, built in HTML/CSS from the Figma component (not a screenshot). -->
@@ -738,7 +727,7 @@ html body .back-nav .back-nav-title,html body .back-nav .back-nav-right,html bod
                   <div class="vt-oc-act"><span class="vt-oc-time"><i><svg viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true"><path d="M354.5-860v-65.5h251v65.5h-251Zm92.87 452.02h65.26v-230.48h-65.26v230.48ZM337.89-98.97q-66.56-28.96-116.35-78.69-49.8-49.73-78.66-116.27-28.86-66.54-28.86-142.01 0-75.47 28.86-142.05 28.86-66.58 78.66-116.42 49.81-49.85 116.38-78.82Q404.5-802.2 480-802.2q67.48 0 127.08 22.5 59.59 22.5 105.83 62.74l53.16-53.15 46.3 46.07-53.15 53.15q36.24 40.48 61.62 97.96 25.38 57.47 25.38 136.95 0 75.52-28.96 142.11-28.95 66.59-78.78 116.28-49.83 49.7-116.44 78.64Q555.43-70 479.94-70T337.89-98.97Zm353.18-126.02q86.78-86.62 86.78-210.95 0-124.32-86.74-211.1-86.75-86.79-211.07-86.79t-211.11 86.75q-86.78 86.74-86.78 211.06 0 124.32 86.74 210.99 86.75 86.66 211.07 86.66t211.11-86.62ZM480-434.98Z"/></svg></i><span>Transcurridos: <b>7 minutos</b></span></span><span class="vt-oc-btn">Pasar a Pick up / Delivery</span></div>
                 </div>
                 <div class="vt-oc-body">
-                  <div class="vt-oc-prod"><p><b>Producto:</b> 1 hamburguesa con lechuga, tomate, jamon y queso, 1 hamburguesa con papas fritas medianas,1 hamburguesa de pollo con papas medianas, 1 combo mediano <span class="vt-oc-more">Ver más<i><svg viewBox="64 64 896 896" fill="currentColor" aria-hidden="true"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z" /></svg></i></span></p><span class="vt-oc-link">Detalle de la órden<i><svg viewBox="64 64 896 896" fill="currentColor" aria-hidden="true"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z" /></svg></i></span></div>
+                  <div class="vt-oc-prod"><p><b>Producto:</b> 1 hamburguesa con lechuga, tomate, jamon y queso, 1 hamburguesa con papas fritas medianas,1 hamburguesa de pollo con papas medianas, 1 combo mediano <span class="vt-oc-more">Ver más<i><svg viewBox="64 64 896 896" fill="currentColor" aria-hidden="true"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z" /></svg></i></span></p><span class="vt-oc-link">Detalle de la orden<i><svg viewBox="64 64 896 896" fill="currentColor" aria-hidden="true"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z" /></svg></i></span></div>
                   <div class="vt-oc-note"><p><b>Comentario:</b> <small>Quiero que el combo mediano no traiga pepino</small></p><span class="vt-oc-print"><i><svg viewBox="64 64 896 896" fill="currentColor" aria-hidden="true"><path d="M820 436h-40c-4.4 0-8 3.6-8 8v40c0 4.4 3.6 8 8 8h40c4.4 0 8-3.6 8-8v-40c0-4.4-3.6-8-8-8zm32-104H732V120c0-4.4-3.6-8-8-8H300c-4.4 0-8 3.6-8 8v212H172c-44.2 0-80 35.8-80 80v328c0 17.7 14.3 32 32 32h168v132c0 4.4 3.6 8 8 8h424c4.4 0 8-3.6 8-8V772h168c17.7 0 32-14.3 32-32V412c0-44.2-35.8-80-80-80zM360 180h304v152H360V180zm304 664H360V568h304v276zm200-140H732V500H292v204H160V412c0-6.6 5.4-12 12-12h680c6.6 0 12 5.4 12 12v292z" /></svg></i>Imprimir</span></div>
                 </div>
                 <p class="vt-oc-link vt-oc-foot">Datos del cliente<i><svg viewBox="64 64 896 896" fill="currentColor" aria-hidden="true"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z" /></svg></i></p>
@@ -770,7 +759,6 @@ html body .back-nav .back-nav-title,html body .back-nav .back-nav-right,html bod
               <figcaption>Detail, with a five-step timeline and a time stamp for each step.</figcaption>
             </figure>
           </div>
-          <!-- TODO(Paula): the history screen has placeholder data (the same order number on several rows, "Gs. 160.000" billed for 40.000 completed orders) and Spanish typos ("Ódenes canceladas"; "Motivo de cancelacion" on the detail). A Spanish-speaking recruiter will see them. Worth fixing in Figma and re-exporting. The two order cards (now live HTML, from the Figma component) still show "[Branch name]" and "Detalle de la órden" with an accent, as in Figma. -->
         </div>
       </article>
 
@@ -792,7 +780,7 @@ html body .back-nav .back-nav-title,html body .back-nav .back-nav-right,html bod
           </figure>
           <figure style="max-width:480px">
             <div class="panel"><img src="vendor-tool-assets/vt-delete-modal.webp" width="855" height="460" loading="lazy" decoding="async" alt="Confirmation modal in Spanish: are you sure you want to delete this user, this action cannot be undone, with No and Sí buttons"></div>
-            <figcaption>The guarded second step, found in your source deck.</figcaption>
+            <figcaption>The second step before removing a user.</figcaption>
           </figure>
         </div>
       </article>
@@ -814,7 +802,6 @@ html body .back-nav .back-nav-title,html body .back-nav .back-nav-right,html bod
         <div id="vt-overview-lottie"></div>
       </div>
     </div>
-    <!-- TODO(Paula): the animation now loads for real (53 frames from vendor-tool-overview-data.js, verified end to end). It needs an internet connection to fetch lottie.min.js from cdnjs, same as the rest of the site, so it'll play normally on your live site — I just can't preview the motion itself in my sandbox, so double check the loop reads well. If there's a Figma prototype link too, I can add "Open the prototype in Figma" next to it, like in the muv case. -->
   </div>
 </section>
 
@@ -826,34 +813,24 @@ html body .back-nav .back-nav-title,html body .back-nav .back-nav-right,html bod
 
     <div>
       <dl class="impact c3">
-        <div><dt class="num">72h → 0 min</dt><dd class="cap">Turnaround on a catalog change: from a support request to instant, self-service.</dd></div>
+        <div><dt class="num">72 h → 0</dt><dd class="cap">Manual hours spent on catalog changes, removed by the new self-service catalog.</dd></div>
         <div><dt class="num">−50%</dt><dd class="cap">Drop in "branch unavailable" status — the top reason vendors cancelled.</dd></div>
         <div><dt class="num">150+ h/mo</dt><dd class="cap">Support and catalog hours given back every month.</dd></div>
       </dl>
       <p class="small" style="margin-top:1.5rem;max-width:66ch">These are the actual final numbers, measured after I'd rolled off the project — not a projection. All three map to what I designed: the catalog editor replaced a support-ticket workflow, and the franchise view is what made branch status visible in the first place.</p>
       <p style="margin-top:1.25rem;font-size:1.0625rem"><strong>830 branches</strong> were unlocked — <strong>61% of GMV</strong> — through Vendor Tool's own billing module, which I also designed as part of the dashboard.</p>
-      <!-- TODO(Paula): swapped in the three real, attributable numbers from your results screenshot (Capítulo 5) — dropped the earlier −15%/+28%/44min set since those read as an interim, in-progress snapshot next to numbers explicitly marked as the final result. Let me know if that's wrong and the two sets should coexist (e.g. different measurement windows) rather than one replacing the other.
-           I moved the 830-branches/61%-GMV line up here from the ecosystem block below: your source deck's own "VENDOR TOOL" slide says the dashboard covers "products, orders, status, and finances in franchises and branches" — finances = the Facturación section in the sidebar — so the billing module is Vendor Tool's, not the POS's. Confirm that's right and I'll leave it here with confidence. -->
     </div>
 
     <div>
-      <h3 class="h3" style="margin-bottom:1rem">Beyond Vendor Tool: where the migration landed</h3>
+      <h3 class="h3" style="margin-bottom:1rem">Where the migration landed</h3>
       <div class="levers">
         <div><h4>100%</h4><p>Of the vendor base migrated onto the new system.</p></div>
         <div><h4>2 legacy systems</h4><p>Deprecated in a single quarter.</p></div>
         <div><h4>2,000+ / month</h4><p>Restaurants and businesses active monthly across Vendor Tool, the in-store POS, and a later check-in tool.</p></div>
       </div>
       <p class="small" style="margin-top:1rem;max-width:66ch">100% of the tools became measurable for the first time, via Amplitude — before this, none of it was instrumented.</p>
-      <!-- TODO(Paula): these three (plus the Amplitude line) are from the same results screenshot. "2,000+/month" is explicitly across all three tools per the screenshot text, so I kept it here as ecosystem-wide. "100% migrated" and "2 legacy systems" could well be Vendor-Tool-specific (migration was literally what Vendor Tool replaced) — but I'd rather you confirm than have me guess again after getting the billing-module attribution wrong the first time. On the "2 legacy systems": given your source deck's Action slide talks about "103 Multicomercio franchises" (a franchise type, by my reading) rather than "the Multicomercio system", I now doubt Multicomercio is one of these two — but tell me either way and I'll fix both notes at once. -->
     </div>
 
-    <div>
-      <h3 class="h3" style="margin-bottom:1rem">A separate, still-open projection</h3>
-      <dl class="baseline">
-        <div><dt>72 h</dt><dd>Of manual work per week that the next version, Vendors 2.0, is projected to free up.</dd></div>
-      </dl>
-      <!-- TODO(Paula): this "72h" is a different metric from the "72h → 0 min" catalog-change number above — one's weekly recurring work Vendors 2.0 projects to save, the other's turnaround time already achieved. They share a number by coincidence; worth double-checking neither is a mislabeled copy of the other before this goes up. -->
-    </div>
 
     <div>
       <h3 class="h3" style="margin-bottom:1.5rem">After launch</h3>
@@ -867,7 +844,6 @@ html body .back-nav .back-nav-title,html body .back-nav .back-nav-right,html bod
           <p>I improved the UI, tooltips and FAQ/support integration, so vendors need to contact support less often.</p>
         </div>
       </div>
-      <!-- TODO(Paula): your source deck gives the real number — "92% of franchises have migrated... although 103 Multicomercio franchises still need to migrate" — so I swapped in 92%/103 for "a handful", and added that migration reached 100% by the time you left (from the Capítulo 5 screenshot). One open question: "103 Multicomercio franchises" reads to me like Multicomercio is a franchise type or segment (a "multi-business" store format), not a legacy software system — different from my earlier guess. That would mean it's likely NOT one of the "2 legacy systems deprecated" in your results screenshot, which is probably about platforms, not franchise types. But I'm inferring this from phrasing, not certain — tell me which it is and I'll fix this and the earlier open question together. -->
     </div>
 
     <div>
@@ -879,7 +855,7 @@ html body .back-nav .back-nav-title,html body .back-nav .back-nav-right,html bod
         </div>
         <div>
           <h4>Photo quality is a growth lever, not a cosmetic one</h4>
-          <p>If 2 in 3 customers decide on the photo, coaching and checking it at the moment of upload matters more than a support team correcting it later.</p>
+          <p>If 2 in 3 customers decide on the photo, coaching it at upload and reviewing it before it goes live matters more than correcting it later.</p>
         </div>
         <div>
           <h4>Migration is a design problem too</h4>
@@ -893,10 +869,8 @@ html body .back-nav .back-nav-title,html body .back-nav .back-nav-right,html bod
       <ul class="next">
         <li><strong>Measure what the case is about.</strong> Track acceptance time and support contacts per branch, before and after.</li>
         <li><strong>Test with the people in the queue.</strong> Run a usability session on the order queue with cashiers, during a real service.</li>
-        <li><strong>Hold up as the network doubles.</strong> The target is to go from 545 to 1,080 vendors, so the queue, permissions and photo review have to keep working at twice the volume.</li>
+        <li><strong>Hold up as the network doubles.</strong> The target is to go from 545 to 1,080 vendors (+98%), so the queue, permissions and photo review have to keep working at twice the volume.</li>
       </ul>
-      <!-- TODO(Paula): confirmed this is in your source too, word for word: "+45% growth — from 545 to 1,080 vendors — by the end of the year," attributed as a quoted goal. So the math problem (545→1,080 is +98%, not +45%) isn't something I introduced — it was already in the original quote. Worth fixing before this goes back up, since it's the kind of thing a numbers-literate interviewer catches in five seconds. I kept the two vendor counts and dropped the percentage; add the year the target is for once you've settled which number is right.
-           There's also no research or usability testing anywhere in the case (no interviews, no test sessions) — if you ran any, a short "What testing told us" section like in the muv case would strengthen it a lot; if not, the three items above say that honestly. -->
     </div>
 
   </div>
