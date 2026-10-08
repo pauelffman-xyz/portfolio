@@ -1,6 +1,6 @@
 # Paula Elffman — Portfolio OS · Design Bible
 
-*Última actualización: 8 de octubre de 2026 — **Home: copy nuevo en el hero y en Selected work.** (1) El párrafo del hero (`.hello-sub`) dice ahora qué diseña Paula, para quién, hace cuánto y dónde está hoy. (2) Las cinco líneas de las cards de Selected work (`.wc-line`) pasaron a ser "qué producto + un dato que el caso sostiene". (3) La meta description de `index.html` (`description`, `og:description`, `twitter:description`) quedó alineada con el hero. (4) En Experience (itti), el dato "44.6% / Monchis CVR" pasó a "44.6% / Favorite Places CVR", por la misma regla de que un número va con lo que mide. (5) `sukupay-proto-case.html`: "4 Partners" pasó a "3 Brands" en los datos del problema y en el cierre. (5b) `sukupay-proto-case.html`, resultados: la sección de lo ya migrado subió y abre con tres datos medidos ("Results so far"), lo proyectado quedó rotulado "Projected · not measured yet", y el contraste del verde viejo se corrigió de 1.31:1 a 2.31:1. (5c) `hugo-case.html`: el rol dice que Paula diseñó y el equipo codeó; las cifras del problema quedaron en dos, con fuente; y los resultados muestran lo demostrado esa noche en vez de cifras tomadas de internet. (5d) **Cierre de los cases:** bloque "Next case" nuevo, aprobado por Paula y aplicado en los 15 cases. Ver "Cierre de los cases: bloque «Next case»" dentro de CASE STUDIES. (5e) **About:** link "Contact me" (mail) al lado de "Find me on LinkedIn". (5f) **Monchis:** corregido el scroll horizontal de desktop que causaban las etiquetas del teléfono de búsqueda. (5g) `muv-case.html`: se resolvieron y borraron las 8 notas `TODO`; las cifras de 2026 pasaron de "The business after launch" a "Where the business aimed to be in 2026", rotuladas como metas. (5h) **Dock:** 12 cases del template viejo ganaron aire bajo el footer (`#dock-clear`) para que el dock no tape su texto. Ver "Dock: aire bajo el footer". (5i) **Titulares:** se reemplazaron 23 titulares de plantilla en monchis, sukupay prototyper y hugo por frases con datos del caso. Después se hizo la segunda tanda en siete cases de More work. Ver "Titulares: fuera las frases de plantilla". (5j) **About:** texto de presentación con el recorrido real, título nuevo en la sección de AI, y Core strengths como cuatro fortalezas con prueba y link al case. El bloque "What I keep, what I cut" se agregó y **se quitó el mismo día a pedido de Paula**. Ver "About: presentación, criterio con AI y fortalezas con prueba". (5k) **Foody:** ya tiene dock y modo oscuro, como el resto. Ver "Foody: dock y modo oscuro". (5m) `sukupay-proto-case.html`: se quitaron las secciones "First partner theme" y "Typography", que repetían datos ya presentes en "Results so far"; el pipeline pasó a ser "Action · 04". (5l) **Contraste del header:** en foody, hotaru, everyone y smartpass el link "Back to portfolio" y el texto del header pasaron a un tono más oscuro del color de marca, que cumple AA en modo claro. Ver "Tono AA del header en cuatro cases". (6) `vendor-tool-case.html`: se corrigió un caption que era una nota de trabajo, y se resolvieron y borraron las 14 notas `TODO` del código (rol, revisión de fotos por el equipo, un solo dato de 72 h, meta +98%, entre otras). Por eso la línea de vendor tool en la home pasó a "72 h of manual catalog work, down to zero." (7) `monchis-case.html`: los cuatro números animados de la investigación van escritos en el HTML con su valor real, y pasa a ser regla para todos los cases. No se sacó ni se movió ningún caso. Ver "Copy de la home: hero y Selected work (8 de octubre de 2026)" en AJUSTES RÁPIDOS POST-REVIEW, que incluye las reglas de copy y los pendientes de la revisión.*
+*Última actualización: 8 de octubre de 2026 — **Home: copy nuevo en el hero y en Selected work.** (1) El párrafo del hero (`.hello-sub`) dice ahora qué diseña Paula, para quién, hace cuánto y dónde está hoy. (2) Las cinco líneas de las cards de Selected work (`.wc-line`) pasaron a ser "qué producto + un dato que el caso sostiene". (3) La meta description de `index.html` (`description`, `og:description`, `twitter:description`) quedó alineada con el hero. (4) En Experience (itti), el dato "44.6% / Monchis CVR" pasó a "44.6% / Favorite Places CVR", por la misma regla de que un número va con lo que mide. (5) `sukupay-proto-case.html`: "4 Partners" pasó a "3 Brands" en los datos del problema y en el cierre. (5b) `sukupay-proto-case.html`, resultados: la sección de lo ya migrado subió y abre con tres datos medidos ("Results so far"), lo proyectado quedó rotulado "Projected · not measured yet", y el contraste del verde viejo se corrigió de 1.31:1 a 2.31:1. (5c) `hugo-case.html`: el rol dice que Paula diseñó y el equipo codeó; las cifras del problema quedaron en dos, con fuente; y los resultados muestran lo demostrado esa noche en vez de cifras tomadas de internet. (5d) **Cierre de los cases:** bloque "Next case" nuevo, aprobado por Paula y aplicado en los 15 cases. Ver "Cierre de los cases: bloque «Next case»" dentro de CASE STUDIES. (5e) **About:** link "Contact me" (mail) al lado de "Find me on LinkedIn". (5f) **Monchis:** corregido el scroll horizontal de desktop que causaban las etiquetas del teléfono de búsqueda. (5g) `muv-case.html`: se resolvieron y borraron las 8 notas `TODO`; las cifras de 2026 pasaron de "The business after launch" a "Where the business aimed to be in 2026", rotuladas como metas. (5h) **Dock:** 12 cases del template viejo ganaron aire bajo el footer (`#dock-clear`) para que el dock no tape su texto. Ver "Dock: aire bajo el footer". (5i) **Titulares:** se reemplazaron 23 titulares de plantilla en monchis, sukupay prototyper y hugo por frases con datos del caso. Después se hizo la segunda tanda en siete cases de More work. Ver "Titulares: fuera las frases de plantilla". (5j) **About:** texto de presentación con el recorrido real, título nuevo en la sección de AI, y Core strengths como cuatro fortalezas con prueba y link al case. El bloque "What I keep, what I cut" se agregó y **se quitó el mismo día a pedido de Paula**. Ver "About: presentación, criterio con AI y fortalezas con prueba". (5k) **Foody:** ya tiene dock y modo oscuro, como el resto. Ver "Foody: dock y modo oscuro". (5m) `sukupay-proto-case.html`: se quitaron las secciones "First partner theme" y "Typography", que repetían datos ya presentes en "Results so far"; el pipeline pasó a ser "Action · 04". (5n) **Home:** más aire entre caso y caso en mobile; en las cards, nombre y descripción más juntos y el rubro más separado. El rubro en mayúsculas se probó y se descartó. Después se reescribieron rubro y descripción de las 15 cards: el rubro es siempre la industria y la descripción no repite ni el rubro ni el nombre; las líneas de "Next case" se regeneraron. Ver "Home: aire entre casos en mobile y texto de las cards". (5l) **Contraste del header:** en foody, hotaru, everyone y smartpass el link "Back to portfolio" y el texto del header pasaron a un tono más oscuro del color de marca, que cumple AA en modo claro. Ver "Tono AA del header en cuatro cases". (6) `vendor-tool-case.html`: se corrigió un caption que era una nota de trabajo, y se resolvieron y borraron las 14 notas `TODO` del código (rol, revisión de fotos por el equipo, un solo dato de 72 h, meta +98%, entre otras). Por eso la línea de vendor tool en la home pasó a "72 h of manual catalog work, down to zero." (7) `monchis-case.html`: los cuatro números animados de la investigación van escritos en el HTML con su valor real, y pasa a ser regla para todos los cases. No se sacó ni se movió ningún caso. Ver "Copy de la home: hero y Selected work (8 de octubre de 2026)" en AJUSTES RÁPIDOS POST-REVIEW, que incluye las reglas de copy y los pendientes de la revisión.*
 
 *Última actualización previa: 8 de octubre de 2026 — **SukuPay Prototyper: Genesis es del equipo de ingeniería, board de componentes y header en el color del link.** (1) `sukupay-proto-case.html` deja en claro que Genesis lo pensaron y construyeron los devs (Alejandro Alvarez, Engineering Manager; Joaquin Beceiro, Frontend; Illan Cohn, Backend) y que Paula lo usa en su proceso de trabajo. Van nombrados en el cover y en el bloque de Genesis. Ver "Cambios en `sukupay-proto-case.html` (8 de octubre de 2026)". (2) El caso pasó a llamarse **SukuPay · Prototyper** (antes "SukuPay · Design system") en el header, la pestaña, el título al compartir y el footer. (3) **Los dos verdes, animados:** los círculos de lima y teal van centrados y casi tocándose, con animación. (4) **Design system como board**, debajo de los círculos. Ver "Board de SukuPay Prototyper". (5) **Regla nueva para todos los cases: el texto del header va en el mismo color que "Back to portfolio"**, ya no en gris. Ver "Texto del header en el color del link de volver (`#nav-ink`)". Aplicado en los 16 cases. (6) **Header transparente en todos:** los 12 cases que no tenían el bloque `#nav-glass` lo recibieron (ver la tabla de "Header transparente arriba, vidrio al hacer scroll"). (7) **SukuPay Home: el UX audit en formato rojo de error.** Las diez cards blancas donde Paula analiza el producto pasaron a ser ítems rojos como la lista de problemas de monchis. Ver "Cambios en `sukupay-case.html` (8 de octubre de 2026)".*
 
@@ -154,6 +154,8 @@ Se sacó `'JetBrains Mono'` de las labels (eyebrows, section labels, back-nav, m
 - **Sin rayita:** `.eyebrow::before`, `.dv-label::before`, `.work-label::before` quedan con `display:none`.
 
 **Excepciones (no se tocan):** textos que imitan la interfaz de un producto dentro de un mockup — `.tp-screen-eyebrow`, `.tp-bal-lbl` (home) y `.proto-ph-eyebrow`, `.proto-ph-bal-lbl` (SukuPay Prototyper). Tampoco los usos de Space Grotesk / JetBrains Mono que no son etiquetas: números, código, hex de color, URLs.
+
+**Prueba descartada (8 de octubre de 2026):** se probó el rubro de las cards de la home (`.wc-cat`) en mayúsculas y Paula lo volvió a minúsculas el mismo día. La regla sigue sin excepciones. Ver "Home: aire entre casos en mobile y texto de las cards".
 
 **Al crear un case o una sección nueva:** no volver a escribir `text-transform:uppercase` con tracking en etiquetas. Copiar el patrón de `.kicker` de MUV.
 
@@ -2703,6 +2705,8 @@ Los 14 `.tile-arrow-label` dicen "View case study" sin flecha (↗ significa lin
 
 ### Home: grilla de casos — ESTADO ACTUAL (4 de octubre de 2026)
 
+> **8 de octubre de 2026:** el rubro y la línea de cada card cambiaron. Las columnas de rubro y descripción de las tablas de acá abajo quedaron viejas; las vigentes están en "Home: aire entre casos en mobile y texto de las cards", punto 4. Covers, posiciones y orden no cambiaron.
+
 *Fuente de verdad de la grilla de la home. Decidido por Paula. Reemplaza la grilla de 14 tiles (`.gallery` / `.tile`) y las dos versiones intermedias de esta misma sección (ver "Historial de decisiones" al final).*
 
 **Orden de la home:** hero → carrusel → ribbon → **Selected work** → **More work**.
@@ -2756,7 +2760,7 @@ En las tablas, la palabra en *cursiva* es la que va dentro de `<span>` (se ve at
 #### Componente `.work-card` (uno solo, dos tamaños)
 
 - Es un `<a href>` real, no un `div role="button"`: funciona el foco por teclado, abrir en pestaña nueva y el clic derecho.
-- Anatomía: `.wc-cover` (imagen o video) y debajo `.wc-body` con `.wc-cat` (rubro, mono), `.wc-name` (h3, minúsculas) y `.wc-line` (una línea de resultado).
+- Anatomía: `.wc-cover` (imagen o video) y debajo `.wc-body` con `.wc-cat` (rubro), `.wc-name` (h3, minúsculas) y `.wc-line` (una línea de resultado).
 - **Nombre y línea siempre visibles. No hay hover reveal ni botón "View case study".** En touch un tap navega.
 - Hover: el cover sube 4px, gana `var(--shadow-card)` y la imagen escala 1.035, con `var(--ease)` lento (movimiento con pausa).
 - Entrada: fade + rise al entrar al viewport (clase `wc-pre`, la pone y la saca el JS). Sin JS o con reduced motion las cards quedan visibles.
@@ -2788,6 +2792,73 @@ Todo el CSS de `.gallery` / `.tile*`, el handler de clics de `#gallery`, el para
 2. **4 de octubre, revisión de Paula:** la grilla chica quedaba muy chica y prototyper tenía que ser destacado. Se evaluaron dos alternativas sin "Selected work" (grilla pareja de a tres, y bento con texto sobre la imagen) y se descartaron: se mantiene Selected work + More work.
 3. **4 de octubre, estado actual:** prototyper pasa a destacado #2 con su demo animada; Elektra sale de la home; More work pasa a tres por fila; covers nuevos en monchis, vendor tool y smartpass; la card de monchis pasa a llamarse "monchis home experience".
 
+### Home: aire entre casos en mobile y texto de las cards (8 de octubre de 2026)
+
+Pedidos de Paula mirando la home en el celular.
+
+**1. Más aire entre casos, solo en mobile (hasta 768px)**
+
+| Qué | Antes | Ahora |
+| --- | --- | --- |
+| Separación entre un caso y el siguiente (`.work-grid--feat` y `.work-grid--more`, `gap`) | `2.5rem` (40px) | `4.5rem` (72px) |
+| Aire antes de "More work" (`.work--more`, `padding-top`) | `4rem` | `6rem` |
+
+- El segundo cambio acompaña al primero: el corte entre las dos listas tiene que seguir siendo mayor que la separación entre casos (ahora 76px contra 72px).
+- Desktop y tablet no cambiaron de espaciado entre casos.
+
+**2. Rubro en mayúsculas: se probó y se descartó.** `.wc-cat` pasó un rato a `text-transform:uppercase` (12px, tracking .08em). Paula prefirió dejarlo en minúsculas. Quedó como estaba: `.875rem`, sin tracking, *sentence case*. La regla "ETIQUETAS — ESTILO EDITORIAL" sigue sin excepciones.
+
+**3. Nombre y descripción más juntos, rubro más separado (todos los anchos)**
+
+- **Problema:** las tres líneas de la card (rubro, nombre, descripción) tenían casi la misma separación entre sí, unos 10px y 8px. Se leían como tres renglones sueltos y costaba ver cuál iba con cuál. Paula lo marcó con "Design system · AI / sukupay prototyper / The design system that…".
+- **Solución, por proximidad:** el nombre y su descripción se leen como un bloque, y el rubro queda aparte, arriba.
+
+| Separación | Antes | Ahora |
+| --- | --- | --- |
+| Rubro → nombre (`.wc-cat`, `margin-bottom`) | `.625rem` (10px) | `.875rem` (14px) |
+| Nombre → descripción (`.wc-line`, `margin-top`) | `.5rem` (8px); `.4375rem` en More work | `.25rem` (4px) en las dos listas |
+
+- **Regla:** en una card, lo que va junto se pega y lo que es de otro nivel se separa. La separación rubro → nombre tiene que ser claramente mayor que la de nombre → descripción (hoy 14px contra 4px).
+- No cambiaron tamaños, pesos ni colores.
+
+**Revisado** con un navegador a 390px y a 1280px: sin scroll horizontal ni errores.
+
+**4. Rubro y descripción de las 15 cards: cada línea dice una sola cosa (aprobado por Paula, "aplicalo")**
+
+- **Problema:** además de la separación, el texto se repetía. En SukuPay Prototyper, "design system", "AI", "prototype" y "SukuPay" aparecían dos veces entre el rubro, el nombre y la descripción. Pasaba algo parecido en monchis ("Food tech" / "home experience" / "Food delivery home redesign") y en hugo ("AI agent" / "AI Customer Success agent"). Y el rubro mezclaba criterios: a veces la industria (Mobility, Fintech) y a veces el tipo de trabajo (Design system · AI, AI agent, Design challenge).
+- **Regla del rubro (`.wc-cat`):** siempre la **industria**. Si hace falta, un segundo dato después del punto medio que diga para quién es o qué tipo de proyecto es (B2B, Logistics, Concept). La industria va primero.
+- **Regla de la descripción (`.wc-line`):** qué es y un dato que el caso sostiene, **sin repetir el rubro ni el nombre**. Sigue valiendo lo de "Copy de la home": sin raya, y un número va con lo que mide.
+- **Todos los datos salen de los propios cases.** No se agregó ninguno.
+
+**Estado actual de las 15 cards** (reemplaza las columnas de rubro y línea de las tablas de "Home: grilla de casos" y de "Selected work (`.wc-line`)"):
+
+| # | Caso | Rubro | Descripción | Cambió |
+| --- | --- | --- | --- | --- |
+| 1 | muv | Mobility | Ride-hailing in Paraguay. Onboarding cut from 21 steps to 6. | no |
+| 2 | sukupay *prototyper* | Fintech | One design system for three brands, built so AI works with the real components. | rubro y línea |
+| 3 | sukupay *home* | Fintech | US-to-Guatemala remittances. A UX audit and two directions, now going live. | línea |
+| 4 | monchis *home experience* | Food tech | Delivery in Paraguay. Favorite Places converts at 44.6%. | línea |
+| 5 | vendor tool | Food tech · B2B | Restaurants edit their own menu. 72 h of manual catalog work, down to zero. | rubro (orden) |
+| 6 | hugo | Customer service | An AI agent that answers customers on WhatsApp. Live after one hackathon. | rubro y línea |
+| 7 | smartpass | Sports & events | Accreditation and access for stadiums and events, across four roles. | rubro y línea |
+| 8 | monchis *drivers* | Food tech · Logistics | Full Android redesign. 1,200+ people delivering 300K orders a month. | rubro y línea |
+| 9 | fancy monas | Digital art | Buying one of 1,942 works by Edgardo Giménez, without the crypto jargon. | rubro y línea |
+| 10 | thefork *onboarding* | Food tech | From six steps to three. | no |
+| 11 | memorable | Ad tech | Ads scored by AI before launch. One dashboard to edit and re-test. | línea |
+| 12 | foody | Food tech · Concept | A recipe app that learns who's cooking. A 3-day solo design challenge. | rubro y línea |
+| 13 | thefork *reviews* | Food tech | +6% CVR across 60k restaurants. | no |
+| 14 | hotaru | Wellness | From a 2020 mentorship project to a startup accelerator in Madrid. | línea |
+| 15 | everyone | E-commerce | Seven brands in one store. A 17-hour team sprint I led. | línea |
+
+- **Rubros anteriores que ya no se usan:** Design system · AI, B2B · Food tech, AI agent, Access control, Delivery ops, NFT marketplace, Design challenge.
+- **"Food tech" aparece seis veces.** Es a propósito: coincide con lo que promete el hero (fintech, mobility y food-tech). Avisado a Paula.
+- **Everyone cambió de enfoque:** la card decía "E-commerce for a global fashion platform" y el case habla de un retailer multimarca deportivo trabajado en un sprint de 17 horas. La línea nueva dice lo que cuenta el case.
+- **hugo y sukupay prototyper ya no dicen "AI" en el rubro.** Queda en la descripción.
+- **Next case:** la línea del bloque "Next case" de los 15 cases se regeneró con las descripciones nuevas (misma regla de siempre: copia la línea de la card de la home).
+- **Revisado** a 390 y 1280px: los 15 rubros entran en una línea; las descripciones ocupan una o dos líneas, y tres solo sukupay prototyper en el celular. Sin scroll horizontal ni errores.
+
+**Pendiente, avisado a Paula y sin tocar:** `thefork-shortlist-case.html` (thefork onboarding) muestra la palabra **"Borrador"** a la vista en cinco lugares: una franja verde arriba de todo ("Borrador — copy y flujo actualizados, faltan métricas reales de resultado"), el header, la fila Status del cover, un "[Borrador]" dentro de un párrafo y uno más abajo. Hay que decidir si se saca el aviso o si el case se despublica hasta tener las métricas.
+
 ### Copy de la home: hero y Selected work (8 de octubre de 2026)
 
 *Decidido por Paula. Sale de una revisión del sitio contra los criterios que publica Aneta Kmiecik (newsletter Be Your Own Design Team), que asesora sobre portfolios de diseño. Toca solo `index.html`. No se sacó ni se movió ningún caso: Paula no quiere sacar casos por ahora.*
@@ -2808,6 +2879,8 @@ Todo el CSS de `.gallery` / `.tile*`, el handler de clics de `#gallery`, el para
 - **Alto:** tres líneas en desktop (1440px) y cinco en celular (390px); antes eran dos y tres. Medido en una copia local sin las fuentes web ni las imágenes: conviene mirarlo una vez en el sitio real.
 
 #### Selected work (`.wc-line`)
+
+> **Actualizado el mismo 8 de octubre:** los rubros y tres de estas cinco líneas volvieron a cambiar. El estado vigente está en "Home: aire entre casos en mobile y texto de las cards", punto 4.
 
 | Card | Antes | Ahora | De dónde sale |
 | --- | --- | --- | --- |

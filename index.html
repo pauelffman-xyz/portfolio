@@ -3233,15 +3233,16 @@ body.light-mode .work{ --wc-muted:#5E5E6C; }
 .work-card:hover .wc-cover{ transform:translateY(-4px); box-shadow:var(--shadow-card); }
 .work-card:hover .wc-cover img,.work-card:hover .wc-cover video{ transform:scale(1.035); }
 .wc-body{ padding:1.25rem .25rem 0; }
-.wc-cat{ font-family:'Geist',sans-serif; font-size:.875rem; letter-spacing:0; text-transform:none; color:var(--wc-muted); margin-bottom:.625rem; }
+/* Card text: the name and its line read as one block, the industry sits apart above them (Oct 2026). */
+.wc-cat{ font-family:'Geist',sans-serif; font-size:.875rem; letter-spacing:0; text-transform:none; color:var(--wc-muted); margin-bottom:.875rem; }
 .wc-name{ font-family:'Geist',sans-serif; font-size:1.875rem; font-weight:700; letter-spacing:-.035em; line-height:1.1; color:var(--paper); }
 .wc-name span{ opacity:.4; }
-.wc-line{ font-family:'Muli',sans-serif; font-size:1.0625rem; font-weight:300; line-height:1.5; color:var(--wc-muted); margin-top:.5rem; max-width:34rem; }
+.wc-line{ font-family:'Muli',sans-serif; font-size:1.0625rem; font-weight:300; line-height:1.5; color:var(--wc-muted); margin-top:.25rem; max-width:34rem; }
 /* compact grid */
 .work-grid--more .wc-cover{ aspect-ratio:4/3; }
 .work-grid--more .wc-body{ padding-top:1.125rem; }
 .work-grid--more .wc-name{ font-size:1.5rem; }
-.work-grid--more .wc-line{ font-size:1rem; margin-top:.4375rem; }
+.work-grid--more .wc-line{ font-size:1rem; margin-top:.25rem; }
 /* prototyper cover: the live demo (prompt types, /prototype lights up, a screen
    appears). Always dark, in both site modes: it is the product's own look. */
 .wc-cover--demo{
@@ -3264,12 +3265,12 @@ body.light-mode .work{ --wc-muted:#5E5E6C; }
 }
 @media(max-width:768px){
   .work{ padding:3rem 1.5rem 0; }
-  .work--more{ padding-top:4rem; padding-bottom:8rem; }
+  .work--more{ padding-top:6rem; padding-bottom:8rem; } /* was 4rem: the break between the two lists stays bigger than the gap between cases */
   .work-head{ margin-bottom:1.5rem; }
-  .work-grid--feat{ grid-template-columns:minmax(0,1fr); gap:2.5rem; }
+  .work-grid--feat{ grid-template-columns:minmax(0,1fr); gap:4.5rem; } /* was 2.5rem: more air between cases on mobile */
   .work-grid--feat .work-card,.work-grid--feat .work-card:nth-child(-n+2){ grid-column:auto; }
   .work-grid--feat .work-card:nth-child(n+3) .wc-cover{ aspect-ratio:16/10; }
-  .work-grid--more{ grid-template-columns:minmax(0,1fr); gap:2.5rem; }
+  .work-grid--more{ grid-template-columns:minmax(0,1fr); gap:4.5rem; }
   .wc-name,.work-grid--feat .work-card:nth-child(n+3) .wc-name,.work-grid--more .wc-name{ font-size:1.5rem; }
   .wc-line,.work-grid--feat .work-card:nth-child(n+3) .wc-line,.work-grid--more .wc-line{ font-size:1rem; }
   .wc-cover--demo{ aspect-ratio:4/3; padding:7% 6% 0; }
@@ -3462,9 +3463,9 @@ body.light-mode .work{ --wc-muted:#5E5E6C; }
           </div>
         </div>
         <div class="wc-body">
-          <div class="wc-cat">Design system · AI</div>
+          <div class="wc-cat">Fintech</div>
           <h3 class="wc-name">sukupay <span>prototyper</span></h3>
-          <p class="wc-line">The design system that lets AI prototype with SukuPay's real components.</p>
+          <p class="wc-line">One design system for three brands, built so AI works with the real components.</p>
         </div>
       </a>
       <a class="work-card" href="sukupay-case.html">
@@ -3472,7 +3473,7 @@ body.light-mode .work{ --wc-muted:#5E5E6C; }
         <div class="wc-body">
           <div class="wc-cat">Fintech</div>
           <h3 class="wc-name">sukupay <span>home</span></h3>
-          <p class="wc-line">US-to-Guatemala remittances. The audit and two directions behind the new home, now going live.</p>
+          <p class="wc-line">US-to-Guatemala remittances. A UX audit and two directions, now going live.</p>
         </div>
       </a>
       <a class="work-card" href="monchis-case.html">
@@ -3480,13 +3481,13 @@ body.light-mode .work{ --wc-muted:#5E5E6C; }
         <div class="wc-body">
           <div class="wc-cat">Food tech</div>
           <h3 class="wc-name">monchis <span>home experience</span></h3>
-          <p class="wc-line">Food delivery home redesign. Favorite Places converts at 44.6%.</p>
+          <p class="wc-line">Delivery in Paraguay. Favorite Places converts at 44.6%.</p>
         </div>
       </a>
       <a class="work-card" href="vendor-tool-case.html">
         <div class="wc-cover"><img src="assets/vendor-tool-laptop.webp" alt="" loading="lazy" decoding="async" width="2000" height="1333" style="object-position:42% center;"></div>
         <div class="wc-body">
-          <div class="wc-cat">B2B · Food tech</div>
+          <div class="wc-cat">Food tech · B2B</div>
           <h3 class="wc-name">vendor tool</h3>
           <p class="wc-line">Restaurants edit their own menu. 72&nbsp;h of manual catalog work, down to zero.</p>
         </div>
@@ -3501,33 +3502,33 @@ body.light-mode .work{ --wc-muted:#5E5E6C; }
       <a class="work-card" href="hugo-case.html">
         <div class="wc-cover"><video src="assets/hugo.webm" autoplay loop muted playsinline aria-hidden="true" width="960" height="720" style="background:#0B1B3D;"></video></div>
         <div class="wc-body">
-          <div class="wc-cat">AI agent</div>
+          <div class="wc-cat">Customer service</div>
           <h3 class="wc-name">hugo</h3>
-          <p class="wc-line">AI Customer Success agent, vibe coded.</p>
+          <p class="wc-line">An AI agent that answers customers on WhatsApp. Live after one hackathon.</p>
         </div>
       </a>
       <a class="work-card" href="smartpass-case.html">
         <div class="wc-cover"><img src="assets/smartpass-accreditations.webp" alt="" loading="lazy" decoding="async" width="1248" height="1872" style="object-position:center 14%;"></div>
         <div class="wc-body">
-          <div class="wc-cat">Access control</div>
+          <div class="wc-cat">Sports &amp; events</div>
           <h3 class="wc-name">smartpass</h3>
-          <p class="wc-line">Digital ticketing &amp; access.</p>
+          <p class="wc-line">Accreditation and access for stadiums and events, across four roles.</p>
         </div>
       </a>
       <a class="work-card" href="monchis-drivers-case.html">
         <div class="wc-cover"><img src="assets/drivers.webp" alt="" loading="lazy" decoding="async" width="1760" height="1328"></div>
         <div class="wc-body">
-          <div class="wc-cat">Delivery ops</div>
+          <div class="wc-cat">Food tech · Logistics</div>
           <h3 class="wc-name">monchis <span>drivers</span></h3>
-          <p class="wc-line">Shift management for 1,200+ drivers.</p>
+          <p class="wc-line">Full Android redesign. 1,200+ people delivering 300K orders a month.</p>
         </div>
       </a>
       <a class="work-card" href="fancymonas-case.html">
         <div class="wc-cover"><img src="assets/fancymonas.jpg" alt="" loading="lazy" decoding="async" width="1000" height="837"></div>
         <div class="wc-body">
-          <div class="wc-cat">NFT marketplace</div>
+          <div class="wc-cat">Digital art</div>
           <h3 class="wc-name">fancy monas</h3>
-          <p class="wc-line">NFT collection marketplace onboarding.</p>
+          <p class="wc-line">Buying one of 1,942 works by Edgardo Giménez, without the crypto jargon.</p>
         </div>
       </a>
       <a class="work-card" href="thefork-shortlist-case.html">
@@ -3543,15 +3544,15 @@ body.light-mode .work{ --wc-muted:#5E5E6C; }
         <div class="wc-body">
           <div class="wc-cat">Ad tech</div>
           <h3 class="wc-name">memorable</h3>
-          <p class="wc-line">AI-powered creative presets dashboard.</p>
+          <p class="wc-line">Ads scored by AI before launch. One dashboard to edit and re-test.</p>
         </div>
       </a>
       <a class="work-card" href="foody-case.html">
         <div class="wc-cover"><img src="assets/foody-home.webp" alt="" loading="lazy" decoding="async" width="1872" height="1248"></div>
         <div class="wc-body">
-          <div class="wc-cat">Design challenge</div>
+          <div class="wc-cat">Food tech · Concept</div>
           <h3 class="wc-name">foody</h3>
-          <p class="wc-line">Recipe discovery app with AI-personalized suggestions.</p>
+          <p class="wc-line">A recipe app that learns who's cooking. A 3-day solo design challenge.</p>
         </div>
       </a>
       <a class="work-card" href="thefork-reviews-case.html">
@@ -3567,7 +3568,7 @@ body.light-mode .work{ --wc-muted:#5E5E6C; }
         <div class="wc-body">
           <div class="wc-cat">Wellness</div>
           <h3 class="wc-name">hotaru</h3>
-          <p class="wc-line">Wellness app, from mentorship to startup.</p>
+          <p class="wc-line">From a 2020 mentorship project to a startup accelerator in Madrid.</p>
         </div>
       </a>
       <a class="work-card" href="everyone-case.html">
@@ -3575,7 +3576,7 @@ body.light-mode .work{ --wc-muted:#5E5E6C; }
         <div class="wc-body">
           <div class="wc-cat">E-commerce</div>
           <h3 class="wc-name">everyone</h3>
-          <p class="wc-line">E-commerce for a global fashion platform.</p>
+          <p class="wc-line">Seven brands in one store. A 17-hour team sprint I led.</p>
         </div>
       </a>
     </div>
