@@ -232,10 +232,6 @@ body{
 .kpi-sub{font-size:.75rem;color:var(--ash);margin-top:.375rem;line-height:1.45;}
 
 /* ─── METRIC ROW ─── */
-.metric-row{display:flex;flex-wrap:wrap;gap:clamp(1.5rem,4vw,3.5rem);align-items:flex-end;margin-top:2.5rem;}
-.metric-item .m-n{font-size:clamp(2.5rem,5vw,4rem);font-weight:800;letter-spacing:-.04em;color:var(--accent);line-height:.88;}
-.metric-item .m-l{font-family:'Space Grotesk',sans-serif;font-size:.6875rem;color:var(--ash);margin-top:.625rem;}
-.metric-arrow{font-size:1.5rem;color:var(--ash-2);align-self:center;}
 
 /* ─── NORTE (dark section) ─── */
 .norte{
@@ -449,8 +445,6 @@ body.dark-mode .back-nav{background:rgba(30,30,38,.85);}
   .unlock-grid{grid-template-columns:1fr;}
   .unlock-wide{grid-column:span 1;grid-template-columns:1fr;}
   .unlock-wide-r{border-left:none;padding-left:0;border-top:1px solid var(--line);padding-top:1rem;margin-top:.25rem;}
-  .metric-row{flex-direction:column;align-items:flex-start;gap:1.5rem;}
-  .metric-arrow{transform:rotate(90deg);}
   .vision-item{grid-template-columns:1fr;}
   .gen-row{flex-direction:column;}
   .gen-conn{display:none;}
@@ -1274,50 +1268,10 @@ html body .back-nav .back-nav-title,html body .back-nav .back-nav-right,html bod
 </div>
 
 <!-- ══════════════════════════════════════════
-     SECTION 05 — FIRST PARTNER THEME
-══════════════════════════════════════════ -->
-<div class="section">
-  <div class="eyebrow">Action · 04 First partner theme</div>
-  <div class="section-label">
-    <div class="sl-text">Tokenized end to end</div>
-    <div class="sl-line"></div>
-    <div class="sl-text">Proof that the system scales to any partner</div>
-  </div>
-
-  <div class="kpi-row">
-    <div class="kpi-card"><div class="kpi-n">14</div><div class="kpi-lab">native variables</div><div class="kpi-sub">primary / accent / neutral + on-colors</div></div>
-    <div class="kpi-card"><div class="kpi-n">12</div><div class="kpi-lab">swatches bound</div><div class="kpi-sub">every state hooked to its token</div></div>
-    <div class="kpi-card"><div class="kpi-n">AAA</div><div class="kpi-lab">WCAG verified</div><div class="kpi-sub">contrast checked in every state</div></div>
-  </div>
-  <p style="margin-top:1.5rem;font-size:.875rem;line-height:1.65;color:var(--ash);max-width:680px;">Consistent naming, scopes, code syntax and descriptions. Ready for a developer to consume without guessing.</p>
-</div>
-
-<!-- ══════════════════════════════════════════
-     SECTION 06 — TYPOGRAPHY
-══════════════════════════════════════════ -->
-<div class="section">
-  <div class="eyebrow">Action · 05 Typography</div>
-  <div class="section-label">
-    <div class="sl-text">From loose styles to tokenized type</div>
-    <div class="sl-line"></div>
-    <div class="sl-text">Now type flows through the chain too</div>
-  </div>
-
-  <div class="metric-row">
-    <div class="metric-item"><div class="m-n">12</div><div class="m-l">font-size</div></div>
-    <div class="metric-item"><div class="m-n">15</div><div class="m-l">line-height</div></div>
-    <div class="metric-item"><div class="m-n">3</div><div class="m-l">tracking</div></div>
-    <div class="metric-arrow">→</div>
-    <div class="metric-item"><div class="m-n">11</div><div class="m-l">typography · composite</div></div>
-  </div>
-  <p style="margin-top:1.5rem;font-size:.875rem;line-height:1.65;color:var(--ash);max-width:680px;">Primitives feed 11 composite tokens, aliased. Now type flows through the chain — just like color. No more Figma-only styles that devs have to translate by hand.</p>
-</div>
-
-<!-- ══════════════════════════════════════════
      SECTION 07 — THE PIPELINE (tokens live today + components next, one section)
 ══════════════════════════════════════════ -->
 <div class="section">
-  <div class="eyebrow">Action · 06 The pipeline</div>
+  <div class="eyebrow">Action · 04 The pipeline</div>
   <div class="section-label">
     <div class="sl-text">From Figma to GitHub to Slack</div>
     <div class="sl-line"></div>
