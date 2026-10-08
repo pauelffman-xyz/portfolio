@@ -599,6 +599,36 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
 }
 /* ═══ /MOBILE ═══ */
 </style>
+<!-- HEADER: transparent at the top of the page, glass once you scroll (Oct 2026). Same block in every case. -->
+<style id="nav-glass">
+:root{--nav-h:73px;}
+.back-nav{margin-bottom:calc(-1 * var(--nav-h));transition:background-color .35s ease,border-color .35s ease,-webkit-backdrop-filter .35s ease,backdrop-filter .35s ease,box-shadow .35s ease;}
+.back-nav + .cover,.back-nav + main > :first-child{border-top:var(--nav-h) solid transparent;background-origin:border-box;}
+html.nav-top .back-nav{background-color:transparent !important;background-image:none !important;border-bottom-color:transparent !important;-webkit-backdrop-filter:none !important;backdrop-filter:none !important;box-shadow:none !important;}
+@media (prefers-reduced-motion:reduce){.back-nav{transition:none;}}
+</style>
+<script>
+/* nav-glass: html.nav-top while the page is at the top; --nav-h follows the real header height */
+(function(){
+  var d=document.documentElement;
+  function top(){ d.classList.toggle('nav-top',(window.pageYOffset||d.scrollTop||0)<8); }
+  function size(){ var n=document.querySelector('.back-nav'); if(n) d.style.setProperty('--nav-h',n.offsetHeight+'px'); }
+  top();
+  window.addEventListener('scroll',top,{passive:true});
+  window.addEventListener('pageshow',top);
+  document.addEventListener('DOMContentLoaded',function(){
+    size(); top();
+    var n=document.querySelector('.back-nav');
+    if(n && 'ResizeObserver' in window) new ResizeObserver(size).observe(n); else window.addEventListener('resize',size);
+  });
+})();
+</script>
+<!-- HEADER TEXT: the case name and the byline take the colour of the "Back to portfolio" link (Oct 2026). Same block in every case; only the --nav-ink line(s) change. -->
+<style id="nav-ink">
+.back-nav{--nav-ink:var(--red);}
+body.dark-mode .back-nav{--nav-ink:#4ADE80;} /* this case had no dark-mode tone for the link */
+html body .back-nav .back-nav-title,html body .back-nav .back-nav-right,html body .back-nav .back-nav-r,html body .back-nav .nav-title,html body .back-nav .nav-right,html body.dark-mode .back-nav .back-btn{color:var(--nav-ink);}
+</style>
 </head>
 <body>
 <div id="wipe-overlay"></div>

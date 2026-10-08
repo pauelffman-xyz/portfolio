@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SukuPay · Design System · From Zero to Prototype · Paula Elffman</title>
+<title>SukuPay · Prototyper · From Zero to Prototype · Paula Elffman</title>
 <meta name="description" content="How SukuPay's design system went from a brand green that failed accessibility to tokens and components that power an AI prototyper.">
 <link rel="canonical" href="https://www.paulaelffman.com/sukupay-proto-case.html">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Paula Elffman">
-<meta property="og:title" content="SukuPay · Design System · From Zero to Prototype">
+<meta property="og:title" content="SukuPay · Prototyper · From Zero to Prototype">
 <meta property="og:description" content="How SukuPay's design system went from a brand green that failed accessibility to tokens and components that power an AI prototyper.">
 <meta property="og:url" content="https://www.paulaelffman.com/sukupay-proto-case.html">
 <meta property="og:image" content="https://www.paulaelffman.com/assets/og/og-sukuds.jpg">
@@ -16,7 +16,7 @@
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="SukuPay · Design System · From Zero to Prototype">
+<meta name="twitter:title" content="SukuPay · Prototyper · From Zero to Prototype">
 <meta name="twitter:description" content="How SukuPay's design system went from a brand green that failed accessibility to tokens and components that power an AI prototyper.">
 <meta name="twitter:image" content="https://www.paulaelffman.com/assets/og/og-sukuds.jpg">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
@@ -590,11 +590,6 @@ body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
 .norte .role-h::before{background:var(--lime);}
 .norte .role-d{color:#8b9b90;}
 @media(max-width:900px){.gen-credit{grid-template-columns:1fr;}}
-/* top bar: before scrolling it sits over the cover and takes its colour; the frosted bar comes in on scroll */
-.back-nav{height:3.5rem;padding-top:0;padding-bottom:0;margin-bottom:-3.5rem;transition:background-color .5s var(--ease-apple),border-color .5s var(--ease-apple);}
-body .back-nav:not(.is-scrolled){background:transparent!important;border-bottom-color:transparent!important;-webkit-backdrop-filter:none;backdrop-filter:none;}
-.cover{padding-top:calc(clamp(96px,12vw,160px) + 3.5rem);}
-body.dark-mode .back-nav-title{color:rgba(244,244,246,.4);}
 
 /* ═════════ COLOR DUO (.duo) ═════════
    The two greens, centred and close together. On enter, the old single green splits into the pair;
@@ -822,16 +817,46 @@ body.dark-mode .duo-teal{box-shadow:inset 0 0 0 1px rgba(255,255,255,.16);}
   .dsb-sub > .dsb-colors{order:2;}
 }
 </style>
+<!-- HEADER: transparent at the top of the page, glass once you scroll (Oct 2026). Same block in every case. -->
+<style id="nav-glass">
+:root{--nav-h:73px;}
+.back-nav{margin-bottom:calc(-1 * var(--nav-h));transition:background-color .35s ease,border-color .35s ease,-webkit-backdrop-filter .35s ease,backdrop-filter .35s ease,box-shadow .35s ease;}
+.back-nav + .cover,.back-nav + main > :first-child{border-top:var(--nav-h) solid transparent;background-origin:border-box;}
+html.nav-top .back-nav{background-color:transparent !important;background-image:none !important;border-bottom-color:transparent !important;-webkit-backdrop-filter:none !important;backdrop-filter:none !important;box-shadow:none !important;}
+html body .back-nav{background:rgba(255,255,255,.92);}
+html body.dark-mode .back-nav{background:rgba(36,36,44,.92);}
+@media (prefers-reduced-motion:reduce){.back-nav{transition:none;}}
+</style>
+<script>
+/* nav-glass: html.nav-top while the page is at the top; --nav-h follows the real header height */
+(function(){
+  var d=document.documentElement;
+  function top(){ d.classList.toggle('nav-top',(window.pageYOffset||d.scrollTop||0)<8); }
+  function size(){ var n=document.querySelector('.back-nav'); if(n) d.style.setProperty('--nav-h',n.offsetHeight+'px'); }
+  top();
+  window.addEventListener('scroll',top,{passive:true});
+  window.addEventListener('pageshow',top);
+  document.addEventListener('DOMContentLoaded',function(){
+    size(); top();
+    var n=document.querySelector('.back-nav');
+    if(n && 'ResizeObserver' in window) new ResizeObserver(size).observe(n); else window.addEventListener('resize',size);
+  });
+})();
+</script>
+<!-- HEADER TEXT: the case name and the byline take the colour of the "Back to portfolio" link (Oct 2026). Same block in every case; only the --nav-ink line(s) change. -->
+<style id="nav-ink">
+.back-nav{--nav-ink:var(--accent);}
+html body .back-nav .back-nav-title,html body .back-nav .back-nav-right,html body .back-nav .back-nav-r,html body .back-nav .nav-title,html body .back-nav .nav-right,html body.dark-mode .back-nav .back-btn{color:var(--nav-ink);}
+</style>
 </head>
 <body>
 <div id="wipe-overlay"></div>
 
 <nav class="back-nav">
   <a class="back-btn" id="back-to-portfolio" href="index.html"><span>←</span> Back to portfolio</a>
-  <div class="back-nav-title">SukuPay · Design system</div>
+  <div class="back-nav-title">SukuPay · Prototyper</div>
   <div class="back-nav-right">Paula Elffman · Sr Product Designer</div>
 </nav>
-<script>(function(){var n=document.currentScript.previousElementSibling;function f(){n.classList.toggle('is-scrolled',(window.scrollY||0)>8);}f();window.addEventListener('scroll',f,{passive:true});})();</script>
 
 <!-- ══════════════════════════════════════════
      COVER
@@ -1474,7 +1499,7 @@ body.dark-mode .duo-teal{box-shadow:inset 0 0 0 1px rgba(255,255,255,.16);}
 
 <!-- FOOTER -->
 <div class="footer">
-  <div class="footer-l">SukuPay · Design system · From zero to prototype · 2026</div>
+  <div class="footer-l">SukuPay · Prototyper · From zero to prototype · 2026</div>
   <div class="footer-r">Sr Product Designer · Paula Elffman</div>
 </div>
 

@@ -323,7 +323,7 @@ body.dark-mode .nav-right,body.dark-mode .back-nav-right{color:rgba(244,244,246,
 </style>
 <!-- HEADER: transparent at the top of the page, glass once you scroll (Oct 2026). Same block in every case. -->
 <style id="nav-glass">
-:root{--nav-h:49px;}
+:root{--nav-h:73px;}
 .back-nav{margin-bottom:calc(-1 * var(--nav-h));transition:background-color .35s ease,border-color .35s ease,-webkit-backdrop-filter .35s ease,backdrop-filter .35s ease,box-shadow .35s ease;}
 .back-nav + .cover,.back-nav + main > :first-child{border-top:var(--nav-h) solid transparent;background-origin:border-box;}
 html.nav-top .back-nav{background-color:transparent !important;background-image:none !important;border-bottom-color:transparent !important;-webkit-backdrop-filter:none !important;backdrop-filter:none !important;box-shadow:none !important;}
@@ -345,6 +345,11 @@ html.nav-top .back-nav{background-color:transparent !important;background-image:
   });
 })();
 </script>
+<!-- HEADER TEXT: the case name and the byline take the colour of the "Back to portfolio" link (Oct 2026). Same block in every case; only the --nav-ink line(s) change. -->
+<style id="nav-ink">
+.back-nav{--nav-ink:var(--ash);}
+html body .back-nav .back-nav-title,html body .back-nav .back-nav-right,html body .back-nav .back-nav-r,html body .back-nav .nav-title,html body .back-nav .nav-right,html body.dark-mode .back-nav .back-btn{color:var(--nav-ink);}
+</style>
 </head>
 <body>
 <div id="wipe-overlay"></div>

@@ -812,6 +812,11 @@ html.nav-top .back-nav{background-color:transparent !important;background-image:
   });
 })();
 </script>
+<!-- HEADER TEXT: the case name and the byline take the colour of the "Back to portfolio" link (Oct 2026). Same block in every case; only the --nav-ink line(s) change. -->
+<style id="nav-ink">
+.back-nav{--nav-ink:var(--orange-ink);}
+html body .back-nav .back-nav-title,html body .back-nav .back-nav-right,html body .back-nav .back-nav-r,html body .back-nav .nav-title,html body .back-nav .nav-right,html body.dark-mode .back-nav .back-btn{color:var(--nav-ink);}
+</style>
 </head>
 <body>
 <script>document.documentElement.classList.add('js');</script>
