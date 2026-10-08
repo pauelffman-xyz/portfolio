@@ -1,6 +1,6 @@
 # Paula Elffman — Portfolio OS · Design Bible
 
-*Última actualización: 8 de octubre de 2026 — **Home: copy nuevo en el hero y en Selected work.** (1) El párrafo del hero (`.hello-sub`) dice ahora qué diseña Paula, para quién, hace cuánto y dónde está hoy. (2) Las cinco líneas de las cards de Selected work (`.wc-line`) pasaron a ser "qué producto + un dato que el caso sostiene". (3) La meta description de `index.html` (`description`, `og:description`, `twitter:description`) quedó alineada con el hero. (4) En Experience (itti), el dato "44.6% / Monchis CVR" pasó a "44.6% / Favorite Places CVR", por la misma regla de que un número va con lo que mide. (5) `sukupay-proto-case.html`: "4 Partners" pasó a "3 Brands" en los datos del problema y en el cierre. (5b) `sukupay-proto-case.html`, resultados: la sección de lo ya migrado subió y abre con tres datos medidos ("Results so far"), lo proyectado quedó rotulado "Projected · not measured yet", y el contraste del verde viejo se corrigió de 1.31:1 a 2.31:1. (5c) `hugo-case.html`: el rol dice que Paula diseñó y el equipo codeó; las cifras del problema quedaron en dos, con fuente; y los resultados muestran lo demostrado esa noche en vez de cifras tomadas de internet. (5d) **Cierre de los cases:** bloque "Next case" nuevo, aprobado por Paula y aplicado en los 15 cases. Ver "Cierre de los cases: bloque «Next case»" dentro de CASE STUDIES. (5e) **About:** link "Contact me" (mail) al lado de "Find me on LinkedIn". (5f) **Monchis:** corregido el scroll horizontal de desktop que causaban las etiquetas del teléfono de búsqueda. (5g) `muv-case.html`: se resolvieron y borraron las 8 notas `TODO`; las cifras de 2026 pasaron de "The business after launch" a "Where the business aimed to be in 2026", rotuladas como metas. (5h) **Dock:** 12 cases del template viejo ganaron aire bajo el footer (`#dock-clear`) para que el dock no tape su texto. Ver "Dock: aire bajo el footer". (5i) **Titulares:** se reemplazaron 23 titulares de plantilla en monchis, sukupay prototyper y hugo por frases con datos del caso. Después se hizo la segunda tanda en siete cases de More work. Ver "Titulares: fuera las frases de plantilla". (5j) **About:** texto de presentación con el recorrido real, bloque "What I keep, what I cut" en la sección de AI, y Core strengths como cuatro fortalezas con prueba y link al case. Ver "About: presentación, criterio con AI y fortalezas con prueba". (6) `vendor-tool-case.html`: se corrigió un caption que era una nota de trabajo, y se resolvieron y borraron las 14 notas `TODO` del código (rol, revisión de fotos por el equipo, un solo dato de 72 h, meta +98%, entre otras). Por eso la línea de vendor tool en la home pasó a "72 h of manual catalog work, down to zero." (7) `monchis-case.html`: los cuatro números animados de la investigación van escritos en el HTML con su valor real, y pasa a ser regla para todos los cases. No se sacó ni se movió ningún caso. Ver "Copy de la home: hero y Selected work (8 de octubre de 2026)" en AJUSTES RÁPIDOS POST-REVIEW, que incluye las reglas de copy y los pendientes de la revisión.*
+*Última actualización: 8 de octubre de 2026 — **Home: copy nuevo en el hero y en Selected work.** (1) El párrafo del hero (`.hello-sub`) dice ahora qué diseña Paula, para quién, hace cuánto y dónde está hoy. (2) Las cinco líneas de las cards de Selected work (`.wc-line`) pasaron a ser "qué producto + un dato que el caso sostiene". (3) La meta description de `index.html` (`description`, `og:description`, `twitter:description`) quedó alineada con el hero. (4) En Experience (itti), el dato "44.6% / Monchis CVR" pasó a "44.6% / Favorite Places CVR", por la misma regla de que un número va con lo que mide. (5) `sukupay-proto-case.html`: "4 Partners" pasó a "3 Brands" en los datos del problema y en el cierre. (5b) `sukupay-proto-case.html`, resultados: la sección de lo ya migrado subió y abre con tres datos medidos ("Results so far"), lo proyectado quedó rotulado "Projected · not measured yet", y el contraste del verde viejo se corrigió de 1.31:1 a 2.31:1. (5c) `hugo-case.html`: el rol dice que Paula diseñó y el equipo codeó; las cifras del problema quedaron en dos, con fuente; y los resultados muestran lo demostrado esa noche en vez de cifras tomadas de internet. (5d) **Cierre de los cases:** bloque "Next case" nuevo, aprobado por Paula y aplicado en los 15 cases. Ver "Cierre de los cases: bloque «Next case»" dentro de CASE STUDIES. (5e) **About:** link "Contact me" (mail) al lado de "Find me on LinkedIn". (5f) **Monchis:** corregido el scroll horizontal de desktop que causaban las etiquetas del teléfono de búsqueda. (5g) `muv-case.html`: se resolvieron y borraron las 8 notas `TODO`; las cifras de 2026 pasaron de "The business after launch" a "Where the business aimed to be in 2026", rotuladas como metas. (5h) **Dock:** 12 cases del template viejo ganaron aire bajo el footer (`#dock-clear`) para que el dock no tape su texto. Ver "Dock: aire bajo el footer". (5i) **Titulares:** se reemplazaron 23 titulares de plantilla en monchis, sukupay prototyper y hugo por frases con datos del caso. Después se hizo la segunda tanda en siete cases de More work. Ver "Titulares: fuera las frases de plantilla". (5j) **About:** texto de presentación con el recorrido real, bloque "What I keep, what I cut" en la sección de AI, y Core strengths como cuatro fortalezas con prueba y link al case. Ver "About: presentación, criterio con AI y fortalezas con prueba". (5k) **Foody:** ya tiene dock y modo oscuro, como el resto. Ver "Foody: dock y modo oscuro". (5l) **Contraste del header:** en foody, hotaru, everyone y smartpass el link "Back to portfolio" y el texto del header pasaron a un tono más oscuro del color de marca, que cumple AA en modo claro. Ver "Tono AA del header en cuatro cases". (6) `vendor-tool-case.html`: se corrigió un caption que era una nota de trabajo, y se resolvieron y borraron las 14 notas `TODO` del código (rol, revisión de fotos por el equipo, un solo dato de 72 h, meta +98%, entre otras). Por eso la línea de vendor tool en la home pasó a "72 h of manual catalog work, down to zero." (7) `monchis-case.html`: los cuatro números animados de la investigación van escritos en el HTML con su valor real, y pasa a ser regla para todos los cases. No se sacó ni se movió ningún caso. Ver "Copy de la home: hero y Selected work (8 de octubre de 2026)" en AJUSTES RÁPIDOS POST-REVIEW, que incluye las reglas de copy y los pendientes de la revisión.*
 
 *Última actualización previa: 8 de octubre de 2026 — **SukuPay Prototyper: Genesis es del equipo de ingeniería, board de componentes y header en el color del link.** (1) `sukupay-proto-case.html` deja en claro que Genesis lo pensaron y construyeron los devs (Alejandro Alvarez, Engineering Manager; Joaquin Beceiro, Frontend; Illan Cohn, Backend) y que Paula lo usa en su proceso de trabajo. Van nombrados en el cover y en el bloque de Genesis. Ver "Cambios en `sukupay-proto-case.html` (8 de octubre de 2026)". (2) El caso pasó a llamarse **SukuPay · Prototyper** (antes "SukuPay · Design system") en el header, la pestaña, el título al compartir y el footer. (3) **Los dos verdes, animados:** los círculos de lima y teal van centrados y casi tocándose, con animación. (4) **Design system como board**, debajo de los círculos. Ver "Board de SukuPay Prototyper". (5) **Regla nueva para todos los cases: el texto del header va en el mismo color que "Back to portfolio"**, ya no en gris. Ver "Texto del header en el color del link de volver (`#nav-ink`)". Aplicado en los 16 cases. (6) **Header transparente en todos:** los 12 cases que no tenían el bloque `#nav-glass` lo recibieron (ver la tabla de "Header transparente arriba, vidrio al hacer scroll"). (7) **SukuPay Home: el UX audit en formato rojo de error.** Las diez cards blancas donde Paula analiza el producto pasaron a ser ítems rojos como la lista de problemas de monchis. Ver "Cambios en `sukupay-case.html` (8 de octubre de 2026)".*
 
@@ -1155,16 +1155,16 @@ html body .back-nav .back-nav-title,html body .back-nav .back-nav-right,html bod
 | Archivo | `--nav-ink` | Light | Dark |
 | --- | --- | --- | --- |
 | `elektra-otp.html` | `var(--red)` | `#DA291C` | no tiene dark mode |
-| `everyone-case.html` | `var(--purple-2)` | `#964BFE` | `#D6B6FF` |
+| `everyone-case.html` | `#842DFE` + línea de dark (`var(--purple-2)`) | `#842DFE` | `#D6B6FF` |
 | `fancymonas-case.html` | `var(--ash)` | negro al 55% | blanco al 55% |
-| `foody-case.html` | `var(--orange)` | `#FAA41A` | no tiene dark mode |
-| `hotaru-case.html` | `var(--gold)` | `#B9873B` | `#B9873B` |
+| `foody-case.html` | `#9B6103` + línea de dark (`var(--orange)`) | `#9B6103` | `#FAA41A` |
+| `hotaru-case.html` | `#7F5D29` + línea de dark (`var(--gold)`) | `#7F5D29` | `#B9873B` |
 | `hugo-case.html` | `var(--orange)` | `#0033A0` | `#7CA6FF` |
 | `memorable-case.html` | `var(--accent)` | `#9846FF` | `#C699FF` |
 | `monchis-case.html` | `var(--red)` | `#C8102E` | `#FF6F8A` |
 | `monchis-drivers-case.html` | `var(--red)` + línea de dark | `#E8143C` | `#FF6F8A` |
 | `muv-case.html` | `var(--orange-ink)` | `#B93E05` | `#FF9A6B` |
-| `smartpass-case.html` | `var(--green)` | `#17A25D` | `#22F0A4` |
+| `smartpass-case.html` | `#117A46` + línea de dark (`var(--green)`) | `#117A46` | `#22F0A4` |
 | `sukupay-case.html` | `var(--accent)` | `#0E6B4A` | `#61FF61` |
 | `sukupay-proto-case.html` | `var(--accent)` | `#005043` | `#61FF61` |
 | `thefork-reviews-case.html` | `var(--accent-text)` | `#0B8457` | `#4ADE80` |
@@ -1175,10 +1175,34 @@ html body .back-nav .back-nav-title,html body .back-nav .back-nav-right,html bod
 
 **A tener en cuenta:**
 - **Fancy Monas:** su link de volver es gris (`--ash`), no un color de marca, así que el header quedó todo en ese gris. Ahora los tres textos tienen el mismo tono (antes iban al 55%, 40% y 30%).
-- **Contraste en light:** en tres cases el color del link es claro y el texto chico del header se lee menos que cuando era gris: Foody (naranja sobre blanco, 2,0:1), Hotaru (dorado sobre beige, 2,5:1) y smartpass (verde sobre verde claro, 2,9:1). Es el color que ya tenía el link. Si se quiere, se puede oscurecer el tono del header en esos tres.
+- **Contraste en light:** resuelto el 8 de octubre de 2026 en foody, hotaru, everyone y smartpass. Ver "Tono AA del header en cuatro cases", acá abajo.
 - En mobile varios cases ocultan la firma (y monchis home también el nombre del caso); eso no cambió.
 
 **Revisado:** en los 16 archivos, con un navegador, a 1360 y 390px, en light y dark, arriba de todo y con scroll: el color calculado de cada texto del header es igual al del link, el header es transparente arriba y toma el vidrio al hacer scroll, el cover empieza desde el borde superior y no aparece scroll horizontal nuevo. (`monchis-case.html` ya traía scroll horizontal en desktop, 1436px en una ventana de 1360, por el carrusel `.fc-slide`; no se tocó.)
+
+### Tono AA del header en cuatro cases (8 de octubre de 2026)
+
+- **Problema:** en foody, hotaru, everyone y smartpass el color de marca es claro. Usado en texto chico sobre el fondo del modo claro no llegaba a 4.5:1: 2.0:1 (foody), 2.8:1 (hotaru), 4.4:1 (everyone, y 3.7:1 sobre el tinte del cover) y 3.3:1 (smartpass). Afectaba al link "← Back to portfolio", al nombre del caso y la firma del header, y al link "About me and contact" del cierre.
+- **Solución:** en esos cuatro, `--nav-ink` ya no apunta al token de marca en modo claro. Lleva un **tono más oscuro del mismo color**, elegido para pasar AA. En modo oscuro vuelve al token de marca, que ahí ya cumplía. El color de marca no se tocó en ningún otro lugar del case (títulos, cards, gráficos).
+- **Cómo está hecho,** dentro del bloque `#nav-ink` de cada uno:
+
+```css
+.back-nav,.next-case{--nav-ink:#9B6103;} /* tono AA; cambia por case */
+body.dark-mode .back-nav,body.dark-mode .next-case{--nav-ink:var(--orange);} /* token de marca del case */
+html body .back-nav .back-btn{color:var(--nav-ink);} /* el link de volver también toma el tono AA en light */
+```
+
+| Case | Marca | Tono AA (light) | Contraste light, antes → ahora | Dark (token de marca) |
+| --- | --- | --- | --- | --- |
+| foody | `#FAA41A` | `#9B6103` | 2.0 → 5.1 | 7.6 en el cierre, 10.4 en el header |
+| hotaru | `#B9873B` | `#7F5D29` | 2.8 → 5.3 | 5.1 en el cierre, 6.6 en el header |
+| everyone | `#964BFE` | `#842DFE` | 4.4 → 5.5 | 8.8 en el cierre, 9.5 en el header |
+| smartpass | `#17A25D` | `#117A46` | 3.3 → 5.4 | 10.3 |
+
+- **Reemplaza a la excepción anterior del bloque Next case:** la línea `.next-case{--nc-link:var(--paper,var(--ink));}`, que ponía "About me and contact" en color de tinta, se borró de los cuatro. Ahora el link va en el tono AA, igual que el header, y los 15 cases usan la misma regla.
+- **Regla para un case nuevo:** si el color de marca no llega a 4.5:1 como texto chico sobre el fondo claro, `--nav-ink` lleva un tono más oscuro del mismo color y se suma la línea de dark con el token de marca. No se cambia el color de marca.
+- **Medido** con un navegador a 1280 y 390px, en light y dark, sobre el fondo real de cada elemento.
+- **Observación, sin tocar:** en everyone y smartpass, en modo oscuro, el gris del texto del footer y de la línea del cierre (`#7A7A90`) da 3.7:1. Ya estaba así. El mismo gris aparece en otros 11 cases; conviene medirlo en todos antes de cambiarlo.
 
 ### Cierre de los cases: bloque «Next case» (`#next-case`, 8 de octubre de 2026) ✅ aprobado por Paula
 
@@ -1207,7 +1231,7 @@ html body .back-nav .back-nav-title,html body .back-nav .back-nav-right,html bod
 - **Nombre:** en minúsculas, como en la home. La segunda palabra atenuada va en `<span>` (`sukupay <span>home</span>`).
 - **Movimiento:** al pasar el mouse la flecha se corre un poco, con `--ease-apple` y pausa. Con reduced motion queda quieta.
 - **Flecha →, no ↗:** es un link interno.
-- **Excepción de contraste (foody, hotaru, everyone, smartpass):** en esos cuatro el color del link del header no llega a 4.5:1 sobre el fondo en modo claro (2.0:1, 2.8:1, 4.4:1 y 3.3:1). Ahí el texto "About me and contact" va en el color de tinta y el color del caso queda en el subrayado y en la flecha. Se hace con una línea más en el bloque `#nav-ink` de cada uno: `.next-case{--nc-link:var(--paper,var(--ink));}`. El "Back to portfolio" de esos cuatro headers tiene el mismo problema de contraste; queda pendiente.
+- **Contraste (foody, hotaru, everyone, smartpass):** en esos cuatro el color de marca no llega a 4.5:1 en modo claro. Primero se resolvió con una excepción (`--nc-link`, el link en color de tinta); el mismo día se reemplazó por un tono AA del color de marca en `--nav-ink`, que sirve para el header y para el cierre. La línea `--nc-link` ya no existe en ningún case. Ver "Tono AA del header en cuatro cases".
 - **`--paper` o `--ink`:** el nombre del caso usa `var(--paper,var(--ink))`, porque monchis y monchis drivers nombran `--ink` al color de texto.
 
 **Orden: el de la home, en ronda.** Cada case lleva al que sigue en la home; el último vuelve al primero.
@@ -1237,7 +1261,7 @@ html body .back-nav .back-nav-title,html body .back-nav .back-nav-right,html bod
 
 **La ronda está completa: los 15 cases tienen el bloque.**
 
-**Pendiente:** (1) `foody-case.html` no tiene dock ni modo oscuro (ver "Dock: aire bajo el footer"). (2) Contraste del link "Back to portfolio" en foody, hotaru, everyone y smartpass. (3) `muv-case.html`: las 8 notas `TODO` ya se repasaron y se borraron; lo que quedó abierto está en "Cambios en `muv-case.html` (8 de octubre de 2026)".
+**Pendiente:** (1) ~~`foody-case.html` no tiene dock ni modo oscuro~~ Resuelto, ver "Foody: dock y modo oscuro". (2) ~~Contraste del link "Back to portfolio" en foody, hotaru, everyone y smartpass~~ Resuelto, ver "Tono AA del header en cuatro cases". (3) `muv-case.html`: las 8 notas `TODO` ya se repasaron y se borraron; lo que quedó abierto está en "Cambios en `muv-case.html` (8 de octubre de 2026)".
 
 **Resuelto el mismo 8 de octubre:** el mail en el About (ver "LinkedIn y mail: solo en el About") y el scroll horizontal de Monchis (ver "8 de octubre de 2026 — etiquetas del teléfono de búsqueda").
 
@@ -1317,8 +1341,30 @@ html body .back-nav .back-nav-title,html body .back-nav .back-nav-right,html bod
 - **Solución:** bloque `<style id="dock-clear">` al final del `<head>`, con `.footer{padding-bottom:7rem;}`. Es el mismo valor que ya usan `muv-case.html` y `vendor-tool-case.html` en su propia regla de footer. Ahora quedan unos 30px entre el texto del footer y el dock, en desktop y en celular.
 - **Aplicado en 12 cases:** everyone, fancymonas, hotaru, hugo, memorable, monchis, monchis drivers, smartpass, sukupay, sukupay prototyper, thefork reviews y thefork shortlist.
 - **Medido** en los 15 cases a 1280 y 390px, con la página al final: el dock no toca el texto del footer en ninguno.
-- **Pendiente, `foody-case.html`:** es el único case **sin dock** (no tiene Home / About Me ni el botón de tema) y sin modo oscuro: no lee `pe-theme` y casi no tiene reglas `body.dark-mode`. Quien viene de la home en modo oscuro lo ve en claro y sin navegación abajo. Falta decidir si se le suma el dock y el modo oscuro como al resto.
+- **`foody-case.html`:** era el único case sin dock. Lo recibió el 8 de octubre de 2026, junto con el modo oscuro y este mismo bloque `#dock-clear`. Ver "Foody: dock y modo oscuro". Con eso son **13 cases** del template viejo con `#dock-clear`.
 - **Para un case nuevo del template viejo:** copiar el bloque `#dock-clear` junto con `#nav-glass`, `#nav-ink` y `#next-case`.
+
+### Foody: dock y modo oscuro (8 de octubre de 2026)
+
+`foody-case.html` era el único case sin dock y sin modo oscuro. Quien venía de la home en modo oscuro lo veía en claro y sin navegación abajo. Ahora se comporta como el resto.
+
+- **Dock:** el bloque `<!-- Portfolio Navigation Dock -->` antes de `</body>`, copiado de `hugo-case.html` (Home, About Me, separador, botón de tema), sin las reglas de dark propias de hugo. Incluye el script que lee y guarda `pe-theme`, así el tema elegido en la home se mantiene al entrar a Foody.
+- **Modo oscuro:** bloque nuevo `<style id="theme-dark">` al final del `<head>`. Redefine los tokens neutros en `body.dark-mode` con los mismos valores que usa el resto de los cases:
+
+```css
+body.dark-mode{
+  --bg:#24242C; --bg2:#1E1E26; --bg3:#2C2C36;
+  --paper:#F4F4F6; --ash:rgba(244,244,246,.66); --ash2:rgba(244,244,246,.22);
+  --line:rgba(244,244,246,.08); --line2:rgba(244,244,246,.14);
+  background:var(--bg); color:var(--paper);
+}
+```
+
+  Más cuatro ajustes puntuales para lo que tenía color fijo: el fondo del header con scroll, `.navy`, `.chip-n` y la palabra atenuada del título del cover (`.cover-title .dim`). El naranja y el verde de Foody no cambian. Los mockups y las imágenes de la app siguen en claro en los dos modos, como en todos los cases.
+- **`#dock-clear`:** `.footer{padding-bottom:7rem;}`, para que el dock no tape el texto del footer.
+- **Gris de texto en modo claro:** `--ash` pasó de `rgba(37,49,76,.55)` a `rgba(37,49,76,.72)`. Al 55% daba 3.3:1 sobre blanco y es el color de casi todo el texto secundario del case; al 72% da 5.4:1. Este cambio no estaba en el pedido original (dock y modo oscuro): salió al medir el contraste. Si Paula prefiere el gris anterior, es una sola línea.
+- **Medido** con la misma auditoría de contraste en los dos modos: el modo claro pasó de 45 textos por debajo de AA a 18, y el modo oscuro quedó en 9, ninguno nuevo (son los mismos elementos que ya fallaban en claro). Sin scroll horizontal a 1280 ni a 390px, y sin errores de JavaScript.
+- **Lo que queda, sin tocar:** (1) Los 18 de modo claro son sobre todo rótulos chicos en el naranja de marca (`#FAA41A`, 2.0:1 sobre blanco) y textos de etiqueta dentro de cards. Arreglarlos es cambiar el color de esos rótulos, que es una decisión de marca del case. (2) Foody sigue **sin Wipe Transition**: se entra y se sale con un link común, como ya estaba documentado en "Volver con «atrás»".
 
 ### DESIGN SYSTEM COMO BOARD (`.dsb`, octubre 2026)
 

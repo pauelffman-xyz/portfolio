@@ -32,7 +32,7 @@
   --bg2:#F7F5F1;
   --bg3:#EFEBE3;
   --paper:#25314C;
-  --ash:rgba(37,49,76,.55);
+  --ash:rgba(37,49,76,.72); /* was .55 = 3.3:1 on white; .72 = 5.4:1 (AA) */
   --ash2:rgba(37,49,76,.15);
   --orange:#FAA41A;
   --navy:#25314C;
@@ -337,9 +337,27 @@ html.nav-top .back-nav{background-color:transparent !important;background-image:
 </script>
 <!-- HEADER TEXT: the case name and the byline take the colour of the "Back to portfolio" link (Oct 2026). Same block in every case; only the --nav-ink line(s) change. -->
 <style id="nav-ink">
-.back-nav,.next-case{--nav-ink:var(--orange);}
+.back-nav,.next-case{--nav-ink:#9B6103;} /* AA tone of the brand colour for small text: the brand orange (#FAA41A) is 2.0:1 on this page */
+body.dark-mode .back-nav,body.dark-mode .next-case{--nav-ink:var(--orange);}
 html body .back-nav .back-nav-title,html body .back-nav .back-nav-right,html body .back-nav .back-nav-r,html body .back-nav .nav-title,html body .back-nav .nav-right,html body.dark-mode .back-nav .back-btn{color:var(--nav-ink);}
-.next-case{--nc-link:var(--paper,var(--ink));} /* the header colour is under 4.5:1 on this page, so the text link takes the ink colour and keeps the colour in its underline */
+html body .back-nav .back-btn{color:var(--nav-ink);} /* the back link takes the AA tone in light mode too */
+</style>
+<!-- DARK MODE (Oct 2026): foody had no dark theme and no dock. Page tokens match the other cases; product mockups stay light in both modes. -->
+<style id="theme-dark">
+body.dark-mode{
+  --bg:#24242C; --bg2:#1E1E26; --bg3:#2C2C36;
+  --paper:#F4F4F6; --ash:rgba(244,244,246,.66); --ash2:rgba(244,244,246,.22);
+  --line:rgba(244,244,246,.08); --line2:rgba(244,244,246,.14);
+  background:var(--bg); color:var(--paper);
+}
+body.dark-mode .back-nav{background:color-mix(in srgb,var(--bg) 90%,transparent);border-bottom-color:rgba(244,244,246,.08);}
+body.dark-mode .navy{color:var(--paper);}
+body.dark-mode .chip-n{color:var(--paper);}
+body.dark-mode .cover-title .dim{color:rgba(244,244,246,.14);}
+</style>
+<!-- DOCK CLEARANCE: room under the footer so the floating dock never covers its text (Oct 2026). Same block in every case of the .section/.cover template; muv and vendor tool already have it in their own footer rule. -->
+<style id="dock-clear">
+.footer{padding-bottom:7rem;}
 </style>
 <style id="next-case">
 /* NEXT CASE: closing block of every case. Same markup and CSS in all of them.
@@ -881,6 +899,85 @@ html body .back-nav .back-nav-title,html body .back-nav .back-nav-right,html bod
   targets.forEach(function(el){ io.observe(el); });
 })();
 </script>
+
+<!-- Portfolio Navigation Dock -->
+<style>
+#portfolio-dock{
+  position:fixed;
+  bottom:2rem;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:9700;
+  display:flex;
+  align-items:center;
+  gap:0;
+  background:rgba(240,239,236,0.85);
+  backdrop-filter:blur(24px);
+  -webkit-backdrop-filter:blur(24px);
+  border:1px solid rgba(26,26,34,0.1);
+  border-radius:100px;
+  padding:.375rem .5rem;
+  font-family:'Inter','Geist',sans-serif;
+}
+body.dark-mode #portfolio-dock{
+  background:rgba(26,25,22,0.85);
+  border-color:rgba(244,244,246,0.13);
+}
+#portfolio-dock .pd-btn{
+  padding:.5rem 1.25rem;
+  font-size:.8125rem;
+  font-weight:500;
+  color:#6B6B7A;
+  background:transparent;
+  border:none;
+  border-radius:100px;
+  cursor:pointer;
+  text-decoration:none;
+  transition:color .3s cubic-bezier(0.22,1,0.36,1), background .3s cubic-bezier(0.22,1,0.36,1);
+  white-space:nowrap;
+}
+#portfolio-dock .pd-btn:hover{color:#1A1A22;background:rgba(26,26,34,0.06);}
+body.dark-mode #portfolio-dock .pd-btn{color:#7A7A90;}
+body.dark-mode #portfolio-dock .pd-btn:hover{color:#F4F4F6;background:rgba(244,244,246,0.07);}
+#portfolio-dock .pd-sep{width:1px;height:20px;background:rgba(26,26,34,0.13);margin:0 .25rem;}
+body.dark-mode #portfolio-dock .pd-sep{background:rgba(244,244,246,0.13);}
+#portfolio-dock .pd-link{
+  display:flex;align-items:center;justify-content:center;
+  padding:.5rem .75rem;
+  font-size:.8125rem;font-weight:500;
+  color:#6B6B7A;text-decoration:none;
+  border-radius:100px;
+  transition:color .3s, background .3s;
+  white-space:nowrap;
+}
+#portfolio-dock .pd-link:hover{color:#1A1A22;background:rgba(26,26,34,0.06);}
+body.dark-mode #portfolio-dock .pd-link{color:#7A7A90;}
+body.dark-mode #portfolio-dock .pd-link:hover{color:#F4F4F6;background:rgba(244,244,246,0.07);}
+#portfolio-dock .pd-theme{
+  display:flex;align-items:center;justify-content:center;
+  width:36px;height:36px;border-radius:50%;border:none;
+  background:transparent;color:#6B6B7A;cursor:pointer;
+  transition:color .3s, background .3s;margin-left:.25rem;
+}
+#portfolio-dock .pd-theme:hover{color:#1A1A22;background:rgba(26,26,34,0.06);}
+body.dark-mode #portfolio-dock .pd-theme{color:#7A7A90;}
+body.dark-mode #portfolio-dock .pd-theme:hover{color:#F4F4F6;background:rgba(244,244,246,0.07);}
+#portfolio-dock .pd-theme svg{width:18px;height:18px;}
+body:not(.dark-mode) #portfolio-dock .icon-sun{display:inline;}
+body:not(.dark-mode) #portfolio-dock .icon-moon{display:none;}
+body.dark-mode #portfolio-dock .icon-sun{display:none;}
+body.dark-mode #portfolio-dock .icon-moon{display:inline;}
+</style>
+<nav id="portfolio-dock">
+  <a class="pd-btn" href="index.html" title="Back to Home">Home</a>
+  <a class="pd-btn" href="index.html#about" title="About Me">About Me</a>
+  <div class="pd-sep"></div>
+  <button class="pd-theme" onclick="document.body.classList.toggle('dark-mode');try{localStorage.setItem('pe-theme',document.body.classList.contains('dark-mode')?'dark':'light')}catch(e){}" aria-label="Toggle light/dark mode">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+</nav>
+<script>(function(){try{if(localStorage.getItem('pe-theme')==='dark')document.body.classList.add('dark-mode')}catch(e){}})()</script>
 
 </body>
 </html>

@@ -506,6 +506,10 @@ html.nav-top .back-nav{background-color:transparent !important;background-image:
 .back-nav,.next-case{--nav-ink:var(--accent);}
 html body .back-nav .back-nav-title,html body .back-nav .back-nav-right,html body .back-nav .back-nav-r,html body .back-nav .nav-title,html body .back-nav .nav-right,html body.dark-mode .back-nav .back-btn{color:var(--nav-ink);}
 </style>
+<!-- DOCK CLEARANCE: room under the footer so the floating dock never covers its text (Oct 2026). Same block in every case of the .section/.cover template; muv and vendor tool already have it in their own footer rule. -->
+<style id="dock-clear">
+.footer{padding-bottom:7rem;}
+</style>
 <style id="next-case">
 /* NEXT CASE: closing block of every case. Same markup and CSS in all of them.
    Uses only tokens every case has; the link takes the header link colour (--nav-ink). */
@@ -521,10 +525,6 @@ html body .back-nav .back-nav-title,html body .back-nav .back-nav-right,html bod
 .nc-about{display:inline-flex;align-items:center;min-height:44px;font-size:.9375rem;font-weight:600;color:var(--nc-link,var(--nav-ink,var(--accent)));text-decoration:underline;text-decoration-color:var(--nav-ink,currentColor);text-decoration-thickness:1px;text-underline-offset:4px;}
 @media (max-width:768px){.next-case{padding-inline:var(--gutter,1.25rem);}}
 @media (prefers-reduced-motion:reduce){.nc-name .nc-arrow{transition:none;}}
-</style>
-<!-- DOCK CLEARANCE: room under the footer so the floating dock never covers its text (Oct 2026). Same block in every case of the .section/.cover template; muv and vendor tool already have it in their own footer rule. -->
-<style id="dock-clear">
-.footer{padding-bottom:7rem;}
 </style>
 </head>
 <body>
