@@ -634,6 +634,10 @@ html body .back-nav .back-nav-title,html body .back-nav .back-nav-right,html bod
 @media (max-width:768px){.next-case{padding-inline:var(--gutter,1.25rem);}}
 @media (prefers-reduced-motion:reduce){.nc-name .nc-arrow{transition:none;}}
 </style>
+<!-- DOCK CLEARANCE: room under the footer so the floating dock never covers its text (Oct 2026). Same block in every case of the .section/.cover template; muv and vendor tool already have it in their own footer rule. -->
+<style id="dock-clear">
+.footer{padding-bottom:7rem;}
+</style>
 </head>
 <body>
 <div id="wipe-overlay"></div>
