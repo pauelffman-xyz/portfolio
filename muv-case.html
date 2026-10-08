@@ -906,8 +906,7 @@ html body .back-nav .back-nav-title,html body .back-nav .back-nav-right,html bod
           <li><span class="bar-label">Find searching and booking a car difficult</span><span class="bar-val">39%</span><span class="bar-track"><span class="bar-fill" style="--v:39%"></span></span></li>
           <li><span class="bar-label">Find the map and the route hard to see</span><span class="bar-val">31%</span><span class="bar-track"><span class="bar-fill" style="--v:31%"></span></span></li>
         </ul>
-        <p class="small" style="margin-top:1.5rem;max-width:56ch">Survey, June 2025, 120–148 answers per question. The sample was mostly customers of B2B brands, so it leans towards corporate users.</p>
-        <!-- TODO(Paula): n is derived from the pie-chart percentages (e.g. 8/148 = 5.41%). Confirm real n per question. -->
+        <p class="small" style="margin-top:1.5rem;max-width:56ch">Survey, June 2025, about 120 to 150 answers per question. The sample was mostly customers of B2B brands, so it leans towards corporate users.</p>
       </div>
       <div class="stack">
         <p class="prose">Most of this was technical and about driver availability, not about the interface. Design couldn't make an ETA accurate, but it could stop leaving people guessing.</p>
@@ -1342,11 +1341,10 @@ html body .back-nav .back-nav-title,html body .back-nav .back-nav-right,html bod
         <span class="say">"Juan started your trip · 10 min to arrive"</span>
       </li>
       <li>
-        <h3>Ride completed or cancelled</h3>
+        <h3>Ride completed</h3>
         <p>Review with preset comments and trip characteristics.</p>
       </li>
     </ol>
-    <!-- TODO(Paula): confirm what the UI shows on cancellation, if you want it named here -->
 
     <div class="split">
       <div>
@@ -1415,9 +1413,7 @@ html body .back-nav .back-nav-title,html body .back-nav .back-nav-right,html bod
         <h3 class="h3">The same flow, for sending a package</h3>
         <p class="prose">Send reuses the trip flow and its components: address entry, categories with a recommended option, and one clear action. Sending needs a card, so the home asks for one first. After the details step comes the delivery, and the same rating.</p>
       </div>
-      <!-- TODO(Paula): the UI copy inside this render is warped in places ("Categorio y precio", "Excelenta servicio", "Temé la ruta indicada"); if you have a clean export from Figma, swap it in -->
       <figure>
-        <!-- MOBILE (pending image): wrap the img in <picture><source media="(max-width:640px)" srcset="muv-assets/muv-envio-fan-mobile.webp" width="1080" height="1350"> … </picture> (2–3 phones, vertical 4:5) -->
         <div class="frame envio-stage"><img class="envio" src="muv-assets/muv-envio-fan.webp" width="2000" height="1342" loading="lazy" decoding="async" alt="The Send flow in four screens, fanned out: the home asking to add a card above the Ride and Send services, the category list with Moto marked Recommended next to Economy and Muv, the package details with Send and Receive tabs and the price, and the rating screen with five stars and preset reasons"></div>
         <figcaption>Send: add a card, pick a category (Moto, Economy or Muv), review the package details, and rate the delivery.</figcaption>
       </figure>
@@ -1454,7 +1450,6 @@ html body .back-nav .back-nav-title,html body .back-nav .back-nav-right,html bod
           <button class="mbtn" type="button" data-ctl="replay">Replay</button>
           <a class="mlink" href="https://www.figma.com/proto/io8XEuCz4DprO7lK40L17a/muv-app?node-id=1-38654&t=hsuCgtYJiZIko83g-1&scaling=min-zoom&content-scaling=fixed&page-id=1%3A8829" target="_blank" rel="noopener">Open the original prototype in Figma</a>
         </div>
-        <!-- TODO(Paula): the Figma link needs "anyone with the link can view" to work for visitors -->
       </div>
       <div class="stage-col">
         <div class="dev" data-stage="hero" data-w="393" data-h="852" role="img" aria-label="Animated recreation of the searching-for-a-driver screen: the map zooms between pickup and destination, a ripple pulses around the pickup pin, and skeleton placeholders shimmer in the bottom sheet">
@@ -1583,8 +1578,7 @@ html body .back-nav .back-nav-title,html body .back-nav .back-nav-right,html bod
   <div class="wrap">
     <div class="split">
       <h2 class="h2 wide" id="testing-h">What testing told us</h2>
-      <p class="prose">I tested the prototype on two tasks: requesting a trip, and taking a trip with stops and rating it.</p>
-      <!-- TODO(Paula): add method + number of participants here (not in the deck) -->
+      <p class="prose">I ran six moderated sessions with the prototype, on two tasks: requesting a trip, and taking a trip with stops and rating it.</p>
     </div>
 
     <table class="tbl">
@@ -1618,7 +1612,6 @@ html body .back-nav .back-nav-title,html body .back-nav .back-nav-right,html bod
       <h2 class="h2 wide" id="prototype-h">See it move</h2>
       <p class="prose">The full passenger journey, screen by screen: from opening the app to rating the ride.</p>
     </div>
-    <!-- TODO(Paula): add "Open the Figma prototype" link if it can be public -->
     <div class="lottie-frame" style="max-width:880px;margin-inline:auto">
       <div id="muv-experience-lottie" role="img" aria-label="muv passenger app, full experience animated screen by screen" style="width:100%;height:100%"></div>
     </div>
@@ -1635,17 +1628,15 @@ html body .back-nav .back-nav-title,html body .back-nav .back-nav-right,html bod
       <div><p class="num">21 → 6</p><p class="cap">Steps in onboarding.</p></div>
       <div><p class="num">25% → 36%</p><p class="cap">Of people who started onboarding finished it: +11 percentage points.</p></div>
     </div>
-    <!-- TODO(Paula): "reduce time to first successful ride" was a goal but has no result yet. Add the post-launch numbers for first-trip (59%) and 4th-trip retention (52%) if you have them. -->
 
     <div>
-      <h3 class="h3" style="margin-bottom:.75rem">The business after launch</h3>
-      <p class="prose" style="margin-bottom:2rem">The new passenger app launched in May 2026 and the numbers moved. But it didn't move them alone: the app is one of five levers.</p>
+      <h3 class="h3" style="margin-bottom:.75rem">Where the business aimed to be in 2026</h3>
+      <p class="prose" style="margin-bottom:2rem">These were the targets for 2026 when I worked on the app. They are estimates, not measured results: I'm no longer at the company, so I don't have the numbers after launch. The plan to get there had five levers, and the new passenger app was one of them.</p>
       <dl class="pairs">
-        <div><dt>Passengers</dt><dd><span class="from"><b>39K</b><small>Q4 2025</small></span><span class="arr" aria-hidden="true">→</span><span class="to"><b>81K</b><small>2026</small></span></dd></div>
-        <div><dt>Trips</dt><dd><span class="from"><b>2.2M+</b><small>Q4 2025</small></span><span class="arr" aria-hidden="true">→</span><span class="to"><b>5.1M+</b><small>2026</small></span></dd></div>
-        <div><dt>GMV</dt><dd><span class="from"><b>Gs 40.1B</b><small>Q4 2025</small></span><span class="arr" aria-hidden="true">→</span><span class="to"><b>Gs 94.6B</b><small>2026</small></span></dd></div>
+        <div><dt>Passengers</dt><dd><span class="from"><b>39K</b><small>Q4 2025</small></span><span class="arr" aria-hidden="true">→</span><span class="to"><b>81K</b><small>2026 target</small></span></dd></div>
+        <div><dt>Trips</dt><dd><span class="from"><b>2.2M+</b><small>Q4 2025</small></span><span class="arr" aria-hidden="true">→</span><span class="to"><b>5.1M+</b><small>2026 target</small></span></dd></div>
+        <div><dt>GMV</dt><dd><span class="from"><b>Gs 40.1B</b><small>Q4 2025</small></span><span class="arr" aria-hidden="true">→</span><span class="to"><b>Gs 94.6B</b><small>2026 target</small></span></dd></div>
       </dl>
-      <!-- TODO(Paula): state the exact period behind "2026" (e.g. Jan–Aug, or Q3). Q4 2025 is one quarter, so the pairs are only comparable if the periods match. GMV given as 40.100M / 94.642M (millions of guaraníes) = 40.1B / 94.6B. -->
       <div class="levers">
         <div>
           <h4>Product and design</h4>
@@ -1667,8 +1658,8 @@ html body .back-nav .back-nav-title,html body .back-nav .back-nav-right,html bod
     </div>
 
     <div>
-      <h3 class="h3" style="margin-bottom:1rem">The funnel baseline still to re-measure</h3>
-      <p class="small" style="margin-bottom:1.5rem;max-width:62ch">Q4 2025, on the legacy app. These two are the funnel numbers the new app should beat.</p>
+      <h3 class="h3" style="margin-bottom:1rem">The funnel baseline the new app had to beat</h3>
+      <p class="small" style="margin-bottom:1.5rem;max-width:62ch">Q4 2025, on the legacy app. I don't have these two numbers for the new app.</p>
       <dl class="baseline">
         <div><dt>59%</dt><dd>Of registered passengers take a first trip.</dd></div>
         <div><dt>52%</dt><dd>Of those who take a first trip are still riding by their fourth.</dd></div>
