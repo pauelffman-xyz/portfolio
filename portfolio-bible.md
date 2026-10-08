@@ -1,6 +1,6 @@
 # Paula Elffman — Portfolio OS · Design Bible
 
-*Última actualización: 8 de octubre de 2026 — **Home: copy nuevo en el hero y en Selected work.** (1) El párrafo del hero (`.hello-sub`) dice ahora qué diseña Paula, para quién, hace cuánto y dónde está hoy. (2) Las cinco líneas de las cards de Selected work (`.wc-line`) pasaron a ser "qué producto + un dato que el caso sostiene". (3) La meta description de `index.html` (`description`, `og:description`, `twitter:description`) quedó alineada con el hero. (4) En Experience (itti), el dato "44.6% / Monchis CVR" pasó a "44.6% / Favorite Places CVR", por la misma regla de que un número va con lo que mide. (5) `sukupay-proto-case.html`: "4 Partners" pasó a "3 Brands" en los datos del problema y en el cierre. (5b) `sukupay-proto-case.html`, resultados: la sección de lo ya migrado subió y abre con tres datos medidos ("Results so far"), lo proyectado quedó rotulado "Projected · not measured yet", y el contraste del verde viejo se corrigió de 1.31:1 a 2.31:1. (5c) `hugo-case.html`: el rol dice que Paula diseñó y el equipo codeó; las cifras del problema quedaron en dos, con fuente; y los resultados muestran lo demostrado esa noche en vez de cifras tomadas de internet. (5d) **Cierre de los cases:** bloque "Next case" nuevo, aprobado por Paula y aplicado en los 15 cases. Ver "Cierre de los cases: bloque «Next case»" dentro de CASE STUDIES. (5e) **About:** link "Contact me" (mail) al lado de "Find me on LinkedIn". (5f) **Monchis:** corregido el scroll horizontal de desktop que causaban las etiquetas del teléfono de búsqueda. (5g) `muv-case.html`: se resolvieron y borraron las 8 notas `TODO`; las cifras de 2026 pasaron de "The business after launch" a "Where the business aimed to be in 2026", rotuladas como metas. (5h) **Dock:** 12 cases del template viejo ganaron aire bajo el footer (`#dock-clear`) para que el dock no tape su texto. Ver "Dock: aire bajo el footer". (5i) **Titulares:** se reemplazaron 23 titulares de plantilla en monchis, sukupay prototyper y hugo por frases con datos del caso. Después se hizo la segunda tanda en siete cases de More work. Ver "Titulares: fuera las frases de plantilla". (6) `vendor-tool-case.html`: se corrigió un caption que era una nota de trabajo, y se resolvieron y borraron las 14 notas `TODO` del código (rol, revisión de fotos por el equipo, un solo dato de 72 h, meta +98%, entre otras). Por eso la línea de vendor tool en la home pasó a "72 h of manual catalog work, down to zero." (7) `monchis-case.html`: los cuatro números animados de la investigación van escritos en el HTML con su valor real, y pasa a ser regla para todos los cases. No se sacó ni se movió ningún caso. Ver "Copy de la home: hero y Selected work (8 de octubre de 2026)" en AJUSTES RÁPIDOS POST-REVIEW, que incluye las reglas de copy y los pendientes de la revisión.*
+*Última actualización: 8 de octubre de 2026 — **Home: copy nuevo en el hero y en Selected work.** (1) El párrafo del hero (`.hello-sub`) dice ahora qué diseña Paula, para quién, hace cuánto y dónde está hoy. (2) Las cinco líneas de las cards de Selected work (`.wc-line`) pasaron a ser "qué producto + un dato que el caso sostiene". (3) La meta description de `index.html` (`description`, `og:description`, `twitter:description`) quedó alineada con el hero. (4) En Experience (itti), el dato "44.6% / Monchis CVR" pasó a "44.6% / Favorite Places CVR", por la misma regla de que un número va con lo que mide. (5) `sukupay-proto-case.html`: "4 Partners" pasó a "3 Brands" en los datos del problema y en el cierre. (5b) `sukupay-proto-case.html`, resultados: la sección de lo ya migrado subió y abre con tres datos medidos ("Results so far"), lo proyectado quedó rotulado "Projected · not measured yet", y el contraste del verde viejo se corrigió de 1.31:1 a 2.31:1. (5c) `hugo-case.html`: el rol dice que Paula diseñó y el equipo codeó; las cifras del problema quedaron en dos, con fuente; y los resultados muestran lo demostrado esa noche en vez de cifras tomadas de internet. (5d) **Cierre de los cases:** bloque "Next case" nuevo, aprobado por Paula y aplicado en los 15 cases. Ver "Cierre de los cases: bloque «Next case»" dentro de CASE STUDIES. (5e) **About:** link "Contact me" (mail) al lado de "Find me on LinkedIn". (5f) **Monchis:** corregido el scroll horizontal de desktop que causaban las etiquetas del teléfono de búsqueda. (5g) `muv-case.html`: se resolvieron y borraron las 8 notas `TODO`; las cifras de 2026 pasaron de "The business after launch" a "Where the business aimed to be in 2026", rotuladas como metas. (5h) **Dock:** 12 cases del template viejo ganaron aire bajo el footer (`#dock-clear`) para que el dock no tape su texto. Ver "Dock: aire bajo el footer". (5i) **Titulares:** se reemplazaron 23 titulares de plantilla en monchis, sukupay prototyper y hugo por frases con datos del caso. Después se hizo la segunda tanda en siete cases de More work. Ver "Titulares: fuera las frases de plantilla". (5j) **About:** texto de presentación con el recorrido real, bloque "What I keep, what I cut" en la sección de AI, y Core strengths como cuatro fortalezas con prueba y link al case. Ver "About: presentación, criterio con AI y fortalezas con prueba". (6) `vendor-tool-case.html`: se corrigió un caption que era una nota de trabajo, y se resolvieron y borraron las 14 notas `TODO` del código (rol, revisión de fotos por el equipo, un solo dato de 72 h, meta +98%, entre otras). Por eso la línea de vendor tool en la home pasó a "72 h of manual catalog work, down to zero." (7) `monchis-case.html`: los cuatro números animados de la investigación van escritos en el HTML con su valor real, y pasa a ser regla para todos los cases. No se sacó ni se movió ningún caso. Ver "Copy de la home: hero y Selected work (8 de octubre de 2026)" en AJUSTES RÁPIDOS POST-REVIEW, que incluye las reglas de copy y los pendientes de la revisión.*
 
 *Última actualización previa: 8 de octubre de 2026 — **SukuPay Prototyper: Genesis es del equipo de ingeniería, board de componentes y header en el color del link.** (1) `sukupay-proto-case.html` deja en claro que Genesis lo pensaron y construyeron los devs (Alejandro Alvarez, Engineering Manager; Joaquin Beceiro, Frontend; Illan Cohn, Backend) y que Paula lo usa en su proceso de trabajo. Van nombrados en el cover y en el bloque de Genesis. Ver "Cambios en `sukupay-proto-case.html` (8 de octubre de 2026)". (2) El caso pasó a llamarse **SukuPay · Prototyper** (antes "SukuPay · Design system") en el header, la pestaña, el título al compartir y el footer. (3) **Los dos verdes, animados:** los círculos de lima y teal van centrados y casi tocándose, con animación. (4) **Design system como board**, debajo de los círculos. Ver "Board de SukuPay Prototyper". (5) **Regla nueva para todos los cases: el texto del header va en el mismo color que "Back to portfolio"**, ya no en gris. Ver "Texto del header en el color del link de volver (`#nav-ink`)". Aplicado en los 16 cases. (6) **Header transparente en todos:** los 12 cases que no tenían el bloque `#nav-glass` lo recibieron (ver la tabla de "Header transparente arriba, vidrio al hacer scroll"). (7) **SukuPay Home: el UX audit en formato rojo de error.** Las diez cards blancas donde Paula analiza el producto pasaron a ser ítems rojos como la lista de problemas de monchis. Ver "Cambios en `sukupay-case.html` (8 de octubre de 2026)".*
 
@@ -951,7 +951,7 @@ Sección nueva en el About Me, **entre About y Core strengths**. Muestra cómo P
 
 **Regla para el futuro:** para sumar/quitar una capacidad, agregar/quitar un `.ai-slide` con su `data-nav` y `data-prompt` dentro de `#aiTrack` — los segmentos de progreso y las pills de nav se generan solos a partir de los slides, no hay que tocar el JS.
 
-### Core strengths (13 pills, 4 en Emerald)
+### Core strengths (13 pills, 4 en Emerald) — REEMPLAZADO el 8 de octubre de 2026
 
 - Emerald: User Research, Design Systems, Visual Design, AI-assisted Design
 - Clase: `.dv-pill-g`
@@ -2630,7 +2630,7 @@ Los 14 `.tile-arrow-label` dicen "View case study" sin flecha (↗ significa lin
 
 **Alineado a la regla Editorial** (se habían escapado): `.dv-period` (fechas) y `.dv-job-loc` (ciudad) pasaron de JetBrains Mono 8–9px con tracking a Geist `.8125rem` sin tracking; `.hs-eyebrow-lg` ("My superpower") pasó de 700 con tracking `.14em` a `.9375rem` / 500 / `letter-spacing:0`.
 
-**Pendiente, sin decidir:** Core strengths sigue con sus 13 pills. El dev sugirió sacarlas o buscar otro enfoque, y linkear "I bridge the gap" a un case. Hay una propuesta dibujada (fortaleza + una línea de evidencia + link al case), todavía no aplicada.
+**Resuelto el 8 de octubre de 2026:** los 13 pills de Core strengths se reemplazaron por cuatro fortalezas con una línea de evidencia y el link al case (ver "About: presentación, criterio con AI y fortalezas con prueba"). Sigue sin linkear "I bridge the gap" a un case.
 
 ### Metadata y Open Graph
 
@@ -2792,10 +2792,56 @@ Anotado para la revisión de cada caso. Nada de esto se tocó en esta pasada.
 | `hugo-case.html` | ✅ **Hecho el 8 de octubre:** rol aclarado, cifras del problema con fuente, y los resultados muestran lo que se demostró (ver "8 de octubre de 2026 — rol, cifras con fuente y resultados" en HUGO CASE STUDY). |
 | `muv-case.html` | ✅ **Hecho el 8 de octubre:** notas `TODO` resueltas y borradas, y las cifras de 2026 rotuladas como metas (ver "Cambios en `muv-case.html` (8 de octubre de 2026)"). **Sigue pendiente:** el resultado propio es el del onboarding y el caso casi no lo muestra; confirmar si el 25% → 36% es medido. |
 | Todos los cases | ✅ **Hecho el 8 de octubre en los 15:** cierre "Next case" (ver "Cierre de los cases: bloque «Next case»") y mail en el About. |
-| About | Los seis bloques de "AI in my workflow" son prompts de ejemplo. Falta un caso real: algo que la AI dio y se conservó, algo que se cortó, y por qué. Core strengths sigue pendiente (ver "About: limpieza y datos de experiencia"). |
+| About | ✅ **Hecho el 8 de octubre:** presentación, bloque "What I keep, what I cut" y Core strengths con prueba (ver "About: presentación, criterio con AI y fortalezas con prueba"). El carrusel de seis etapas sigue con prompts de ejemplo. |
 | Titulares de los cases | ✅ **Hecho el 8 de octubre:** dos tandas, 10 cases (ver "Titulares: fuera las frases de plantilla"). `sukupay-case.html` queda para cuando se rehaga con la versión nueva. |
 
 **Para el caso nuevo de SukuPay Home:** anotar antes del lanzamiento la apuesta, la métrica que se va a mirar y qué número contaría como que no funcionó. Después no se puede reconstruir. Vale la regla de "Elektra: sin datos de la base de SukuPay": los resultados se cuentan en términos relativos.
+
+### About: presentación, criterio con AI y fortalezas con prueba (8 de octubre de 2026)
+
+*Aprobado por Paula. Sale de la revisión contra los criterios de Aneta Kmiecik: el About prometía cualidades ("product thinker", "curiosity, empathy") y mostraba prompts de ejemplo, sin evidencia. Toca solo `index.html`.*
+
+**1. Texto de presentación (`.dv-story`)**
+
+| | Texto |
+| --- | --- |
+| Antes | "I'm a product thinker at heart…", "The best products emerge from curiosity, empathy…", "For more than 10 years I've designed products across fintech, mobility, food-tech, AI and SaaS…" |
+| Ahora | "For 10 years I've designed products people use every day: booking a table, ordering food, getting a ride, sending money home." / "Seven of those years were at Restorando and TheFork, through the 2019 acquisition by TripAdvisor. Since then I've worked on ride-hailing and food delivery in Paraguay with itti, and now on remittances at SukuPay." / "Most of the work happens before Figma: reading the funnel, listening to users and support, and mapping every state before drawing a screen." |
+
+- Cada frase sale del recorrido real: los siete años de Restorando y TheFork con la adquisición de 2019, itti, SukuPay, y el modo de trabajo que muestran los cases (embudo y encuesta en muv, Amplitude y escucha activa en monchis, los cinco estados de muv).
+- Dice "Since then I've worked on…" y no "Then…", porque entre TheFork e itti hubo otros trabajos que el párrafo no nombra.
+- El statement grande ("I design complex digital products and use AI…") no cambió.
+
+**2. AI in my workflow**
+
+- **Título:** "AI as a force multiplier." → **"How I use AI, and where I don't."**
+- El carrusel de seis etapas (`#aiLab`) no cambió.
+- **Bloque nuevo debajo del carrusel, `.ai-calls` · "What I keep, what I cut":** abre con "I built this portfolio with Claude. A few of the calls I made along the way:" y lista cuatro decisiones reales, cada una con su rótulo:
+  - **Cut:** las etiquetas chicas en mayúsculas en cada sección ("read as AI, not as a designer's choice").
+  - **Cut:** titulares como "Five findings. Five non-negotiables.".
+  - **Checked:** cada número contra su fuente; algunas metas estaban escritas como resultados.
+  - **Kept:** los design systems reconstruidos como componentes vivos en vez de capturas.
+- **Por qué:** es lo que más se pide hoy en un portfolio: nombrar la herramienta y mostrar una cosa que la AI dio y se conservó, otra que se cortó, y el porqué. Las cuatro están documentadas en esta biblia ("ETIQUETAS — ESTILO EDITORIAL", "Titulares: fuera las frases de plantilla", los cambios de muv y de SukuPay Prototyper, "DESIGN SYSTEM COMO BOARD").
+- **Decisión de Paula:** el sitio dice públicamente que el portfolio se hizo con Claude.
+- **Estilo:** lista simple, sin cards: rótulo en `--paper` a la izquierda, frase a la derecha, filete arriba de cada fila. En mobile el rótulo va arriba de la frase.
+- **Regla:** si se suma una decisión, tiene que ser real y estar documentada acá. Nada de ejemplos inventados.
+
+**3. Core strengths (`.dv-proofs`)**
+
+Los 13 pills (`.dv-pills`) se reemplazaron por cuatro fortalezas. Cada una es un link al case que la prueba.
+
+| Fortaleza | Línea de evidencia | Case |
+| --- | --- | --- |
+| Research that changes the brief | A survey and a funnel pointed at two different problems. | muv |
+| Decisions with the trade-off on the table | Two full directions, then one spine with the other's safeguards. | monchis |
+| Design systems that reach code | Tokens that flow from Figma to the repo, and an AI prototyper built on top. | sukupay prototyper |
+| Self-service for B2B | Restaurants change their own menu without calling support. | vendor tool |
+
+- **Layout:** grilla de dos columnas con filete arriba de cada ítem; una columna bajo 768px. El link va en color de texto con la flecha en `--accent` (el verde solo no llega a contraste AA en texto chico).
+- **Contraste medido:** texto secundario 7.3:1 en claro y 8.3:1 en oscuro.
+- El CSS de `.dv-pill` quedó en el archivo, sin uso.
+- **"My superpower · I bridge the gap"** no cambió.
+- **Regla:** una fortaleza solo entra si hay un case que la muestra. Siempre: nombre, una línea con el hecho, y el link.
 
 ### Imágenes de link preview: prefijo `og-`
 

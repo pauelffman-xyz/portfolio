@@ -2401,6 +2401,29 @@ mark.mk{background:transparent;color:var(--paper);font-weight:500;}
 .dv-pill:hover { border-color:color-mix(in srgb, var(--accent) 60%, transparent); background:color-mix(in srgb, var(--accent) 8%, transparent); }
 .dv-pill-g { }
 
+/* Core strengths as proof (Oct 2026): strength + one line of evidence + the case. Replaces the 13 pills. */
+.dv-proofs { list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:0 3.5rem; max-width:1100px; }
+.dv-proof { border-top:1px solid var(--line-md); }
+.dv-proof a { display:block; padding:1.5rem 0 1.875rem; text-decoration:none; color:inherit; }
+.dv-proof h3 { font-family:'Geist',sans-serif; font-size:1.25rem; font-weight:700; letter-spacing:-.02em; line-height:1.25; color:var(--paper); margin-bottom:.375rem; }
+.dv-proof p { font-family:'Geist',sans-serif; font-size:1rem; line-height:1.55; color:color-mix(in srgb, var(--paper) 74%, var(--void)); max-width:44ch; }
+.dv-proof-link { display:inline-block; margin-top:.875rem; font-family:'Geist',sans-serif; font-size:.9375rem; font-weight:600; color:var(--paper); }
+.dv-proof-link i { font-style:normal; display:inline-block; margin-left:.35em; color:var(--accent); transition:transform .5s var(--ease); }
+.dv-proof a:hover .dv-proof-link i, .dv-proof a:focus-visible .dv-proof-link i { transform:translateX(.25em); }
+.dv-proof a:focus-visible { outline:2px solid var(--accent); outline-offset:4px; border-radius:4px; }
+@media(max-width:768px){ .dv-proofs { grid-template-columns:1fr; } }
+@media (prefers-reduced-motion:reduce){ .dv-proof-link i { transition:none; } }
+
+/* AI: what I keep, what I cut (Oct 2026). A plain list: tag + sentence, no cards. */
+.ai-calls { max-width:820px; margin-top:3.5rem; padding-top:2.5rem; border-top:1px solid var(--line-md); }
+.ai-calls-h { font-family:'Geist',sans-serif; font-size:1.375rem; font-weight:700; letter-spacing:-.02em; color:var(--paper); margin-bottom:.5rem; }
+.ai-calls-lede { font-family:'Muli',sans-serif; font-size:1.0625rem; line-height:1.7; font-weight:300; color:color-mix(in srgb, var(--paper) 74%, var(--void)); margin-bottom:1.25rem; }
+.ai-calls ul { list-style:none; margin:0; padding:0; }
+.ai-calls li { display:grid; grid-template-columns:5.5rem minmax(0,1fr); gap:1rem; padding:1rem 0; border-top:1px solid var(--line); font-family:'Geist',sans-serif; font-size:1rem; line-height:1.55; }
+.ai-calls li b { font-weight:600; color:var(--paper); }
+.ai-calls li span { color:color-mix(in srgb, var(--paper) 74%, var(--void)); }
+@media(max-width:768px){ .ai-calls li { grid-template-columns:1fr; gap:.125rem; } }
+
 .dv-exp-h { font-family:'Geist',sans-serif; font-size:clamp(2.5rem,5vw,5rem); font-weight:800; letter-spacing:-.04em; color:var(--paper); line-height:.95; margin-bottom:4rem; }
 .dv-exp-h em { font-style:normal; color:var(--accent); }
 .dv-timeline { --tl-text:color-mix(in srgb, var(--paper) 74%, var(--void)); --tl-meta:color-mix(in srgb, var(--paper) 66%, var(--void)); --tl-zebra:rgba(244,244,246,.035); --tl-hover:rgba(244,244,246,.075); --tl-num:var(--accent); }
@@ -3592,9 +3615,9 @@ body.light-mode .work{ --wc-muted:#5E5E6C; }
   <div class="dv-label">About</div>
   <div class="dv-about">
     <div class="dv-story">
-      <p>I'm a <b>product thinker</b> at heart. I love mapping messy workflows, asking the right questions and turning complexity into intuitive experiences that actually make sense to real people.</p>
-      <p>The best products emerge from <b>curiosity, empathy</b> and continuous iteration. Working in Figma is only one part of my process. The real work happens through <b>conversations, research, systems thinking</b> and understanding how people behave.</p>
-      <p>For more than <b>10 years</b> I've designed products across fintech, mobility, food-tech, AI and SaaS, with startups, scale-ups and enterprise teams across <span class="dv-accent">Latin America, Europe and the US.</span></p>
+      <p>For <b>10 years</b> I've designed products people use every day: booking a table, ordering food, getting a ride, sending money home.</p>
+      <p>Seven of those years were at <b>Restorando and TheFork</b>, through the 2019 acquisition by TripAdvisor. Since then I've worked on ride-hailing and food delivery in Paraguay with <b>itti</b>, and now on remittances at <b>SukuPay</b>.</p>
+      <p>Most of the work happens <b>before Figma</b>: reading the funnel, listening to users and support, and mapping every state before drawing a screen.</p>
     </div>
     <div class="tk">
       <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><filter id="tkTint" color-interpolation-filters="sRGB"><feFlood/><feComposite in2="SourceAlpha" operator="in"/></filter></svg>
@@ -3618,7 +3641,7 @@ body.light-mode .work{ --wc-muted:#5E5E6C; }
 
 <div class="dv-section">
   <div class="dv-label">AI in my workflow</div>
-  <h2 class="dv-human-h">AI as a <em>force multiplier.</em></h2>
+  <h2 class="dv-human-h">How I use AI, <em>and where I don't.</em></h2>
   <div class="ai-intro">
     <p>AI is <b>deeply integrated</b> into my design workflow. It doesn't replace design thinking. It works as a <span class="ai-accent">force multiplier</span> that lets me spend more time on <b>strategy, user experience</b> and cross-functional collaboration.</p>
   </div>
@@ -3681,6 +3704,18 @@ body.light-mode .work{ --wc-muted:#5E5E6C; }
         </dl>
       </article>
     </div>
+  </div>
+
+  <!-- What I keep, what I cut: real calls made on AI output while building this site (Oct 2026) -->
+  <div class="ai-calls">
+    <h3 class="ai-calls-h">What I keep, what I cut</h3>
+    <p class="ai-calls-lede">I built this portfolio with Claude. A few of the calls I made along the way:</p>
+    <ul>
+      <li><b>Cut</b><span>Small uppercase labels on every section. They read as AI, not as a designer's choice. I replaced them across the site.</span></li>
+      <li><b>Cut</b><span>Headlines like "Five findings. Five non-negotiables." They could sit on anyone's project.</span></li>
+      <li><b>Checked</b><span>Every number against its source. Some targets had been written up as results, so I relabeled them.</span></li>
+      <li><b>Kept</b><span>Design systems rebuilt as live components instead of screenshots.</span></li>
+    </ul>
   </div>
 </div>
 
@@ -3771,15 +3806,28 @@ body.light-mode .work{ --wc-muted:#5E5E6C; }
 
 <div class="dv-section dv-bg">
   <div class="dv-label">Core strengths</div>
-  <div class="dv-pills">
-    <span class="dv-pill">Empathy</span><span class="dv-pill">Product Thinking</span>
-    <span class="dv-pill">Systems Thinking</span><span class="dv-pill dv-pill-g">User Research</span>
-    <span class="dv-pill">UX Strategy</span><span class="dv-pill dv-pill-g">Design Systems</span>
-    <span class="dv-pill">Cross-functional Collaboration</span><span class="dv-pill">Leadership</span>
-    <span class="dv-pill dv-pill-g">Visual Design</span><span class="dv-pill">Communication</span>
-    <span class="dv-pill">Rapid Prototyping</span><span class="dv-pill dv-pill-g">AI-assisted Design</span>
-    <span class="dv-pill">Business Thinking</span>
-  </div>
+  <ul class="dv-proofs">
+    <li class="dv-proof"><a href="muv-case.html">
+      <h3>Research that changes the brief</h3>
+      <p>A survey and a funnel pointed at two different problems.</p>
+      <span class="dv-proof-link">muv case<i aria-hidden="true">→</i></span>
+    </a></li>
+    <li class="dv-proof"><a href="monchis-case.html">
+      <h3>Decisions with the trade-off on the table</h3>
+      <p>Two full directions, then one spine with the other's safeguards.</p>
+      <span class="dv-proof-link">monchis case<i aria-hidden="true">→</i></span>
+    </a></li>
+    <li class="dv-proof"><a href="sukupay-proto-case.html">
+      <h3>Design systems that reach code</h3>
+      <p>Tokens that flow from Figma to the repo, and an AI prototyper built on top.</p>
+      <span class="dv-proof-link">sukupay prototyper case<i aria-hidden="true">→</i></span>
+    </a></li>
+    <li class="dv-proof"><a href="vendor-tool-case.html">
+      <h3>Self-service for B2B</h3>
+      <p>Restaurants change their own menu without calling support.</p>
+      <span class="dv-proof-link">vendor tool case<i aria-hidden="true">→</i></span>
+    </a></li>
+  </ul>
 
   <div class="hs-feature" id="hsFeature">
     <div class="hs-eyebrow hs-eyebrow-lg">My superpower</div>
