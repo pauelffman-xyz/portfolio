@@ -150,13 +150,13 @@ body{
 .ba-card{background:#fff;border-radius:14px;padding:1.5rem;text-align:center;box-shadow:0 2px 10px rgba(21,33,25,.06);}
 .ba-label{font-family:'Inter',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;margin-bottom:1rem;}
 .ba-label.bad{color:var(--danger);}
-.ba-label.good{color:var(--accent);}
+.ba-label.good{color:#005043;}
 .ba-btn{width:100%;padding:.875rem 1rem;border-radius:100px;font-weight:700;font-size:.9375rem;border:none;margin-bottom:1rem;}
 .ba-btn-old{background:#00C603;color:#fff;}
-.ba-btn-new{background:var(--accent);color:#fff;}
+.ba-btn-new{background:#005043;color:#61FF61;} /* product colours, fixed in both themes: lime on teal = 7.17:1 (AAA) */
 .ba-metric-n{font-size:2.5rem;font-weight:800;letter-spacing:-.04em;line-height:1;}
 .ba-metric-n.bad{color:var(--danger);}
-.ba-metric-n.good{color:var(--accent);}
+.ba-metric-n.good{color:#005043;}
 .ba-metric-l{font-size:.6875rem;color:var(--ash);margin-top:.375rem;}
 .ba-arrow{font-size:2rem;color:var(--ash-2);}
 
@@ -523,7 +523,7 @@ body.dark-mode{
 .decisions-grid > *,.dec-grid > *,.dd-grid > *,.metrics-bento > *,.impact-strip > *,.quotes-grid > *,.principles-row > *{
   background:var(--card);border-radius:var(--r-card);box-shadow:var(--sh-card);
 }
-.ins,.ui-label,.panel-card,.impact-card,.col-card,.step-card,.direction-card,.unlock-card,.email-card,
+.ins,.ui-label,.panel-card,.impact-card,.col-card,.step-card,.direction-card,.unlock-card,.kpi-card,.email-card,
 .pill-card,.audit-item,.goal-item,.use-case{
   background:var(--card);border-color:transparent;border-radius:var(--r-card);box-shadow:var(--sh-card);
 }
@@ -1019,10 +1019,10 @@ html body .back-nav .back-nav-title,html body .back-nav .back-nav-right,html bod
       <p class="ov-body">SukuPay's product was growing fast — new partners, new surfaces, new features. But underneath, <strong>the design infrastructure hadn't kept up.</strong><br><br>The brand green <code>#00C603</code> — generic, not tech, and failing accessibility — was just the symptom. Below it: hardcoded states, two conflicting semantic systems, variables misaligned between Figma and Tokens Studio, typography never tokenized, and <strong>no single source of truth.</strong><br><br>The color was the most visible problem. But the real one was structural debt across the entire system.</p>
     </div>
     <div class="stats-col">
-      <div class="stat-item"><div class="stat-val">1.31:1</div><div class="stat-lbl">Old green contrast ratio on text</div></div>
+      <div class="stat-item"><div class="stat-val">2.31:1</div><div class="stat-lbl">Old green contrast ratio on text</div></div>
       <div class="stat-item"><div class="stat-val">0</div><div class="stat-lbl">Tokens reaching code</div></div>
       <div class="stat-item"><div class="stat-val">2</div><div class="stat-lbl">Conflicting semantic systems</div></div>
-      <div class="stat-item"><div class="stat-val">4</div><div class="stat-lbl">Partners to skin on one skeleton</div></div>
+      <div class="stat-item"><div class="stat-val">3</div><div class="stat-lbl">Brands to skin on one skeleton</div></div>
     </div>
     <div class="accent-card">
       <div class="ac-lbl">The opportunity</div>
@@ -1056,7 +1056,7 @@ html body .back-nav .back-nav-title,html body .back-nav .back-nav-right,html bod
     <div class="ba-card">
       <div class="ba-label bad">Before</div>
       <div class="ba-btn ba-btn-old">Send money</div>
-      <div class="ba-metric-n bad">1.31:1</div>
+      <div class="ba-metric-n bad">2.31:1</div>
       <div class="ba-metric-l">WCAG contrast ratio</div>
     </div>
     <div class="ba-arrow">→</div>
@@ -1345,6 +1345,48 @@ html body .back-nav .back-nav-title,html body .back-nav .back-nav-right,html bod
 </div>
 
 <!-- ══════════════════════════════════════════
+     SECTION — RESULTS SO FAR (measured; sits before the North Star)
+══════════════════════════════════════════ -->
+<div class="section">
+  <div class="eyebrow">Results so far</div>
+  <div class="section-label">
+    <div class="sl-text">What's done, what's left</div>
+    <div class="sl-line"></div>
+    <div class="sl-text">Measured on what is already migrated</div>
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi-card"><div class="kpi-n">2.31:1 → AAA</div><div class="kpi-lab">contrast of the main button</div><div class="kpi-sub">the old green with white text, against lime on the new teal</div></div>
+    <div class="kpi-card"><div class="kpi-n">11</div><div class="kpi-lab">composite type tokens</div><div class="kpi-sub">fed by 30 primitives. Before, type lived only as Figma styles</div></div>
+    <div class="kpi-card"><div class="kpi-n">Live</div><div class="kpi-lab">token pipeline</div><div class="kpi-sub">Figma → Tokens Studio → GitHub → Slack</div></div>
+  </div>
+
+  <div class="status-grid">
+    <div class="status-col done">
+      <h4>✓ Already migrated</h4>
+      <ul>
+        <li><span class="status-mk">✓</span>Color — teal functional, lime expressive, WCAG verified</li>
+        <li><span class="status-mk">✓</span>Typography — primitives + 11 composites</li>
+        <li><span class="status-mk">✓</span>First partner theme — 14 variables, tokenized end to end</li>
+        <li><span class="status-mk">✓</span>Repo + live pipeline (Figma → GitHub → Slack)</li>
+      </ul>
+    </div>
+    <div class="status-col todo">
+      <h4>→ Left for the north</h4>
+      <ul>
+        <li><span class="status-mk">→</span>Semantic dimensions — <code>radius.button · space.card · size.control</code></li>
+        <li><span class="status-mk">→</span>One single neutral — resolve brand vs Tailwind</li>
+        <li><span class="status-mk">→</span>Tokens Studio Pro — automatic multi-file sync</li>
+        <li><span class="status-mk">→</span>Dev consumption — <code>Style Dictionary → CSS / code</code></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="progress-bar"><i class="progress-fill"></i></div>
+  <div class="progress-cap">Foundations migrated · closing dimensions, automatic sync and code consumption.</div>
+</div>
+
+<!-- ══════════════════════════════════════════
      EL NORTE — DARK SECTION
 ══════════════════════════════════════════ -->
 <div class="norte">
@@ -1385,12 +1427,13 @@ html body .back-nav .back-nav-title,html body .back-nav .back-nav-right,html bod
      SECTION — WHAT THIS UNLOCKS
 ══════════════════════════════════════════ -->
 <div class="section">
-  <div class="eyebrow">The North Star · Expected outcomes</div>
+  <div class="eyebrow">Projected · not measured yet</div>
   <div class="section-label">
-    <div class="sl-text">What this unlocks</div>
+    <div class="sl-text">What this should unlock</div>
     <div class="sl-line"></div>
-    <div class="sl-text">Once the loop closes, both teams work in the same system</div>
+    <div class="sl-text">Targets for when the loop closes</div>
   </div>
+  <p style="margin-top:1.5rem;font-size:.875rem;line-height:1.65;color:var(--ash);max-width:680px;">These are targets, not results. None of this is measured yet: it depends on Storybook and code consumption, which are still to come.</p>
 
   <div class="unlock-grid">
     <div class="unlock-card">
@@ -1418,52 +1461,16 @@ html body .back-nav .back-nav-title,html body .back-nav .back-nav-right,html bod
         <div class="unlock-num">Real-time</div>
         <div class="unlock-title">Design-dev alignment</div>
       </div>
-      <div class="unlock-wide-r">When a component changes in Figma, a token export triggers a PR. When engineering updates a story, designers review visually in Chromatic. The feedback loop that once took days now completes in hours — both teams working in the same system, at the same time.</div>
+      <div class="unlock-wide-r">When a component changes in Figma, a token export triggers a PR. When engineering updates a story, designers review visually in Chromatic. The feedback loop that takes days today should complete in hours, with both teams working in the same system, at the same time.</div>
     </div>
   </div>
 </div>
 
 <!-- ══════════════════════════════════════════
-     SECTION — MIGRATION STATUS
+     SECTION — REFLECTIONS
 ══════════════════════════════════════════ -->
 <div class="section">
-  <div class="eyebrow">Migration status</div>
-  <div class="section-label">
-    <div class="sl-text">What's done, what's left</div>
-    <div class="sl-line"></div>
-    <div class="sl-text">Foundations migrated · closing the last mile</div>
-  </div>
-
-  <div class="status-grid">
-    <div class="status-col done">
-      <h4>✓ Already migrated</h4>
-      <ul>
-        <li><span class="status-mk">✓</span>Color — teal functional, lime expressive, WCAG verified</li>
-        <li><span class="status-mk">✓</span>Typography — primitives + 11 composites</li>
-        <li><span class="status-mk">✓</span>First partner theme — 14 variables, tokenized end to end</li>
-        <li><span class="status-mk">✓</span>Repo + live pipeline (Figma → GitHub → Slack)</li>
-      </ul>
-    </div>
-    <div class="status-col todo">
-      <h4>→ Left for the north</h4>
-      <ul>
-        <li><span class="status-mk">→</span>Semantic dimensions — <code>radius.button · space.card · size.control</code></li>
-        <li><span class="status-mk">→</span>One single neutral — resolve brand vs Tailwind</li>
-        <li><span class="status-mk">→</span>Tokens Studio Pro — automatic multi-file sync</li>
-        <li><span class="status-mk">→</span>Dev consumption — <code>Style Dictionary → CSS / code</code></li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="progress-bar"><i class="progress-fill"></i></div>
-  <div class="progress-cap">Foundations migrated · closing dimensions, automatic sync and code consumption.</div>
-</div>
-
-<!-- ══════════════════════════════════════════
-     SECTION — EXPECTED IMPACT
-══════════════════════════════════════════ -->
-<div class="section">
-  <div class="eyebrow">Expected impact</div>
+  <div class="eyebrow">Reflections</div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;">
     <div class="insights-grid" style="grid-template-columns:1fr;margin-top:0;">
       <div class="ins">
@@ -1489,9 +1496,9 @@ html body .back-nav .back-nav-title,html body .back-nav .back-nav-right,html bod
       <div class="co-stats">
         <div><div class="cos-v">AAA</div><div class="cos-l">Accessibility</div></div>
         <div><div class="cos-v">1</div><div class="cos-l">Source of truth</div></div>
-        <div><div class="cos-v">4</div><div class="cos-l">Partners themed</div></div>
-        <div><div class="cos-v">↓</div><div class="cos-l">Manual steps</div></div>
-        <div><div class="cos-v">∞</div><div class="cos-l">Initiatives it supports</div></div>
+        <div><div class="cos-v">3</div><div class="cos-l">Brands on one system</div></div>
+        <div><div class="cos-v">11</div><div class="cos-l">Type tokens</div></div>
+        <div><div class="cos-v">Live</div><div class="cos-l">Token pipeline</div></div>
       </div>
     </div>
   </div>
