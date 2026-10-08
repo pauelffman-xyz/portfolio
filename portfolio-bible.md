@@ -1,6 +1,8 @@
 # Paula Elffman — Portfolio OS · Design Bible
 
-*Última actualización: 7 de octubre de 2026 — **SmartPass: design system como board y header transparente.** (1) La sección Design System de `smartpass-case.html` dejó de ser cuatro grupos apilados (escalas de color, tipografía, toasts, filtros) y pasó a ser **un solo board** con todo a la vista: tipografía, botones, código de verificación, filtro, modal, íconos, colores, toast y badges. Está hecho en HTML/CSS, no es una imagen, y los componentes van **equidistantes**: una sola separación entre todos y un solo margen. Ver "DESIGN SYSTEM COMO BOARD" dentro de CASE STUDIES. (2) `smartpass-case.html` recibió el bloque `#nav-glass`: el header va sin fondo arriba de todo (se ve el degradé del cover) y toma el vidrio al hacer scroll. Ver "Header transparente arriba, vidrio al hacer scroll". (3) **Home: cover nuevo en la card de smartpass** (More work): `assets/smartpass-accreditations.webp`, el teléfono con la pantalla de acreditaciones, en lugar del login provisorio. Ver "Notas de covers" en "Home: grilla de casos". (4) **muv: imagen de Envío reemplazada** por el abanico de cuatro pantallas (`muv-assets/muv-envio-fan.webp`) sobre un fondo `--bg3`. También se eliminó de Process la figura del flujo completo (`muv-full-flow.webp`). Ver "Cambios en `vendor-tool-case.html` y `muv-case.html` (6 de octubre de 2026)". (5) **muv: design system como board.** La biblioteca de componentes en imágenes se reemplazó por un board con los componentes reconstruidos en HTML/CSS desde el frame de Figma. Ver "Board de muv". (6) **smartpass, mobile:** Screen 03 y Screen 04 ocupan todo el ancho en el celular (antes quedaban al 72% y 60%). Ver "smartpass-case.html — pantallas sueltas en mobile". (7) **muv, 7 de octubre:** se corrigieron las pantallas Destination y Categories (mockups nuevos `-v2`) y se le dio margen izquierdo a la imagen de las dos homes. Ver "Cambios en `muv-case.html` (7 de octubre de 2026)". (8) **Vendor Tool, 7 de octubre:** el hero abre con la foto de la laptop (la de la card de la home), la composición de cinco pantallas va debajo, y en mobile las capturas se achican en proporción en vez de cortarse con scroll horizontal. Ver "Cambios en `vendor-tool-case.html` (7 de octubre de 2026)". (9) **Vendor Tool: design system como board.** La "Component library" colapsada con nueve capturas se reemplazó por el board con los componentes en HTML/CSS (botones, switches, chips, buscador de categorías, tabs de la cola, navegación lateral y colores), que en mobile se apila. Ver "Board de Vendor Tool". (10) **Vendor Tool: la captura de la cola de órdenes pasó a ser dos order cards en código.** En la decisión 2 se quitó `vt-orders-queue.webp` (se veía borrosa) y en su lugar van las dos cards de "Preparando", en tiempo y pasada de límite, hechas en HTML/CSS desde Figma, más chicas y sobre un fondo neutro. Ver "Cambios en `vendor-tool-case.html` (7 de octubre de 2026)".*
+*Última actualización: 8 de octubre de 2026 — **SukuPay Prototyper: Genesis es del equipo de ingeniería, board de componentes y header en el color del link.** (1) `sukupay-proto-case.html` deja en claro que Genesis lo pensaron y construyeron los devs (Alejandro Alvarez, Engineering Manager; Joaquin Beceiro, Frontend; Illan Cohn, Backend) y que Paula lo usa en su proceso de trabajo. Van nombrados en el cover y en el bloque de Genesis. Ver "Cambios en `sukupay-proto-case.html` (8 de octubre de 2026)". (2) El caso pasó a llamarse **SukuPay · Prototyper** (antes "SukuPay · Design system") en el header, la pestaña, el título al compartir y el footer. (3) **Los dos verdes, animados:** los círculos de lima y teal van centrados y casi tocándose, con animación. (4) **Design system como board**, debajo de los círculos. Ver "Board de SukuPay Prototyper". (5) **Regla nueva para todos los cases: el texto del header va en el mismo color que "Back to portfolio"**, ya no en gris. Ver "Texto del header en el color del link de volver (`#nav-ink`)". Aplicado en los 16 cases. (6) **Header transparente en todos:** los 12 cases que no tenían el bloque `#nav-glass` lo recibieron (ver la tabla de "Header transparente arriba, vidrio al hacer scroll").*
+
+*Última actualización previa: 7 de octubre de 2026 — **SmartPass: design system como board y header transparente.** (1) La sección Design System de `smartpass-case.html` dejó de ser cuatro grupos apilados (escalas de color, tipografía, toasts, filtros) y pasó a ser **un solo board** con todo a la vista: tipografía, botones, código de verificación, filtro, modal, íconos, colores, toast y badges. Está hecho en HTML/CSS, no es una imagen, y los componentes van **equidistantes**: una sola separación entre todos y un solo margen. Ver "DESIGN SYSTEM COMO BOARD" dentro de CASE STUDIES. (2) `smartpass-case.html` recibió el bloque `#nav-glass`: el header va sin fondo arriba de todo (se ve el degradé del cover) y toma el vidrio al hacer scroll. Ver "Header transparente arriba, vidrio al hacer scroll". (3) **Home: cover nuevo en la card de smartpass** (More work): `assets/smartpass-accreditations.webp`, el teléfono con la pantalla de acreditaciones, en lugar del login provisorio. Ver "Notas de covers" en "Home: grilla de casos". (4) **muv: imagen de Envío reemplazada** por el abanico de cuatro pantallas (`muv-assets/muv-envio-fan.webp`) sobre un fondo `--bg3`. También se eliminó de Process la figura del flujo completo (`muv-full-flow.webp`). Ver "Cambios en `vendor-tool-case.html` y `muv-case.html` (6 de octubre de 2026)". (5) **muv: design system como board.** La biblioteca de componentes en imágenes se reemplazó por un board con los componentes reconstruidos en HTML/CSS desde el frame de Figma. Ver "Board de muv". (6) **smartpass, mobile:** Screen 03 y Screen 04 ocupan todo el ancho en el celular (antes quedaban al 72% y 60%). Ver "smartpass-case.html — pantallas sueltas en mobile". (7) **muv, 7 de octubre:** se corrigieron las pantallas Destination y Categories (mockups nuevos `-v2`) y se le dio margen izquierdo a la imagen de las dos homes. Ver "Cambios en `muv-case.html` (7 de octubre de 2026)". (8) **Vendor Tool, 7 de octubre:** el hero abre con la foto de la laptop (la de la card de la home), la composición de cinco pantallas va debajo, y en mobile las capturas se achican en proporción en vez de cortarse con scroll horizontal. Ver "Cambios en `vendor-tool-case.html` (7 de octubre de 2026)". (9) **Vendor Tool: design system como board.** La "Component library" colapsada con nueve capturas se reemplazó por el board con los componentes en HTML/CSS (botones, switches, chips, buscador de categorías, tabs de la cola, navegación lateral y colores), que en mobile se apila. Ver "Board de Vendor Tool". (10) **Vendor Tool: la captura de la cola de órdenes pasó a ser dos order cards en código.** En la decisión 2 se quitó `vt-orders-queue.webp` (se veía borrosa) y en su lugar van las dos cards de "Preparando", en tiempo y pasada de límite, hechas en HTML/CSS desde Figma, más chicas y sobre un fondo neutro. Ver "Cambios en `vendor-tool-case.html` (7 de octubre de 2026)".*
 
 *Última actualización previa: 6 de octubre de 2026 — **Cases: header transparente en Vendor Tool y equipo en el hero.** (1) `vendor-tool-case.html` recibió el bloque `#nav-glass` que ya tenía `muv-case.html`: el header de arriba (`.back-nav`) va sin fondo mientras la página está arriba de todo y toma el vidrio al hacer scroll. Le faltaba, por eso seguía con fondo. Ver "Header transparente arriba, vidrio al hacer scroll" dentro de CASE STUDIES. (2) **Equipo en el bloque de datos del hero:** Vendor Tool suma la fila Team (Lucia Giacomelli, Product Manager; Fabian de la Cruz, Engineering Manager) y muv completa la suya (Passengers: Nathalia Torres, PM; Gabriel Vargas, Engineering Manager; data). El degradé del hero (`--grad-warm`) no se tocó: sigue siendo regla.*
 
@@ -1112,20 +1114,80 @@ Lo que aparezca en el resultado y sea un color de **texto** (no un accent de mar
 | `muv-case.html` | ✅ |
 | `vendor-tool-case.html` | ✅ (6 de octubre de 2026) |
 | `smartpass-case.html` | ✅ (6 de octubre de 2026), variante para el template viejo, ver nota |
-| Resto de los cases | Sin verificar |
+| `sukupay-proto-case.html` | ✅ (8 de octubre de 2026), bloque de muv más las dos líneas que fijan el vidrio, ver nota |
+| `elektra-otp.html`, `everyone-case.html`, `fancymonas-case.html`, `foody-case.html`, `hotaru-case.html`, `hugo-case.html`, `memorable-case.html`, `monchis-case.html`, `monchis-drivers-case.html`, `sukupay-case.html`, `thefork-reviews-case.html`, `thefork-shortlist-case.html` | ✅ (8 de octubre de 2026), bloque literal de muv. Cada case conserva su propio vidrio al hacer scroll |
+
+**Estado: los 16 cases lo tienen.** `sukupay-home-prototype.html` no lleva header (va embebido en un iframe).
+
+**Dos casos a tener en cuenta:** en `elektra-otp.html` el cover va en caja (`.cover.wrap`) y el degradé vive en el `body`, así que lo que se ve detrás del header es el fondo de la página. En `thefork-shortlist-case.html` hay una franja verde de "Borrador" arriba del header: el header queda transparente debajo de ella y el cover empieza justo ahí.
 
 **Nota para el template viejo (`.section` / `.cover`, sin `<main>`), aplicada en `smartpass-case.html`:** el bloque se rearmó a partir de esta descripción, no se copió de `muv-case.html`. Hace lo mismo con dos diferencias de selector: el "primer bloque" es `.back-nav + .cover` (lleva el `border-top` transparente del alto del header y `background-origin:border-box`, así `--grad-hero` empieza desde el borde de arriba), y el vidrio queda fijado dentro del bloque en los valores de la regla (blanco al 92% en light, `rgba(36,36,44,.92)` en dark) con selectores `html body…`, porque smartpass traía dos fondos viejos del header (`.82` en light y `rgba(30,30,38,.85)` en dark, este último en el `<style>` del final del body). Revisado arriba y con scroll, en light y dark, a 1440, 1100, 820 y 390px. Si se quiere el bloque literal de muv, se puede reemplazar: el comportamiento es el mismo.
+
+**En `sukupay-proto-case.html` (8 de octubre de 2026)** se usó el bloque literal de muv, que ya trae el selector `.back-nav + .cover`, y se le sumaron dos líneas para fijar el vidrio en los valores de la regla, porque el caso traía `.82` en light y un `color-mix` en dark: `html body .back-nav{background:rgba(255,255,255,.92);}` y `html body.dark-mode .back-nav{background:rgba(36,36,44,.92);}`. Ojo: entre el `</nav>` y el `.cover` no puede haber ningún otro elemento (ni un `<script>`), porque el selector `+` deja de aplicar.
+
+### Texto del header en el color del link de volver (`#nav-ink`, 8 de octubre de 2026)
+
+**La regla, para todos los cases:** el texto del header que antes iba en gris (el nombre del caso, por ejemplo "SukuPay · Prototyper", y la firma "Paula Elffman · Sr Product Designer") va **en el mismo color que "← Back to portfolio"**. El header queda en un solo color. Reemplaza al `color:var(--ash)` que se había puesto en septiembre de 2026 (ver "BUG CONOCIDO Y CORREGIDO — .back-nav").
+
+**Qué color es:** el del link de volver de ese case, no un verde fijo. Cada case nombra el token que usa su `.back-btn` en la primera línea del bloque (`--nav-ink`). Como es un token, cambia solo entre light y dark: en dark el header toma el tono brillante del case (en los verdes: `#61FF61` en SukuPay y SukuPay Prototyper, `#22F0A4` en smartpass, `#4ADE80` en los dos de TheFork).
+
+**Cómo está hecho:** un bloque propio al final del `<head>`, después de `#nav-glass`, igual en todos los cases. Solo cambia la línea de `--nav-ink`:
+
+```html
+<!-- HEADER TEXT: the case name and the byline take the colour of the "Back to portfolio" link (Oct 2026). Same block in every case; only the --nav-ink line(s) change. -->
+<style id="nav-ink">
+.back-nav{--nav-ink:var(--accent);}
+html body .back-nav .back-nav-title,html body .back-nav .back-nav-right,html body .back-nav .back-nav-r,html body .back-nav .nav-title,html body .back-nav .nav-right,html body.dark-mode .back-nav .back-btn{color:var(--nav-ink);}
+</style>
+```
+
+- Cubre todas las variantes de nombre de clase: `.back-nav-title` / `.nav-title`, `.back-nav-right` / `.nav-right` y `.back-nav-r` (Elektra).
+- `--nav-ink` va declarado en `.back-nav` y no en `:root`, para que tome el valor de dark mode del token.
+- El `html body` adelante es para ganarle a los `body.dark-mode .back-nav-right{…}` que varios cases tienen sueltos.
+- **Si el link de un case no tiene tono para dark** (queda oscuro sobre oscuro), se agrega una segunda línea, `body.dark-mode .back-nav{--nav-ink:#…;}`, y el propio link la toma en dark (por eso `.back-btn` está en la lista de selectores con `body.dark-mode`). Hizo falta en dos: `thefork-shortlist-case.html` (`#4ADE80`, el mismo que TheFork Reviews) y `monchis-drivers-case.html` (`#FF6F8A`, el mismo que monchis home).
+- **No toca los links del índice** que muv y Vendor Tool llevan en el centro del header (`.toc`). Son navegación con su propio hover y siguen en gris.
+- No cambia tamaños ni pesos.
+
+**Para un case nuevo:** pegar el bloque y poner en `--nav-ink` el mismo token que usa `.back-btn` en ese archivo.
+
+| Archivo | `--nav-ink` | Light | Dark |
+| --- | --- | --- | --- |
+| `elektra-otp.html` | `var(--red)` | `#DA291C` | no tiene dark mode |
+| `everyone-case.html` | `var(--purple-2)` | `#964BFE` | `#D6B6FF` |
+| `fancymonas-case.html` | `var(--ash)` | negro al 55% | blanco al 55% |
+| `foody-case.html` | `var(--orange)` | `#FAA41A` | no tiene dark mode |
+| `hotaru-case.html` | `var(--gold)` | `#B9873B` | `#B9873B` |
+| `hugo-case.html` | `var(--orange)` | `#0033A0` | `#7CA6FF` |
+| `memorable-case.html` | `var(--accent)` | `#9846FF` | `#C699FF` |
+| `monchis-case.html` | `var(--red)` | `#C8102E` | `#FF6F8A` |
+| `monchis-drivers-case.html` | `var(--red)` + línea de dark | `#E8143C` | `#FF6F8A` |
+| `muv-case.html` | `var(--orange-ink)` | `#B93E05` | `#FF9A6B` |
+| `smartpass-case.html` | `var(--green)` | `#17A25D` | `#22F0A4` |
+| `sukupay-case.html` | `var(--accent)` | `#0E6B4A` | `#61FF61` |
+| `sukupay-proto-case.html` | `var(--accent)` | `#005043` | `#61FF61` |
+| `thefork-reviews-case.html` | `var(--accent-text)` | `#0B8457` | `#4ADE80` |
+| `thefork-shortlist-case.html` | `var(--red)` + línea de dark | `#0B8457` | `#4ADE80` |
+| `vendor-tool-case.html` | `var(--red-ink)` | `#C8102E` | `#FF6F88` |
+
+**Estado: los 16 cases lo tienen.**
+
+**A tener en cuenta:**
+- **Fancy Monas:** su link de volver es gris (`--ash`), no un color de marca, así que el header quedó todo en ese gris. Ahora los tres textos tienen el mismo tono (antes iban al 55%, 40% y 30%).
+- **Contraste en light:** en tres cases el color del link es claro y el texto chico del header se lee menos que cuando era gris: Foody (naranja sobre blanco, 2,0:1), Hotaru (dorado sobre beige, 2,5:1) y smartpass (verde sobre verde claro, 2,9:1). Es el color que ya tenía el link. Si se quiere, se puede oscurecer el tono del header en esos tres.
+- En mobile varios cases ocultan la firma (y monchis home también el nombre del caso); eso no cambió.
+
+**Revisado:** en los 16 archivos, con un navegador, a 1360 y 390px, en light y dark, arriba de todo y con scroll: el color calculado de cada texto del header es igual al del link, el header es transparente arriba y toma el vidrio al hacer scroll, el cover empieza desde el borde superior y no aparece scroll horizontal nuevo. (`monchis-case.html` ya traía scroll horizontal en desktop, 1436px en una ventana de 1360, por el carrusel `.fc-slide`; no se tocó.)
 
 ### DESIGN SYSTEM COMO BOARD (`.dsb`, octubre 2026)
 
 **Qué es:** la parte de design system de un case se arma como **un solo board**, no como grupos apilados con título, descripción y tarjeta por componente. En una sola pieza se ve la tipografía en grande, los estados de botón, los componentes clave, el set de íconos y los colores. Referencias: el board de ejemplo con Playfair Display + Inter y el frame `example` del archivo de Figma `Muv-landing` (board de SmartPass).
 
-**Aplicado en:** `smartpass-case.html` y `muv-case.html` (los dos el 6 de octubre de 2026) y `vendor-tool-case.html` (7 de octubre de 2026). En muv reemplazó, a pedido de Paula, a la sección de imágenes que estaba marcada como aprobada. Ver "Board de muv" y "Board de Vendor Tool" más abajo.
+**Aplicado en:** `smartpass-case.html` y `muv-case.html` (los dos el 6 de octubre de 2026), `vendor-tool-case.html` (7 de octubre de 2026) y `sukupay-proto-case.html` (8 de octubre de 2026). En muv reemplazó, a pedido de Paula, a la sección de imágenes que estaba marcada como aprobada. Ver "Board de muv" y "Board de Vendor Tool" más abajo.
 
 **Reglas:**
 
 - **No es una imagen.** Los componentes se construyen en HTML/CSS con los tokens del Figma (colores, radios, tamaños de texto). Se ven nítidos a cualquier tamaño y en mobile se pueden reordenar.
-- **Equidistante.** Una sola separación entre componentes, igual en horizontal y en vertical (`--g`, 40 en la escala del board), y un solo margen exterior (`--p`, 52). Las columnas quedan al ras arriba y abajo.
+- **Equidistante.** Una sola separación entre componentes, igual en horizontal y en vertical (`--g`, 40 en la escala del board), y un solo margen exterior (`--p`, 52). Las columnas quedan al ras arriba y abajo. **Cuando el board tiene muchas piezas, más aire:** en SukuPay Prototyper (más de 20 componentes) con 40 quedaba "todo medio pegado" y Paula pidió separarlo; ahí `--g` es 64 y `--p` 72.
 - **Qué absorbe la diferencia de alto:** las piezas que son contenedor y no componente: la tarjeta blanca del código de verificación, la tarjeta blanca de los badges y los swatches de color. Los componentes no se estiran en alto. Excepción en smartpass: el filtro ocupa el ancho de su columna (en Figma mide 174 y dejaba un hueco a su derecha).
 - **Escala:** todas las medidas son px de Figma multiplicados por `--u` (`100cqw / 1170`), así el board escala entero con su contenedor. Para sumar o cambiar un componente se usan los valores de Figma tal cual, multiplicados por `--u`.
 - **Colores fijos, no tokens de página.** El board es un specimen de UI: queda claro también en dark mode (misma excepción que `.flow-node`).
@@ -1173,6 +1235,21 @@ Fuente: frame `example` del archivo de Figma `Muv-landing` (nodo `40000610:33149
 - **Revisado:** cada componente comparado contra su recorte del export de Figma, y la sección a 1920, 1440, 1150, 900, 768, 390 y 360px, en light y dark, sin scroll horizontal ni textos cortados.
 - **Clases de Vendor Tool:** `.vt-btns`, `.vt-btn` (`.is-primary .is-secondary .is-danger`, más `.is-off`, `.is-on`, `.is-line`), `.vt-ctrl`, `.vt-sw` (`.is-off`), `.vt-icon`, `.vt-chips`, `.vt-chip` (`.is-add`), `.vt-card`, `.vt-search` (`.vt-box`, `.vt-opt`), `.vt-tabs` (`.vt-tab`, `.is-on` = activo), `.vt-rail` (`.is-on` = seleccionado).
 
+#### Board de SukuPay Prototyper (`sukupay-proto-case.html`, 8 de octubre de 2026)
+
+Fuente: frame `example` del archivo de Figma `Proposal-SukuPay` (nodo `286:7013`) y la captura del frame que pasó Paula.
+
+- **Dónde va:** en la sección "The color decision", debajo de los círculos de lima y teal, con título propio ("The system, in one board."). No es una sección aparte.
+- **Componentes, todos vivos:** "Font DM Sans", ocho botones (Primary, Soft, Outline, Borderless, Secondary, Tertiary, Tertiary soft, Disabled), ocho íconos, colores (Brand `#61FF61`, Primary `#005044`, `#C8FFC8` y tres pasos), bottom navigation, tres botones redondos de ícono con badge, recipient card (SukuPay y Zigi), los tres estados de envío (Enviado, Envio rechazado, Enviando), modal, los dos badges de tipo de cambio, card de últimos envíos, card de solicitud de dinero, header con stepper, tres banners de feedback, tres cards de método de pago y el selector de país.
+- **Layout (desktop):** tres columnas de 360. Arriba, sobre A y B: tipografía, botones (4 × 2) e íconos (2 × 4). Columna A: navegación, botones redondos, recipient card, los tres estados, modal. Columna B: badges, últimos envíos, recipient card de Zigi, solicitud, stepper, feedback. Columna C: colores, métodos de pago, selector de país. Separación única `--g` 64 y margen `--p` 72 (canvas 1352), a pedido de Paula (la primera versión iba con 40 y 48). Fondo blanco con `--sh-card`. Los colores absorben la diferencia de alto.
+- **Contenedor de 999px o menos:** columnas A y B, y debajo colores + dos métodos de pago a la izquierda, "Agregar tarjeta" + selector de país a la derecha. **De 699px o menos:** una columna, en este orden: tipografía, colores, botones (de a dos), íconos en fila, columna A, columna B, métodos de pago, selector de país.
+- **Tipografía:** DM Sans, sumada al `<link>` de Google Fonts (`opsz,wght@9..40,400..800`). Los componentes van con `opsz` 14, como en Figma; el título "Font DM Sans" va con `opsz` 40, que es lo que da el ancho del frame (421).
+- **Íconos:** Iconoir (los mismos nombres que en Figma), en un sprite SVG inline dentro del `<figure>`; los de relleno son la variante `solid`.
+- **⚠️ Piezas que no son las originales.** La conexión con Figma cortó por el límite de llamadas del plan antes de poder exportar los SVG, así que: el ícono **wallet-check** es el `wallet` de Iconoir, sin el check (aparece en la tira de íconos, en la navegación y en el botón redondo); el **logo de Zigi** es un recuadro lima `#ABF24B` con "ZIGI" en texto; las **banderas** son de `circle-flags` y la marca de **Apple Pay** de `simple-icons`. **Pendiente:** que Paula pase los SVG de wallet-check y de Zigi para reemplazarlos.
+- **Diferencias con Figma:** todas las cards miden 360 de ancho (en Figma van de 350 a 390) para que las columnas queden parejas, así que algún texto corta la línea en otro lugar; los íconos van en grilla de 2 × 4 al lado de los botones (en Figma son una tira vertical entre columnas); el círculo verde de la recipient card es un color plano `#01C601`.
+- **Revisado:** contra la captura del frame, a 1440, 1100, 834, 768 y 390px, en light y dark, sin scroll horizontal.
+- **Clases de SukuPay:** `.sk-btns`, `.sk-btn` (`.is-soft .is-outline .is-ghost .is-secondary .is-tertiary .is-tertiary-soft .is-disabled .is-lg`), `.sk-icons`, `.sk-nav`, `.sk-trio`, `.sk-rcp`, `.sk-act`, `.sk-modal`, `.sk-badge`, `.sk-rate`, `.sk-repeat`, `.sk-req`, `.sk-step`, `.sk-fb`, `.sk-pay` (`.is-method .is-add`), `.sk-country`. Estructura: `.dsb-band` (franja de arriba) y `.dsb-sub` (las dos mitades de la columna C).
+
 **CSS classes clave**
 
 ```css
@@ -1205,7 +1282,7 @@ Como no son `var(--x)`, el script de auditoría de la sección anterior (que com
 /* después del bloque body.dark-mode{...} de cada archivo */
 body.dark-mode .back-nav{background:rgba(30,30,38,.85);}
 ```
-y en `.nav-right`/`.back-nav-right`, se reemplazó el literal fijo por `color:var(--ash);` (mismo tratamiento que ya tenía `.nav-title`/`.back-nav-title` al otro lado del nav — quedan con el mismo peso visual entre los dos lados).
+y en `.nav-right`/`.back-nav-right`, se reemplazó el literal fijo por `color:var(--ash);` (mismo tratamiento que ya tenía `.nav-title`/`.back-nav-title` al otro lado del nav — quedan con el mismo peso visual entre los dos lados). **Reemplazado el 8 de octubre de 2026:** esos textos ya no van en gris sino en el color del link de volver. Ver "Texto del header en el color del link de volver (`#nav-ink`)".
 
 **Estado por archivo (auditado y corregido, Septiembre 2026):**
 
@@ -1601,6 +1678,19 @@ Prompt base (en inglés):
 - **Cómo se armó el marco del teléfono:** los assets originales no estaban a mano, así que el marco se redibujó midiendo el que se ve en la página (borde de titanio violeta, bisel negro, botones laterales, isla), y se comparó esquina por esquina con el anterior. Si alguna vez hay que rehacer las otras dos pantallas (`muv-app-searching.webp`, `muv-app-confirmed.webp`), conviene usar el mismo marco.
 - **Ajustes al calzar las pantallas:** en Destination se recortaron 21px de blanco debajo del botón. El export de Categories traía su propia isla, más grande, sobre el mapa: se borró y va la isla del marco, para que los cuatro teléfonos sean iguales; además se ensanchó 1,4% para que entre completa con el indicador de inicio.
 - **Home: photo or map?** El wireframe de la izquierda quedaba pegado al borde de la imagen. El panel ahora lleva `.inset-l` (`padding-left:7%`): el wireframe queda centrado en la mitad blanca y la mitad verde sigue llegando al borde derecho. La imagen (`muv-homes-ab.jpg`) no se tocó; `.panel.inset-l` sirve para cualquier imagen cuyo dibujo toque el borde izquierdo.
+
+### Cambios en `sukupay-proto-case.html` (8 de octubre de 2026)
+
+- **Genesis es trabajo de ingeniería, y es parte del proceso de Paula.** El caso daba a entender que el prototyper era de Paula. Ahora dice que la idea y la construcción son del equipo de ingeniería, y que Paula lo usa todos los días para ir rápido, explorar ideas y escribirles las ACRs a los devs a través de Ideate. El design system es lo que enlaza el proceso y hace que lo que sale de Genesis sea fiel a sus diseños.
+- **Equipo, arriba.** El cover suma la fila "Team · Genesis was built by": Alejandro Alvarez (Engineering Manager), Joaquin Beceiro (Frontend), Illan Cohn (Backend). El bloque de Genesis los repite en una franja "Thought up and built by" (`.gen-credit`).
+- **Bloque de Genesis.** Título: "Engineering built it. I design with it every day." (antes "This stopped being a diagram."). Los tres pasos pasaron de describir la herramienta (Describe → Shape → Prototype) a describir el uso diario de Paula (Explore → Ideate → Prototype), con el rótulo "How I use it, day to day".
+- **Scope del cover:** "Tokens · Architecture · Components · Pipeline". Salieron "Agents" y "Prototyper", para que no se lean como algo construido por Paula.
+- **"From design system to the Prototyper"** (bloque oscuro de más abajo): dice que Genesis es de ingeniería y que el design system aporta el enlace. El nodo central del diagrama pasó de "The agent / The Prototyper" a "Built by engineering / Genesis", y se sumó una fila de tres roles (Engineering, Design system, My day to day). La reflexión 03 también lo dice.
+- **Nombre del caso: SukuPay · Prototyper** (antes "SukuPay · Design system"), en el header, el `<title>`, `og:title`, `twitter:title` y el footer.
+- **Los dos verdes, animados (`.duo`).** Reemplaza a `.swatch-row`. Los círculos van centrados y casi tocándose (se pisan un 10%). Al entrar en pantalla, el verde viejo `#00C603` se divide en lima y teal; después se acercan y se separan en un loop de 9 segundos, con pausa en cada extremo. Los textos van debajo, centrados, en dos columnas (una en mobile). Sin JS o con `prefers-reduced-motion` se ve el par quieto.
+- **Design system como board,** debajo de los círculos. Detalle en "DESIGN SYSTEM COMO BOARD" → "Board de SukuPay Prototyper".
+- **Header:** bloques `#nav-glass` y `#nav-ink`. Ver las dos secciones del header dentro de CASE STUDIES.
+- **Pendiente de confirmar con Paula:** (1) "ACRs" quedó escrito tal cual, sin aclarar la sigla; (2) el caso ahora nombra "Ideate", cuando el 3 de octubre se habían quitado los nombres de los pasos para no exponer cómo está orquestado Genesis; (3) los SVG de wallet-check y de Zigi.
 
 ### Cambios en `vendor-tool-case.html` (Septiembre 2026)
 
