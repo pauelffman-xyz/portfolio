@@ -1,6 +1,6 @@
 # Paula Elffman — Portfolio OS · Design Bible
 
-*Última actualización: 8 de octubre de 2026 — **Home: copy nuevo en el hero y en Selected work.** (1) El párrafo del hero (`.hello-sub`) dice ahora qué diseña Paula, para quién, hace cuánto y dónde está hoy. (2) Las cinco líneas de las cards de Selected work (`.wc-line`) pasaron a ser "qué producto + un dato que el caso sostiene". (3) La meta description de `index.html` (`description`, `og:description`, `twitter:description`) quedó alineada con el hero. (4) En Experience (itti), el dato "44.6% / Monchis CVR" pasó a "44.6% / Favorite Places CVR", por la misma regla de que un número va con lo que mide. (5) `sukupay-proto-case.html`: "4 Partners" pasó a "3 Brands" en los datos del problema y en el cierre. (5b) `sukupay-proto-case.html`, resultados: la sección de lo ya migrado subió y abre con tres datos medidos ("Results so far"), lo proyectado quedó rotulado "Projected · not measured yet", y el contraste del verde viejo se corrigió de 1.31:1 a 2.31:1. (5c) `hugo-case.html`: el rol dice que Paula diseñó y el equipo codeó; las cifras del problema quedaron en dos, con fuente; y los resultados muestran lo demostrado esa noche en vez de cifras tomadas de internet. (6) `vendor-tool-case.html`: se corrigió un caption que era una nota de trabajo, y se resolvieron y borraron las 14 notas `TODO` del código (rol, revisión de fotos por el equipo, un solo dato de 72 h, meta +98%, entre otras). Por eso la línea de vendor tool en la home pasó a "72 h of manual catalog work, down to zero." (7) `monchis-case.html`: los cuatro números animados de la investigación van escritos en el HTML con su valor real, y pasa a ser regla para todos los cases. No se sacó ni se movió ningún caso. Ver "Copy de la home: hero y Selected work (8 de octubre de 2026)" en AJUSTES RÁPIDOS POST-REVIEW, que incluye las reglas de copy y los pendientes de la revisión.*
+*Última actualización: 8 de octubre de 2026 — **Home: copy nuevo en el hero y en Selected work.** (1) El párrafo del hero (`.hello-sub`) dice ahora qué diseña Paula, para quién, hace cuánto y dónde está hoy. (2) Las cinco líneas de las cards de Selected work (`.wc-line`) pasaron a ser "qué producto + un dato que el caso sostiene". (3) La meta description de `index.html` (`description`, `og:description`, `twitter:description`) quedó alineada con el hero. (4) En Experience (itti), el dato "44.6% / Monchis CVR" pasó a "44.6% / Favorite Places CVR", por la misma regla de que un número va con lo que mide. (5) `sukupay-proto-case.html`: "4 Partners" pasó a "3 Brands" en los datos del problema y en el cierre. (5b) `sukupay-proto-case.html`, resultados: la sección de lo ya migrado subió y abre con tres datos medidos ("Results so far"), lo proyectado quedó rotulado "Projected · not measured yet", y el contraste del verde viejo se corrigió de 1.31:1 a 2.31:1. (5c) `hugo-case.html`: el rol dice que Paula diseñó y el equipo codeó; las cifras del problema quedaron en dos, con fuente; y los resultados muestran lo demostrado esa noche en vez de cifras tomadas de internet. (5d) **Cierre de los cases:** bloque "Next case" nuevo, aprobado por Paula y aplicado en 14 de los 15 cases (falta smartpass). Ver "Cierre de los cases: bloque «Next case»" dentro de CASE STUDIES. (5e) **About:** link "Contact me" (mail) al lado de "Find me on LinkedIn". (5f) **Monchis:** corregido el scroll horizontal de desktop que causaban las etiquetas del teléfono de búsqueda. (6) `vendor-tool-case.html`: se corrigió un caption que era una nota de trabajo, y se resolvieron y borraron las 14 notas `TODO` del código (rol, revisión de fotos por el equipo, un solo dato de 72 h, meta +98%, entre otras). Por eso la línea de vendor tool en la home pasó a "72 h of manual catalog work, down to zero." (7) `monchis-case.html`: los cuatro números animados de la investigación van escritos en el HTML con su valor real, y pasa a ser regla para todos los cases. No se sacó ni se movió ningún caso. Ver "Copy de la home: hero y Selected work (8 de octubre de 2026)" en AJUSTES RÁPIDOS POST-REVIEW, que incluye las reglas de copy y los pendientes de la revisión.*
 
 *Última actualización previa: 8 de octubre de 2026 — **SukuPay Prototyper: Genesis es del equipo de ingeniería, board de componentes y header en el color del link.** (1) `sukupay-proto-case.html` deja en claro que Genesis lo pensaron y construyeron los devs (Alejandro Alvarez, Engineering Manager; Joaquin Beceiro, Frontend; Illan Cohn, Backend) y que Paula lo usa en su proceso de trabajo. Van nombrados en el cover y en el bloque de Genesis. Ver "Cambios en `sukupay-proto-case.html` (8 de octubre de 2026)". (2) El caso pasó a llamarse **SukuPay · Prototyper** (antes "SukuPay · Design system") en el header, la pestaña, el título al compartir y el footer. (3) **Los dos verdes, animados:** los círculos de lima y teal van centrados y casi tocándose, con animación. (4) **Design system como board**, debajo de los círculos. Ver "Board de SukuPay Prototyper". (5) **Regla nueva para todos los cases: el texto del header va en el mismo color que "Back to portfolio"**, ya no en gris. Ver "Texto del header en el color del link de volver (`#nav-ink`)". Aplicado en los 16 cases. (6) **Header transparente en todos:** los 12 cases que no tenían el bloque `#nav-glass` lo recibieron (ver la tabla de "Header transparente arriba, vidrio al hacer scroll"). (7) **SukuPay Home: el UX audit en formato rojo de error.** Las diez cards blancas donde Paula analiza el producto pasaron a ser ítems rojos como la lista de problemas de monchis. Ver "Cambios en `sukupay-case.html` (8 de octubre de 2026)".*
 
@@ -1180,6 +1180,65 @@ html body .back-nav .back-nav-title,html body .back-nav .back-nav-right,html bod
 
 **Revisado:** en los 16 archivos, con un navegador, a 1360 y 390px, en light y dark, arriba de todo y con scroll: el color calculado de cada texto del header es igual al del link, el header es transparente arriba y toma el vidrio al hacer scroll, el cover empieza desde el borde superior y no aparece scroll horizontal nuevo. (`monchis-case.html` ya traía scroll horizontal en desktop, 1436px en una ventana de 1360, por el carrusel `.fc-slide`; no se tocó.)
 
+### Cierre de los cases: bloque «Next case» (`#next-case`, 8 de octubre de 2026) ✅ aprobado por Paula
+
+*Sale de la revisión contra los criterios de Aneta Kmiecik: los cases terminaban en Home / About, sin un paso siguiente. Ahora cada case cierra invitando al próximo.*
+
+- **Qué es:** un bloque entre el final del contenido y el footer. Rótulo "Next case", el nombre del caso siguiente en grande con una flecha →, y debajo la misma línea que tiene su card en la home. A la derecha (abajo en mobile), el link "About me and contact", que lleva a `index.html#about`.
+- **Por qué el contacto va como link al About:** por la regla de "LinkedIn y mail: solo en el About" (links externos en el About, no en la navegación).
+- **Markup (igual en todos, va justo antes del footer):**
+
+```html
+<!-- NEXT CASE -->
+<nav class="next-case" aria-label="Next case">
+  <div class="nc-in">
+    <a class="nc-link" href="hugo-case.html">
+      <span class="nc-kicker">Next case</span>
+      <span class="nc-name">hugo<span class="nc-arrow" aria-hidden="true">→</span></span>
+      <span class="nc-line">AI Customer Success agent, vibe coded.</span>
+    </a>
+    <a class="nc-about" href="index.html#about">About me and contact</a>
+  </div>
+</nav>
+```
+
+- **CSS:** bloque `<style id="next-case">` al final del `<head>`, idéntico en todos los cases. Usa solo tokens que tienen todos (`--paper`, `--ash`, `--line2`, `--accent`, `--ease`). El margen lateral es `var(--gutter)` en el template nuevo y `4rem` (`1.25rem` bajo 768px) en el viejo, así queda alineado con el footer de cada uno.
+- **Color:** la flecha y el link "About me and contact" van en el color de "Back to portfolio" (`--nav-ink`). Para eso, en el bloque `#nav-ink` de cada case el selector pasó de `.back-nav{--nav-ink:…}` a `.back-nav,.next-case{--nav-ink:…}`. Así el bloque toma solo el color del caso, también en modo oscuro.
+- **Nombre:** en minúsculas, como en la home. La segunda palabra atenuada va en `<span>` (`sukupay <span>home</span>`).
+- **Movimiento:** al pasar el mouse la flecha se corre un poco, con `--ease-apple` y pausa. Con reduced motion queda quieta.
+- **Flecha →, no ↗:** es un link interno.
+- **Excepción de contraste (foody, hotaru, everyone):** en esos tres el color del link del header no llega a 4.5:1 sobre el fondo (2.0:1, 2.8:1 y 4.4:1). Ahí el texto "About me and contact" va en el color de tinta y el color del caso queda en el subrayado y en la flecha. Se hace con una línea más en el bloque `#nav-ink` de cada uno: `.next-case{--nc-link:var(--paper,var(--ink));}`. El "Back to portfolio" de esos tres headers tiene el mismo problema de contraste; queda pendiente.
+- **`--paper` o `--ink`:** el nombre del caso usa `var(--paper,var(--ink))`, porque monchis y monchis drivers nombran `--ink` al color de texto.
+
+**Orden: el de la home, en ronda.** Cada case lleva al que sigue en la home; el último vuelve al primero.
+
+| # | Case | Lleva a | Estado |
+| --- | --- | --- | --- |
+| 1 | `muv-case.html` | sukupay prototyper | ✅ |
+| 2 | `sukupay-proto-case.html` | sukupay home | ✅ |
+| 3 | `sukupay-case.html` | monchis home experience | ✅ |
+| 4 | `monchis-case.html` | vendor tool | ✅ |
+| 5 | `vendor-tool-case.html` | hugo | ✅ |
+| 6 | `hugo-case.html` | smartpass | ✅ |
+| 7 | `smartpass-case.html` | monchis drivers | **pendiente** (falta el archivo) |
+| 8 | `monchis-drivers-case.html` | fancy monas | ✅ |
+| 9 | `fancymonas-case.html` | thefork onboarding | ✅ |
+| 10 | `thefork-shortlist-case.html` | memorable | ✅ |
+| 11 | `memorable-case.html` | foody | ✅ |
+| 12 | `foody-case.html` | thefork reviews | ✅ |
+| 13 | `thefork-reviews-case.html` | hotaru | ✅ |
+| 14 | `hotaru-case.html` | everyone | ✅ |
+| 15 | `everyone-case.html` | muv | ✅ |
+
+**Reglas:**
+1. Si cambia el orden de la home, o se suma o se saca un caso, hay que actualizar los `href` de los cases vecinos y esta tabla.
+2. Si cambia la línea de una card en la home, cambia también en el "Next case" del case anterior. Son el mismo texto.
+3. Para un case nuevo: copiar el bloque `<style id="next-case">` y el `<nav class="next-case">`, cambiar `href`, nombre y línea, y sumar `.next-case` al selector de `--nav-ink`.
+
+**Pendiente:** (1) `smartpass-case.html`: falta el archivo para sumarle el bloque (lleva a monchis drivers). (2) En los cases del template viejo el dock tapa el texto del footer al llegar al final (el footer tiene `2rem` de aire abajo; en el template nuevo son `7rem`). (3) Contraste del link "Back to portfolio" en foody, hotaru y everyone. (4) `muv-case.html` tiene 8 comentarios `<!-- TODO(...) -->` en el código, con dudas abiertas (tamaño de muestra de la encuesta, textos deformados en un render, permisos del link de Figma, método y participantes del test, período exacto de las cifras de 2026). Hay que repasarlos con Paula y borrarlos, como se hizo con Vendor Tool.
+
+**Resuelto el mismo 8 de octubre:** el mail en el About (ver "LinkedIn y mail: solo en el About") y el scroll horizontal de Monchis (ver "8 de octubre de 2026 — etiquetas del teléfono de búsqueda").
+
 ### DESIGN SYSTEM COMO BOARD (`.dsb`, octubre 2026)
 
 **Qué es:** la parte de design system de un case se arma como **un solo board**, no como grupos apilados con título, descripción y tarjeta por componente. En una sola pieza se ve la tipografía en grande, los estados de botón, los componentes clave, el set de íconos y los colores. Referencias: el board de ejemplo con Playfair Display + Inter y el frame `example` del archivo de Figma `Muv-landing` (board de SmartPass).
@@ -1924,6 +1983,18 @@ Cada hallazgo tiene código (F01–F05) y la matriz de decisión los cita. Si se
 - **Probado:** sin JS, con JS (antes y después del scroll) y con movimiento reducido. En los tres casos el valor final es el mismo.
 - **Regla para todos los cases:** un número animado va escrito en el HTML con su valor real. La animación es un agregado que parte de cero por script; nunca al revés.
 
+### 8 de octubre de 2026 — etiquetas del teléfono de búsqueda (scroll horizontal en desktop)
+
+- **Problema:** en "The search that thinks", las tres etiquetas flotantes ("Time-aware · 9am", "Rotates every 2.5s", "60% click rate") estaban en `right:-140px` respecto de la columna, no del teléfono. Quedaban 76px fuera de la página **en cualquier ancho de desktop**, de 641px a 1920px, y generaban scroll horizontal.
+- **Solución (opción elegida por Paula):**
+  - Las etiquetas se anclan al borde derecho del teléfono: `left:calc(50% + 148px)` (el teléfono mide 280px y va centrado).
+  - **Desde 1400px** de ancho van flotando al lado del teléfono, con su línea roja.
+  - **Por debajo de 1400px** no entran al lado, así que pasan a una fila debajo del teléfono, sin línea, igual que ya hacían en celular. A 1280px (laptop común) se ven así.
+  - En la fila se anula el `margin-top:2rem` inline de la segunda y la tercera, que las dejaba escalonadas.
+- **Probado** de 360 a 1920px: sin scroll horizontal. Queda un desborde de 5px solo entre 641 y 649px de ancho, de otro elemento, que ya estaba.
+- **De paso:** el footer de monchis no tenía versión mobile (seguía con `4rem` a los lados y el contenido con `1.25rem`). Bajo 640px ahora va con `1.25rem` y apilado, como en el resto de los cases.
+- **Regla:** un elemento que flota fuera de su columna se ancla al objeto que acompaña, y se prueba a 1280px, no solo a pantalla grande.
+
 ---
 
 ## HUGO CASE STUDY ✅ APROBADO
@@ -2339,11 +2410,12 @@ body.light-mode .tile-sukupay-ds .tile-name {
 - Mismo lenguaje que antes (Muli 400 `.9375rem`, `var(--accent)`) más subrayado de 1px, porque sin flecha necesita otra señal de link.
 - JS: bloque `HERO CTA` al inicio del script. Hace `scrollIntoView` a `#gallery` con `preventDefault` (no ensucia la URL con el hash) y respeta `prefers-reduced-motion`. `#gallery` tiene `scroll-margin-top:1.5rem`.
 
-### LinkedIn: solo en el About
+### LinkedIn y mail: solo en el About
 
 - Fuera del dock de `index.html` y del dock de todos los cases (`.pd-link`). El separador queda antes del theme toggle.
 - En el About: `<a class="dv-linkedin">Find me on LinkedIn</a>` dentro de `.dv-intro`, debajo del `<h1>`.
 - **Regla:** links externos (LinkedIn, mail, CV) van en el About, no en la navegación.
+- **8 de octubre de 2026, mail (pedido de Paula):** al lado de "Find me on LinkedIn" va "Contact me", un `mailto:` a pau.elffman@gmail.com. Los dos links van dentro de `<p class="dv-links">`, separados por un `·` (`.dv-links-sep`, `aria-hidden`), y usan la misma clase `.dv-linkedin`. En pantallas angostas la fila se parte sola. El bloque "Next case" de los cases lleva acá con "About me and contact".
 
 ### Deep link `index.html#about`
 
@@ -2617,11 +2689,11 @@ Anotado para la revisión de cada caso. Nada de esto se tocó en esta pasada.
 | `vendor-tool-case.html` | ✅ **Hecho el 8 de octubre:** el caption de la decisión 3 pasó a "The second step before removing a user." Las 14 notas `TODO(Paula)` del código fuente se repasaron con Paula y se borraron. **Sigue pendiente:** el período de las 72 h, el año de la meta de vendors, el nombre de sucursal de las order cards y las capturas con typos (ver "Cambios en `vendor-tool-case.html` (8 de octubre de 2026)"). |
 | `index.html`, Experience (itti) | ✅ **Hecho el 8 de octubre.** El dato decía "44.6% / Monchis CVR" y tenía el mismo problema que la card: el número es de Favorite Places. Ahora dice "44.6% / Favorite Places CVR". |
 | `sukupay-proto-case.html` | ✅ **Hecho el 8 de octubre:** el "4 Partners" pasó a "3 Brands", los resultados medidos van primero y lo proyectado quedó marcado como meta (ver "Cambios en `sukupay-proto-case.html` (8 de octubre de 2026)"). **A confirmar:** el hex del verde viejo, del que depende el 2.31:1. |
-| `monchis-case.html` | ✅ **Hecho el 8 de octubre:** los contadores llevan el valor real en el HTML (ver "8 de octubre de 2026 — los números de "What the numbers said" van escritos en el HTML"). **Sigue pendiente:** falta un "antes"; varios números de impacto son los mismos de la investigación. |
+| `monchis-case.html` | ✅ **Hecho el 8 de octubre:** se corrigió el scroll horizontal de desktop, y los contadores llevan el valor real en el HTML (ver "8 de octubre de 2026 — los números de "What the numbers said" van escritos en el HTML"). **Sigue pendiente:** falta un "antes"; varios números de impacto son los mismos de la investigación. |
 | `sukupay-case.html` | Termina en "Expected impact". Se rehace cuando entre la versión que sale a producción. |
 | `hugo-case.html` | ✅ **Hecho el 8 de octubre:** rol aclarado, cifras del problema con fuente, y los resultados muestran lo que se demostró (ver "8 de octubre de 2026 — rol, cifras con fuente y resultados" en HUGO CASE STUDY). |
 | `muv-case.html` | El resultado propio es el del onboarding, y el caso casi no muestra el onboarding. |
-| Todos los cases | Terminan en Home / About: no hay "siguiente caso" ni contacto. |
+| Todos los cases | ✅ **Hecho el 8 de octubre en 14 de 15:** cierre "Next case" (ver "Cierre de los cases: bloque «Next case»") y mail en el About. Falta `smartpass-case.html`. |
 | About | Los seis bloques de "AI in my workflow" son prompts de ejemplo. Falta un caso real: algo que la AI dio y se conservó, algo que se cortó, y por qué. Core strengths sigue pendiente (ver "About: limpieza y datos de experiencia"). |
 | Titulares de los cases | Varios suenan a plantilla ("Five findings. Five non-negotiables.", "A system without a system."). Misma limpieza que se hizo con las etiquetas. |
 

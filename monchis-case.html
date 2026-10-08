@@ -408,8 +408,15 @@ body{
 /* Annotation badges floating */
 .search-annotations{
   position:absolute;
-  top:60px;right:-140px;
+  top:60px;left:calc(50% + 148px); /* anchored to the phone's right edge: the phone is 280px wide and centred */
   display:flex;flex-direction:column;gap:.75rem;
+}
+/* Under 1400px there is no room beside the phone, so the labels go below it in a row (same as mobile).
+   Before this they hung 76px outside the page at every desktop width and caused a horizontal scroll. */
+@media(max-width:1399px){
+  .search-annotations{position:static;flex-direction:row;flex-wrap:wrap;justify-content:center;gap:.5rem;margin-top:1.5rem;}
+  .search-annotations .ann-item{margin-top:0!important;}
+  .ann-line{display:none;}
 }
 .ann-item{
   display:flex;align-items:center;gap:.625rem;
@@ -492,6 +499,7 @@ body{
   display:flex;justify-content:space-between;align-items:center;
 }
 .footer-t{font-family:'Geist',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--ash);}
+@media(max-width:640px){.footer{padding:1.5rem 1.25rem;flex-direction:column;align-items:flex-start;gap:.5rem;}}
 
 /* ─── Sketch scenes (storytelling illustrations) ───
    Portfolio system: graphite + two brand accents. See bible → "LENGUAJE VISUAL v3".
@@ -778,8 +786,24 @@ html.nav-top .back-nav{background-color:transparent !important;background-image:
 </script>
 <!-- HEADER TEXT: the case name and the byline take the colour of the "Back to portfolio" link (Oct 2026). Same block in every case; only the --nav-ink line(s) change. -->
 <style id="nav-ink">
-.back-nav{--nav-ink:var(--red);}
+.back-nav,.next-case{--nav-ink:var(--red);}
 html body .back-nav .back-nav-title,html body .back-nav .back-nav-right,html body .back-nav .back-nav-r,html body .back-nav .nav-title,html body .back-nav .nav-right,html body.dark-mode .back-nav .back-btn{color:var(--nav-ink);}
+</style>
+<style id="next-case">
+/* NEXT CASE: closing block of every case. Same markup and CSS in all of them.
+   Uses only tokens every case has; the link takes the header link colour (--nav-ink). */
+.next-case{border-top:1px solid var(--line2);padding:clamp(56px,8vw,112px) var(--gutter,4rem);}
+.next-case .nc-in{max-width:var(--wrap,none);margin:0 auto;display:flex;align-items:flex-end;justify-content:space-between;gap:2rem 3rem;flex-wrap:wrap;}
+.nc-link{display:grid;gap:.625rem;text-decoration:none;color:inherit;}
+.nc-kicker{font-size:.9375rem;font-weight:500;color:var(--ash);}
+.nc-name{font-size:clamp(2.25rem,5.5vw,4.5rem);font-weight:800;letter-spacing:-.045em;line-height:1;color:var(--paper,var(--ink));}
+.nc-name span{color:var(--ash);}
+.nc-name .nc-arrow{display:inline-block;margin-left:.3em;font-weight:500;color:var(--nav-ink,var(--accent));transition:transform .6s var(--ease-apple,var(--ease));}
+.nc-link:hover .nc-arrow,.nc-link:focus-visible .nc-arrow{transform:translateX(.22em);}
+.nc-line{font-size:1.0625rem;line-height:1.5;color:var(--ash);max-width:40ch;}
+.nc-about{display:inline-flex;align-items:center;min-height:44px;font-size:.9375rem;font-weight:600;color:var(--nc-link,var(--nav-ink,var(--accent)));text-decoration:underline;text-decoration-color:var(--nav-ink,currentColor);text-decoration-thickness:1px;text-underline-offset:4px;}
+@media (max-width:768px){.next-case{padding-inline:var(--gutter,1.25rem);}}
+@media (prefers-reduced-motion:reduce){.nc-name .nc-arrow{transition:none;}}
 </style>
 </head>
 <body>
@@ -1167,12 +1191,12 @@ html body .back-nav .back-nav-title,html body .back-nav .back-nav-right,html bod
     <div class="ri-stat">
       <div class="ri-stat-top">
         <div>
-          <div class="ri-stat-number" data-count="60">0<span class="ri-pct">%</span></div>
+          <div class="ri-stat-number" data-count="60">60<span class="ri-pct">%</span></div>
           <div class="ri-stat-label">of users engage with search — on a static placeholder</div>
         </div>
         <svg class="ri-donut" viewBox="0 0 36 36">
           <circle class="ri-donut-track" cx="18" cy="18" r="14"/>
-          <circle class="ri-donut-fill c-red" cx="18" cy="18" r="14" stroke-dasharray="0 88" data-target="52.8 35.2"/>
+          <circle class="ri-donut-fill c-red" cx="18" cy="18" r="14" stroke-dasharray="52.8 35.2" data-target="52.8 35.2"/>
         </svg>
       </div>
       <div class="ri-stat-insight">Search was the front door — disguised as a form field</div>
@@ -1182,12 +1206,12 @@ html body .back-nav .back-nav-title,html body .back-nav .back-nav-right,html bod
     <div class="ri-stat">
       <div class="ri-stat-top">
         <div>
-          <div class="ri-stat-number" data-count="80">0<span class="ri-pct">%</span></div>
+          <div class="ri-stat-number" data-count="80">80<span class="ri-pct">%</span></div>
           <div class="ri-stat-label">go straight into Restaurants from home</div>
         </div>
         <svg class="ri-donut" viewBox="0 0 36 36">
           <circle class="ri-donut-track" cx="18" cy="18" r="14"/>
-          <circle class="ri-donut-fill c-blue" cx="18" cy="18" r="14" stroke-dasharray="0 88" data-target="70.4 17.6"/>
+          <circle class="ri-donut-fill c-blue" cx="18" cy="18" r="14" stroke-dasharray="70.4 17.6" data-target="70.4 17.6"/>
         </svg>
       </div>
       <div class="ri-stat-insight">Users arrive with intent, not curiosity</div>
@@ -1197,14 +1221,14 @@ html body .back-nav .back-nav-title,html body .back-nav .back-nav-right,html bod
     <div class="ri-stat">
       <div class="ri-stat-top">
         <div>
-          <div class="ri-stat-number" data-count="67">0<span class="ri-pct">%+</span></div>
+          <div class="ri-stat-number" data-count="67">67<span class="ri-pct">%+</span></div>
           <div class="ri-stat-label">of category traffic is burgers &amp; pizza</div>
         </div>
         <div class="ri-bar-wrap">
-          <div class="ri-bar-track"><div class="ri-bar-fill" style="width:0%;background:var(--red);" data-w="82%"></div></div>
-          <div class="ri-bar-track"><div class="ri-bar-fill" style="width:0%;background:#F0A500;" data-w="64%"></div></div>
-          <div class="ri-bar-track"><div class="ri-bar-fill" style="width:0%;background:var(--ash);opacity:.55;" data-w="28%"></div></div>
-          <div class="ri-bar-track"><div class="ri-bar-fill" style="width:0%;background:var(--ash);opacity:.3;" data-w="15%"></div></div>
+          <div class="ri-bar-track"><div class="ri-bar-fill" style="width:82%;background:var(--red);" data-w="82%"></div></div>
+          <div class="ri-bar-track"><div class="ri-bar-fill" style="width:64%;background:#F0A500;" data-w="64%"></div></div>
+          <div class="ri-bar-track"><div class="ri-bar-fill" style="width:28%;background:var(--ash);opacity:.55;" data-w="28%"></div></div>
+          <div class="ri-bar-track"><div class="ri-bar-fill" style="width:15%;background:var(--ash);opacity:.3;" data-w="15%"></div></div>
         </div>
       </div>
       <div class="ri-stat-insight">High intent, low browsing — they already decided</div>
@@ -1214,12 +1238,12 @@ html body .back-nav .back-nav-title,html body .back-nav .back-nav-right,html bod
     <div class="ri-stat">
       <div class="ri-stat-top">
         <div>
-          <div class="ri-stat-number" data-count="27">0<span class="ri-pct">%</span></div>
+          <div class="ri-stat-number" data-count="27">27<span class="ri-pct">%</span></div>
           <div class="ri-stat-label">of navbar taps go to cart — highest of any tab</div>
         </div>
         <svg class="ri-donut" viewBox="0 0 36 36">
           <circle class="ri-donut-track" cx="18" cy="18" r="14"/>
-          <circle class="ri-donut-fill c-teal" cx="18" cy="18" r="14" stroke-dasharray="0 88" data-target="23.8 64.2"/>
+          <circle class="ri-donut-fill c-teal" cx="18" cy="18" r="14" stroke-dasharray="23.8 64.2" data-target="23.8 64.2"/>
         </svg>
       </div>
       <div class="ri-stat-insight">Cart is the real destination — home is just a corridor</div>
@@ -2216,6 +2240,18 @@ html body .back-nav .back-nav-title,html body .back-nav .back-nav-right,html bod
   </div>
 </div>
 
+<!-- NEXT CASE -->
+<nav class="next-case" aria-label="Next case">
+  <div class="nc-in">
+    <a class="nc-link" href="vendor-tool-case.html">
+      <span class="nc-kicker">Next case</span>
+      <span class="nc-name">vendor tool<span class="nc-arrow" aria-hidden="true">→</span></span>
+      <span class="nc-line">Restaurants edit their own menu. 72&nbsp;h of manual catalog work, down to zero.</span>
+    </a>
+    <a class="nc-about" href="index.html#about">About me and contact</a>
+  </div>
+</nav>
+
 <!-- FOOTER -->
 <div class="footer">
   <div class="footer-t">monchis · Home redesign · Q3–Q4 2025</div>
@@ -2424,6 +2460,17 @@ body.dark-mode{
 (function(){
   var statsEl = document.getElementById('ri-stats');
   if(!statsEl) return;
+  /* The HTML carries the real values, so the stats read correctly with no JS,
+     in link previews and for crawlers. The count-up is an enhancement: it runs
+     only when it can, and never with reduced motion. */
+  if(!('IntersectionObserver' in window)) return;
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  statsEl.querySelectorAll('[data-count]').forEach(function(el){
+    var pct = el.querySelector('.ri-pct');
+    el.innerHTML = '0' + (pct ? pct.outerHTML : '');
+  });
+  statsEl.querySelectorAll('[data-target]').forEach(function(c){ c.setAttribute('stroke-dasharray','0 88'); });
+  statsEl.querySelectorAll('[data-w]').forEach(function(bar){ bar.style.width = '0%'; });
   var fired = false;
   var io = new IntersectionObserver(function(entries){
     entries.forEach(function(e){

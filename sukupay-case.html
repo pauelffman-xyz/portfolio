@@ -675,7 +675,7 @@ html.nav-top .back-nav{background-color:transparent !important;background-image:
 </script>
 <!-- HEADER TEXT: the case name and the byline take the colour of the "Back to portfolio" link (Oct 2026). Same block in every case; only the --nav-ink line(s) change. -->
 <style id="nav-ink">
-.back-nav{--nav-ink:var(--accent);}
+.back-nav,.next-case{--nav-ink:var(--accent);}
 html body .back-nav .back-nav-title,html body .back-nav .back-nav-right,html body .back-nav .back-nav-r,html body .back-nav .nav-title,html body .back-nav .nav-right,html body.dark-mode .back-nav .back-btn{color:var(--nav-ink);}
 </style>
 <!-- UX AUDIT: the findings read as problems, in the red "error" format (same idea as the problem list in the monchis case). Oct 2026. -->
@@ -693,6 +693,22 @@ body.dark-mode{--err:#FF8A8A;}
 .audit-list .audit-d{font-size:.8125rem;}
 body.dark-mode .audit-list .audit-item{background:color-mix(in srgb,var(--err) 10%,var(--bg));}
 @media(max-width:900px){.audit-list{grid-template-columns:minmax(0,1fr);}}
+</style>
+<style id="next-case">
+/* NEXT CASE: closing block of every case. Same markup and CSS in all of them.
+   Uses only tokens every case has; the link takes the header link colour (--nav-ink). */
+.next-case{border-top:1px solid var(--line2);padding:clamp(56px,8vw,112px) var(--gutter,4rem);}
+.next-case .nc-in{max-width:var(--wrap,none);margin:0 auto;display:flex;align-items:flex-end;justify-content:space-between;gap:2rem 3rem;flex-wrap:wrap;}
+.nc-link{display:grid;gap:.625rem;text-decoration:none;color:inherit;}
+.nc-kicker{font-size:.9375rem;font-weight:500;color:var(--ash);}
+.nc-name{font-size:clamp(2.25rem,5.5vw,4.5rem);font-weight:800;letter-spacing:-.045em;line-height:1;color:var(--paper,var(--ink));}
+.nc-name span{color:var(--ash);}
+.nc-name .nc-arrow{display:inline-block;margin-left:.3em;font-weight:500;color:var(--nav-ink,var(--accent));transition:transform .6s var(--ease-apple,var(--ease));}
+.nc-link:hover .nc-arrow,.nc-link:focus-visible .nc-arrow{transform:translateX(.22em);}
+.nc-line{font-size:1.0625rem;line-height:1.5;color:var(--ash);max-width:40ch;}
+.nc-about{display:inline-flex;align-items:center;min-height:44px;font-size:.9375rem;font-weight:600;color:var(--nc-link,var(--nav-ink,var(--accent)));text-decoration:underline;text-decoration-color:var(--nav-ink,currentColor);text-decoration-thickness:1px;text-underline-offset:4px;}
+@media (max-width:768px){.next-case{padding-inline:var(--gutter,1.25rem);}}
+@media (prefers-reduced-motion:reduce){.nc-name .nc-arrow{transition:none;}}
 </style>
 </head>
 <body>
@@ -1227,6 +1243,18 @@ body.dark-mode .audit-list .audit-item{background:color-mix(in srgb,var(--err) 1
     </div>
   </div>
 </div>
+
+<!-- NEXT CASE -->
+<nav class="next-case" aria-label="Next case">
+  <div class="nc-in">
+    <a class="nc-link" href="monchis-case.html">
+      <span class="nc-kicker">Next case</span>
+      <span class="nc-name">monchis <span>home experience</span><span class="nc-arrow" aria-hidden="true">→</span></span>
+      <span class="nc-line">Food delivery home redesign. Favorite Places converts at 44.6%.</span>
+    </a>
+    <a class="nc-about" href="index.html#about">About me and contact</a>
+  </div>
+</nav>
 
 <!-- FOOTER -->
 <div class="footer">
