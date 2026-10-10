@@ -1,6 +1,8 @@
 # Paula Elffman — Portfolio OS · Design Bible
 
-*Última actualización: 10 de octubre de 2026 — **Monchis: fondo de página blanco.** `monchis-case.html` era el único case que seguía con el fondo crema (`#F5F4F0`) en modo claro, porque nunca recibió el cambio a blanco que sí tuvieron los demás. Ahora usa `--bg:#FFFFFF`, igual que el resto. El modo oscuro no cambió. Ver "10 de octubre de 2026 — fondo de página blanco" dentro de MONCHIS CASE STUDY.*
+*Última actualización: 10 de octubre de 2026 — **TheFork onboarding: deja de ser borrador.** `thefork-shortlist-case.html` ya no muestra "Borrador", se llama "TheFork Onboarding" igual que en la home, dice que es una propuesta de 2021 que no se lanzó, y los números inventados de "Projected impact" se reemplazaron por "How I'd measure it". Ver "Cambios en `thefork-shortlist-case.html` (10 de octubre de 2026)".*
+
+*Última actualización previa: 10 de octubre de 2026 — **Monchis: fondo de página blanco.** `monchis-case.html` era el único case que seguía con el fondo crema (`#F5F4F0`) en modo claro, porque nunca recibió el cambio a blanco que sí tuvieron los demás. Ahora usa `--bg:#FFFFFF`, igual que el resto. El modo oscuro no cambió. Ver "10 de octubre de 2026 — fondo de página blanco" dentro de MONCHIS CASE STUDY.*
 
 *Última actualización previa: 8 de octubre de 2026 — **Home: copy nuevo en el hero y en Selected work.** (1) El párrafo del hero (`.hello-sub`) dice ahora qué diseña Paula, para quién, hace cuánto y dónde está hoy. (2) Las cinco líneas de las cards de Selected work (`.wc-line`) pasaron a ser "qué producto + un dato que el caso sostiene". (3) La meta description de `index.html` (`description`, `og:description`, `twitter:description`) quedó alineada con el hero. (4) En Experience (itti), el dato "44.6% / Monchis CVR" pasó a "44.6% / Favorite Places CVR", por la misma regla de que un número va con lo que mide. (5) `sukupay-proto-case.html`: "4 Partners" pasó a "3 Brands" en los datos del problema y en el cierre. (5b) `sukupay-proto-case.html`, resultados: la sección de lo ya migrado subió y abre con tres datos medidos ("Results so far"), lo proyectado quedó rotulado "Projected · not measured yet", y el contraste del verde viejo se corrigió de 1.31:1 a 2.31:1. (5c) `hugo-case.html`: el rol dice que Paula diseñó y el equipo codeó; las cifras del problema quedaron en dos, con fuente; y los resultados muestran lo demostrado esa noche en vez de cifras tomadas de internet. (5d) **Cierre de los cases:** bloque "Next case" nuevo, aprobado por Paula y aplicado en los 15 cases. Ver "Cierre de los cases: bloque «Next case»" dentro de CASE STUDIES. (5e) **About:** link "Contact me" (mail) al lado de "Find me on LinkedIn". (5f) **Monchis:** corregido el scroll horizontal de desktop que causaban las etiquetas del teléfono de búsqueda. (5g) `muv-case.html`: se resolvieron y borraron las 8 notas `TODO`; las cifras de 2026 pasaron de "The business after launch" a "Where the business aimed to be in 2026", rotuladas como metas. (5h) **Dock:** 12 cases del template viejo ganaron aire bajo el footer (`#dock-clear`) para que el dock no tape su texto. Ver "Dock: aire bajo el footer". (5i) **Titulares:** se reemplazaron 23 titulares de plantilla en monchis, sukupay prototyper y hugo por frases con datos del caso. Después se hizo la segunda tanda en siete cases de More work. Ver "Titulares: fuera las frases de plantilla". (5j) **About:** texto de presentación con el recorrido real, título nuevo en la sección de AI, y Core strengths como cuatro fortalezas con prueba y link al case. El bloque "What I keep, what I cut" se agregó y **se quitó el mismo día a pedido de Paula**. Ver "About: presentación, criterio con AI y fortalezas con prueba". (5k) **Foody:** ya tiene dock y modo oscuro, como el resto. Ver "Foody: dock y modo oscuro". (5m) `sukupay-proto-case.html`: se quitaron las secciones "First partner theme" y "Typography", que repetían datos ya presentes en "Results so far"; el pipeline pasó a ser "Action · 04". (5n) **Home:** más aire entre caso y caso en mobile; en las cards, nombre y descripción más juntos y el rubro más separado. El rubro en mayúsculas se probó y se descartó. Después se reescribieron rubro y descripción de las 15 cards: el rubro es siempre la industria y la descripción no repite ni el rubro ni el nombre; las líneas de "Next case" se regeneraron. Ver "Home: aire entre casos en mobile y texto de las cards". (5l) **Contraste del header:** en foody, hotaru, everyone y smartpass el link "Back to portfolio" y el texto del header pasaron a un tono más oscuro del color de marca, que cumple AA en modo claro. Ver "Tono AA del header en cuatro cases". (6) `vendor-tool-case.html`: se corrigió un caption que era una nota de trabajo, y se resolvieron y borraron las 14 notas `TODO` del código (rol, revisión de fotos por el equipo, un solo dato de 72 h, meta +98%, entre otras). Por eso la línea de vendor tool en la home pasó a "72 h of manual catalog work, down to zero." (7) `monchis-case.html`: los cuatro números animados de la investigación van escritos en el HTML con su valor real, y pasa a ser regla para todos los cases. No se sacó ni se movió ningún caso. Ver "Copy de la home: hero y Selected work (8 de octubre de 2026)" en AJUSTES RÁPIDOS POST-REVIEW, que incluye las reglas de copy y los pendientes de la revisión.*
 
@@ -1950,6 +1952,46 @@ Prompt base (en inglés):
   - **Regla que sale de acá:** en un case, un dato va una sola vez y donde sostiene una decisión. Una sección que solo lista cantidades (tokens, variables, estilos) sin decisión al lado se saca o se resume en resultados.
   - Revisado a 1280 y 390px, en light y dark: sin scroll horizontal ni errores.
 
+### Cambios en `thefork-shortlist-case.html` (10 de octubre de 2026)
+
+Repaso del case con Paula. El archivo sigue llamándose `thefork-shortlist-case.html` (no se renombró, para no romper links), pero el case se llama **TheFork Onboarding**.
+
+**Datos que dio Paula:** es de **2021**, llevó **3 semanas**, su rol era **Sr Product Designer** y fue una **propuesta que no se lanzó**.
+
+| Qué | Antes | Ahora |
+| --- | --- | --- |
+| Aviso "Borrador" | Franja verde arriba de todo, más cuatro menciones (sobre el título, fila Status, un "[Borrador]" en un párrafo y el footer) | Sacado de los cinco lugares |
+| Nombre | "TheFork Shortlist" en la pestaña, el header, el título del cover y el footer; en la home, "thefork onboarding" | **"TheFork Onboarding"** en todos lados. "Shortlist" queda solo como nombre de la funcionalidad dentro del texto |
+| Título del cover | TheFork / Shortlist / *for you.* | TheFork / Onboarding / *in three steps.* |
+| Rótulo sobre el título | Onboarding & discovery · TheFork · Borrador | Onboarding & discovery · TheFork · 2021 |
+| Role | Product Designer | Sr Product Designer (ya lo decían el header y el footer) |
+| Time | no estaba | 3 weeks · 2021 (fila nueva) |
+| Status | Borrador — flujo final, faltan métricas | Proposal · not launched |
+| Pestaña y título al compartir | TheFork Shortlist · Personalized Restaurant Recommendations | TheFork Onboarding · From six steps to three |
+| Footer | TheFork Shortlist · TheFork · Borrador | TheFork Onboarding · TheFork · 2021 |
+
+**Números de "Mission" más grandes.** Los tres datos del bloque verde (6, Step 3, 0) pasaron de `1.375rem` a `clamp(2.5rem,4.5vw,3.5rem)`: 56px en desktop, 40px en celular. La etiqueta de abajo pasó de `.625rem` (10px, casi ilegible) a `.875rem`, con más contraste (blanco al 78%, antes al 50%). En celular van uno debajo del otro.
+
+**"Projected impact" → "How I'd measure it".** La sección tenía una tabla con rangos estimados ("~35–45% → ~70–80% (est.)", "~1.3–1.6×") y el propio texto aclaraba que no había analítica detrás; hasta las cifras del flujo viejo eran estimadas. Además el párrafo decía "until this section gets replaced with actual data", una nota de trabajo. Ahora:
+- Rótulo "Measurement", título "How I'd measure it" y una frase: "This proposal didn't launch, so there are no results to report. These are the three metrics I'd track, and what I'd expect each one to do."
+- Tabla nueva (`.measure`, con clases, sin `grid-template-columns` inline): **Metric / Hypothesis**, sin ningún número. Tres métricas (Onboarding completion, Location permission granted, Conversion to reservation) y una fila "Open questions" con las dos preguntas que ya estaban. En celular cada fila se apila y se oculta el encabezado.
+- Se borraron las barras animadas y su código (`.stat-*`, `.js-bar`, `.js-stat`). De paso desaparece un problema: los valores estaban ocultos por CSS hasta que corría la animación.
+- **Regla (refuerza la de SukuPay Prototyper y muv):** si un case no se lanzó, no lleva números de resultado, ni siquiera rotulados como estimación. Lleva qué se mediría y qué se espera que pase.
+
+**Citas → escenarios.** Sofía, Marco y Julia opinaban entre comillas sobre el flujo viejo y sobre el nuevo, que nunca se lanzó. Ahora son seis frases en tercera persona, sin comillas ni cursiva, que describen qué le pasa a cada persona en cada flujo. El rótulo pasó de "User personas" a "User personas · three scenarios".
+
+**Rótulos más oscuros.** "The current flow, screen by screen" y "User personas" estaban en `--ash2` (casi invisibles) y pasaron a `--ash`, como el resto de los rótulos.
+
+**Título del cover en celular.** "Onboarding" es una palabra más larga que "Shortlist" y a 72px se salía de la pantalla por debajo de 390px. Regla nueva: `@media (max-width:480px){.cover-title{font-size:15vw;}}`. Probado a 320, 360, 390, 430 y 768px, sin scroll horizontal.
+
+**Revisado** en desktop y celular, en claro y oscuro: sin errores ni scroll horizontal.
+
+**Pendiente de confirmar con Paula:**
+1. La sección Wireframes dice "validated in wireframes first" y "Content hierarchy and flow were tested here". No se sabe con quién ni cómo. No se tocó.
+2. Si las tres personas (Sofía, Marco, Julia) salen de investigación real o son supuestos de trabajo.
+3. El case sigue sin fila Team.
+4. Quedan las rayas largas del texto original; van en la pasada general de rayas.
+
 ### Cambios en `vendor-tool-case.html` (Septiembre 2026)
 
 - **Bloque v3 aplicado.** Colores por case: `--grad-warm` rosado Monchis (`#FFECEF → #FFF6F7 → #FFF`, dark `#36242A → #2A2429 → #24242C`) y `--grad-accent` rojo (`#F0284E → #E8143C → #C8102E`, dark `#FF7A93 → #FF5C7A → #FF3D63`). Todas las paradas dan ≥3.6:1 sobre el hero (verificado con script).
@@ -2878,7 +2920,7 @@ Pedidos de Paula mirando la home en el celular.
 - **Next case:** la línea del bloque "Next case" de los 15 cases se regeneró con las descripciones nuevas (misma regla de siempre: copia la línea de la card de la home).
 - **Revisado** a 390 y 1280px: los 15 rubros entran en una línea; las descripciones ocupan una o dos líneas, y tres solo sukupay prototyper en el celular. Sin scroll horizontal ni errores.
 
-**Pendiente, avisado a Paula y sin tocar:** `thefork-shortlist-case.html` (thefork onboarding) muestra la palabra **"Borrador"** a la vista en cinco lugares: una franja verde arriba de todo ("Borrador — copy y flujo actualizados, faltan métricas reales de resultado"), el header, la fila Status del cover, un "[Borrador]" dentro de un párrafo y uno más abajo. Hay que decidir si se saca el aviso o si el case se despublica hasta tener las métricas.
+**Resuelto el 10 de octubre de 2026:** el aviso de "Borrador" de `thefork-shortlist-case.html`. Ver "Cambios en `thefork-shortlist-case.html` (10 de octubre de 2026)".
 
 ### Copy de la home: hero y Selected work (8 de octubre de 2026)
 
