@@ -1,6 +1,8 @@
 # Paula Elffman — Portfolio OS · Design Bible
 
-*Última actualización: 10 de octubre de 2026 — **Everyone: design system como board.** `everyone-case.html` suma el board de design system en HTML/CSS (no es imagen), reemplaza las dos imágenes que se veían mal, achica un 25% las cinco pantallas de Home y arregla los subtítulos de sección que no se leían. Ver "Board de Everyone" dentro de "DESIGN SYSTEM COMO BOARD" y "Cambios en `everyone-case.html` (10 de octubre de 2026)".*
+*Última actualización: 10 de octubre de 2026 — **Everyone: plan de equipo como roadmap.** La sección de proceso de `everyone-case.html` se rehízo como un roadmap de dos semanas con responsable por tarea y los hitos con el cliente, y subió al segundo lugar del case. Ver el punto 5 de "Cambios en `everyone-case.html` (10 de octubre de 2026)".*
+
+*Última actualización previa: 10 de octubre de 2026 — **Everyone: design system como board.** `everyone-case.html` suma el board de design system en HTML/CSS (no es imagen), reemplaza las dos imágenes que se veían mal, achica un 25% las cinco pantallas de Home y arregla los subtítulos de sección que no se leían. Ver "Board de Everyone" dentro de "DESIGN SYSTEM COMO BOARD" y "Cambios en `everyone-case.html` (10 de octubre de 2026)".*
 
 *Última actualización previa: 10 de octubre de 2026 — **Rayas largas fuera de los cases.** Se reescribieron las 160 frases con raya larga (—) de monchis, sukupay home, sukupay prototyper, vendor tool y thefork onboarding. Con muv, fancy monas y hotaru, que ya no tenían, son 8 de 15 cases limpios. Faltan 7 de More work. Ver "Rayas largas: fuera del texto de los cases".*
 
@@ -2092,6 +2094,20 @@ Cuatro pedidos de Paula en la misma pasada.
 | Oscuro | `var(--ash2)` | `#A9A9BC` | 6,7:1 |
 
 - Mismo problema que en TheFork onboarding el mismo día. **Regla:** `--ash2` es para filetes y fondos, nunca para texto.
+
+**5. Plan de equipo como roadmap (`#plan`, mismo día).** Paula pasó el diagrama original (`03.pdf`: dos semanas, tareas por rol, sincronizaciones con el cliente) y pidió que la parte de cómo organizaría al equipo si lo liderara quede mejor plasmada, tipo roadmap, atractiva y al inicio.
+
+- **Qué reemplazó:** la sección "Process · Two-week sprint" (titular "Seventeen hours, a daily standup and two scoped weeks.", la tarjeta del daily y las dos tarjetas de semana), que estaba después del benchmark.
+- **Dónde va ahora:** es la segunda sección del case, justo después de "Overview & challenge" y antes de "Project vision & strategy".
+- **Titular:** "How I'd run the team: two weeks, three roles, three client syncs." El texto está en voz de plan ("the way I would lead it"), porque Paula lo describió como lo que haría si liderara.
+- **Estructura:** dos semanas (Week 1 · Research, Week 2 · Ideation and validation), cuatro pasos cada una, numerados 01 a 08 sobre un riel. Cada paso es una tarjeta con sus tareas, y cada tarea lleva su responsable en un chip: **PM** (oscuro), **Sr + Jr** (degradé violeta de la marca) o **Jr** (lima). Las sincronizaciones con el cliente van como hito con rombo, en el orden en que ocurren (después de los wireframes, después del UI y antes del MVP), y el kickoff abre el paso 01.
+- **Debajo:** tres notas (Kickoff, Daily · 10:30, Client syncs).
+- **Contenido:** sale del PDF. Los ocho nombres de paso (Existing data, Survey and flows, Benchmark and synthesis, Wireframes, Visual design, UI and prototype, Testing, Iteration and MVP) son un resumen propio de las tareas de cada columna del diagrama; Paula puede cambiarlos. Las filas "Start day" y "Middle day" del original no se muestran: las tareas van en orden dentro de cada paso.
+- **No es imagen.** HTML/CSS con tokens de página, así que sigue el modo oscuro. Los chips usan los colores de Everyone (violeta, lima, oscuro).
+- **Responsive:** riel horizontal con cuatro tarjetas por semana en desktop; hasta 1100px el rótulo de la semana pasa arriba; hasta 900px dos columnas sin riel; hasta 600px una columna con riel vertical a la izquierda.
+- **Movimiento:** las tarjetas entran de a una, con pausa (140 ms entre cada una), y el riel se dibuja. Solo corre si el navegador tiene `IntersectionObserver` y no hay "reducir movimiento"; sin JavaScript todo se ve desde el principio.
+- **Clases:** `.rm-head`, `.rm-title`, `.rm-sub`, `.rm-legend`, `.rm-who` (`.is-pm .is-pair .is-jr`), `.rm-dia`, `.rm` (`.is-anim`, `.is-in`), `.rm-week`, `.rm-track`, `.rm-step`, `.rm-node`, `.rm-card`, `.rm-tasks`, `.rm-ms` (hito; `.is-start` = kickoff), `.rm-rituals`.
+- **Para consultar con Paula:** el case y la home hablan del equipo en pasado, como algo que ocurrió ("Ran quality checks on the Jr Designer's output", "A 17-hour team sprint I led"), y ella describió el plan como lo que haría "si estuviera liderando". Falta confirmar si el equipo existió o si fue un ejercicio, para dejar todo en la misma voz.
 
 **De paso:** cuatro rayas largas menos en la sección de design system. El resto de las rayas del case sigue pendiente (ver "Rayas largas").
 

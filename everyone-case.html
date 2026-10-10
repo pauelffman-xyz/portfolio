@@ -414,6 +414,76 @@ body.dark-mode .sl-text{color:#A9A9BC;}
 .ds-tag-green { border-color:rgba(46,204,113,.3);color:#2ECC71; }
 .ds-tag-red { border-color:rgba(232,80,80,.3);color:#E85050; }
 
+/* ── TEAM PLAN ROADMAP (Oct 2026) ──
+   Two weeks, four steps each. Every task carries its owner (PM, Sr + Jr, Jr) and the client
+   syncs sit in the order they happen. Built in HTML/CSS (not an image): a horizontal rail on
+   desktop, two columns on tablet, a vertical rail on phones. Page tokens, so it follows dark mode. */
+.rm-head{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(2rem,5vw,5rem);align-items:end;}
+.rm-title{font-size:clamp(2rem,3.5vw,3rem);font-weight:800;letter-spacing:-.04em;line-height:1;color:var(--paper);}
+.rm-sub{font-size:.9375rem;line-height:1.75;color:var(--ash);font-weight:300;}
+.rm-legend{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem 1.5rem;margin-top:clamp(2rem,4vw,3.5rem);font-size:.8125rem;color:var(--ash);}
+.rm-legend > span{display:inline-flex;align-items:center;gap:.5rem;}
+.rm-who{display:inline-block;flex:none;min-width:3.5rem;padding:.1875rem .5rem;border-radius:100px;font-size:.6875rem;line-height:1.3;font-weight:600;text-align:center;white-space:nowrap;}
+.rm-who.is-pm{background:var(--paper);color:var(--bg);}
+.rm-who.is-pair{background:linear-gradient(180deg,#9747FF,#8381F0);color:#fff;}
+.rm-who.is-jr{background:#D9F144;color:#1A1815;}
+.rm-dia{display:inline-block;flex:none;width:.5rem;height:.5rem;background:var(--purple-2);transform:rotate(45deg);border-radius:1px;}
+
+.rm-week{display:grid;grid-template-columns:11rem minmax(0,1fr);gap:clamp(1.5rem,3vw,3rem);margin-top:clamp(3rem,6vw,5.5rem);}
+.rm-week + .rm-week{margin-top:clamp(2.5rem,5vw,4.5rem);}
+.rm-week-h{padding-top:2.75rem;}
+.rm-week-n{display:block;font-size:clamp(2rem,3vw,2.75rem);font-weight:800;letter-spacing:-.04em;line-height:1;color:var(--paper);}
+.rm-week-t{display:block;margin-top:.5rem;font-size:1rem;font-weight:600;letter-spacing:-.01em;color:var(--purple-2);}
+.rm-week-d{margin-top:.75rem;font-size:.8125rem;line-height:1.6;color:var(--ash);}
+
+.rm-track{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1.25rem;list-style:none;margin:0;padding:0;}
+.rm-track::before{content:'';position:absolute;left:14px;right:0;top:13px;height:2px;border-radius:2px;background:linear-gradient(90deg,#9747FF,#8381F0 60%,#D9F144);transform-origin:left center;}
+.rm-step{position:relative;display:flex;flex-direction:column;gap:1rem;min-width:0;}
+.rm-node{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:var(--bg);border:2px solid var(--purple-2);font-size:.6875rem;font-weight:700;letter-spacing:0;color:var(--paper);}
+.rm-card{flex:1;display:flex;flex-direction:column;padding:1.25rem;background:var(--card);border-radius:var(--r-card);box-shadow:var(--sh-card);}
+.rm-step-t{font-size:1.0625rem;font-weight:700;letter-spacing:-.02em;line-height:1.25;color:var(--paper);margin-bottom:.75rem;}
+.rm-tasks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;}
+.rm-tasks li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:.625rem;align-items:start;padding:.75rem 0;border-top:1px solid var(--line);}
+.rm-tasks b{display:block;font-size:.875rem;font-weight:600;line-height:1.3;color:var(--paper);}
+.rm-tasks p{margin-top:.1875rem;font-size:.75rem;line-height:1.5;color:var(--ash);}
+.rm-tasks li.rm-ms{grid-template-columns:auto minmax(0,1fr);align-items:center;gap:.625rem;margin:.25rem 0;padding:.5rem .625rem;border-top:0;border-radius:8px;background:color-mix(in srgb,var(--purple-2) 10%,transparent);font-size:.75rem;font-weight:600;line-height:1.3;color:var(--paper);}
+.rm-tasks li.rm-ms + li{border-top:0;}
+.rm-tasks li.rm-ms.is-start .rm-dia{border-radius:50%;transform:none;}
+
+.rm-rituals{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(1.5rem,3vw,3rem);margin-top:clamp(3rem,6vw,5.5rem);padding-top:clamp(2rem,4vw,3rem);border-top:1px solid var(--line2);}
+.rm-rit-t{font-size:.9375rem;font-weight:700;letter-spacing:-.01em;color:var(--paper);margin-bottom:.375rem;}
+.rm-rit-d{font-size:.875rem;line-height:1.65;color:var(--ash);}
+
+/* staggered entrance, with a pause between steps. Only when JS adds .is-anim (so it is visible without JS) */
+.rm.is-anim .rm-step{opacity:0;transform:translateY(18px);}
+.rm.is-anim .rm-track::before{transform:scaleX(0);}
+.rm.is-anim.is-in .rm-step{opacity:1;transform:none;transition:opacity .9s var(--ease-apple),transform .9s var(--ease-apple);transition-delay:calc(var(--i,0)*140ms + 200ms);}
+.rm.is-anim.is-in .rm-track::before{transform:scaleX(1);transition:transform 1.4s var(--ease-apple) .1s;}
+
+@media (max-width:1100px){
+  .rm-week{grid-template-columns:minmax(0,1fr);gap:1.5rem;}
+  .rm-week-h{padding-top:0;display:flex;flex-wrap:wrap;align-items:baseline;gap:.25rem .875rem;}
+  .rm-week-t{margin-top:0;}
+  .rm-week-d{flex-basis:100%;margin-top:.25rem;}
+}
+@media (max-width:900px){
+  .rm-head{grid-template-columns:minmax(0,1fr);gap:1.25rem;align-items:start;}
+  .rm-track{grid-template-columns:repeat(2,minmax(0,1fr));gap:2rem 1.25rem;}
+  .rm-track::before{display:none;}
+  .rm-rituals{grid-template-columns:minmax(0,1fr);gap:1.5rem;}
+}
+@media (max-width:600px){
+  .rm-track{grid-template-columns:minmax(0,1fr);gap:1.25rem;}
+  .rm-track::before{display:block;left:13px;right:auto;top:14px;bottom:14px;width:2px;height:auto;background:linear-gradient(180deg,#9747FF,#8381F0 60%,#D9F144);transform-origin:center top;}
+  .rm.is-anim .rm-track::before{transform:scaleY(0);}
+  .rm.is-anim.is-in .rm-track::before{transform:scaleY(1);}
+  .rm-step{display:grid;grid-template-columns:28px minmax(0,1fr);gap:.875rem;align-items:start;}
+}
+@media (prefers-reduced-motion:reduce){
+  .rm.is-anim .rm-step{opacity:1;transform:none;}
+  .rm.is-anim .rm-track::before{transform:none;}
+}
+
 /* ── DESIGN SYSTEM BOARD (Oct 2026) ──
    One artboard built in HTML/CSS from the Figma frame "example" (Everyone, node 2021:2693).
    Not an image: every size is a Figma px multiplied by --u, so the board scales as one piece
@@ -832,6 +902,128 @@ html body .back-nav .back-btn{color:var(--nav-ink);} /* the back link takes the 
 </div>
 
 <!-- ══════════════════════════════════════════
+     SECTION 02 — TEAM PLAN · ROADMAP (moved up and rebuilt, Oct 2026)
+══════════════════════════════════════════ -->
+<div class="section" id="plan">
+  <div class="eyebrow">Team plan · Two-week sprint</div>
+  <div class="rm-head">
+    <div class="rm-title">How I'd run the team:<br><span class="purple">two weeks, three roles, three client syncs.</span></div>
+    <p class="rm-sub">With 17 hours of hands-on time, I planned the sprint the way I would lead it: a kickoff to assign tasks, a daily at 10:30 to unblock and re-prioritise, and two scoped weeks with one clear owner for every task.</p>
+  </div>
+
+  <div class="rm-legend" aria-label="Who owns each task">
+    <span><span class="rm-who is-pm">PM</span>Project manager</span>
+    <span><span class="rm-who is-pair">Sr + Jr</span>Both designers, with me leading</span>
+    <span><span class="rm-who is-jr">Jr</span>Junior designer, reviewed by me</span>
+    <span><i class="rm-dia" aria-hidden="true"></i>Client sync</span>
+  </div>
+
+  <div class="rm" id="rm">
+    <div class="rm-week">
+      <div class="rm-week-h"><span class="rm-week-n">Week 1</span><span class="rm-week-t">Research</span><p class="rm-week-d">Understand the site, the shopper and the market before drawing anything.</p></div>
+      <ol class="rm-track">
+        <li class="rm-step" style="--i:0">
+          <div class="rm-node" aria-hidden="true">01</div>
+          <div class="rm-card">
+            <div class="rm-step-t">Existing data</div>
+            <ul class="rm-tasks">
+              <li class="rm-ms is-start"><i class="rm-dia" aria-hidden="true"></i>Kickoff · tasks assigned</li>
+              <li><span class="rm-who is-pm">PM</span><div><b>Site data</b><p>Collect and analyse what the current site already tells us.</p></div></li>
+              <li><span class="rm-who is-pair">Sr + Jr</span><div><b>User research</b><p>Market research, interviews and metrics on behaviour and needs.</p></div></li>
+            </ul>
+          </div>
+        </li>
+        <li class="rm-step" style="--i:1">
+          <div class="rm-node" aria-hidden="true">02</div>
+          <div class="rm-card">
+            <div class="rm-step-t">Survey and flows</div>
+            <ul class="rm-tasks">
+              <li><span class="rm-who is-pm">PM</span><div><b>Survey</b><p>The main online shopping pains and what users expect.</p></div></li>
+              <li><span class="rm-who is-pair">Sr + Jr</span><div><b>User flows</b><p>Detailed flowcharts of navigation and interaction on the site.</p></div></li>
+            </ul>
+          </div>
+        </li>
+        <li class="rm-step" style="--i:2">
+          <div class="rm-node" aria-hidden="true">03</div>
+          <div class="rm-card">
+            <div class="rm-step-t">Benchmark and synthesis</div>
+            <ul class="rm-tasks">
+              <li><span class="rm-who is-jr">Jr</span><div><b>Benchmark</b><p>How comparable multi-brand stores solve the same problems.</p></div></li>
+              <li><span class="rm-who is-pm">PM</span><div><b>Survey results</b><p>Read the answers and close the week with a clearer picture.</p></div></li>
+              <li><span class="rm-who is-pair">Sr + Jr</span><div><b>First wireframes</b><p>Structure before style, on the flows we agreed.</p></div></li>
+            </ul>
+          </div>
+        </li>
+        <li class="rm-step" style="--i:3">
+          <div class="rm-node" aria-hidden="true">04</div>
+          <div class="rm-card">
+            <div class="rm-step-t">Wireframes</div>
+            <ul class="rm-tasks">
+              <li><span class="rm-who is-jr">Jr</span><div><b>Wireframes</b><p>Layouts and design schemes for every defined flow.</p></div></li>
+              <li class="rm-ms"><i class="rm-dia" aria-hidden="true"></i>Client sync · wireframes</li>
+            </ul>
+          </div>
+        </li>
+      </ol>
+    </div>
+    <div class="rm-week">
+      <div class="rm-week-h"><span class="rm-week-n">Week 2</span><span class="rm-week-t">Ideation and validation</span><p class="rm-week-d">Turn the structure into a testable product, then let the test decide.</p></div>
+      <ol class="rm-track">
+        <li class="rm-step" style="--i:0">
+          <div class="rm-node" aria-hidden="true">05</div>
+          <div class="rm-card">
+            <div class="rm-step-t">Visual design</div>
+            <ul class="rm-tasks">
+              <li><span class="rm-who is-pair">Sr + Jr</span><div><b>Visual design</b><p>Colour palette, typography and graphic style.</p></div></li>
+              <li><span class="rm-who is-pair">Sr + Jr</span><div><b>UI · main screens</b><p>Home, the shopping flow, login and onboarding.</p></div></li>
+            </ul>
+          </div>
+        </li>
+        <li class="rm-step" style="--i:1">
+          <div class="rm-node" aria-hidden="true">06</div>
+          <div class="rm-card">
+            <div class="rm-step-t">UI and prototype</div>
+            <ul class="rm-tasks">
+              <li><span class="rm-who is-pair">Sr + Jr</span><div><b>UI · main screens</b><p>Final pass on the screens.</p></div></li>
+              <li class="rm-ms"><i class="rm-dia" aria-hidden="true"></i>Client sync · UI</li>
+              <li><span class="rm-who is-pair">Sr + Jr</span><div><b>Test script</b><p>Tasks for the current checkout and the filters.</p></div></li>
+              <li><span class="rm-who is-pair">Sr + Jr</span><div><b>Prototype</b><p>High fidelity and interactive, close to the real experience.</p></div></li>
+            </ul>
+          </div>
+        </li>
+        <li class="rm-step" style="--i:2">
+          <div class="rm-node" aria-hidden="true">07</div>
+          <div class="rm-card">
+            <div class="rm-step-t">Testing</div>
+            <ul class="rm-tasks">
+              <li><span class="rm-who is-pm">PM</span><div><b>Test results</b><p>Read the results and write the report.</p></div></li>
+              <li><span class="rm-who is-pair">Sr + Jr</span><div><b>Iteration</b><p>Organise the main insights and change the designs.</p></div></li>
+            </ul>
+          </div>
+        </li>
+        <li class="rm-step" style="--i:3">
+          <div class="rm-node" aria-hidden="true">08</div>
+          <div class="rm-card">
+            <div class="rm-step-t">Iteration and MVP</div>
+            <ul class="rm-tasks">
+              <li><span class="rm-who is-pair">Sr + Jr</span><div><b>Iteration</b><p>Last round of changes.</p></div></li>
+              <li class="rm-ms"><i class="rm-dia" aria-hidden="true"></i>Client sync · before the MVP</li>
+              <li><span class="rm-who is-pair">Sr + Jr</span><div><b>MVP sent</b><p>The MVP goes to the client.</p></div></li>
+            </ul>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="rm-rituals">
+    <div><div class="rm-rit-t">Kickoff</div><p class="rm-rit-d">First meeting with the team, to assign every task to an owner.</p></div>
+    <div><div class="rm-rit-t">Daily · 10:30</div><p class="rm-rit-d">Three questions with the whole team: Progress? Blockages? Next steps.</p></div>
+    <div><div class="rm-rit-t">Client syncs</div><p class="rm-rit-d">Three check-ins: after the wireframes, after the UI and before the MVP goes out.</p></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
      SECTION 02 — VISION & STRATEGY
 ══════════════════════════════════════════ -->
 <div class="section">
@@ -942,40 +1134,6 @@ html body .back-nav .back-btn{color:var(--nav-ink);} /* the back link takes the 
     <div class="trend-item"><div class="trend-v up">25.1%</div><div class="trend-d">Sporting goods e-commerce growth to September 2023.</div></div>
   </div>
   <div class="quote-band">"<strong>Simplifying the checkout process</strong> can help reduce this number of abandoned purchases."</div>
-</div>
-
-<!-- ══════════════════════════════════════════
-     SECTION 04 — PROCESS TIMELINE
-══════════════════════════════════════════ -->
-<div class="section">
-  <div class="eyebrow">Process · Two-week sprint</div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;margin-bottom:3rem;">
-    <div>
-      <div style="font-size:clamp(2rem,3.5vw,3rem);font-weight:800;letter-spacing:-.04em;line-height:1;margin-bottom:1.25rem;">Seventeen hours, a daily standup<br>and two <span class="purple">scoped weeks.</span></div>
-      <p style="font-size:.9375rem;line-height:1.75;color:var(--ash);font-weight:300;">With only 17 hours of hands-on time, the team ran a tight cadence: a kickoff meeting to assign tasks, a 10:30am daily standup to unblock and re-prioritise, and two clearly scoped weeks — Research, then Ideation & Validation.</p>
-    </div>
-    <div style="padding:2rem;background:var(--bg2);border:1px solid var(--line2);border-radius:8px;">
-      <div style="font-family:'Geist',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--ash);margin-bottom:1.25rem;">Daily standup — 10:30am</div>
-      <div style="display:flex;flex-direction:column;gap:.75rem;">
-        <div style="display:flex;align-items:center;gap:.875rem;padding:.875rem 0;border-bottom:1px solid var(--line);"><div style="width:5px;height:5px;border-radius:50%;background:var(--purple);flex-shrink:0;"></div><span style="font-size:.875rem;color:var(--paper);">Progress?</span></div>
-        <div style="display:flex;align-items:center;gap:.875rem;padding:.875rem 0;border-bottom:1px solid var(--line);"><div style="width:5px;height:5px;border-radius:50%;background:var(--purple);flex-shrink:0;"></div><span style="font-size:.875rem;color:var(--paper);">Blockages?</span></div>
-        <div style="display:flex;align-items:center;gap:.875rem;padding:.875rem 0;"><div style="width:5px;height:5px;border-radius:50%;background:var(--purple);flex-shrink:0;"></div><span style="font-size:.875rem;color:var(--paper);">Next steps</span></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="decisions-grid" style="grid-template-columns:1fr 1fr;">
-    <div class="dec">
-      <div class="dec-n">Week 01 · Research</div>
-      <div class="dec-t">Data, survey & flows</div>
-      <div class="dec-d">PM collects & analyses existing site data and runs a survey on shopping pains. Designers map current user flows and run a competitive benchmark. Results are synthesised into a report ahead of the client sync.</div>
-    </div>
-    <div class="dec">
-      <div class="dec-n">Week 02 · Ideation & validation</div>
-      <div class="dec-t">Wireframes → UI → Prototype → Test</div>
-      <div class="dec-d">Wireframes and design schemes based on defined flows, then visual design (colour, typography, graphic style) and the main screens: Home, shopping flow, Login + onboarding. Testing script built for checkout and filters; insights fold back into iteration before the MVP ships.</div>
-    </div>
-  </div>
 </div>
 
 <!-- ══════════════════════════════════════════
@@ -1486,6 +1644,21 @@ html body .back-nav .back-btn{color:var(--nav-ink);} /* the back link takes the 
       coverFrom(x,y,true,function(){ window.location.href='index.html'; });
     });
   }
+})();
+</script>
+
+<script>
+/* TEAM PLAN ROADMAP: staggered entrance. The steps are visible by default; they are only
+   hidden when the observer exists and motion is allowed, and shown again when the block enters. */
+(function(){
+  var rm=document.getElementById('rm');
+  if(!rm||!('IntersectionObserver' in window)) return;
+  if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  rm.classList.add('is-anim');
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ rm.classList.add('is-in'); io.disconnect(); } });
+  },{threshold:.12});
+  io.observe(rm);
 })();
 </script>
 
