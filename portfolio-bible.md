@@ -1,6 +1,8 @@
 # Paula Elffman — Portfolio OS · Design Bible
 
-*Última actualización: 10 de octubre de 2026 — **Rayas largas fuera de los cases.** Se reescribieron las 160 frases con raya larga (—) de monchis, sukupay home, sukupay prototyper, vendor tool y thefork onboarding. Con muv, fancy monas y hotaru, que ya no tenían, son 8 de 15 cases limpios. Faltan 7 de More work. Ver "Rayas largas: fuera del texto de los cases".*
+*Última actualización: 10 de octubre de 2026 — **Everyone: design system como board.** `everyone-case.html` suma el board de design system en HTML/CSS (no es imagen), reemplaza las dos imágenes que se veían mal, achica un 25% las cinco pantallas de Home y arregla los subtítulos de sección que no se leían. Ver "Board de Everyone" dentro de "DESIGN SYSTEM COMO BOARD" y "Cambios en `everyone-case.html` (10 de octubre de 2026)".*
+
+*Última actualización previa: 10 de octubre de 2026 — **Rayas largas fuera de los cases.** Se reescribieron las 160 frases con raya larga (—) de monchis, sukupay home, sukupay prototyper, vendor tool y thefork onboarding. Con muv, fancy monas y hotaru, que ya no tenían, son 8 de 15 cases limpios. Faltan 7 de More work. Ver "Rayas largas: fuera del texto de los cases".*
 
 *Última actualización previa: 10 de octubre de 2026 — **TheFork onboarding: deja de ser borrador.** `thefork-shortlist-case.html` ya no muestra "Borrador", se llama "TheFork Onboarding" igual que en la home, dice que es una propuesta de 2021 que no se lanzó, y los números inventados de "Projected impact" se reemplazaron por "How I'd measure it". Ver "Cambios en `thefork-shortlist-case.html` (10 de octubre de 2026)".*
 
@@ -1377,7 +1379,7 @@ html body .back-nav .back-btn{color:var(--nav-ink);} /* el link de volver tambi�
 | `memorable-case.html` | 26 | pendiente |
 | `thefork-reviews-case.html` | 24 | pendiente |
 | `monchis-drivers-case.html` | 20 | pendiente |
-| `everyone-case.html` | 19 | pendiente |
+| `everyone-case.html` | 15 (se sacaron 4 el 10 de octubre) | pendiente |
 | `smartpass-case.html` | 19 | pendiente |
 
 **Revisado** con un navegador a 1280 y 390px en los cinco cases tocados: cero rayas largas en el texto visible, sin errores ni scroll horizontal.
@@ -1421,7 +1423,7 @@ body.dark-mode{
 
 **Qué es:** la parte de design system de un case se arma como **un solo board**, no como grupos apilados con título, descripción y tarjeta por componente. En una sola pieza se ve la tipografía en grande, los estados de botón, los componentes clave, el set de íconos y los colores. Referencias: el board de ejemplo con Playfair Display + Inter y el frame `example` del archivo de Figma `Muv-landing` (board de SmartPass).
 
-**Aplicado en:** `smartpass-case.html` y `muv-case.html` (los dos el 6 de octubre de 2026), `vendor-tool-case.html` (7 de octubre de 2026) y `sukupay-proto-case.html` (8 de octubre de 2026). En muv reemplazó, a pedido de Paula, a la sección de imágenes que estaba marcada como aprobada. Ver "Board de muv" y "Board de Vendor Tool" más abajo.
+**Aplicado en:** `smartpass-case.html` y `muv-case.html` (los dos el 6 de octubre de 2026), `vendor-tool-case.html` (7 de octubre de 2026), `sukupay-proto-case.html` (8 de octubre de 2026) y `everyone-case.html` (10 de octubre de 2026). En muv reemplazó, a pedido de Paula, a la sección de imágenes que estaba marcada como aprobada. Ver "Board de muv" y "Board de Vendor Tool" más abajo.
 
 **Reglas:**
 
@@ -1488,6 +1490,31 @@ Fuente: frame `example` del archivo de Figma `Proposal-SukuPay` (nodo `286:7013`
 - **Diferencias con Figma:** todas las cards miden 360 de ancho (en Figma van de 350 a 390) para que las columnas queden parejas, así que algún texto corta la línea en otro lugar; los íconos van en grilla de 2 × 4 al lado de los botones (en Figma son una tira vertical entre columnas); el círculo verde de la recipient card es un color plano `#01C601`.
 - **Revisado:** contra la captura del frame, a 1440, 1100, 834, 768 y 390px, en light y dark, sin scroll horizontal.
 - **Clases de SukuPay:** `.sk-btns`, `.sk-btn` (`.is-soft .is-outline .is-ghost .is-secondary .is-tertiary .is-tertiary-soft .is-disabled .is-lg`), `.sk-icons`, `.sk-nav`, `.sk-trio`, `.sk-rcp`, `.sk-act`, `.sk-modal`, `.sk-badge`, `.sk-rate`, `.sk-repeat`, `.sk-req`, `.sk-step`, `.sk-fb`, `.sk-pay` (`.is-method .is-add`), `.sk-country`. Estructura: `.dsb-band` (franja de arriba) y `.dsb-sub` (las dos mitades de la columna C).
+
+#### Board de Everyone (`everyone-case.html`, 10 de octubre de 2026)
+
+Fuente: frame `example` del archivo de Figma `Everyone` (nodo `2021:2693`), leído por la conexión con Figma. Pedido de Paula: sumar el design system "como hicimos con muv", que no sea imagen para que se vea bien en mobile.
+
+- **Dónde va:** en la sección "Design system · Product grid & cards", debajo del título y antes de los dos grupos con captura (Product card y Category cards).
+- **Componentes, todos vivos:** "Font Inter", tres botones (Primary con degradé, Secondary oscuro, Secondary con ícono), link "View all sports", botón Filters + "Sort by", control de carrusel (anterior / siguiente), chip "Most popular", breadcrumb, colección "Essentials" con su card de producto, fila de cantidad del carrito (stepper y eliminar), bloque de dirección de envío, confirmación de pedido y rating. En la columna derecha: colores, colección "Trainers" con card de producto, y el detalle de producto (marca, nombre, precio, selector de talle, "Add to bag", "Add to wishlist", envío gratis y descripción).
+- **Colores:** Brand (degradé `#9747FF` → `#8381F0`), Hover `#D9F144`, Primary `#2C2925` y tres pasos (`#D9D3C8`, `#F6F4ED`, `#FFFFFF`).
+- **Layout (desktop):** dos columnas de 585 · 393. Separación única `--g` 64 y margen `--p` 64 (canvas 1170). El board tiene ancho máximo de 1170px y va centrado. Los colores absorben la diferencia de alto: las dos columnas cierran al ras.
+- **Contenedor de 1000px o menos:** dos columnas armadas con `columns:2`, y el navegador reparte las piezas para que las dos terminen parejas; los componentes van a tamaño real (`--u` de 1px como máximo) y ocupan el ancho de su columna. **De 700px o menos:** una columna, en este orden: tipografía, colores, botones y controles, Trainers, Essentials, detalle de producto, rating, cantidad, dirección, confirmación. En un celular de 390px el texto de los botones queda en 12,25px.
+- **Fotos:** la zapatilla sale de la imagen nueva de la grilla que pasó Paula (2x), con el corazón borrado para dibujarlo vivo encima. La foto de Essentials sale del render 1x del frame de Figma (464 × 310), con el corazón incluido. Las dos van embebidas en base64 (WebP, 18 KB en total).
+- **⚠️ Íconos que no son los originales.** La red de este entorno bloquea la descarga de archivos desde Figma, así que los íconos se redibujaron en SVG inline: corazón, camión, tacho, caja y más/menos con los trazos de Tabler; flechas del carrusel con las de Material Symbols (los mismos nombres que en Figma); el ícono de filtro y el de pedido confirmado, dibujados a mano siguiendo el render. Las estrellas sí son las originales (salen del `Rating.svg` que pasó Paula). Si Paula exporta los SVG originales se reemplazan uno por uno (van en un sprite al principio del `<figure>`).
+- **Diferencias con Figma:**
+  - "Font Inter" no está en el frame de Figma; se sumó para que el board tenga el specimen de tipografía, como los otros cuatro.
+  - Columna izquierda de 585: la colección Essentials mide 585 en vez de 544, la fila de cantidad 585 en vez de 421 y la confirmación 585 en vez de 689 (el texto corta en tres líneas en vez de dos).
+  - El rating pasó de la columna derecha a la izquierda, para que las columnas cierren al ras.
+  - La confirmación de pedido lleva 24 de padding arriba (en Figma el ícono toca el borde).
+  - Las etiquetas de los colores van a 10 en vez de 8,6, y la de "Hover" va oscura (en Figma es casi blanca sobre lima y no se lee). El paso blanco lleva un filete para que se vea sobre el board blanco.
+  - "Quantity:" va en Inter (en Figma es Helvetica Neue).
+  - "Men´s shoes" se escribió con apóstrofo ("Men's shoes").
+  - **El teléfono del bloque de dirección se reemplazó por uno ficticio** ("+1 (305) 555-0142"). En Figma hay un número largo que podría ser real; el mail sí quedó, porque es el de contacto público de Paula.
+- **Rating corregido (mismo día):** en Figma decía 5.7 con cuatro estrellas y media sobre cinco. Paula pasó el componente corregido (`Rating.svg`): ahora dice **4.7**. El board usa las estrellas originales de ese SVG (entera y media) y el número y el texto siguen siendo texto vivo. También se corrigió la línea "Reviews · 4.7 based on 2300" del checkout (State 01). **Ojo:** la captura de la pantalla de producto (`everyone_case_015`) puede seguir mostrando 5.7, porque es una imagen.
+- **Tipografía:** Inter 400/500/600/700, sumada al `<link>` de Google Fonts del case.
+- **Revisado:** contra el render del frame, a 1920, 1440, 1280, 1100, 1024, 900, 834, 768, 430, 390, 360 y 320px, en light y dark: sin scroll horizontal, sin textos que se salgan de su card y con las columnas al ras en desktop.
+- **Clases de Everyone:** `.ev-btn` (`.is-dark .is-pill .is-fit .is-icon .is-line .is-text`), `.ev-link`, `.ev-ctrl` (`.ev-btns`, `.ev-side`), `.ev-sort`, `.ev-pager`, `.ev-chip`, `.ev-crumb`, `.ev-need`, `.ev-coll` (`.is-line` = con borde; `.ev-coll-h`, `.ev-card-img`, `.ev-card-d`), `.ev-row` (`.ev-qty`, `.ev-step`), `.ev-addr`, `.ev-done`, `.ev-rate` (`.ev-stars`), `.ev-colors` (`.ev-sw`, `.is-step`, `.is-light`), `.ev-pdp` (`.ev-over`, `.ev-pdp-a`, `.ev-ship`).
 
 **CSS classes clave**
 
@@ -2036,6 +2063,41 @@ Repaso del case con Paula. El archivo sigue llamándose `thefork-shortlist-case.
 2. Si las tres personas (Sofía, Marco, Julia) salen de investigación real o son supuestos de trabajo.
 3. El case sigue sin fila Team.
 4. ~~Quedan las rayas largas del texto original~~ Resuelto el mismo día, ver "Rayas largas: fuera del texto de los cases".
+
+### Cambios en `everyone-case.html` (10 de octubre de 2026)
+
+Cuatro pedidos de Paula en la misma pasada.
+
+**1. Board de design system.** Ver "Board de Everyone" dentro de "DESIGN SYSTEM COMO BOARD".
+- Se quitó el grupo "03 · Colour System" (la grilla de ocho swatches con sus nombres, `.swatch-grid`), porque los colores ahora están en el board. **Avisado a Paula:** la grilla tenía los nombres de token (Neutral/100 a Neutral/600, Gradient, Lemon) y dos neutros que el board no muestra (`#726D64` y `#1A1815`). Si los quiere de vuelta, se suman al board.
+
+**2. Las dos imágenes que se veían mal.** Eran las de "Trainers" y "Dive into Sports": se veían con un marco negro y un halo con ruido. Las capturas tenían sombra con transparencia y habían quedado aplanadas sobre negro. Paula pasó dos imágenes nuevas.
+
+| Grupo | Antes | Ahora |
+| --- | --- | --- |
+| 01 · Product card | `everyone_case_012`, "Trainers · Grid vs. filtered column" | Imagen nueva, "Less than 50% OFF · 4-column and 3-column grid" (siete cards: cuatro arriba, tres abajo) |
+| 02 · Category cards | `everyone_case_013`, "Dive into Sports · 4-up category rail" | Imagen nueva, "Dive into Sports · 3-up category rail" (Tenis, Basketball, Crossfit) |
+
+- Las dos imágenes nuevas se recortaron justo en la card (sin el margen transparente ni la sombra), se aplanaron sobre blanco y se guardaron en WebP a 1800px de ancho: 81 KB y 69 KB. Van **embebidas en base64 en el HTML**, así que no dependen de `everyone-case-images.js`. Los ids `everyone_case_012` y `everyone_case_013` de ese archivo quedaron sin uso.
+- El texto del grupo 02 nombraba cuatro deportes (Futbol incluido); ahora nombra los tres de la imagen.
+- **Regla:** una captura con sombra transparente se recorta en el borde de la card y se aplana sobre blanco antes de guardarla. La sombra la pone el CSS.
+
+**3. Las cinco pantallas de "Final UI · Home", 25% más chicas y centradas.** Ocupaban todo el ancho y se veían bruscas. Regla nueva: `@media (min-width:769px){.browser-wrap .browser-shell{width:75%;}}`. En una pantalla de 1440px pasan de 1312 a 984px de ancho. En celular siguen al 100%. Las cuatro pantallas del checkout (`.flow-item`) no cambiaron: van en grilla.
+
+**4. Subtítulos de sección que no se leían** ("Three main goals", "UX · Conversion · Loyalty" y los otros ocho `.sl-text`). Estaban en `--ash2`, un 15% de opacidad, invisibles en los dos temas.
+
+| Tema | Antes | Ahora | Contraste |
+| --- | --- | --- | --- |
+| Claro | `var(--ash2)` | `rgba(26,24,21,.68)` | 6,1:1 |
+| Oscuro | `var(--ash2)` | `#A9A9BC` | 6,7:1 |
+
+- Mismo problema que en TheFork onboarding el mismo día. **Regla:** `--ash2` es para filetes y fondos, nunca para texto.
+
+**De paso:** cuatro rayas largas menos en la sección de design system. El resto de las rayas del case sigue pendiente (ver "Rayas largas").
+
+**Revisado** a 12 anchos entre 1920 y 320px, en light y dark: sin scroll horizontal ni errores. Las pantallas de Home y del checkout no se pudieron ver con sus imágenes reales, porque viven en `everyone-case-images.js`, que no está en la copia de trabajo; se midió su tamaño y posición.
+
+**Peso del archivo:** pasó de 74 KB a unos 320 KB por las dos imágenes embebidas.
 
 ### Cambios en `vendor-tool-case.html` (Septiembre 2026)
 
