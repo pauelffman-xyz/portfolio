@@ -1,6 +1,8 @@
 # Paula Elffman — Portfolio OS · Design Bible
 
-*Última actualización: 10 de octubre de 2026 — **TheFork onboarding: deja de ser borrador.** `thefork-shortlist-case.html` ya no muestra "Borrador", se llama "TheFork Onboarding" igual que en la home, dice que es una propuesta de 2021 que no se lanzó, y los números inventados de "Projected impact" se reemplazaron por "How I'd measure it". Ver "Cambios en `thefork-shortlist-case.html` (10 de octubre de 2026)".*
+*Última actualización: 10 de octubre de 2026 — **Rayas largas fuera de los cases.** Se reescribieron las 160 frases con raya larga (—) de monchis, sukupay home, sukupay prototyper, vendor tool y thefork onboarding. Con muv, fancy monas y hotaru, que ya no tenían, son 8 de 15 cases limpios. Faltan 7 de More work. Ver "Rayas largas: fuera del texto de los cases".*
+
+*Última actualización previa: 10 de octubre de 2026 — **TheFork onboarding: deja de ser borrador.** `thefork-shortlist-case.html` ya no muestra "Borrador", se llama "TheFork Onboarding" igual que en la home, dice que es una propuesta de 2021 que no se lanzó, y los números inventados de "Projected impact" se reemplazaron por "How I'd measure it". Ver "Cambios en `thefork-shortlist-case.html` (10 de octubre de 2026)".*
 
 *Última actualización previa: 10 de octubre de 2026 — **Monchis: fondo de página blanco.** `monchis-case.html` era el único case que seguía con el fondo crema (`#F5F4F0`) en modo claro, porque nunca recibió el cambio a blanco que sí tuvieron los demás. Ahora usa `--bg:#FFFFFF`, igual que el resto. El modo oscuro no cambió. Ver "10 de octubre de 2026 — fondo de página blanco" dentro de MONCHIS CASE STUDY.*
 
@@ -1341,6 +1343,49 @@ html body .back-nav .back-btn{color:var(--nav-ink);} /* el link de volver tambi�
 - **Para tener en cuenta en monchis drivers:** la sección de impacto muestra números de escala (1,200 drivers, 300K órdenes, 10 pantallas), no de resultado. El titular ahora lo dice ("What shipped, and at what scale"). Si aparece un dato de resultado, va ahí.
 - **Reglas para titulares nuevos:** (1) describen lo que pasó o lo que se ve, con un dato del caso; (2) sin comillas salvo que sea una cita de otra persona, con su autor; (3) un titular no repite una frase que el párrafo de abajo dice igual.
 
+### Rayas largas: fuera del texto de los cases (10 de octubre de 2026)
+
+**La regla, ahora para todo el sitio:** el texto visible no lleva raya larga (—). Ya valía para la home; desde hoy vale también para los cases. La raya larga repetida es de lo que más delata un texto armado con AI, y muv, fancy monas y hotaru ya estaban sin ninguna.
+
+**Cómo se reemplaza (no es buscar y reemplazar, se reescribe cada frase):**
+
+| La raya hacía de… | Va… | Ejemplo |
+| --- | --- | --- |
+| Pausa antes de una explicación | dos puntos | "disagreed on everything else: search had to lead" |
+| Pausa antes de un agregado | coma | "on any design direction, which is exactly what made…" |
+| Corte entre dos ideas completas | punto | "I wasn't handed a brief. I was asked to take the lead on the home." |
+| Inciso entre dos rayas | paréntesis, o dos comas si es corto | "a compact sticky bar (search plus abbreviated address) and a floating…" |
+| Separador en un rótulo o etiqueta | punto medio (·) | "Current home · before", "Live demo · rotating every 2.5s" |
+| Término y su definición en una lista | dos puntos | "**Time-aware**: …" |
+
+- No se cambió el sentido de ninguna frase ni se tocaron datos.
+- También se sacaron de los textos alternativos de las imágenes (`alt`) y de los `title`.
+- **No se tocan** las rayas dentro de comentarios de CSS, HTML o JavaScript: no se ven.
+- La raya corta en rangos (35–45, Q3–Q4) no es parte de esta regla.
+
+| Case | Frases reescritas | Estado |
+| --- | --- | --- |
+| `muv-case.html` | 0 (ya estaba limpio) | ✅ |
+| `monchis-case.html` | 62 | ✅ |
+| `sukupay-case.html` | 40 | ✅ |
+| `sukupay-proto-case.html` | 30 | ✅ |
+| `vendor-tool-case.html` | 7 | ✅ |
+| `thefork-shortlist-case.html` | 21 | ✅ |
+| `fancymonas-case.html`, `hotaru-case.html` | 0 (ya estaban limpios) | ✅ |
+| `foody-case.html` | 53 | pendiente |
+| `hugo-case.html` | 28 | pendiente |
+| `memorable-case.html` | 26 | pendiente |
+| `thefork-reviews-case.html` | 24 | pendiente |
+| `monchis-drivers-case.html` | 20 | pendiente |
+| `everyone-case.html` | 19 | pendiente |
+| `smartpass-case.html` | 19 | pendiente |
+
+**Revisado** con un navegador a 1280 y 390px en los cinco cases tocados: cero rayas largas en el texto visible, sin errores ni scroll horizontal.
+
+**Para un case nuevo o un texto nuevo:** no escribir raya larga. Si una frase la pide, es que son dos frases.
+
+**Visto de paso, sin tocar, para consultar con Paula:** `sukupay-case.html` dice "directly supporting the goal of reaching 100M transactions by 2026". Si es una meta interna de SukuPay, choca con la regla de no publicar métricas internas de la empresa.
+
 ### Dock: aire bajo el footer (`#dock-clear`, 8 de octubre de 2026)
 
 - **Problema:** en los cases del template viejo (`.section` / `.cover`) el footer tenía `2rem` de aire abajo, o `1.5rem` en mobile. Al llegar al final de la página, el dock flotante quedaba encima del texto del footer. En celular lo tapaba en 12 cases; en desktop no llegaba a taparlo porque el texto va a los costados, pero quedaba a la misma altura.
@@ -1990,7 +2035,7 @@ Repaso del case con Paula. El archivo sigue llamándose `thefork-shortlist-case.
 1. La sección Wireframes dice "validated in wireframes first" y "Content hierarchy and flow were tested here". No se sabe con quién ni cómo. No se tocó.
 2. Si las tres personas (Sofía, Marco, Julia) salen de investigación real o son supuestos de trabajo.
 3. El case sigue sin fila Team.
-4. Quedan las rayas largas del texto original; van en la pasada general de rayas.
+4. ~~Quedan las rayas largas del texto original~~ Resuelto el mismo día, ver "Rayas largas: fuera del texto de los cases".
 
 ### Cambios en `vendor-tool-case.html` (Septiembre 2026)
 
