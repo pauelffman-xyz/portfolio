@@ -1,0 +1,1646 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<script>if(/[?&]embed\b/.test(location.search))document.documentElement.classList.add('embed');</script>
+<title>belo · Rumbo prototype</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: flow index | phone (live prototype) | notes. Single dark look: soft depth, big radii, glass pills, tinted glow. */
+:root{
+  color-scheme: dark;
+  --page:#07070B; --bg:#0C0B12; --surface:#16151E; --surface2:#1E1C29; --ink:#F4F3FA; --muted:#8E8BA5; --line:rgba(255,255,255,.05);
+  --glass:rgba(255,255,255,.05); --glass-line:rgba(255,255,255,.07);
+  --accent:#7B5CFF; --accent-ink:#B4A2FF; --lav:#C9BCFF; --tint:rgba(123,92,255,.16);
+  --green:#62E3A4; --green-bg:rgba(63,179,122,.15); --amber:#F3C774; --amber-bar:#E3A73A; --amber-bg:rgba(227,167,58,.15);
+  --red:#FF8F86; --red-bg:rgba(217,83,74,.17); --info:#AFC6F5; --info-bg:rgba(90,130,220,.15);
+  --shadow:0 1px 0 rgba(255,255,255,.03) inset, 0 8px 20px -14px rgba(0,0,0,.6);
+  --f-ui:"Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+*{box-sizing:border-box}
+b,strong{font-weight:600}
+body{background:var(--page);color:var(--ink);font-family:var(--f-ui);font-size:15px;line-height:1.45;
+  padding-left:max(16px, env(safe-area-inset-left,0px));padding-right:max(16px, env(safe-area-inset-right,0px));padding-block:28px 48px}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.eyebrow{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-ink)}
+.wrap{max-width:1180px;margin:0 auto;display:grid;gap:28px;grid-template-columns:240px minmax(0,390px) minmax(0,1fr);align-items:start}
+header.top{max-width:1180px;margin:0 auto 24px;display:grid;gap:6px}
+header.top h1{font-size:clamp(24px,3.2vw,34px);line-height:1.1;margin:0;letter-spacing:-.025em;text-wrap:balance;font-weight:600}
+header.top p{margin:0;color:var(--muted);max-width:68ch}
+
+/* Flow index */
+.index{display:grid;gap:18px;position:sticky;top:20px}
+.flow h3{margin:0 0 6px;font-size:14px;font-weight:600}
+.flow .eyebrow{display:block;margin-bottom:2px;color:var(--muted)}
+.flow.new .eyebrow{color:var(--accent-ink)}
+.flow ol{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.flow li button{width:100%;text-align:left;padding:7px 10px;border-radius:12px;font-size:13.5px;display:flex;gap:8px;align-items:baseline;transition:background .2s}
+.flow li button span{font-family:var(--f-mono);font-size:11px;color:var(--muted);min-width:22px}
+.flow li button:hover{background:var(--glass)}
+.flow li button.on{background:var(--surface2);box-shadow:var(--shadow)}
+.flow li button.on span{color:var(--accent-ink)}
+.reset{font-size:12.5px;color:var(--muted);text-decoration:underline;justify-self:start;padding:0}
+
+/* Phone */
+.phone{width:100%;max-width:390px;height:812px;max-height:calc(100vh - 40px);min-height:640px;background:var(--bg);border-radius:48px;
+  border:9px solid #000;outline:1px solid rgba(255,255,255,.08);position:sticky;top:20px;overflow:hidden;
+  box-shadow:0 30px 60px -30px rgba(0,0,0,.8)}
+.status{height:40px;display:flex;justify-content:space-between;align-items:center;padding:0 26px;font-size:13px;font-weight:600;position:relative;z-index:2}
+.status .logo{font-family:var(--f-mono);font-weight:600}
+.screen{position:absolute;inset:40px 0 0;display:flex;flex-direction:column}
+.scroll{flex:1;overflow-y:auto;padding:8px 16px 18px;display:flex;flex-direction:column;gap:14px;scrollbar-width:none}
+.scroll::-webkit-scrollbar{display:none}
+.scroll > *{flex-shrink:0}
+.scroll > .pair{align-self:flex-start}
+.scroll > .swap{align-self:center}
+.foot{padding:12px 16px 22px;display:grid;gap:10px;background:linear-gradient(to top,var(--bg) 72%,transparent)}
+.btn{height:48px;border-radius:999px;font-weight:500;font-size:14px;letter-spacing:-.005em;display:flex;align-items:center;justify-content:center;gap:8px;width:100%;
+  transition:transform .15s cubic-bezier(.3,.7,.4,1.4), box-shadow .2s, background .2s}
+.btn:active{transform:scale(.97)}
+.btn.primary{background:#5B1FE3;color:#fff;box-shadow:none}
+.btn.primary:hover{background:#6A30EE}
+.btn.primary:disabled{background:#3A3550;color:#8E8BA5;box-shadow:none;cursor:not-allowed}
+.btn.ghost{background:var(--glass);border:1px solid var(--glass-line);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.btn.light{background:#F4F3FA;color:#0C0B12}
+.btn.sm{height:40px;font-size:13px}
+.link{color:var(--accent-ink);font-weight:500;font-size:13.5px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.back{width:44px;height:44px;border-radius:50%;background:var(--glass);border:1px solid var(--glass-line);display:grid;place-items:center;line-height:1;color:var(--ink);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:var(--shadow);transition:transform .15s}
+.back:active{transform:scale(.92)}
+.gpill{height:40px;padding:0 14px;border-radius:999px;background:var(--glass);border:1px solid var(--glass-line);display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:500;box-shadow:var(--shadow)}
+.gpill i{width:18px;height:18px;border-radius:50%;border:1.5px solid currentColor;display:grid;place-items:center;font-style:normal;font-size:11px;font-weight:600}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:28px;padding:18px;box-shadow:var(--shadow);position:relative;overflow:hidden;isolation:isolate}
+.card::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:-1;opacity:0;transition:opacity .3s;
+  background:radial-gradient(260px circle at var(--mx,50%) var(--my,0%), rgba(123,92,255,.16), transparent 60%)}
+.card:hover::after{opacity:1}
+.glow{background:radial-gradient(120% 90% at 100% 0%, rgba(123,92,255,.30), transparent 55%), var(--surface)}
+.dark{border-radius:28px;padding:20px;border:1px solid var(--glass-line);box-shadow:var(--shadow);
+  background:radial-gradient(120% 120% at 100% 0%, rgba(123,92,255,.38), transparent 55%), linear-gradient(180deg,#1C1830,#14121E)}
+.dark .eyebrow{color:var(--lav)}
+.dark .sub{color:#C9C6D8}
+h2.t{font-size:28px;line-height:1.08;margin:6px 0 0;letter-spacing:-.02em;font-weight:600}
+.lead{margin:0;color:#B9B6CB;font-size:14.5px}
+.muted{color:var(--muted)}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.kv{display:grid;gap:11px}
+.kv .row span:first-child{color:var(--muted)}
+.kv .row b{font-variant-numeric:tabular-nums;text-align:right}
+hr.sep{border:0;border-top:1px solid var(--line);margin:2px 0;width:100%}
+.pill{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 13px;border-radius:999px;font-size:13px;font-weight:600}
+.pill.verde{background:var(--green-bg);color:var(--green)}
+.pill.amarillo{background:var(--amber-bg);color:var(--amber)}
+.pill.rojo{background:var(--red-bg);color:var(--red)}
+.pill.neutral{background:var(--glass);color:#D7D4E6}
+.dot{width:8px;height:8px;border-radius:50%;background:currentColor}
+.sem{border-radius:28px;background:var(--surface);border:1px solid var(--line);padding:16px 18px 16px 22px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+.sem::before{content:"";position:absolute;inset:0;background:radial-gradient(90% 120% at 0% 0%, rgba(227,167,58,.22), transparent 60%);pointer-events:none}
+.sem.verde::before{background:radial-gradient(90% 120% at 0% 0%, rgba(63,179,122,.24), transparent 60%)}
+.sem.rojo::before{background:radial-gradient(90% 120% at 0% 0%, rgba(217,83,74,.24), transparent 60%)}
+.sem h4{margin:2px 0 4px;font-size:24px;font-weight:600;letter-spacing:-.02em;position:relative}
+.sem p,.sem span{position:relative}
+.sem p{margin:0;font-size:14px;color:#C9C6D8}
+.big{font-size:40px;font-weight:600;letter-spacing:-.025em;line-height:1;font-variant-numeric:tabular-nums}
+.big .dec{color:#5F5C74}
+
+/* currency */
+.pair{display:inline-flex;align-items:center;gap:6px;font-family:var(--f-mono);font-size:12px;font-weight:600}
+.cur{display:inline-flex;align-items:center;justify-content:center;height:24px;padding:0 9px;border-radius:8px;background:var(--glass);border:1px solid var(--glass-line);color:var(--ink)}
+.cur.big{height:34px;padding:0 13px;font-size:14px;border-radius:12px}
+.arrow{color:var(--muted)}
+.ico{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-family:var(--f-mono);font-size:10px;font-weight:600;color:#fff;flex:none;box-shadow:0 0 0 1px rgba(255,255,255,.08) inset}
+.walletrow{display:flex;align-items:center;gap:10px;padding:9px 0}
+.walletrow + .walletrow{border-top:1px solid var(--line)}
+.walletrow .nm{flex:1;min-width:0}
+.walletrow .nm b{display:block;font-size:14.5px}
+.walletrow .nm small{color:var(--muted);font-size:12.5px}
+.walletrow .amt{text-align:right;font-variant-numeric:tabular-nums}
+.walletrow .amt b{display:block;font-size:14.5px}
+.walletrow .amt small{color:var(--muted);font-size:12.5px}
+.bar{display:flex;height:10px;border-radius:99px;overflow:hidden;background:var(--glass);gap:2px}
+.bar i{display:block;height:100%;transform-origin:left;animation:growX .9s cubic-bezier(.2,.8,.2,1) both}
+.bar i:nth-child(2){animation-delay:.06s}.bar i:nth-child(3){animation-delay:.12s}.bar i:nth-child(4){animation-delay:.18s}.bar i:nth-child(5){animation-delay:.24s}
+@keyframes growX{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.legend{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:12px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.legend i{width:8px;height:8px;border-radius:3px;display:inline-block}
+
+/* proposals */
+.prop{display:grid;gap:10px}
+.prop.rec{border:1px solid rgba(123,92,255,.28);background:radial-gradient(120% 90% at 100% 0%, rgba(123,92,255,.22), transparent 55%), var(--surface);
+  box-shadow:var(--shadow)}
+.prop h3{margin:0;font-size:19px;line-height:1.2;font-weight:600;letter-spacing:-.015em}
+.prop p{margin:0;font-size:14px;color:#B9B6CB}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.btns{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.blocked{border:1.5px dashed rgba(255,255,255,.14);border-radius:28px;padding:16px 18px;display:grid;gap:6px}
+.blocked b{font-size:15px}
+.blocked p{margin:0;color:var(--red);font-size:13.5px}
+.more{font-size:13px;font-weight:500;color:var(--accent-ink);justify-self:start;min-height:44px;padding:0;display:inline-flex;align-items:center;gap:4px;margin-block:-8px}
+.more span{font-size:18px;transition:transform .2s}.more:hover span{transform:translateX(3px)}
+.prop{gap:16px;padding:22px 20px 20px}
+.prop-top{display:flex;justify-content:space-between;align-items:center;gap:8px;min-height:30px}
+.prop-kicker{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.prop-head{display:grid;gap:8px;text-align:left;padding:0}
+.prop .prop-head h3{font-size:24px;letter-spacing:-.025em;text-wrap:balance}
+.chev{display:inline-block;margin-left:6px;font-size:24px;color:var(--muted);font-weight:500;transition:transform .2s,color .2s}
+.meta-row{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.detail-link{flex:none;display:inline-flex;align-items:center;gap:1px;min-height:32px;margin-block:-8px;padding:0;background:none;border:0;color:var(--accent-ink);font-size:12px;font-weight:500}
+.detail-link svg{transition:transform .2s}
+.detail-link:hover svg{transform:translateX(3px)}
+.prop-meta{font-size:12px;font-weight:400;color:#B9B6CB;font-variant-numeric:tabular-nums}
+.prop p.ev-box{font-size:13px;line-height:1.45;font-weight:400;color:#9C98B2;padding:12px 14px;border-radius:16px;background:rgba(0,0,0,.22);border:1px solid var(--line)}
+.stack{display:grid;gap:10px;margin-top:4px}
+.prop p.ev-sm{font-size:12.5px;line-height:1.4;color:#A9A4C4;padding:8px 10px;border-radius:12px;background:rgba(123,92,255,.08)}
+.ev-sm b{color:var(--accent-ink);font-weight:600}
+.shiny{font-family:var(--f-ui);font-weight:600;font-size:12px;letter-spacing:.08em;text-transform:uppercase;
+  background:linear-gradient(110deg,#9A86FF 35%,#FFFFFF 50%,#9A86FF 65%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 3s linear infinite}
+@keyframes shine{from{background-position:120% 0}to{background-position:-120% 0}}
+
+.box{border-radius:20px;padding:13px 15px;font-size:14px}
+.box.info{background:var(--info-bg);color:var(--info)}
+.box.warn{background:var(--amber-bg);color:var(--amber)}
+.box.red{background:var(--red-bg);color:var(--red)}
+.box.plain{background:var(--glass);color:#C9C6D8}
+.box b{display:block;margin-bottom:2px}
+
+/* move */
+.picker{display:grid;gap:6px}
+.picker .lab{font-size:12.5px;color:var(--muted);font-weight:600}
+.curgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.curgrid button{border:1px solid var(--line);background:var(--surface);border-radius:18px;padding:9px 10px;text-align:left;display:grid;gap:0;transition:transform .15s, border-color .2s, background .2s}
+.curgrid button:active{transform:scale(.95)}
+.curgrid button b{font-family:var(--f-mono);font-size:13px}
+.curgrid button small{font-size:11.5px;color:var(--muted)}
+.curgrid button.on{border-color:var(--accent);background:var(--tint);box-shadow:0 0 18px -6px rgba(123,92,255,.8)}
+.curgrid button:disabled{opacity:.3;cursor:not-allowed}
+.amount{display:flex;align-items:baseline;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:14px 16px;box-shadow:var(--shadow)}
+.amount:focus-within{border-color:rgba(123,92,255,.6)}
+.amount span{font-family:var(--f-mono);font-weight:600;color:var(--muted)}
+.amount input{border:0;outline:0;font:inherit;font-size:30px;font-weight:600;letter-spacing:-.02em;width:100%;min-width:0;background:transparent;color:var(--ink);font-variant-numeric:tabular-nums}
+.quick{display:flex;gap:6px;flex-wrap:wrap}
+.quick button,.chip{height:36px;padding:0 14px;border-radius:99px;background:var(--surface2);border:1px solid var(--line);font-size:13px;font-weight:500;transition:transform .15s, background .2s}
+.quick button:active,.chip:active{transform:scale(.94)}
+.chip.on{background:#F4F3FA;color:#0C0B12}
+.swap{justify-self:center;width:40px;height:40px;border-radius:50%;background:var(--glass);border:1px solid var(--glass-line);font-size:16px;transition:transform .35s cubic-bezier(.3,.7,.4,1.4)}
+.swap:hover{transform:rotate(180deg)}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:13.5px}
+.check input{margin-top:3px;accent-color:var(--accent);width:18px;height:18px}
+
+/* projection (bars like a savings forecast) */
+.proj{display:grid;gap:12px}
+.pbars{display:flex;gap:8px;height:150px;align-items:flex-end}
+.pb{flex:1;display:grid;grid-template-rows:1fr auto;gap:6px;height:100%;text-align:center;font-size:12px;color:var(--muted)}
+.pb .col{display:flex;flex-direction:column;justify-content:flex-end;align-items:stretch}
+.pb .col i{display:block;border-radius:10px 10px 4px 4px;background:linear-gradient(180deg,rgba(123,92,255,.42),rgba(123,92,255,.04));transform-origin:bottom;animation:growY .8s cubic-bezier(.2,.8,.2,1) both}
+.pb .col i.int{border-radius:10px 10px 0 0;background:rgba(180,162,255,.55)}
+.pb .col i.int + i{border-radius:0 0 4px 4px}
+.pb:last-child .col i.int{background:var(--accent);box-shadow:0 0 20px rgba(123,92,255,.7)}
+.pb:last-child span{color:var(--ink);font-weight:600}
+@keyframes growY{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+
+/* toggles */
+.tog{display:flex;align-items:center;justify-content:space-between;padding:10px 0;gap:10px}
+.tog + .tog{border-top:1px solid var(--line)}
+.switch{width:46px;height:28px;border-radius:99px;background:#3A3850;position:relative;flex:none;transition:background .2s}
+.switch::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:transform .3s cubic-bezier(.3,.7,.4,1.5);box-shadow:0 2px 6px rgba(0,0,0,.4)}
+.switch.on{background:var(--accent);box-shadow:0 0 16px -4px rgba(123,92,255,.9)}
+.switch.on::after{transform:translateX(18px)}
+.setrow{display:flex;justify-content:space-between;padding:12px 0;font-size:14.5px}
+.setrow + .setrow{border-top:1px solid var(--line)}
+.setrow b{color:var(--accent-ink)}
+
+/* sheet & toast */
+.scrim{position:absolute;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);display:flex;align-items:flex-end;z-index:5;animation:fade .2s both}
+.sheet{background:var(--surface);border-top:1px solid var(--glass-line);width:100%;border-radius:32px 32px 0 0;padding:22px 18px 26px;display:grid;gap:12px;animation:up .35s cubic-bezier(.2,.8,.2,1) both}
+.sheet h3{margin:0;font-size:22px;font-weight:600;letter-spacing:-.02em}
+@keyframes up{from{transform:translateY(100%)}to{transform:none}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.reasons{display:grid;gap:6px}
+.reasons button{border:1px solid var(--line);background:var(--surface2);border-radius:18px;padding:12px 14px;text-align:left;font-size:14px;font-weight:400;transition:transform .15s}
+.reasons button:active{transform:scale(.98)}
+.reasons button.on{border-color:var(--accent);background:var(--tint);font-weight:500}
+.toast{position:absolute;left:16px;right:16px;bottom:96px;background:rgba(30,28,41,.92);border:1px solid var(--glass-line);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);color:#fff;border-radius:20px;padding:13px 15px;font-size:14px;z-index:6;animation:up2 .35s cubic-bezier(.2,.8,.2,1) both;box-shadow:var(--shadow)}
+@keyframes up2{from{opacity:0;transform:translateY(12px) scale(.97)}to{opacity:1;transform:none}}
+.done{display:grid;place-items:center;text-align:center;gap:10px;padding-top:30px}
+.done .ok{width:72px;height:72px;border-radius:50%;background:var(--green-bg);color:var(--green);display:grid;place-items:center;font-size:32px;font-weight:600;box-shadow:0 0 40px -6px rgba(63,179,122,.6);animation:pop .5s cubic-bezier(.3,.7,.4,1.6) both}
+@keyframes pop{from{transform:scale(.4);opacity:0}to{transform:none;opacity:1}}
+
+/* semaphore dot (no word) */
+.sdot{width:12px;height:12px;border-radius:50%;flex:none;margin-right:6px}
+.sdot.verde{background:#4FD394;box-shadow:0 0 0 5px var(--green-bg)}
+.sdot.amarillo{background:#F0B44C;box-shadow:0 0 0 5px var(--amber-bg)}
+.sdot.rojo{background:#F0675E;box-shadow:0 0 0 5px var(--red-bg)}
+
+/* belo app (light) */
+.phone.is-light{background:#F6F6F8}.phone.is-light .status{color:#111}
+.phone.is-splash{background:#5617D6}.phone.is-splash .status{color:#fff}
+.splash{position:absolute;inset:0;display:grid;place-items:center;align-content:center;gap:10px;background:#5617D6;color:#fff;animation:fade .4s both}
+.splash-word{font-size:64px;font-weight:600;letter-spacing:-.025em;animation:pop .6s .1s cubic-bezier(.3,.7,.4,1.6) both}
+.splash-tag{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;opacity:.7}
+.lt{color:#141418;padding-bottom:0}
+.lt-head{display:flex;justify-content:space-between;align-items:center}
+.lt-user{display:flex;align-items:center;gap:8px;color:#5617D6;font-size:17px}
+.lt-av{width:42px;height:42px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#B9A6FF,#3A1F8C)}
+.lt-caret{font-size:16px;margin-top:-6px}
+.lt-icons{display:flex;gap:8px}
+.lt-ic{width:42px;height:42px;border-radius:50%;background:#ECE6FB;color:#5617D6;display:grid;place-items:center;position:relative}
+.lt-ic.bell::after{content:"";position:absolute;top:3px;right:4px;width:9px;height:9px;border-radius:50%;background:#EF4444}
+.lt-card{background:#fff;border:1px solid #ECECF1;border-radius:22px;padding:16px 16px 12px;display:grid;gap:10px;box-shadow:0 8px 24px -18px rgba(20,20,40,.25)}
+.lt-row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.lt-muted{color:#55555F;font-size:15px}
+.lt-cur{display:inline-flex;align-items:center;gap:6px;color:#55555F;font-weight:600;font-size:15px}
+.lt-cur i{width:22px;height:22px;border-radius:50%;background:#26A17B;color:#fff;display:grid;place-items:center;font-style:normal;font-size:12px;font-weight:600}
+.lt-bal{font-size:36px;font-weight:600;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.lt-bal .dec{color:#141418}
+.lt-eye{color:#141418}
+.lt-acts{display:grid;grid-template-columns:repeat(3,1fr);padding:6px 0 4px}
+.lt-acts button{display:grid;justify-items:center;gap:8px;font-weight:500;font-size:13px;color:#141418}
+.lt-acts button span{width:62px;height:62px;border-radius:50%;background:#5617D6;color:#fff;display:grid;place-items:center;transition:transform .15s}
+.lt-acts button:active span{transform:scale(.92)}
+.lt-pot{display:flex;align-items:center;gap:10px;background:#F4F4F7;border-radius:14px;padding:11px 12px;font-size:14.5px;border-top:1px solid #ECECF1}
+.lt-pot span{flex:1;text-align:left}
+button.lt-pot{width:100%;color:inherit;font:inherit;font-size:14.5px;cursor:pointer}
+.lt-promo{display:grid;grid-template-columns:44px 1fr auto;gap:12px;align-items:center;background:#fff;border:1px solid #ECECF1;border-radius:18px;padding:14px}
+.lt-promo b{display:block;font-size:16px}.lt-promo div span{font-size:13px;color:#7A7A85}
+.lt-coin{width:40px;height:40px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#F8DA7A,#B88A1E)}
+.lt-chev{color:#5617D6}
+.lt-dots{display:flex;gap:6px;justify-content:center}.lt-dots i{width:7px;height:7px;border-radius:50%;background:#C9C9D1}.lt-dots i.on{background:#5617D6}
+.lt-h{font-size:18px;font-weight:600}
+.lt-link{color:#5617D6;font-weight:600;font-size:15px}
+.lt-short{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;text-align:center}
+.lt-short div{display:grid;justify-items:center;gap:6px}
+.lt-tile{width:62px;height:62px;border-radius:16px;background:#fff;border:1px solid #ECECF1;display:grid;place-items:center}
+.lt-tile i{width:30px;height:30px;border-radius:50%}
+.lt-short small{font-size:12px;color:#3A3A44;line-height:1.25}
+.lt-nav{position:absolute;left:0;right:0;bottom:0;height:76px;background:#fff;border-top:1px solid #ECECF1;display:grid;grid-template-columns:1fr 1fr 80px 1fr 1fr;align-items:center;justify-items:center;font-size:11.5px;color:#8A8A94;padding-bottom:8px}
+.lt-nav span{display:grid;justify-items:center;gap:3px}
+.lt-nav .on{color:#5617D6}
+.lt-qr{width:62px;height:62px;border-radius:50%;background:#5617D6;color:#fff;display:grid!important;place-items:center;margin-top:-34px;box-shadow:0 0 0 6px rgba(86,23,214,.18)}
+/* agent card: dark island inside the light home */
+.agentcard{border-radius:24px;padding:18px;display:grid;gap:8px;color:var(--ink);border:1px solid rgba(123,92,255,.35);
+  background:radial-gradient(120% 120% at 100% 0%, rgba(123,92,255,.45), transparent 55%), linear-gradient(180deg,#1C1830,#121019);
+  box-shadow:0 18px 40px -18px rgba(86,23,214,.65)}
+.ag-top{display:flex;justify-content:space-between;align-items:center}
+.agentcard .eyebrow{color:var(--lav)}
+.ag-title{font-size:20px;letter-spacing:-.02em;line-height:1.2}
+.ag-sub{font-size:13.5px;color:#C9C6D8}
+.ag-peek{display:grid;gap:6px;background:rgba(0,0,0,.28);border:1px solid var(--line);border-radius:16px;padding:10px 12px;font-size:14px;font-weight:600;margin:4px 0}
+.agentcard .btns{margin-top:4px}
+.ag-peek b{font-size:17px;letter-spacing:-.015em}
+.ag-meta{font-size:13px;font-weight:600;color:#C9C6D8}
+.ag-more{font-size:13px;font-weight:500;color:var(--accent-ink);display:inline-flex;align-items:center;gap:3px;min-height:36px}
+.ag-more span{font-size:17px;transition:transform .2s}.ag-more:hover span{transform:translateX(3px)}
+/* tall bottom sheet over the home */
+.sheet.tall{max-height:90%;overflow-y:auto;background:var(--bg);gap:14px;padding-top:12px;scrollbar-width:none}
+.sheet .handle{justify-self:center;width:40px;height:5px;border-radius:99px;background:rgba(255,255,255,.18);margin-bottom:4px}
+.sheet .back{width:40px;height:40px}
+
+/* belo-style banner */
+.bbanner{position:relative;overflow:hidden;text-align:left;color:#fff;border-radius:22px;padding:18px 18px 20px;display:grid;gap:16px;
+  background:linear-gradient(115deg,#3A0CB0 0%,#5615DE 55%,#7A2CF7 100%);box-shadow:0 16px 30px -18px rgba(86,23,214,.8);transition:transform .15s}
+.bbanner:active{transform:scale(.985)}
+.bbanner::after{content:"";position:absolute;right:-40px;top:-60px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.18),transparent 65%);pointer-events:none}
+.bb-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.bb-pill{display:inline-flex;align-items:center;gap:5px;height:30px;padding:0 12px;border-radius:999px;background:#C9F5E1;color:#145C3E;font-size:13px;font-weight:600}
+.bb-pill svg{width:16px;height:16px}
+.bb-pill.off{background:rgba(255,255,255,.2);color:#fff}
+.bb-body{display:grid;gap:4px;padding-right:48px}
+.bb-body b{font-size:22px;line-height:1.2;letter-spacing:-.02em;font-weight:600}
+.bb-body span{font-size:14px;color:rgba(255,255,255,.75)}
+.bb-chev{position:absolute;right:18px;bottom:22px;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.18);display:grid;place-items:center}
+.coins{display:flex;padding-left:10px}
+.coin{width:34px;height:34px;border-radius:50%;border:2.5px solid #fff;margin-left:-10px;display:grid;place-items:center;font-style:normal;font-weight:600;font-size:15px;color:#fff;position:relative;box-shadow:0 2px 6px rgba(0,0,0,.2)}
+.coin.ars{background:linear-gradient(#74ACDF 0 33%,#fff 33% 67%,#74ACDF 67%)}
+.coin.ars::after{content:"";width:9px;height:9px;border-radius:50%;background:#F6B40E}
+.coin.usd{background:#2E9E5B}.coin.usdt{background:#26A17B}.coin.btc{background:#F7931A}
+.coin.more{background:#EEE8FF;color:#5617D6;font-size:13px}
+
+/* agent banner: belo night gradient + neon line art */
+/* letter-spacing tuned for Inter */
+.abanner{position:relative;overflow:hidden;border-radius:20px;padding:16px 8px 16px 16px;display:grid;grid-template-columns:1fr 112px;gap:4px;align-items:center;color:#fff;
+  background:linear-gradient(180deg,#06031A 0%,#0B0630 45%,#2B0D86 85%,#5A22D6 100%);box-shadow:0 14px 28px -18px rgba(43,13,134,.9)}
+.ab-text{display:grid;gap:4px;justify-items:start;min-width:0}
+.ab-text .ab-tag{margin-bottom:6px}
+.ab-tag{display:inline-flex;align-items:center;gap:4px;color:#3CF0B0;font-size:11px;font-weight:500;letter-spacing:.02em;line-height:1}
+.ab-tag svg{width:12px;height:12px}
+.abanner b{font-size:18px;line-height:1.2;font-weight:600;letter-spacing:-.02em;text-wrap:balance}
+.ab-sub{font-size:13px;color:rgba(255,255,255,.68)}
+.ab-cta{margin-top:8px;height:34px;padding:0 20px;border-radius:999px;background:#fff;color:#0A0A0A;font-family:"Inter",system-ui,sans-serif;font-size:13px;font-weight:500;letter-spacing:-.005em;box-shadow:none;transition:transform .15s,opacity .15s}
+.ab-cta:hover{opacity:.9}
+.ab-cta:active{transform:scale(.95)}
+.ab-art{width:112px;height:112px;filter:drop-shadow(0 0 6px rgba(60,240,176,.45))}
+.ab-tag-sub{color:rgba(255,255,255,.6);margin-left:4px}
+.ab-tagrow{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.ab-text .ab-tagrow .ab-tag{margin-bottom:0}
+.ab-flags{display:inline-flex;padding-left:4px}
+.mf{width:13px;height:13px;border-radius:50%;margin-left:-4px;box-shadow:0 0 0 1.2px #0B0630;opacity:.9}
+.ab-spin{animation:coinspin 3.2s cubic-bezier(.45,0,.55,1) infinite}
+@keyframes coinspin{0%,30%{transform:scaleX(1)}50%{transform:scaleX(.06)}70%,100%{transform:scaleX(1)}}
+.ab-twinkle{transform-box:fill-box;transform-origin:center;animation:twinkle 2.4s ease-in-out infinite}.ab-twinkle.d2{animation-delay:-1.2s}
+@keyframes glowpulse{50%{transform:scale(1.04)}}
+@keyframes twinkle{0%,100%{opacity:.35;transform:scale(.8)}50%{opacity:1;transform:scale(1.1)}}
+@keyframes float{50%{transform:translateY(-3px)}}
+
+.btn.mint{background:#6EF2B8;color:#0A0A0A;box-shadow:none}
+.btn.mint:hover{background:#82F5C5}
+.rumbo-eb{display:inline-flex;align-items:center;gap:5px;color:#6EF2B8}
+.rumbo-eb svg{width:13px;height:13px}
+
+/* recommendations carousel */
+.car-sheet{gap:12px}
+.car-head{display:flex;justify-content:space-between;align-items:center}
+.car-head .rumbo-eb{font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+.car-head{gap:10px}
+.car-back{width:36px;height:36px;flex:none}
+.car-count{font-size:12.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.car{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -18px;padding:2px 18px 6px;scrollbar-width:none;overscroll-behavior-x:contain}
+.car::-webkit-scrollbar{display:none}
+.car-item{flex:0 0 86%;scroll-snap-align:center;display:flex}
+.car-item .prop{flex:1;padding:20px 18px 18px}
+.car-item .prop .prop-head h3{font-size:21px}
+
+.car-nav{display:flex;justify-content:center;align-items:center;gap:14px}
+.car-dots{display:flex;gap:6px}
+.car-dots i{width:6px;height:6px;border-radius:99px;background:rgba(255,255,255,.2);transition:width .25s,background .25s}
+.car-dots i.on{width:18px;background:#6EF2B8}
+.car-arrow{width:32px;height:32px;border-radius:50%;background:var(--glass);border:1px solid var(--glass-line);font-size:18px;display:grid;place-items:center;color:var(--muted)}
+.car-arrow:hover{color:var(--ink)}
+
+
+/* ===== Agent light theme (toggle in the index) ===== */
+.phone.ag-light{
+  --bg:#F6F6F8; --surface:#FFFFFF; --surface2:#F1F0F5; --ink:#141418; --muted:#6E6B80; --line:rgba(20,20,40,.08);
+  --glass:#FFFFFF; --glass-line:rgba(20,20,40,.10);
+  --accent:#5B1FE3; --accent-ink:#5617D6; --lav:#5617D6; --tint:rgba(91,31,227,.07);
+  --green:#1E7A4F; --green-bg:#E3F6EC; --amber:#8A5A0B; --amber-bg:#FCF1DC; --red:#B0322A; --red-bg:#FBE6E3; --info:#1E3A66; --info-bg:#E8EEFA;
+  --shadow:0 1px 2px rgba(20,20,40,.04), 0 8px 20px -16px rgba(20,20,40,.22);
+  color:var(--ink); background:var(--bg)}
+.phone.ag-light .status{color:#141418}
+.phone.ag-light .lead,.phone.ag-light .sem p,.phone.ag-light .prop p,.phone.ag-light .dark .sub{color:#55525F}
+.phone.ag-light .prop-meta{color:#6E6B80}
+.phone.ag-light .prop p.ev-box{color:#55525F;background:#FBFBFB}
+.phone.ag-light .prop.rec{border-color:rgba(91,31,227,.22);background:radial-gradient(120% 90% at 100% 0%, rgba(91,31,227,.07), transparent 55%), #fff}
+.phone.ag-light .glow{background:radial-gradient(120% 90% at 100% 0%, rgba(91,31,227,.08), transparent 55%), #fff}
+.phone.ag-light .dark{color:var(--ink);border-color:var(--line);background:radial-gradient(120% 120% at 100% 0%, rgba(91,31,227,.12), transparent 55%), #fff}
+.phone.ag-light .meter{background:rgba(20,20,40,.08)}
+.phone.ag-light .shiny{background:linear-gradient(110deg,#5617D6 35%,#B49CFF 50%,#5617D6 65%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text}
+.phone.ag-light .pill.neutral{color:#3A3850;background:#F1F0F5}
+.phone.ag-light .box.plain{color:#55525F;background:#F1F0F5}
+.phone.ag-light .cmp-col.no .cmp-v{color:#55525F}
+.phone.ag-light .cmp-col.yes{border-color:rgba(91,31,227,.22);background:radial-gradient(130% 100% at 100% 0%, rgba(91,31,227,.08), transparent 60%), #fff}
+.phone.ag-light .big .dec{color:#B3B0C2}
+.phone.ag-light .chip.on{background:#141418;color:#fff}
+.phone.ag-light .sheet{border-top-color:var(--line)}
+.phone.ag-light .sheet .handle{background:rgba(20,20,40,.15)}
+.phone.ag-light .msg.ag{background:#fff}
+.phone.ag-light .chat-prop{background:#F6F5FA;border-color:rgba(91,31,227,.2)}
+.phone.ag-light .switch{background:#D5D3E0}
+.phone.ag-light .switch.on{background:var(--accent)}
+.phone.ag-light .car-dots i{background:rgba(20,20,40,.15)}
+.phone.ag-light .car-dots i.on{background:#5617D6}
+.phone.ag-light .rumbo-eb{color:#13A06A}
+.phone.ag-light .btn.primary:disabled{background:#E4E1EE;color:#9C99AE}
+.phone.ag-light .toast{background:rgba(20,20,24,.92)}
+.phone.ag-light .ag-meta{color:#6E6B80}
+/* belo surfaces: 16px radius, 1px light-grey border, no drop shadow */
+.phone.ag-light{--line:#ECECF0; --glass-line:#E6E6EB; --shadow:none}
+.phone.ag-light .card,.phone.ag-light .sem,.phone.ag-light .cmp-col,.phone.ag-light .evcard,.phone.ag-light .blocked,.phone.ag-light .dark,.phone.ag-light .amount{border-radius:16px;border:1px solid #ECECF0;box-shadow:none}
+.phone.ag-light .prop.rec,.phone.ag-light .cmp-col.yes{border-color:#E2DAFB}
+.phone.ag-light .card::after{display:none}
+.phone.ag-light .notice,.phone.ag-light .box{border-radius:12px}
+.phone.ag-light .prop p.ev-box,.phone.ag-light .chat-prop,.phone.ag-light .ag-peek{border-radius:12px;border-color:#ECECF0}
+.phone.ag-light .curgrid button,.phone.ag-light .reasons button{border-radius:12px;border-color:#ECECF0}
+.phone.ag-light .msg{border-radius:16px;box-shadow:none}
+.phone.ag-light .msg.ag{border:1px solid #ECECF0;border-bottom-left-radius:4px}
+.phone.ag-light .msg.me{border-bottom-right-radius:4px}
+.phone.ag-light .sheet{border-radius:24px 24px 0 0}
+.phone.ag-light .back,.phone.ag-light .gpill,.phone.ag-light .car-arrow,.phone.ag-light .swap{border-color:#E6E6EB;box-shadow:none}
+.phone.ag-light .btn.ghost{border-color:#E6E6EB}
+.phone.ag-light .pill.neutral{background:#F1F1F4}
+.theme-switch{display:grid;grid-template-columns:1fr 1fr;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:3px;gap:3px}
+.theme-switch button{padding:8px 6px;border-radius:11px;font-size:13px;font-weight:500;color:var(--muted)}
+.theme-switch button.on{background:var(--surface2);color:var(--ink);box-shadow:var(--shadow)}
+
+/* nav agent item */
+.lt-nav{grid-template-columns:1fr 1fr 80px 1fr 1fr}
+.lt-agent{display:grid;justify-items:center;gap:3px;font-size:11.5px;color:#8A8A94;font-weight:400;position:relative}
+.lt-agent.on{color:#5617D6}
+.lt-agent .badge{position:absolute;top:-1px;right:8px;width:8px;height:8px;border-radius:50%;background:#5617D6;box-shadow:0 0 0 2px #fff}
+/* chat */
+.sheet.chat{height:94%;display:flex;flex-direction:column;padding:0;gap:0;background:var(--bg)}
+.chat-head{display:flex;align-items:center;gap:12px;padding:16px 16px 12px;border-bottom:1px solid var(--line)}
+.chat-head div{flex:1;display:grid}.chat-head b{font-size:17px}.chat-head span{font-size:13px;color:var(--muted)}
+.orb{width:40px;height:40px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#E4DCFF,#7B5CFF 45%,#2A1A6E);box-shadow:0 0 22px rgba(123,92,255,.7);animation:breathe 3s ease-in-out infinite}
+@keyframes breathe{50%{box-shadow:0 0 34px rgba(123,92,255,.95);transform:scale(1.04)}}
+.msgs{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;scrollbar-width:none}
+.msg{max-width:86%;padding:12px 14px;border-radius:20px;font-size:14.5px;line-height:1.45;animation:up2 .3s cubic-bezier(.2,.8,.2,1) both}
+.msg.ag{align-self:flex-start;background:var(--surface);border:1px solid var(--line);border-bottom-left-radius:6px;box-shadow:var(--shadow)}
+.msg.me{align-self:flex-end;background:var(--accent);color:#fff;border-bottom-right-radius:6px;box-shadow:0 10px 24px -12px rgba(123,92,255,.8)}
+.msg .sdot{display:inline-block;vertical-align:middle;margin:0 4px;width:10px;height:10px}
+.msg.typing{display:flex;gap:5px;padding:14px 16px}
+.msg.typing i{width:7px;height:7px;border-radius:50%;background:var(--muted);animation:blink 1s infinite}
+.msg.typing i:nth-child(2){animation-delay:.15s}.msg.typing i:nth-child(3){animation-delay:.3s}
+@keyframes blink{0%,100%{opacity:.3;transform:translateY(0)}50%{opacity:1;transform:translateY(-3px)}}
+.chat-prop{margin-top:10px;display:grid;gap:6px;background:rgba(0,0,0,.28);border:1px solid rgba(123,92,255,.35);border-radius:16px;padding:12px}
+.chat-prop b{font-size:15.5px}
+.chat-prop .btns{margin-top:4px}
+.msg.ag{max-width:92%}
+.msg .btn.sm{height:38px;font-size:12.5px;white-space:nowrap;padding:0 10px}
+.chips-row{display:flex;gap:6px;overflow-x:auto;padding:4px 16px 10px;scrollbar-width:none}
+.chips-row .chip{flex:none;height:34px;font-size:12.5px;white-space:nowrap}
+.chat-in{display:flex;gap:8px;align-items:center;padding:8px 12px 20px 16px;border-top:1px solid var(--line)}
+.chat-in input{flex:1;min-width:0;height:46px;border-radius:999px;border:1px solid var(--glass-line);background:var(--surface);color:var(--ink);padding:0 16px;font:inherit;font-size:14.5px;outline:0}
+.chat-in input:focus{border-color:rgba(123,92,255,.6)}
+.send{width:44px;height:44px;border-radius:50%;background:#5B1FE3;color:#fff;display:grid;place-items:center;flex:none;box-shadow:none;transition:transform .15s}
+.send:active{transform:scale(.9)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+/* semaphore chip: dot + word */
+.schip{display:inline-flex;align-items:center;gap:7px;height:26px;padding:0 10px 0 9px;border-radius:999px;font-size:12px;font-weight:500;white-space:nowrap;flex:none}
+.schip .sdot{width:7px;height:7px;margin:0;box-shadow:none}
+.schip.verde{background:var(--green-bg);color:var(--green)}
+.schip.amarillo{background:var(--amber-bg);color:var(--amber)}
+.schip.rojo{background:var(--red-bg);color:var(--red)}
+.msg .schip{vertical-align:middle;margin:2px 0}
+/* investor profile */
+.perf{display:grid;gap:8px}
+.perf-chip{display:inline-flex;align-items:center;gap:3px;height:28px;padding:0 10px 0 12px;border-radius:999px;background:var(--tint);color:var(--accent-ink);font-size:12.5px;font-weight:500}
+.perf-desc{font-size:13px;color:var(--muted)}
+.mixbar{position:relative;height:8px;border-radius:99px;background:var(--surface2);margin-top:6px}
+.mixbar .fill{position:absolute;left:0;top:0;bottom:0;border-radius:99px;background:var(--accent);min-width:6px}
+.mixbar .fill.over{background:#E0A43A}
+.mixbar .cap{position:absolute;top:-4px;bottom:-4px;width:2px;border-radius:2px;background:var(--ink);opacity:.5;transform:translateX(-1px)}
+.perf-legend{font-size:12px;color:var(--muted)}
+.perf-why{font-size:12px;color:var(--muted);padding-top:8px;border-top:1px solid var(--line)}
+
+.pot-tip{display:grid;gap:6px;padding:16px;border-radius:16px;background:linear-gradient(180deg,#06031A 0%,#0B0630 45%,#2B0D86 85%,#5A22D6 100%);color:#fff}
+.pot-tip .rumbo-eb{color:#3CF0B0!important;font-size:11px}
+.pot-tip b{font-size:17px;font-weight:600;letter-spacing:-.01em}
+.pot-tip-d{font-size:13px;color:rgba(255,255,255,.72)}
+.pot-tip .btns{margin-top:6px}
+.pot-tip .btn.ghost{background:rgba(255,255,255,.1)!important;color:#fff;border-color:rgba(255,255,255,.18)!important}
+.pot{display:grid;grid-template-columns:44px 1fr auto;gap:12px;align-items:center;padding:12px 0}
+.pot + .pot{border-top:1px solid var(--line)}
+.pot-t{display:grid;gap:2px;min-width:0}
+.pot-t b{font-size:14.5px;font-weight:500}
+.pot-t span{font-size:12.5px;color:var(--muted)}
+.pot-pct{font-size:13px;font-weight:500;color:var(--accent-ink);font-variant-numeric:tabular-nums}
+
+/* habits list */
+.hab-list{display:grid;margin-top:4px}
+.hab{display:grid;grid-template-columns:36px 1fr;gap:12px;align-items:center;padding:11px 0}
+.hab + .hab{border-top:1px solid var(--line)}
+.hab div{display:grid;gap:1px;min-width:0}
+.hab b{font-size:14px;font-weight:500;letter-spacing:-.005em;font-variant-numeric:tabular-nums}
+.hab div span{font-size:12.5px;color:var(--muted)}
+.hab-ic{width:36px;height:36px;border-radius:50%;display:grid;place-items:center}
+.hab-ic.ars{background:var(--amber-bg);color:var(--amber)}
+.hab-ic.usd{background:var(--tint);color:var(--accent-ink)}
+.hab-ic.save{background:var(--green-bg);color:var(--green)}
+
+/* notice: icon + text */
+.notice{display:grid;grid-template-columns:20px 1fr;gap:12px;align-items:start;border-radius:18px;padding:14px 16px;font-size:14px;line-height:1.45}
+.notice svg{margin-top:1px}
+.notice p{margin:0}
+.notice b{font-weight:600}
+.notice.verde{background:var(--green-bg);color:var(--green)}
+.notice.amarillo{background:var(--amber-bg);color:var(--amber)}
+.notice.rojo{background:var(--red-bg);color:var(--red)}
+.notice.info{background:var(--info-bg);color:var(--info)}
+
+/* compare: do vs don't */
+.cmp{display:grid;gap:12px}
+.cmp-q{font-size:14px;color:var(--muted)}
+.cmp-cols{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.cmp-col{border-radius:24px;padding:16px 14px;display:grid;gap:10px;align-content:start;border:1px solid var(--line);box-shadow:var(--shadow);min-width:0}
+.cmp-col.no{background:var(--surface)}
+.cmp-col.yes{border-color:rgba(123,92,255,.28);background:radial-gradient(130% 100% at 100% 0%, rgba(123,92,255,.28), transparent 60%), var(--surface);box-shadow:var(--shadow)}
+.cmp-tag{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:var(--muted)}
+.cmp-col.no .dot{color:var(--amber-bar)}
+.cmp-col.yes .cmp-tag{color:var(--accent-ink)}
+.cmp-col.yes .dot{color:var(--accent)}
+.cmp-v{font-size:21px;font-weight:600;letter-spacing:-.025em;line-height:1.15;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.cmp-col.no .cmp-v{color:#C9C6D8}
+.cmp-col dl{margin:0;display:grid;gap:2px;padding-top:10px;border-top:1px solid var(--line)}
+.cmp-col dt{font-size:12px;color:var(--muted)}
+.cmp-col dd{margin:0 0 6px;font-size:14px;font-weight:600;font-variant-numeric:tabular-nums}
+.cmp-note{font-size:12px;color:var(--muted)}
+
+/* history */
+.meter{height:6px;border-radius:99px;background:rgba(255,255,255,.1);margin-top:14px;overflow:hidden}
+.meter i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--lav));border-radius:99px;transform-origin:left;animation:growX 1.1s cubic-bezier(.2,.8,.2,1) both;box-shadow:0 0 12px rgba(180,162,255,.7)}
+.evcard{background:var(--surface);border:1px solid var(--line);border-radius:28px;padding:15px 18px;display:grid;gap:4px;text-align:left;font-size:14px;box-shadow:var(--shadow);transition:transform .15s}
+.evcard:active{transform:scale(.985)}
+.evcard b{color:var(--accent-ink);font-size:13.5px}
+.steps{display:flex;gap:4px;margin-top:4px}.steps i{flex:1;height:5px;border-radius:99px;background:rgba(255,255,255,.1)}.steps i.on{background:var(--accent)}
+.ev{border-left:2px solid var(--accent);background:var(--tint);border-radius:0 14px 14px 0;padding:9px 12px;font-size:13.5px;display:grid;gap:2px;color:#DCD7F2}
+.ev .eyebrow{font-size:10.5px}
+.hbars{display:flex;gap:18px;height:110px;align-items:flex-end;padding-top:6px}
+.hb{flex:1;display:grid;gap:4px;height:100%;grid-template-rows:1fr auto;text-align:center;font-size:12px;color:var(--muted)}
+.hb .cols{display:flex;gap:4px;align-items:flex-end;justify-content:center}
+.hb .cols i{width:18px;border-radius:7px 7px 3px 3px;transform-origin:bottom;animation:growY .8s cubic-bezier(.2,.8,.2,1) both}
+.habit{display:grid;grid-template-columns:72px 1fr;gap:8px;align-items:start;font-size:13.5px}
+.habit .pill{justify-content:center;height:24px;font-size:12px}
+.qa{display:grid;gap:2px;font-size:14px}
+.qa b{font-size:20px;letter-spacing:-.02em}
+.tl{display:grid;grid-template-columns:28px 1fr;gap:10px;font-size:13.5px}
+.tl i{width:28px;height:28px;border-radius:50%;background:var(--glass);display:grid;place-items:center;font-style:normal;font-family:var(--f-mono);font-size:12px;font-weight:600}
+.tl i.on{background:var(--accent);color:#fff;box-shadow:0 0 14px rgba(123,92,255,.7)}
+.tl div{display:grid}.tl span{color:var(--muted)}
+.persona{display:grid;grid-template-columns:1fr 1fr;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:3px;gap:3px}
+.persona button{padding:8px 6px;border-radius:11px;font-size:13px;font-weight:600;color:var(--muted);transition:background .2s,color .2s}
+.persona button.on{background:var(--surface2);color:var(--ink);box-shadow:var(--shadow)}
+
+/* screen enter (fade + rise, staggered) */
+.enter .scroll > *{animation:rise .5s cubic-bezier(.2,.8,.2,1) both}
+.enter .scroll > *:nth-child(2){animation-delay:.04s}.enter .scroll > *:nth-child(3){animation-delay:.08s}.enter .scroll > *:nth-child(4){animation-delay:.12s}
+.enter .scroll > *:nth-child(5){animation-delay:.16s}.enter .scroll > *:nth-child(6){animation-delay:.2s}.enter .scroll > *:nth-child(n+7){animation-delay:.24s}
+.enter .foot{animation:rise .5s .15s cubic-bezier(.2,.8,.2,1) both}
+@keyframes rise{from{opacity:.001;transform:translateY(14px)}to{opacity:1;transform:none}}
+canvas.spark{position:absolute;inset:0;pointer-events:none;z-index:8}
+
+/* notes */
+.notes{display:grid;gap:14px;position:sticky;top:20px}
+.notes .card{border-radius:22px}
+.notes h3{margin:4px 0 8px;font-size:19px;font-weight:600;letter-spacing:-.01em}
+.notes ul{margin:0;padding-left:18px;display:grid;gap:6px;font-size:14px;max-width:60ch;color:#C9C6D8}
+.rules{display:grid;gap:8px;font-size:13.5px;color:#C9C6D8}
+.rules div{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start}
+.assume{font-size:12.5px;color:var(--muted)}
+
+@media (max-width:1100px){
+  .wrap{grid-template-columns:minmax(0,390px) minmax(0,1fr)}
+  .index{grid-column:1 / -1;position:static;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+}
+@media (max-width:760px){
+  .wrap{grid-template-columns:minmax(0,1fr);justify-items:center}
+  .wrap > *{width:100%;max-width:390px}
+  .phone,.notes{position:static}
+  .phone{height:760px;max-height:none}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+<style id="embed-mode">
+html.embed body{padding:0!important;background:#F6F6F8!important}
+html.embed header.top,html.embed #index,html.embed #notes{display:none!important}
+html.embed .wrap{display:block;max-width:none}
+html.embed .phone{position:relative!important;top:0;max-width:none;width:100vw;height:100vh;max-height:none;min-height:0;border:0;outline:0;border-radius:0;box-shadow:none}
+</style>
+</head>
+<body>
+
+
+<header class="top">
+  <span class="eyebrow">Buildathon belo · Agente de sugerencias · Flujos por moneda</span>
+  <h1>Cada propuesta es un movimiento entre tus monedas.</h1>
+  <p>Prototipo clickeable. El agente lee tu plata en pesos, dólares, stablecoins y cripto, y propone de qué moneda a cuál mover. También podés mover vos, con el mismo semáforo.</p>
+</header>
+
+<div class="wrap">
+  <nav class="index" id="index" aria-label="Pantallas"></nav>
+  <div class="phone ag-light" id="phone">
+    <div class="status"><span>9:41</span><span class="logo">belo</span></div>
+    <div class="screen" id="screen"></div>
+  </div>
+  <aside class="notes" id="notes"></aside>
+</div>
+
+<script>
+// ---------- Data (example values for the demo) ----------
+const FEE = 0.008;              // 0,8% conversion cost (example)
+// monthly spend / saving capacity in USD come from the persona (S.prof)
+const CUR = {
+  ARS:{name:'Pesos', kind:'local', price:1/1450, color:'#8E8AA3'},
+  USD:{name:'Dólares', kind:'stable', price:1, color:'#6C47FF'},
+  USDT:{name:'Tether', kind:'stable', price:1, yield:6, color:'#9D86FF'},
+  USDC:{name:'USD Coin', kind:'stable', price:1, yield:5, color:'#C9BCFF'},
+  BTC:{name:'Bitcoin', kind:'volatile', price:90000, color:'#5D5A78'},
+  ETH:{name:'Ether', kind:'volatile', price:3200, color:'#3B394E'},
+};
+const ORDER = ['ARS','USD','USDT','USDC','BTC','ETH'];
+const ROLE = {local:'Gasto del mes', stable:'Ahorro en dólares', volatile:'Inversión'};
+
+const PERSONAS = {
+  hist:{
+    prof:{perfil:'moderado', perfilWhy:'Lo inferimos de tus compras de BTC de los últimos 3 meses.', gasto:2800, ahorro:1200, metaTitle:'Respiro en 14 meses', metaGoal:6, metaSub:'6 meses de gastos en USD'},
+    wallet:{ARS:1160000, USD:1820, USDT:12740, USDC:0, BTC:0.006, ETH:0},
+    proposals:[
+      {id:'p1', from:'ARS', to:'USD', amt:360000, rec:true, status:'pending',
+        why:'Son los pesos que te sobran después de los gastos del mes. En dólares no pierden valor.',
+        ev:'Los últimos 3 meses cobraste el día 5 y te quedaron unos ARS 360.000 sin usar a fin de mes.',
+        ifNot:'Si quedan quietos 3 meses, con 2,5% de inflación mensual pierden unos USD 18 de poder de compra.'},
+      {id:'p2', from:'USD', to:'USDT', amt:250, status:'pending',
+        why:'Tus dólares quietos no rinden. En USDT rinden cerca de 6% anual y siguen siendo dólares.',
+        ev:'Tus USD 1.820 no tuvieron movimientos en 74 días.',
+        ifNot:'En 12 meses son unos USD 15 que no ganás. En USD el rendimiento es 0.'},
+      {id:'p3', from:'USD', to:'BTC', amt:100, status:'pending',
+        why:'Usa una parte de lo que podés invertir este mes. Puede subir o bajar mucho en pocos días.',
+        ev:'Compraste BTC en julio, agosto y septiembre, unos USD 100 cada vez.',
+        ifNot:'Si BTC cae 20%, perdés USD 20. Si sube 20%, ganás USD 20.'},
+      {id:'p4', from:'USDT', to:'BTC', amt:6500, status:'pending', asked:true, why:'Lo consultaste vos.', ifNot:''},
+    ]},
+  new:{
+    prof:{perfil:'conservador', perfilWhy:'Según lo que nos contaste: tu prioridad es ahorrar en dólares.', gasto:760, ahorro:205, metaTitle:'Tus primeros ahorros', metaGoal:3, metaSub:'3 meses de gastos en USD', learning:1},
+    wallet:{ARS:850000, USD:120, USDT:0, USDC:0, BTC:0, ETH:0},
+    proposals:[
+      {id:'n1', from:'ARS', to:'USD', amt:300000, rec:true, status:'pending',
+        why:'Es lo que te sobra este mes. En dólares empezás a ahorrar y no pierde valor.',
+        ev:'Nos contaste que cobrás ARS 1.400.000 y gastás unos ARS 1.100.000 por mes.',
+        ifNot:'Si quedan quietos 3 meses, con 2,5% de inflación mensual pierden unos USD 15 de poder de compra.'},
+      {id:'n2', from:'USD', to:'USDT', amt:120, status:'pending',
+        why:'Que tus dólares rindan desde el primer día, sin dejar de ser dólares.',
+        ev:'Tenés USD 120 en dólares sin rendimiento.',
+        ifNot:'En USD el rendimiento es 0.'},
+    ]},
+};
+const initial = (persona='hist') => {
+  const P = PERSONAS[persona];
+  return {
+    persona, prof:{...P.prof}, screen:'belo', wallet:{...P.wallet},
+    invested:0, frozen:false, agentCur:{ARS:true,USD:true,USDT:true,USDC:true,BTC:true,ETH:true},
+    proposals:P.proposals.map(p => ({...p})),
+    sel:null, move:{from:'ARS', to:'USD', amt:''}, pending:null, quote:30, ack:false,
+    sheet:null, reason:null, toast:null, last:null, chat:[], chatDraft:'', pots:[{id:'trip',name:'Viaje a Brasil',emoji:'BR',saved:1200,goal:2000,due:'Mar 2027',months:5},{id:'emerg',name:'Fondo de emergencia',emoji:'EF',saved:1800,goal:8400,due:'Dic 2027',months:14},{id:'nb',name:'Nueva notebook',emoji:'NB',saved:450,goal:1500,due:'Jun 2027',months:8}], potTip:true,
+  };
+};
+let S = initial();
+
+// ---------- Helpers ----------
+const nf = (n, d) => n.toLocaleString('es-AR', {minimumFractionDigits:0, maximumFractionDigits:d});
+const nfFixed = (n, d) => n.toLocaleString('es-AR', {minimumFractionDigits:d, maximumFractionDigits:d});
+function fmt(code, n, precise){
+  const k = CUR[code].kind;
+  if (code==='ARS') return 'ARS ' + nf(n,0);
+  if (k==='stable') return code + ' ' + (precise ? nfFixed(n,2) : nf(n, n<100?2:0));
+  return code + ' ' + nf(n, code==='BTC'?6:4);
+}
+const usd = (n) => 'USD ' + (n<100 && Math.abs(n % 1) > 0.004 ? nfFixed(n,2) : nf(n,0));
+const usdOf = (code, n) => n * CUR[code].price;
+const colchon = (w) => (w.USD + w.USDT + w.USDC) / S.prof.gasto;
+function pairM(a, b){
+  let d = 1; if (nfFixed(a,1)===nfFixed(b,1)) d = 2;
+  return [nfFixed(a,d), nfFixed(b,d)];
+}
+const level = (c) => c>=6 ? 'verde' : c>=3 ? 'amarillo' : 'rojo';
+const limitFor = (c) => ({verde:S.prof.ahorro*.5, amarillo:S.prof.ahorro*.25, rojo:0})[level(c)];
+const label = {verde:'Seguro', amarillo:'Moderado', rojo:'Riesgoso'};
+// Investor profile: risk tolerance expressed as max share of the portfolio in high-risk assets (crypto)
+const PROFILES = {
+  conservador:{name:'Conservador', cap:5,  desc:'Priorizás no perder. Casi todo en dólares y stablecoins.'},
+  moderado:   {name:'Moderado',    cap:30, desc:'Aceptás algo de riesgo para crecer. Hasta 30% en cripto.'},
+  arriesgado: {name:'Arriesgado',  cap:60, desc:'Buscás crecer y tolerás subas y bajas. Hasta 60% en cripto.'},
+};
+const PORDER = ['conservador','moderado','arriesgado'];
+const RISK = {ARS:'Inflación', USD:'Bajo', USDT:'Bajo', USDC:'Bajo', BTC:'Alto', ETH:'Alto'};
+const prof = () => PROFILES[S.prof.perfil];
+const totalUsd = (w) => ORDER.reduce((t,k)=>t+usdOf(k,w[k]),0);
+const cryptoPct = (w) => { const t = totalUsd(w); return t ? (usdOf('BTC',w.BTC)+usdOf('ETH',w.ETH))/t*100 : 0; };
+const pctTxt = (x) => nf(x < 1 ? +x.toFixed(1) : Math.round(x), 1) + '%';
+function applyMove(w, from, to, amt){
+  const w2 = {...w};
+  w2[from] = w[from] - amt;
+  w2[to] = w[to] + receive(from, to, amt);
+  return w2;
+}
+const receive = (from, to, amt) => usdOf(from, amt) * (1-FEE) / CUR[to].price;
+function quoteText(from, to){
+  const [hi, lo] = CUR[from].price >= CUR[to].price ? [from, to] : [to, from];
+  const r = CUR[hi].price / CUR[lo].price;
+  return `1 ${hi} = ${lo} ${nf(r, r<10?4:0)}`;
+}
+
+function evalMove(from, to, amt){
+  const w = S.wallet;
+  if (!(amt > 0)) return {level:'empty'};
+  if (from === to) return {level:'empty'};
+  if (amt > w[from] + 1e-9) return {level:'error', msg:`No te alcanza. Tenés ${fmt(from, w[from])}.`};
+  const w2 = applyMove(w, from, to, amt);
+  const c0 = colchon(w), c1 = colchon(w2);
+  const [a, b] = pairM(c0, c1);
+  const v = usdOf(from, amt), fk = CUR[from].kind, tk = CUR[to].kind;
+  const remaining = Math.max(0, limitFor(c0) - S.invested);
+  const base = {c0, c1, w2, v, recv:receive(from,to,amt), cost:v*FEE};
+  const P = prof(), p0 = cryptoPct(w), p1 = cryptoPct(w2);
+  Object.assign(base, {p0, p1, risk:RISK[to], perfil:P.name});
+  if (tk === 'volatile'){
+    if (S.prof.perfil === 'conservador' && p1 > P.cap) return {...base, level:'rojo', msg:`${to} es riesgo alto y tu perfil es conservador. Quedarías con ${pctTxt(p1)} en cripto.`};
+    if (p1 > P.cap + 20) return {...base, level:'rojo', msg:`Demasiado riesgo para tu perfil ${P.name.toLowerCase()}: quedarías con ${pctTxt(p1)} en cripto (tu ideal es hasta ${P.cap}%).`};
+    if (p1 > P.cap) return {...base, level:'amarillo', msg:`${to} es riesgo alto. Te deja con ${pctTxt(p1)} en cripto; para tu perfil ${P.name.toLowerCase()} el ideal es hasta ${P.cap}%.`};
+    return {...base, level:'verde', msg:`${to} es riesgo alto, pero entra en tu perfil ${P.name.toLowerCase()}: quedás con ${pctTxt(p1)} en cripto (hasta ${P.cap}%).`};
+  }
+  if (fk === 'volatile') return {...base, level:'verde', msg:`Bajás tu riesgo: quedás con ${pctTxt(p1)} en cripto.`};
+  if (to === 'ARS') return {...base, level:'amarillo', msg:'Los pesos pierden valor con la inflación.'};
+  if (from === 'ARS') return {...base, level:'verde', msg:'Riesgo bajo. Protegés tus pesos de la inflación.'};
+  const y = CUR[to].yield ? ` Pasa a rendir cerca de ${CUR[to].yield}% anual.` : '';
+  return {...base, level:'verde', msg:'Riesgo bajo.' + y};
+}
+
+const visibleProps = () => S.frozen ? [] : S.proposals.filter(p => p.status==='pending' && S.agentCur[p.from] && S.agentCur[p.to] && p.amt <= S.wallet[p.from] + 1e-9);
+const propTitle = (p) => `Pasar ${fmt(p.from, p.amt)} a ${p.to}`;
+const pairHTML = (f, t, big) => `<span class="pair"><span class="cur ${big?'big':''}">${f}</span><span class="arrow">→</span><span class="cur ${big?'big':''}">${t}</span></span>`;
+const sdot = (lv) => `<span class="schip ${lv}"><span class="sdot ${lv}" aria-hidden="true"></span>${label[lv]}</span>`;
+const pill = (lv) => `<span class="pill ${lv}"><span class="dot"></span>${label[lv]}</span>`;
+
+function mixBar(w){
+  const vals = ORDER.map(c => [c, usdOf(c, w[c])]).filter(x => x[1] > 0.5);
+  const tot = vals.reduce((s,x)=>s+x[1],0);
+  return `<div class="bar" role="img" aria-label="Distribución por moneda">${vals.map(([c,v]) => `<i style="width:${v/tot*100}%;background:${CUR[c].color}"></i>`).join('')}</div>`;
+}
+function legend(w){
+  return `<div class="legend">${ORDER.filter(c => w[c] > 0).map(c => `<span><i style="background:${CUR[c].color}"></i>${c}</span>`).join('')}</div>`;
+}
+
+// ---------- Screens ----------
+const SCREENS = {};
+
+SCREENS.home = () => {
+  const w = S.wallet, c = colchon(w), lv = level(c), lim = limitFor(c), rem = Math.max(0, lim - S.invested);
+  const props = visibleProps().filter(p => evalMove(p.from,p.to,p.amt).level !== 'rojo');
+  const rec = props.find(p => p.rec) || props[0];
+  const total = ORDER.reduce((s,k)=>s+usdOf(k,w[k]),0);
+  const rows = ORDER.filter(k => w[k] > 0).map(k => {
+    const ck = CUR[k];
+    let tag = ROLE[ck.kind];
+    if (k==='ARS') tag += ' · pierde valor quieto';
+    if (ck.yield) tag += ` · rinde ${ck.yield}%`;
+    if (ck.kind==='volatile') tag += ' · varía';
+    return `<div class="walletrow"><span class="ico" style="background:${ck.color}">${k}</span>
+      <div class="nm"><b>${ck.name}</b><small>${tag}</small></div>
+      <div class="amt"><b>${fmt(k, w[k])}</b>${k!=='USD' && ck.kind!=='stable' ? `<small>≈ ${usd(usdOf(k,w[k]))}</small>` : ''}</div></div>`;
+  }).join('');
+  return `
+  <div class="scroll">
+    <div class="row"><span class="muted">Octubre 2026</span><button class="link" data-a="go:settings">Ajustes</button></div>
+    <div class="dark"><span class="eyebrow">Tu meta</span>
+      <div style="font-size:24px;font-weight:600;margin-top:4px">${S.prof.metaTitle}</div>
+      <div class="sub" style="font-size:14px">${S.prof.metaSub}. Vas en ${nfFixed(c,1)}.</div>
+      <div class="meter" aria-hidden="true"><i style="width:${Math.min(100, c/S.prof.metaGoal*100)}%"></i></div></div>
+    ${S.persona==='hist'
+      ? `<button class="evcard" data-a="go:history"><span class="eyebrow">Basado en tus últimos 3 meses</span><span>Sueldo ≈ USD 4.000 · Gastos ≈ USD 2.800 · Ahorrás ≈ USD 1.200</span><b>Ver qué ve el agente →</b></button>`
+      : `<button class="evcard" data-a="go:newstart"><span class="eyebrow">Mes ${S.prof.learning} de 3 · Aprendiendo tus hábitos</span><span>Todavía no tenemos historial. Usamos lo que nos contaste y mejoramos cada mes.</span><div class="steps"><i class="on"></i><i></i><i></i></div></button>`}
+    ${S.frozen ? `<div class="box plain"><b>El agente está congelado</b>No propone ni ejecuta. Podés mover entre monedas vos.<div style="margin-top:10px"><button class="btn sm primary" data-a="unfreeze">Reactivar agente</button></div></div>` : `
+    <div class="sem ${lv}"><span class="muted" style="font-size:13px">Semáforo de este mes</span><h4>${label[lv]}</h4>
+      <p>${lv==='rojo' ? 'Todavía no es momento de invertir. Primero ahorremos 3 meses de gastos en dólares.' : `Podés invertir hasta ${usd(lim)}${S.invested>0?` (te quedan ${usd(rem)})`:''}.`}</p></div>`}
+    <div class="card glow" style="display:grid;gap:10px">
+      <span class="muted" style="font-size:14px">Tu plata por moneda, en dólares</span>
+      <div class="big" data-count="${total}" data-pre="USD ">USD ${nf(total,0)}</div>
+      ${mixBar(w)}
+      <div>${rows}</div>
+      <button class="btn sm ghost" data-a="go:move">Mover entre monedas</button>
+    </div>
+    ${!S.frozen && props.length ? `<div class="card" style="display:grid;gap:8px">
+      <div class="row"><b style="font-size:17px">${props.length} ${props.length===1?'propuesta':'propuestas'}</b><button class="link" data-a="go:proposals">Ver todas</button></div>
+      ${props.map(p => `<div class="row" style="font-size:14px"><span>${pairHTML(p.from,p.to)}</span><span style="text-align:right">${fmt(p.from,p.amt)}${p===rec?' · <b style="color:var(--accent-ink)">recomendada</b>':''}</span></div>`).join('')}
+    </div>` : ''}
+    ${!S.frozen && !props.length ? `<div class="card muted" style="font-size:14px">No hay propuestas pendientes este mes.</div>` : ''}
+  </div>
+  <div class="foot">
+    ${!S.frozen && props.length ? `<button class="btn primary" data-a="go:proposals">Revisar propuestas</button>` : ''}
+    ${S.frozen ? '' : `<button class="btn ghost" data-a="sheet:freeze">Congelar agente</button>`}
+  </div>`;
+};
+
+function propCard(p){
+    const e = evalMove(p.from,p.to,p.amt);
+    return `<div class="card prop ${p.rec?'rec':''}">
+      <div class="prop-top">${p.rec ? '<span class="shiny">Recomendada</span>' : '<span class="prop-kicker">Otra opción</span>'}${sdot(e.level)}</div>
+      <div class="prop-head"><h3>${propTitle(p)}</h3>
+      <div class="meta-row"><span class="prop-meta">Recibís ≈ ${fmt(p.to, e.recv)} · Costo ${usd(e.cost)}</span>
+      <button class="detail-link" data-a="detail:${p.id}" aria-label="Ver detalle de ${propTitle(p)}">Ver detalle<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M9.5 6l6 6-6 6"/></svg></button></div></div>
+      ${p.ev ? `<p class="ev-box">${p.ev}</p>` : ''}
+      <div class="stack"><button class="btn primary" data-a="accept:${p.id}">Quiero avanzar</button><button class="btn ghost" data-a="reject:${p.id}">No por ahora</button></div>
+    </div>`;
+  }
+
+SCREENS.proposals = () => {
+  const all = visibleProps();
+  const ok = all.filter(p => evalMove(p.from,p.to,p.amt).level !== 'rojo');
+  const red = all.filter(p => evalMove(p.from,p.to,p.amt).level === 'rojo');
+  const card = propCard;
+  return `
+  <div class="scroll">
+    <div class="topbar"><button class="back" data-a="go:belo" aria-label="Volver">${IC.back}</button></div>
+    <div><span class="muted" style="font-size:14px">Octubre · ${ok.length} opciones</span><h2 class="t">Tus propuestas</h2>
+    <p class="lead" style="margin-top:4px">Cada una mueve plata de una moneda a otra. Elegí una, o no hagas nada. Nada se mueve sin tu OK.</p></div>
+    ${ok.length ? ok.map(card).join('') : '<div class="card muted">No quedan propuestas este mes.</div>'}
+    ${red.map(p => { const e = evalMove(p.from,p.to,p.amt); return `<div class="blocked">${pairHTML(p.from,p.to)}<b>${propTitle(p)}${p.asked?' · lo consultaste vos':''}</b><p>Sin opción de aceptar: ${e.msg.charAt(0).toLowerCase()+e.msg.slice(1)}</p></div>`; }).join('')}
+  </div>`;
+};
+
+SCREENS.detail = () => {
+  const p = S.proposals.find(x => x.id === S.sel) || S.proposals[0];
+  const e = evalMove(p.from,p.to,p.amt);
+  const [a,b] = pairM(e.c0, e.c1);
+  return `
+  <div class="scroll">
+    <div class="topbar"><button class="back" data-a="back-detail" aria-label="Volver">${IC.back}</button><button class="gpill" data-a="howcalc">${IC.infoc}Cómo se calcula</button></div>
+    ${pairHTML(p.from,p.to,true)}
+    <h2 class="t" style="font-size:26px">${propTitle(p)}</h2>
+    <div class="chips">${sdot(e.level)}<span class="pill neutral">Riesgo ${RISK[p.to].toLowerCase()}</span><span class="pill neutral">Perfil ${prof().name.toLowerCase()}</span></div>
+    ${cmpHTML(p, e)}
+    ${notice(e.level, '', e.msg)}
+    ${CUR[p.to].yield ? projHTML(p) : ''}
+    <div class="card" style="display:grid;gap:8px">
+      <b style="font-size:15px">Tu plata por moneda</b>
+      <span class="muted" style="font-size:12.5px">Hoy</span>${mixBar(S.wallet)}
+      <span class="muted" style="font-size:12.5px">Después</span>${mixBar(e.w2)}
+      ${legend(e.w2)}
+    </div>
+  </div>
+  <div class="foot"><button class="btn primary" data-a="accept:${p.id}">Quiero avanzar</button><button class="btn ghost" data-a="reject:${p.id}">No por ahora</button></div>`;
+};
+
+// Notice: icon + text, tinted by tone (verde/info = info icon, amarillo/rojo = warning icon)
+const ICON = {
+  info:'<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v6M12 7.5v.5" stroke-linecap="round"/></svg>',
+  warn:'<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5 2.8 19.5h18.4L12 3.5Z"/><path d="M12 10v4.5M12 17v.3" stroke-linecap="round"/></svg>'
+};
+function notice(tone, lead, text){
+  const icon = (tone === 'amarillo' || tone === 'rojo') ? ICON.warn : ICON.info;
+  return `<div class="notice ${tone}" role="note">${icon}<p>${lead ? `<b>${lead}</b> ` : ''}${text}</p></div>`;
+}
+
+// Do vs don't: same rows, two columns
+function cmpHTML(p, e){
+  const [a, b] = pairM(e.c0, e.c1);
+  const v = usdOf(p.from, p.amt);
+  let q, no, yes, note;
+  if (p.from === 'ARS'){
+    q = `En 3 meses, tus ${fmt(p.from,p.amt)} valen`;
+    no = '≈ ' + usd(v / Math.pow(1.025, 3)); yes = '≈ ' + fmt(p.to, e.recv);
+    note = 'Supuesto: 2,5% de inflación mensual.';
+  } else if (CUR[p.to].yield){
+    q = `En 12 meses, tus ${fmt(p.from,p.amt)} valen`;
+    no = fmt(p.from, p.amt); yes = '≈ ' + fmt(p.to, e.recv * (1 + CUR[p.to].yield/100));
+    note = `Supuesto: ${p.to} rinde ${CUR[p.to].yield}% anual.`;
+  } else if (CUR[p.to].kind === 'volatile'){
+    const r = usdOf(p.to, e.recv);
+    q = `En 12 meses, tus ${fmt(p.from,p.amt)} valen`;
+    no = fmt(p.from, p.amt); yes = `${usd(Math.round(r*.8))} a ${nf(Math.round(r*1.2),0)}`;
+    note = `Escenario: ${p.to} sube o baja 20% en un año.`;
+  } else {
+    q = `Tus ${fmt(p.from,p.amt)} valen`; no = usd(v); yes = '≈ ' + fmt(p.to, e.recv); note = '';
+  }
+  const col = (cls, tag, val, colchon, cost) => `<div class="cmp-col ${cls}">
+    <span class="cmp-tag"><span class="dot"></span>${tag}</span>
+    <b class="cmp-v">${val}</b>
+    <dl><dt>Costo</dt><dd>${cost}</dd></dl></div>`;
+  return `<div class="cmp">
+    <span class="cmp-q">${q}</span>
+    <div class="cmp-cols">${col('no','Si no hacés nada', no, a, 'USD 0')}${col('yes','Si lo hacés', yes, b, usd(e.cost))}</div>
+    <span class="cmp-note">Cotización ${quoteText(p.from,p.to)}${note ? ' · ' + note : ''}</span>
+  </div>`;
+}
+
+function projHTML(p){
+  const y = CUR[p.to].yield / 100, r = y / 12;
+  const opts = [p.amt, p.amt*2, p.amt*4].map(v => Math.round(v));
+  const m = S.proj && opts.includes(S.proj) ? S.proj : opts[0];
+  const years = [1,2,3,4,5];
+  const fv = (n) => { let t = 0; for (let i=0;i<n*12;i++) t = t*(1+r) + m; return t; };
+  const data = years.map(n => ({n, total:fv(n), put:m*n*12}));
+  const last = data[data.length-1], max = last.total;
+  return `<div class="card glow proj">
+    <span class="muted" style="font-size:14px">Si lo repetís cada mes con ${fmt(p.from, m)}, en 5 años tenés</span>
+    <div class="big" data-count="${last.total}" data-pre="${p.to} " data-dec="2">${p.to} ${nfFixed(last.total,2)}</div>
+    <span class="pill verde" style="justify-self:start">+${fmt(p.to, last.total-last.put)} de rendimiento</span>
+    <div class="pbars" role="img" aria-label="Proyección a 5 años">${data.map((d,i) => `<div class="pb"><div class="col">
+      <i class="int" style="height:${(d.total-d.put)/max*130}px;animation-delay:${i*.07}s"></i><i style="height:${d.put/max*130}px;animation-delay:${i*.07}s"></i></div><span>${d.n}a</span></div>`).join('')}</div>
+    <span class="muted" style="font-size:13px">Por mes</span>
+    <div class="quick">${opts.map(v => `<button class="chip ${v===m?'on':''}" data-a="proj:${v}">${fmt(p.from, v)}</button>`).join('')}</div>
+    <span class="muted" style="font-size:12.5px">Solo cambia la proyección. No programa movimientos automáticos. Rendimiento de ejemplo: ${CUR[p.to].yield}% anual.</span>
+  </div>`;
+}
+
+SCREENS.move = () => {
+  const m = S.move, w = S.wallet;
+  const grid = (side) => `<div class="curgrid">${ORDER.map(c => {
+    const dis = side==='from' ? w[c] <= 0 : c === m.from;
+    const on = m[side] === c;
+    const sub = side==='from' ? fmt(c, w[c]).replace(c+' ','') : ROLE[CUR[c].kind];
+    return `<button class="${on?'on':''}" data-a="mv-${side}:${c}" ${dis?'disabled':''} aria-pressed="${on}"><b>${c}</b><small>${sub}</small></button>`;
+  }).join('')}</div>`;
+  return `
+  <div class="scroll">
+    <div class="topbar"><button class="back" data-a="go:belo" aria-label="Volver">${IC.back}</button></div>
+    <h2 class="t">Mover entre monedas</h2>
+    <p class="lead">Elegí de qué moneda a cuál. El semáforo se calcula con las mismas reglas que usa el agente.</p>
+    <div class="picker"><span class="lab">De</span>${grid('from')}</div>
+    <button class="swap" data-a="mv-swap" aria-label="Invertir monedas">${IC.updown}</button>
+    <div class="picker"><span class="lab">A</span>${grid('to')}</div>
+    <div class="picker"><span class="lab">Monto en ${m.from}</span>
+      <label class="amount" for="amt"><span>${m.from}</span><input id="amt" inputmode="decimal" placeholder="0" value="${m.amt}" autocomplete="off"></label>
+      <div class="quick"><button data-a="mv-pct:.25">25%</button><button data-a="mv-pct:.5">50%</button><button data-a="mv-pct:1">Todo</button></div>
+    </div>
+    <div id="mv-result"></div>
+  </div>
+  <div class="foot"><button class="btn primary" id="mv-go" data-a="mv-review">Revisar movimiento</button></div>`;
+};
+
+function moveResult(){
+  const m = S.move, amt = parseAmt(m.amt);
+  const e = evalMove(m.from, m.to, amt);
+  const btn = document.getElementById('mv-go'), out = document.getElementById('mv-result');
+  if (!out) return;
+  if (e.level === 'empty'){ out.innerHTML = `<div class="box plain">Ingresá un monto para ver cuánto recibís y cómo queda tu semáforo.</div>`; btn.disabled = true; btn.textContent='Revisar movimiento'; return; }
+  if (e.level === 'error'){ out.innerHTML = `<div class="box red">${e.msg}</div>`; btn.disabled = true; btn.textContent='Revisar movimiento'; return; }
+  const [a,b] = pairM(e.c0, e.c1);
+  out.innerHTML = `<div class="card kv">
+    <div class="row"><span>Recibís</span><b>≈ ${fmt(m.to, e.recv)}</b></div>
+    <div class="row"><span>Cotización</span><b>${quoteText(m.from,m.to)}</b></div>
+    <div class="row"><span>Costo (0,8%)</span><b>${usd(e.cost)}</b></div>
+    <hr class="sep">
+    <div style="display:grid;gap:6px;justify-items:start">${sdot(e.level)}<span style="font-size:14px">${e.msg}</span></div>
+  </div>`;
+  btn.disabled = false;
+  btn.textContent = e.level === 'rojo' ? 'Revisar igual' : 'Revisar movimiento';
+}
+function parseAmt(s){ if (!s) return 0; return parseFloat(String(s).replace(/\./g,'').replace(',', '.')) || 0; }
+
+SCREENS.confirm = () => {
+  const p = S.pending, e = evalMove(p.from, p.to, p.amt), w = S.wallet;
+  const needAck = e.level === 'rojo';
+  const expired = S.quote <= 0;
+  return `
+  <div class="scroll">
+    <h2 class="t">Confirmás esto</h2>
+    <p class="lead">Revisá antes de aceptar. Podés volver atrás sin costo.</p>
+    <div class="card kv">
+      <div class="row"><span>Movés</span><b>${fmt(p.from, p.amt)}</b></div>
+      <div class="row"><span>Recibís</span><b>≈ ${fmt(p.to, e.recv, true)}</b></div>
+      <div class="row"><span>Cotización</span><b>${quoteText(p.from,p.to)}</b></div>
+      <div class="row"><span>Costo (0,8%)</span><b>${usd(e.cost)}</b></div>
+      <hr class="sep">
+      <div class="row"><span>Tu ${p.from}</span><b>${fmt(p.from,w[p.from])} → ${fmt(p.from,e.w2[p.from])}</b></div>
+      <div class="row"><span>Tu ${p.to}</span><b>${fmt(p.to,w[p.to])} → ${fmt(p.to,e.w2[p.to])}</b></div>
+    </div>
+    <div class="row" style="font-size:13px"><span class="muted" id="quote-timer">${expired ? 'La cotización venció.' : `Cotización válida por ${S.quote} s`}</span>${sdot(e.level)}</div>
+    ${needAck ? notice('rojo', 'Este movimiento queda en rojo.', e.msg) + `
+      <label class="check" for="ack"><input type="checkbox" id="ack" ${S.ack?'checked':''}><span>Entiendo que es más riesgo del que va con mi perfil y lo hago igual.</span></label>` : ''}
+    ${notice('info', 'Lo ejecuta belo.', p.source==='agent' ? 'Podés congelar al agente cuando quieras.' : 'Este movimiento lo iniciaste vos.')}
+  </div>
+  <div class="foot">
+    ${expired ? `<button class="btn primary" data-a="requote">Actualizar cotización</button>` :
+      `<button class="btn primary" id="confirm-btn" data-a="execute" ${needAck && !S.ack ? 'disabled' : ''}>Confirmar</button>`}
+    <button class="btn ghost" data-a="back-from-confirm">Volver</button>
+  </div>`;
+};
+
+SCREENS.done = () => {
+  const l = S.last;
+  return `
+  <div class="scroll">
+    <div class="done"><div class="ok" aria-hidden="true">✓</div><h2 class="t" style="margin:0">Listo</h2>
+      <p class="lead">Pasaste ${fmt(l.from,l.amt)} a ${l.to}.</p></div>
+    <div class="card kv">
+      <div class="row"><span>Recibiste</span><b>${fmt(l.to, l.recv, true)}</b></div>
+      <div class="row"><span>Costo</span><b>${usd(l.cost)}</b></div>
+      <div class="row"><span>Semáforo</span>${sdot(l.level)}</div>
+    </div>
+    <div class="card" style="display:grid;gap:8px"><b style="font-size:15px">Tu plata por moneda</b>${mixBar(S.wallet)}${legend(S.wallet)}</div>
+  </div>
+  <div class="foot"><button class="btn primary" data-a="go:belo">Volver al inicio</button><button class="btn ghost" data-a="go:move">Mover otra vez</button></div>`;
+};
+
+SCREENS.history = () => {
+  const months = [['Jul',3950,2750],['Ago',4020,2900],['Sep',4030,2750]];
+  const max = 4200;
+  const cats = [['Alquiler',32],['Súper',18],['Tarjeta',15],['Servicios',9],['Otros',26]];
+  const catCol = [agentTheme==='light' ? '#2B2838' : '#F4F3FA','#6C47FF','#9D86FF','#C9BCFF','#D9D6E6'];
+  return `
+  <div class="scroll">
+    <div class="topbar"><button class="back" data-a="go:belo" aria-label="Volver">${IC.back}</button></div>
+    <span class="eyebrow rumbo-eb">${IC.agent}Rumbo · Tu agente AI</span>
+    <h2 class="t" style="margin-top:-6px">Tu historial financiero</h2>
+    ${profileCard()}
+    <div class="card" style="display:grid;gap:10px">
+      <div class="row"><b style="font-size:15px">Sueldo</b><span class="pill neutral">3 de 3 meses</span></div>
+      <div style="font-size:22px;font-weight:600">≈ ARS 5.800.000 <span class="muted" style="font-size:14px;font-weight:600">≈ USD 4.000</span></div>
+      <div class="hbars" role="img" aria-label="Ingresos y gastos por mes">
+        ${months.map(([m,i,g]) => `<div class="hb"><div class="cols"><i style="height:${i/max*100}%;background:var(--accent)"></i><i style="height:${g/max*100}%;background:#C9BCFF"></i></div><span>${m}</span></div>`).join('')}
+      </div>
+      <div class="legend"><span><i style="background:var(--accent)"></i>Ingreso</span><span><i style="background:#C9BCFF"></i>Gasto</span></div>
+    </div>
+    <div class="card" style="display:grid;gap:10px">
+      <div class="row"><b style="font-size:15px">Gastos</b><b>≈ USD 2.800 / mes</b></div>
+      <div class="bar">${cats.map(([n,p],i)=>`<i style="width:${p}%;background:${catCol[i]}"></i>`).join('')}</div>
+      <div class="legend">${cats.map(([n,p],i)=>`<span><i style="background:${catCol[i]}"></i>${n} ${p}%</span>`).join('')}</div>
+    </div>
+    <div class="card" style="display:grid;gap:8px">
+      <b style="font-size:15px">Hábitos que detectamos</b>
+      <div class="hab-list">
+        <div class="hab"><span class="hab-ic ars" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v10M14.6 9.3c-.5-.8-1.5-1.3-2.6-1.3-1.5 0-2.6.8-2.6 2s1.1 1.6 2.6 1.9 2.6.8 2.6 2-1.1 2.1-2.6 2.1c-1.1 0-2.1-.5-2.6-1.3"/></svg></span>
+          <div><b>ARS 360.000 sin usar</b><span>Quedan quietos hasta el próximo sueldo</span></div></div>
+        <div class="hab"><span class="hab-ic usd" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg></span>
+          <div><b>USD 1.820 sin moverse</b><span>Hace 74 días, sin rendimiento</span></div></div>
+        <div class="hab"><span class="hab-ic save" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16l5-5 3.5 3.5L20 7"/><path d="M15 7h5v5"/></svg></span>
+          <div><b>Ahorrás el 30% del sueldo</b><span>Unos USD 1.200 por mes</span></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><button class="btn mint" data-a="go-recs">Ver recomendaciones</button></div>`;
+};
+
+function profileCard(){
+  const P = prof(), w = S.wallet, p = cryptoPct(w);
+  const over = p > P.cap;
+  return `<div class="card perf">
+    <div class="row"><b style="font-size:15px">Tu perfil de inversor</b><button class="perf-chip" data-a="perfil-cycle" aria-label="Cambiar perfil">${P.name}<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M7 10l5 5 5-5"/></svg></button></div>
+    <span class="perf-desc">${P.desc}</span>
+    <div class="mixbar" role="img" aria-label="Cripto ${pctTxt(p)}, ideal hasta ${P.cap}%"><i class="fill ${over?'over':''}" style="width:${Math.min(100,p)}%"></i><i class="cap" style="left:${P.cap}%"></i></div>
+    <div class="row perf-legend"><span>Hoy ${pctTxt(p)} en cripto</span><span>Ideal hasta ${P.cap}%</span></div>
+    <span class="perf-why">${S.prof.perfilWhy}</span>
+  </div>`;
+}
+SCREENS.newstart = () => `
+  <div class="scroll">
+    <div class="topbar"><button class="back" data-a="go:belo" aria-label="Volver">${IC.back}</button></div>
+    <span class="eyebrow rumbo-eb">${IC.agent}Rumbo · Empezamos juntos</span>
+    <h2 class="t" style="margin-top:-6px">Empezamos juntos</h2>
+    <p class="lead">Todavía no tenés movimientos en belo. Con 3 respuestas armamos tu primer semáforo, y cada mes aprendemos más de vos.</p>
+    ${profileCard()}
+    <div class="card qa"><span class="muted">¿Cuánto cobrás por mes?</span><b>ARS 1.400.000</b><span class="muted" style="font-size:12.5px">≈ USD 965</span></div>
+    <div class="card qa"><span class="muted">¿Cuánto gastás, más o menos?</span><b>ARS 1.100.000</b><span class="muted" style="font-size:12.5px">≈ USD 760 · te quedan ≈ USD 205</span></div>
+    <div class="card qa"><span class="muted">¿Qué querés lograr primero?</span>
+      <div class="chips" style="margin-top:4px"><span class="pill" style="background:var(--accent);color:#fff">Ahorrar en dólares</span><span class="pill neutral">Ahorrar para algo</span><span class="pill neutral">Empezar a invertir</span></div></div>
+    <div class="card" style="display:grid;gap:12px">
+      <b style="font-size:15px">Tu camino</b>
+      <div class="tl"><i class="on">1</i><div><b>Mes 1 a 3 · Ahorrar en dólares</b><span>Pasar lo que sobra a dólares hasta juntar 3 meses de gastos.</span></div></div>
+      <div class="tl"><i>2</i><div><b>Con 3 meses de historial</b><span>Las propuestas usan tus movimientos reales, no solo lo que nos contaste.</span></div></div>
+      <div class="tl"><i>3</i><div><b>Con ahorros · Invertir</b><span>Se habilita invertir una parte en cripto, según tu perfil.</span></div></div>
+    </div>
+  </div>
+  <div class="foot"><button class="btn mint" data-a="go-recs">Ver mi primera recomendación</button></div>`;
+
+
+// ---------- belo app (light) : entry point ----------
+const IC = {
+  help:'<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.3a2.5 2.5 0 1 1 3.4 2.3c-.6.3-1 .8-1 1.4v.5M12 16.6v.4" stroke-linecap="round"/></svg>',
+  vib:'<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="8" y="4" width="8" height="16" rx="2"/><path d="M4.5 9v6M19.5 9v6" stroke-linecap="round"/></svg>',
+  bell:'<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15L6 16Z" stroke-linejoin="round"/><path d="M10 20.5a2 2 0 0 0 4 0"/></svg>',
+  eye:'<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="3"/></svg>',
+  dep:'<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 7l10 10M17 9v8H9"/></svg>',
+  swap:'<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 10a7 7 0 0 1 12.5-3.5L19 8M19 4v4h-4M19 14a7 7 0 0 1-12.5 3.5L5 16M5 20v-4h4"/></svg>',
+  tr:'<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M17 7L7 17M7 7h10v10"/></svg>',
+  pig:'<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M5 11a6 5 0 0 1 11-2.5l3-1-.5 3.5A5 5 0 0 1 19 14l-2 1v3h-2.5l-.5-1.5h-4L9.5 18H7v-3a5 5 0 0 1-2-4Z"/></svg>',
+  home:'<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5V20h-5v-5H9v5H4v-9.5Z"/></svg>',
+  money:'<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M14.5 9.5c-.4-.9-1.4-1.5-2.5-1.5-1.4 0-2.5.8-2.5 2s1.1 1.7 2.5 2 2.5.8 2.5 2-1.1 2-2.5 2c-1.1 0-2.1-.6-2.5-1.5M12 6.5V8M12 16v1.5" stroke-linecap="round"/></svg>',
+  qr:'<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="6" height="6" rx="1.5"/><rect x="14" y="4" width="6" height="6" rx="1.5"/><rect x="4" y="14" width="6" height="6" rx="1.5"/><path d="M14 14h2v2M18 14h2M14 18v2h2M18 18h2v2" stroke-linecap="round"/></svg>',
+  card:'<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3.5" y="6" width="17" height="12" rx="2"/><path d="M3.5 10h17M13 15h4" stroke-linecap="round"/></svg>',
+  plus:'<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>',
+  agent:'<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 3.5l1.9 4.6 4.6 1.9-4.6 1.9L12 16.5l-1.9-4.6L5.5 10l4.6-1.9L12 3.5Z"/><path d="M18.5 15.5l.8 1.9 1.9.8-1.9.8-.8 1.9-.8-1.9-1.9-.8 1.9-.8.8-1.9Z"/></svg>',
+  send:'<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"/></svg>',
+  back:'<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 5.5 8 12l6.5 6.5"/></svg>',
+  close:'<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>',
+  right:'<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 5.5 16 12l-6.5 6.5"/></svg>',
+  updown:'<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4v16M4.5 7.5 8 4l3.5 3.5M16 20V4M12.5 16.5 16 20l3.5-3.5"/></svg>',
+  infoc:'<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5M12 7.8v.2"/></svg>',
+  chev:'<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9.5 6l6 6-6 6"/></svg>',
+};
+
+const MINIFLAGS = `<span class="ab-flags" aria-label="Argentina, Brasil, México, Colombia y Chile"><svg class="mf" viewBox="-5.5 -5.5 11 11" aria-hidden="true"><rect x="-5.5" y="-5.5" width="11.0" height="11.0" fill="#74ACDF"/><rect x="-5.5" y="-1.8" width="11.0" height="3.6" fill="#fff"/><circle r="1" fill="#F6B40E"/></svg><svg class="mf" viewBox="-5.5 -5.5 11 11" aria-hidden="true"><rect x="-5.5" y="-5.5" width="11.0" height="11.0" fill="#229E45"/><path d="M0-4 4.6 0 0 4-4.6 0Z" fill="#F8E509"/><circle r="1.9" fill="#2B49A3"/></svg><svg class="mf" viewBox="-5.5 -5.5 11 11" aria-hidden="true"><rect x="-5.5" y="-5.5" width="11.0" height="11.0" fill="#fff"/><rect x="-5.5" y="-5.5" width="3.7" height="11.0" fill="#0B7A3E"/><rect x="1.8" y="-5.5" width="3.7" height="11.0" fill="#CE1126"/><circle r=".9" fill="#8C5A2B"/></svg><svg class="mf" viewBox="-5.5 -5.5 11 11" aria-hidden="true"><rect x="-5.5" y="-5.5" width="11.0" height="11.0" fill="#CE1126"/><rect x="-5.5" y="-5.5" width="11.0" height="6.7" fill="#FCD116"/><rect x="-5.5" y="1.2" width="11.0" height="2.4" fill="#003893"/></svg><svg class="mf" viewBox="-5.5 -5.5 11 11" aria-hidden="true"><rect x="-5.5" y="-5.5" width="11.0" height="11.0" fill="#D52B1E"/><rect x="-5.5" y="-5.5" width="11.0" height="5.5" fill="#fff"/><rect x="-5.5" y="-5.5" width="5.5" height="5.5" fill="#0039A6"/></svg></span>`;
+const ORBIT = `<svg class="ab-art" viewBox="0 0 120 120" aria-hidden="true">
+  <defs><radialGradient id="abhalo" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#3CF0B0" stop-opacity=".26"/><stop offset="1" stop-color="#3CF0B0" stop-opacity="0"/></radialGradient></defs>
+  <circle cx="60" cy="60" r="44" fill="url(#abhalo)"/>
+  <g transform="rotate(-14 60 60)"><path d="M10 60 a50 15 0 1 0 100 0 a50 15 0 1 0 -100 0" fill="none" stroke="#3CF0B0" stroke-width="1.3"/></g>
+  <g transform="translate(60 60)"><g class="ab-spin"><g class=""><circle cx="2.5" cy="2.9" r="21" fill="#04021A" stroke="#3CF0B0" stroke-width="2.3"/><circle r="21" fill="#55DFA6" stroke="#3CF0B0" stroke-width="2.3"/><circle r="15.5" fill="none" stroke="#0B3B2A" stroke-opacity=".35" stroke-width="1.6"/><text y="7.6" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-weight="700" font-size="22.1" fill="#0B3B2A">$</text></g></g></g>
+  <g transform="rotate(-14 60 60)"><g><g class=""><circle cx="0.7" cy="0.8" r="6" fill="#04021A" stroke="#3CF0B0" stroke-width="1.0"/><circle r="6" fill="#55DFA6" stroke="#3CF0B0" stroke-width="1.0"/><circle r="4.4" fill="none" stroke="#0B3B2A" stroke-opacity=".35" stroke-width="0.7"/><text y="2.2" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-weight="700" font-size="6.3" fill="#0B3B2A">$</text></g><animateMotion dur="10s" begin="-0s" repeatCount="indefinite" path="M10 60 a50 15 0 1 0 100 0 a50 15 0 1 0 -100 0"/></g><g><g class=""><circle cx="0.7" cy="0.8" r="6" fill="#04021A" stroke="#3CF0B0" stroke-width="1.0"/><circle r="6" fill="#55DFA6" stroke="#3CF0B0" stroke-width="1.0"/><circle r="4.4" fill="none" stroke="#0B3B2A" stroke-opacity=".35" stroke-width="0.7"/><text y="2.2" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-weight="700" font-size="6.3" fill="#0B3B2A">$</text></g><animateMotion dur="10s" begin="-3.4s" repeatCount="indefinite" path="M10 60 a50 15 0 1 0 100 0 a50 15 0 1 0 -100 0"/></g><g><g class=""><circle cx="0.7" cy="0.8" r="6" fill="#04021A" stroke="#3CF0B0" stroke-width="1.0"/><circle r="6" fill="#55DFA6" stroke="#3CF0B0" stroke-width="1.0"/><circle r="4.4" fill="none" stroke="#0B3B2A" stroke-opacity=".35" stroke-width="0.7"/><text y="2.2" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-weight="700" font-size="6.3" fill="#0B3B2A">$</text></g><animateMotion dur="10s" begin="-6.8s" repeatCount="indefinite" path="M10 60 a50 15 0 1 0 100 0 a50 15 0 1 0 -100 0"/></g></g>
+</svg>`;
+
+SCREENS.splash = () => `<div class="splash"><span class="splash-word">belo</span><span class="splash-tag">Buildathon · Agentic banking</span></div>`;
+
+SCREENS.belo = () => {
+  const w = S.wallet, c = colchon(w), lv = level(c), lim = limitFor(c), rem = Math.max(0, lim - S.invested);
+  const props = visibleProps().filter(p => evalMove(p.from,p.to,p.amt).level !== 'rojo');
+  const rec = props.find(p => p.rec) || props[0];
+  const semText = lv === 'rojo' ? 'Primero ahorremos en dólares.' : `Este mes podés invertir hasta ${usd(rem)}.`;
+  const banner = (title, sub, cta, action) => `<div class="abanner">
+      <div class="ab-text"><div class="ab-tagrow"><span class="ab-tag">${IC.agent}Rumbo<span class="ab-tag-sub">· Tu agente AI</span></span>${MINIFLAGS}</div>
+        <b>${title}</b>${sub ? `<span class="ab-sub">${sub}</span>` : ''}
+        <button class="ab-cta" data-a="${action}">${cta}</button></div>
+      ${ORBIT}</div>`;
+  const agent = S.frozen ? banner('Tu agente está en pausa', 'No propone ni ejecuta nada.', 'Reactivar', 'unfreeze')
+    : rec ? banner('Que tu plata trabaje por vos', '', 'Ir a mi agente', 'open-rumbo')
+    : banner('Este mes no hay recomendaciones', 'Preguntale lo que quieras.', 'Hablar con mi agente', 'open-chat');
+  const shortcuts = [['Deposit','Argentine pesos','#7FB5E8'],['Exchange','currencies','#F0B93A'],['Pay','with Pix','#2FA36B'],['Local','card','#6A4BD8']];
+  return `
+  <div class="scroll lt">
+    <div class="lt-head">
+      <div class="lt-user"><span class="lt-av" aria-hidden="true"></span><b>$usuario</b><span class="lt-caret">⌄</span></div>
+      <div class="lt-icons"><span class="lt-ic">${IC.help}</span><span class="lt-ic">${IC.vib}</span><span class="lt-ic bell">${IC.bell}</span></div>
+    </div>
+    <div class="lt-card">
+      <div class="lt-row"><span class="lt-muted">Available to use</span><span class="lt-cur"><i>₮</i>USD₮ ⌄</span></div>
+      <div class="lt-row"><span class="lt-bal" data-count="${w.USDT}" data-dec="2">${nfFixed(w.USDT,2)}</span><span class="lt-eye">${IC.eye}</span></div>
+      <div class="lt-acts">
+        <button data-a="toast-demo"><span>${IC.dep}</span>Deposit</button>
+        <button data-a="go:move"><span>${IC.swap}</span>Swap</button>
+        <button data-a="toast-demo"><span>${IC.tr}</span>Transfer</button>
+      </div>
+      <button class="lt-pot" data-a="go:pots">${IC.pig}<span>Saving pots</span>${IC.chev}</button>
+    </div>
+    ${agent}
+    <div class="lt-promo"><span class="lt-coin" aria-hidden="true"></span><div><b>Gold for every move</b><span>Invite friends, send abroad and get rewards. Start now!</span></div><span class="lt-chev">${IC.chev}</span></div>
+    <div class="lt-dots"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+    <div class="lt-row"><b class="lt-h">Shortcuts</b><span class="lt-link">See more ›</span></div>
+    <div class="lt-short">${shortcuts.map(([a,b,c]) => `<div><span class="lt-tile"><i style="background:${c}"></i></span><small>${a}<br>${b}</small></div>`).join('')}</div>
+    <div style="height:70px"></div>
+  </div>
+  <nav class="lt-nav" aria-label="belo">
+    <span class="on">${IC.home}Home</span><span>${IC.money}My money</span>
+    <span class="lt-qr">${IC.qr}</span>
+    <span>${IC.card}Cards</span>
+    <button class="lt-agent ${S.sheet==='chat'?'on':''}" data-a="open-chat" aria-label="Abrir chat del agente">${IC.agent}${visibleProps().length && !S.frozen ? '<i class="badge"></i>' : ''}Agente</button>
+  </nav>`;
+};
+
+SCREENS.pots = () => {
+  const pots = S.pots, total = pots.reduce((t,p)=>t+p.saved,0);
+  const tr = pots[0], left = tr.goal - tr.saved, perMonth = Math.ceil(left / tr.months / 10) * 10;
+  const ring = (p) => { const r=17, c=2*Math.PI*r, k=Math.min(1,p.saved/p.goal); return `<svg viewBox="0 0 40 40" width="44" height="44" aria-hidden="true"><circle cx="20" cy="20" r="${r}" fill="none" stroke="var(--line)" stroke-width="4"/><circle cx="20" cy="20" r="${r}" fill="none" stroke="var(--accent)" stroke-width="4" stroke-linecap="round" stroke-dasharray="${c*k} ${c}" transform="rotate(-90 20 20)"/></svg>`; };
+  return `
+  <div class="scroll">
+    <div class="topbar"><button class="back" data-a="go:belo" aria-label="Volver">${IC.back}</button></div>
+    <h2 class="t" style="margin-top:-2px">Alcancías</h2>
+    <div class="card" style="display:grid;gap:6px">
+      <span class="muted" style="font-size:13px">Total reservado</span>
+      <div class="big" style="font-size:34px">USD ${nf(total,0)}</div>
+      <div class="row" style="font-size:13px;color:var(--ok,#1E7A4F)"><span>Rendimiento ganado</span><b>USD 38</b></div>
+    </div>
+    ${S.potTip ? `<div class="pot-tip">
+      <span class="eyebrow rumbo-eb">${IC.agent}Rumbo · Cobraste el sueldo</span>
+      <b>Separá USD ${nf(perMonth,0)} para ${tr.name}</b>
+      <span class="pot-tip-d">Con eso llegás a la meta en ${tr.due}. Este mes te sobraron unos USD 250.</span>
+      <div class="btns"><button class="btn sm primary" data-a="pot-save:${perMonth}">Separar USD ${nf(perMonth,0)}</button><button class="btn sm ghost" data-a="pot-skip">Ahora no</button></div>
+    </div>` : ''}
+    <div class="card" style="padding-block:4px">
+      ${pots.map(p => `<div class="pot">${ring(p)}<div class="pot-t"><b>${p.name}</b><span>USD ${nf(p.saved,0)} de ${nf(p.goal,0)} · ${p.due}</span></div><span class="pot-pct">${Math.round(p.saved/p.goal*100)}%</span></div>`).join('')}
+    </div>
+    <div class="notice info" role="note">${ICON.info}<p><b>Antes de retirar,</b> Rumbo te muestra cuánto se corre el plazo de tu objetivo.</p></div>
+  </div>
+  <div class="foot"><button class="btn primary" data-a="toast-demo">Nueva alcancía</button></div>`;
+};
+
+SCREENS.settings = () => `
+  <div class="scroll">
+    <div class="topbar"><button class="back" data-a="go:belo" aria-label="Volver">${IC.back}</button></div>
+    <h2 class="t">Ajustes</h2>
+    <div class="dark" style="display:grid;gap:10px">
+      <b style="font-size:19px">${S.frozen ? 'El agente está congelado' : 'El agente está activo'}</b>
+      <span class="sub" style="font-size:14px">${S.frozen ? 'No propone ni ejecuta.' : 'Puede proponerte cosas. Nada se mueve sin tu OK.'}</span>
+      <button class="btn sm light" data-a="${S.frozen?'unfreeze':'sheet:freeze'}">${S.frozen?'Reactivar agente':'Congelar agente'}</button>
+    </div>
+    <div class="card" style="padding-block:6px">
+      <div style="padding:10px 0 4px"><b style="font-size:15px">Monedas que puede usar el agente</b><div class="muted" style="font-size:13px">Si apagás una, no te propone movimientos con ella.</div></div>
+      ${ORDER.map(c => `<div class="tog"><span><b class="pair"><span class="cur">${c}</span></b> <span style="font-size:14px;margin-left:6px">${CUR[c].name}</span> <span class="muted" style="font-size:12.5px">· ${ROLE[CUR[c].kind]}</span></span>
+        <button class="switch ${S.agentCur[c]?'on':''}" role="switch" aria-checked="${S.agentCur[c]}" aria-label="${CUR[c].name}" data-a="tog:${c}"></button></div>`).join('')}
+    </div>
+    <div class="card" style="padding-block:4px">
+      <div class="setrow"><span>Cada cuánto te propone</span><b>Semanal</b></div>
+      <div class="setrow"><span>Tu perfil</span><b>${prof().name}</b></div>
+      <div class="setrow"><span>Cómo se calcula el semáforo</span><b>Ver</b></div>
+      <div class="setrow"><span>Desconectar belo</span><b style="color:var(--red)">Quitar</b></div>
+    </div>
+    <p class="muted" style="font-size:13px;margin:0">Las sugerencias son escenarios para que decidas. No son una recomendación personal de inversión.</p>
+  </div>`;
+
+
+// ---------- Agent chat (scripted demo) ----------
+const CHIPS = ['¿Cuánto puedo invertir?','¿Paso mis pesos a dólares?','¿Pongo a rendir mis dólares?','¿Y si compro BTC?','Quiero gastar USD 300','Pausar al agente'];
+function findProp(from, to){ return visibleProps().find(p => p.from === from && (!to || p.to === to)); }
+function chatProp(p){
+  if (!p) return '';
+  const e = evalMove(p.from, p.to, p.amt);
+  return `<div class="chat-prop"><div class="row">${pairHTML(p.from,p.to)}${sdot(e.level)}</div>
+    <b>${propTitle(p)}</b><span class="ag-meta">Recibís ≈ ${fmt(p.to, e.recv)} · Costo ${usd(e.cost)}</span>
+    <div class="btns"><button class="btn sm primary" data-a="accept:${p.id}">Quiero avanzar</button><button class="btn sm ghost" data-a="detail:${p.id}">Ver detalle</button></div></div>`;
+}
+function agentAnswer(q){
+  const t = q.toLowerCase();
+  const w = S.wallet, c = colchon(w), lv = level(c), rem = Math.max(0, limitFor(c) - S.invested);
+  const m = (x) => nfFixed(x, 1);
+  const amtMatch = t.match(/(\d[\d.]*)/);
+  if (/gast|comprar un|viaje|cambiar el auto/.test(t)){
+    const amt = amtMatch ? parseFloat(amtMatch[1].replace(/\./g,'')) : 300;
+    const c1 = (w.USD + w.USDT + w.USDC - amt) / S.prof.gasto;
+    const days = Math.round(amt / S.prof.ahorro * 30);
+    const comp = Math.round(amt / 3);
+    return `Si gastás <b>${usd(amt)}</b> de tus dólares, tu meta se corre unos <b>${days} días</b>.<br><br>Para compensarlo, podés separar ${usd(comp)} por mes durante 3 meses. ¿Lo sumo como recomendación?`
+      + `<div class="btns" style="margin-top:10px"><button class="btn sm primary" data-a="chat-comp">Sí, sumalo</button><button class="btn sm ghost" data-a="ask-text:Sigo con el gasto">Sigo con el gasto</button></div>`;
+  }
+  if (/sigo con el gasto/.test(t)) return 'Perfecto, es tu decisión. No cambio nada. Si querés, el mes que viene recalculo tu semáforo con el gasto incluido.';
+  if (/btc|bitcoin|cripto|eth/.test(t)){
+    const p = findProp('USD','BTC');
+    return `BTC puede subir o bajar mucho. Revisá cuánto entra en tu perfil antes de sumar.` + (p ? ` Esta es la opción que veo:${chatProp(p)}` : ' Hoy no tengo una propuesta de BTC para vos.');
+  }
+  if (/rend|usdt|inter[eé]s|quiet/.test(t)){
+    const p = findProp('USD','USDT');
+    return (S.persona==='hist' ? 'Tus USD 1.820 no se mueven hace 74 días. ' : '') + `En USDT rinden cerca de 6% anual y siguen siendo dólares.` + (p ? chatProp(p) : '');
+  }
+  if (/peso|d[oó]lar|ars/.test(t)){
+    const p = findProp('ARS','USD');
+    return (S.persona==='hist' ? 'Los últimos 3 meses te quedaron unos ARS 360.000 sin usar a fin de mes. ' : 'Con lo que nos contaste, te sobran unos ARS 300.000 por mes. ') + 'En dólares no pierden valor.' + (p ? chatProp(p) : '');
+  }
+  if (/invert|cu[aá]nto|sem[aá]foro|puedo/.test(t)){
+    { const P = prof(), p = cryptoPct(w), room = Math.max(0, (P.cap/100*totalUsd(w)) - usdOf('BTC',w.BTC) - usdOf('ETH',w.ETH));
+      return `Tu perfil es <b>${P.name.toLowerCase()}</b>: hasta ${P.cap}% en cripto. Hoy tenés ${pctTxt(p)}, así que podés sumar hasta <b>${usd(room)}</b> sin salirte de tu perfil.`; }
+    return `Tu semáforo de este mes: ${sdot(lv)}<br>` + (lv==='rojo'
+      ? 'Todavía no es momento de invertir. Primero ahorremos en dólares.'
+      : `Podés invertir hasta <b>${usd(rem)}</b>.`);
+  }
+  if (/congel|paus|stop|fren/.test(t)) return 'Podés pausarme cuando quieras: dejo de proponer y de ejecutar. Tus monedas quedan como están.<div class="btns" style="margin-top:10px"><button class="btn sm ghost" data-a="sheet:freeze">Congelar agente</button></div>';
+  return 'Todavía no sé responder eso. Puedo ayudarte con cuánto invertir, pasar pesos a dólares, poner a rendir tus dólares, comprar cripto o ver el impacto de un gasto.';
+}
+function chatSend(q){
+  q = (q || '').trim(); if (!q) return;
+  S.chat.push({me:true, html:q.replace(/</g,'&lt;')}); S.chatDraft = '';
+  S.chat.push({typing:true}); render();
+  setTimeout(() => { S.chat = S.chat.filter(x => !x.typing); S.chat.push({html:agentAnswer(q)}); if (S.sheet==='chat') render(); }, RM ? 0 : 750);
+}
+function chatHTML(){
+  if (!S.chat.length){
+    const c = colchon(S.wallet), lv = level(c);
+    S.chat.push({html:`Hola. Soy tu agente: miro tus movimientos en belo y te propongo qué hacer con tu plata. Nada se mueve sin tu OK.<br><br>Tu perfil es <b>${prof().name.toLowerCase()}</b>. ¿En qué te ayudo?`});
+  }
+  return `<div class="scrim" data-a="sheet-close"><div class="sheet chat" role="dialog" aria-label="Chat con tu agente">
+    <div class="chat-head"><span class="orb" aria-hidden="true"></span><div><b>Tu agente</b><span>Te propone. Vos decidís.</span></div><button class="back" data-a="sheet-close" aria-label="Cerrar">${IC.close}</button></div>
+    <div class="msgs" id="msgs" aria-live="polite">${S.chat.map(m => m.typing ? '<div class="msg ag typing"><i></i><i></i><i></i></div>' : `<div class="msg ${m.me?'me':'ag'}">${m.html}</div>`).join('')}</div>
+    <div class="chips-row">${CHIPS.map((c,i) => `<button class="chip" data-a="ask:${i}">${c}</button>`).join('')}</div>
+    <div class="chat-in"><label for="chat-in" class="sr">Escribile al agente</label><input id="chat-in" placeholder="Preguntale a tu agente" autocomplete="off" value="${(S.chatDraft||'').replace(/"/g,'&quot;')}"><button class="send" data-a="chat-send" aria-label="Enviar">${IC.send}</button></div>
+  </div></div>`;
+}
+
+// ---------- Sheets ----------
+const REASONS = ['Prefiero quedarme en esta moneda','Es mucho monto','No entiendo bien esta moneda','Lo hago más adelante'];
+function sheetHTML(){
+  if (S.sheet === 'carousel'){
+    const props = visibleProps().filter(p => evalMove(p.from,p.to,p.amt).level !== 'rojo');
+    if (!props.length) return `<div class="scrim" data-a="sheet-close"><div class="sheet tall"><span class="handle" aria-hidden="true"></span><div class="card muted">No quedan recomendaciones este mes.</div><button class="btn ghost" data-a="sheet-close">Cerrar</button></div></div>`;
+    S.carIdx = Math.min(S.carIdx || 0, props.length - 1);
+    return `<div class="scrim" data-a="sheet-close"><div class="sheet tall car-sheet" role="dialog" aria-label="Recomendaciones">
+      <span class="handle" aria-hidden="true"></span>
+      <div class="car-head"><button class="back car-back" data-a="sheet-close" aria-label="Volver a Rumbo">${IC.back}</button><span class="rumbo-eb" style="flex:1">${IC.agent}Rumbo · Recomendaciones</span><span class="car-count" id="car-count">${S.carIdx+1} de ${props.length}</span></div>
+      <div class="car" id="car" aria-roledescription="carrusel">${props.map((p,i) => `<div class="car-item" aria-label="${i+1} de ${props.length}">${propCard(p)}</div>`).join('')}</div>
+      <div class="car-nav">
+        <button class="car-arrow" data-a="car:-1" aria-label="Anterior">${IC.back}</button>
+        <div class="car-dots" id="car-dots">${props.map((_,i) => `<i class="${i===S.carIdx?'on':''}"></i>`).join('')}</div>
+        <button class="car-arrow" data-a="car:1" aria-label="Siguiente">${IC.right}</button>
+      </div>
+    </div></div>`;
+  }
+  if (S.sheet === 'rec'){
+    const props = visibleProps().filter(p => evalMove(p.from,p.to,p.amt).level !== 'rojo');
+    const rec = props.find(p => p.rec) || props[0];
+    return `<div class="scrim" data-a="sheet-close"><div class="sheet tall" role="dialog" aria-label="Tu recomendación">
+      <span class="handle" aria-hidden="true"></span>
+      ${rec ? propCard(rec) : '<div class="card muted">No hay más recomendaciones este mes.</div><button class="btn ghost" data-a="sheet-close">Cerrar</button>'}
+    </div></div>`;
+  }
+  if (S.sheet === 'chat') return chatHTML();
+  if (S.sheet === 'props'){
+    const all = visibleProps();
+    const ok = all.filter(p => evalMove(p.from,p.to,p.amt).level !== 'rojo');
+    const red = all.filter(p => evalMove(p.from,p.to,p.amt).level === 'rojo');
+    return `<div class="scrim" data-a="sheet-close"><div class="sheet tall" role="dialog" aria-label="Tus recomendaciones">
+      <span class="handle" aria-hidden="true"></span>
+      <div class="row"><div><h3>Tus recomendaciones</h3></div>
+        <button class="back" data-a="sheet-close" aria-label="Cerrar">${IC.close}</button></div>
+      ${ok.length ? ok.map(propCard).join('') : '<div class="card muted">No quedan recomendaciones este mes.</div>'}
+      ${red.map(p => { const e = evalMove(p.from,p.to,p.amt); return `<div class="blocked"><b>${propTitle(p)}${p.asked?' · lo consultaste vos':''}</b><p>Sin opción de aceptar: ${e.msg.charAt(0).toLowerCase()+e.msg.slice(1)}</p></div>`; }).join('')}
+      <button class="btn ghost sm" data-a="go:home">Ver todo en mi agente</button>
+    </div></div>`;
+  }
+  if (S.sheet === 'reject'){
+    const p = S.proposals.find(x => x.id === S.sel);
+    return `<div class="scrim" data-a="sheet-close"><div class="sheet" role="dialog" aria-label="No ahora">
+      <span class="pair">${pairHTML(p.from,p.to)}</span>
+      <h3>¿Por qué no ahora?</h3>
+      <p class="muted" style="margin:0;font-size:14px">Es opcional. Con esto ajustamos la próxima propuesta.</p>
+      <div class="reasons">${REASONS.map((r,i) => `<button class="${S.reason===i?'on':''}" data-a="reason:${i}">${r}</button>`).join('')}</div>
+      <button class="btn primary" data-a="reject-send">${S.reason===null?'Descartar sin motivo':'Enviar y descartar'}</button>
+      <button class="btn ghost" data-a="sheet-close">Cancelar</button>
+    </div></div>`;
+  }
+  if (S.sheet === 'freeze'){
+    return `<div class="scrim" data-a="sheet-close"><div class="sheet" role="dialog" aria-label="Congelar agente">
+      <h3>¿Congelar al agente?</h3>
+      <p style="margin:0;font-size:14.5px">El agente deja de proponer y de ejecutar. Tus monedas quedan como están y podés seguir moviendo vos.</p>
+      <button class="btn primary" data-a="freeze">Congelar agente</button>
+      <button class="btn ghost" data-a="sheet-close">Cancelar</button>
+    </div></div>`;
+  }
+  return '';
+}
+
+// ---------- Notes & index ----------
+const NOTES = {
+  pots:{f:'Alcancías', t:'Objetivos que guían al agente', b:[
+    'Cada alcancía tiene un objetivo claro: monto y fecha. Rumbo los usa para sugerir.',
+    'Al cobrar el sueldo, propone cuánto separar para llegar a tiempo.',
+    'Antes de retirar, muestra cuánto se corre el plazo.']},
+  carousel:{f:'Rumbo · Recomendaciones', t:'Carrusel de recomendaciones', b:[
+    'Desde Rumbo, "Recomendaciones" abre un carrusel con todas las del mes. Se desliza con el dedo; en desktop, con las flechas.',
+    'La primera es la recomendada. Los puntos y el contador muestran dónde estás.',
+    'Si rechazás una, sale del carrusel y quedás en la siguiente.']},
+  chat:{f:'Flow 0 · Nav', t:'El agente en la barra de navegación', b:[
+    'Un ícono "Agente" en la barra abre un chat que asesora. Es otro acceso directo, como Cards o More.',
+    'Las respuestas usan el saldo, el semáforo y el historial. Cuando hay una propuesta, aparece como mini card con Quiero avanzar y Ver detalle.',
+    '"Quiero gastar USD 300" corre el Flow 4: muestra cuántos días se corre la meta y propone compensarlo.',
+    'En la demo las respuestas son guionadas. Para la versión real, este chat se conecta al modelo vía MCP de belo.']},
+  splash:{f:'Flow 0 · Entrada', t:'Abre belo', b:['El agente vive dentro de la app de belo. No es otra app.']},
+  rec:{f:'Flow 0 · Bottom sheet', t:'Una recomendación, decidir ahí', b:[
+    'El banner abre un bottom sheet con una sola recomendación: la más importante del mes.',
+    'Quiero avanzar, No por ahora o ver el impacto tocando el título. Si la rechazás, el sheet muestra la siguiente.']},
+  belo:{f:'Flow 0 · Home de belo', t:'Un banner del agente en la home', b:[
+    'El agente entra como un banner con el estilo de belo: gradiente violeta, monedas superpuestas y pill menta.',
+    'Se ubica debajo del saldo, antes de las promos. Al tocarlo abre un bottom sheet con 1 recomendación.',
+    'Swap abre "Mover entre monedas" con el semáforo del agente.']},
+  props:{f:'Flow 0 · Bottom sheet', t:'Recomendaciones sin salir de la home', b:[
+    'Mismas cards que la lista: semáforo como punto, título tocable para ver el impacto, avanzar o no por ahora.',
+    '"No por ahora" pide el motivo y vuelve al sheet.']},
+  history:{f:'Rumbo · Con historial', t:'Tu situación financiera', b:[
+    'Es la sección de Rumbo: se llega tocando "Revisar" en el banner de la home.',
+    '"Recomendaciones" abre el bottom sheet con la recomendación del mes, sobre esta pantalla.',
+    'Con 3 meses de movimientos en belo detecta sueldo (monto, moneda y día de cobro), gastos por categoría e inversiones.',
+    'También detecta hábitos: pesos que quedan quietos, dólares sin rendimiento, compras de cripto que se repiten.',
+    'Cada propuesta cita el dato del historial que la origina. La persona puede corregir cualquier dato.']},
+  newstart:{f:'Flow 1 · Sin historial', t:'Acompañar desde cero', b:[
+    'Sin historial, 3 preguntas reemplazan los datos: cuánto cobra, cuánto gasta y qué quiere lograr primero.',
+    'El primer objetivo es ahorrar en dólares. Invertir se habilita después.',
+    'Cada mes el agente suma movimientos reales. Al tercer mes pasa a proponer con historial.']},
+  home:{f:'Flow 2 · Inicio', t:'Inicio con la plata por moneda', b:[
+    'Cada moneda muestra qué rol cumple: gasto del mes (ARS), ahorro en dólares (USD y stablecoins) o inversión (BTC, ETH).',
+    'El semáforo cruza el riesgo de cada moneda con tu perfil de inversor.',
+    'Las propuestas se leen como pares de monedas: de dónde sale y a dónde va.',
+    '"Mover entre monedas" está siempre a mano, con o sin agente.']},
+  proposals:{f:'Flow 2 · Paso 2', t:'Propuestas como movimientos entre monedas', b:[
+    'Hasta 3 propuestas y una recomendada. Cada una dice de qué moneda a cuál, cuánto recibís, el costo y su semáforo.',
+    'Pesos sobrantes → dólares protege. Dólares quietos → USDT rinde. Dólares → BTC invierte.',
+    'Rojo se ve, pero sin botón. Muestra el motivo con el número.']},
+  detail:{f:'Flow 2 · Paso 3', t:'Detalle: qué pasa si lo hacés y si no', b:[
+    'Escenario de no hacer nada, en la misma moneda que la persona entiende.',
+    'Cotización, costo y riesgo antes de decidir.',
+    'Distribución por moneda hoy y después, en una sola mirada.']},
+  confirm:{f:'Flow 2 y 5 · Confirmación', t:'Confirmación con saldo por moneda', b:[
+    'Monto, recibís, cotización y costo. Después, el saldo de las dos monedas antes → después.',
+    'La cotización vale 30 segundos. Si vence, se actualiza antes de poder confirmar.',
+    'Si el movimiento es manual y queda en rojo, pide una confirmación extra en vez de bloquear.']},
+  done:{f:'Flow 2 y 5 · Resultado', t:'Resultado y nuevo semáforo', b:[
+    'Confirma lo que recibiste y el semáforo del movimiento.',
+    'Si el movimiento fue a cripto, descuenta de lo que podés invertir este mes.']},
+  move:{f:'Flow 5 · Nuevo', t:'Mover entre monedas, vos', b:[
+    'La persona elige origen y destino entre ARS, USD, USDT, USDC, BTC y ETH.',
+    'Mientras escribe el monto, ve cuánto recibe y el semáforo del movimiento con las mismas reglas del agente.',
+    'Rojo no bloquea un movimiento manual: es tu plata. Pide una confirmación extra. Decisión a validar con belo.']},
+  settings:{f:'Ajustes', t:'Qué monedas puede usar el agente', b:[
+    'La persona apaga monedas que no quiere tocar. El agente deja de proponer pares que las usen.',
+    'Probalo: apagá BTC y volvé a Propuestas.',
+    'Congelar sigue a un toque, arriba de todo.']},
+};
+const FLOWS = [
+  {e:'Flow 0 · Entrada', t:'Desde la home de belo', n:true, items:[['splash','Splash'],['belo','Home de belo + banner del agente'],['rec','Bottom sheet con 1 recomendación'],['carousel','Rumbo · carrusel de recomendaciones'],['chat','Chat del agente (nav)'],['pots','Alcancías con objetivos']]},
+  {e:'Flow 1 · Conocerte', t:'Historial o desde cero', items:[['history','Con historial · lo que ve el agente'],['newstart','Sin historial · empezamos juntos']]},
+  {e:'Flow 2 · Decidir una propuesta', t:'Propuestas por moneda', items:[['belo','Home de belo'],['proposals','Propuestas'],['detail','Detalle'],['confirm-p','Confirmación'],['done-p','Listo'],['reject','No ahora · motivo']]},
+  {e:'Flow 5 · Nuevo', t:'Mover entre monedas', n:true, items:[['move','Elegir monedas y monto'],['confirm-m','Confirmación'],['done-m','Listo']]},
+  {e:'Flow 3 · Ajustes', t:'Panel, congelar y monedas', items:[['home','Panel del agente'],['freeze','Congelar agente'],['settings','Monedas del agente']]},
+];
+let currentKey = 'splash';
+const agentTheme = 'light';
+// Opening the app: splash -> home -> the month's recommendation slides up once
+function enterApp(){
+  go('splash', 'splash');
+  setTimeout(() => {
+    if (S.screen !== 'splash') return;
+    go('belo', 'belo');
+    setTimeout(() => {
+      if (!S.autoShown) homeRec();
+    }, 700);
+  }, 1400);
+}
+// First thing on the belo home: the month's recommendation in a bottom sheet
+function homeRec(){
+  const hasRec = !S.frozen && visibleProps().some(p => evalMove(p.from,p.to,p.amt).level !== 'rojo');
+  if (S.screen === 'belo' && !S.sheet && hasRec){ S.autoShown = true; S.sheet = 'rec'; currentKey = 'rec'; render(); }
+}
+function enterHome(){ go('belo'); setTimeout(homeRec, RM ? 0 : 450); }
+
+function renderIndex(){
+  document.getElementById('index').innerHTML =
+    `<div style="display:grid;gap:6px"><span class="eyebrow" style="color:var(--muted)">Usuario de la demo</span><div class="persona">
+      <button class="${S.persona==='hist'?'on':''}" data-j="p-hist">Con historial</button><button class="${S.persona==='new'?'on':''}" data-j="p-new">Sin historial</button></div></div>`
+    + FLOWS.map(f => `<div class="flow ${f.n?'new':''}"><span class="eyebrow">${f.e}</span><h3>${f.t}</h3><ol>${
+    f.items.map(([k,l],i) => `<li><button class="${currentKey===k?'on':''}" data-j="${k}"><span>${String(i+1).padStart(2,'0')}</span>${l}</button></li>`).join('')}</ol></div>`).join('')
+    + `<button class="reset" data-j="reset">Reiniciar demo</button>`;
+}
+function renderNotes(){
+  const n = NOTES[S.screen] || NOTES.home;
+  const c = colchon(S.wallet);
+  document.getElementById('notes').innerHTML = `
+    <div class="card"><span class="eyebrow">${n.f}</span><h3>${n.t}</h3><ul>${n.b.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+    <div class="card"><span class="eyebrow">Semáforo: riesgo × perfil</span>
+      <div class="rules" style="margin-top:10px">
+        <div>${sdot('verde')}<span>El riesgo entra en tu perfil y tu cripto queda dentro del ideal. O baja tu riesgo.</span></div>
+        <div>${sdot('amarillo')}<span>Te pasás del % de cripto de tu perfil, o vas a pesos.</span></div>
+        <div>${sdot('rojo')}<span>Riesgo muy por encima de tu perfil.</span></div>
+      </div></div>
+    <div class="card"><span class="eyebrow">Estado de la demo</span>
+      <div class="kv" style="margin-top:10px;font-size:13.5px">
+        <div class="row"><span>Perfil</span><b>${prof().name}</b></div>
+        <div class="row"><span>Cripto en cartera</span><b>${pctTxt(cryptoPct(S.wallet))} (ideal ${prof().cap}%)</b></div>
+        <div class="row"><span>Agente</span><b>${S.frozen?'Congelado':'Activo'}</b></div>
+      </div>
+      <p class="assume" style="margin:10px 0 0">Supuestos de ejemplo: 1 USD = ARS 1.450, BTC USD 90.000, ETH USD 3.200, costo 0,8%, USDT rinde 6% anual, gasto mensual ${usd(S.prof.gasto)}.</p></div>`;
+}
+// ---------- Micro-interactions (vanilla takes on React Bits: CountUp, FadeContent, SpotlightCard, ClickSpark) ----------
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+let lastView = '';
+function countUp(el){
+  const to = parseFloat(el.dataset.count), pre = el.dataset.pre || '', dec = +(el.dataset.dec || 0);
+  const paint = (v) => {
+    const s = nfFixed(v, dec);
+    if (dec){ const i = s.lastIndexOf(','); el.innerHTML = pre + s.slice(0,i) + `<span class="dec">${s.slice(i)}</span>`; }
+    else el.textContent = pre + s;
+  };
+  if (RM){ paint(to); return; }
+  const t0 = performance.now(), dur = 1000;
+  const step = (t) => { const k = Math.min(1,(t-t0)/dur), e = 1 - Math.pow(1-k, 4); paint(to*e); if (k<1) requestAnimationFrame(step); };
+  requestAnimationFrame(step);
+}
+const phoneEl = document.getElementById('phone');
+phoneEl.addEventListener('pointermove', (ev) => {
+  const c = ev.target.closest('.card'); if (!c) return;
+  const r = c.getBoundingClientRect();
+  c.style.setProperty('--mx', (ev.clientX - r.left) + 'px'); c.style.setProperty('--my', (ev.clientY - r.top) + 'px');
+});
+const spark = document.createElement('canvas'); spark.className = 'spark'; phoneEl.appendChild(spark);
+const sctx = spark.getContext('2d'); let sparks = [], sparkRun = false;
+phoneEl.addEventListener('pointerdown', (ev) => {
+  if (RM || !ev.target.closest('button')) return;
+  const r = phoneEl.getBoundingClientRect(), dpr = devicePixelRatio || 1;
+  if (spark.width !== Math.round(r.width*dpr)){ spark.width = r.width*dpr; spark.height = r.height*dpr; sctx.setTransform(dpr,0,0,dpr,0,0); }
+  const x = ev.clientX - r.left - 9, y = ev.clientY - r.top - 9, t = performance.now();
+  for (let i=0;i<8;i++) sparks.push({x, y, a: i/8*Math.PI*2, t});
+  if (!sparkRun){ sparkRun = true; requestAnimationFrame(drawSpark); }
+});
+function drawSpark(now){
+  sctx.clearRect(0,0,spark.width,spark.height);
+  sparks = sparks.filter(s => now - s.t < 420);
+  sctx.strokeStyle = '#C9BCFF'; sctx.lineWidth = 2; sctx.lineCap = 'round';
+  for (const s of sparks){
+    const k = (now - s.t)/420, e = k*(2-k), d = e*22, len = 9*(1-e);
+    sctx.beginPath(); sctx.moveTo(s.x + Math.cos(s.a)*d, s.y + Math.sin(s.a)*d);
+    sctx.lineTo(s.x + Math.cos(s.a)*(d+len), s.y + Math.sin(s.a)*(d+len)); sctx.stroke();
+  }
+  if (sparks.length) requestAnimationFrame(drawSpark); else sparkRun = false;
+}
+
+function render(){
+  const scr = document.getElementById('screen');
+  const view = S.screen + '|' + S.persona;
+  const fresh = view !== lastView;
+  const prevScroll = fresh ? 0 : (scr.querySelector('.scroll')?.scrollTop || 0);
+  scr.innerHTML = SCREENS[S.screen]() + sheetHTML() + (S.toast ? `<div class="toast" role="status">${S.toast}</div>` : '');
+  scr.classList.toggle('enter', fresh);
+  const sc = scr.querySelector('.scroll'); if (sc) sc.scrollTop = prevScroll;
+  scr.querySelectorAll('[data-count]').forEach(el => { if (fresh || el.closest('.proj')) countUp(el); });
+  lastView = view;
+  phoneEl.classList.toggle('is-light', S.screen === 'belo');
+  phoneEl.classList.toggle('ag-light', agentTheme === 'light');
+  phoneEl.classList.toggle('is-splash', S.screen === 'splash');
+  renderIndex(); renderNotes();
+  if (S.screen === 'move'){
+    const inp = document.getElementById('amt');
+    inp.addEventListener('input', () => { S.move.amt = inp.value; moveResult(); });
+    moveResult();
+  }
+  const car = document.getElementById('car');
+  if (car){
+    const it = car.querySelector('.car-item'), step = () => it.offsetWidth + 12;
+    car.scrollLeft = (S.carIdx || 0) * step();
+    const dots = document.querySelectorAll('#car-dots i'), cnt = document.getElementById('car-count'), n = dots.length;
+    car.addEventListener('scroll', () => {
+      const i = Math.max(0, Math.min(n - 1, Math.round(car.scrollLeft / step())));
+      if (i !== S.carIdx){ S.carIdx = i; dots.forEach((d,j) => d.classList.toggle('on', j === i)); cnt.textContent = `${i+1} de ${n}`; }
+    }, {passive:true});
+  }
+  const msgs = document.getElementById('msgs');
+  if (msgs){ msgs.scrollTop = msgs.scrollHeight;
+    const ci = document.getElementById('chat-in');
+    ci.addEventListener('input', () => { S.chatDraft = ci.value; });
+    ci.addEventListener('keydown', (ev) => { if (ev.key === 'Enter'){ ev.preventDefault(); chatSend(ci.value); } });
+    if (S.chat.length > 1) ci.focus({preventScroll:true});
+  }
+  const ack = document.getElementById('ack');
+  if (ack) ack.addEventListener('change', () => { S.ack = ack.checked; const b = document.getElementById('confirm-btn'); if (b) b.disabled = !S.ack; });
+}
+function go(screen, key){ S.screen = screen; S.sheet = null; currentKey = key || screen; render(); const sc = document.querySelector('.scroll'); if (sc) sc.scrollTop = 0; }
+function toast(msg){ S.toast = msg; render(); clearTimeout(toast.t); toast.t = setTimeout(() => { S.toast = null; render(); }, 2600); }
+
+function startConfirm(move){ S.pending = move; S.quote = 30; S.ack = false; }
+
+// quote countdown
+setInterval(() => {
+  if (S.screen !== 'confirm' || S.quote <= 0) return;
+  S.quote--;
+  if (S.quote === 0) render();
+  else { const t = document.getElementById('quote-timer'); if (t) t.textContent = `Cotización válida por ${S.quote} s`; }
+}, 1000);
+
+function execute(){
+  const p = S.pending, e = evalMove(p.from, p.to, p.amt);
+  if (e.level === 'empty' || e.level === 'error') return;
+  if (CUR[p.to].kind === 'volatile') S.invested += e.v;
+  S.last = {from:p.from, to:p.to, amt:p.amt, recv:e.recv, cost:e.cost, c0:e.c0, c1:e.c1, level:e.level};
+  S.wallet = e.w2;
+  if (p.pid){ const pr = S.proposals.find(x => x.id === p.pid); if (pr) pr.status = 'accepted'; }
+  S.move.amt = '';
+  go('done', p.source === 'agent' ? 'done-p' : 'done-m');
+}
+
+// ---------- Events ----------
+document.getElementById('screen').addEventListener('click', (ev) => {
+  const el = ev.target.closest('[data-a]'); if (!el) return;
+  if (el.classList.contains('scrim') && ev.target !== el) return;
+  const [a, v] = el.dataset.a.split(':');
+  switch(a){
+    case 'go': go(v); break;
+    case 'detail': S.origin = {screen: S.screen === 'proposals' ? 'proposals' : S.screen, sheet: S.sheet}; S.sel = v; go('detail'); break;
+    case 'back-detail': { const o = S.origin || {screen:'proposals'}; go(o.screen); if (o.sheet){ S.sheet = o.sheet; render(); } break; }
+    case 'pot-save': { const v2 = +v; S.pots[0].saved += v2; S.potTip = false; toast(`Listo. Separaste USD ${nf(v2,0)} para ${S.pots[0].name}.`); break; }
+    case 'pot-skip': S.potTip = false; toast('Te lo recordamos el próximo cobro.'); break;
+    case 'open-rec': S.sheet = 'rec'; currentKey = 'rec'; render(); break;
+    case 'open-chat': S.sheet = 'chat'; currentKey = 'chat'; render(); break;
+    case 'ask': chatSend(CHIPS[+v]); break;
+    case 'ask-text': chatSend(v); break;
+    case 'chat-send': { const i = document.getElementById('chat-in'); chatSend(i ? i.value : ''); break; }
+    case 'chat-comp': S.chat.push({html:'Listo. Lo sumé a tus recomendaciones: separar una parte por mes durante 3 meses. Lo vas a ver en la home.'}); render(); break;
+    case 'open-props': S.sheet = 'props'; currentKey = 'props'; render(); break;
+    case 'toast-demo': toast('Fuera del alcance de la demo.'); break;
+    case 'accept': { const p = S.proposals.find(x=>x.id===v); startConfirm({from:p.from,to:p.to,amt:p.amt,source:'agent',pid:p.id}); S.backTo = S.screen; S.backSheet = (S.screen === 'detail' ? null : S.sheet); go('confirm','confirm-p'); break; }
+    case 'reject': S.rejectSheet = S.sheet; S.sel = v; S.reason = null; S.sheet = 'reject'; render(); break;
+    case 'reason': S.reason = +v; render(); break;
+    case 'reject-send': { const p = S.proposals.find(x=>x.id===S.sel); p.status = 'rejected'; if (S.rejectSheet || S.screen === 'belo'){ S.sheet = S.rejectSheet || null; } else { S.sheet = null; S.screen = 'proposals'; currentKey='proposals'; }
+      toast(S.reason===null ? 'Descartada.' : `Anotado. La próxima propuesta lo tiene en cuenta.`); break; }
+    case 'sheet': S.sheet = v; render(); break;
+    case 'sheet-close': S.sheet = null; render(); break;
+    case 'freeze': S.frozen = true; S.sheet = null; S.screen = 'belo'; currentKey='freeze'; toast('Agente congelado. No propone ni ejecuta.'); break;
+    case 'unfreeze': S.frozen = false; toast('Agente activo. Recalculamos el semáforo con tus datos de hoy.'); break;
+    case 'mv-from': S.move.from = v; if (S.move.to === v) S.move.to = ORDER.find(c => c !== v); S.move.amt=''; render(); break;
+    case 'mv-to': S.move.to = v; render(); break;
+    case 'mv-swap': { const {from,to} = S.move; if (S.wallet[to] > 0){ S.move.from = to; S.move.to = from; S.move.amt=''; render(); } else toast(`No tenés ${to} para mover.`); break; }
+    case 'mv-pct': { const n = S.wallet[S.move.from] * parseFloat(v); const k = CUR[S.move.from].kind;
+      S.move.amt = S.move.from==='ARS' ? nf(Math.floor(n),0).replace(/\./g,'') : k==='stable' ? String(Math.floor(n*100)/100).replace('.',',') : String(+n.toFixed(6)).replace('.',',');
+      render(); break; }
+    case 'mv-review': { const amt = parseAmt(S.move.amt); startConfirm({from:S.move.from,to:S.move.to,amt,source:'manual'}); S.backTo='move'; go('confirm','confirm-m'); break; }
+    case 'requote': S.quote = 30; render(); break;
+    case 'execute': execute(); break;
+    case 'back-from-confirm': go(S.backTo || 'belo'); if (S.backSheet){ S.sheet = S.backSheet; render(); } break;
+    case 'tog': S.agentCur[v] = !S.agentCur[v]; render(); break;
+    case 'proj': S.proj = +v; render(); break;
+    case 'perfil-cycle': { const i = PORDER.indexOf(S.prof.perfil); S.prof.perfil = PORDER[(i+1)%3]; S.prof.perfilWhy = 'Lo cambiaste vos.'; toast(`Perfil ${prof().name.toLowerCase()}. Recalculamos tus recomendaciones.`); break; }
+    case 'howcalc': toast('Riesgo de la moneda según tu perfil de inversor, cotización de hoy y costo 0,8%.'); break;
+    case 'go-recs': S.carIdx = 0; S.sheet = 'carousel'; currentKey = 'carousel'; render(); break;
+    case 'car': { const car = document.getElementById('car'); if (car){ const it = car.querySelector('.car-item'); car.scrollBy({left: (+v) * (it.offsetWidth + 12), behavior: RM ? 'auto' : 'smooth'}); } break; }
+    case 'open-rumbo': go(S.persona === 'hist' ? 'history' : 'newstart'); break;
+    case 'fix': toast('Podés editar sueldo, gastos o metas a mano. Las propuestas se recalculan.'); break;
+  }
+});
+
+document.getElementById('index').addEventListener('click', (ev) => {
+  const b = ev.target.closest('[data-j]'); if (!b) return;
+  const k = b.dataset.j;
+  if (k === 'reset'){ S = initial(S.persona); currentKey='belo'; render(); return; }
+  if (k === 'carousel'){ go(S.persona === 'hist' ? 'history' : 'newstart'); S.carIdx = 0; S.sheet = 'carousel'; currentKey = 'carousel'; render(); return; }
+  if (k === 'rec'){ go('belo'); S.sheet = 'rec'; currentKey = 'rec'; render(); return; }
+  if (k === 'pots'){ go('pots'); return; }
+  if (k === 'chat'){ go('belo'); S.sheet = 'chat'; currentKey = 'chat'; render(); return; }
+  if (k === 'props'){ go('belo'); S.sheet = 'props'; currentKey = 'props'; render(); return; }
+  if (k === 'splash'){ S.autoShown = false; enterApp(); return; }
+  if (k === 'p-hist' || k === 'p-new'){ S = initial(k==='p-hist'?'hist':'new'); enterHome(); return; }
+  if (k === 'belo'){ enterHome(); return; }
+  if (k === 'history' && S.persona !== 'hist'){ S = initial('hist'); }
+  if (k === 'newstart' && S.persona !== 'new'){ S = initial('new'); }
+  if (k === 'confirm-m' && !parseAmt(S.move.amt)){ S.move = {from:'ARS',to:'USD',amt: S.persona==='hist'?'200000':'100000'}; }
+  if (k === 'confirm-p'){ const p = visibleProps().find(x=>x.rec) || visibleProps()[0] || S.proposals[1]; startConfirm({from:p.from,to:p.to,amt:p.amt,source:'agent',pid:p.id}); S.backTo='proposals'; go('confirm',k); return; }
+  if (k === 'confirm-m'){ if (!parseAmt(S.move.amt)) S.move = {from:'ARS',to:'USD',amt:'200000'}; startConfirm({from:S.move.from,to:S.move.to,amt:parseAmt(S.move.amt),source:'manual'}); S.backTo='move'; go('confirm',k); return; }
+  if (k === 'done-p' || k === 'done-m'){
+    if (!S.last){ const e = evalMove('ARS','USD',360000); S.last = {from:'ARS',to:'USD',amt:360000,recv:e.recv,cost:e.cost,c0:e.c0,c1:e.c1,level:e.level}; }
+    go('done',k); return; }
+  if (k === 'reject'){ S.screen='proposals'; currentKey=k; S.sel = (visibleProps()[0]||S.proposals[0]).id; S.reason=null; S.sheet='reject'; render(); return; }
+  if (k === 'freeze'){ S.screen='belo'; currentKey=k; S.frozen=false; S.sheet='freeze'; render(); return; }
+  if (k === 'detail'){ S.sel = S.sel || 'p1'; }
+  go(k);
+});
+
+enterApp();
+</script>
+
+</body>
+</html>
