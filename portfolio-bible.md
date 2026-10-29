@@ -1,6 +1,8 @@
 # Paula Elffman — Portfolio OS · Design Bible
 
-*Última actualización: 10 de octubre de 2026 — **Everyone: plan de equipo como roadmap.** La sección de proceso de `everyone-case.html` se rehízo como un roadmap de dos semanas con responsable por tarea y los hitos con el cliente, y subió al segundo lugar del case. Ver el punto 5 de "Cambios en `everyone-case.html` (10 de octubre de 2026)".*
+*Última actualización: 29 de octubre de 2026 — **Nuevo case: belo · Rumbo (agentic banking).** `belo-case.html` es el caso 16. Va tercero en la home, entre sukupay prototyper y sukupay home. Tiene el prototipo navegable arriba de todo, secciones de pantallas reales, cover de card nuevo y su propio cierre "Next case" y dock. Se arregló el final del case, que había quedado roto (dock sin estilos, sin footer ni "Next case"). Ver "BELO CASE STUDY · Rumbo".*
+
+*Última actualización previa: 10 de octubre de 2026 — **Everyone: plan de equipo como roadmap.** La sección de proceso de `everyone-case.html` se rehízo como un roadmap de dos semanas con responsable por tarea y los hitos con el cliente, y subió al segundo lugar del case. Ver el punto 5 de "Cambios en `everyone-case.html` (10 de octubre de 2026)".*
 
 *Última actualización previa: 10 de octubre de 2026 — **Everyone: design system como board.** `everyone-case.html` suma el board de design system en HTML/CSS (no es imagen), reemplaza las dos imágenes que se veían mal, achica un 25% las cinco pantallas de Home y arregla los subtítulos de sección que no se leían. Ver "Board de Everyone" dentro de "DESIGN SYSTEM COMO BOARD" y "Cambios en `everyone-case.html` (10 de octubre de 2026)".*
 
@@ -1043,6 +1045,7 @@ Se migraron `smartpass` y `sukupay` de overlay dark (`<template id="tpl-*">` den
 | everyone    | `everyone-case.html`    | `everyone`                |
 | vendor tool | `vendor-tool-case.html` | `vendor`                  |
 | hugo        | `hugo-case.html`        | `hugo`                    |
+| belo        | `belo-case.html`        | link directo (`<a class="work-card" href="belo-case.html">`), sin `data-case` |
 
 
 **Pendiente de limpieza:** `<template id="tpl-smart">` y `<template id="tpl-suku">` quedaron huérfanos dentro de `index.html` (ya no se usan, `openCase()` solo corre como fallback si un `data-case` no está en `CASE_PAGE_MAP`). Se pueden borrar en una pasada futura sin romper nada.
@@ -1251,7 +1254,8 @@ html body .back-nav .back-btn{color:var(--nav-ink);} /* el link de volver tambi�
 | # | Case | Lleva a | Estado |
 | --- | --- | --- | --- |
 | 1 | `muv-case.html` | sukupay prototyper | ✅ |
-| 2 | `sukupay-proto-case.html` | sukupay home | ✅ |
+| 2 | `sukupay-proto-case.html` | **belo agentic banking** (antes sukupay home) | ⏳ cambiar el `href` y el texto en ese archivo |
+| 2b | `belo-case.html` | sukupay home | ✅ |
 | 3 | `sukupay-case.html` | monchis home experience | ✅ |
 | 4 | `monchis-case.html` | vendor tool | ✅ |
 | 5 | `vendor-tool-case.html` | hugo | ✅ |
@@ -1271,7 +1275,7 @@ html body .back-nav .back-btn{color:var(--nav-ink);} /* el link de volver tambi�
 2. Si cambia la línea de una card en la home, cambia también en el "Next case" del case anterior. Son el mismo texto.
 3. Para un case nuevo: copiar el bloque `<style id="next-case">` y el `<nav class="next-case">`, cambiar `href`, nombre y línea, y sumar `.next-case` al selector de `--nav-ink`.
 
-**La ronda está completa: los 15 cases tienen el bloque.**
+**La ronda está completa: los 16 cases tienen el bloque.** (Falta solo apuntar `sukupay-proto-case.html` a belo; ver BELO CASE STUDY.)
 
 **Pendiente:** (1) ~~`foody-case.html` no tiene dock ni modo oscuro~~ Resuelto, ver "Foody: dock y modo oscuro". (2) ~~Contraste del link "Back to portfolio" en foody, hotaru, everyone y smartpass~~ Resuelto, ver "Tono AA del header en cuatro cases". (3) `muv-case.html`: las 8 notas `TODO` ya se repasaron y se borraron; lo que quedó abierto está en "Cambios en `muv-case.html` (8 de octubre de 2026)".
 
@@ -2738,6 +2742,79 @@ body.light-mode .tile-sukupay-ds .tile-name {
 **Cuarta excepción registrada** — mismo criterio que las tres anteriores: la superficie no cambia entre modos, así que el color que va encima tampoco debería.
 
 ---
+
+## BELO CASE STUDY · Rumbo (29 de octubre de 2026)
+
+*Case 16. Concepto de feature para belo, hecho en la belo Agentic Banking Buildathon 001 (28.10.2026) sobre la API REST de staging de belo. Template viejo (`.section` / `.cover`) con el adaptador v3.*
+
+### Archivos
+
+| Archivo | Qué es |
+| --- | --- |
+| `belo-case.html` | El case. |
+| `assets/belo-agente-prototype.html` | Prototipo navegable, autocontenido (CSS y JS adentro). Con `?embed` muestra solo el teléfono; sin parámetro, el índice de flujos y las notas. |
+| `assets/rumbo/*.webp` | 8 capturas del prototipo (390×844 @2x, WebP, 33–59 KB): `rec-sheet`, `detail`, `history`, `history-habits`, `carousel`, `home`, `chat`, `pots`. |
+| `assets/belo-cover.webp` | Cover de la card en la home (1600×1200). |
+
+- **El prototipo tiene que estar en `assets/`**, al lado del case, porque el `src` del iframe es relativo (`assets/belo-agente-prototype.html?embed`). Si se sube suelto a la raíz, el iframe queda vacío. Es el mismo principio que el iframe de `sukupay-case.html`.
+- **El prototipo no se edita a mano en el portfolio:** se genera desde el artifact de Claude (fuente) y se re-exporta. El modo embed lo agrega el export (`<style id="embed-mode">` y un script que pone `html.embed` si la URL trae `?embed`).
+- **Las capturas salen del prototipo** con Playwright a 390×844 @2x. Si cambia una pantalla, se re-sacan las 8 para que todo quede igual.
+
+### Marca del case
+
+- **Colores:** violeta belo `#5617D6` (`--brand` / `--accent`), menta `#3CF0B0` (solo sobre fondos oscuros: sobre blanco no da contraste), y el degradé noche de los banners de belo: `linear-gradient(180deg,#06031A 0%,#0B0630 45%,#2B0D86 85%,#5A22D6 100%)` (`--grad-night`).
+- **Bloque `<style id="belo-brand">`** después de `#next-case`. Pisa `--paper`, `--ash`, `--line` con un negro azulado (`#14141C`) en vez del verde oscuro del template, y define el modo oscuro completo (texto, líneas y semáforo).
+- **`.accent-card` y `.callout`** usan el degradé noche en lugar del verde. El rótulo va en menta.
+- **Semáforo:** chip con punto de color + palabra, nunca color solo. `--ok` / `--warn` / `--risk` con sus fondos, light y dark.
+- **Tipografía:** Inter, como todo el template.
+
+### Estructura
+
+1. **Cover:** "rumbo / agentic banking", con equipo, evento y "Built on belo REST API (staging)".
+2. **Hero band (bloque noche):** a la izquierda "An agent that walks you toward your money goals." y la definición de Rumbo; a la derecha **el prototipo navegable** (iframe 390×844, 760 en mobile) con la nota de que el copy va en español y las cifras son de demo, y el link a pantalla completa. *Paula pidió el prototipo arriba de todo; la sección "The prototype" de más abajo se quitó para no repetirlo.*
+3. **Situation & task:** "Eight apps. Money that sits still."
+4. **01 The problem:** Scattered (~8 apps), Idle, miedo a perder el control con la AI. Sale del pitch.
+5. **02 The solution:** Lee → Semáforo → Propone → Vos decidís, y el cierre "You're in control."
+6. **03 Recommendations** (4 capturas): bottom sheet en la home, detalle hacer vs. no hacer, Mi historial, carrusel.
+7. **04 From the home** (3 capturas): banner de Rumbo, la sección del agente financiero, chat del agente.
+8. **05 Savings pots with goals** (texto + 1 captura): alcancías con objetivo; al cobrar, Rumbo sugiere cuánto separar; antes de retirar, cuánto se corre el plazo.
+9. **06 Moments**, **07 Traffic light** (riesgo × perfil, tres perfiles), **08 Design decisions**, **09 Guardrails**, **Result & next**, **The team**.
+10. **Next case → sukupay home**, footer, dock.
+
+- **Capturas (`.scr`):** imagen con radio 28px y `--sh-ring` + `--sh-float`, como teléfono. Debajo, número, título y una línea. Grillas `.scr-4` / `.scr-3`, que bajan a 2 y 1 columna.
+- **Fondos:** las secciones alternan `style="background:var(--bg2)"` y blanco, para que nunca haya dos tintadas seguidas.
+
+### Equipo
+
+Tomás Rosito y Marcos Senatori (con link a LinkedIn, ↗), Nahuel Namur, Giorgio Nalbandian, Paula Elffman (Product Designer). **Pendiente:** roles de los demás y LinkedIn de Nahuel y Giorgio.
+
+### Card en la home
+
+- Tercera en Selected work, después de sukupay prototyper.
+- **Cover:** `assets/belo-cover.webp`, con `object-position:center 30%`. Degradé noche de belo (muestreado de la imagen de marca), el mockup del teléfono grande mostrando el saldo y el banner de Rumbo, y el logo de belo chico, blanco con la sonrisa menta, **abajo a la derecha**. El banner de Rumbo queda dentro de la zona segura de 16:10 y de 4:3.
+- **Línea:** "An agent inside belo that brings one money move at the right moment. Nothing moves without your OK." Es la misma que usa el "Next case" de sukupay prototyper.
+
+### 🐛 Bug corregido: el final del case estaba roto
+
+- **Síntoma:** al final del case se veían "Home" y "About Me" como links sin estilo y un botón vacío; no había footer ni "Next case".
+- **Causa:** el case se armó desde una copia que no traía el `<nav class="next-case">`, el `<footer class="footer">` ni el `<style>` del dock (`#portfolio-dock`). El CSS de `#next-case` y `#dock-clear` sí estaba en el `<head>`, pero sin markup que lo usara.
+- **Solución:** se sumaron, antes del dock: el bloque "Next case" (→ sukupay home, con la línea de su card), el footer ("belo · Rumbo · Agentic banking · Buildathon 2026" / "Product design · Paula Elffman") y un `<style id="portfolio-dock-css">` con el dock en pastilla (Home, About Me, separador, toggle sol/luna), light y dark, `z-index:9700`.
+- **Regla para cualquier case nuevo:** antes de darlo por cerrado, bajar al final de la página y mirar que estén **los tres**: "Next case", footer y dock con estilo. Si falta uno, copiarlo de otro case.
+
+### Pendientes
+
+- `sukupay-proto-case.html`: cambiar su "Next case" para que lleve a belo:
+  ```html
+  <a class="nc-link" href="belo-case.html">
+    <span class="nc-kicker">Next case</span>
+    <span class="nc-name">belo <span>agentic banking</span><span class="nc-arrow" aria-hidden="true">→</span></span>
+    <span class="nc-line">An agent inside belo that brings one money move at the right moment. Nothing moves without your OK.</span>
+  </a>
+  ```
+- Fuente del dato "~8 apps per person", o rotularlo como estimación.
+- Revisar con Paula las "Design decisions": están escritas desde lo iterado en la buildathon.
+- `og:image` apunta a `assets/og/og-belo.jpg`, que todavía no existe. Se puede hacer desde `belo-cover.webp` a 1200×630.
+
 
 ## AJUSTES RÁPIDOS POST-REVIEW (Octubre 2026)
 

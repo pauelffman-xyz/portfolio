@@ -1172,7 +1172,40 @@ body.dark-mode .back-nav-title,body.dark-mode .back-nav-right{color:var(--accent
   </ul>
 </div>
 
-<div style="height:120px;"></div>
+<!-- NEXT CASE -->
+<nav class="next-case" aria-label="Next case">
+  <div class="nc-in">
+    <a class="nc-link" href="sukupay-case.html">
+      <span class="nc-kicker">Next case</span>
+      <span class="nc-name">sukupay <span>home</span><span class="nc-arrow" aria-hidden="true">→</span></span>
+      <span class="nc-line">US-to-Guatemala remittances. A UX audit and two directions, now going live.</span>
+    </a>
+    <a class="nc-about" href="index.html#about">About me and contact</a>
+  </div>
+</nav>
+
+<footer class="footer">
+  <div class="footer-l">belo · Rumbo · Agentic banking · Buildathon 2026</div>
+  <div class="footer-r">Product design · Paula Elffman</div>
+</footer>
+
+<!-- Portfolio Navigation Dock -->
+<style id="portfolio-dock-css">
+#portfolio-dock{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:9700;display:flex;align-items:center;gap:.25rem;padding:.375rem .5rem;border-radius:999px;background:rgba(240,239,236,.85);border:1px solid rgba(21,33,25,.12);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);box-shadow:0 8px 24px rgba(0,0,0,.08);}
+#portfolio-dock .pd-btn{display:inline-flex;align-items:center;min-height:44px;padding:0 1.25rem;border-radius:999px;font-family:'Inter',sans-serif;font-size:.9375rem;font-weight:500;color:rgba(21,33,25,.7);text-decoration:none;transition:background .2s,color .2s;}
+#portfolio-dock .pd-btn:hover{background:rgba(21,33,25,.06);color:#14141C;}
+#portfolio-dock .pd-sep{width:1px;height:24px;background:rgba(21,33,25,.16);margin:0 .25rem;}
+#portfolio-dock .pd-theme{display:grid;place-items:center;width:44px;height:44px;border:0;border-radius:50%;background:none;color:rgba(21,33,25,.7);cursor:pointer;}
+#portfolio-dock .pd-theme:hover{background:rgba(21,33,25,.06);}
+#portfolio-dock .pd-theme svg{width:20px;height:20px;}
+#portfolio-dock .icon-moon{display:none;}
+body.dark-mode #portfolio-dock{background:rgba(44,44,53,.85);border-color:rgba(244,244,246,.1);}
+body.dark-mode #portfolio-dock .pd-btn,body.dark-mode #portfolio-dock .pd-theme{color:rgba(244,244,246,.75);}
+body.dark-mode #portfolio-dock .pd-btn:hover,body.dark-mode #portfolio-dock .pd-theme:hover{background:rgba(244,244,246,.08);color:#F4F4F6;}
+body.dark-mode #portfolio-dock .pd-sep{background:rgba(244,244,246,.16);}
+body.dark-mode #portfolio-dock .icon-sun{display:none;}
+body.dark-mode #portfolio-dock .icon-moon{display:block;}
+</style>
 <nav id="portfolio-dock">
   <a class="pd-btn" href="index.html" title="Back to Home">Home</a>
   <a class="pd-btn" href="index.html#about" title="About Me">About Me</a>
