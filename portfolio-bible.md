@@ -2755,6 +2755,7 @@ body.light-mode .tile-sukupay-ds .tile-name {
 | `assets/belo-agente-prototype.html` | Prototipo navegable, autocontenido (CSS y JS adentro). Con `?embed` muestra solo el teléfono; sin parámetro, el índice de flujos y las notas. |
 | `assets/rumbo/*.webp` | 8 capturas del prototipo (390×844 @2x, WebP, 33–59 KB): `rec-sheet`, `detail`, `history`, `history-habits`, `carousel`, `home`, `chat`, `pots`. |
 | `assets/belo-cover.webp` | Cover de la card en la home (1600×1200). |
+| `assets/rumbo/belo-current.webp` | Grilla de pantallas de la app actual de belo (sección "belo today"). |
 
 - **El prototipo tiene que estar en `assets/`**, al lado del case, porque el `src` del iframe es relativo (`assets/belo-agente-prototype.html?embed`). Si se sube suelto a la raíz, el iframe queda vacío. Es el mismo principio que el iframe de `sukupay-case.html`.
 - **El prototipo no se edita a mano en el portfolio:** se genera desde el artifact de Claude (fuente) y se re-exporta. El modo embed lo agrega el export (`<style id="embed-mode">` y un script que pone `html.embed` si la URL trae `?embed`).
@@ -2773,15 +2774,17 @@ body.light-mode .tile-sukupay-ds .tile-name {
 1. **Cover:** "rumbo / agentic banking", con equipo, evento y "Built on belo REST API (staging)".
 2. **Hero band (bloque noche):** a la izquierda "An agent that walks you toward your money goals." y la definición de Rumbo; a la derecha **el prototipo navegable** (iframe 390×844, 760 en mobile) con la nota de que el copy va en español y las cifras son de demo, y el link a pantalla completa. *Paula pidió el prototipo arriba de todo; la sección "The prototype" de más abajo se quitó para no repetirlo.*
 3. **Situation & task:** "Eight apps. Money that sits still."
+3b. **Context · belo today** (agregada el 30 de octubre, antes del problema): un párrafo sobre lo que belo ya hace y la imagen `assets/rumbo/belo-current.webp` (grilla de pantallas de la app actual, 1264×848, a todo el ancho con `--sh-card`). Por ahora es una sola imagen; Paula la va a ampliar.
 4. **01 The problem:** Scattered (~8 apps), Idle, miedo a perder el control con la AI. Sale del pitch.
 5. **02 The solution:** Lee → Semáforo → Propone → Vos decidís, y el cierre "You're in control."
 6. **03 Recommendations** (4 capturas): bottom sheet en la home, detalle hacer vs. no hacer, Mi historial, carrusel.
 7. **04 From the home** (3 capturas): banner de Rumbo, la sección del agente financiero, chat del agente.
 8. **05 Savings pots with goals** (texto + 1 captura): alcancías con objetivo; al cobrar, Rumbo sugiere cuánto separar; antes de retirar, cuánto se corre el plazo.
-9. **06 Moments**, **07 Traffic light** (riesgo × perfil, tres perfiles), **08 Design decisions**, **09 Guardrails**, **Result & next**, **The team**.
+9. **06 Moments**, **07 Traffic light** (riesgo × perfil, tres perfiles), **08 Design decisions**, **09 Guardrails** y **The team**. *(La sección "Result & next" se quitó a pedido de Paula el 29 de octubre.)*
 10. **Next case → sukupay home**, footer, dock.
 
 - **Capturas (`.scr`):** imagen con radio 28px y `--sh-ring` + `--sh-float`, como teléfono. Debajo, número, título y una línea. Grillas `.scr-4` / `.scr-3`, que bajan a 2 y 1 columna.
+- **Mobile (≤520px, 30 de octubre):** las capturas `.scr` ocupan todo el ancho de la columna (antes tope de 300px) y el hero band achica su margen y padding para que el prototipo use casi todo el ancho de la pantalla; su alto se ajusta a la pantalla (mínimo 640px).
 - **Fondos:** las secciones alternan `style="background:var(--bg2)"` y blanco, para que nunca haya dos tintadas seguidas.
 
 ### Equipo
@@ -2799,6 +2802,7 @@ Tomás Rosito y Marcos Senatori (con link a LinkedIn, ↗), Nahuel Namur, Giorgi
 - **Síntoma:** al final del case se veían "Home" y "About Me" como links sin estilo y un botón vacío; no había footer ni "Next case".
 - **Causa:** el case se armó desde una copia que no traía el `<nav class="next-case">`, el `<footer class="footer">` ni el `<style>` del dock (`#portfolio-dock`). El CSS de `#next-case` y `#dock-clear` sí estaba en el `<head>`, pero sin markup que lo usara.
 - **Solución:** se sumaron, antes del dock: el bloque "Next case" (→ sukupay home, con la línea de su card), el footer ("belo · Rumbo · Agentic banking · Buildathon 2026" / "Product design · Paula Elffman") y un `<style id="portfolio-dock-css">` con el dock en pastilla (Home, About Me, separador, toggle sol/luna), light y dark, `z-index:9700`.
+- **Bug mobile (30 de octubre):** en el celular "About Me" se partía en dos líneas. Causa: un elemento `position:fixed` con `left:50%` solo tiene la mitad del ancho de la pantalla para acomodarse, así que el texto se envolvía. Arreglo: `width:max-content`, `white-space:nowrap` y `max-width:calc(100vw - 32px)` en `#portfolio-dock`, y botones un poco más angostos bajo 420px.
 - **Regla para cualquier case nuevo:** antes de darlo por cerrado, bajar al final de la página y mirar que estén **los tres**: "Next case", footer y dock con estilo. Si falta uno, copiarlo de otro case.
 
 ### Pendientes
