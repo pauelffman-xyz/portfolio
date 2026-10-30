@@ -814,6 +814,8 @@ body.dark-mode .back-nav-title,body.dark-mode .back-nav-right{color:var(--accent
 .hero-proto-link:hover{text-decoration:underline;text-underline-offset:4px;}
 .hero-band-in{align-items:center;}
 @media(max-width:768px){.hero-proto .proto-frame{height:760px;}}
+.belo-today{margin:var(--stack) 0 0;border-radius:24px;overflow:hidden;box-shadow:var(--sh-card);background:#fff;}
+.belo-today img{display:block;width:100%;height:auto;}
 /* ─── PROBLEM: three cards, big figure on top ─── */
 .prob-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,1.5vw,20px);margin-top:var(--stack);}
 .prob-card{background:var(--card);border-radius:var(--r-card);box-shadow:var(--sh-card);padding:2rem 1.75rem;display:flex;flex-direction:column;gap:.625rem;}
@@ -992,6 +994,18 @@ body.dark-mode .back-nav-title,body.dark-mode .back-nav-right{color:var(--accent
       <div class="ac-desc">belo already holds pesos, dollars, stablecoins and crypto. Rumbo reads that, and suggests the next move from one currency to another.</div>
     </div>
   </div>
+</div>
+
+<!-- BELO TODAY -->
+<div class="section" style="background:var(--bg2)">
+  <div class="eyebrow">Context · belo today</div>
+  <div class="section-label">
+    <div class="sl-text">The app Rumbo lives in</div>
+    <div class="sl-line"></div>
+    <div class="sl-text">Pesos, dollars, stablecoins and crypto in one wallet</div>
+  </div>
+  <p class="ov-body" style="max-width:68ch;">belo already lets people hold pesos, dollars and stablecoins, swap between them, transfer, pay with QR in several countries, and save in pots that earn yield. <strong>The tools are there. What's missing is someone who says, at the right moment, which one to use.</strong></p>
+  <figure class="belo-today"><img src="assets/rumbo/belo-current.webp" alt="A grid of screens from the current belo app: the home with Deposit, Swap and Transfer, savings pots with yield in USDT, transfer confirmations, paying with QR across Latin American countries, and requesting money by bringing phones together." loading="lazy" decoding="async" width="1264" height="848"></figure>
 </div>
 
 <!-- 02 PROBLEM -->
