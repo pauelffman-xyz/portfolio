@@ -2771,7 +2771,7 @@ body.light-mode .tile-sukupay-ds .tile-name {
 
 ### Estructura
 
-1. **Cover:** "rumbo / agentic banking", con equipo, evento y "Built on belo REST API (staging)".
+1. **Cover:** "rumbo / agentic banking", con equipo ("5 people · 10 hours": la buildathon duró 10 horas), evento y "Built on belo REST API (staging)".
 2. **Hero band (bloque noche):** a la izquierda "An agent that walks you toward your money goals." y la definición de Rumbo; a la derecha **el prototipo navegable** (iframe 390×844, 760 en mobile) con la nota de que el copy va en español y las cifras son de demo. *(El link "Open full screen with the flow index" se quitó el 30 de octubre a pedido de Paula; el archivo sin `?embed` sigue funcionando si se quiere volver a sumar.)* *Paula pidió el prototipo arriba de todo; la sección "The prototype" de más abajo se quitó para no repetirlo.*
 3. **Situation & task:** "Eight apps. Money that sits still."
 3b. **Context · belo today** (agregada el 30 de octubre, antes del problema): un párrafo sobre lo que belo ya hace y la imagen `assets/rumbo/belo-current.webp` (grilla de pantallas de la app actual, 1264×848, a todo el ancho con `--sh-card`). Por ahora es una sola imagen; Paula la va a ampliar.
