@@ -826,6 +826,29 @@ body.dark-mode .back-nav-title,body.dark-mode .back-nav-right{color:var(--accent
 .prob-t{font-size:1.0625rem;font-weight:700;letter-spacing:-.015em;color:var(--paper);}
 .prob-d{font-size:.875rem;line-height:1.6;color:var(--ash);}
 
+/* ─── PROBLEM IN NUMBERS: market stats + belo projection ─── */
+.num-label{margin-top:clamp(48px,6vw,80px);}
+.num-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(12px,1.5vw,20px);margin-top:var(--stack);}
+.num-stats{display:grid;grid-template-rows:repeat(3,1fr);gap:clamp(12px,1.5vw,20px);}
+.num-stat{background:var(--card);border-radius:var(--r-card);box-shadow:var(--sh-card);padding:1.5rem 1.75rem;display:flex;flex-direction:column;justify-content:center;gap:.375rem;}
+.num-fig{font-size:clamp(2rem,3.4vw,2.75rem);font-weight:800;letter-spacing:-.045em;line-height:1;color:var(--paper);}
+.num-d{font-size:.875rem;line-height:1.55;color:var(--ash);}
+.num-proj{background:var(--card);border-radius:var(--r-card);box-shadow:var(--sh-card);border:1.5px solid var(--accent);padding:clamp(1.75rem,3vw,2.5rem);display:flex;flex-direction:column;gap:1.5rem;}
+.num-proj-lbl{font-size:.8125rem;font-weight:600;color:var(--accent);}
+.num-proj-fig{font-size:clamp(3rem,6.5vw,5rem);font-weight:800;letter-spacing:-.05em;line-height:1;color:var(--accent);}
+.num-proj-d{font-size:1rem;line-height:1.55;color:var(--paper);max-width:44ch;margin-top:.625rem;}
+.num-bars{display:flex;flex-direction:column;gap:.75rem;}
+.num-bar{display:grid;grid-template-columns:3.5rem 1fr;align-items:center;gap:1rem;font-size:.875rem;color:var(--ash);}
+.num-bar .trk{display:flex;align-items:center;gap:.75rem;}
+.num-bar i{display:block;height:12px;border-radius:6px;background:color-mix(in srgb,var(--accent) 18%,transparent);}
+.num-bar b{font-weight:600;white-space:nowrap;}
+.num-bar.on{color:var(--paper);font-weight:600;}
+.num-bar.on i{background:var(--accent);}
+.num-bar.on b{font-weight:700;}
+.num-foot{margin-top:auto;padding-top:1.25rem;border-top:1px solid var(--line);font-size:.8125rem;line-height:1.6;color:var(--ash);}
+.num-src{margin-top:1rem;font-size:.75rem;color:var(--ash);}
+@media(max-width:768px){.num-grid{grid-template-columns:1fr;}}
+
 /* ─── SOLUTION: steps + principle ─── */
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,1.5vw,20px);margin-top:var(--stack);}
 .step{background:var(--card);border-radius:var(--r-card);box-shadow:var(--sh-card);padding:1.75rem 1.5rem;display:flex;flex-direction:column;gap:.5rem;}
@@ -1028,9 +1051,36 @@ body.dark-mode .back-nav-title,body.dark-mode .back-nav-right{color:var(--accent
   </div>
   <div class="prob-grid">
     <div class="prob-card"><div class="prob-fig">~8</div><div class="prob-t">Scattered</div><div class="prob-d">About eight finance apps per person. Most of the activity is moving money between them, not growing it.</div></div>
-    <div class="prob-card"><div class="prob-fig">Idle</div><div class="prob-t">Still</div><div class="prob-d">Many people don't do anything with their money, even with all the information within reach. In Argentina, pesos that sit still lose value to inflation every month.</div></div>
+    <div class="prob-card"><div class="prob-fig">Parked</div><div class="prob-t">Still</div><div class="prob-d">Many people don't do anything with their money, even with all the information within reach. In Argentina, pesos that sit still lose value to inflation every month.</div></div>
     <div class="prob-card"><div class="prob-fig">AI?</div><div class="prob-t">Afraid of losing control</div><div class="prob-d">When an agent shows up, the first fear is that it decides for you. Any answer has to start from there.</div></div>
   </div>
+
+  <div class="section-label num-label">
+    <div class="sl-text">The problem, in numbers</div>
+    <div class="sl-line"></div>
+    <div class="sl-text">Market data + our projection for belo</div>
+  </div>
+  <div class="num-grid">
+    <div class="num-stats">
+      <div class="num-stat"><div class="num-fig">ARS 96 trillion</div><div class="num-d">moves every month in instant transfers in Argentina. 77% goes through a digital wallet.</div></div>
+      <div class="num-stat"><div class="num-fig">19.2</div><div class="num-d">transfers per adult per month. In 2023 it was 7.7.</div></div>
+      <div class="num-stat"><div class="num-fig">7 in 10</div><div class="num-d">people keep their money split between a bank and a wallet.</div></div>
+    </div>
+    <div class="num-proj">
+      <div class="num-proj-lbl">Projection for belo</div>
+      <div>
+        <div class="num-proj-fig">ARS 355 bn</div>
+        <p class="num-proj-d">a month leaves belo for other accounts of the same user. Money that could stay inside and keep working.</p>
+      </div>
+      <div class="num-bars">
+        <div class="num-bar"><span>Low</span><span class="trk"><i style="width:13%"></i><b>ARS 106 bn</b></span></div>
+        <div class="num-bar on"><span>Base</span><span class="trk"><i style="width:43%"></i><b>ARS 355 bn</b></span></div>
+        <div class="num-bar"><span>High</span><span class="trk"><i style="width:72%"></i><b>ARS 828 bn</b></span></div>
+      </div>
+      <p class="num-foot">Base case: 600k active users × 19.2 transfers × 25% to their own accounts × ARS 123k average transfer. These are our assumptions, to be validated with belo's internal data.</p>
+    </div>
+  </div>
+  <p class="num-src">Sources: BCRA, Retail Payments Report (Aug 2026) · Kantar / IAB Argentina</p>
 </div>
 
 <!-- 03 SOLUTION -->
