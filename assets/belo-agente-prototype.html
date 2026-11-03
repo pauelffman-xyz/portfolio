@@ -1404,7 +1404,7 @@ const NOTES = {
     'Swap opens "Move between currencies" with the agent’s traffic light.']},
   props:{f:'Flow 0 · Bottom sheet', t:'Recommendations without leaving the home', b:[
     'Same cards as the list: traffic light as a dot, a tappable title to see the impact, go ahead or not now.',
-    '"Not now" asks for the reason and goes back to the sheet.']},
+    '"Not now" dismisses it right away and shows the next one.']},
   history:{f:'Rumbo · With history', t:'Your financial situation', b:[
     'It’s the Rumbo section: you get there by tapping the banner on the home.',
     '"Recommendations" opens the bottom sheet with the month’s recommendation, over this screen.',
@@ -1447,7 +1447,7 @@ const NOTES = {
 const FLOWS = [
   {e:'Flow 0 · Entry', t:'From the belo home', n:true, items:[['splash','Splash'],['belo','belo home + agent banner'],['rec','Bottom sheet with 1 recommendation'],['carousel','Rumbo · recommendations carousel'],['chat','Agent chat (nav)'],['pots','Savings pots with goals'],['withdraw','Before withdrawing from a pot']]},
   {e:'Flow 1 · Getting to know you', t:'History or from scratch', items:[['history','With history · what the agent sees'],['newstart','No history · we start together']]},
-  {e:'Flow 2 · Decide on a proposal', t:'Proposals by currency', items:[['belo','belo home'],['proposals','Proposals'],['detail','Detail'],['confirm-p','Confirmation'],['done-p','Done'],['reject','Not now · reason']]},
+  {e:'Flow 2 · Decide on a proposal', t:'Proposals by currency', items:[['belo','belo home'],['proposals','Proposals'],['detail','Detail'],['confirm-p','Confirmation'],['done-p','Done']]},
   {e:'Flow 5 · New', t:'Move between currencies', n:true, items:[['move','Choose currencies and amount'],['confirm-m','Confirmation'],['done-m','Done']]},
   {e:'Flow 3 · Settings', t:'Panel, freeze and currencies', items:[['home','Agent panel'],['freeze','Freeze agent'],['settings','Agent currencies']]},
 ];
@@ -1455,6 +1455,8 @@ let currentKey = 'splash';
 const agentTheme = 'light';
 // Opening the app: splash -> home -> the month's recommendation slides up once
 function enterApp(){
+  // ?tile: portfolio card. Straight to the belo home, no splash and no sheet.
+  if (/[?&]tile\b/.test(location.search)){ S.autoShown = true; go('belo', 'belo'); return; }
   go('splash', 'splash');
   setTimeout(() => {
     if (S.screen !== 'splash') return;
@@ -1630,7 +1632,11 @@ document.getElementById('screen').addEventListener('click', (ev) => {
       if (p.kind === 'save'){ p.status = 'accepted'; S.pots[p.pot].saved += p.amt; S.potTip = false; toast(`Done. You set aside USD ${nf(p.amt,0)} for ${S.pots[p.pot].name}.`); break; }
       if (p.kind === 'goal'){ p.status = 'accepted'; S.pots.push({id:'g'+Date.now(), saved:0, ...p.goal}); toast(`You created the goal “${p.goal.name}”. On payday, I’ll tell you how much to set aside.`); break; }
       startConfirm({from:p.from,to:p.to,amt:p.amt,source:'agent',pid:p.id}); S.backTo = S.screen; S.backSheet = (S.screen === 'detail' ? null : S.sheet); go('confirm','confirm-p'); break; }
-    case 'reject': S.rejectSheet = S.sheet; S.sel = v; S.reason = null; S.sheet = 'reject'; render(); break;
+    case 'reject': { // "Not now" dismisses right away: no reason sheet in the prototype (kept as an idea in the case)
+      const p = S.proposals.find(x=>x.id===v); p.status = 'rejected';
+      if (!(S.sheet || S.screen === 'belo')){ S.screen = 'proposals'; currentKey='proposals'; }
+      if (S.sheet === 'rec' && !visibleProps().some(x => lvl(x) !== 'rojo')) S.sheet = null;
+      toast('Got it. Not now.'); break; }
     case 'reason': S.reason = +v; render(); break;
     case 'reject-send': { const p = S.proposals.find(x=>x.id===S.sel); p.status = 'rejected'; if (S.rejectSheet || S.screen === 'belo'){ S.sheet = S.rejectSheet || null; } else { S.sheet = null; S.screen = 'proposals'; currentKey='proposals'; }
       toast(S.reason===null ? 'Dismissed.' : `Noted. The next proposal takes it into account.`); break; }
