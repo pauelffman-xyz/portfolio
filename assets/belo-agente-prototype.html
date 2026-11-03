@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<script>if(/[?&]embed\b/.test(location.search))document.documentElement.classList.add('embed');</script>
+<script>if(/[?&]embed\b/.test(location.search))document.documentElement.classList.add('embed');if(/[?&]tile\b/.test(location.search))document.documentElement.classList.add('tile');</script>
 <title>belo · Rumbo prototype</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -593,6 +593,8 @@ canvas.spark{position:absolute;inset:0;pointer-events:none;z-index:8}
 html.embed body{padding:0!important;background:#F6F6F8!important}
 html.embed header.top,html.embed #index,html.embed #notes{display:none!important}
 html.embed .wrap{display:block;max-width:none}
+html.tile *{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+html.tile .scrim{background:rgba(20,18,40,.45)!important}
 html.embed .phone{position:relative!important;top:0;max-width:none;width:100vw;height:100vh;max-height:none;min-height:0;border:0;outline:0;border-radius:0;box-shadow:none}
 </style>
 </head>
@@ -1456,7 +1458,7 @@ const agentTheme = 'light';
 // Opening the app: splash -> home -> the month's recommendation slides up once
 function enterApp(){
   // ?tile: portfolio card. Straight to the belo home, no splash and no sheet.
-  if (/[?&]tile\b/.test(location.search)){ S.autoShown = true; go('belo', 'belo'); return; }
+  if (/[?&]tile\b/.test(location.search)){ S.autoShown = true; go('belo', 'belo'); tileLoop(); return; }
   go('splash', 'splash');
   setTimeout(() => {
     if (S.screen !== 'splash') return;
@@ -1465,6 +1467,26 @@ function enterApp(){
       if (!S.autoShown) homeRec();
     }, 700);
   }, 1400);
+}
+// ?tile autoplay for the portfolio card: home → recommendation → carousel → chat → home, in a loop. Nothing is accepted or rejected.
+function tileLoop(){
+  const wait = (ms) => new Promise(r => setTimeout(r, ms));
+  const tap = (sel) => { const el = document.querySelector(sel); if (el) el.click(); };
+  (async function run(){
+    for(;;){
+      S = initial(); S.autoShown = true; S.screen = 'belo'; S.sheet = null; currentKey = 'belo'; render();
+      await wait(2200);
+      S.sheet = 'rec'; render(); await wait(3800);
+      S.sheet = null; render(); await wait(600);
+      go('history'); await wait(2200);
+      S.carIdx = 0; S.sheet = 'carousel'; render(); await wait(2200);
+      for (let i = 0; i < 3; i++){ tap('[data-a="car:1"]'); await wait(2000); }
+      S.sheet = null; S.screen = 'belo'; render(); await wait(500);
+      S.chat = []; S.sheet = 'chat'; render(); await wait(1500);
+      chatSend('Should I move my pesos to dollars?'); await wait(4200);
+      S.sheet = null; render(); await wait(800);
+    }
+  })();
 }
 // First thing on the belo home: the month's recommendation in a bottom sheet
 function homeRec(){
