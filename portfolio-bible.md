@@ -2762,7 +2762,15 @@ A pedido de Paula, la card de belo en la home ya no muestra una imagen: muestra 
   - El 3 de noviembre `belo-logo.png` se rehízo con el logo oficial que pasó Paula (Full Color): letras en blanco para fondo oscuro, la sonrisa en menta #03FFB3, 900×434 con alfa.
 - **Sin lazy:** el iframe va sin `loading=lazy`. Con lazy, en el sitio en vivo quedaba en `about:blank` y nunca cargaba, porque está dentro de un contenedor escalado. Además, si al cargar la página sigue en blanco, el script le vuelve a poner el `src`.
 - **Escala:** un script al final del `<body>` escala el teléfono al alto de la card (`--bt-s` = alto × 1,06 / 868), con un ResizeObserver.
-- **Modo tile del prototipo:** con `?tile`, el prototipo entra directo a la home de belo, sin splash y sin abrir la bottom sheet.
+- **Modo tile del prototipo:** con `?tile`, el prototipo entra directo a la home de belo, sin splash, y se reproduce solo en loop con `tileLoop()`:
+  1. home (2,2 s)
+  2. bottom sheet con la recomendación (3,8 s)
+  3. "Your financial history"
+  4. el carrusel, que avanza 3 cards
+  5. el chat con "Should I move my pesos to dollars?" y su respuesta
+  6. vuelve a la home
+  - No acepta ni rechaza nada.
+  - `html.tile` saca los `backdrop-filter`, porque dentro del iframe escalado el blur duplicaba la pantalla de fondo.
 - **Archivos para subir al sitio:** `index.html`, `assets/belo-logo.png` y `assets/belo-agente-prototype.html`.
 - **Ojo:** el 3 de noviembre el sitio en vivo todavía tenía el `index.html` viejo, con muv primero y `belo-cover.webp`.
 - `belo-cover-tile.webp` queda como alternativa estática, pero no se usa.
