@@ -3440,7 +3440,7 @@ body.light-mode .work{ --wc-muted:#5E5E6C; }
     <div class="work-head"><h2 class="work-label" id="work-feat-label">Selected work</h2></div>
     <div class="work-grid work-grid--feat">
       <a class="work-card" href="belo-case.html">
-        <div class="wc-cover wc-cover--belo"><div class="bt-phone"><iframe src="assets/belo-agente-prototype.html?embed&tile" title="" tabindex="-1" aria-hidden="true" loading="lazy"></iframe></div><span class="bt-logo"><img src="assets/belo-logo.png" alt="" width="900" height="434" decoding="async"></span></div>
+        <div class="wc-cover wc-cover--belo"><div class="bt-phone"><iframe src="assets/belo-agente-prototype.html?embed&tile" title="" tabindex="-1" aria-hidden="true"></iframe></div><span class="bt-logo"><img src="assets/belo-logo.png" alt="" width="900" height="434" decoding="async"></span></div>
         <div class="wc-body">
           <div class="wc-cat">Fintech · AI</div>
           <h3 class="wc-name">belo <span>agentic banking</span></h3>
@@ -6346,6 +6346,6 @@ document.addEventListener('DOMContentLoaded', function(){
 </script>
 <script>
 /* belo tile: scale the phone so it fills the card height, like the other covers */
-(function(){var c=document.querySelector('.wc-cover--belo');if(!c)return;var f=function(){c.style.setProperty('--bt-s',(c.clientHeight*1.06/868).toFixed(4));};f();if(window.ResizeObserver)new ResizeObserver(f).observe(c);else window.addEventListener('resize',f);})();
+(function(){var c=document.querySelector('.wc-cover--belo');if(!c)return;var fr=c.querySelector('iframe');if(fr)window.addEventListener('load',function(){try{if(fr.contentWindow.location.href==='about:blank')fr.src=fr.getAttribute('src');}catch(e){}});var f=function(){c.style.setProperty('--bt-s',(c.clientHeight*1.06/868).toFixed(4));};f();if(window.ResizeObserver)new ResizeObserver(f).observe(c);else window.addEventListener('resize',f);})();
 </script>
 </body></html>

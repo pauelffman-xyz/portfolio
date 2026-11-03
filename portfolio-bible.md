@@ -2745,6 +2745,37 @@ body.light-mode .tile-sukupay-ds .tile-name {
 
 ## BELO CASE STUDY · Rumbo (29 de octubre de 2026)
 
+### En el prototipo, "Not now" ya no pide el motivo (3 de noviembre de 2026)
+
+- Paula sacó del prototipo la sheet "Why not now?" con motivos, porque lo volvía denso.
+- Ahora "Not now" descarta la propuesta en el momento: muestra el toast "Got it. Not now." y pasa a la siguiente. Si no quedan más, cierra la sheet.
+- En el caso la idea sigue, en Guardrails: "A declined proposal asks why (optional)".
+- Se sacó del índice "Not now · reason". El código de la sheet `reject` quedó, pero ya no se usa.
+
+### La card de belo usa el prototipo real (3 de noviembre de 2026)
+
+A pedido de Paula, la card de belo en la home ya no muestra una imagen: muestra el prototipo en vivo, con la moneda girando.
+
+- **Estructura:** `.wc-cover--belo` lleva el degradé en CSS y adentro tiene dos piezas:
+  - `.bt-phone`: un marco de teléfono de 414×868 con un `<iframe src="assets/belo-agente-prototype.html?embed&tile">` de 390×844. El iframe tiene `pointer-events:none`, `tabindex=-1`, `aria-hidden` y `loading=lazy`.
+  - `.bt-logo`: el logo de belo a la derecha (`assets/belo-logo.png`).
+  - El 3 de noviembre `belo-logo.png` se rehízo con el logo oficial que pasó Paula (Full Color): letras en blanco para fondo oscuro, la sonrisa en menta #03FFB3, 900×434 con alfa.
+- **Sin lazy:** el iframe va sin `loading=lazy`. Con lazy, en el sitio en vivo quedaba en `about:blank` y nunca cargaba, porque está dentro de un contenedor escalado. Además, si al cargar la página sigue en blanco, el script le vuelve a poner el `src`.
+- **Escala:** un script al final del `<body>` escala el teléfono al alto de la card (`--bt-s` = alto × 1,06 / 868), con un ResizeObserver.
+- **Modo tile del prototipo:** con `?tile`, el prototipo entra directo a la home de belo, sin splash y sin abrir la bottom sheet.
+- **Archivos para subir al sitio:** `index.html`, `assets/belo-logo.png` y `assets/belo-agente-prototype.html`.
+- **Ojo:** el 3 de noviembre el sitio en vivo todavía tenía el `index.html` viejo, con muv primero y `belo-cover.webp`.
+- `belo-cover-tile.webp` queda como alternativa estática, pero no se usa.
+
+### Cover nuevo para la card de belo (3 de noviembre de 2026)
+
+- Archivo: `assets/belo-cover-tile.webp`, de 1920×1200. Tiene el 16:10 de las cards grandes, así no se recorta.
+- Lleva el degradé nocturno de belo, con brillo violeta abajo.
+- En el centro va un teléfono con la home del prototipo en inglés: el banner "Make your money work for you" y "Go to my agent".
+- El logo de belo va a la derecha, centrado en vertical.
+- En `index.html` la card usa `object-position:center top`.
+- El cover anterior, `belo-cover.webp` (4:3, en español), quedó en `assets/` pero ya no se usa.
+
 ### belo pasa al primer lugar de la home (3 de noviembre de 2026)
 
 - **Nuevo orden en Selected work:**
