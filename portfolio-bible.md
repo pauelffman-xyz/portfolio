@@ -2745,6 +2745,21 @@ body.light-mode .tile-sukupay-ds .tile-name {
 
 ## BELO CASE STUDY · Rumbo (29 de octubre de 2026)
 
+### belo pasa al primer lugar de la home (3 de noviembre de 2026)
+
+- **Nuevo orden en Selected work:**
+  1. belo agentic banking
+  2. sukupay prototyper
+  3. muv
+  4. sukupay home
+  5. vendor tool
+- belo y muv intercambiaron lugares. Las dos primeras cards son las grandes (`nth-child(-n+2)` ocupa 3 columnas), así que ahora belo va grande y muv queda chica.
+- **Next case:** `belo-case.html` ahora lleva a sukupay prototyper (antes llevaba a sukupay home).
+- **Pendiente en el repo del portfolio:**
+  - `sukupay-proto-case.html`: su Next case tiene que pasar a muv.
+  - `muv-case.html`: su Next case tiene que pasar a sukupay home.
+  - Revisar si algún case lleva todavía a muv como primero.
+
 ### La solución muestra todo lo que hace el producto (3 de noviembre de 2026)
 
 A pedido de Paula, "02 The solution" ahora abre con todo lo que hace Rumbo para que la plata no quede quieta.
