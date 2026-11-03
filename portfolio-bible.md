@@ -2745,6 +2745,123 @@ body.light-mode .tile-sukupay-ds .tile-name {
 
 ## BELO CASE STUDY · Rumbo (29 de octubre de 2026)
 
+### La solución muestra todo lo que hace el producto (3 de noviembre de 2026)
+
+A pedido de Paula, "02 The solution" ahora abre con todo lo que hace Rumbo para que la plata no quede quieta.
+
+- **Label:** "Everything it does so your money never sits parked". Debajo va la intro: "Swapping currencies is only the start."
+- **`.feat-grid`:** 6 cards en una grilla de 3×2, con ícono:
+  - Change currency
+  - Set part of your salary aside
+  - Create a savings pot
+  - Turn a trip into a goal
+  - Watch the dollar for you (USDT/ARS más de 1,5%)
+  - Protect your goals
+- **`.real-strip`:** una franja nocturna, "And it runs for real", con 4 ítems: Agent with Claude, Jobs that watch your account, Anti-spam guardrails y Approvals on belo staging. Tiene un link "How it works →" a `#under-the-hood`.
+- **Pasos:** los 4 pasos (Reads, traffic light, Proposes, You decide) quedaron debajo, con el label "How every proposal works".
+- **Bloque quitado:** se sacó "What Rumbo can propose" de la sección de momentos, porque repetía lo mismo. El CSS `.act-*` quedó sin uso.
+
+### Prototipo en inglés (3 de noviembre de 2026)
+
+- Todo el prototipo pasó al inglés: pantallas, notas del índice, chat, toasts y textos del semáforo. Lo pidió Paula.
+- El semáforo dice Safe / Moderate / Risky.
+- Los perfiles se llaman Conservative / Moderate / Aggressive.
+- Los números usan `en-US`, por ejemplo 12,740.00.
+- Los apóstrofes van tipográficos (’), así no rompen los strings de JS.
+- Las regex del chat aceptan preguntas en inglés y en español.
+- La versión en español quedó en `scratchpad/v17-es-before-en.html`.
+- Las capturas del caso siguen en español.
+- El hint del hero dice "Demo figures; the screenshots below keep the Spanish copy of the app."
+
+### Lo que suma el repo del equipo (3 de noviembre de 2026)
+
+Fuente: el repo `belo-agentic-hackathon` (Tommy-R8). Lo construyó el equipo: el agente, el backend y la app que corre contra belo staging. Paula diseñó el flujo, la UI y el prototipo.
+
+**En el caso:**
+- "The opportunity" y el paso 03 de la solución ya no hablan solo de cambiar de moneda. Ahora incluyen "into a savings pot, or toward a new goal".
+- Dentro de "06 The moments" hay un bloque nuevo, "What Rumbo can propose" (`.act-grid`), con 5 acciones:
+  - mover de moneda
+  - separar del sueldo para una alcancía
+  - armar el objetivo de un viaje detectado en la tarjeta
+  - vender lo justo si el USDT/ARS se mueve más de 1,5%
+  - mostrar cuánto se atrasa el objetivo antes de retirar
+- Sección nueva, "08 Under the hood" (`.steps.steps-5`), en 5 pasos:
+  1. Los jobs vigilan la cuenta.
+  2. El código hace las cuentas.
+  3. Claude decide con herramientas de solo lectura.
+  4. Las barandas filtran: 3 urgentes por día, 1 por tema, silencio de 22 a 8, y pueden bajar el nivel pero nunca subirlo.
+  5. Vos aprobás.
+- Debajo de "Under the hood" van los tres niveles de aviso: urgent, feed y daily digest. La fatiga: si marcás 2 avisos como "no útil" en 7 días, Rumbo espera.
+- Las secciones se renumeraron: Decisions pasa a 09 y Guardrails a 10. Los fondos se alternan: hood blanco, decisions gris, guardrails blanco, measure gris.
+
+**En el prototipo** (`belo-agente-monedas.html`, artifact v60):
+- El carrusel suma 3 propuestas nuevas:
+  - `s1` (kind `save`): "Separar USD 160 para Viaje a Brasil".
+  - `g1` (kind `goal`): "Armar el objetivo de tu viaje", a partir de una compra en GOL. Si se acepta, se crea la alcancía "Próximo viaje".
+  - `p5`: "Pasar USDT 85 a ARS", porque el dólar subió 10% y la tarjeta vence en 5 días.
+- Las alcancías se pueden tocar. Abren la sheet "Retirar de…" con montos de USD 100, 300 o 500, y muestran cuántas semanas se corre el objetivo. Los botones son "Retirar igual" y "Mejor no".
+- Hay una entrada nueva en el índice: "Antes de retirar de una alcancía".
+- El helper `lvl(p)` devuelve 'verde' para las propuestas con `kind`.
+
+**Diferencias detectadas con el repo:**
+- El repo sacó de la app el aviso "antes de transferir", porque molestaba en Transferir. La API sigue existiendo y el README lo sigue listando entre los momentos.
+- En el repo, el botón dice "Ver las 4 recomendaciones" aunque el carrusel muestra 3.
+
+### Visual de cierre: pantallas en capas (2 de noviembre de 2026)
+
+- El abanico en perspectiva (`rumbo-fan-alpha.webp`) se reemplazó por `assets/rumbo/rumbo-layers.webp`, de 1920×1080. Es la misma imagen del post de LinkedIn.
+- La composición tiene pantallas planas en capas sobre el degradé nocturno de belo:
+  - **Centro:** la home dentro de un teléfono.
+  - **Detrás:** la bottom sheet y el chat.
+  - **Afuera:** el historial y las alcancías.
+- `.fan` pasó a `max-width:1080px`, con radio de 24px y sombra flotante.
+- El archivo viejo sigue en `assets/rumbo/`, pero ya no se usa.
+
+### Banner "You're in control" con la animación del home (2 de noviembre de 2026)
+
+- La card `.principle-quote` de "02 The solution" ahora lleva la moneda girando y 3 monedas en órbita, la misma SVG `ORBIT` del banner del prototipo.
+- Las clases son `.pq-art` y `.mb-spin`, y el gradiente se llama `pqhalo`.
+- Lleva también las 5 banderas (`.pq-flags`) al lado de "The difference".
+- En desktop la moneda va a la derecha. En mobile va arriba del texto.
+
+### Revisión de copy y storytelling (2 de noviembre de 2026)
+
+- **Fuera el "~8".** Se sacó la cifra de apps, que no tenía fuente.
+  - "Situation & task" ahora se titula "Money everywhere. Working nowhere." y su primera cifra es "10 · Hours to build it, as a team of 5".
+  - En la card "Scattered" del problema la cifra pasó a "73%" (Kantar: usan 2 o más billeteras).
+  - "Don't add a ninth app" pasó a "Don't add another app".
+- **"Situation & task" cuenta solo el desafío, la tarea y el rol de Paula.** El problema vive entero en "01 The problem".
+- **Texto de "My role":** Paula trajo el insight de que la plata queda quieta y nadie te acompaña; el equipo le dio forma; ella armó el flow low-fi con las primeras pantallas, y después diseñó la UI y armó el prototipo navegable.
+- **Puente antes de los números:** "Parked doesn't mean still…".
+- **El momento 04 se conecta con la proyección:** dice que es el momento detrás de los ARS 355 bn.
+- **Término único: *parked*.** Reemplaza a "sits still", "idle" y "Still". La card "Parked" lleva el subtítulo "Not working for you".
+- **Copys de las secciones:**
+  - "Three barriers"
+  - "Four screens, one recommendation"
+  - "How we turn parked money into a decision"
+  - "Copy in Spanish, as in the app"
+  - "The agent suggests. You decide."
+- **Se quitó la fila "Principle"** de la meta del hero, porque repetía "Nothing moves without your OK".
+- **Traducción entre paréntesis** para las frases en español del prototipo.
+- **Sección nueva "What we'd measure"** antes del equipo: acceptance rate, money retained in belo y freezes/opt-outs. Usa `.guard.guard-3`.
+
+### Problema en números (2 de noviembre de 2026)
+
+- Dentro de "Action · 01 The problem", debajo de las tres cards, va un bloque nuevo: "The problem, in numbers". Las clases son `.num-*`.
+- A la izquierda hay tres datos de mercado:
+  - ARS 96 trillion por mes en transferencias inmediatas; el 77% pasa por una billetera.
+  - 19.2 transferencias por adulto por mes (7.7 en 2023).
+  - 7 de cada 10 tienen la plata repartida entre banco y billetera.
+- A la derecha está la proyección para belo, con borde violeta:
+  - Número principal: ARS 355 bn por mes, el escenario base.
+  - Barras para los tres escenarios: Low 106 / Base 355 / High 828 bn.
+  - Fórmula base: 600k usuarios activos × 19.2 × 25% a cuentas propias × ARS 123k.
+- Fuentes: BCRA, Informe de Pagos Minoristas (ago. 2026), y Kantar / IAB Argentina.
+- Los supuestos de usuarios activos y del % a cuentas propias son del equipo. Hay que validarlos con datos internos de belo.
+- En mobile se apila en una columna.
+- Se probó como slide en el deck y Paula prefirió que viva en el caso, así que la slide se sacó del deck.
+- **Pendiente:** la card "~8" del problema no tiene fuente; Kantar dice 73% con 2+ billeteras y ~40% con 3+.
+
 *Case 16. Concepto de feature para belo, hecho en la belo Agentic Banking Buildathon 001 (28.10.2026) sobre la API REST de staging de belo. Template viejo (`.section` / `.cover`) con el adaptador v3.*
 
 ### Archivos
@@ -2755,6 +2872,7 @@ body.light-mode .tile-sukupay-ds .tile-name {
 | `assets/belo-agente-prototype.html` | Prototipo navegable, autocontenido (CSS y JS adentro). Con `?embed` muestra solo el teléfono; sin parámetro, el índice de flujos y las notas. |
 | `assets/rumbo/*.webp` | 8 capturas del prototipo (390×844 @2x, WebP, 33–59 KB): `rec-sheet`, `detail`, `history`, `history-habits`, `carousel`, `home`, `chat`, `pots`. |
 | `assets/belo-cover.webp` | Cover de la card en la home (1600×1200). |
+| `assets/rumbo/rumbo-fan.png` / `.webp` | Visual de cierre: 5 pantallas en abanico (PNG transparente para el case; WebP sobre blanco). |
 | `assets/rumbo/belo-current.webp` | Grilla de pantallas de la app actual de belo (sección "belo today"). |
 
 - **El prototipo tiene que estar en `assets/`**, al lado del case, porque el `src` del iframe es relativo (`assets/belo-agente-prototype.html?embed`). Si se sube suelto a la raíz, el iframe queda vacío. Es el mismo principio que el iframe de `sukupay-case.html`.
@@ -2781,6 +2899,7 @@ body.light-mode .tile-sukupay-ds .tile-name {
 7. **04 From the home** (3 capturas): banner de Rumbo, la sección del agente financiero, chat del agente.
 8. **05 Savings pots with goals** (texto + 1 captura): alcancías con objetivo; al cobrar, Rumbo sugiere cuánto separar; antes de retirar, cuánto se corre el plazo.
 9. **06 Moments**, **07 Traffic light** (riesgo × perfil, tres perfiles), **08 Design decisions**, **09 Guardrails** y **The team**. *(La sección "Result & next" se quitó a pedido de Paula el 29 de octubre.)*
+9b. **Visual de cierre** (2 de noviembre): `assets/rumbo/rumbo-fan-alpha.webp` (WebP con transparencia, ~1/5 del PNG), cinco pantallas en abanico (historial, bottom sheet, home al centro, chat, carrusel), PNG transparente para que tome el fondo de la página en light y dark. Centrado, `max-width:920px`, después de The team.
 10. **Next case → sukupay home**, footer, dock.
 
 - **Capturas (`.scr`):** imagen con radio 28px y `--sh-ring` + `--sh-float`, como teléfono. Debajo, número, título y una línea. Grillas `.scr-4` / `.scr-3`, que bajan a 2 y 1 columna.

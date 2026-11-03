@@ -868,6 +868,31 @@ body.dark-mode .back-nav-title,body.dark-mode .back-nav-right{color:var(--accent
 .pq-mf{width:16px;height:16px;border-radius:50%;margin-left:-5px;box-shadow:0 0 0 1.5px #0B0630;opacity:.9;}
 .pq-art{width:clamp(140px,18vw,240px);height:auto;aspect-ratio:1;filter:drop-shadow(0 0 10px rgba(60,240,176,.45));margin-right:clamp(0px,3vw,48px);}
 @media(max-width:768px){.principle-quote{grid-template-columns:1fr;}.pq-art{order:-1;width:140px;margin:0 0 -8px;}}
+.act-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(12px,1.5vw,20px);margin-top:var(--stack);}
+.act{background:var(--card);border-radius:var(--r-card);box-shadow:var(--sh-card);padding:1.5rem 1.375rem;display:flex;flex-direction:column;gap:.5rem;}
+.act-w{font-size:.75rem;font-weight:600;color:var(--accent);}
+.act-t{font-size:1rem;font-weight:700;letter-spacing:-.015em;color:var(--paper);}
+.act-d{font-size:.8125rem;line-height:1.6;color:var(--ash);}
+.steps.steps-5{grid-template-columns:repeat(5,1fr);}
+@media(max-width:1024px){.act-grid,.steps.steps-5{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:640px){.act-grid,.steps.steps-5{grid-template-columns:1fr;}}
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,1.5vw,20px);margin-top:var(--stack);}
+.feat{background:var(--card);border-radius:var(--r-card);box-shadow:var(--sh-card);padding:1.75rem 1.5rem;display:flex;flex-direction:column;gap:.5rem;}
+.feat-ic{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:color-mix(in srgb,var(--accent) 12%,transparent);color:var(--accent);margin-bottom:.5rem;}
+.feat-ic svg{width:22px;height:22px;}
+.feat-t{font-size:1.0625rem;font-weight:700;letter-spacing:-.015em;color:var(--paper);}
+.feat-d{font-size:.875rem;line-height:1.6;color:var(--ash);}
+#under-the-hood{scroll-margin-top:72px;}
+.real-strip{margin-top:clamp(12px,1.5vw,20px);border-radius:var(--r-card);background:var(--grad-night);color:#fff;padding:clamp(1.5rem,3vw,2rem) clamp(1.5rem,3vw,2.5rem);display:grid;grid-template-columns:auto 1fr auto;gap:clamp(16px,3vw,40px);align-items:center;box-shadow:var(--sh-float);}
+.rs-lbl{font-size:.875rem;font-weight:600;color:var(--mint);white-space:nowrap;}
+.rs-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,2vw,28px);}
+.rs-list li{display:flex;flex-direction:column;gap:.25rem;border-left:1px solid rgba(255,255,255,.16);padding-left:14px;}
+.rs-list b{font-size:.9375rem;font-weight:600;}
+.rs-list span{font-size:.8125rem;line-height:1.5;color:rgba(255,255,255,.68);}
+.rs-link{font-size:.875rem;font-weight:500;color:var(--mint);text-decoration:none;white-space:nowrap;}
+.rs-link:hover{text-decoration:underline;text-underline-offset:4px;}
+@media(max-width:1024px){.feat-grid{grid-template-columns:repeat(2,1fr);}.real-strip{grid-template-columns:1fr;}.rs-list{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:640px){.feat-grid,.rs-list{grid-template-columns:1fr;}}
 /* ─── ENTRY POINTS ─── */
 .entry-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,1.5vw,20px);margin-top:var(--stack);}
 .entry{background:var(--card);border-radius:var(--r-card);box-shadow:var(--sh-card);padding:1.5rem;display:flex;flex-direction:column;gap:.5rem;}
@@ -1009,7 +1034,7 @@ body.dark-mode .back-nav-title,body.dark-mode .back-nav-right{color:var(--accent
     </div>
     <div class="hero-proto">
       <iframe class="proto-frame" src="assets/belo-agente-prototype.html?embed" title="Rumbo clickable prototype, starting from the belo home" loading="eager"></iframe>
-      <p class="hero-proto-hint">Try it: it opens like belo. Copy in Spanish, as in the app; demo figures.</p>
+      <p class="hero-proto-hint">Try it: it opens like belo. Demo figures; the screenshots below keep the Spanish copy of the app.</p>
     </div>
   </div>
 </div>
@@ -1031,7 +1056,7 @@ body.dark-mode .back-nav-title,body.dark-mode .back-nav-right{color:var(--accent
     <div class="accent-card">
       <div class="ac-lbl">The opportunity</div>
       <div class="ac-val">Don't add another app. Put the advice inside the one where the money already is.</div>
-      <div class="ac-desc">belo already holds pesos, dollars, stablecoins and crypto. Rumbo reads that, and suggests the next move from one currency to another.</div>
+      <div class="ac-desc">belo already holds pesos, dollars, stablecoins and crypto. Rumbo reads that, and suggests the next move: to another currency, into a savings pot, or toward a new goal.</div>
     </div>
   </div>
 </div>
@@ -1097,12 +1122,36 @@ body.dark-mode .back-nav-title,body.dark-mode .back-nav-right{color:var(--accent
   <div class="section-label">
     <div class="sl-text">That's why we built Rumbo</div>
     <div class="sl-line"></div>
+    <div class="sl-text">Everything it does so your money never sits parked</div>
+  </div>
+  <p class="ov-body" style="max-width:62ch;margin-top:var(--stack);"><strong>Swapping currencies is only the start.</strong> Rumbo watches your salary, your spending and the dollar, and brings you the move that puts your money to work.</p>
+  <div class="feat-grid">
+    <div class="feat"><div class="feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h13l-3-3M20 16H7l3 3"/></svg></div><div class="feat-t">Change currency</div><div class="feat-d">Pesos sitting still go to dollars or USDT, so they don't lose to inflation. Idle dollars go to USDT, so they earn.</div></div>
+    <div class="feat"><div class="feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v10M8 10l4 4 4-4"/><path d="M5 18h14"/></svg></div><div class="feat-t">Set part of your salary aside</div><div class="feat-d">On payday, it suggests a share of what's left this month and puts it in your savings pot.</div></div>
+    <div class="feat"><div class="feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="7" width="16" height="12" rx="3"/><path d="M9 7V5h6v2M12 11v4M10 13h4"/></svg></div><div class="feat-t">Create a savings pot</div><div class="feat-d">No pot yet? It suggests one with a goal, an amount and a date, so the money has a direction.</div></div>
+    <div class="feat"><div class="feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 14l18-6-6 12-3-5-9-1Z"/></svg></div><div class="feat-t">Turn a trip into a goal</div><div class="feat-d">It spots flights and stays on your card and offers to build the goal for that trip.</div></div>
+    <div class="feat"><div class="feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 16l5-5 4 4 7-7"/><path d="M15 8h5v5"/></svg></div><div class="feat-t">Watch the dollar for you</div><div class="feat-d">When USDT/ARS moves more than 1.5%, it tells you how much to sell. Just what you need; the rest keeps earning.</div></div>
+    <div class="feat"><div class="feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></div><div class="feat-t">Protect your goals</div><div class="feat-d">Before you withdraw from a pot, it shows how many weeks your goal moves. It never blocks.</div></div>
+  </div>
+  <div class="real-strip">
+    <div class="rs-lbl">And it runs for real</div>
+    <ul class="rs-list">
+      <li><b>Agent with Claude</b><span>Decides whether to tell you, and writes the message</span></li>
+      <li><b>Jobs that watch your account</b><span>Salary, purchases, parked pesos, the dollar</span></li>
+      <li><b>Anti-spam guardrails</b><span>3 urgent a day, quiet hours, fewer if you say no</span></li>
+      <li><b>Approvals on belo staging</b><span>You tap OK, belo returns the approval</span></li>
+    </ul>
+    <a class="rs-link" href="#under-the-hood">How it works →</a>
+  </div>
+  <div class="section-label num-label">
+    <div class="sl-text">How every proposal works</div>
+    <div class="sl-line"></div>
     <div class="sl-text">It reads, it proposes, you decide</div>
   </div>
   <div class="steps">
     <div class="step"><div class="step-n">01</div><div class="step-t">Reads</div><div class="step-d">Salary, spending, savings pots and which currency the money is in.</div></div>
     <div class="step"><div class="step-n">02</div><div class="step-t">Checks the traffic light</div><div class="step-d">How much risk this move carries for your investor profile.</div></div>
-    <div class="step"><div class="step-n">03</div><div class="step-t">Proposes</div><div class="step-d">One move, from one currency to another, with the amount, the cost and the reason.</div></div>
+    <div class="step"><div class="step-n">03</div><div class="step-t">Proposes</div><div class="step-d">One move, with the amount, the cost and the reason: change currency, set money aside for a goal, or start a new one.</div></div>
     <div class="step on"><div class="step-n">04</div><div class="step-t">You decide</div><div class="step-d">Accept or decline. Freeze the agent whenever you want.</div></div>
   </div>
   <div class="principle-quote">
@@ -1207,9 +1256,32 @@ body.dark-mode .back-nav-title,body.dark-mode .back-nav-right{color:var(--accent
   <p class="tl-note">The profile is inferred from history (someone who buys BTC every month reads as moderate) and confirmed by the user. Without history, it comes from three onboarding questions. Every result is a colored dot plus a word, never color alone.</p>
 </div>
 
-<!-- 08 DECISIONS -->
-<div class="section">
-  <div class="eyebrow">Action · 08 Design decisions</div>
+<!-- 08 UNDER THE HOOD -->
+<div class="section" id="under-the-hood">
+  <div class="eyebrow">Action · 08 Under the hood</div>
+  <div class="section-label">
+    <div class="sl-text">It works on a real belo account</div>
+    <div class="sl-line"></div>
+    <div class="sl-text">Built by the team on belo's staging API</div>
+  </div>
+  <p class="ov-body" style="max-width:68ch;margin-top:var(--stack);">The prototype shows the experience. Behind it, the team built a working version that reads a belo staging account and runs the moments on its own. <strong>The code does the math. The agent only decides whether it's worth telling you, and how.</strong></p>
+  <div class="steps steps-5">
+    <div class="step"><div class="step-n">01</div><div class="step-t">Jobs watch the account</div><div class="step-d">Salary coming in, travel purchases, pesos sitting still, USDT/ARS moves, spending habits.</div></div>
+    <div class="step"><div class="step-n">02</div><div class="step-t">Code does the math</div><div class="step-d">What's free to save after fixed costs, inflation, belo's yield, how far each goal is.</div></div>
+    <div class="step"><div class="step-n">03</div><div class="step-t">The agent decides</div><div class="step-d">Claude, with read-only tools, picks the level and writes the message. Every number comes from a tool.</div></div>
+    <div class="step"><div class="step-n">04</div><div class="step-t">Guardrails filter</div><div class="step-d">Up to 3 urgent alerts a day, one per topic, quiet from 10 pm to 8 am. They can lower a level, never raise it.</div></div>
+    <div class="step on"><div class="step-n">05</div><div class="step-t">You approve</div><div class="step-d">Nothing executes from the agent. You tap, and belo returns the approval for the operation.</div></div>
+  </div>
+  <div class="bl-grid">
+    <div class="bl-card"><h4>Urgent</h4><p>A push notification. Salary in, pesos about to lose value, a big jump in the dollar.</p></div>
+    <div class="bl-card"><h4>Feed</h4><p>Waits in the app. A trip to plan, a goal falling behind, a habit that changed a lot.</p></div>
+    <div class="bl-card"><h4>Daily digest</h4><p>Everything else. A coffee doesn't interrupt you. If you mark two alerts as not useful in a week, it waits.</p></div>
+  </div>
+</div>
+
+<!-- 09 DECISIONS -->
+<div class="section" style="background:var(--bg2)">
+  <div class="eyebrow">Action · 09 Design decisions</div>
   <div class="section-label">
     <div class="sl-text">What shaped the screens</div>
     <div class="sl-line"></div>
@@ -1225,9 +1297,9 @@ body.dark-mode .back-nav-title,body.dark-mode .back-nav-right{color:var(--accent
   </div>
 </div>
 
-<!-- 09 GUARDRAILS -->
-<div class="section" style="background:var(--bg2)">
-  <div class="eyebrow">Action · 09 Guardrails</div>
+<!-- 10 GUARDRAILS -->
+<div class="section">
+  <div class="eyebrow">Action · 10 Guardrails</div>
   <div class="section-label">
     <div class="sl-text">What Rumbo does not do</div>
     <div class="sl-line"></div>
@@ -1242,7 +1314,7 @@ body.dark-mode .back-nav-title,body.dark-mode .back-nav-right{color:var(--accent
 </div>
 
 <!-- WHAT WE'D MEASURE -->
-<div class="section">
+<div class="section" style="background:var(--bg2)">
   <div class="eyebrow">What we'd measure</div>
   <div class="section-label">
     <div class="sl-text">If Rumbo moved past the buildathon</div>
