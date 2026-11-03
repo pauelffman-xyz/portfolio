@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -488,6 +488,8 @@ button.lt-pot{width:100%;color:inherit;font:inherit;font-size:14.5px;cursor:poin
 .pot-tip .btn.ghost{background:rgba(255,255,255,.1)!important;color:#fff;border-color:rgba(255,255,255,.18)!important}
 .pot{display:grid;grid-template-columns:44px 1fr auto;gap:12px;align-items:center;padding:12px 0}
 .pot + .pot{border-top:1px solid var(--line)}
+.pot-btn{width:100%;background:none;border:0;border-radius:0;font:inherit;color:inherit;text-align:left;cursor:pointer}
+.wd-tip{margin:4px 0}
 .pot-t{display:grid;gap:2px;min-width:0}
 .pot-t b{font-size:14.5px;font-weight:500}
 .pot-t span{font-size:12.5px;color:var(--muted)}
@@ -598,9 +600,9 @@ html.embed .phone{position:relative!important;top:0;max-width:none;width:100vw;h
 
 
 <header class="top">
-  <span class="eyebrow">Buildathon belo · Agente de sugerencias · Flujos por moneda</span>
-  <h1>Cada propuesta es un movimiento entre tus monedas.</h1>
-  <p>Prototipo clickeable. El agente lee tu plata en pesos, dólares, stablecoins y cripto, y propone de qué moneda a cuál mover. También podés mover vos, con el mismo semáforo.</p>
+  <span class="eyebrow">belo Buildathon · Suggestions agent · Flows by currency</span>
+  <h1>Each proposal is a move between your currencies.</h1>
+  <p>Clickable prototype. The agent reads your money in pesos, dollars, stablecoins and crypto, and suggests which currency to move into. You can also move it yourself, with the same traffic light.</p>
 </header>
 
 <div class="wrap">
@@ -618,46 +620,56 @@ const FEE = 0.008;              // 0,8% conversion cost (example)
 // monthly spend / saving capacity in USD come from the persona (S.prof)
 const CUR = {
   ARS:{name:'Pesos', kind:'local', price:1/1450, color:'#8E8AA3'},
-  USD:{name:'Dólares', kind:'stable', price:1, color:'#6C47FF'},
+  USD:{name:'Dollars', kind:'stable', price:1, color:'#6C47FF'},
   USDT:{name:'Tether', kind:'stable', price:1, yield:6, color:'#9D86FF'},
   USDC:{name:'USD Coin', kind:'stable', price:1, yield:5, color:'#C9BCFF'},
   BTC:{name:'Bitcoin', kind:'volatile', price:90000, color:'#5D5A78'},
   ETH:{name:'Ether', kind:'volatile', price:3200, color:'#3B394E'},
 };
 const ORDER = ['ARS','USD','USDT','USDC','BTC','ETH'];
-const ROLE = {local:'Gasto del mes', stable:'Ahorro en dólares', volatile:'Inversión'};
+const ROLE = {local:'Monthly spending', stable:'Savings in dollars', volatile:'Investment'};
 
 const PERSONAS = {
   hist:{
-    prof:{perfil:'moderado', perfilWhy:'Lo inferimos de tus compras de BTC de los últimos 3 meses.', gasto:2800, ahorro:1200, metaTitle:'Respiro en 14 meses', metaGoal:6, metaSub:'6 meses de gastos en USD'},
+    prof:{perfil:'moderado', perfilWhy:'We inferred it from your BTC purchases over the last 3 months.', gasto:2800, ahorro:1200, metaTitle:'Breathing room in 14 months', metaGoal:6, metaSub:'6 months of expenses in USD'},
     wallet:{ARS:1160000, USD:1820, USDT:12740, USDC:0, BTC:0.006, ETH:0},
     proposals:[
       {id:'p1', from:'ARS', to:'USD', amt:360000, rec:true, status:'pending',
-        why:'Son los pesos que te sobran después de los gastos del mes. En dólares no pierden valor.',
-        ev:'Los últimos 3 meses cobraste el día 5 y te quedaron unos ARS 360.000 sin usar a fin de mes.',
-        ifNot:'Si quedan quietos 3 meses, con 2,5% de inflación mensual pierden unos USD 18 de poder de compra.'},
+        why:'These are the pesos left after the month’s expenses. In dollars they don’t lose value.',
+        ev:'The last 3 months you got paid on the 5th and had about ARS 360,000 left unused at month end.',
+        ifNot:'If they stay parked for 3 months, with 2.5% monthly inflation they lose about USD 18 in buying power.'},
+      {id:'s1', kind:'save', pot:0, amt:160, status:'pending', title:'Set aside USD 160 for Trip to Brazil',
+        meta:'Goes to your savings pot · you get there by Mar 2027',
+        ev:'Your salary came in. After this month’s expenses you have about USD 250 left.'},
+      {id:'g1', kind:'goal', status:'pending', title:'Build the goal for your trip',
+        meta:'USD 1,600 by Jan 31, 2027', goal:{name:'Next trip', goal:1600, due:'Jan 2027', months:3},
+        ev:'I saw a purchase of ARS 850,000 at GOL LINHAS AEREAS. Going on a trip?'},
+      {id:'p5', from:'USDT', to:'ARS', amt:85, status:'pending',
+        why:'Sell just what you need for the card. The rest of your dollars keeps earning.',
+        ev:'The dollar is up 10% today. Your card is due in 5 days (ARS 180,000) and you’re ARS 120,000 short.',
+        ifNot:'If you wait and the dollar drops, you need more USDT to cover the same.'},
       {id:'p2', from:'USD', to:'USDT', amt:250, status:'pending',
-        why:'Tus dólares quietos no rinden. En USDT rinden cerca de 6% anual y siguen siendo dólares.',
-        ev:'Tus USD 1.820 no tuvieron movimientos en 74 días.',
-        ifNot:'En 12 meses son unos USD 15 que no ganás. En USD el rendimiento es 0.'},
+        why:'Your parked dollars don’t earn. In USDT they earn about 6% a year and they’re still dollars.',
+        ev:'Your USD 1,820 haven’t moved in 74 days.',
+        ifNot:'In 12 months that’s about USD 15 you don’t earn. USD earns 0.'},
       {id:'p3', from:'USD', to:'BTC', amt:100, status:'pending',
-        why:'Usa una parte de lo que podés invertir este mes. Puede subir o bajar mucho en pocos días.',
-        ev:'Compraste BTC en julio, agosto y septiembre, unos USD 100 cada vez.',
-        ifNot:'Si BTC cae 20%, perdés USD 20. Si sube 20%, ganás USD 20.'},
-      {id:'p4', from:'USDT', to:'BTC', amt:6500, status:'pending', asked:true, why:'Lo consultaste vos.', ifNot:''},
+        why:'It uses part of what you can invest this month. It can go up or down a lot in a few days.',
+        ev:'You bought BTC in July, August and September, about USD 100 each time.',
+        ifNot:'If BTC drops 20%, you lose USD 20. If it rises 20%, you gain USD 20.'},
+      {id:'p4', from:'USDT', to:'BTC', amt:6500, status:'pending', asked:true, why:'You asked about it.', ifNot:''},
     ]},
   new:{
-    prof:{perfil:'conservador', perfilWhy:'Según lo que nos contaste: tu prioridad es ahorrar en dólares.', gasto:760, ahorro:205, metaTitle:'Tus primeros ahorros', metaGoal:3, metaSub:'3 meses de gastos en USD', learning:1},
+    prof:{perfil:'conservador', perfilWhy:'Based on what you told us: your priority is saving in dollars.', gasto:760, ahorro:205, metaTitle:'Your first savings', metaGoal:3, metaSub:'3 months of expenses in USD', learning:1},
     wallet:{ARS:850000, USD:120, USDT:0, USDC:0, BTC:0, ETH:0},
     proposals:[
       {id:'n1', from:'ARS', to:'USD', amt:300000, rec:true, status:'pending',
-        why:'Es lo que te sobra este mes. En dólares empezás a ahorrar y no pierde valor.',
-        ev:'Nos contaste que cobrás ARS 1.400.000 y gastás unos ARS 1.100.000 por mes.',
-        ifNot:'Si quedan quietos 3 meses, con 2,5% de inflación mensual pierden unos USD 15 de poder de compra.'},
+        why:'It’s what you have left this month. In dollars you start saving and it doesn’t lose value.',
+        ev:'You told us you earn ARS 1,400,000 and spend about ARS 1,100,000 a month.',
+        ifNot:'If they stay parked for 3 months, with 2.5% monthly inflation they lose about USD 15 in buying power.'},
       {id:'n2', from:'USD', to:'USDT', amt:120, status:'pending',
-        why:'Que tus dólares rindan desde el primer día, sin dejar de ser dólares.',
-        ev:'Tenés USD 120 en dólares sin rendimiento.',
-        ifNot:'En USD el rendimiento es 0.'},
+        why:'Let your dollars earn from day one, while staying dollars.',
+        ev:'You have USD 120 in dollars with no yield.',
+        ifNot:'USD earns 0.'},
     ]},
 };
 const initial = (persona='hist') => {
@@ -667,14 +679,14 @@ const initial = (persona='hist') => {
     invested:0, frozen:false, agentCur:{ARS:true,USD:true,USDT:true,USDC:true,BTC:true,ETH:true},
     proposals:P.proposals.map(p => ({...p})),
     sel:null, move:{from:'ARS', to:'USD', amt:''}, pending:null, quote:30, ack:false,
-    sheet:null, reason:null, toast:null, last:null, chat:[], chatDraft:'', pots:[{id:'trip',name:'Viaje a Brasil',emoji:'BR',saved:1200,goal:2000,due:'Mar 2027',months:5},{id:'emerg',name:'Fondo de emergencia',emoji:'EF',saved:1800,goal:8400,due:'Dic 2027',months:14},{id:'nb',name:'Nueva notebook',emoji:'NB',saved:450,goal:1500,due:'Jun 2027',months:8}], potTip:true,
+    sheet:null, reason:null, toast:null, last:null, chat:[], chatDraft:'', pots:[{id:'trip',name:'Trip to Brazil',emoji:'BR',saved:1200,goal:2000,due:'Mar 2027',months:5},{id:'emerg',name:'Emergency fund',emoji:'EF',saved:1800,goal:8400,due:'Dec 2027',months:14},{id:'nb',name:'New laptop',emoji:'NB',saved:450,goal:1500,due:'Jun 2027',months:8}], potTip:true,
   };
 };
 let S = initial();
 
 // ---------- Helpers ----------
-const nf = (n, d) => n.toLocaleString('es-AR', {minimumFractionDigits:0, maximumFractionDigits:d});
-const nfFixed = (n, d) => n.toLocaleString('es-AR', {minimumFractionDigits:d, maximumFractionDigits:d});
+const nf = (n, d) => n.toLocaleString('en-US', {minimumFractionDigits:0, maximumFractionDigits:d});
+const nfFixed = (n, d) => n.toLocaleString('en-US', {minimumFractionDigits:d, maximumFractionDigits:d});
 function fmt(code, n, precise){
   const k = CUR[code].kind;
   if (code==='ARS') return 'ARS ' + nf(n,0);
@@ -690,15 +702,15 @@ function pairM(a, b){
 }
 const level = (c) => c>=6 ? 'verde' : c>=3 ? 'amarillo' : 'rojo';
 const limitFor = (c) => ({verde:S.prof.ahorro*.5, amarillo:S.prof.ahorro*.25, rojo:0})[level(c)];
-const label = {verde:'Seguro', amarillo:'Moderado', rojo:'Riesgoso'};
+const label = {verde:'Safe', amarillo:'Moderate', rojo:'Risky'};
 // Investor profile: risk tolerance expressed as max share of the portfolio in high-risk assets (crypto)
 const PROFILES = {
-  conservador:{name:'Conservador', cap:5,  desc:'Priorizás no perder. Casi todo en dólares y stablecoins.'},
-  moderado:   {name:'Moderado',    cap:30, desc:'Aceptás algo de riesgo para crecer. Hasta 30% en cripto.'},
-  arriesgado: {name:'Arriesgado',  cap:60, desc:'Buscás crecer y tolerás subas y bajas. Hasta 60% en cripto.'},
+  conservador:{name:'Conservative', cap:5,  desc:'You’d rather not lose. Almost everything in dollars and stablecoins.'},
+  moderado:   {name:'Moderate',    cap:30, desc:'You accept some risk to grow. Up to 30% in crypto.'},
+  arriesgado: {name:'Aggressive',  cap:60, desc:'You want growth and can handle ups and downs. Up to 60% in crypto.'},
 };
 const PORDER = ['conservador','moderado','arriesgado'];
-const RISK = {ARS:'Inflación', USD:'Bajo', USDT:'Bajo', USDC:'Bajo', BTC:'Alto', ETH:'Alto'};
+const RISK = {ARS:'Inflation', USD:'Low', USDT:'Low', USDC:'Low', BTC:'High', ETH:'High'};
 const prof = () => PROFILES[S.prof.perfil];
 const totalUsd = (w) => ORDER.reduce((t,k)=>t+usdOf(k,w[k]),0);
 const cryptoPct = (w) => { const t = totalUsd(w); return t ? (usdOf('BTC',w.BTC)+usdOf('ETH',w.ETH))/t*100 : 0; };
@@ -720,7 +732,7 @@ function evalMove(from, to, amt){
   const w = S.wallet;
   if (!(amt > 0)) return {level:'empty'};
   if (from === to) return {level:'empty'};
-  if (amt > w[from] + 1e-9) return {level:'error', msg:`No te alcanza. Tenés ${fmt(from, w[from])}.`};
+  if (amt > w[from] + 1e-9) return {level:'error', msg:`Not enough. You have ${fmt(from, w[from])}.`};
   const w2 = applyMove(w, from, to, amt);
   const c0 = colchon(w), c1 = colchon(w2);
   const [a, b] = pairM(c0, c1);
@@ -730,20 +742,21 @@ function evalMove(from, to, amt){
   const P = prof(), p0 = cryptoPct(w), p1 = cryptoPct(w2);
   Object.assign(base, {p0, p1, risk:RISK[to], perfil:P.name});
   if (tk === 'volatile'){
-    if (S.prof.perfil === 'conservador' && p1 > P.cap) return {...base, level:'rojo', msg:`${to} es riesgo alto y tu perfil es conservador. Quedarías con ${pctTxt(p1)} en cripto.`};
-    if (p1 > P.cap + 20) return {...base, level:'rojo', msg:`Demasiado riesgo para tu perfil ${P.name.toLowerCase()}: quedarías con ${pctTxt(p1)} en cripto (tu ideal es hasta ${P.cap}%).`};
-    if (p1 > P.cap) return {...base, level:'amarillo', msg:`${to} es riesgo alto. Te deja con ${pctTxt(p1)} en cripto; para tu perfil ${P.name.toLowerCase()} el ideal es hasta ${P.cap}%.`};
-    return {...base, level:'verde', msg:`${to} es riesgo alto, pero entra en tu perfil ${P.name.toLowerCase()}: quedás con ${pctTxt(p1)} en cripto (hasta ${P.cap}%).`};
+    if (S.prof.perfil === 'conservador' && p1 > P.cap) return {...base, level:'rojo', msg:`${to} is high risk and your profile is conservative. You’d end up with ${pctTxt(p1)} in crypto.`};
+    if (p1 > P.cap + 20) return {...base, level:'rojo', msg:`Too much risk for your ${P.name.toLowerCase()} profile: you’d end up with ${pctTxt(p1)} in crypto (your ideal is up to ${P.cap}%).`};
+    if (p1 > P.cap) return {...base, level:'amarillo', msg:`${to} is high risk. It leaves you with ${pctTxt(p1)} in crypto; for a ${P.name.toLowerCase()} profile the ideal is up to ${P.cap}%.`};
+    return {...base, level:'verde', msg:`${to} is high risk, but it fits your ${P.name.toLowerCase()} profile: you end up with ${pctTxt(p1)} in crypto (up to ${P.cap}%).`};
   }
-  if (fk === 'volatile') return {...base, level:'verde', msg:`Bajás tu riesgo: quedás con ${pctTxt(p1)} en cripto.`};
-  if (to === 'ARS') return {...base, level:'amarillo', msg:'Los pesos pierden valor con la inflación.'};
-  if (from === 'ARS') return {...base, level:'verde', msg:'Riesgo bajo. Protegés tus pesos de la inflación.'};
-  const y = CUR[to].yield ? ` Pasa a rendir cerca de ${CUR[to].yield}% anual.` : '';
-  return {...base, level:'verde', msg:'Riesgo bajo.' + y};
+  if (fk === 'volatile') return {...base, level:'verde', msg:`You lower your risk: you end up with ${pctTxt(p1)} in crypto.`};
+  if (to === 'ARS') return {...base, level:'amarillo', msg:'Pesos lose value to inflation.'};
+  if (from === 'ARS') return {...base, level:'verde', msg:'Low risk. You protect your pesos from inflation.'};
+  const y = CUR[to].yield ? ` It starts earning about ${CUR[to].yield}% a year.` : '';
+  return {...base, level:'verde', msg:'Low risk.' + y};
 }
 
-const visibleProps = () => S.frozen ? [] : S.proposals.filter(p => p.status==='pending' && S.agentCur[p.from] && S.agentCur[p.to] && p.amt <= S.wallet[p.from] + 1e-9);
-const propTitle = (p) => `Pasar ${fmt(p.from, p.amt)} a ${p.to}`;
+const visibleProps = () => S.frozen ? [] : S.proposals.filter(p => p.status==='pending' && (p.kind || (S.agentCur[p.from] && S.agentCur[p.to] && p.amt <= S.wallet[p.from] + 1e-9)));
+const lvl = (p) => p.kind ? 'verde' : evalMove(p.from,p.to,p.amt).level;
+const propTitle = (p) => p.kind ? p.title : `Move ${fmt(p.from, p.amt)} to ${p.to}`;
 const pairHTML = (f, t, big) => `<span class="pair"><span class="cur ${big?'big':''}">${f}</span><span class="arrow">→</span><span class="cur ${big?'big':''}">${t}</span></span>`;
 const sdot = (lv) => `<span class="schip ${lv}"><span class="sdot ${lv}" aria-hidden="true"></span>${label[lv]}</span>`;
 const pill = (lv) => `<span class="pill ${lv}"><span class="dot"></span>${label[lv]}</span>`;
@@ -751,7 +764,7 @@ const pill = (lv) => `<span class="pill ${lv}"><span class="dot"></span>${label[
 function mixBar(w){
   const vals = ORDER.map(c => [c, usdOf(c, w[c])]).filter(x => x[1] > 0.5);
   const tot = vals.reduce((s,x)=>s+x[1],0);
-  return `<div class="bar" role="img" aria-label="Distribución por moneda">${vals.map(([c,v]) => `<i style="width:${v/tot*100}%;background:${CUR[c].color}"></i>`).join('')}</div>`;
+  return `<div class="bar" role="img" aria-label="Breakdown by currency">${vals.map(([c,v]) => `<i style="width:${v/tot*100}%;background:${CUR[c].color}"></i>`).join('')}</div>`;
 }
 function legend(w){
   return `<div class="legend">${ORDER.filter(c => w[c] > 0).map(c => `<span><i style="background:${CUR[c].color}"></i>${c}</span>`).join('')}</div>`;
@@ -762,75 +775,82 @@ const SCREENS = {};
 
 SCREENS.home = () => {
   const w = S.wallet, c = colchon(w), lv = level(c), lim = limitFor(c), rem = Math.max(0, lim - S.invested);
-  const props = visibleProps().filter(p => evalMove(p.from,p.to,p.amt).level !== 'rojo');
+  const props = visibleProps().filter(p => !p.kind && lvl(p) !== 'rojo');
   const rec = props.find(p => p.rec) || props[0];
   const total = ORDER.reduce((s,k)=>s+usdOf(k,w[k]),0);
   const rows = ORDER.filter(k => w[k] > 0).map(k => {
     const ck = CUR[k];
     let tag = ROLE[ck.kind];
-    if (k==='ARS') tag += ' · pierde valor quieto';
+    if (k==='ARS') tag += ' · loses value when parked';
     if (ck.yield) tag += ` · rinde ${ck.yield}%`;
-    if (ck.kind==='volatile') tag += ' · varía';
+    if (ck.kind==='volatile') tag += ' · varies';
     return `<div class="walletrow"><span class="ico" style="background:${ck.color}">${k}</span>
       <div class="nm"><b>${ck.name}</b><small>${tag}</small></div>
       <div class="amt"><b>${fmt(k, w[k])}</b>${k!=='USD' && ck.kind!=='stable' ? `<small>≈ ${usd(usdOf(k,w[k]))}</small>` : ''}</div></div>`;
   }).join('');
   return `
   <div class="scroll">
-    <div class="row"><span class="muted">Octubre 2026</span><button class="link" data-a="go:settings">Ajustes</button></div>
-    <div class="dark"><span class="eyebrow">Tu meta</span>
+    <div class="row"><span class="muted">October 2026</span><button class="link" data-a="go:settings">Settings</button></div>
+    <div class="dark"><span class="eyebrow">Your goal</span>
       <div style="font-size:24px;font-weight:600;margin-top:4px">${S.prof.metaTitle}</div>
-      <div class="sub" style="font-size:14px">${S.prof.metaSub}. Vas en ${nfFixed(c,1)}.</div>
+      <div class="sub" style="font-size:14px">${S.prof.metaSub}. You’re at ${nfFixed(c,1)}.</div>
       <div class="meter" aria-hidden="true"><i style="width:${Math.min(100, c/S.prof.metaGoal*100)}%"></i></div></div>
     ${S.persona==='hist'
-      ? `<button class="evcard" data-a="go:history"><span class="eyebrow">Basado en tus últimos 3 meses</span><span>Sueldo ≈ USD 4.000 · Gastos ≈ USD 2.800 · Ahorrás ≈ USD 1.200</span><b>Ver qué ve el agente →</b></button>`
-      : `<button class="evcard" data-a="go:newstart"><span class="eyebrow">Mes ${S.prof.learning} de 3 · Aprendiendo tus hábitos</span><span>Todavía no tenemos historial. Usamos lo que nos contaste y mejoramos cada mes.</span><div class="steps"><i class="on"></i><i></i><i></i></div></button>`}
-    ${S.frozen ? `<div class="box plain"><b>El agente está congelado</b>No propone ni ejecuta. Podés mover entre monedas vos.<div style="margin-top:10px"><button class="btn sm primary" data-a="unfreeze">Reactivar agente</button></div></div>` : `
-    <div class="sem ${lv}"><span class="muted" style="font-size:13px">Semáforo de este mes</span><h4>${label[lv]}</h4>
-      <p>${lv==='rojo' ? 'Todavía no es momento de invertir. Primero ahorremos 3 meses de gastos en dólares.' : `Podés invertir hasta ${usd(lim)}${S.invested>0?` (te quedan ${usd(rem)})`:''}.`}</p></div>`}
+      ? `<button class="evcard" data-a="go:history"><span class="eyebrow">Based on your last 3 months</span><span>Salary ≈ USD 4,000 · Spending ≈ USD 2,800 · You save ≈ USD 1,200</span><b>See what the agent sees →</b></button>`
+      : `<button class="evcard" data-a="go:newstart"><span class="eyebrow">Month ${S.prof.learning} of 3 · Learning your habits</span><span>We don’t have your history yet. We use what you told us and get better every month.</span><div class="steps"><i class="on"></i><i></i><i></i></div></button>`}
+    ${S.frozen ? `<div class="box plain"><b>The agent is frozen</b>It doesn’t propose or execute. You can move between currencies yourself.<div style="margin-top:10px"><button class="btn sm primary" data-a="unfreeze">Turn agent back on</button></div></div>` : `
+    <div class="sem ${lv}"><span class="muted" style="font-size:13px">This month’s traffic light</span><h4>${label[lv]}</h4>
+      <p>${lv==='rojo' ? 'It’s not time to invest yet. Let’s first save 3 months of expenses in dollars.' : `You can invest up to ${usd(lim)}${S.invested>0?` (${usd(rem)} left)`:''}.`}</p></div>`}
     <div class="card glow" style="display:grid;gap:10px">
-      <span class="muted" style="font-size:14px">Tu plata por moneda, en dólares</span>
+      <span class="muted" style="font-size:14px">Your money by currency, in dollars</span>
       <div class="big" data-count="${total}" data-pre="USD ">USD ${nf(total,0)}</div>
       ${mixBar(w)}
       <div>${rows}</div>
-      <button class="btn sm ghost" data-a="go:move">Mover entre monedas</button>
+      <button class="btn sm ghost" data-a="go:move">Move between currencies</button>
     </div>
     ${!S.frozen && props.length ? `<div class="card" style="display:grid;gap:8px">
-      <div class="row"><b style="font-size:17px">${props.length} ${props.length===1?'propuesta':'propuestas'}</b><button class="link" data-a="go:proposals">Ver todas</button></div>
-      ${props.map(p => `<div class="row" style="font-size:14px"><span>${pairHTML(p.from,p.to)}</span><span style="text-align:right">${fmt(p.from,p.amt)}${p===rec?' · <b style="color:var(--accent-ink)">recomendada</b>':''}</span></div>`).join('')}
+      <div class="row"><b style="font-size:17px">${props.length} ${props.length===1?'proposal':'proposals'}</b><button class="link" data-a="go:proposals">See all</button></div>
+      ${props.map(p => `<div class="row" style="font-size:14px"><span>${pairHTML(p.from,p.to)}</span><span style="text-align:right">${fmt(p.from,p.amt)}${p===rec?' · <b style="color:var(--accent-ink)">recommended</b>':''}</span></div>`).join('')}
     </div>` : ''}
-    ${!S.frozen && !props.length ? `<div class="card muted" style="font-size:14px">No hay propuestas pendientes este mes.</div>` : ''}
+    ${!S.frozen && !props.length ? `<div class="card muted" style="font-size:14px">No pending proposals this month.</div>` : ''}
   </div>
   <div class="foot">
-    ${!S.frozen && props.length ? `<button class="btn primary" data-a="go:proposals">Revisar propuestas</button>` : ''}
-    ${S.frozen ? '' : `<button class="btn ghost" data-a="sheet:freeze">Congelar agente</button>`}
+    ${!S.frozen && props.length ? `<button class="btn primary" data-a="go:proposals">Review proposals</button>` : ''}
+    ${S.frozen ? '' : `<button class="btn ghost" data-a="sheet:freeze">Freeze agent</button>`}
   </div>`;
 };
 
 function propCard(p){
+    if (p.kind) return `<div class="card prop ${p.rec?'rec':''}">
+      <div class="prop-top">${p.rec ? '<span class="shiny">Recommended</span>' : '<span class="prop-kicker">Other option</span>'}${sdot('verde')}</div>
+      <div class="prop-head"><h3>${p.title}</h3>
+      <div class="meta-row"><span class="prop-meta">${p.meta}</span></div></div>
+      ${p.ev ? `<p class="ev-box">${p.ev}</p>` : ''}
+      <div class="stack"><button class="btn primary" data-a="accept:${p.id}">${p.kind==='goal'?'Build the goal':'Let’s do it'}</button><button class="btn ghost" data-a="reject:${p.id}">Not now</button></div>
+    </div>`;
     const e = evalMove(p.from,p.to,p.amt);
     return `<div class="card prop ${p.rec?'rec':''}">
-      <div class="prop-top">${p.rec ? '<span class="shiny">Recomendada</span>' : '<span class="prop-kicker">Otra opción</span>'}${sdot(e.level)}</div>
+      <div class="prop-top">${p.rec ? '<span class="shiny">Recommended</span>' : '<span class="prop-kicker">Other option</span>'}${sdot(e.level)}</div>
       <div class="prop-head"><h3>${propTitle(p)}</h3>
-      <div class="meta-row"><span class="prop-meta">Recibís ≈ ${fmt(p.to, e.recv)} · Costo ${usd(e.cost)}</span>
-      <button class="detail-link" data-a="detail:${p.id}" aria-label="Ver detalle de ${propTitle(p)}">Ver detalle<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M9.5 6l6 6-6 6"/></svg></button></div></div>
+      <div class="meta-row"><span class="prop-meta">You get ≈ ${fmt(p.to, e.recv)} · Cost ${usd(e.cost)}</span>
+      <button class="detail-link" data-a="detail:${p.id}" aria-label="See details for ${propTitle(p)}">See details<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M9.5 6l6 6-6 6"/></svg></button></div></div>
       ${p.ev ? `<p class="ev-box">${p.ev}</p>` : ''}
-      <div class="stack"><button class="btn primary" data-a="accept:${p.id}">Quiero avanzar</button><button class="btn ghost" data-a="reject:${p.id}">No por ahora</button></div>
+      <div class="stack"><button class="btn primary" data-a="accept:${p.id}">Let’s do it</button><button class="btn ghost" data-a="reject:${p.id}">Not now</button></div>
     </div>`;
   }
 
 SCREENS.proposals = () => {
   const all = visibleProps();
-  const ok = all.filter(p => evalMove(p.from,p.to,p.amt).level !== 'rojo');
-  const red = all.filter(p => evalMove(p.from,p.to,p.amt).level === 'rojo');
+  const ok = all.filter(p => lvl(p) !== 'rojo');
+  const red = all.filter(p => lvl(p) === 'rojo');
   const card = propCard;
   return `
   <div class="scroll">
-    <div class="topbar"><button class="back" data-a="go:belo" aria-label="Volver">${IC.back}</button></div>
-    <div><span class="muted" style="font-size:14px">Octubre · ${ok.length} opciones</span><h2 class="t">Tus propuestas</h2>
-    <p class="lead" style="margin-top:4px">Cada una mueve plata de una moneda a otra. Elegí una, o no hagas nada. Nada se mueve sin tu OK.</p></div>
-    ${ok.length ? ok.map(card).join('') : '<div class="card muted">No quedan propuestas este mes.</div>'}
-    ${red.map(p => { const e = evalMove(p.from,p.to,p.amt); return `<div class="blocked">${pairHTML(p.from,p.to)}<b>${propTitle(p)}${p.asked?' · lo consultaste vos':''}</b><p>Sin opción de aceptar: ${e.msg.charAt(0).toLowerCase()+e.msg.slice(1)}</p></div>`; }).join('')}
+    <div class="topbar"><button class="back" data-a="go:belo" aria-label="Back">${IC.back}</button></div>
+    <div><span class="muted" style="font-size:14px">October · ${ok.length} options</span><h2 class="t">Your proposals</h2>
+    <p class="lead" style="margin-top:4px">Each one moves money from one currency to another. Pick one, or do nothing. Nothing moves without your OK.</p></div>
+    ${ok.length ? ok.map(card).join('') : '<div class="card muted">No proposals left this month.</div>'}
+    ${red.map(p => { const e = evalMove(p.from,p.to,p.amt); return `<div class="blocked">${pairHTML(p.from,p.to)}<b>${propTitle(p)}${p.asked?' · lo consultaste vos':''}</b><p>No option to accept: ${e.msg.charAt(0).toLowerCase()+e.msg.slice(1)}</p></div>`; }).join('')}
   </div>`;
 };
 
@@ -840,21 +860,21 @@ SCREENS.detail = () => {
   const [a,b] = pairM(e.c0, e.c1);
   return `
   <div class="scroll">
-    <div class="topbar"><button class="back" data-a="back-detail" aria-label="Volver">${IC.back}</button><button class="gpill" data-a="howcalc">${IC.infoc}Cómo se calcula</button></div>
+    <div class="topbar"><button class="back" data-a="back-detail" aria-label="Back">${IC.back}</button><button class="gpill" data-a="howcalc">${IC.infoc}How it’s calculated</button></div>
     ${pairHTML(p.from,p.to,true)}
     <h2 class="t" style="font-size:26px">${propTitle(p)}</h2>
-    <div class="chips">${sdot(e.level)}<span class="pill neutral">Riesgo ${RISK[p.to].toLowerCase()}</span><span class="pill neutral">Perfil ${prof().name.toLowerCase()}</span></div>
+    <div class="chips">${sdot(e.level)}<span class="pill neutral">Risk ${RISK[p.to].toLowerCase()}</span><span class="pill neutral">Profile ${prof().name.toLowerCase()}</span></div>
     ${cmpHTML(p, e)}
     ${notice(e.level, '', e.msg)}
     ${CUR[p.to].yield ? projHTML(p) : ''}
     <div class="card" style="display:grid;gap:8px">
-      <b style="font-size:15px">Tu plata por moneda</b>
-      <span class="muted" style="font-size:12.5px">Hoy</span>${mixBar(S.wallet)}
-      <span class="muted" style="font-size:12.5px">Después</span>${mixBar(e.w2)}
+      <b style="font-size:15px">Your money by currency</b>
+      <span class="muted" style="font-size:12.5px">Today</span>${mixBar(S.wallet)}
+      <span class="muted" style="font-size:12.5px">After</span>${mixBar(e.w2)}
       ${legend(e.w2)}
     </div>
   </div>
-  <div class="foot"><button class="btn primary" data-a="accept:${p.id}">Quiero avanzar</button><button class="btn ghost" data-a="reject:${p.id}">No por ahora</button></div>`;
+  <div class="foot"><button class="btn primary" data-a="accept:${p.id}">Let’s do it</button><button class="btn ghost" data-a="reject:${p.id}">Not now</button></div>`;
 };
 
 // Notice: icon + text, tinted by tone (verde/info = info icon, amarillo/rojo = warning icon)
@@ -873,29 +893,29 @@ function cmpHTML(p, e){
   const v = usdOf(p.from, p.amt);
   let q, no, yes, note;
   if (p.from === 'ARS'){
-    q = `En 3 meses, tus ${fmt(p.from,p.amt)} valen`;
+    q = `In 3 months, your ${fmt(p.from,p.amt)} are worth`;
     no = '≈ ' + usd(v / Math.pow(1.025, 3)); yes = '≈ ' + fmt(p.to, e.recv);
-    note = 'Supuesto: 2,5% de inflación mensual.';
+    note = 'Assumption: 2.5% monthly inflation.';
   } else if (CUR[p.to].yield){
-    q = `En 12 meses, tus ${fmt(p.from,p.amt)} valen`;
+    q = `In 12 months, your ${fmt(p.from,p.amt)} are worth`;
     no = fmt(p.from, p.amt); yes = '≈ ' + fmt(p.to, e.recv * (1 + CUR[p.to].yield/100));
     note = `Supuesto: ${p.to} rinde ${CUR[p.to].yield}% anual.`;
   } else if (CUR[p.to].kind === 'volatile'){
     const r = usdOf(p.to, e.recv);
-    q = `En 12 meses, tus ${fmt(p.from,p.amt)} valen`;
+    q = `In 12 months, your ${fmt(p.from,p.amt)} are worth`;
     no = fmt(p.from, p.amt); yes = `${usd(Math.round(r*.8))} a ${nf(Math.round(r*1.2),0)}`;
-    note = `Escenario: ${p.to} sube o baja 20% en un año.`;
+    note = `Scenario: ${p.to} goes up or down 20% in a year.`;
   } else {
     q = `Tus ${fmt(p.from,p.amt)} valen`; no = usd(v); yes = '≈ ' + fmt(p.to, e.recv); note = '';
   }
   const col = (cls, tag, val, colchon, cost) => `<div class="cmp-col ${cls}">
     <span class="cmp-tag"><span class="dot"></span>${tag}</span>
     <b class="cmp-v">${val}</b>
-    <dl><dt>Costo</dt><dd>${cost}</dd></dl></div>`;
+    <dl><dt>Cost</dt><dd>${cost}</dd></dl></div>`;
   return `<div class="cmp">
     <span class="cmp-q">${q}</span>
-    <div class="cmp-cols">${col('no','Si no hacés nada', no, a, 'USD 0')}${col('yes','Si lo hacés', yes, b, usd(e.cost))}</div>
-    <span class="cmp-note">Cotización ${quoteText(p.from,p.to)}${note ? ' · ' + note : ''}</span>
+    <div class="cmp-cols">${col('no','If you do nothing', no, a, 'USD 0')}${col('yes','If you do it', yes, b, usd(e.cost))}</div>
+    <span class="cmp-note">Rate ${quoteText(p.from,p.to)}${note ? ' · ' + note : ''}</span>
   </div>`;
 }
 
@@ -908,14 +928,14 @@ function projHTML(p){
   const data = years.map(n => ({n, total:fv(n), put:m*n*12}));
   const last = data[data.length-1], max = last.total;
   return `<div class="card glow proj">
-    <span class="muted" style="font-size:14px">Si lo repetís cada mes con ${fmt(p.from, m)}, en 5 años tenés</span>
+    <span class="muted" style="font-size:14px">If you repeat it every month with ${fmt(p.from, m)}, in 5 years you have</span>
     <div class="big" data-count="${last.total}" data-pre="${p.to} " data-dec="2">${p.to} ${nfFixed(last.total,2)}</div>
-    <span class="pill verde" style="justify-self:start">+${fmt(p.to, last.total-last.put)} de rendimiento</span>
-    <div class="pbars" role="img" aria-label="Proyección a 5 años">${data.map((d,i) => `<div class="pb"><div class="col">
+    <span class="pill verde" style="justify-self:start">+${fmt(p.to, last.total-last.put)} in yield</span>
+    <div class="pbars" role="img" aria-label="5-year projection">${data.map((d,i) => `<div class="pb"><div class="col">
       <i class="int" style="height:${(d.total-d.put)/max*130}px;animation-delay:${i*.07}s"></i><i style="height:${d.put/max*130}px;animation-delay:${i*.07}s"></i></div><span>${d.n}a</span></div>`).join('')}</div>
-    <span class="muted" style="font-size:13px">Por mes</span>
+    <span class="muted" style="font-size:13px">Per month</span>
     <div class="quick">${opts.map(v => `<button class="chip ${v===m?'on':''}" data-a="proj:${v}">${fmt(p.from, v)}</button>`).join('')}</div>
-    <span class="muted" style="font-size:12.5px">Solo cambia la proyección. No programa movimientos automáticos. Rendimiento de ejemplo: ${CUR[p.to].yield}% anual.</span>
+    <span class="muted" style="font-size:12.5px">It only changes the projection. It doesn’t schedule automatic moves. Sample yield: ${CUR[p.to].yield}% anual.</span>
   </div>`;
 }
 
@@ -929,19 +949,19 @@ SCREENS.move = () => {
   }).join('')}</div>`;
   return `
   <div class="scroll">
-    <div class="topbar"><button class="back" data-a="go:belo" aria-label="Volver">${IC.back}</button></div>
-    <h2 class="t">Mover entre monedas</h2>
-    <p class="lead">Elegí de qué moneda a cuál. El semáforo se calcula con las mismas reglas que usa el agente.</p>
+    <div class="topbar"><button class="back" data-a="go:belo" aria-label="Back">${IC.back}</button></div>
+    <h2 class="t">Move between currencies</h2>
+    <p class="lead">Choose from which currency to which. The traffic light uses the same rules as the agent.</p>
     <div class="picker"><span class="lab">De</span>${grid('from')}</div>
-    <button class="swap" data-a="mv-swap" aria-label="Invertir monedas">${IC.updown}</button>
+    <button class="swap" data-a="mv-swap" aria-label="Invest currencies">${IC.updown}</button>
     <div class="picker"><span class="lab">A</span>${grid('to')}</div>
-    <div class="picker"><span class="lab">Monto en ${m.from}</span>
+    <div class="picker"><span class="lab">Amount in ${m.from}</span>
       <label class="amount" for="amt"><span>${m.from}</span><input id="amt" inputmode="decimal" placeholder="0" value="${m.amt}" autocomplete="off"></label>
-      <div class="quick"><button data-a="mv-pct:.25">25%</button><button data-a="mv-pct:.5">50%</button><button data-a="mv-pct:1">Todo</button></div>
+      <div class="quick"><button data-a="mv-pct:.25">25%</button><button data-a="mv-pct:.5">50%</button><button data-a="mv-pct:1">All</button></div>
     </div>
     <div id="mv-result"></div>
   </div>
-  <div class="foot"><button class="btn primary" id="mv-go" data-a="mv-review">Revisar movimiento</button></div>`;
+  <div class="foot"><button class="btn primary" id="mv-go" data-a="mv-review">Review move</button></div>`;
 };
 
 function moveResult(){
@@ -949,18 +969,18 @@ function moveResult(){
   const e = evalMove(m.from, m.to, amt);
   const btn = document.getElementById('mv-go'), out = document.getElementById('mv-result');
   if (!out) return;
-  if (e.level === 'empty'){ out.innerHTML = `<div class="box plain">Ingresá un monto para ver cuánto recibís y cómo queda tu semáforo.</div>`; btn.disabled = true; btn.textContent='Revisar movimiento'; return; }
-  if (e.level === 'error'){ out.innerHTML = `<div class="box red">${e.msg}</div>`; btn.disabled = true; btn.textContent='Revisar movimiento'; return; }
+  if (e.level === 'empty'){ out.innerHTML = `<div class="box plain">Enter an amount to see how much you get and how your traffic light looks.</div>`; btn.disabled = true; btn.textContent='Review move'; return; }
+  if (e.level === 'error'){ out.innerHTML = `<div class="box red">${e.msg}</div>`; btn.disabled = true; btn.textContent='Review move'; return; }
   const [a,b] = pairM(e.c0, e.c1);
   out.innerHTML = `<div class="card kv">
-    <div class="row"><span>Recibís</span><b>≈ ${fmt(m.to, e.recv)}</b></div>
-    <div class="row"><span>Cotización</span><b>${quoteText(m.from,m.to)}</b></div>
-    <div class="row"><span>Costo (0,8%)</span><b>${usd(e.cost)}</b></div>
+    <div class="row"><span>You get</span><b>≈ ${fmt(m.to, e.recv)}</b></div>
+    <div class="row"><span>Rate</span><b>${quoteText(m.from,m.to)}</b></div>
+    <div class="row"><span>Cost (0.8%)</span><b>${usd(e.cost)}</b></div>
     <hr class="sep">
     <div style="display:grid;gap:6px;justify-items:start">${sdot(e.level)}<span style="font-size:14px">${e.msg}</span></div>
   </div>`;
   btn.disabled = false;
-  btn.textContent = e.level === 'rojo' ? 'Revisar igual' : 'Revisar movimiento';
+  btn.textContent = e.level === 'rojo' ? 'Review anyway' : 'Review move';
 }
 function parseAmt(s){ if (!s) return 0; return parseFloat(String(s).replace(/\./g,'').replace(',', '.')) || 0; }
 
@@ -970,26 +990,26 @@ SCREENS.confirm = () => {
   const expired = S.quote <= 0;
   return `
   <div class="scroll">
-    <h2 class="t">Confirmás esto</h2>
-    <p class="lead">Revisá antes de aceptar. Podés volver atrás sin costo.</p>
+    <h2 class="t">Confirm this</h2>
+    <p class="lead">Check before accepting. You can go back at no cost.</p>
     <div class="card kv">
-      <div class="row"><span>Movés</span><b>${fmt(p.from, p.amt)}</b></div>
-      <div class="row"><span>Recibís</span><b>≈ ${fmt(p.to, e.recv, true)}</b></div>
-      <div class="row"><span>Cotización</span><b>${quoteText(p.from,p.to)}</b></div>
-      <div class="row"><span>Costo (0,8%)</span><b>${usd(e.cost)}</b></div>
+      <div class="row"><span>You move</span><b>${fmt(p.from, p.amt)}</b></div>
+      <div class="row"><span>You get</span><b>≈ ${fmt(p.to, e.recv, true)}</b></div>
+      <div class="row"><span>Rate</span><b>${quoteText(p.from,p.to)}</b></div>
+      <div class="row"><span>Cost (0.8%)</span><b>${usd(e.cost)}</b></div>
       <hr class="sep">
       <div class="row"><span>Tu ${p.from}</span><b>${fmt(p.from,w[p.from])} → ${fmt(p.from,e.w2[p.from])}</b></div>
       <div class="row"><span>Tu ${p.to}</span><b>${fmt(p.to,w[p.to])} → ${fmt(p.to,e.w2[p.to])}</b></div>
     </div>
-    <div class="row" style="font-size:13px"><span class="muted" id="quote-timer">${expired ? 'La cotización venció.' : `Cotización válida por ${S.quote} s`}</span>${sdot(e.level)}</div>
-    ${needAck ? notice('rojo', 'Este movimiento queda en rojo.', e.msg) + `
-      <label class="check" for="ack"><input type="checkbox" id="ack" ${S.ack?'checked':''}><span>Entiendo que es más riesgo del que va con mi perfil y lo hago igual.</span></label>` : ''}
-    ${notice('info', 'Lo ejecuta belo.', p.source==='agent' ? 'Podés congelar al agente cuando quieras.' : 'Este movimiento lo iniciaste vos.')}
+    <div class="row" style="font-size:13px"><span class="muted" id="quote-timer">${expired ? 'The rate expired.' : `Rate valid for ${S.quote} s`}</span>${sdot(e.level)}</div>
+    ${needAck ? notice('rojo', 'This move lands in red.', e.msg) + `
+      <label class="check" for="ack"><input type="checkbox" id="ack" ${S.ack?'checked':''}><span>I understand it’s more risk than fits my profile, and I’m doing it anyway.</span></label>` : ''}
+    ${notice('info', 'belo executes it.', p.source==='agent' ? 'You can freeze the agent whenever you want.' : 'You started this move.')}
   </div>
   <div class="foot">
-    ${expired ? `<button class="btn primary" data-a="requote">Actualizar cotización</button>` :
-      `<button class="btn primary" id="confirm-btn" data-a="execute" ${needAck && !S.ack ? 'disabled' : ''}>Confirmar</button>`}
-    <button class="btn ghost" data-a="back-from-confirm">Volver</button>
+    ${expired ? `<button class="btn primary" data-a="requote">Refresh rate</button>` :
+      `<button class="btn primary" id="confirm-btn" data-a="execute" ${needAck && !S.ack ? 'disabled' : ''}>Confirm</button>`}
+    <button class="btn ghost" data-a="back-from-confirm">Back</button>
   </div>`;
 };
 
@@ -997,87 +1017,87 @@ SCREENS.done = () => {
   const l = S.last;
   return `
   <div class="scroll">
-    <div class="done"><div class="ok" aria-hidden="true">✓</div><h2 class="t" style="margin:0">Listo</h2>
-      <p class="lead">Pasaste ${fmt(l.from,l.amt)} a ${l.to}.</p></div>
+    <div class="done"><div class="ok" aria-hidden="true">✓</div><h2 class="t" style="margin:0">Done</h2>
+      <p class="lead">You moved ${fmt(l.from,l.amt)} a ${l.to}.</p></div>
     <div class="card kv">
-      <div class="row"><span>Recibiste</span><b>${fmt(l.to, l.recv, true)}</b></div>
-      <div class="row"><span>Costo</span><b>${usd(l.cost)}</b></div>
-      <div class="row"><span>Semáforo</span>${sdot(l.level)}</div>
+      <div class="row"><span>You got</span><b>${fmt(l.to, l.recv, true)}</b></div>
+      <div class="row"><span>Cost</span><b>${usd(l.cost)}</b></div>
+      <div class="row"><span>Traffic light</span>${sdot(l.level)}</div>
     </div>
-    <div class="card" style="display:grid;gap:8px"><b style="font-size:15px">Tu plata por moneda</b>${mixBar(S.wallet)}${legend(S.wallet)}</div>
+    <div class="card" style="display:grid;gap:8px"><b style="font-size:15px">Your money by currency</b>${mixBar(S.wallet)}${legend(S.wallet)}</div>
   </div>
-  <div class="foot"><button class="btn primary" data-a="go:belo">Volver al inicio</button><button class="btn ghost" data-a="go:move">Mover otra vez</button></div>`;
+  <div class="foot"><button class="btn primary" data-a="go:belo">Back to start</button><button class="btn ghost" data-a="go:move">Move again</button></div>`;
 };
 
 SCREENS.history = () => {
-  const months = [['Jul',3950,2750],['Ago',4020,2900],['Sep',4030,2750]];
+  const months = [['Jul',3950,2750],['Aug',4020,2900],['Sep',4030,2750]];
   const max = 4200;
-  const cats = [['Alquiler',32],['Súper',18],['Tarjeta',15],['Servicios',9],['Otros',26]];
+  const cats = [['Rent',32],['Groceries',18],['Card',15],['Utilities',9],['Other',26]];
   const catCol = [agentTheme==='light' ? '#2B2838' : '#F4F3FA','#6C47FF','#9D86FF','#C9BCFF','#D9D6E6'];
   return `
   <div class="scroll">
-    <div class="topbar"><button class="back" data-a="go:belo" aria-label="Volver">${IC.back}</button></div>
-    <span class="eyebrow rumbo-eb">${IC.agent}Rumbo · Tu agente AI</span>
-    <h2 class="t" style="margin-top:-6px">Tu historial financiero</h2>
+    <div class="topbar"><button class="back" data-a="go:belo" aria-label="Back">${IC.back}</button></div>
+    <span class="eyebrow rumbo-eb">${IC.agent}Rumbo · Your AI agent</span>
+    <h2 class="t" style="margin-top:-6px">Your financial history</h2>
     ${profileCard()}
     <div class="card" style="display:grid;gap:10px">
-      <div class="row"><b style="font-size:15px">Sueldo</b><span class="pill neutral">3 de 3 meses</span></div>
-      <div style="font-size:22px;font-weight:600">≈ ARS 5.800.000 <span class="muted" style="font-size:14px;font-weight:600">≈ USD 4.000</span></div>
-      <div class="hbars" role="img" aria-label="Ingresos y gastos por mes">
+      <div class="row"><b style="font-size:15px">Salary</b><span class="pill neutral">3 of 3 months</span></div>
+      <div style="font-size:22px;font-weight:600">≈ ARS 5,800,000 <span class="muted" style="font-size:14px;font-weight:600">≈ USD 4,000</span></div>
+      <div class="hbars" role="img" aria-label="Income and spending by month">
         ${months.map(([m,i,g]) => `<div class="hb"><div class="cols"><i style="height:${i/max*100}%;background:var(--accent)"></i><i style="height:${g/max*100}%;background:#C9BCFF"></i></div><span>${m}</span></div>`).join('')}
       </div>
-      <div class="legend"><span><i style="background:var(--accent)"></i>Ingreso</span><span><i style="background:#C9BCFF"></i>Gasto</span></div>
+      <div class="legend"><span><i style="background:var(--accent)"></i>Income</span><span><i style="background:#C9BCFF"></i>Spending</span></div>
     </div>
     <div class="card" style="display:grid;gap:10px">
-      <div class="row"><b style="font-size:15px">Gastos</b><b>≈ USD 2.800 / mes</b></div>
+      <div class="row"><b style="font-size:15px">Spending</b><b>≈ USD 2,800 / month</b></div>
       <div class="bar">${cats.map(([n,p],i)=>`<i style="width:${p}%;background:${catCol[i]}"></i>`).join('')}</div>
       <div class="legend">${cats.map(([n,p],i)=>`<span><i style="background:${catCol[i]}"></i>${n} ${p}%</span>`).join('')}</div>
     </div>
     <div class="card" style="display:grid;gap:8px">
-      <b style="font-size:15px">Hábitos que detectamos</b>
+      <b style="font-size:15px">Habits we detected</b>
       <div class="hab-list">
         <div class="hab"><span class="hab-ic ars" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v10M14.6 9.3c-.5-.8-1.5-1.3-2.6-1.3-1.5 0-2.6.8-2.6 2s1.1 1.6 2.6 1.9 2.6.8 2.6 2-1.1 2.1-2.6 2.1c-1.1 0-2.1-.5-2.6-1.3"/></svg></span>
-          <div><b>ARS 360.000 sin usar</b><span>Quedan quietos hasta el próximo sueldo</span></div></div>
+          <div><b>ARS 360,000 unused</b><span>They sit still until the next payday</span></div></div>
         <div class="hab"><span class="hab-ic usd" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg></span>
-          <div><b>USD 1.820 sin moverse</b><span>Hace 74 días, sin rendimiento</span></div></div>
+          <div><b>USD 1,820 not moving</b><span>74 days, no yield</span></div></div>
         <div class="hab"><span class="hab-ic save" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16l5-5 3.5 3.5L20 7"/><path d="M15 7h5v5"/></svg></span>
-          <div><b>Ahorrás el 30% del sueldo</b><span>Unos USD 1.200 por mes</span></div></div>
+          <div><b>You save 30% of your salary</b><span>About USD 1,200 a month</span></div></div>
       </div>
     </div>
   </div>
-  <div class="foot"><button class="btn mint" data-a="go-recs">Ver recomendaciones</button></div>`;
+  <div class="foot"><button class="btn mint" data-a="go-recs">See recommendations</button></div>`;
 };
 
 function profileCard(){
   const P = prof(), w = S.wallet, p = cryptoPct(w);
   const over = p > P.cap;
   return `<div class="card perf">
-    <div class="row"><b style="font-size:15px">Tu perfil de inversor</b><button class="perf-chip" data-a="perfil-cycle" aria-label="Cambiar perfil">${P.name}<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M7 10l5 5 5-5"/></svg></button></div>
+    <div class="row"><b style="font-size:15px">Your investor profile</b><button class="perf-chip" data-a="perfil-cycle" aria-label="Change profile">${P.name}<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M7 10l5 5 5-5"/></svg></button></div>
     <span class="perf-desc">${P.desc}</span>
     <div class="mixbar" role="img" aria-label="Cripto ${pctTxt(p)}, ideal hasta ${P.cap}%"><i class="fill ${over?'over':''}" style="width:${Math.min(100,p)}%"></i><i class="cap" style="left:${P.cap}%"></i></div>
-    <div class="row perf-legend"><span>Hoy ${pctTxt(p)} en cripto</span><span>Ideal hasta ${P.cap}%</span></div>
+    <div class="row perf-legend"><span>Today ${pctTxt(p)} in crypto</span><span>Ideal up to ${P.cap}%</span></div>
     <span class="perf-why">${S.prof.perfilWhy}</span>
   </div>`;
 }
 SCREENS.newstart = () => `
   <div class="scroll">
-    <div class="topbar"><button class="back" data-a="go:belo" aria-label="Volver">${IC.back}</button></div>
-    <span class="eyebrow rumbo-eb">${IC.agent}Rumbo · Empezamos juntos</span>
-    <h2 class="t" style="margin-top:-6px">Empezamos juntos</h2>
-    <p class="lead">Todavía no tenés movimientos en belo. Con 3 respuestas armamos tu primer semáforo, y cada mes aprendemos más de vos.</p>
+    <div class="topbar"><button class="back" data-a="go:belo" aria-label="Back">${IC.back}</button></div>
+    <span class="eyebrow rumbo-eb">${IC.agent}Rumbo · Let’s start together</span>
+    <h2 class="t" style="margin-top:-6px">Let’s start together</h2>
+    <p class="lead">You don’t have activity in belo yet. With 3 answers we build your first traffic light, and every month we learn more about you.</p>
     ${profileCard()}
-    <div class="card qa"><span class="muted">¿Cuánto cobrás por mes?</span><b>ARS 1.400.000</b><span class="muted" style="font-size:12.5px">≈ USD 965</span></div>
-    <div class="card qa"><span class="muted">¿Cuánto gastás, más o menos?</span><b>ARS 1.100.000</b><span class="muted" style="font-size:12.5px">≈ USD 760 · te quedan ≈ USD 205</span></div>
-    <div class="card qa"><span class="muted">¿Qué querés lograr primero?</span>
-      <div class="chips" style="margin-top:4px"><span class="pill" style="background:var(--accent);color:#fff">Ahorrar en dólares</span><span class="pill neutral">Ahorrar para algo</span><span class="pill neutral">Empezar a invertir</span></div></div>
+    <div class="card qa"><span class="muted">How much do you earn a month?</span><b>ARS 1,400,000</b><span class="muted" style="font-size:12.5px">≈ USD 965</span></div>
+    <div class="card qa"><span class="muted">Roughly how much do you spend?</span><b>ARS 1,100,000</b><span class="muted" style="font-size:12.5px">≈ USD 760 · ≈ USD 205 left</span></div>
+    <div class="card qa"><span class="muted">What do you want to achieve first?</span>
+      <div class="chips" style="margin-top:4px"><span class="pill" style="background:var(--accent);color:#fff">Save in dollars</span><span class="pill neutral">Save for something</span><span class="pill neutral">Start investing</span></div></div>
     <div class="card" style="display:grid;gap:12px">
-      <b style="font-size:15px">Tu camino</b>
-      <div class="tl"><i class="on">1</i><div><b>Mes 1 a 3 · Ahorrar en dólares</b><span>Pasar lo que sobra a dólares hasta juntar 3 meses de gastos.</span></div></div>
-      <div class="tl"><i>2</i><div><b>Con 3 meses de historial</b><span>Las propuestas usan tus movimientos reales, no solo lo que nos contaste.</span></div></div>
-      <div class="tl"><i>3</i><div><b>Con ahorros · Invertir</b><span>Se habilita invertir una parte en cripto, según tu perfil.</span></div></div>
+      <b style="font-size:15px">Your path</b>
+      <div class="tl"><i class="on">1</i><div><b>Months 1 to 3 · Save in dollars</b><span>Move what’s left into dollars until you have 3 months of expenses.</span></div></div>
+      <div class="tl"><i>2</i><div><b>With 3 months of history</b><span>Proposals use your real activity, not just what you told us.</span></div></div>
+      <div class="tl"><i>3</i><div><b>With savings · Invest</b><span>Investing part in crypto unlocks, based on your profile.</span></div></div>
     </div>
   </div>
-  <div class="foot"><button class="btn mint" data-a="go-recs">Ver mi primera recomendación</button></div>`;
+  <div class="foot"><button class="btn mint" data-a="go-recs">See my first recommendation</button></div>`;
 
 
 // ---------- belo app (light) : entry point ----------
@@ -1105,7 +1125,7 @@ const IC = {
   chev:'<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9.5 6l6 6-6 6"/></svg>',
 };
 
-const MINIFLAGS = `<span class="ab-flags" aria-label="Argentina, Brasil, México, Colombia y Chile"><svg class="mf" viewBox="-5.5 -5.5 11 11" aria-hidden="true"><rect x="-5.5" y="-5.5" width="11.0" height="11.0" fill="#74ACDF"/><rect x="-5.5" y="-1.8" width="11.0" height="3.6" fill="#fff"/><circle r="1" fill="#F6B40E"/></svg><svg class="mf" viewBox="-5.5 -5.5 11 11" aria-hidden="true"><rect x="-5.5" y="-5.5" width="11.0" height="11.0" fill="#229E45"/><path d="M0-4 4.6 0 0 4-4.6 0Z" fill="#F8E509"/><circle r="1.9" fill="#2B49A3"/></svg><svg class="mf" viewBox="-5.5 -5.5 11 11" aria-hidden="true"><rect x="-5.5" y="-5.5" width="11.0" height="11.0" fill="#fff"/><rect x="-5.5" y="-5.5" width="3.7" height="11.0" fill="#0B7A3E"/><rect x="1.8" y="-5.5" width="3.7" height="11.0" fill="#CE1126"/><circle r=".9" fill="#8C5A2B"/></svg><svg class="mf" viewBox="-5.5 -5.5 11 11" aria-hidden="true"><rect x="-5.5" y="-5.5" width="11.0" height="11.0" fill="#CE1126"/><rect x="-5.5" y="-5.5" width="11.0" height="6.7" fill="#FCD116"/><rect x="-5.5" y="1.2" width="11.0" height="2.4" fill="#003893"/></svg><svg class="mf" viewBox="-5.5 -5.5 11 11" aria-hidden="true"><rect x="-5.5" y="-5.5" width="11.0" height="11.0" fill="#D52B1E"/><rect x="-5.5" y="-5.5" width="11.0" height="5.5" fill="#fff"/><rect x="-5.5" y="-5.5" width="5.5" height="5.5" fill="#0039A6"/></svg></span>`;
+const MINIFLAGS = `<span class="ab-flags" aria-label="Argentina, Brazil, Mexico, Colombia and Chile"><svg class="mf" viewBox="-5.5 -5.5 11 11" aria-hidden="true"><rect x="-5.5" y="-5.5" width="11.0" height="11.0" fill="#74ACDF"/><rect x="-5.5" y="-1.8" width="11.0" height="3.6" fill="#fff"/><circle r="1" fill="#F6B40E"/></svg><svg class="mf" viewBox="-5.5 -5.5 11 11" aria-hidden="true"><rect x="-5.5" y="-5.5" width="11.0" height="11.0" fill="#229E45"/><path d="M0-4 4.6 0 0 4-4.6 0Z" fill="#F8E509"/><circle r="1.9" fill="#2B49A3"/></svg><svg class="mf" viewBox="-5.5 -5.5 11 11" aria-hidden="true"><rect x="-5.5" y="-5.5" width="11.0" height="11.0" fill="#fff"/><rect x="-5.5" y="-5.5" width="3.7" height="11.0" fill="#0B7A3E"/><rect x="1.8" y="-5.5" width="3.7" height="11.0" fill="#CE1126"/><circle r=".9" fill="#8C5A2B"/></svg><svg class="mf" viewBox="-5.5 -5.5 11 11" aria-hidden="true"><rect x="-5.5" y="-5.5" width="11.0" height="11.0" fill="#CE1126"/><rect x="-5.5" y="-5.5" width="11.0" height="6.7" fill="#FCD116"/><rect x="-5.5" y="1.2" width="11.0" height="2.4" fill="#003893"/></svg><svg class="mf" viewBox="-5.5 -5.5 11 11" aria-hidden="true"><rect x="-5.5" y="-5.5" width="11.0" height="11.0" fill="#D52B1E"/><rect x="-5.5" y="-5.5" width="11.0" height="5.5" fill="#fff"/><rect x="-5.5" y="-5.5" width="5.5" height="5.5" fill="#0039A6"/></svg></span>`;
 const ORBIT = `<svg class="ab-art" viewBox="0 0 120 120" aria-hidden="true">
   <defs><radialGradient id="abhalo" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#3CF0B0" stop-opacity=".26"/><stop offset="1" stop-color="#3CF0B0" stop-opacity="0"/></radialGradient></defs>
   <circle cx="60" cy="60" r="44" fill="url(#abhalo)"/>
@@ -1118,22 +1138,22 @@ SCREENS.splash = () => `<div class="splash"><span class="splash-word">belo</span
 
 SCREENS.belo = () => {
   const w = S.wallet, c = colchon(w), lv = level(c), lim = limitFor(c), rem = Math.max(0, lim - S.invested);
-  const props = visibleProps().filter(p => evalMove(p.from,p.to,p.amt).level !== 'rojo');
+  const props = visibleProps().filter(p => lvl(p) !== 'rojo');
   const rec = props.find(p => p.rec) || props[0];
-  const semText = lv === 'rojo' ? 'Primero ahorremos en dólares.' : `Este mes podés invertir hasta ${usd(rem)}.`;
+  const semText = lv === 'rojo' ? 'Let’s save in dollars first.' : `This month you can invest up to ${usd(rem)}.`;
   const banner = (title, sub, cta, action) => `<div class="abanner">
-      <div class="ab-text"><div class="ab-tagrow"><span class="ab-tag">${IC.agent}Rumbo<span class="ab-tag-sub">· Tu agente AI</span></span>${MINIFLAGS}</div>
+      <div class="ab-text"><div class="ab-tagrow"><span class="ab-tag">${IC.agent}Rumbo<span class="ab-tag-sub">· Your AI agent</span></span>${MINIFLAGS}</div>
         <b>${title}</b>${sub ? `<span class="ab-sub">${sub}</span>` : ''}
         <button class="ab-cta" data-a="${action}">${cta}</button></div>
       ${ORBIT}</div>`;
-  const agent = S.frozen ? banner('Tu agente está en pausa', 'No propone ni ejecuta nada.', 'Reactivar', 'unfreeze')
-    : rec ? banner('Que tu plata trabaje por vos', '', 'Ir a mi agente', 'open-rumbo')
-    : banner('Este mes no hay recomendaciones', 'Preguntale lo que quieras.', 'Hablar con mi agente', 'open-chat');
+  const agent = S.frozen ? banner('Your agent is paused', 'It doesn’t propose or execute anything.', 'Reactivar', 'unfreeze')
+    : rec ? banner('Make your money work for you', '', 'Go to my agent', 'open-rumbo')
+    : banner('No recommendations this month', 'Ask it anything.', 'Talk to my agent', 'open-chat');
   const shortcuts = [['Deposit','Argentine pesos','#7FB5E8'],['Exchange','currencies','#F0B93A'],['Pay','with Pix','#2FA36B'],['Local','card','#6A4BD8']];
   return `
   <div class="scroll lt">
     <div class="lt-head">
-      <div class="lt-user"><span class="lt-av" aria-hidden="true"></span><b>$usuario</b><span class="lt-caret">⌄</span></div>
+      <div class="lt-user"><span class="lt-av" aria-hidden="true"></span><b>$user</b><span class="lt-caret">⌄</span></div>
       <div class="lt-icons"><span class="lt-ic">${IC.help}</span><span class="lt-ic">${IC.vib}</span><span class="lt-ic bell">${IC.bell}</span></div>
     </div>
     <div class="lt-card">
@@ -1157,7 +1177,7 @@ SCREENS.belo = () => {
     <span class="on">${IC.home}Home</span><span>${IC.money}My money</span>
     <span class="lt-qr">${IC.qr}</span>
     <span>${IC.card}Cards</span>
-    <button class="lt-agent ${S.sheet==='chat'?'on':''}" data-a="open-chat" aria-label="Abrir chat del agente">${IC.agent}${visibleProps().length && !S.frozen ? '<i class="badge"></i>' : ''}Agente</button>
+    <button class="lt-agent ${S.sheet==='chat'?'on':''}" data-a="open-chat" aria-label="Open agent chat">${IC.agent}${visibleProps().length && !S.frozen ? '<i class="badge"></i>' : ''}Agent</button>
   </nav>`;
 };
 
@@ -1167,96 +1187,96 @@ SCREENS.pots = () => {
   const ring = (p) => { const r=17, c=2*Math.PI*r, k=Math.min(1,p.saved/p.goal); return `<svg viewBox="0 0 40 40" width="44" height="44" aria-hidden="true"><circle cx="20" cy="20" r="${r}" fill="none" stroke="var(--line)" stroke-width="4"/><circle cx="20" cy="20" r="${r}" fill="none" stroke="var(--accent)" stroke-width="4" stroke-linecap="round" stroke-dasharray="${c*k} ${c}" transform="rotate(-90 20 20)"/></svg>`; };
   return `
   <div class="scroll">
-    <div class="topbar"><button class="back" data-a="go:belo" aria-label="Volver">${IC.back}</button></div>
-    <h2 class="t" style="margin-top:-2px">Alcancías</h2>
+    <div class="topbar"><button class="back" data-a="go:belo" aria-label="Back">${IC.back}</button></div>
+    <h2 class="t" style="margin-top:-2px">Savings pots</h2>
     <div class="card" style="display:grid;gap:6px">
-      <span class="muted" style="font-size:13px">Total reservado</span>
+      <span class="muted" style="font-size:13px">Total saved</span>
       <div class="big" style="font-size:34px">USD ${nf(total,0)}</div>
-      <div class="row" style="font-size:13px;color:var(--ok,#1E7A4F)"><span>Rendimiento ganado</span><b>USD 38</b></div>
+      <div class="row" style="font-size:13px;color:var(--ok,#1E7A4F)"><span>Yield earned</span><b>USD 38</b></div>
     </div>
     ${S.potTip ? `<div class="pot-tip">
-      <span class="eyebrow rumbo-eb">${IC.agent}Rumbo · Cobraste el sueldo</span>
-      <b>Separá USD ${nf(perMonth,0)} para ${tr.name}</b>
-      <span class="pot-tip-d">Con eso llegás a la meta en ${tr.due}. Este mes te sobraron unos USD 250.</span>
-      <div class="btns"><button class="btn sm primary" data-a="pot-save:${perMonth}">Separar USD ${nf(perMonth,0)}</button><button class="btn sm ghost" data-a="pot-skip">Ahora no</button></div>
+      <span class="eyebrow rumbo-eb">${IC.agent}Rumbo · Payday</span>
+      <b>Set aside USD ${nf(perMonth,0)} for ${tr.name}</b>
+      <span class="pot-tip-d">With that you reach the goal by ${tr.due}. This month you had about USD 250 left.</span>
+      <div class="btns"><button class="btn sm primary" data-a="pot-save:${perMonth}">Set aside USD ${nf(perMonth,0)}</button><button class="btn sm ghost" data-a="pot-skip">Not now</button></div>
     </div>` : ''}
     <div class="card" style="padding-block:4px">
-      ${pots.map(p => `<div class="pot">${ring(p)}<div class="pot-t"><b>${p.name}</b><span>USD ${nf(p.saved,0)} de ${nf(p.goal,0)} · ${p.due}</span></div><span class="pot-pct">${Math.round(p.saved/p.goal*100)}%</span></div>`).join('')}
+      ${pots.map((p,i) => `<button class="pot pot-btn" data-a="pot-wd:${i}" aria-label="Withdraw from ${p.name}">${ring(p)}<div class="pot-t"><b>${p.name}</b><span>USD ${nf(p.saved,0)} of ${nf(p.goal,0)} · ${p.due}</span></div><span class="pot-pct">${Math.round(p.saved/p.goal*100)}%</span></button>`).join('')}
     </div>
-    <div class="notice info" role="note">${ICON.info}<p><b>Antes de retirar,</b> Rumbo te muestra cuánto se corre el plazo de tu objetivo.</p></div>
+    <div class="notice info" role="note">${ICON.info}<p><b>Tap a pot to withdraw.</b> First, Rumbo shows you how far your goal’s deadline moves.</p></div>
   </div>
-  <div class="foot"><button class="btn primary" data-a="toast-demo">Nueva alcancía</button></div>`;
+  <div class="foot"><button class="btn primary" data-a="toast-demo">New savings pot</button></div>`;
 };
 
 SCREENS.settings = () => `
   <div class="scroll">
-    <div class="topbar"><button class="back" data-a="go:belo" aria-label="Volver">${IC.back}</button></div>
-    <h2 class="t">Ajustes</h2>
+    <div class="topbar"><button class="back" data-a="go:belo" aria-label="Back">${IC.back}</button></div>
+    <h2 class="t">Settings</h2>
     <div class="dark" style="display:grid;gap:10px">
-      <b style="font-size:19px">${S.frozen ? 'El agente está congelado' : 'El agente está activo'}</b>
-      <span class="sub" style="font-size:14px">${S.frozen ? 'No propone ni ejecuta.' : 'Puede proponerte cosas. Nada se mueve sin tu OK.'}</span>
-      <button class="btn sm light" data-a="${S.frozen?'unfreeze':'sheet:freeze'}">${S.frozen?'Reactivar agente':'Congelar agente'}</button>
+      <b style="font-size:19px">${S.frozen ? 'The agent is frozen' : 'The agent is on'}</b>
+      <span class="sub" style="font-size:14px">${S.frozen ? 'It doesn’t propose or execute.' : 'It can suggest things. Nothing moves without your OK.'}</span>
+      <button class="btn sm light" data-a="${S.frozen?'unfreeze':'sheet:freeze'}">${S.frozen?'Turn agent back on':'Freeze agent'}</button>
     </div>
     <div class="card" style="padding-block:6px">
-      <div style="padding:10px 0 4px"><b style="font-size:15px">Monedas que puede usar el agente</b><div class="muted" style="font-size:13px">Si apagás una, no te propone movimientos con ella.</div></div>
+      <div style="padding:10px 0 4px"><b style="font-size:15px">Currencies the agent can use</b><div class="muted" style="font-size:13px">If you turn one off, it won’t propose moves with it.</div></div>
       ${ORDER.map(c => `<div class="tog"><span><b class="pair"><span class="cur">${c}</span></b> <span style="font-size:14px;margin-left:6px">${CUR[c].name}</span> <span class="muted" style="font-size:12.5px">· ${ROLE[CUR[c].kind]}</span></span>
         <button class="switch ${S.agentCur[c]?'on':''}" role="switch" aria-checked="${S.agentCur[c]}" aria-label="${CUR[c].name}" data-a="tog:${c}"></button></div>`).join('')}
     </div>
     <div class="card" style="padding-block:4px">
-      <div class="setrow"><span>Cada cuánto te propone</span><b>Semanal</b></div>
-      <div class="setrow"><span>Tu perfil</span><b>${prof().name}</b></div>
-      <div class="setrow"><span>Cómo se calcula el semáforo</span><b>Ver</b></div>
-      <div class="setrow"><span>Desconectar belo</span><b style="color:var(--red)">Quitar</b></div>
+      <div class="setrow"><span>How often it suggests</span><b>Weekly</b></div>
+      <div class="setrow"><span>Your profile</span><b>${prof().name}</b></div>
+      <div class="setrow"><span>How the traffic light works</span><b>Ver</b></div>
+      <div class="setrow"><span>Disconnect belo</span><b style="color:var(--red)">Remove</b></div>
     </div>
-    <p class="muted" style="font-size:13px;margin:0">Las sugerencias son escenarios para que decidas. No son una recomendación personal de inversión.</p>
+    <p class="muted" style="font-size:13px;margin:0">Suggestions are scenarios for you to decide. They’re not personal investment advice.</p>
   </div>`;
 
 
 // ---------- Agent chat (scripted demo) ----------
-const CHIPS = ['¿Cuánto puedo invertir?','¿Paso mis pesos a dólares?','¿Pongo a rendir mis dólares?','¿Y si compro BTC?','Quiero gastar USD 300','Pausar al agente'];
+const CHIPS = ['How much can I invest?','Should I move my pesos to dollars?','Should I put my dollars to work?','What if I buy BTC?','I want to spend USD 300','Pause the agent'];
 function findProp(from, to){ return visibleProps().find(p => p.from === from && (!to || p.to === to)); }
 function chatProp(p){
   if (!p) return '';
   const e = evalMove(p.from, p.to, p.amt);
   return `<div class="chat-prop"><div class="row">${pairHTML(p.from,p.to)}${sdot(e.level)}</div>
-    <b>${propTitle(p)}</b><span class="ag-meta">Recibís ≈ ${fmt(p.to, e.recv)} · Costo ${usd(e.cost)}</span>
-    <div class="btns"><button class="btn sm primary" data-a="accept:${p.id}">Quiero avanzar</button><button class="btn sm ghost" data-a="detail:${p.id}">Ver detalle</button></div></div>`;
+    <b>${propTitle(p)}</b><span class="ag-meta">You get ≈ ${fmt(p.to, e.recv)} · Cost ${usd(e.cost)}</span>
+    <div class="btns"><button class="btn sm primary" data-a="accept:${p.id}">Let’s do it</button><button class="btn sm ghost" data-a="detail:${p.id}">See details</button></div></div>`;
 }
 function agentAnswer(q){
   const t = q.toLowerCase();
   const w = S.wallet, c = colchon(w), lv = level(c), rem = Math.max(0, limitFor(c) - S.invested);
   const m = (x) => nfFixed(x, 1);
   const amtMatch = t.match(/(\d[\d.]*)/);
-  if (/gast|comprar un|viaje|cambiar el auto/.test(t)){
+  if (/spend|gast|buy a |trip|viaje/.test(t)){
     const amt = amtMatch ? parseFloat(amtMatch[1].replace(/\./g,'')) : 300;
     const c1 = (w.USD + w.USDT + w.USDC - amt) / S.prof.gasto;
     const days = Math.round(amt / S.prof.ahorro * 30);
     const comp = Math.round(amt / 3);
-    return `Si gastás <b>${usd(amt)}</b> de tus dólares, tu meta se corre unos <b>${days} días</b>.<br><br>Para compensarlo, podés separar ${usd(comp)} por mes durante 3 meses. ¿Lo sumo como recomendación?`
-      + `<div class="btns" style="margin-top:10px"><button class="btn sm primary" data-a="chat-comp">Sí, sumalo</button><button class="btn sm ghost" data-a="ask-text:Sigo con el gasto">Sigo con el gasto</button></div>`;
+    return `If you spend <b>${usd(amt)}</b> of your dollars, your goal moves about <b>${days} days</b>.<br><br>To make up for it, you can set aside ${usd(comp)} a month for 3 months. Should I add it as a recommendation?`
+      + `<div class="btns" style="margin-top:10px"><button class="btn sm primary" data-a="chat-comp">Yes, add it</button><button class="btn sm ghost" data-a="ask-text:I’ll go ahead with the expense">I’ll go ahead with the expense</button></div>`;
   }
-  if (/sigo con el gasto/.test(t)) return 'Perfecto, es tu decisión. No cambio nada. Si querés, el mes que viene recalculo tu semáforo con el gasto incluido.';
+  if (/go ahead with the expense|sigo con el gasto/.test(t)) return 'Got it, it’s your call. I won’t change anything. If you want, next month I’ll recalculate your traffic light with the expense included.';
   if (/btc|bitcoin|cripto|eth/.test(t)){
     const p = findProp('USD','BTC');
-    return `BTC puede subir o bajar mucho. Revisá cuánto entra en tu perfil antes de sumar.` + (p ? ` Esta es la opción que veo:${chatProp(p)}` : ' Hoy no tengo una propuesta de BTC para vos.');
+    return `BTC can go up or down a lot. Check how much fits your profile before adding more.` + (p ? ` Here’s the option I see:${chatProp(p)}` : ' I don’t have a BTC proposal for you today.');
   }
-  if (/rend|usdt|inter[eé]s|quiet/.test(t)){
+  if (/rend|usdt|inter[eé]s|quiet|work|earn|yield|park/.test(t)){
     const p = findProp('USD','USDT');
-    return (S.persona==='hist' ? 'Tus USD 1.820 no se mueven hace 74 días. ' : '') + `En USDT rinden cerca de 6% anual y siguen siendo dólares.` + (p ? chatProp(p) : '');
+    return (S.persona==='hist' ? 'Your USD 1,820 haven’t moved in 74 days. ' : '') + `In USDT they earn about 6% a year and they’re still dollars.` + (p ? chatProp(p) : '');
   }
-  if (/peso|d[oó]lar|ars/.test(t)){
+  if (/peso|d[oó]lar|ars|dollar/.test(t)){
     const p = findProp('ARS','USD');
-    return (S.persona==='hist' ? 'Los últimos 3 meses te quedaron unos ARS 360.000 sin usar a fin de mes. ' : 'Con lo que nos contaste, te sobran unos ARS 300.000 por mes. ') + 'En dólares no pierden valor.' + (p ? chatProp(p) : '');
+    return (S.persona==='hist' ? 'The last 3 months you had about ARS 360,000 left unused at month end. ' : 'From what you told us, you have about ARS 300,000 left each month. ') + 'In dollars they don’t lose value.' + (p ? chatProp(p) : '');
   }
-  if (/invert|cu[aá]nto|sem[aá]foro|puedo/.test(t)){
+  if (/invert|cu[aá]nto|sem[aá]foro|puedo|invest|how much|traffic/.test(t)){
     { const P = prof(), p = cryptoPct(w), room = Math.max(0, (P.cap/100*totalUsd(w)) - usdOf('BTC',w.BTC) - usdOf('ETH',w.ETH));
-      return `Tu perfil es <b>${P.name.toLowerCase()}</b>: hasta ${P.cap}% en cripto. Hoy tenés ${pctTxt(p)}, así que podés sumar hasta <b>${usd(room)}</b> sin salirte de tu perfil.`; }
-    return `Tu semáforo de este mes: ${sdot(lv)}<br>` + (lv==='rojo'
-      ? 'Todavía no es momento de invertir. Primero ahorremos en dólares.'
-      : `Podés invertir hasta <b>${usd(rem)}</b>.`);
+      return `Your profile is <b>${P.name.toLowerCase()}</b>: up to ${P.cap}% in crypto. Today you have ${pctTxt(p)}, so you can add up to <b>${usd(room)}</b> and stay within your profile.`; }
+    return `This month’s traffic light: ${sdot(lv)}<br>` + (lv==='rojo'
+      ? 'It’s not time to invest yet. Let’s first save in dollars.'
+      : `You can invest up to <b>${usd(rem)}</b>.`);
   }
-  if (/congel|paus|stop|fren/.test(t)) return 'Podés pausarme cuando quieras: dejo de proponer y de ejecutar. Tus monedas quedan como están.<div class="btns" style="margin-top:10px"><button class="btn sm ghost" data-a="sheet:freeze">Congelar agente</button></div>';
-  return 'Todavía no sé responder eso. Puedo ayudarte con cuánto invertir, pasar pesos a dólares, poner a rendir tus dólares, comprar cripto o ver el impacto de un gasto.';
+  if (/congel|paus|stop|fren|freeze/.test(t)) return 'You can pause me whenever you want: I stop proposing and executing. Your currencies stay as they are.<div class="btns" style="margin-top:10px"><button class="btn sm ghost" data-a="sheet:freeze">Freeze agent</button></div>';
+  return 'I can’t answer that yet. I can help you with how much to invest, moving pesos to dollars, putting your dollars to work, buying crypto, or seeing the impact of an expense.';
 }
 function chatSend(q){
   q = (q || '').trim(); if (!q) return;
@@ -1267,27 +1287,27 @@ function chatSend(q){
 function chatHTML(){
   if (!S.chat.length){
     const c = colchon(S.wallet), lv = level(c);
-    S.chat.push({html:`Hola. Soy tu agente: miro tus movimientos en belo y te propongo qué hacer con tu plata. Nada se mueve sin tu OK.<br><br>Tu perfil es <b>${prof().name.toLowerCase()}</b>. ¿En qué te ayudo?`});
+    S.chat.push({html:`Hi. I’m your agent: I look at your activity in belo and suggest what to do with your money. Nothing moves without your OK.<br><br>Your profile is <b>${prof().name.toLowerCase()}</b>. How can I help?`});
   }
-  return `<div class="scrim" data-a="sheet-close"><div class="sheet chat" role="dialog" aria-label="Chat con tu agente">
-    <div class="chat-head"><span class="orb" aria-hidden="true"></span><div><b>Tu agente</b><span>Te propone. Vos decidís.</span></div><button class="back" data-a="sheet-close" aria-label="Cerrar">${IC.close}</button></div>
+  return `<div class="scrim" data-a="sheet-close"><div class="sheet chat" role="dialog" aria-label="Chat with your agent">
+    <div class="chat-head"><span class="orb" aria-hidden="true"></span><div><b>Your agent</b><span>It suggests. You decide.</span></div><button class="back" data-a="sheet-close" aria-label="Close">${IC.close}</button></div>
     <div class="msgs" id="msgs" aria-live="polite">${S.chat.map(m => m.typing ? '<div class="msg ag typing"><i></i><i></i><i></i></div>' : `<div class="msg ${m.me?'me':'ag'}">${m.html}</div>`).join('')}</div>
     <div class="chips-row">${CHIPS.map((c,i) => `<button class="chip" data-a="ask:${i}">${c}</button>`).join('')}</div>
-    <div class="chat-in"><label for="chat-in" class="sr">Escribile al agente</label><input id="chat-in" placeholder="Preguntale a tu agente" autocomplete="off" value="${(S.chatDraft||'').replace(/"/g,'&quot;')}"><button class="send" data-a="chat-send" aria-label="Enviar">${IC.send}</button></div>
+    <div class="chat-in"><label for="chat-in" class="sr">Write to the agent</label><input id="chat-in" placeholder="Ask your agent" autocomplete="off" value="${(S.chatDraft||'').replace(/"/g,'&quot;')}"><button class="send" data-a="chat-send" aria-label="Enviar">${IC.send}</button></div>
   </div></div>`;
 }
 
 // ---------- Sheets ----------
-const REASONS = ['Prefiero quedarme en esta moneda','Es mucho monto','No entiendo bien esta moneda','Lo hago más adelante'];
+const REASONS = ['I’d rather stay in this currency','It’s too much','I don’t really get this currency','I’ll do it later'];
 function sheetHTML(){
   if (S.sheet === 'carousel'){
-    const props = visibleProps().filter(p => evalMove(p.from,p.to,p.amt).level !== 'rojo');
-    if (!props.length) return `<div class="scrim" data-a="sheet-close"><div class="sheet tall"><span class="handle" aria-hidden="true"></span><div class="card muted">No quedan recomendaciones este mes.</div><button class="btn ghost" data-a="sheet-close">Cerrar</button></div></div>`;
+    const props = visibleProps().filter(p => lvl(p) !== 'rojo');
+    if (!props.length) return `<div class="scrim" data-a="sheet-close"><div class="sheet tall"><span class="handle" aria-hidden="true"></span><div class="card muted">No recommendations left this month.</div><button class="btn ghost" data-a="sheet-close">Close</button></div></div>`;
     S.carIdx = Math.min(S.carIdx || 0, props.length - 1);
     return `<div class="scrim" data-a="sheet-close"><div class="sheet tall car-sheet" role="dialog" aria-label="Recomendaciones">
       <span class="handle" aria-hidden="true"></span>
-      <div class="car-head"><button class="back car-back" data-a="sheet-close" aria-label="Volver a Rumbo">${IC.back}</button><span class="rumbo-eb" style="flex:1">${IC.agent}Rumbo · Recomendaciones</span><span class="car-count" id="car-count">${S.carIdx+1} de ${props.length}</span></div>
-      <div class="car" id="car" aria-roledescription="carrusel">${props.map((p,i) => `<div class="car-item" aria-label="${i+1} de ${props.length}">${propCard(p)}</div>`).join('')}</div>
+      <div class="car-head"><button class="back car-back" data-a="sheet-close" aria-label="Back to Rumbo">${IC.back}</button><span class="rumbo-eb" style="flex:1">${IC.agent}Rumbo · Recommendations</span><span class="car-count" id="car-count">${S.carIdx+1} of ${props.length}</span></div>
+      <div class="car" id="car" aria-roledescription="carousel">${props.map((p,i) => `<div class="car-item" aria-label="${i+1} of ${props.length}">${propCard(p)}</div>`).join('')}</div>
       <div class="car-nav">
         <button class="car-arrow" data-a="car:-1" aria-label="Anterior">${IC.back}</button>
         <div class="car-dots" id="car-dots">${props.map((_,i) => `<i class="${i===S.carIdx?'on':''}"></i>`).join('')}</div>
@@ -1296,44 +1316,59 @@ function sheetHTML(){
     </div></div>`;
   }
   if (S.sheet === 'rec'){
-    const props = visibleProps().filter(p => evalMove(p.from,p.to,p.amt).level !== 'rojo');
+    const props = visibleProps().filter(p => lvl(p) !== 'rojo');
     const rec = props.find(p => p.rec) || props[0];
-    return `<div class="scrim" data-a="sheet-close"><div class="sheet tall" role="dialog" aria-label="Tu recomendación">
+    return `<div class="scrim" data-a="sheet-close"><div class="sheet tall" role="dialog" aria-label="Your recommendation">
       <span class="handle" aria-hidden="true"></span>
-      ${rec ? propCard(rec) : '<div class="card muted">No hay más recomendaciones este mes.</div><button class="btn ghost" data-a="sheet-close">Cerrar</button>'}
+      ${rec ? propCard(rec) : '<div class="card muted">No more recommendations this month.</div><button class="btn ghost" data-a="sheet-close">Close</button>'}
     </div></div>`;
   }
   if (S.sheet === 'chat') return chatHTML();
   if (S.sheet === 'props'){
     const all = visibleProps();
-    const ok = all.filter(p => evalMove(p.from,p.to,p.amt).level !== 'rojo');
-    const red = all.filter(p => evalMove(p.from,p.to,p.amt).level === 'rojo');
-    return `<div class="scrim" data-a="sheet-close"><div class="sheet tall" role="dialog" aria-label="Tus recomendaciones">
+    const ok = all.filter(p => lvl(p) !== 'rojo');
+    const red = all.filter(p => lvl(p) === 'rojo');
+    return `<div class="scrim" data-a="sheet-close"><div class="sheet tall" role="dialog" aria-label="Your recommendations">
       <span class="handle" aria-hidden="true"></span>
-      <div class="row"><div><h3>Tus recomendaciones</h3></div>
-        <button class="back" data-a="sheet-close" aria-label="Cerrar">${IC.close}</button></div>
-      ${ok.length ? ok.map(propCard).join('') : '<div class="card muted">No quedan recomendaciones este mes.</div>'}
-      ${red.map(p => { const e = evalMove(p.from,p.to,p.amt); return `<div class="blocked"><b>${propTitle(p)}${p.asked?' · lo consultaste vos':''}</b><p>Sin opción de aceptar: ${e.msg.charAt(0).toLowerCase()+e.msg.slice(1)}</p></div>`; }).join('')}
-      <button class="btn ghost sm" data-a="go:home">Ver todo en mi agente</button>
+      <div class="row"><div><h3>Your recommendations</h3></div>
+        <button class="back" data-a="sheet-close" aria-label="Close">${IC.close}</button></div>
+      ${ok.length ? ok.map(propCard).join('') : '<div class="card muted">No recommendations left this month.</div>'}
+      ${red.map(p => { const e = evalMove(p.from,p.to,p.amt); return `<div class="blocked"><b>${propTitle(p)}${p.asked?' · lo consultaste vos':''}</b><p>No option to accept: ${e.msg.charAt(0).toLowerCase()+e.msg.slice(1)}</p></div>`; }).join('')}
+      <button class="btn ghost sm" data-a="go:home">See everything in my agent</button>
+    </div></div>`;
+  }
+  if (S.sheet === 'withdraw'){
+    const pt = S.pots[S.wd.i], left = Math.max(0, pt.goal - pt.saved), per = Math.max(10, Math.ceil(left / pt.months / 10) * 10);
+    const opts = [100, 300, 500].filter(x => x <= pt.saved);
+    const a = S.wd.amt, weeks = a ? Math.max(1, Math.round(a / per * 4.3)) : 0;
+    return `<div class="scrim" data-a="sheet-close"><div class="sheet" role="dialog" aria-label="Withdraw from ${pt.name}">
+      <span class="handle" aria-hidden="true"></span>
+      <span class="muted" style="font-size:13px">USD ${nf(pt.saved,0)} of ${nf(pt.goal,0)} · ${pt.due}</span>
+      <h3>Withdraw from ${pt.name}</h3>
+      ${opts.length ? `<div class="quick">${opts.map(x => `<button class="chip ${x===a?'on':''}" data-a="wd-amt:${x}">USD ${nf(x,0)}</button>`).join('')}</div>` : '<p class="muted" style="margin:0;font-size:14px">There’s no money to withdraw yet.</p>'}
+      ${a ? `<div class="pot-tip wd-tip"><span class="eyebrow rumbo-eb">${IC.agent}Rumbo · Before withdrawing</span>
+        <b>Your goal moves about ${weeks} weeks</b>
+        <span class="pot-tip-d">You’ve been setting aside about USD ${nf(per,0)} a month. If you take out USD ${nf(a,0)}, you get there later than ${pt.due}. You catch up by setting aside a bit more over the next paydays.</span></div>
+        <button class="btn primary" data-a="wd-go">Withdraw anyway</button><button class="btn ghost" data-a="sheet-close">Not now</button>` : '<button class="btn ghost" data-a="sheet-close">Cancel</button>'}
     </div></div>`;
   }
   if (S.sheet === 'reject'){
     const p = S.proposals.find(x => x.id === S.sel);
-    return `<div class="scrim" data-a="sheet-close"><div class="sheet" role="dialog" aria-label="No ahora">
-      <span class="pair">${pairHTML(p.from,p.to)}</span>
-      <h3>¿Por qué no ahora?</h3>
-      <p class="muted" style="margin:0;font-size:14px">Es opcional. Con esto ajustamos la próxima propuesta.</p>
+    return `<div class="scrim" data-a="sheet-close"><div class="sheet" role="dialog" aria-label="Not now">
+      ${p.kind ? `<span class="muted" style="font-size:13px">${p.title}</span>` : `<span class="pair">${pairHTML(p.from,p.to)}</span>`}
+      <h3>Why not now?</h3>
+      <p class="muted" style="margin:0;font-size:14px">It’s optional. We use it to adjust the next proposal.</p>
       <div class="reasons">${REASONS.map((r,i) => `<button class="${S.reason===i?'on':''}" data-a="reason:${i}">${r}</button>`).join('')}</div>
-      <button class="btn primary" data-a="reject-send">${S.reason===null?'Descartar sin motivo':'Enviar y descartar'}</button>
-      <button class="btn ghost" data-a="sheet-close">Cancelar</button>
+      <button class="btn primary" data-a="reject-send">${S.reason===null?'Dismiss without a reason':'Send and dismiss'}</button>
+      <button class="btn ghost" data-a="sheet-close">Cancel</button>
     </div></div>`;
   }
   if (S.sheet === 'freeze'){
-    return `<div class="scrim" data-a="sheet-close"><div class="sheet" role="dialog" aria-label="Congelar agente">
-      <h3>¿Congelar al agente?</h3>
-      <p style="margin:0;font-size:14.5px">El agente deja de proponer y de ejecutar. Tus monedas quedan como están y podés seguir moviendo vos.</p>
-      <button class="btn primary" data-a="freeze">Congelar agente</button>
-      <button class="btn ghost" data-a="sheet-close">Cancelar</button>
+    return `<div class="scrim" data-a="sheet-close"><div class="sheet" role="dialog" aria-label="Freeze agent">
+      <h3>Freeze the agent?</h3>
+      <p style="margin:0;font-size:14.5px">The agent stops proposing and executing. Your currencies stay as they are, and you can keep moving them yourself.</p>
+      <button class="btn primary" data-a="freeze">Freeze agent</button>
+      <button class="btn ghost" data-a="sheet-close">Cancel</button>
     </div></div>`;
   }
   return '';
@@ -1341,75 +1376,80 @@ function sheetHTML(){
 
 // ---------- Notes & index ----------
 const NOTES = {
-  pots:{f:'Alcancías', t:'Objetivos que guían al agente', b:[
-    'Cada alcancía tiene un objetivo claro: monto y fecha. Rumbo los usa para sugerir.',
-    'Al cobrar el sueldo, propone cuánto separar para llegar a tiempo.',
-    'Antes de retirar, muestra cuánto se corre el plazo.']},
-  carousel:{f:'Rumbo · Recomendaciones', t:'Carrusel de recomendaciones', b:[
-    'Desde Rumbo, "Recomendaciones" abre un carrusel con todas las del mes. Se desliza con el dedo; en desktop, con las flechas.',
-    'La primera es la recomendada. Los puntos y el contador muestran dónde estás.',
-    'Si rechazás una, sale del carrusel y quedás en la siguiente.']},
-  chat:{f:'Flow 0 · Nav', t:'El agente en la barra de navegación', b:[
-    'Un ícono "Agente" en la barra abre un chat que asesora. Es otro acceso directo, como Cards o More.',
-    'Las respuestas usan el saldo, el semáforo y el historial. Cuando hay una propuesta, aparece como mini card con Quiero avanzar y Ver detalle.',
-    '"Quiero gastar USD 300" corre el Flow 4: muestra cuántos días se corre la meta y propone compensarlo.',
-    'En la demo las respuestas son guionadas. Para la versión real, este chat se conecta al modelo vía MCP de belo.']},
-  splash:{f:'Flow 0 · Entrada', t:'Abre belo', b:['El agente vive dentro de la app de belo. No es otra app.']},
-  rec:{f:'Flow 0 · Bottom sheet', t:'Una recomendación, decidir ahí', b:[
-    'El banner abre un bottom sheet con una sola recomendación: la más importante del mes.',
-    'Quiero avanzar, No por ahora o ver el impacto tocando el título. Si la rechazás, el sheet muestra la siguiente.']},
-  belo:{f:'Flow 0 · Home de belo', t:'Un banner del agente en la home', b:[
-    'El agente entra como un banner con el estilo de belo: gradiente violeta, monedas superpuestas y pill menta.',
-    'Se ubica debajo del saldo, antes de las promos. Al tocarlo abre un bottom sheet con 1 recomendación.',
-    'Swap abre "Mover entre monedas" con el semáforo del agente.']},
-  props:{f:'Flow 0 · Bottom sheet', t:'Recomendaciones sin salir de la home', b:[
-    'Mismas cards que la lista: semáforo como punto, título tocable para ver el impacto, avanzar o no por ahora.',
-    '"No por ahora" pide el motivo y vuelve al sheet.']},
-  history:{f:'Rumbo · Con historial', t:'Tu situación financiera', b:[
-    'Es la sección de Rumbo: se llega tocando "Revisar" en el banner de la home.',
-    '"Recomendaciones" abre el bottom sheet con la recomendación del mes, sobre esta pantalla.',
-    'Con 3 meses de movimientos en belo detecta sueldo (monto, moneda y día de cobro), gastos por categoría e inversiones.',
-    'También detecta hábitos: pesos que quedan quietos, dólares sin rendimiento, compras de cripto que se repiten.',
-    'Cada propuesta cita el dato del historial que la origina. La persona puede corregir cualquier dato.']},
-  newstart:{f:'Flow 1 · Sin historial', t:'Acompañar desde cero', b:[
-    'Sin historial, 3 preguntas reemplazan los datos: cuánto cobra, cuánto gasta y qué quiere lograr primero.',
-    'El primer objetivo es ahorrar en dólares. Invertir se habilita después.',
-    'Cada mes el agente suma movimientos reales. Al tercer mes pasa a proponer con historial.']},
-  home:{f:'Flow 2 · Inicio', t:'Inicio con la plata por moneda', b:[
-    'Cada moneda muestra qué rol cumple: gasto del mes (ARS), ahorro en dólares (USD y stablecoins) o inversión (BTC, ETH).',
-    'El semáforo cruza el riesgo de cada moneda con tu perfil de inversor.',
-    'Las propuestas se leen como pares de monedas: de dónde sale y a dónde va.',
-    '"Mover entre monedas" está siempre a mano, con o sin agente.']},
-  proposals:{f:'Flow 2 · Paso 2', t:'Propuestas como movimientos entre monedas', b:[
-    'Hasta 3 propuestas y una recomendada. Cada una dice de qué moneda a cuál, cuánto recibís, el costo y su semáforo.',
-    'Pesos sobrantes → dólares protege. Dólares quietos → USDT rinde. Dólares → BTC invierte.',
-    'Rojo se ve, pero sin botón. Muestra el motivo con el número.']},
-  detail:{f:'Flow 2 · Paso 3', t:'Detalle: qué pasa si lo hacés y si no', b:[
-    'Escenario de no hacer nada, en la misma moneda que la persona entiende.',
-    'Cotización, costo y riesgo antes de decidir.',
-    'Distribución por moneda hoy y después, en una sola mirada.']},
-  confirm:{f:'Flow 2 y 5 · Confirmación', t:'Confirmación con saldo por moneda', b:[
-    'Monto, recibís, cotización y costo. Después, el saldo de las dos monedas antes → después.',
-    'La cotización vale 30 segundos. Si vence, se actualiza antes de poder confirmar.',
-    'Si el movimiento es manual y queda en rojo, pide una confirmación extra en vez de bloquear.']},
-  done:{f:'Flow 2 y 5 · Resultado', t:'Resultado y nuevo semáforo', b:[
-    'Confirma lo que recibiste y el semáforo del movimiento.',
-    'Si el movimiento fue a cripto, descuenta de lo que podés invertir este mes.']},
-  move:{f:'Flow 5 · Nuevo', t:'Mover entre monedas, vos', b:[
-    'La persona elige origen y destino entre ARS, USD, USDT, USDC, BTC y ETH.',
-    'Mientras escribe el monto, ve cuánto recibe y el semáforo del movimiento con las mismas reglas del agente.',
-    'Rojo no bloquea un movimiento manual: es tu plata. Pide una confirmación extra. Decisión a validar con belo.']},
-  settings:{f:'Ajustes', t:'Qué monedas puede usar el agente', b:[
-    'La persona apaga monedas que no quiere tocar. El agente deja de proponer pares que las usen.',
-    'Probalo: apagá BTC y volvé a Propuestas.',
-    'Congelar sigue a un toque, arriba de todo.']},
+  pots:{f:'Savings pots', t:'Goals that guide the agent', b:[
+    'Each savings pot has a clear goal: amount and date. Rumbo uses them to suggest.',
+    'On payday, it suggests how much to set aside to get there on time.',
+    'Before a withdrawal, it shows how far the deadline moves.']},
+  withdraw:{f:'Savings pots · Before withdrawing', t:'How far your goal moves', b:[
+    'You tap a savings pot and choose how much to take out.',
+    'Rumbo shows how many weeks the goal gets delayed, based on what you’ve been setting aside.',
+    'It never blocks: "Withdraw anyway" is always there. It’s your money.']},
+  carousel:{f:'Rumbo · Recommendations', t:'Recommendations carousel', b:[
+    'From Rumbo, "Recommendations" opens a carousel with all of this month’s. Swipe with your finger; on desktop, use the arrows.',
+    'The first one is the recommended one. The dots and the counter show where you are.',
+    'It’s not only about switching currencies: it also sets part of your salary aside in a savings pot, builds the goal for a trip it spotted, or sells just enough USDT when the dollar jumps.',
+    'If you decline one, it leaves the carousel and you land on the next one.']},
+  chat:{f:'Flow 0 · Nav', t:'The agent in the nav bar', b:[
+    'An "Agent" icon in the nav bar opens an advisory chat. It’s another shortcut, like Cards or More.',
+    'Answers use your balance, the traffic light and your history. When there’s a proposal, it shows up as a mini card with Let’s do it and See details.',
+    '"I want to spend USD 300" runs Flow 4: it shows how many days the goal moves and offers to make up for it.',
+    'In the demo the answers are scripted. In the real version, this chat connects to the model through belo’s MCP.']},
+  splash:{f:'Flow 0 · Entry', t:'Opens belo', b:['The agent lives inside the belo app. It’s not another app.']},
+  rec:{f:'Flow 0 · Bottom sheet', t:'One recommendation, decide right there', b:[
+    'The banner opens a bottom sheet with a single recommendation: the most important one this month.',
+    'Let’s do it, Not now, or see the impact by tapping the title. If you decline it, the sheet shows the next one.']},
+  belo:{f:'Flow 0 · belo home', t:'An agent banner on the home', b:[
+    'The agent comes in as a banner in belo’s style: violet gradient, stacked coins and a mint pill.',
+    'It sits below the balance, before the promos. Tapping it opens a bottom sheet with 1 recommendation.',
+    'Swap opens "Move between currencies" with the agent’s traffic light.']},
+  props:{f:'Flow 0 · Bottom sheet', t:'Recommendations without leaving the home', b:[
+    'Same cards as the list: traffic light as a dot, a tappable title to see the impact, go ahead or not now.',
+    '"Not now" asks for the reason and goes back to the sheet.']},
+  history:{f:'Rumbo · With history', t:'Your financial situation', b:[
+    'It’s the Rumbo section: you get there by tapping the banner on the home.',
+    '"Recommendations" opens the bottom sheet with the month’s recommendation, over this screen.',
+    'With 3 months of activity in belo it detects your salary (amount, currency and payday), spending by category and investments.',
+    'It also detects habits: pesos left parked, dollars with no yield, crypto purchases that repeat.',
+    'Each proposal cites the data from your history that triggered it. The person can correct any data point.']},
+  newstart:{f:'Flow 1 · No history', t:'Guide from scratch', b:[
+    'Without history, 3 questions replace the data: how much they earn, how much they spend and what they want to achieve first.',
+    'The first goal is saving in dollars. Investing unlocks later.',
+    'Every month the agent adds real activity. By the third month it starts proposing from your history.']},
+  home:{f:'Flow 2 · Start', t:'Start with your money by currency', b:[
+    'Each currency shows its role: monthly spending (ARS), savings in dollars (USD and stablecoins) or investment (BTC, ETH).',
+    'The traffic light crosses each currency’s risk with your investor profile.',
+    'Proposals read as currency pairs: where the money comes from and where it goes.',
+    '"Move between currencies" is always at hand, with or without the agent.']},
+  proposals:{f:'Flow 2 · Step 2', t:'Proposals as moves between currencies', b:[
+    'Up to 3 proposals and one recommended. Each one says which currency to which, how much you get, the cost and its traffic light.',
+    'Spare pesos → dollars protects. Parked dollars → USDT earns. Dollars → BTC invests.',
+    'Red is shown, but without a button. It shows the reason with the number.']},
+  detail:{f:'Flow 2 · Step 3', t:'Detail: what happens if you do it and if you don’t', b:[
+    'The do-nothing scenario, in the same currency the person thinks in.',
+    'Rate, cost and risk before you decide.',
+    'Breakdown by currency now and after, at a glance.']},
+  confirm:{f:'Flow 2 and 5 · Confirmation', t:'Confirmation with balance by currency', b:[
+    'Amount, what you get, rate and cost. Then the balance of both currencies, before → after.',
+    'The rate is valid for 30 seconds. If it expires, it refreshes before you can confirm.',
+    'If the move is manual and lands in red, it asks for an extra confirmation instead of blocking.']},
+  done:{f:'Flow 2 and 5 · Result', t:'Result and new traffic light', b:[
+    'Confirms what you got and the move’s traffic light.',
+    'If the move went to crypto, it comes out of what you can invest this month.']},
+  move:{f:'Flow 5 · New', t:'Move between currencies, yourself', b:[
+    'The person picks origin and destination among ARS, USD, USDT, USDC, BTC and ETH.',
+    'While typing the amount, they see how much they get and the move’s traffic light, with the same rules as the agent.',
+    'Red doesn’t block a manual move: it’s your money. It asks for an extra confirmation. A decision to validate with belo.']},
+  settings:{f:'Settings', t:'Which currencies the agent can use', b:[
+    'The person turns off currencies they don’t want touched. The agent stops proposing pairs that use them.',
+    'Try it: turn off BTC and go back to Proposals.',
+    'Freezing is still one tap away, at the top.']},
 };
 const FLOWS = [
-  {e:'Flow 0 · Entrada', t:'Desde la home de belo', n:true, items:[['splash','Splash'],['belo','Home de belo + banner del agente'],['rec','Bottom sheet con 1 recomendación'],['carousel','Rumbo · carrusel de recomendaciones'],['chat','Chat del agente (nav)'],['pots','Alcancías con objetivos']]},
-  {e:'Flow 1 · Conocerte', t:'Historial o desde cero', items:[['history','Con historial · lo que ve el agente'],['newstart','Sin historial · empezamos juntos']]},
-  {e:'Flow 2 · Decidir una propuesta', t:'Propuestas por moneda', items:[['belo','Home de belo'],['proposals','Propuestas'],['detail','Detalle'],['confirm-p','Confirmación'],['done-p','Listo'],['reject','No ahora · motivo']]},
-  {e:'Flow 5 · Nuevo', t:'Mover entre monedas', n:true, items:[['move','Elegir monedas y monto'],['confirm-m','Confirmación'],['done-m','Listo']]},
-  {e:'Flow 3 · Ajustes', t:'Panel, congelar y monedas', items:[['home','Panel del agente'],['freeze','Congelar agente'],['settings','Monedas del agente']]},
+  {e:'Flow 0 · Entry', t:'From the belo home', n:true, items:[['splash','Splash'],['belo','belo home + agent banner'],['rec','Bottom sheet with 1 recommendation'],['carousel','Rumbo · recommendations carousel'],['chat','Agent chat (nav)'],['pots','Savings pots with goals'],['withdraw','Before withdrawing from a pot']]},
+  {e:'Flow 1 · Getting to know you', t:'History or from scratch', items:[['history','With history · what the agent sees'],['newstart','No history · we start together']]},
+  {e:'Flow 2 · Decide on a proposal', t:'Proposals by currency', items:[['belo','belo home'],['proposals','Proposals'],['detail','Detail'],['confirm-p','Confirmation'],['done-p','Done'],['reject','Not now · reason']]},
+  {e:'Flow 5 · New', t:'Move between currencies', n:true, items:[['move','Choose currencies and amount'],['confirm-m','Confirmation'],['done-m','Done']]},
+  {e:'Flow 3 · Settings', t:'Panel, freeze and currencies', items:[['home','Agent panel'],['freeze','Freeze agent'],['settings','Agent currencies']]},
 ];
 let currentKey = 'splash';
 const agentTheme = 'light';
@@ -1426,37 +1466,37 @@ function enterApp(){
 }
 // First thing on the belo home: the month's recommendation in a bottom sheet
 function homeRec(){
-  const hasRec = !S.frozen && visibleProps().some(p => evalMove(p.from,p.to,p.amt).level !== 'rojo');
+  const hasRec = !S.frozen && visibleProps().some(p => lvl(p) !== 'rojo');
   if (S.screen === 'belo' && !S.sheet && hasRec){ S.autoShown = true; S.sheet = 'rec'; currentKey = 'rec'; render(); }
 }
 function enterHome(){ go('belo'); setTimeout(homeRec, RM ? 0 : 450); }
 
 function renderIndex(){
   document.getElementById('index').innerHTML =
-    `<div style="display:grid;gap:6px"><span class="eyebrow" style="color:var(--muted)">Usuario de la demo</span><div class="persona">
-      <button class="${S.persona==='hist'?'on':''}" data-j="p-hist">Con historial</button><button class="${S.persona==='new'?'on':''}" data-j="p-new">Sin historial</button></div></div>`
+    `<div style="display:grid;gap:6px"><span class="eyebrow" style="color:var(--muted)">Demo user</span><div class="persona">
+      <button class="${S.persona==='hist'?'on':''}" data-j="p-hist">With history</button><button class="${S.persona==='new'?'on':''}" data-j="p-new">No history</button></div></div>`
     + FLOWS.map(f => `<div class="flow ${f.n?'new':''}"><span class="eyebrow">${f.e}</span><h3>${f.t}</h3><ol>${
     f.items.map(([k,l],i) => `<li><button class="${currentKey===k?'on':''}" data-j="${k}"><span>${String(i+1).padStart(2,'0')}</span>${l}</button></li>`).join('')}</ol></div>`).join('')
-    + `<button class="reset" data-j="reset">Reiniciar demo</button>`;
+    + `<button class="reset" data-j="reset">Restart demo</button>`;
 }
 function renderNotes(){
   const n = NOTES[S.screen] || NOTES.home;
   const c = colchon(S.wallet);
   document.getElementById('notes').innerHTML = `
     <div class="card"><span class="eyebrow">${n.f}</span><h3>${n.t}</h3><ul>${n.b.map(x=>`<li>${x}</li>`).join('')}</ul></div>
-    <div class="card"><span class="eyebrow">Semáforo: riesgo × perfil</span>
+    <div class="card"><span class="eyebrow">Traffic light: risk × profile</span>
       <div class="rules" style="margin-top:10px">
-        <div>${sdot('verde')}<span>El riesgo entra en tu perfil y tu cripto queda dentro del ideal. O baja tu riesgo.</span></div>
-        <div>${sdot('amarillo')}<span>Te pasás del % de cripto de tu perfil, o vas a pesos.</span></div>
-        <div>${sdot('rojo')}<span>Riesgo muy por encima de tu perfil.</span></div>
+        <div>${sdot('verde')}<span>The risk fits your profile and your crypto stays within your ideal. Or it lowers your risk.</span></div>
+        <div>${sdot('amarillo')}<span>You go over your profile’s crypto %, or you go to pesos.</span></div>
+        <div>${sdot('rojo')}<span>Risk well above your profile.</span></div>
       </div></div>
-    <div class="card"><span class="eyebrow">Estado de la demo</span>
+    <div class="card"><span class="eyebrow">Demo state</span>
       <div class="kv" style="margin-top:10px;font-size:13.5px">
-        <div class="row"><span>Perfil</span><b>${prof().name}</b></div>
-        <div class="row"><span>Cripto en cartera</span><b>${pctTxt(cryptoPct(S.wallet))} (ideal ${prof().cap}%)</b></div>
-        <div class="row"><span>Agente</span><b>${S.frozen?'Congelado':'Activo'}</b></div>
+        <div class="row"><span>Profile</span><b>${prof().name}</b></div>
+        <div class="row"><span>Crypto in your portfolio</span><b>${pctTxt(cryptoPct(S.wallet))} (ideal ${prof().cap}%)</b></div>
+        <div class="row"><span>Agent</span><b>${S.frozen?'Frozen':'On'}</b></div>
       </div>
-      <p class="assume" style="margin:10px 0 0">Supuestos de ejemplo: 1 USD = ARS 1.450, BTC USD 90.000, ETH USD 3.200, costo 0,8%, USDT rinde 6% anual, gasto mensual ${usd(S.prof.gasto)}.</p></div>`;
+      <p class="assume" style="margin:10px 0 0">Sample assumptions: 1 USD = ARS 1,450, BTC USD 90,000, ETH USD 3,200, 0.8% cost, USDT earns 6% a year, monthly spending ${usd(S.prof.gasto)}.</p></div>`;
 }
 // ---------- Micro-interactions (vanilla takes on React Bits: CountUp, FadeContent, SpotlightCard, ClickSpark) ----------
 const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1527,7 +1567,7 @@ function render(){
     const dots = document.querySelectorAll('#car-dots i'), cnt = document.getElementById('car-count'), n = dots.length;
     car.addEventListener('scroll', () => {
       const i = Math.max(0, Math.min(n - 1, Math.round(car.scrollLeft / step())));
-      if (i !== S.carIdx){ S.carIdx = i; dots.forEach((d,j) => d.classList.toggle('on', j === i)); cnt.textContent = `${i+1} de ${n}`; }
+      if (i !== S.carIdx){ S.carIdx = i; dots.forEach((d,j) => d.classList.toggle('on', j === i)); cnt.textContent = `${i+1} of ${n}`; }
     }, {passive:true});
   }
   const msgs = document.getElementById('msgs');
@@ -1550,7 +1590,7 @@ setInterval(() => {
   if (S.screen !== 'confirm' || S.quote <= 0) return;
   S.quote--;
   if (S.quote === 0) render();
-  else { const t = document.getElementById('quote-timer'); if (t) t.textContent = `Cotización válida por ${S.quote} s`; }
+  else { const t = document.getElementById('quote-timer'); if (t) t.textContent = `Rate valid for ${S.quote} s`; }
 }, 1000);
 
 function execute(){
@@ -1573,28 +1613,34 @@ document.getElementById('screen').addEventListener('click', (ev) => {
     case 'go': go(v); break;
     case 'detail': S.origin = {screen: S.screen === 'proposals' ? 'proposals' : S.screen, sheet: S.sheet}; S.sel = v; go('detail'); break;
     case 'back-detail': { const o = S.origin || {screen:'proposals'}; go(o.screen); if (o.sheet){ S.sheet = o.sheet; render(); } break; }
-    case 'pot-save': { const v2 = +v; S.pots[0].saved += v2; S.potTip = false; toast(`Listo. Separaste USD ${nf(v2,0)} para ${S.pots[0].name}.`); break; }
-    case 'pot-skip': S.potTip = false; toast('Te lo recordamos el próximo cobro.'); break;
+    case 'pot-save': { const v2 = +v; S.pots[0].saved += v2; S.potTip = false; const s1 = S.proposals.find(x=>x.id==='s1'); if (s1) s1.status='accepted'; toast(`Done. You set aside USD ${nf(v2,0)} for ${S.pots[0].name}.`); break; }
+    case 'pot-wd': S.wd = {i:+v, amt:null}; S.sheet = 'withdraw'; render(); break;
+    case 'wd-amt': S.wd.amt = +v; render(); break;
+    case 'wd-go': { const pt = S.pots[S.wd.i]; const a2 = Math.min(S.wd.amt, pt.saved); pt.saved -= a2; S.sheet = null; toast(`You withdrew USD ${nf(a2,0)} from ${pt.name}. Your call.`); break; }
+    case 'pot-skip': S.potTip = false; toast('We’ll remind you next payday.'); break;
     case 'open-rec': S.sheet = 'rec'; currentKey = 'rec'; render(); break;
     case 'open-chat': S.sheet = 'chat'; currentKey = 'chat'; render(); break;
     case 'ask': chatSend(CHIPS[+v]); break;
     case 'ask-text': chatSend(v); break;
     case 'chat-send': { const i = document.getElementById('chat-in'); chatSend(i ? i.value : ''); break; }
-    case 'chat-comp': S.chat.push({html:'Listo. Lo sumé a tus recomendaciones: separar una parte por mes durante 3 meses. Lo vas a ver en la home.'}); render(); break;
+    case 'chat-comp': S.chat.push({html:'Done. I added it to your recommendations: set a part aside every month for 3 months. You’ll see it on the home.'}); render(); break;
     case 'open-props': S.sheet = 'props'; currentKey = 'props'; render(); break;
-    case 'toast-demo': toast('Fuera del alcance de la demo.'); break;
-    case 'accept': { const p = S.proposals.find(x=>x.id===v); startConfirm({from:p.from,to:p.to,amt:p.amt,source:'agent',pid:p.id}); S.backTo = S.screen; S.backSheet = (S.screen === 'detail' ? null : S.sheet); go('confirm','confirm-p'); break; }
+    case 'toast-demo': toast('Out of scope for the demo.'); break;
+    case 'accept': { const p = S.proposals.find(x=>x.id===v);
+      if (p.kind === 'save'){ p.status = 'accepted'; S.pots[p.pot].saved += p.amt; S.potTip = false; toast(`Done. You set aside USD ${nf(p.amt,0)} for ${S.pots[p.pot].name}.`); break; }
+      if (p.kind === 'goal'){ p.status = 'accepted'; S.pots.push({id:'g'+Date.now(), saved:0, ...p.goal}); toast(`You created the goal “${p.goal.name}”. On payday, I’ll tell you how much to set aside.`); break; }
+      startConfirm({from:p.from,to:p.to,amt:p.amt,source:'agent',pid:p.id}); S.backTo = S.screen; S.backSheet = (S.screen === 'detail' ? null : S.sheet); go('confirm','confirm-p'); break; }
     case 'reject': S.rejectSheet = S.sheet; S.sel = v; S.reason = null; S.sheet = 'reject'; render(); break;
     case 'reason': S.reason = +v; render(); break;
     case 'reject-send': { const p = S.proposals.find(x=>x.id===S.sel); p.status = 'rejected'; if (S.rejectSheet || S.screen === 'belo'){ S.sheet = S.rejectSheet || null; } else { S.sheet = null; S.screen = 'proposals'; currentKey='proposals'; }
-      toast(S.reason===null ? 'Descartada.' : `Anotado. La próxima propuesta lo tiene en cuenta.`); break; }
+      toast(S.reason===null ? 'Dismissed.' : `Noted. The next proposal takes it into account.`); break; }
     case 'sheet': S.sheet = v; render(); break;
     case 'sheet-close': S.sheet = null; render(); break;
-    case 'freeze': S.frozen = true; S.sheet = null; S.screen = 'belo'; currentKey='freeze'; toast('Agente congelado. No propone ni ejecuta.'); break;
-    case 'unfreeze': S.frozen = false; toast('Agente activo. Recalculamos el semáforo con tus datos de hoy.'); break;
+    case 'freeze': S.frozen = true; S.sheet = null; S.screen = 'belo'; currentKey='freeze'; toast('Agent frozen. It doesn’t propose or execute.'); break;
+    case 'unfreeze': S.frozen = false; toast('Agent on. We recalculated the traffic light with today’s data.'); break;
     case 'mv-from': S.move.from = v; if (S.move.to === v) S.move.to = ORDER.find(c => c !== v); S.move.amt=''; render(); break;
     case 'mv-to': S.move.to = v; render(); break;
-    case 'mv-swap': { const {from,to} = S.move; if (S.wallet[to] > 0){ S.move.from = to; S.move.to = from; S.move.amt=''; render(); } else toast(`No tenés ${to} para mover.`); break; }
+    case 'mv-swap': { const {from,to} = S.move; if (S.wallet[to] > 0){ S.move.from = to; S.move.to = from; S.move.amt=''; render(); } else toast(`You don’t have ${to} to move.`); break; }
     case 'mv-pct': { const n = S.wallet[S.move.from] * parseFloat(v); const k = CUR[S.move.from].kind;
       S.move.amt = S.move.from==='ARS' ? nf(Math.floor(n),0).replace(/\./g,'') : k==='stable' ? String(Math.floor(n*100)/100).replace('.',',') : String(+n.toFixed(6)).replace('.',',');
       render(); break; }
@@ -1604,12 +1650,12 @@ document.getElementById('screen').addEventListener('click', (ev) => {
     case 'back-from-confirm': go(S.backTo || 'belo'); if (S.backSheet){ S.sheet = S.backSheet; render(); } break;
     case 'tog': S.agentCur[v] = !S.agentCur[v]; render(); break;
     case 'proj': S.proj = +v; render(); break;
-    case 'perfil-cycle': { const i = PORDER.indexOf(S.prof.perfil); S.prof.perfil = PORDER[(i+1)%3]; S.prof.perfilWhy = 'Lo cambiaste vos.'; toast(`Perfil ${prof().name.toLowerCase()}. Recalculamos tus recomendaciones.`); break; }
-    case 'howcalc': toast('Riesgo de la moneda según tu perfil de inversor, cotización de hoy y costo 0,8%.'); break;
+    case 'perfil-cycle': { const i = PORDER.indexOf(S.prof.perfil); S.prof.perfil = PORDER[(i+1)%3]; S.prof.perfilWhy = 'You changed it.'; toast(`Profile: ${prof().name.toLowerCase()}. We recalculated your recommendations.`); break; }
+    case 'howcalc': toast('The currency’s risk for your investor profile, today’s rate and a 0.8% cost.'); break;
     case 'go-recs': S.carIdx = 0; S.sheet = 'carousel'; currentKey = 'carousel'; render(); break;
     case 'car': { const car = document.getElementById('car'); if (car){ const it = car.querySelector('.car-item'); car.scrollBy({left: (+v) * (it.offsetWidth + 12), behavior: RM ? 'auto' : 'smooth'}); } break; }
     case 'open-rumbo': go(S.persona === 'hist' ? 'history' : 'newstart'); break;
-    case 'fix': toast('Podés editar sueldo, gastos o metas a mano. Las propuestas se recalculan.'); break;
+    case 'fix': toast('You can edit salary, spending or goals by hand. Proposals are recalculated.'); break;
   }
 });
 
@@ -1620,6 +1666,7 @@ document.getElementById('index').addEventListener('click', (ev) => {
   if (k === 'carousel'){ go(S.persona === 'hist' ? 'history' : 'newstart'); S.carIdx = 0; S.sheet = 'carousel'; currentKey = 'carousel'; render(); return; }
   if (k === 'rec'){ go('belo'); S.sheet = 'rec'; currentKey = 'rec'; render(); return; }
   if (k === 'pots'){ go('pots'); return; }
+  if (k === 'withdraw'){ go('pots'); S.wd = {i:0, amt:300}; S.sheet = 'withdraw'; currentKey = 'withdraw'; render(); return; }
   if (k === 'chat'){ go('belo'); S.sheet = 'chat'; currentKey = 'chat'; render(); return; }
   if (k === 'props'){ go('belo'); S.sheet = 'props'; currentKey = 'props'; render(); return; }
   if (k === 'splash'){ S.autoShown = false; enterApp(); return; }
