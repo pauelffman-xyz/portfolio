@@ -1,6 +1,8 @@
 # Paula Elffman — Portfolio OS · Design Bible
 
-*Última actualización: 29 de octubre de 2026 — **Nuevo case: belo · Rumbo (agentic banking).** `belo-case.html` es el caso 16. Va tercero en la home, entre sukupay prototyper y sukupay home. Tiene el prototipo navegable arriba de todo, secciones de pantallas reales, cover de card nuevo y su propio cierre "Next case" y dock. Se arregló el final del case, que había quedado roto (dock sin estilos, sin footer ni "Next case"). Ver "BELO CASE STUDY · Rumbo".*
+*Última actualización: 18 de noviembre de 2026. **Nuevo case: SukuPay · New experience (Nueva XP).** `sukupay-newxp-case.html` es el caso 17. Va tercero en Selected work, después de belo y sukupay prototyper; sukupay home pasa a More work. Cuenta la nueva experiencia con antes y después: home de dos mercados animada, sender box, navegación, una banda con 20 pantallas, las pestañas y un antes/después con la pantalla de revisión en vivo. Tiene reglas de contenido propias: solo SukuPay, México fuera del copy, sin referidos y la regla "Instantáneo". Ver "SUKUPAY NEW EXPERIENCE CASE STUDY · Nueva XP".*
+
+*Última actualización previa: 29 de octubre de 2026 — **Nuevo case: belo · Rumbo (agentic banking).** `belo-case.html` es el caso 16. Va tercero en la home, entre sukupay prototyper y sukupay home. Tiene el prototipo navegable arriba de todo, secciones de pantallas reales, cover de card nuevo y su propio cierre "Next case" y dock. Se arregló el final del case, que había quedado roto (dock sin estilos, sin footer ni "Next case"). Ver "BELO CASE STUDY · Rumbo".*
 
 *Última actualización previa: 10 de octubre de 2026 — **Everyone: plan de equipo como roadmap.** La sección de proceso de `everyone-case.html` se rehízo como un roadmap de dos semanas con responsable por tarea y los hitos con el cliente, y subió al segundo lugar del case. Ver el punto 5 de "Cambios en `everyone-case.html` (10 de octubre de 2026)".*
 
@@ -72,6 +74,8 @@
 | `vendor-tool-case.html` | standalone   | Case study Vendor Tool / Monchis (light)                                 |
 | `hugo-case.html`        | ~100KB       | Case study hugo completo (light) — hackathon, no Design System section   |
 | `hugo-case-images.js`   | ~375KB, lazy | Imágenes de `hugo-case.html` (screenshots reales del producto)           |
+| `sukupay-newxp-case.html` | standalone | Case study SukuPay · New experience (light). Noviembre 2026. Ver "SUKUPAY NEW EXPERIENCE CASE STUDY". |
+| `assets/sukupay-newxp/` | ~1.4MB | 30 archivos WebP: 22 pantallas nuevas y 6 del flujo viejo (780×1688), más 2 boards del flujo viejo. Se reemplaza la subcarpeta entera. |
 
 
 > Todos los archivos deben estar en la **misma carpeta** para que los links funcionen — desde Sept 2026 esto incluye la carpeta `assets/` completa (no solo los `.html`).
@@ -2990,6 +2994,159 @@ Tomás Rosito y Marcos Senatori (con link a LinkedIn, ↗), Nahuel Namur, Giorgi
 - `og:image` apunta a `assets/og/og-belo.jpg`, que todavía no existe. Se puede hacer desde `belo-cover.webp` a 1200×630.
 
 
+## SUKUPAY NEW EXPERIENCE CASE STUDY · Nueva XP (16 a 18 de noviembre de 2026)
+
+*Case 17. La nueva experiencia de SukuPay (Nueva XP): una home para todos los corredores y un envío en dos pasos. Se cuenta con el antes y el después. Template viejo (`.section` / `.cover`) con el adaptador v3, igual que belo. Archivo: `sukupay-newxp-case.html`.*
+
+### Reglas de contenido de este case (decididas por Paula)
+
+- **Solo SukuPay. Nada de Elektra:** la experiencia también se aplica a Elektra, pero Elektra no salió todavía.
+- **México no aparece en el copy.** Solo se ve en la bottom sheet de países, porque es una pantalla real del producto. En textos, cifras y listas de corredores van Guatemala y Colombia: "2 corridors in one home today: Guatemala and Colombia, with room for the next".
+- **Sin referidos.** Se sacó todo lo de "invitá a un amigo", incluida la línea "Por cada amigo…".
+- **Regla "Instantáneo":** cuando el badge de la home dice "Instantáneo", al frente va "Menos de 30 segundos" y la tasa sube, más chica, como "1 USD = 3,950.50 COP". Cuando el badge es "Sin comisiones", al frente va la tasa (Q7.66) con "Tipo de cambio" arriba. Vale para todas las piezas animadas del case y para la card de la home. En el código la aplica una sola función, `box(p,c)`, que lee el mapa `COUNTRY` (`gt` / `co`). No escribir esta lógica a mano en otro lado.
+- **Cifras:** son las de los archivos de diseño y lo dice la nota del antes/después. No se publican métricas internas de la base de SukuPay (regla general, ver "Elektra: sin datos de la base de SukuPay"). Lo que se va a medir va rotulado como meta, en "What we'll measure · Written down before launch", nunca como resultado.
+- **Idioma:** el case va en inglés. Los textos de las pantallas quedan en español, con la traducción entre paréntesis la primera vez, por ejemplo "Sin comisiones (no fees)".
+- **Sin raya larga** en el texto visible y etiquetas en estilo Editorial, como todo el sitio.
+
+### Archivos
+
+| Archivo | Qué es |
+| --- | --- |
+| `sukupay-newxp-case.html` | El case. |
+| `assets/sukupay-newxp/xp-*.webp` | 22 pantallas de la experiencia nueva, todas de 780×1688 (390×844 @2x), WebP calidad 90, de 17 a 115 KB. |
+| `assets/sukupay-newxp/before-*.webp` | 6 pantallas del flujo viejo para el antes/después (`home`, `send`, `pay`, `review`, `done`, `receipt`), con el mismo tamaño. |
+| `assets/sukupay-newxp/before-board-1.webp` / `-2.webp` | Los dos boards del flujo viejo de la sección "Context · SukuPay before". |
+
+**Pantallas nuevas (`xp-`):** `splash`, `login`, `otp`, `privacy`, `home` (Guatemala), `home-co` (Colombia con envíos), `home-co-empty` (Colombia sin envíos, con el banner "Descargá la app"), `country`, `send`, `swap`, `limits`, `pay`, `review`, `done`, `receipt`, `rejected`, `requests`, `sends`, `sends-empty`, `account`, `cards`, `card-delete`.
+
+- **Al actualizar:** reemplazar la carpeta `assets/sukupay-newxp/` entera. Se fueron borrando las pantallas que dejaron de usarse (`after-*`), así que en la carpeta no queda ningún archivo sin uso. Ojo con la regla de Mac de "Home: grilla de casos → Reglas": reemplazar **esta** subcarpeta, no `assets/`.
+- **Verificación:** todo `assets/sukupay-newxp/*.webp` tiene que estar referenciado en el HTML, y todo lo referenciado tiene que existir.
+
+### Pipeline de pantallas
+
+1. **Fuente:** export de Figma a 2x (780 px de ancho), sin textos agregados. Las pantallas del handoff que no se pudieron bajar por URL se sacaron con `get_screenshot` del MCP de Figma.
+2. **Fondo:** se compone sobre blanco (los PNG traen alfa).
+3. **Ancho:** si no viene a 780 px, se escala a 780 (Cuenta vino a 804).
+4. **Alto fijo de 1688 px.** Si sobra, se sacan filas de **zonas vacías** (renglones de un solo color, de 24 px o más, dejando 16 px como mínimo en cada hueco). Nunca se corta la barra de navegación ni un botón. Si falta, se completa con el color de la última fila.
+5. **Sin barra de Safari:** las pantallas viejas traían el footer gris del navegador y se borró en todas. El case muestra la app, no el navegador.
+6. **Casos puntuales:** Límites (`xp-limits`) venía de 1752 px y "Entendido" quedaba cortado, así que se sacaron las filas 300 a 320 y 666 a 710. A la home de Colombia sin envíos se le sacaron 51 px en y=1140. A Pago (`xp-pay`), 32 px entre Tarjeta de débito y Coinbase. A Cuenta, 221 px repartidos entre sus espacios: entra entera, pero "Ayuda" queda algo pegada a la card de arriba.
+
+### Marca del case
+
+- **Teal funcional** `#005043` / `#005044` (botones, links, el header). **Lima** `#61FF61` solo sobre teal o fondo oscuro: sobre blanco no da contraste.
+- **`.accent-card` y `.callout`** usan `--grad-teal`, con el rótulo en lima.
+- **Tipografías:** Inter en el case, como el template. **DM Sans en los mockups en código** (clase `.ui`, `--ui`), porque es la fuente de la app.
+
+### Estructura (orden actual)
+
+1. **Cover:** "sukupay / new experience", eyebrow "Remittances · Fintech · SukuPay · 2026".
+2. **Hero band:** "One home for every corridor. Two steps to send." A la derecha, el teléfono `#hero-phone` en HTML, animado: la home cambia entre Guatemala y Colombia, se abre la bottom sheet de países y se mueve la barra de navegación.
+3. **Situation & task:** "A web app made for one corridor, asked to serve more." Cuatro datos: 2 corredores, 2 pasos, 4 pestañas y 60 s. Card de acento "The bet".
+4. **Context · SukuPay before:** los dos boards del flujo viejo en cards de la misma altura, con el caption abajo.
+5. **Action · 01 What the old flow got wrong:** 8 hallazgos en formato rojo de error.
+6. **The new experience:** "Every screen, from sign-in to receipt." y la banda de mockups a todo el ancho (ver abajo).
+7. **Action · 02 Three changes:** un solo slider (`#ks`) con Home screen, The sender box y Navigation. Un spotlight marca la zona de cada cambio sobre el teléfono.
+8. **Action · 03 Home screen · a modular home:** la home de dos mercados animada (`#mh`) y después la infografía "The home box, piece by piece" (`#hb-stage`). El título "Modules that switch on and off, not screens that get redesigned." **está oculto por ahora**, comentado en el HTML, a pedido de Paula (18 de noviembre).
+9. **Action · 04 The sender box:** la animación del sender box (`#sb-stage`).
+10. **Action · 05 Navigation**
+11. **Action · 06 Behind the tabs:** grilla de 10 pantallas (ver abajo).
+12. **Action · 07 Before and after:** el mismo envío, momento a momento (ver abajo).
+13. **Action · 08 Design decisions**
+14. **Action · 09 From the design system to the handoff**
+15. **What we'll measure:** metas, no resultados.
+16. **Next case → muv**, footer y dock.
+
+- **Fondos:** las secciones alternan `var(--bg2)` y blanco.
+- **Los comentarios del HTML tienen la numeración vieja** (`<!-- 04 HOME BOX -->`, `<!-- 06 SENDER BOX -->`…). La numeración que vale es la del eyebrow.
+
+### La banda de mockups ("The new experience")
+
+- **20 pantallas, ninguna repetida**, en 5 columnas de 4 (`.sc-col.sc-c1` a `.sc-c5`). Bajo 900px quedan 3 columnas.
+- Columnas: (1) splash, review, requests, account · (2) login, done, pay, sends · (3) otp, home, home-co, cards · (4) privacy, swap, limits, card-delete · (5) country, send, rejected, sends-empty.
+- **Animación:** cada columna recorre todas sus pantallas, de `translateY(0)` a `translateY(calc(var(--sh) - 100%))`, donde `--sh` es el alto de la banda (`clamp(560px,62vw,940px)`, 560px bajo 900px). Son 44 s por recorrido, en `alternate`, con pausa en cada punta (0–6% y 94–100%). Las columnas pares van al revés y cada una arranca en otro punto con un `animation-delay` negativo, así la banda siempre se ve escalonada.
+- **Las imágenes de la banda no llevan `loading=lazy`** (van con `fetchpriority="low"`): quedan recortadas por el `overflow:hidden` y con lazy aparecían en blanco al entrar.
+- Máscara con degradé arriba y abajo. Sin caption.
+- Con reduced motion no hay animación y las columnas 2, 3 y 4 quedan corridas para que se vea escalonado.
+- **Historia:** con 3 pantallas por columna el movimiento era de 9% y alcanzaba. Al pasar a 4 (18 de noviembre), la cuarta no se veía nunca, por eso se cambió el recorrido.
+
+### Behind the tabs (Action · 06)
+
+Orden pedido por Paula el 18 de noviembre:
+
+1. First visit (`xp-home-co-empty`)
+2. Back for another send (`xp-home-co`)
+3. Choose the country (`xp-country`)
+4. Limits, explained (`xp-limits`)
+5. No sends yet (`xp-sends-empty`)
+6. Envíos (sends) (`xp-sends`, con el detalle de un envío abierto)
+7. Solicitudes (requests) (`xp-requests`)
+8. Cuenta (account) (`xp-account`)
+9. Saved cards (`xp-cards`)
+10. Deleting asks first (`xp-card-delete`)
+
+- Grilla `.scr-3`. Con 10 pantallas la última queda sola en su fila: se centra con `.scr-3>.scr:last-child:nth-child(3n+1){grid-column:2}`. Bajo 900px vuelve a una columna.
+- Cada pantalla lleva número, título y una línea en inglés.
+
+### Before and after (Action · 07)
+
+- **6 momentos:** Home, Send money · 1/2, Payment method, Review and send · 2/2, Done y Receipt. A la izquierda el flujo viejo (`before-*`), a la derecha el nuevo.
+- Avanza solo cada 6 s, con una barra de progreso en el ítem activo. El hover pausa. Un clic deja fijo ese momento.
+- **Momento 04 en vivo (18 de noviembre):** el teléfono "After" ya no muestra `xp-review.webp` (esa imagen sigue en la banda de mockups). Muestra la pantalla "Revisa y envía" en HTML (`.ba-live`, `#bl-scr`), con los mismos datos del export: +502 483 60496, 764,07 GTQ, 1 USD > 7,62 GTQ y "Pagar con Apple Pay".
+  - La pantalla se arma a 390×844 y se escala al ancho del teléfono con un ResizeObserver.
+  - Debajo del teléfono aparece una pastilla con el contador (`.ba-lock`): "60 s · quote lock, sped up". No es parte de la UI y no está adentro del teléfono.
+  - A los 60 s acelerados (unos 7 s reales) la fila "Tipo de cambio" se ilumina en verde, la tasa pasa a 7,61 y el monto baja a 763,07.
+  - Ese momento dura 10,5 s en lugar de 6, para que se vea completo. Si está fijo por un clic, el contador se repite.
+  - Texto del momento 04: "Who, what arrives, and one clean sum. You pay right here, next to the summary. The rate stays locked for 60 seconds; if it runs out, you see the new amount before being charged."
+- **La sección "Action · 06 Review and send" se eliminó** (18 de noviembre) porque su animación pasó al antes/después. Las secciones de abajo se renumeraron.
+- Nota debajo: "Plays on its own. Pick a moment to stop on it. Screens keep the Spanish copy of the product; figures are from the design files."
+
+### Historial de decisiones
+
+- **Antes/después al final:** primero iba arriba. Paula lo pasó al final: primero los tres cambios en un slider, después cada cambio en detalle, y al final la comparación completa.
+- **Configurador de la home descartado:** se probó un configurador de módulos y a Paula le pareció "muy sobrecargado". Lo reemplazó la home de dos mercados con la animación entre uno y otro.
+- **Card de la home:** primero mostraba el flujo en un teléfono. Paula prefirió solo el home box animado.
+- **Visual de cierre en capas:** se quitó.
+- **Logo de Zigi:** las pantallas viejas tenían el logo de Zigi en el header y se reemplazaron por las de SukuPay.
+- **Before mockups:** se veían "pegados" porque estaban recortados de los boards. Se reemplazaron por frames limpios con el mismo marco negro.
+- **Todo en 2x (17 y 18 de noviembre):** Paula pasó las pantallas en 2x y se re-exportaron todas. Ya no queda ninguna en 1x.
+
+### Card en la home
+
+- **Lugar:** tercera en Selected work, después de belo y sukupay prototyper. sukupay home pasó a ser la primera de More work.
+- **Orden actual de Selected work:** belo, sukupay prototyper, sukupay new experience, muv, vendor tool.
+- **More work:** 12 casos. `.work-count` dice "12 cases".
+- **Rubro:** Fintech. **Nombre:** sukupay *new experience*. **Línea:** "Remittances from the US to Latin America. The old send flow and the new one, side by side."
+- **Cover sin imagen:** `.wc-cover--newxp` es un degradé teal oscuro (`linear-gradient(180deg,#00473B 0%,#00332A 50%,#001E18 100%)` con brillos lima) con el home box en CSS en el centro (`.nx-box`).
+  - Anima solo con CSS, en un ciclo de 10 s: Guatemala ("Sin comisiones", Q7.66, "Por cada 1 USD…") ↔ Colombia ("Instantáneo", "1 USD = 3,950.50 COP" arriba y "Menos de 30 segundos" al frente). Cumple la regla Instantáneo.
+  - Se escala con container queries (`container-type:inline-size`, `--u:calc(66cqw / 340)`).
+  - `index.html` suma DM Sans al link de Google Fonts (`&family=DM+Sans:wght@400;500;600;700`) para esta card.
+
+### Next case
+
+- `sukupay-newxp-case.html` → muv ("Ride-hailing in Paraguay. Onboarding cut from 21 steps to 6.").
+- La cadena correcta, siguiendo el orden de la home, es: belo → sukupay prototyper → **sukupay new experience** → muv → sukupay home. Falta el paso de prototyper (ver Pendientes).
+
+### Pendientes
+
+- `sukupay-proto-case.html`: cambiar su "Next case" para que lleve al case nuevo (hoy lleva a muv):
+  ```html
+  <a class="nc-link" href="sukupay-newxp-case.html">
+    <span class="nc-kicker">Next case</span>
+    <span class="nc-name">sukupay <span>new experience</span><span class="nc-arrow" aria-hidden="true">→</span></span>
+    <span class="nc-line">Remittances from the US to Latin America. The old send flow and the new one, side by side.</span>
+  </a>
+  ```
+- `muv-case.html` ya lleva a sukupay home: no hay que tocarlo.
+- `og:image` apunta a `assets/og/og-sukupay-newxp.jpg`, que todavía no existe. Se puede hacer a 1200×630 con el home box sobre el teal.
+- **En Figma (Paula):**
+  - El comprobante dice "$100..00 USD" (doble punto). Se lee en el momento Receipt del antes/después.
+  - La sheet de Envíos dice "Detalles de envio", sin tilde.
+  - En Cuenta se ve un teléfono completo (+18483604962). Si es real, enmascararlo.
+  - Cuenta: si se exporta con menos aire, se puede volver a meter sin recortar.
+- **Confirmar con Paula:** la cifra "Menos de 30 segundos" de Colombia y el teal oscuro de la card.
+- **Revisar al cerrar:** abrir el case a 390px y comprobar que `document.documentElement.scrollWidth` sea igual al ancho de la ventana, y que al final estén "Next case", footer y dock (regla de belo).
+
+
 ## AJUSTES RÁPIDOS POST-REVIEW (Octubre 2026)
 
 *A partir del feedback de un dev sobre el sitio online. Tocan `index.html`, los 17 HTML de cases y `assets/og/`.*
@@ -3141,6 +3298,8 @@ Los 14 `.tile-arrow-label` dicen "View case study" sin flecha (↗ significa lin
 - La línea de sukupay home volvió a cambiar el 8 de octubre de 2026 (ver "Copy de la home: hero y Selected work").
 
 ### Home: grilla de casos — ESTADO ACTUAL (4 de octubre de 2026)
+
+> **18 de noviembre de 2026:** Selected work es ahora belo, sukupay prototyper, sukupay new experience, muv y vendor tool. sukupay home abre More work, que tiene 12 casos. Ver "SUKUPAY NEW EXPERIENCE CASE STUDY → Card en la home".
 
 > **8 de octubre de 2026:** el rubro y la línea de cada card cambiaron. Las columnas de rubro y descripción de las tablas de acá abajo quedaron viejas; las vigentes están en "Home: aire entre casos en mobile y texto de las cards", punto 4. Covers, posiciones y orden no cambiaron.
 
