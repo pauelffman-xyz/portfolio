@@ -3207,11 +3207,7 @@ body.light-mode .work{ --wc-muted:#5E5E6C; }
 .work-grid{ display:grid; }
 /* five featured: two large on the first row, three on the second */
 .work-grid--feat{ grid-template-columns:repeat(6,minmax(0,1fr)); gap:3.5rem 2rem; }
-.work-grid--feat .work-card{ grid-column:span 2; }
-.work-grid--feat .work-card:nth-child(-n+2){ grid-column:span 3; }
-.work-grid--feat .work-card:nth-child(n+3) .wc-cover{ aspect-ratio:4/3; }
-.work-grid--feat .work-card:nth-child(n+3) .wc-name{ font-size:1.5rem; }
-.work-grid--feat .work-card:nth-child(n+3) .wc-line{ font-size:1rem; }
+.work-grid--feat .work-card{ grid-column:span 3; } /* 18 Nov 2026: 4 cases, 2x2, all large (was 2 large + 3 medium) */
 .work-grid--more{ grid-template-columns:repeat(3,minmax(0,1fr)); gap:3.5rem 2rem; }
 .work-card{
   display:block; color:inherit; text-decoration:none; border-radius:20px;
@@ -3541,6 +3537,13 @@ body.light-mode .work{ --wc-muted:#5E5E6C; }
           <p class="wc-line">Ride-hailing in Paraguay. Onboarding cut from 21 steps to 6.</p>
         </div>
       </a>
+    </div>
+  </section>
+
+  <!-- MORE WORK: every other case, compact grid -->
+  <section class="work work--more" id="more-work" aria-labelledby="work-more-label">
+    <div class="work-head"><h2 class="work-label" id="work-more-label">More work</h2><span class="work-count">13 cases</span></div>
+    <div class="work-grid work-grid--more">
       <a class="work-card" href="vendor-tool-case.html">
         <div class="wc-cover"><img src="assets/vendor-tool-laptop.webp" alt="" loading="lazy" decoding="async" width="2000" height="1333" style="object-position:42% center;"></div>
         <div class="wc-body">
@@ -3549,13 +3552,6 @@ body.light-mode .work{ --wc-muted:#5E5E6C; }
           <p class="wc-line">Restaurants edit their own menu. 72&nbsp;h of manual catalog work, down to zero.</p>
         </div>
       </a>
-    </div>
-  </section>
-
-  <!-- MORE WORK: every other case, compact grid -->
-  <section class="work work--more" id="more-work" aria-labelledby="work-more-label">
-    <div class="work-head"><h2 class="work-label" id="work-more-label">More work</h2><span class="work-count">12 cases</span></div>
-    <div class="work-grid work-grid--more">
       <a class="work-card" href="sukupay-case.html">
         <div class="wc-cover"><img src="assets/suku.jpg" alt="" loading="lazy" decoding="async" width="1420" height="1520" style="object-position:center 18%;"></div>
         <div class="wc-body">

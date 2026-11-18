@@ -1,6 +1,6 @@
 # Paula Elffman — Portfolio OS · Design Bible
 
-*Última actualización: 18 de noviembre de 2026. **Nuevo case: SukuPay · New experience (Nueva XP).** `sukupay-newxp-case.html` es el caso 17. Va tercero en Selected work, después de belo y sukupay prototyper; sukupay home pasa a More work. Cuenta la nueva experiencia con antes y después: home de dos mercados animada, sender box, navegación, una banda con 20 pantallas, las pestañas y un antes/después con la pantalla de revisión en vivo. Tiene reglas de contenido propias: solo SukuPay, México fuera del copy, sin referidos y la regla "Instantáneo". Ver "SUKUPAY NEW EXPERIENCE CASE STUDY · Nueva XP".*
+*Última actualización: 18 de noviembre de 2026. **Nuevo case: SukuPay · New experience (Nueva XP).** `sukupay-newxp-case.html` es el caso 17. Va tercero en Selected work, después de belo y sukupay prototyper. Selected work queda con 4 casos grandes (2×2); vendor tool y sukupay home abren More work. Cuenta la nueva experiencia con antes y después: home de dos mercados animada, sender box, navegación, una banda con 20 pantallas, las pestañas y un antes/después con la pantalla de revisión en vivo. Tiene reglas de contenido propias: solo SukuPay, México fuera del copy, sin referidos y la regla "Instantáneo". Ver "SUKUPAY NEW EXPERIENCE CASE STUDY · Nueva XP".*
 
 *Última actualización previa: 29 de octubre de 2026 — **Nuevo case: belo · Rumbo (agentic banking).** `belo-case.html` es el caso 16. Va tercero en la home, entre sukupay prototyper y sukupay home. Tiene el prototipo navegable arriba de todo, secciones de pantallas reales, cover de card nuevo y su propio cierre "Next case" y dock. Se arregló el final del case, que había quedado roto (dock sin estilos, sin footer ni "Next case"). Ver "BELO CASE STUDY · Rumbo".*
 
@@ -3112,9 +3112,9 @@ Orden pedido por Paula el 18 de noviembre:
 
 ### Card en la home
 
-- **Lugar:** tercera en Selected work, después de belo y sukupay prototyper. sukupay home pasó a ser la primera de More work.
-- **Orden actual de Selected work:** belo, sukupay prototyper, sukupay new experience, muv, vendor tool.
-- **More work:** 12 casos. `.work-count` dice "12 cases".
+- **Lugar:** tercera en Selected work, después de belo y sukupay prototyper.
+- **Orden actual de Selected work (18 de noviembre, pedido de Paula):** belo, sukupay prototyper, sukupay new experience y muv. Son 4, todas grandes (2×2), así Selected work se ve más grande.
+- **More work:** empieza con vendor tool y sigue con sukupay home. Son 13 casos; `.work-count` dice "13 cases".
 - **Rubro:** Fintech. **Nombre:** sukupay *new experience*. **Línea:** "Remittances from the US to Latin America. The old send flow and the new one, side by side."
 - **Cover sin imagen:** `.wc-cover--newxp` es un degradé teal oscuro (`linear-gradient(180deg,#00473B 0%,#00332A 50%,#001E18 100%)` con brillos lima) con el home box en CSS en el centro (`.nx-box`).
   - Anima solo con CSS, en un ciclo de 10 s: Guatemala ("Sin comisiones", Q7.66, "Por cada 1 USD…") ↔ Colombia ("Instantáneo", "1 USD = 3,950.50 COP" arriba y "Menos de 30 segundos" al frente). Cumple la regla Instantáneo.
@@ -3124,7 +3124,7 @@ Orden pedido por Paula el 18 de noviembre:
 ### Next case
 
 - `sukupay-newxp-case.html` → muv ("Ride-hailing in Paraguay. Onboarding cut from 21 steps to 6.").
-- La cadena correcta, siguiendo el orden de la home, es: belo → sukupay prototyper → **sukupay new experience** → muv → sukupay home. Falta el paso de prototyper (ver Pendientes).
+- La cadena correcta, siguiendo el orden de la home, es: belo → sukupay prototyper → **sukupay new experience** → muv → vendor tool → sukupay home. Faltan los pasos de prototyper, muv y vendor tool (ver Pendientes).
 
 ### Pendientes
 
@@ -3136,7 +3136,8 @@ Orden pedido por Paula el 18 de noviembre:
     <span class="nc-line">Remittances from the US to Latin America. The old send flow and the new one, side by side.</span>
   </a>
   ```
-- `muv-case.html` ya lleva a sukupay home: no hay que tocarlo.
+- `muv-case.html`: hoy lleva a sukupay home. Con vendor tool primero en More work, tiene que llevar a vendor tool (línea: "Restaurants edit their own menu. 72 h of manual catalog work, down to zero.").
+- `vendor-tool-case.html`: revisar que su "Next case" lleve a sukupay home.
 - `og:image` apunta a `assets/og/og-sukupay-newxp.jpg`, que todavía no existe. Se puede hacer a 1200×630 con el home box sobre el teal.
 - **En Figma (Paula):**
   - El comprobante dice "$100..00 USD" (doble punto). Se lee en el momento Receipt del antes/después.
@@ -3299,7 +3300,7 @@ Los 14 `.tile-arrow-label` dicen "View case study" sin flecha (↗ significa lin
 
 ### Home: grilla de casos — ESTADO ACTUAL (4 de octubre de 2026)
 
-> **18 de noviembre de 2026:** Selected work es ahora belo, sukupay prototyper, sukupay new experience, muv y vendor tool. sukupay home abre More work, que tiene 12 casos. Ver "SUKUPAY NEW EXPERIENCE CASE STUDY → Card en la home".
+> **18 de noviembre de 2026:** Selected work tiene ahora **4 casos**, todos grandes en una grilla de 2×2: belo, sukupay prototyper, sukupay new experience y muv. vendor tool bajó a More work y va primero, antes de sukupay home. More work tiene 13 casos ("13 cases"). En el CSS, `.work-grid--feat .work-card` es `span 3` para todas; se borraron las reglas `:nth-child(-n+2)` y `:nth-child(n+3)` de desktop (cover 4:3 y nombre más chico de la segunda fila). Con 13, la última fila de More work queda con una sola card. Ver "SUKUPAY NEW EXPERIENCE CASE STUDY → Card en la home".
 
 > **8 de octubre de 2026:** el rubro y la línea de cada card cambiaron. Las columnas de rubro y descripción de las tablas de acá abajo quedaron viejas; las vigentes están en "Home: aire entre casos en mobile y texto de las cards", punto 4. Covers, posiciones y orden no cambiaron.
 
