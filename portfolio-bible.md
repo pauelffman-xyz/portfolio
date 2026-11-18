@@ -3140,8 +3140,6 @@ Orden pedido por Paula el 18 de noviembre:
 - `vendor-tool-case.html`: revisar que su "Next case" lleve a sukupay home.
 - `og:image` apunta a `assets/og/og-sukupay-newxp.jpg`, que todavía no existe. Se puede hacer a 1200×630 con el home box sobre el teal.
 - **En Figma (Paula):**
-  - El comprobante dice "$100..00 USD" (doble punto). Se lee en el momento Receipt del antes/después.
-  - La sheet de Envíos dice "Detalles de envio", sin tilde.
   - En Cuenta se ve un teléfono completo (+18483604962). Si es real, enmascararlo.
   - Cuenta: si se exporta con menos aire, se puede volver a meter sin recortar.
 - **Confirmar con Paula:** la cifra "Menos de 30 segundos" de Colombia y el teal oscuro de la card.
