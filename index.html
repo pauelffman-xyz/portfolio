@@ -28,7 +28,7 @@
 <script src="assets/tab.js" defer></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Muli:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Muli:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@300;400&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* ===== TOKENS ===== */
 :root {
@@ -3252,6 +3252,42 @@ body.light-mode .work{ --wc-muted:#5E5E6C; }
 .bt-phone iframe{display:block;width:390px;height:844px;border:0;border-radius:46px;background:#F6F6F8;pointer-events:none;}
 .bt-logo{position:absolute;right:8%;top:50%;width:12%;aspect-ratio:900/434;margin-top:-2.9%;}
 .bt-logo img{object-fit:contain;}
+/* sukupay new experience (Nov 2026): the home box alone, centred on SukuPay's dark teal.
+   It switches market in a loop: Guatemala (Sin comisiones, the rate in front) -> Colombia
+   (Instantáneo, "Menos de 30 segundos" in front, the rate up and small). Sizes follow the
+   cover width (container units), so the box keeps its proportions in every card size.
+   Fixed colours in both site modes: it is the product's own look. */
+.wc-cover--newxp{container-type:inline-size;display:grid;place-items:center;background:radial-gradient(60% 55% at 50% 0%,rgba(97,255,97,.20),transparent 70%),radial-gradient(55% 50% at 0% 100%,rgba(97,255,97,.10),transparent 70%),linear-gradient(180deg,#00473B 0%,#00332A 50%,#001E18 100%);}
+.nx-box{--u:calc(66cqw / 340);width:calc(var(--u)*340);padding:calc(var(--u)*16) calc(var(--u)*16) calc(var(--u)*18);border-radius:calc(var(--u)*20);background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.08),0 calc(var(--u)*30) calc(var(--u)*60) calc(var(--u)*-20) rgba(0,0,0,.55);font-family:'DM Sans',system-ui,sans-serif;color:#040404;transition:transform 1.2s var(--ease);}
+.work-card:hover .nx-box{transform:translateY(-3%);}
+.nx-top{display:flex;justify-content:space-between;align-items:center;}
+.nx-pill{position:relative;display:inline-flex;align-items:center;gap:calc(var(--u)*7);padding:calc(var(--u)*5) calc(var(--u)*12) calc(var(--u)*5) calc(var(--u)*5);border-radius:999px;background:#F3F0F0;font-weight:700;font-size:calc(var(--u)*15);color:#005044;}
+.nx-pill .caret{width:0;height:0;border-left:calc(var(--u)*5.5) solid transparent;border-right:calc(var(--u)*5.5) solid transparent;border-top:calc(var(--u)*6.5) solid #005044;margin-left:calc(var(--u)*4);}
+.nx-flag{position:relative;width:calc(var(--u)*24);height:calc(var(--u)*24);flex-shrink:0;}
+.nx-flag svg{position:absolute;inset:0;width:100%;height:100%;}
+.nx-sw{display:grid;}
+.nx-sw > *{grid-area:1/1;}
+.nx-vp{position:relative;display:grid;padding:calc(var(--u)*4) calc(var(--u)*9);border-radius:999px;font-weight:500;font-size:calc(var(--u)*12.5);color:#747474;animation:nx-ring 10s cubic-bezier(.28,.11,.32,1) infinite;}
+.nx-vp > span{grid-area:1/1;display:inline-flex;align-items:center;justify-content:flex-end;gap:calc(var(--u)*5);white-space:nowrap;}
+.nx-vp svg{width:calc(var(--u)*13);height:calc(var(--u)*13);}
+.nx-rate{display:grid;text-align:center;margin-top:calc(var(--u)*12);}
+.nx-rate > div{grid-area:1/1;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.nx-rate small{display:inline-flex;align-items:center;gap:calc(var(--u)*4);font-size:calc(var(--u)*12);color:#747474;}
+.nx-rate small svg{width:calc(var(--u)*12);height:calc(var(--u)*12);}
+.nx-rate b{display:block;font-weight:700;font-size:calc(var(--u)*34);line-height:1.15;letter-spacing:-.03em;margin:calc(var(--u)*3) 0 calc(var(--u)*2);}
+.nx-rate b.sp{font-size:calc(var(--u)*27);line-height:1.1;}
+.nx-rate span{font-size:calc(var(--u)*11.5);color:#515151;}
+.nx-cta{margin-top:calc(var(--u)*14);height:calc(var(--u)*52);border-radius:999px;background:#005044;color:#61FF61;display:flex;align-items:center;justify-content:center;gap:calc(var(--u)*20);font-weight:700;font-size:calc(var(--u)*19);}
+.nx-cta svg{width:calc(var(--u)*22);height:calc(var(--u)*22);}
+.nx-bal{margin-top:calc(var(--u)*11);text-align:center;font-size:calc(var(--u)*13.5);font-weight:500;color:#005044;}
+.nx-bal u{font-weight:700;text-underline-offset:calc(var(--u)*3);margin-left:calc(var(--u)*5);}
+/* the two markets: A = Guatemala, B = Colombia */
+.nx-a{animation:nx-a 10s cubic-bezier(.28,.11,.32,1) infinite;}
+.nx-b{opacity:0;animation:nx-b 10s cubic-bezier(.28,.11,.32,1) infinite;}
+@keyframes nx-a{0%,42%{opacity:1;transform:none}48%,92%{opacity:0;transform:translateY(-6%)}98%,100%{opacity:1;transform:none}}
+@keyframes nx-b{0%,42%{opacity:0;transform:translateY(6%)}48%,92%{opacity:1;transform:none}98%,100%{opacity:0;transform:translateY(6%)}}
+@keyframes nx-ring{0%,40%{box-shadow:0 0 0 0 rgba(0,80,68,0)}46%,62%{box-shadow:0 0 0 calc(var(--u)*3) rgba(0,80,68,.14)}70%,90%{box-shadow:0 0 0 0 rgba(0,80,68,0)}96%,100%{box-shadow:0 0 0 calc(var(--u)*3) rgba(0,80,68,.14)}}
+@media(prefers-reduced-motion:reduce){.nx-a,.nx-b,.nx-vp{animation:none;}.nx-b{display:none;}}
 .wc-cover--demo{
   background:radial-gradient(120% 90% at 18% 0%, rgba(97,255,97,.10), transparent 55%),
              linear-gradient(160deg,#0e1a13 0%,#0a1310 46%,#050807 100%);
@@ -3475,20 +3511,34 @@ body.light-mode .work{ --wc-muted:#5E5E6C; }
           <p class="wc-line">One design system for three brands, built so AI works with the real components.</p>
         </div>
       </a>
+      <!-- sukupay new experience (Nov 2026): the home box switching market, CSS only -->
+      <a class="work-card" href="sukupay-newxp-case.html">
+        <div class="wc-cover wc-cover--newxp" aria-hidden="true">
+          <div class="nx-box">
+            <div class="nx-top">
+              <span class="nx-pill"><span class="nx-flag"><span class="nx-a"><svg viewBox="0 0 22 22"><clipPath id="nxc1"><circle cx="11" cy="11" r="11"/></clipPath><g clip-path="url(#nxc1)"><rect width="22" height="22" fill="#fff"/><rect width="7.3" height="22" fill="#4997D0"/><rect x="14.7" width="7.3" height="22" fill="#4997D0"/><circle cx="11" cy="11" r="2.2" fill="#9CC28B"/></g></svg></span><span class="nx-b"><svg viewBox="0 0 22 22"><clipPath id="nxc2"><circle cx="11" cy="11" r="11"/></clipPath><g clip-path="url(#nxc2)"><rect width="22" height="11" fill="#FCD116"/><rect y="11" width="22" height="5.5" fill="#003893"/><rect y="16.5" width="22" height="5.5" fill="#CE1126"/></g></svg></span></span><span class="nx-sw"><span class="nx-a">Guatemala</span><span class="nx-b">Colombia</span></span><span class="caret"></span></span>
+              <span class="nx-vp"><span class="nx-a"><svg viewBox="0 0 24 24"><path d="M10 3.5l1.6 4.4 4.4 1.6-4.4 1.6L10 15.5l-1.6-4.4L4 9.5l4.4-1.6L10 3.5ZM17.5 13.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8.8-2.2Z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>Sin comisiones</span><span class="nx-b"><svg viewBox="0 0 24 24"><path d="M13 3 5 13.5h6L10 21l8-10.5h-6L13 3Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>Instantáneo</span></span>
+            </div>
+            <div class="nx-rate">
+              <div class="nx-a"><small><svg viewBox="0 0 24 24"><path d="M19 8.5A7.5 7.5 0 0 0 5.6 7.4M5 15.5a7.5 7.5 0 0 0 13.4 1.1M19 4v4.5h-4.5M5 20v-4.5h4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Tipo de cambio</small><b>Q7.66</b><span>Por cada 1 USD que envíes</span></div>
+              <div class="nx-b"><small><svg viewBox="0 0 24 24"><path d="M19 8.5A7.5 7.5 0 0 0 5.6 7.4M5 15.5a7.5 7.5 0 0 0 13.4 1.1M19 4v4.5h-4.5M5 20v-4.5h4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>1 USD = 3,950.50 COP</small><b class="sp">Menos de<br>30 segundos</b></div>
+            </div>
+            <div class="nx-cta">Enviar dinero <svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="nx-bal">Disponible <u>5.00 USD</u></div>
+          </div>
+        </div>
+        <div class="wc-body">
+          <div class="wc-cat">Fintech</div>
+          <h3 class="wc-name">sukupay <span>new experience</span></h3>
+          <p class="wc-line">Remittances from the US to Latin America. The old send flow and the new one, side by side.</p>
+        </div>
+      </a>
       <a class="work-card" href="muv-case.html">
         <div class="wc-cover"><video autoplay loop muted playsinline poster="muv-assets/muv-cover-poster.jpg" aria-hidden="true"><source src="assets/muv-cover-home.mp4" type="video/mp4"><source src="assets/muv-cover-home.webm" type="video/webm"></video></div>
         <div class="wc-body">
           <div class="wc-cat">Mobility</div>
           <h3 class="wc-name">muv</h3>
           <p class="wc-line">Ride-hailing in Paraguay. Onboarding cut from 21 steps to 6.</p>
-        </div>
-      </a>
-      <a class="work-card" href="sukupay-case.html">
-        <div class="wc-cover"><img src="assets/suku.jpg" alt="" loading="lazy" decoding="async" width="1420" height="1520" style="object-position:center 18%;"></div>
-        <div class="wc-body">
-          <div class="wc-cat">Fintech</div>
-          <h3 class="wc-name">sukupay <span>home</span></h3>
-          <p class="wc-line">US-to-Guatemala remittances. A UX audit and two directions, now going live.</p>
         </div>
       </a>
       <a class="work-card" href="vendor-tool-case.html">
@@ -3504,8 +3554,16 @@ body.light-mode .work{ --wc-muted:#5E5E6C; }
 
   <!-- MORE WORK: every other case, compact grid -->
   <section class="work work--more" id="more-work" aria-labelledby="work-more-label">
-    <div class="work-head"><h2 class="work-label" id="work-more-label">More work</h2><span class="work-count">11 cases</span></div>
+    <div class="work-head"><h2 class="work-label" id="work-more-label">More work</h2><span class="work-count">12 cases</span></div>
     <div class="work-grid work-grid--more">
+      <a class="work-card" href="sukupay-case.html">
+        <div class="wc-cover"><img src="assets/suku.jpg" alt="" loading="lazy" decoding="async" width="1420" height="1520" style="object-position:center 18%;"></div>
+        <div class="wc-body">
+          <div class="wc-cat">Fintech</div>
+          <h3 class="wc-name">sukupay <span>home</span></h3>
+          <p class="wc-line">US-to-Guatemala remittances. A UX audit and two directions, now going live.</p>
+        </div>
+      </a>
       <a class="work-card" href="hugo-case.html">
         <div class="wc-cover"><video src="assets/hugo.webm" autoplay loop muted playsinline aria-hidden="true" width="960" height="720" style="background:#0B1B3D;"></video></div>
         <div class="wc-body">

@@ -1,0 +1,1928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SukuPay · New experience · Paula Elffman</title>
+<meta name="description" content="SukuPay's new experience: one web app for sending money from the US to Guatemala and Colombia. The old flow and the new one, side by side.">
+<link rel="canonical" href="https://www.paulaelffman.com/sukupay-newxp-case.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Paula Elffman">
+<meta property="og:title" content="SukuPay · New experience">
+<meta property="og:description" content="SukuPay's new experience: one web app for sending money from the US to Guatemala and Colombia. The old flow and the new one, side by side.">
+<meta property="og:url" content="https://www.paulaelffman.com/sukupay-newxp-case.html">
+<meta property="og:image" content="https://www.paulaelffman.com/assets/og/og-sukupay-newxp.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SukuPay · New experience">
+<meta name="twitter:description" content="SukuPay's new experience: one web app for sending money from the US to Guatemala and Colombia. The old flow and the new one, side by side.">
+<meta name="twitter:image" content="https://www.paulaelffman.com/assets/og/og-sukupay-newxp.jpg">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="alternate icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<script src="assets/tab.js" defer></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#F5F4F0;
+  --bg2:#EDEAE4;
+  --bg3:#E4E1DA;
+  --ghost:#EDEAE4;
+  --ghost-2:#E4E1DA;
+  --paper:#152119;
+  --ash:rgba(21,33,25,.55);
+  --ash-2:rgba(21,33,25,.28);
+  --accent:#0E6B4A;
+  --lime:#AEEB3B;
+  --dark:#0B2A20;
+  --line:rgba(21,33,25,.08);
+  --line-md:rgba(21,33,25,.16);
+  --line2:rgba(21,33,25,.14);
+  --ease:cubic-bezier(0.22,1,0.36,1);
+}
+html{font-size:16px;}
+body{
+  font-family:'Inter',sans-serif;
+  background:var(--bg);
+  color:var(--paper);
+  -webkit-font-smoothing:antialiased;
+}
+#wipe-overlay{
+  position:fixed; inset:0; z-index:99999;
+  background:var(--bg);
+  pointer-events:none;
+  clip-path:circle(0% at 50% 50%);
+}
+#wipe-overlay.animate{ transition:clip-path .6s cubic-bezier(.65,0,.35,1); }
+#wipe-overlay.dark{ background:#24242C; }
+
+/* ─── SHARED ─── */
+.mono{font-family:'Space Grotesk',sans-serif;}
+.accent{color:var(--accent);}
+.lime{color:var(--lime);}
+
+/* ─── SECTION WRAPPER ─── */
+.section{padding:5rem 4rem;}
+.section + .section{border-top:1px solid var(--line2);}
+
+/* ─── EYEBROW ─── */
+.eyebrow{
+  font-family:'Inter',sans-serif;
+  font-size:.9375rem;letter-spacing:0;text-transform:none;
+  color:var(--ash);margin-bottom:1rem;
+  display:flex;align-items:center;gap:.75rem;font-weight:500;}
+.eyebrow::before{content:'';width:20px;height:1px;background:var(--accent);flex-shrink:0;display:none;}
+
+/* ─── PHONES ─── */
+.phone-wrap{display:flex;flex-direction:column;align-items:center;}
+.phone-shell{
+  border-radius:20px;overflow:hidden;background:transparent;
+  box-shadow:0 0 0 1px rgba(21,33,25,.08), 0 16px 48px rgba(21,33,25,.14), 0 4px 12px rgba(21,33,25,.08);
+  position:relative;
+}
+.phone-shell img{display:block;width:100%;height:auto;}
+.badge{
+  margin-top:-12px;position:relative;z-index:5;
+  display:inline-flex;align-items:center;gap:.4rem;
+  padding:.3rem .875rem;border-radius:100px;
+  font-family:'Inter',sans-serif;
+  font-size:.75rem;letter-spacing:0;text-transform:none;
+}
+.badge-a{background:var(--accent);color:#fff;}
+.badge-g{background:var(--bg2);color:var(--ash);border:1px solid var(--line2);}
+.badge-l{background:rgba(174,235,59,.18);color:#5B7A0E;border:1px solid rgba(174,235,59,.4);}
+
+.plabel{margin-top:1.5rem;text-align:center;max-width:210px;}
+.pl-n{font-family:'Inter',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;color:var(--accent);margin-bottom:.375rem;}
+.pl-t{font-size:.875rem;font-weight:700;color:var(--paper);letter-spacing:-.02em;margin-bottom:.25rem;}
+.pl-d{font-size:.75rem;line-height:1.55;color:var(--ash);}
+
+/* wire / component shell */
+.wire-shell{
+  border-radius:12px;overflow:hidden;
+  background:transparent;
+  display:flex;align-items:center;justify-content:center;
+}
+.wire-shell img{display:block;width:100%;height:auto;}
+
+/* flow arrow */
+.arrow-col{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:.375rem;padding-top:5rem;
+}
+.arr-dot{width:5px;height:5px;border-radius:50%;background:var(--accent);}
+.arr-line{width:1px;height:28px;background:linear-gradient(to bottom,var(--accent),rgba(21,33,25,0));}
+.arr-lbl{
+  font-family:'Inter',sans-serif;
+  font-size:.6875rem;letter-spacing:0;text-transform:none;
+  color:var(--accent);writing-mode:vertical-rl;margin-top:.25rem;
+}
+
+/* ─── SECTION 00: COVER ─── */
+.cover{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:4rem;
+  align-items:end;
+  padding:5rem 4rem 4rem;
+}
+.cover-title{
+  font-size:clamp(4.5rem,10vw,10rem);
+  font-weight:800;letter-spacing:-.06em;line-height:.85;
+  color:var(--paper);
+}
+.cover-title .dim{color:rgba(21,33,25,.15);}
+.cover-meta{
+  display:flex;flex-direction:column;gap:1.25rem;
+  padding-bottom:.5rem;
+}
+.cm-label{font-family:'Inter',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--ash);margin-bottom:.25rem;}
+.cm-val{font-size:.875rem;font-weight:500;color:var(--paper);}
+
+/* ─── SECTION 01: OVERVIEW ─── */
+.overview-grid{
+  display:grid;
+  grid-template-columns:1.3fr 1fr 1fr;
+  gap:3rem;
+  align-items:start;
+}
+.ov-title{
+  font-size:clamp(2.25rem,4vw,3.75rem);
+  font-weight:800;letter-spacing:-.04em;line-height:1.02;
+  margin-bottom:1.5rem;
+}
+.ov-body{font-size:.9375rem;line-height:1.75;color:var(--ash);font-weight:300;}
+.ov-body strong{color:var(--paper);font-weight:600;}
+.stats-col{display:flex;flex-direction:column;gap:0;}
+.stat-item{
+  padding:1.25rem 0;
+  border-bottom:1px solid var(--line);
+  display:flex;align-items:baseline;gap:.875rem;
+}
+.stat-val{font-size:2rem;font-weight:800;letter-spacing:-.04em;color:var(--paper);white-space:nowrap;}
+.stat-lbl{font-size:.8125rem;color:var(--ash);line-height:1.4;}
+.accent-card{
+  background:var(--accent);
+  border-radius:12px;padding:2rem;
+}
+.ac-lbl{font-family:'Inter',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:rgba(255,255,255,.6);margin-bottom:.875rem;}
+.ac-val{font-size:1.375rem;font-weight:700;letter-spacing:-.02em;color:#fff;line-height:1.35;margin-bottom:.75rem;}
+.ac-desc{font-size:.8125rem;color:rgba(255,255,255,.82);line-height:1.65;}
+
+/* ─── PILL ROW (assumptions) ─── */
+.pill-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2.5rem;}
+.pill-card{
+  background:var(--bg2);border:1px solid var(--line);border-radius:12px;
+  padding:1.5rem 1.25rem;text-align:center;
+}
+.pill-ico{
+  width:36px;height:36px;border-radius:50%;
+  background:rgba(14,107,74,.1);color:var(--accent);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto .875rem;font-size:1rem;font-weight:700;
+}
+.pill-t{font-size:.8125rem;font-weight:600;color:var(--paper);line-height:1.4;}
+.pill-note{
+  margin-top:1.25rem;text-align:center;font-size:.75rem;color:var(--ash);
+  font-style:italic;
+}
+
+/* ─── COMPETITOR GRID ─── */
+.comp-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:var(--line);border:1px solid var(--line);border-radius:12px;
+  overflow:hidden;margin-top:3rem;
+}
+.comp-card{background:var(--bg2);padding:1.75rem 1.5rem;display:flex;flex-direction:column;}
+.comp-name{font-size:1rem;font-weight:800;letter-spacing:-.02em;color:var(--paper);margin-bottom:.25rem;}
+.comp-owns{font-family:'Inter',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--accent);margin-bottom:1rem;}
+.comp-list{list-style:none;display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.25rem;flex:1;}
+.comp-list li{font-size:.75rem;line-height:1.5;color:var(--ash);padding-left:.875rem;position:relative;}
+.comp-list li::before{content:'';position:absolute;left:0;top:.5em;width:4px;height:4px;border-radius:50%;background:var(--ash-2);}
+.comp-insight{
+  padding-top:1rem;border-top:1px solid var(--line);
+  font-size:.75rem;line-height:1.55;color:var(--paper);font-weight:500;
+}
+.comp-insight span{font-family:'Inter',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;color:var(--ash-2);display:block;margin-bottom:.375rem;font-weight:400;}
+
+.opportunity-box{
+  margin-top:1.5rem;background:var(--dark);border-radius:12px;padding:1.75rem 2rem;
+  text-align:center;
+}
+.opportunity-box .co-lbl{font-family:'Inter',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;color:rgba(255,255,255,.4);margin-bottom:.75rem;}
+.opportunity-box .co-t{font-size:1.125rem;font-weight:600;letter-spacing:-.01em;line-height:1.5;color:#fff;max-width:760px;margin:0 auto;}
+.opportunity-box .co-t .lime{color:var(--lime);font-weight:700;}
+
+/* ─── OLD XP CAROUSEL (multi-item marquee) ─── */
+.oldxp-block{margin-bottom:3rem;}
+.oldxp-tag{
+  font-family:'Inter',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;
+  color:var(--ash);text-align:center;margin-bottom:1.5rem;
+}
+.oldxp-carousel{
+  position:relative;overflow:hidden;
+  -webkit-mask-image:linear-gradient(to right,transparent 0,#000 6%,#000 94%,transparent 100%);
+  mask-image:linear-gradient(to right,transparent 0,#000 6%,#000 94%,transparent 100%);
+}
+.oldxp-track{
+  display:flex;align-items:flex-start;gap:1.75rem;width:max-content;
+  animation:oldxp-scroll 32s linear infinite;
+}
+.oldxp-carousel:hover .oldxp-track{animation-play-state:paused;}
+@keyframes oldxp-scroll{
+  from{transform:translateX(0);}
+  to{transform:translateX(-50%);}
+}
+.oldxp-slide{
+  flex:0 0 auto;
+  display:flex;flex-direction:column;align-items:center;
+}
+.oldxp-slide img{
+  height:340px;width:auto;display:block;
+  filter:drop-shadow(0 16px 32px rgba(21,33,25,.14));
+}
+.oldxp-cap{
+  margin-top:.875rem;font-size:.75rem;font-weight:600;color:var(--paper);
+  display:flex;align-items:center;gap:.5rem;
+}
+.oldxp-cap::before{content:'';width:14px;height:1px;background:var(--accent);}
+@media(max-width:720px){
+  .oldxp-slide img{height:260px;}
+}
+
+/* ─── AUDIT LAYOUT ─── */
+.audit-layout{margin-top:3rem;}
+.audit-list{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;}
+.audit-item{
+  background:#fff;border-radius:16px;padding:1.5rem 1.375rem;
+  box-shadow:0 1px 2px rgba(21,33,25,.04), 0 12px 28px rgba(21,33,25,.07);
+  border:1px solid rgba(21,33,25,.04);
+  transition:transform .3s var(--ease),box-shadow .3s var(--ease);
+}
+.audit-item:hover{transform:translateY(-2px);box-shadow:0 1px 2px rgba(21,33,25,.04), 0 18px 36px rgba(21,33,25,.1);}
+.audit-t{font-size:.9375rem;font-weight:700;color:var(--paper);letter-spacing:-.015em;margin-bottom:.5rem;}
+.audit-d{font-size:.75rem;line-height:1.6;color:var(--ash);}
+@media(max-width:1100px){
+  .audit-list{grid-template-columns:repeat(2,1fr);}
+}
+
+.proscons{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2rem;}
+.pc-box{border-radius:12px;padding:1.5rem 1.75rem;}
+.pc-pros{background:rgba(14,107,74,.06);border:1px solid rgba(14,107,74,.18);}
+.pc-cons{background:rgba(232,80,80,.05);border:1px solid rgba(232,80,80,.16);}
+.pc-lbl{font-family:'Inter',sans-serif;font-size:.8125rem;letter-spacing:0;text-transform:none;margin-bottom:.875rem;}
+.pc-pros .pc-lbl{color:var(--accent);}
+.pc-cons .pc-lbl{color:#C0392B;}
+.pc-box ul{list-style:none;display:flex;flex-direction:column;gap:.625rem;}
+.pc-box li{font-size:.8125rem;line-height:1.55;color:var(--paper);padding-left:1rem;position:relative;}
+.pc-box li::before{content:'—';position:absolute;left:0;color:var(--ash-2);}
+
+/* ─── PRINCIPLES ROW ─── */
+.principles-row{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-top:3rem;}
+.principle-card{background:var(--bg2);padding:1.75rem 1.25rem;text-align:center;}
+.principle-n{font-family:'Space Grotesk',sans-serif;font-size:.5rem;color:var(--accent);margin-bottom:.75rem;}
+.principle-t{font-size:.8125rem;font-weight:700;color:var(--paper);line-height:1.45;letter-spacing:-.01em;}
+
+/* ─── TWO DIRECTIONS ─── */
+.directions-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;margin-top:3rem;}
+.direction-card{background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:2.5rem;display:flex;flex-direction:column;}
+.dir-tag{display:inline-flex;align-self:flex-start;padding:.3rem .875rem;border-radius:100px;background:var(--accent);color:#fff;font-family:'Inter',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;margin-bottom:1.25rem;}
+.dir-tag.dir-tag-2{background:var(--dark);}
+.dir-title{font-size:1.5rem;font-weight:800;letter-spacing:-.03em;margin-bottom:1rem;}
+.dir-body{font-size:.8438rem;line-height:1.72;color:var(--ash);font-weight:300;margin-bottom:1.75rem;}
+.dir-body strong{color:var(--paper);font-weight:600;}
+.dir-shot{display:flex;justify-content:center;margin-top:auto;padding-top:1rem;}
+.dir-shot .phone-shell{width:190px;}
+.dir-shot.dir-shot-wide .phone-shell{width:auto;max-width:100%;box-shadow:none;border-radius:12px;}
+.proto-embed{margin-top:2.5rem;}
+.proto-embed-label{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;margin-bottom:1.25rem;}
+.proto-embed-tag{display:inline-flex;align-items:center;gap:.5rem;padding:.3rem .875rem;border-radius:100px;background:var(--dark);color:#fff;font-family:'Inter',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;flex-shrink:0;}
+.proto-embed-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--lime);}
+.proto-embed-hint{font-size:.8125rem;line-height:1.6;color:var(--ash);font-weight:300;max-width:34rem;}
+.proto-embed-frame{border:1px solid var(--line);border-radius:20px;overflow:hidden;background:#F1F0EC;box-shadow:0 24px 60px -32px rgba(11,42,32,.25);}
+.proto-embed-frame iframe{display:block;width:100%;border:0;}
+
+/* ─── SCROLL BEHAVIOR ─── */
+.scroll-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:3rem;align-items:start;}
+.scroll-item{display:flex;flex-direction:column;align-items:center;}
+.scroll-item .phone-shell{width:190px;}
+.scroll-lbl{margin-top:1.25rem;text-align:center;max-width:200px;}
+.scroll-lbl strong{display:block;font-size:.875rem;font-weight:700;letter-spacing:-.01em;color:var(--paper);margin-bottom:.25rem;}
+.scroll-lbl span{font-size:.75rem;color:var(--ash);line-height:1.5;}
+
+/* ─── SECTION 04: DECISIONS ─── */
+.decisions-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1px;
+  background:var(--line);
+  border:1px solid var(--line);
+  border-radius:12px;
+  overflow:hidden;
+  margin-top:3rem;
+}
+.dec{background:var(--bg2);padding:2rem 1.75rem;}
+.dec-n{font-family:'Inter',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;color:var(--accent);margin-bottom:.875rem;}
+.dec-t{font-size:1rem;font-weight:700;color:var(--paper);letter-spacing:-.02em;margin-bottom:.5rem;}
+.dec-d{font-size:.8125rem;line-height:1.65;color:var(--ash);}
+
+/* ─── SUPPORT / TEST CALLOUT ─── */
+.test-layout{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;margin-top:3rem;}
+.test-q{display:flex;flex-direction:column;gap:.875rem;}
+.test-q-item{display:flex;gap:.75rem;align-items:flex-start;padding:.875rem 0;border-bottom:1px solid var(--line);}
+.test-q-item:last-child{border-bottom:none;}
+.test-q-mark{font-family:'Space Grotesk',sans-serif;font-size:.6875rem;color:var(--accent);flex-shrink:0;}
+.test-q-item p{font-size:.8438rem;line-height:1.6;color:var(--paper);}
+
+/* ─── INSIGHTS ─── */
+.insights-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:1rem;
+  margin-top:3rem;
+}
+.ins{padding:1.75rem;border:1px solid var(--line);border-radius:12px;background:var(--bg2);}
+.ins-n{font-family:'Inter',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;color:var(--ash);margin-bottom:.75rem;}
+.ins-t{font-size:.9375rem;font-weight:700;color:var(--paper);letter-spacing:-.02em;margin-bottom:.375rem;}
+.ins-d{font-size:.8125rem;line-height:1.6;color:var(--ash);}
+
+/* ─── DARK CALLOUT ─── */
+.callout{
+  background:var(--dark);border-radius:16px;padding:2.5rem;
+}
+.co-lbl{font-family:'Inter',sans-serif;font-size:.75rem;letter-spacing:0;text-transform:none;color:rgba(255,255,255,.35);margin-bottom:1rem;}
+.co-t{font-size:1.375rem;font-weight:700;letter-spacing:-.025em;line-height:1.3;margin-bottom:.875rem;color:#fff;}
+.co-d{font-size:.8125rem;line-height:1.7;color:rgba(255,255,255,.6);}
+.co-stats{margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.1);display:flex;gap:1.5rem;flex-wrap:wrap;}
+.cos-v{font-size:1.25rem;font-weight:800;letter-spacing:-.03em;color:var(--lime);}
+.cos-l{font-size:.625rem;color:rgba(255,255,255,.4);margin-top:.125rem;}
+
+/* ─── FOOTER ─── */
+.footer{
+  padding:2rem 4rem;
+  border-top:1px solid var(--line2);
+  display:flex;justify-content:space-between;align-items:center;
+}
+.footer-l,.footer-r{
+  font-family:'Inter',sans-serif;
+  font-size:.8125rem;letter-spacing:0;text-transform:none;color:var(--ash);
+}
+
+/* ─── BACK NAV ─── */
+.back-nav{
+  position:sticky;
+  top:0;z-index:100;
+  background:rgba(245,244,240,0.92);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(21,33,25,.08);
+  padding:1rem 4rem;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.back-btn{
+  display:inline-flex;align-items:center;gap:.625rem;
+  font-family:'Inter',sans-serif;
+  font-size:.8125rem;letter-spacing:0;text-transform:none;
+  color:var(--accent);
+  background:none;border:none;cursor:pointer;
+  text-decoration:none;
+  transition:gap .2s;
+}
+.back-btn:hover{gap:1rem;}
+.back-btn span{font-size:.875rem;}
+.back-nav-title{
+  font-family:'Inter',sans-serif;
+  font-size:.8125rem;letter-spacing:0;text-transform:none;
+  color:rgba(21,33,25,.4);
+}
+.back-nav-right{
+  font-family:'Inter',sans-serif;
+  font-size:.8125rem;letter-spacing:0;text-transform:none;
+  color:var(--ash);
+}
+
+/* Section divider label */
+.section-label{
+  display:flex;align-items:center;gap:1.5rem;
+  margin-bottom:3rem;
+}
+.sl-text{
+  font-family:'Inter',sans-serif;
+  font-size:.875rem;letter-spacing:0;text-transform:none;color:var(--ash-2);
+  white-space:nowrap;font-weight:500;}
+.sl-line{flex:1;height:1px;background:var(--line);}
+
+@media(max-width:900px){
+  .overview-grid,.pill-row,.comp-grid,.principles-row,.directions-grid,.scroll-grid,.decisions-grid,.audit-layout,.test-layout,.insights-grid,.proscons{grid-template-columns:1fr !important;}
+  .audit-list{grid-template-columns:1fr;}
+  .proto-embed-frame iframe{height:960px;}
+}
+</style>
+
+<style>
+/* ── DESIGN SYSTEM SECTION ── */
+.ds-intro { margin-bottom:3.5rem; }
+.ds-title {
+  font-family:'Inter',sans-serif;
+  font-size:clamp(2.25rem,4vw,3.75rem);
+  font-weight:800;letter-spacing:-.04em;color:var(--paper);
+  line-height:1.02;margin-bottom:1rem;
+}
+.ds-title em { font-style:normal;color:var(--accent); }
+.ds-sub {
+  font-family:'Inter',sans-serif;font-size:1rem;
+  line-height:1.75;color:var(--ash);font-weight:300;max-width:680px;
+}
+
+.ds-group {
+  margin-bottom:4rem;
+  padding-bottom:4rem;
+  border-bottom:1px solid var(--line);
+}
+.ds-group-label {
+  display:flex;align-items:center;gap:.875rem;
+  font-family:'Inter',sans-serif;font-size:1.125rem;font-weight:700;
+  color:var(--paper);letter-spacing:-.02em;
+  margin-bottom:.875rem;
+}
+.ds-group-num {
+  font-family:'Space Grotesk',sans-serif;font-size:.5625rem;
+  letter-spacing:.12em;color:var(--accent);
+  border:1px solid rgba(14,107,74,.3);border-radius:100px;
+  padding:.2rem .625rem;
+}
+.ds-group-desc {
+  font-family:'Inter',sans-serif;font-size:.9375rem;
+  line-height:1.7;color:var(--ash);font-weight:300;
+  max-width:720px;margin-bottom:2rem;
+}
+
+.ds-comp-grid { display:grid;gap:1.5rem; }
+.ds-2col { grid-template-columns:1fr 1fr; }
+
+.ds-comp {
+  background:var(--ghost);border:1px solid var(--line);
+  border-radius:14px;overflow:hidden;
+  transition:border-color .3s;
+}
+.ds-comp:hover { border-color:var(--line-md); }
+.ds-comp-label {
+  font-family:'Inter',sans-serif;font-size:.8125rem;
+  letter-spacing:0;text-transform:none;
+  color:var(--ash);padding:.875rem 1.25rem;
+  border-bottom:1px solid var(--line);
+}
+.ds-comp-img {
+  padding:1.75rem;background:var(--ghost-2);
+  display:flex;align-items:center;justify-content:center;
+}
+.ds-comp-img img {
+  max-width:50%;height:auto;display:block;
+}
+.ds-comp-img-wide img { max-width:70%; }
+.ds-comp-img-full img { max-width:100%; }
+.ds-comp-meta {
+  display:flex;flex-wrap:wrap;gap:.375rem;
+  padding:.875rem 1.25rem;
+}
+
+.ds-tag {
+  padding:.25rem .75rem;border-radius:100px;
+  border:1px solid var(--line-md);
+  font-family:'Inter',sans-serif;font-size:.75rem;
+  letter-spacing:0;text-transform:none;color:var(--ash-2);
+}
+.ds-tag-accent { border-color:rgba(174,235,59,.5);color:#5B7A0E; }
+.ds-tag-green { border-color:rgba(14,107,74,.35);color:var(--accent); }
+.ds-tag-red { border-color:rgba(232,80,80,.3);color:#C0392B; }
+
+.ds-type-card{
+  display:grid;grid-template-columns:1fr 1.4fr;gap:2rem;align-items:center;
+  background:var(--ghost);border:1px solid var(--line);border-radius:14px;
+  padding:2rem;margin-bottom:4rem;
+}
+.ds-type-sample{font-family:'Inter',sans-serif;font-weight:800;font-size:3rem;letter-spacing:-.04em;color:var(--paper);}
+.ds-type-desc{font-size:.8438rem;line-height:1.7;color:var(--ash);font-weight:300;}
+.ds-type-desc strong{color:var(--paper);font-weight:600;}
+
+/* DS Principles */
+.ds-principles {
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+  background:var(--line);border:1px solid var(--line);
+  border-radius:12px;overflow:hidden;margin-top:3rem;
+}
+.ds-principle { background:var(--ghost);padding:2rem; }
+.dsp-num {
+  font-family:'Space Grotesk',sans-serif;font-size:.5rem;
+  letter-spacing:.12em;color:var(--accent);margin-bottom:.875rem;
+}
+.dsp-title {
+  font-family:'Inter',sans-serif;font-size:1rem;font-weight:700;
+  color:var(--paper);letter-spacing:-.02em;margin-bottom:.5rem;
+}
+.dsp-desc {
+  font-family:'Inter',sans-serif;font-size:.8125rem;
+  line-height:1.65;color:var(--ash);font-weight:300;
+}
+
+@media(max-width:768px){
+  .ds-2col { grid-template-columns:1fr; }
+  .ds-principles { grid-template-columns:1fr; }
+  .ds-type-card{grid-template-columns:1fr;}
+}
+</style>
+<style id="v3-principles">
+/* ════════════════════════════════════════════════════════════
+   v3 · Portfolio principles (adapter for the .section/.cover template)
+   Same rules as muv-case.html: 1. motion with a pause  2. more air
+   3. Apple-style shadows (borders out, depth in)  4. Apple-style gradients
+   Per case: only --brand (and the page colour) changes.
+   ════════════════════════════════════════════════════════════ */
+:root{
+  --bg:#FFFFFF;--bg2:#F5F5F7;--bg3:#E8E8ED;
+  --brand:#0E6B4A;
+  --sec:clamp(96px,12vw,176px);
+  --stack:clamp(48px,6vw,96px);
+  --r-card:16px;
+  --card:#FFFFFF;
+  --sh-card:0 1px 2px rgba(0,0,0,.03),2px 4px 12px rgba(0,0,0,.08);
+  --sh-float:0 2px 6px rgba(0,0,0,.04),0 12px 24px rgba(0,0,0,.06),0 32px 72px rgba(0,0,0,.10);
+  --sh-ring:0 0 0 1px rgba(0,0,0,.04);
+  --ease-apple:cubic-bezier(.28,.11,.32,1);
+}
+/* gradients live on body so they follow the dark-mode --bg */
+body{
+  --grad-hero:linear-gradient(180deg,color-mix(in srgb,var(--brand) 14%,var(--bg)) 0%,color-mix(in srgb,var(--brand) 5%,var(--bg)) 45%,var(--bg) 100%);
+  --grad-neutral:linear-gradient(180deg,color-mix(in srgb,#8E8E93 9%,var(--bg)) 0%,color-mix(in srgb,#8E8E93 3%,var(--bg)) 55%,var(--bg) 100%);
+}
+body.dark-mode{
+  --card:var(--bg3);
+  --sh-card:0 0 0 1px rgba(255,255,255,.06),0 8px 24px rgba(0,0,0,.35);
+  --sh-float:0 0 0 1px rgba(255,255,255,.06),0 16px 40px rgba(0,0,0,.40),0 40px 90px rgba(0,0,0,.35);
+  --sh-ring:0 0 0 1px rgba(255,255,255,.06);
+}
+
+/* 2 · more air */
+.section{padding-top:var(--sec);padding-bottom:var(--sec);}
+.section + .section{border-top:0;}
+.cover{padding-top:clamp(96px,12vw,160px);padding-bottom:clamp(72px,9vw,128px);}
+.section-label{margin-bottom:clamp(40px,5vw,72px);}
+.eyebrow{margin-bottom:1.5rem;}
+.decisions-grid,.dec-grid,.dd-grid,.insights-grid,.ins-grid,.impact-grid,.panel-grid,
+.sketch-strip,.persona-grid,.attr-grid,.collision,.compare-row,.fix-table,.ui-flow-labels{margin-top:var(--stack);}
+.overview-grid{gap:clamp(40px,6vw,96px);}
+
+/* 4 · gradients: a brand tint at the top that melts into the page */
+.cover{background:var(--grad-hero);}
+.cover + div[style*="height:1px"]{display:none;}
+.section[style*="background:var(--bg2)"]{background:var(--grad-neutral)!important;}
+/* two tinted sections in a row: only the first carries the gradient */
+.section[style*="background:var(--bg2)"] + .section[style*="background:var(--bg2)"]{background:var(--bg)!important;}
+/* dark brand boxes keep their colour and gain a soft top-left light */
+.callout,.quote-block,.accent-card,.panel-foot{
+  background-image:radial-gradient(120% 140% at 0% 0%,rgba(255,255,255,.16) 0%,rgba(255,255,255,0) 55%);
+  border-radius:20px;
+}
+
+/* 3 · shadows: hairline grids become separate floating cards */
+.decisions-grid,.dec-grid,.dd-grid,.metrics-bento,.impact-strip,.quotes-grid,.principles-row{
+  gap:clamp(12px,1.5vw,20px);background:transparent;border:0;border-radius:0;overflow:visible;
+}
+.decisions-grid > *,.dec-grid > *,.dd-grid > *,.metrics-bento > *,.impact-strip > *,.quotes-grid > *,.principles-row > *{
+  background:var(--card);border-radius:var(--r-card);box-shadow:var(--sh-card);
+}
+.ins,.ui-label,.panel-card,.impact-card,.col-card,.step-card,.direction-card,.unlock-card,.email-card,
+.pill-card,.audit-item,.goal-item,.use-case{
+  background:var(--card);border-color:transparent;border-radius:var(--r-card);box-shadow:var(--sh-card);
+}
+.sketch-item,.wire-shell-full,.wire-shell,.fix-table,.bench-shell,.roles-mini,.config-panel,.ds-comp,.vds-comp-card,
+.ds-type-card,.ds-principles,.comp-grid,.diag-grid,.pillars-grid,.layer-card,.norte-card,.proto-demo,.reaction-pair{
+  border-color:transparent;box-shadow:var(--sh-card);
+}
+/* media: frames get the card shadow, devices float */
+.img-frame,.browser-shell,.shot-frame,.proto-embed-frame,.cover-video-frame,.video-frame{
+  border:0;border-radius:var(--r-card);box-shadow:var(--sh-card);
+}
+.phone-shell,.phone-shell-sm,.otp-phone,.hugo-phone,.proto-phone,.device-phone,.device-laptop{
+  border-color:transparent;box-shadow:var(--sh-ring),var(--sh-float);
+}
+
+/* 1 · motion with a pause: slow start, long settle (delays are kept) */
+.reveal{transition-duration:1s;transition-timing-function:var(--ease-apple);}
+@media (prefers-reduced-motion:reduce){.reveal{transition:none;}}
+
+/* dark-mode leftovers from the old template */
+body.dark-mode .cover-title .dim{color:rgba(244,244,246,.14);}
+body.dark-mode .section[style*="#fff 100%"]{background:var(--bg)!important;}
+body.dark-mode .back-nav{background:color-mix(in srgb,var(--bg) 90%,transparent);border-bottom-color:rgba(244,244,246,.08);}
+body.dark-mode .nav-right,body.dark-mode .back-nav-right{color:rgba(244,244,246,.4);}
+.browser-bar,.browser-topbar{background:var(--bg2);}
+
+body:not(.dark-mode) .back-nav{background:rgba(255,255,255,.82);}
+
+/* ═══ MOBILE: no horizontal scroll (Oct 2026) ═══ */
+@media(max-width:768px){
+  /* padding comes down: content was 262 of 390px */
+  .section{padding-left:1.25rem;padding-right:1.25rem;}
+  .section[style*="padding:"]{padding-left:1.25rem!important;padding-right:1.25rem!important;}
+  .cover{grid-template-columns:1fr;gap:2rem;align-items:start;padding-left:1.25rem;padding-right:1.25rem;}
+  .footer{padding-left:1.25rem;padding-right:1.25rem;flex-direction:column;align-items:flex-start;gap:.5rem;}
+  .back-nav{padding-left:1.25rem;padding-right:1.25rem;}
+  /* top bar: keep back link + case name */
+  .back-nav-right,.nav-right{display:none;}
+  .back-nav{gap:1rem;}
+  .back-btn{white-space:nowrap;flex-shrink:0;}
+  .back-nav-title,.nav-title{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  /* label row was a nowrap flex line wider than the screen */
+  .section-label{flex-direction:column;align-items:flex-start;gap:.5rem;}
+  .section-label .sl-line,.section-label .sl-l{display:none;}
+  .sl-text,.sl-t{white-space:normal;}
+  /* two-column blocks collapse to one column (inline grids included) */
+  [style*="grid-template-columns"]{grid-template-columns:minmax(0,1fr)!important;}
+  [style*="gap:4rem"],[style*="gap:3rem"]{gap:2rem!important;}
+}
+/* ═══ /MOBILE ═══ */
+</style>
+<!-- HEADER: transparent at the top of the page, glass once you scroll (Oct 2026). Same block in every case. -->
+<style id="nav-glass">
+:root{--nav-h:73px;}
+.back-nav{margin-bottom:calc(-1 * var(--nav-h));transition:background-color .35s ease,border-color .35s ease,-webkit-backdrop-filter .35s ease,backdrop-filter .35s ease,box-shadow .35s ease;}
+.back-nav + .cover,.back-nav + main > :first-child{border-top:var(--nav-h) solid transparent;background-origin:border-box;}
+html.nav-top .back-nav{background-color:transparent !important;background-image:none !important;border-bottom-color:transparent !important;-webkit-backdrop-filter:none !important;backdrop-filter:none !important;box-shadow:none !important;}
+@media (prefers-reduced-motion:reduce){.back-nav{transition:none;}}
+</style>
+<script>
+/* nav-glass: html.nav-top while the page is at the top; --nav-h follows the real header height */
+(function(){
+  var d=document.documentElement;
+  function top(){ d.classList.toggle('nav-top',(window.pageYOffset||d.scrollTop||0)<8); }
+  function size(){ var n=document.querySelector('.back-nav'); if(n) d.style.setProperty('--nav-h',n.offsetHeight+'px'); }
+  top();
+  window.addEventListener('scroll',top,{passive:true});
+  window.addEventListener('pageshow',top);
+  document.addEventListener('DOMContentLoaded',function(){
+    size(); top();
+    var n=document.querySelector('.back-nav');
+    if(n && 'ResizeObserver' in window) new ResizeObserver(size).observe(n); else window.addEventListener('resize',size);
+  });
+})();
+</script>
+<!-- HEADER TEXT: the case name and the byline take the colour of the "Back to portfolio" link (Oct 2026). Same block in every case; only the --nav-ink line(s) change. -->
+<style id="nav-ink">
+.back-nav,.next-case{--nav-ink:var(--accent);}
+html body .back-nav .back-nav-title,html body .back-nav .back-nav-right,html body .back-nav .back-nav-r,html body .back-nav .nav-title,html body .back-nav .nav-right,html body.dark-mode .back-nav .back-btn{color:var(--nav-ink);}
+</style>
+<!-- UX AUDIT: the findings read as problems, in the red "error" format (same idea as the problem list in the monchis case). Oct 2026. -->
+<style id="audit-error">
+:root{--err:#9A0003;}                 /* belo's own danger tone (alert/danger/text) */
+body.dark-mode{--err:#FF8A8A;}
+.audit-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem 1rem;}
+.audit-list .audit-item{
+  background:color-mix(in srgb,var(--err) 6%,var(--bg));
+  border:0;border-left:3px solid var(--err);border-radius:0 12px 12px 0;
+  box-shadow:none;padding:1.125rem 1.375rem;transition:none;
+}
+.audit-list .audit-item:hover{transform:none;box-shadow:none;}
+.audit-list .audit-t{margin-bottom:.3125rem;}
+.audit-list .audit-d{font-size:.8125rem;}
+body.dark-mode .audit-list .audit-item{background:color-mix(in srgb,var(--err) 10%,var(--bg));}
+@media(max-width:900px){.audit-list{grid-template-columns:minmax(0,1fr);}}
+</style>
+<!-- DOCK CLEARANCE: room under the footer so the floating dock never covers its text (Oct 2026). Same block in every case of the .section/.cover template; muv and vendor tool already have it in their own footer rule. -->
+<style id="dock-clear">
+.footer{padding-bottom:7rem;}
+</style>
+<style id="next-case">
+/* NEXT CASE: closing block of every case. Same markup and CSS in all of them.
+   Uses only tokens every case has; the link takes the header link colour (--nav-ink). */
+.next-case{border-top:1px solid var(--line2);padding:clamp(56px,8vw,112px) var(--gutter,4rem);}
+.next-case .nc-in{max-width:var(--wrap,none);margin:0 auto;display:flex;align-items:flex-end;justify-content:space-between;gap:2rem 3rem;flex-wrap:wrap;}
+.nc-link{display:grid;gap:.625rem;text-decoration:none;color:inherit;}
+.nc-kicker{font-size:.9375rem;font-weight:500;color:var(--ash);}
+.nc-name{font-size:clamp(2.25rem,5.5vw,4.5rem);font-weight:800;letter-spacing:-.045em;line-height:1;color:var(--paper,var(--ink));}
+.nc-name span{color:var(--ash);}
+.nc-name .nc-arrow{display:inline-block;margin-left:.3em;font-weight:500;color:var(--nav-ink,var(--accent));transition:transform .6s var(--ease-apple,var(--ease));}
+.nc-link:hover .nc-arrow,.nc-link:focus-visible .nc-arrow{transform:translateX(.22em);}
+.nc-line{font-size:1.0625rem;line-height:1.5;color:var(--ash);max-width:40ch;}
+.nc-about{display:inline-flex;align-items:center;min-height:44px;font-size:.9375rem;font-weight:600;color:var(--nc-link,var(--nav-ink,var(--accent)));text-decoration:underline;text-decoration-color:var(--nav-ink,currentColor);text-decoration-thickness:1px;text-underline-offset:4px;}
+@media (max-width:768px){.next-case{padding-inline:var(--gutter,1.25rem);}}
+@media (prefers-reduced-motion:reduce){.nc-name .nc-arrow{transition:none;}}
+</style>
+
+<style id="newxp-brand">
+/* ════════════════════════════════════════════════════════════
+   sukupay · New experience: brand layer (Nov 2026)
+   Teal #005043 is the functional primary (passes AA on white), lime #61FF61
+   is the brand accent and only goes on teal or dark surfaces.
+   Product mockups are built in HTML with the product's own type (DM Sans)
+   and stay light in both site modes.
+   ════════════════════════════════════════════════════════════ */
+:root{
+  --paper:#0F1A17; --ash:rgba(15,26,23,.6); --ash-2:rgba(15,26,23,.3);
+  --line:rgba(15,26,23,.08); --line-md:rgba(15,26,23,.16); --line2:rgba(15,26,23,.12);
+  --brand:#005043; --accent:#005043; --dark:#00271F; --lime:#61FF61;
+  --teal:#005044; --teal-2:#007A66; --soft:#F0FFF0;
+  --grad-teal:linear-gradient(160deg,#00594B 0%,#004236 55%,#00271F 100%);
+  --err:#9A0003;
+  --ui:'DM Sans',system-ui,-apple-system,sans-serif;
+}
+body.dark-mode{
+  --bg:#24242C; --bg2:#2C2C35; --bg3:#33333D;
+  --ghost:#2C2C35; --ghost-2:#33333D;
+  --paper:#F4F4F6; --ash:rgba(244,244,246,.64); --ash-2:rgba(244,244,246,.32);
+  --line:rgba(244,244,246,.08); --line-md:rgba(244,244,246,.16); --line2:rgba(244,244,246,.12);
+  --accent:#61FF61; --brand:#3FBF8F; --err:#FF8A8A;
+}
+.cover-title .dim{color:rgba(15,26,23,.16);}
+.ov-title .accent{color:var(--accent);}
+.accent-card,.callout{background:var(--grad-teal)!important;}
+.accent-card .ac-lbl{color:var(--lime);}
+
+/* reveal on scroll (timing comes from the v3 block) */
+.reveal{opacity:0;transform:translateY(24px);transition-property:opacity,transform;}
+.reveal.in{opacity:1;transform:none;}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;}}
+
+/* ─── shared product-mockup pieces (always light) ─── */
+.ui{font-family:var(--ui);color:#040404;-webkit-font-smoothing:antialiased;}
+.flag{width:22px;height:22px;border-radius:50%;flex-shrink:0;display:block;box-shadow:0 0 0 1px rgba(0,0,0,.06);}
+.replay{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.5rem;padding:.625rem 1.125rem;border-radius:999px;border:0;background:var(--card);box-shadow:var(--sh-card);font:600 .875rem 'Inter',sans-serif;color:var(--paper);cursor:pointer;}
+.replay svg{width:14px;height:14px;}
+.replay:hover{color:var(--accent);}
+.demo-row{display:flex;flex-direction:column;align-items:center;}
+
+/* ─── HERO BAND: live home ─── */
+.hero-band{padding:0 4rem;margin-top:-1rem;}
+.hero-band-in{border-radius:28px;background:var(--grad-teal);padding:clamp(32px,5vw,72px);display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(32px,5vw,72px);align-items:center;box-shadow:var(--sh-float);position:relative;overflow:hidden;}
+.hero-band-in::after{content:"";position:absolute;right:-140px;top:-180px;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(97,255,97,.18),transparent 65%);pointer-events:none;}
+.hb-kicker{display:inline-flex;align-items:center;gap:.5rem;color:var(--lime);font-size:.875rem;font-weight:500;margin-bottom:1.25rem;}
+.hb-kicker i{width:8px;height:8px;border-radius:50%;background:var(--lime);display:block;}
+.hb-title{font-size:clamp(2rem,4.2vw,3.5rem);font-weight:700;letter-spacing:-.035em;line-height:1.04;color:#fff;margin-bottom:1.25rem;text-wrap:balance;}
+.hb-sub{font-size:1.0625rem;line-height:1.65;color:rgba(255,255,255,.74);max-width:44ch;font-weight:300;}
+.hb-sub strong{color:#fff;font-weight:600;}
+.hb-legend{margin-top:1.75rem;display:flex;flex-wrap:wrap;gap:.5rem;}
+.hb-legend span{padding:.375rem .75rem;border-radius:999px;font-size:.8125rem;color:#fff;background:rgba(255,255,255,.08);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);}
+
+/* phone shell for live mockups */
+.lphone{position:relative;z-index:1;justify-self:center;width:320px;height:690px;border-radius:48px;background:#0B0B10;padding:10px;box-shadow:0 0 0 1px rgba(255,255,255,.1),0 40px 80px -30px rgba(0,0,0,.7);}
+.lphone-in{position:relative;width:100%;height:100%;border-radius:38px;overflow:hidden;background:#FAFAFA;}
+.lp-status{display:flex;justify-content:space-between;align-items:center;padding:14px 26px 0;font:600 13px var(--ui);color:#040404;}
+.lp-island{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:92px;height:26px;border-radius:20px;background:#0B0B10;}
+.lp-logo{padding:20px 18px 14px;font:700 22px var(--ui);letter-spacing:-.04em;color:#0B2B25;display:flex;align-items:center;gap:3px;}
+.lp-logo i{width:11px;height:11px;border-radius:50%;background:#1CBF1C;display:block;margin-top:4px;}
+.hbox{margin:0 14px;background:#fff;border-radius:16px;padding:14px 14px 16px;box-shadow:0 0 32px rgba(10,13,18,.06);position:relative;transition:box-shadow .3s;}
+.hbox-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+.hpill{display:inline-flex;align-items:center;gap:7px;padding:5px 10px 5px 5px;border-radius:999px;background:#F3F0F0;font:700 14px var(--ui);color:#005044;transition:box-shadow .3s;}
+.hpill .caret{width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-top:6px solid #005044;margin-left:2px;}
+.hvp{display:inline-flex;align-items:center;gap:5px;white-space:nowrap;font:500 12.5px var(--ui);color:#747474;padding:4px 6px;border-radius:999px;transition:box-shadow .3s,background .3s,opacity .25s;}
+.hvp svg{width:14px;height:14px;}
+.lphone .hpill{font-size:13px;}
+.lphone .hvp{font-size:11.5px;padding:4px 2px;}
+.hrate{text-align:center;transition:box-shadow .3s;border-radius:12px;}
+.hrate small{display:flex;justify-content:center;align-items:center;gap:4px;font:500 11.5px var(--ui);color:#747474;}
+.hrate{transition:opacity .25s;}
+.hrate b.speed{font-size:28px;line-height:1.12;margin:6px auto 2px;max-width:11ch;text-wrap:balance;}
+.hbox.solo .hrate b.speed{font-size:32px;}
+.hrate b{display:block;font:700 30px/1.15 var(--ui);letter-spacing:-.03em;margin:3px 0 2px;transition:opacity .25s;}
+.hrate span{font:400 11px var(--ui);color:#515151;}
+.hcta{margin-top:14px;height:50px;border-radius:999px;background:#005044;color:#61FF61;display:flex;align-items:center;justify-content:center;gap:18px;font:700 18px var(--ui);transition:box-shadow .3s,transform .3s;}
+.hcta svg{width:24px;height:24px;}
+.hbal{margin-top:10px;text-align:center;font:500 13px var(--ui);color:#005044;transition:box-shadow .3s,opacity .3s;border-radius:8px;padding:2px;}
+.hbal u{font-weight:700;text-underline-offset:3px;margin-left:4px;}
+.hrep{margin:12px 14px 0;background:#fff;border-radius:16px;padding:12px;box-shadow:0 0 32px rgba(10,13,18,.06);transition:opacity .35s;}
+.hrep-h{display:flex;justify-content:space-between;font:600 12.5px var(--ui);margin-bottom:8px;}
+.hrep-h span{color:#515151;font-weight:500;}
+.hrep-row{display:flex;justify-content:space-between;align-items:center;border:1px solid #E7E7E7;border-radius:10px;padding:8px 9px;margin-top:6px;font:700 12px var(--ui);}
+.hrep-row > span:first-child{min-width:0;flex:1;margin-right:8px;}
+.hrep-row small{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block;font:400 9.5px var(--ui);color:#747474;margin-top:2px;}
+.hrep-row em{font-style:normal;background:#F0FFF0;color:#005044;padding:5px 9px;border-radius:999px;font-size:11px;}
+.hempty{margin:22px 14px 0;text-align:center;font:600 13px var(--ui);color:#747474;transition:opacity .35s;}
+.hempty small{display:block;font:400 11px/1.5 var(--ui);color:#A4A4A4;margin-top:4px;}
+.hstack{position:relative;}
+.hstack > *{transition:opacity .35s;}
+.hstack .hempty{position:absolute;left:0;right:0;top:0;}
+.wa{position:absolute;right:14px;bottom:86px;width:40px;height:40px;border-radius:50%;background:#25D366;display:grid;place-items:center;box-shadow:0 6px 16px rgba(37,211,102,.35);}
+.wa svg{width:22px;height:22px;}
+.lp-nav{position:absolute;left:0;right:0;bottom:0;height:70px;background:#fff;box-shadow:0 -1px 0 #E7E7E7;display:flex;}
+.lp-ind{position:absolute;top:0;left:0;width:25%;height:3px;background:#61FF61;border-radius:0 0 3px 3px;transition:transform .55s cubic-bezier(.28,.11,.32,1);}
+.lp-tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font:500 10.5px var(--ui);color:#A4A4A4;transition:color .35s;position:relative;}
+.lp-tab svg{width:20px;height:20px;}
+.lp-tab.on{color:#005044;font-weight:700;}
+.lp-badge{position:absolute;top:10px;left:calc(50% + 5px);min-width:14px;height:14px;padding:0 3px;border-radius:999px;background:#61FF61;color:#005044;font:800 9px/14px var(--ui);text-align:center;}
+/* country sheet inside the hero phone */
+.csheet-dim{position:absolute;inset:0;background:rgba(4,4,4,.32);opacity:0;transition:opacity .35s;pointer-events:none;}
+.csheet{position:absolute;left:0;right:0;bottom:0;background:#fff;border-radius:22px 22px 0 0;padding:16px 0 18px;transform:translateY(105%);transition:transform .5s cubic-bezier(.28,.11,.32,1);}
+.csheet h5{font:700 15px var(--ui);padding:0 18px 12px;border-bottom:1px solid #E7E7E7;margin:0;}
+.crow{display:flex;align-items:center;gap:12px;padding:12px 18px;font:500 14px var(--ui);transition:background .3s;}
+.crow small{margin-left:auto;font-size:12px;color:#515151;}
+.crow.sel{background:#F0FFF0;}
+.lphone.sheet-open .csheet{transform:none;}
+.lphone.sheet-open .csheet-dim{opacity:1;}
+.tap{position:absolute;width:34px;height:34px;border-radius:50%;background:rgba(0,80,68,.18);box-shadow:0 0 0 2px rgba(0,80,68,.35);opacity:0;transform:scale(.6);pointer-events:none;transition:opacity .25s,transform .35s;z-index:6;}
+.tap.on{opacity:1;transform:scale(1);}
+
+/* ─── BEFORE / AFTER STAGE ─── */
+.ba{display:grid;grid-template-columns:minmax(260px,.8fr) 1.6fr;gap:clamp(32px,5vw,72px);align-items:center;margin-top:var(--stack);}
+.ba-list{list-style:none;display:flex;flex-direction:column;gap:.5rem;}
+.ba-item{position:relative;display:block;width:100%;text-align:left;border:0;background:transparent;padding:1rem 1.125rem 1.125rem;border-radius:16px;cursor:pointer;font-family:'Inter',sans-serif;color:var(--paper);transition:background .4s var(--ease-apple),box-shadow .4s var(--ease-apple);}
+.ba-item:hover{background:color-mix(in srgb,var(--paper) 4%,transparent);}
+.ba-item.on{background:var(--card);box-shadow:var(--sh-card);}
+.ba-n{font-size:.8125rem;font-weight:600;color:var(--accent);}
+.ba-t{display:block;font-size:1.0625rem;font-weight:700;letter-spacing:-.015em;margin-top:.25rem;}
+.ba-d{display:block;font-size:.875rem;line-height:1.55;color:var(--ash);margin-top:.375rem;max-height:0;opacity:0;overflow:hidden;transition:max-height .6s var(--ease-apple),opacity .5s var(--ease-apple);}
+.ba-item.on .ba-d{max-height:9rem;opacity:1;}
+.ba-bar{position:absolute;left:1.125rem;right:1.125rem;bottom:.5rem;height:2px;border-radius:2px;background:var(--line);overflow:hidden;opacity:0;}
+.ba-item.on .ba-bar{opacity:1;}
+.ba-bar i{display:block;height:100%;width:0;background:var(--accent);}
+.ba-item.on.run .ba-bar i{animation:ba-fill var(--ba-t,6s) linear forwards;}
+.ba-paused .ba-item.on.run .ba-bar i{animation-play-state:paused;}
+@keyframes ba-fill{to{width:100%;}}
+.ba-stage{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,3vw,40px);}
+.ba-col{display:flex;flex-direction:column;align-items:center;gap:1rem;}
+.ba-tag{display:inline-flex;align-items:center;gap:.5rem;padding:.3rem .875rem;border-radius:999px;font-size:.8125rem;font-weight:600;}
+.ba-tag.b{background:color-mix(in srgb,var(--err) 9%,transparent);color:var(--err);}
+.ba-tag.a{background:color-mix(in srgb,var(--accent) 12%,transparent);color:var(--accent);}
+.ba-phone{position:relative;width:100%;max-width:300px;aspect-ratio:406/860;border-radius:44px;overflow:hidden;background:#0B0B10;box-shadow:var(--sh-ring),var(--sh-float);}
+.ba-phone img{position:absolute;inset:8px;width:calc(100% - 16px);height:calc(100% - 16px);border-radius:36px;object-fit:cover;object-position:center top;background:#fff;opacity:0;transform:scale(1.02);transition:opacity .7s var(--ease-apple),transform 1s var(--ease-apple);}
+.ba-phone img.on{opacity:1;transform:none;}
+.ba-phone.before img{filter:saturate(.92);}
+.ba-note{font-size:.8125rem;color:var(--ash);text-align:center;margin-top:1.5rem;}
+#ba + .ba-note{margin-top:2.75rem;}
+
+/* ─── BEFORE / AFTER: live review screen (moment 04) ─── */
+.ba-live{position:absolute;inset:8px;border-radius:36px;overflow:hidden;background:#FAFAFA;opacity:0;transform:scale(1.02);transition:opacity .7s var(--ease-apple),transform 1s var(--ease-apple);}
+.ba-live.on{opacity:1;transform:none;}
+.bl-scr{position:absolute;top:0;left:0;width:390px;height:844px;transform-origin:0 0;color:#040404;}
+.bl-status{position:relative;display:flex;justify-content:space-between;align-items:center;height:58px;padding:6px 34px 0 52px;font:600 17px var(--ui);}
+.bl-island{position:absolute;left:50%;top:11px;transform:translateX(-50%);width:124px;height:36px;border-radius:20px;background:#0B0B10;}
+.bl-sig{display:flex;align-items:flex-end;gap:2px;}
+.bl-sig b{display:block;width:3.5px;background:#040404;border-radius:1px;}
+.bl-sig b:nth-child(1){height:5px}.bl-sig b:nth-child(2){height:7px}.bl-sig b:nth-child(3){height:9px}.bl-sig b:nth-child(4){height:11px}
+.bl-sig em{display:block;width:24px;height:12px;border:1.5px solid #9A9A9A;border-radius:4px;margin-left:8px;position:relative;}
+.bl-sig em::after{content:"";position:absolute;left:1.5px;top:1.5px;bottom:1.5px;width:9px;border-radius:1.5px;background:#040404;}
+.bl-head{display:flex;align-items:center;gap:22px;height:76px;margin-top:10px;padding:0 20px;background:#fff;}
+.bl-head svg{width:26px;height:26px;flex:none;}
+.bl-title{font:500 30px var(--ui);letter-spacing:-.02em;flex:1;}
+.bl-step{padding:3px 10px;border-radius:999px;background:#EAFDEA;font:500 14px var(--ui);color:#005044;}
+.bl-bars{display:flex;gap:4px;}
+.bl-bars i{flex:1;height:4px;background:#61FF61;border-radius:2px;}
+.bl-body{position:relative;padding:22px 20px 0;}
+.bl-card{background:#fff;border-radius:16px;box-shadow:0 0 0 1px #F1F1F1,0 4px 18px rgba(10,13,18,.05);padding:14px 12px;margin-bottom:18px;}
+.bl-who{display:flex;justify-content:space-between;align-items:center;padding:14px 18px 14px 12px;}
+.bl-who b{display:block;font:500 19px var(--ui);margin-bottom:6px;}
+.bl-who small{display:block;font:400 15px/1.4 var(--ui);color:#515151;white-space:nowrap;}
+.bl-who small strong{font-weight:600;}
+.bl-who u{text-decoration:none;color:#005044;font-weight:600;margin-left:10px;}
+.bl-dot{width:22px;height:22px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#7DFF5E,#1CBF1C);}
+.bl-rec small{display:block;font:400 13px var(--ui);color:#515151;letter-spacing:.01em;}
+.bl-amt{display:flex;align-items:baseline;margin-top:4px;}
+.bl-amt sup{font:400 18px var(--ui);color:#515151;vertical-align:top;position:relative;top:-14px;margin-right:6px;}
+#bl-gtq{font:700 42px/1 var(--ui);letter-spacing:-.045em;font-variant-numeric:tabular-nums;transition:color .4s;}
+.bl-amt.chg #bl-gtq{color:#005044;}
+.bl-cur{margin-left:auto;display:flex;align-items:center;gap:6px;font:500 16px var(--ui);color:#515151;align-self:center;}
+.bl-cur .flag{width:18px;height:18px;}
+.bl-rows{padding:4px 12px;}
+.bl-rows>div:not(.bl-fx){display:flex;justify-content:space-between;align-items:center;height:56px;border-bottom:1px solid #EFEFEF;font:400 15.5px var(--ui);}
+.bl-rows>div.tot{font-weight:700;font-size:16.5px;}
+.bl-i{display:inline-grid;place-items:center;width:15px;height:15px;border-radius:50%;background:#E4E4E4;color:#fff;font:700 10px var(--ui);font-style:normal;margin-left:6px;vertical-align:-2px;}
+.bl-fx{margin:0 -6px;padding:12px 6px 12px;border-radius:10px;transition:background .4s,box-shadow .4s;}
+.bl-fx.flash{background:#F0FFF0;box-shadow:0 0 0 2px rgba(97,255,97,.65);}
+.bl-fx-r{display:flex;justify-content:space-between;align-items:center;font:400 15.5px var(--ui);}
+.bl-fx-r svg{width:16px;height:16px;margin-right:8px;vertical-align:-3px;color:#515151;}
+.bl-fx p{margin:8px 0 0;font:400 13px/1.45 var(--ui);color:#515151;}
+.bl-wa{position:absolute;right:20px;top:690px;width:40px;height:40px;border-radius:50%;background:#25D366;display:grid;place-items:center;color:#fff;box-shadow:0 4px 12px rgba(0,0,0,.12);}
+.bl-wa svg{width:22px;height:22px;}
+.bl-pay{position:absolute;left:20px;right:20px;top:756px;height:54px;border-radius:999px;background:#000;color:#fff;display:flex;align-items:center;justify-content:center;font:500 20px var(--ui);}
+.bl-pay svg{margin:0 1px 4px 8px;}
+.ba-col{position:relative;}
+.ba-lock{position:absolute;left:50%;bottom:-22px;transform:translate(-50%,6px);display:flex;align-items:center;gap:.5rem;padding:.375rem .875rem .375rem .5rem;border-radius:999px;background:var(--card);box-shadow:var(--sh-card);font-size:.75rem;color:var(--ash);white-space:nowrap;opacity:0;transition:opacity .4s var(--ease-apple),transform .4s var(--ease-apple);pointer-events:none;z-index:2;}
+.ba-lock.on{opacity:1;transform:translate(-50%,0);}
+.ba-lock svg{width:22px;height:22px;}
+.ba-lock circle{fill:none;stroke-width:7;}
+.ba-lock .bg{stroke:var(--line-md);}
+.ba-lock .fg{stroke:var(--accent);stroke-linecap:round;transform:rotate(-90deg);transform-origin:50% 50%;transition:stroke-dashoffset .12s linear;}
+.ba-lock b{color:var(--paper);font-weight:700;font-variant-numeric:tabular-nums;margin-right:.375rem;}
+
+
+/* ─── THREE CHANGES: one slider, a spotlight on the phone ─── */
+.ks{display:grid;grid-template-columns:auto minmax(280px,1fr);gap:clamp(40px,6vw,96px);align-items:center;margin-top:var(--stack);max-width:1040px;margin-left:auto;margin-right:auto;}
+.ks-phone{position:relative;width:320px;aspect-ratio:406/860;border-radius:46px;background:#0B0B10;box-shadow:var(--sh-ring),var(--sh-float);}
+.ks-screen{position:absolute;inset:8px;border-radius:38px;overflow:hidden;background:#fff;}
+.ks-screen img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;opacity:0;transition:opacity .7s var(--ease-apple);}
+.ks-screen img.on{opacity:1;}
+.ks-spot{position:absolute;border-radius:18px;box-shadow:0 0 0 3px #61FF61,0 0 0 9999px rgba(4,12,10,.52);transition:top .8s var(--ease-apple),left .8s var(--ease-apple),width .8s var(--ease-apple),height .8s var(--ease-apple),border-radius .8s var(--ease-apple);pointer-events:none;}
+.ks-link{list-style:none;padding:.5rem 1.125rem 0;}
+.ks-more{display:inline-block;font-weight:600;color:var(--accent);text-decoration:none;}
+.ks-more:hover{text-decoration:underline;text-underline-offset:3px;}
+@media(max-width:900px){.ks{grid-template-columns:1fr;justify-items:center;}.ks-list{width:100%;}}
+@media(max-width:768px){.ks .ks-list{flex-direction:column;overflow:visible;scroll-snap-type:none;}.ks .ks-list li,.ks .ks-list li.ks-link{flex:0 0 auto;width:100%;}.ks-list li.ks-link{padding-left:1.125rem;}.ks .ba-item .ba-d{max-height:0;opacity:0;}.ks .ba-item.on .ba-d{max-height:9rem;opacity:1;}}
+@media(max-width:520px){.ks-phone{width:min(280px,78vw);border-radius:40px;}.ks-screen{inset:6px;border-radius:34px;}}
+@media (prefers-reduced-motion:reduce){.ks-screen img,.ks-spot{transition:none;}}
+
+
+/* ─── MODULAR HOME: one home, two markets, animated ─── */
+.num-label{margin-top:clamp(56px,7vw,112px);}
+.mh{display:grid;grid-template-columns:minmax(280px,1fr) auto;gap:clamp(40px,6vw,96px);align-items:center;margin-top:var(--stack);max-width:1040px;margin-left:auto;margin-right:auto;}
+.mh-list .ba-n{display:inline-flex;align-items:center;gap:.5rem;font-size:1.0625rem;font-weight:700;color:var(--paper);letter-spacing:-.015em;}
+.mh-list .ba-n .flag{width:20px;height:20px;}
+.mh-list .ba-item.on .ba-d{max-height:14rem;}
+.mh-def{display:grid;grid-template-columns:5.5rem 1fr;gap:.75rem;padding:.5rem 0;border-top:1px solid var(--line);}
+.mh-def:first-child{margin-top:.5rem;}
+.mh-def b{font-weight:600;color:var(--paper);}
+.mh-phone .hrate,.mh-phone .hvp{transition:opacity .3s var(--ease-apple);}
+@media(max-width:1024px){.mh{grid-template-columns:1fr;justify-items:center;}.mh-list{width:100%;}.mh-phone{order:-1;}}
+@media(max-width:768px){.mh .mh-list{flex-direction:column;overflow:visible;scroll-snap-type:none;}.mh .mh-list li{flex:0 0 auto;width:100%;}.mh .ba-item .ba-d{max-height:0;opacity:0;}.mh .ba-item.on .ba-d{max-height:14rem;opacity:1;}}
+
+
+/* ─── SHOWCASE: every screen of the new experience, full width ─── */
+.showcase{margin:0;position:relative;background:var(--bg);}
+.sc-stage{--sh:clamp(560px,62vw,940px);position:relative;height:var(--sh);overflow:hidden;background:transparent;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(16px,2.4vw,40px);padding:0 clamp(16px,2.4vw,40px);}
+.sc-stage{-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 14%,#000 86%,transparent 100%);mask-image:linear-gradient(180deg,transparent 0,#000 14%,#000 86%,transparent 100%);}
+.sc-head{padding-bottom:clamp(32px,4vw,56px)!important;}
+.showcase{padding-bottom:clamp(48px,6vw,96px);}
+.sc-col{display:flex;flex-direction:column;gap:clamp(16px,2.4vw,40px);align-self:start;will-change:transform;animation:sc-drift 44s cubic-bezier(.45,0,.55,1) infinite alternate;}
+.sc-col:nth-child(even){animation-name:sc-drift-b;}
+.sc-c1{animation-delay:-6s;} .sc-c2{animation-delay:-30s;} .sc-c3{animation-delay:-18s;} .sc-c4{animation-delay:-40s;} .sc-c5{animation-delay:-12s;}
+.sc-ph{display:block;width:100%;height:auto;aspect-ratio:406/860;object-fit:cover;object-position:center top;border:clamp(4px,.5vw,8px) solid #111114;border-radius:clamp(22px,2.6vw,44px);background:#fff;box-sizing:border-box;box-shadow:0 0 0 1.5px #B9BCC2,0 24px 48px -18px rgba(20,20,30,.35),0 6px 14px -6px rgba(20,20,30,.2);}
+@keyframes sc-drift{0%,6%{transform:translateY(0);}94%,100%{transform:translateY(calc(var(--sh) - 100%));}}
+@keyframes sc-drift-b{0%,6%{transform:translateY(calc(var(--sh) - 100%));}94%,100%{transform:translateY(0);}}
+.showcase figcaption{padding:1rem 4rem 0;text-align:center;font-size:.8125rem;color:var(--ash);}
+body.dark-mode .sc-ph{box-shadow:0 0 0 1.5px #3A3A44,0 24px 48px -18px rgba(0,0,0,.6);}
+@media(max-width:900px){.sc-stage{grid-template-columns:repeat(3,minmax(0,1fr));--sh:560px;}.sc-c4,.sc-c5{display:none;}}
+@media(max-width:768px){.showcase figcaption{padding:1rem 1.25rem 0;}}
+@media (prefers-reduced-motion:reduce){.sc-col{animation:none;}.sc-c2{transform:translateY(-18%);}.sc-c3{transform:translateY(-8%);}.sc-c4{transform:translateY(-24%);}}
+
+/* ─── INFOGRAPHIC STAGE (home box, sender box) ─── */
+.info-stage{position:relative;width:min(880px,100%);min-height:620px;margin:var(--stack) auto 0;}
+.info-stage .card-c{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;}
+.call{position:absolute;z-index:3;display:flex;align-items:flex-start;gap:.75rem;max-width:240px;padding:1rem 1.125rem;border-radius:16px;background:var(--card);box-shadow:var(--sh-card);font-size:.875rem;line-height:1.45;font-weight:600;color:var(--paper);opacity:.38;transition:opacity .5s var(--ease-apple),transform .5s var(--ease-apple);}
+.call.on{opacity:1;transform:translateY(-2px);}
+.call b{display:grid;place-items:center;flex-shrink:0;width:24px;height:24px;border-radius:50%;background:color-mix(in srgb,var(--accent) 14%,transparent);color:var(--accent);font-size:.75rem;}
+.call span em{display:block;font-style:normal;font-weight:400;color:var(--ash);margin-top:.25rem;}
+.c1{top:2%;left:0;} .c2{top:6%;right:0;} .c3{bottom:8%;left:0;} .c4{bottom:2%;right:0;}
+.hl{box-shadow:0 0 0 4px rgba(0,80,68,.18)!important;}
+.hl-lime{box-shadow:0 0 0 4px rgba(97,255,97,.55)!important;}
+/* standalone home box */
+.hbox.solo{width:340px;margin:0;padding:18px 18px 20px;box-shadow:0 2px 6px rgba(0,0,0,.04),0 24px 48px -20px rgba(10,13,18,.2);}
+.hbox.solo .hrate b{font-size:34px;}
+.hbox.solo .hcta{height:54px;font-size:19px;}
+/* sender box */
+.sbox{width:350px;background:#fff;border-radius:16px;box-shadow:0 2px 6px rgba(0,0,0,.04),0 24px 48px -20px rgba(10,13,18,.2);overflow:visible;padding:0 16px 18px;}
+.s-rate{display:flex;align-items:center;justify-content:center;gap:5px;margin:0 -16px 14px;padding:10px;background:#F7F7F7;border-radius:16px 16px 0 0;font:500 12px var(--ui);color:#515151;transition:box-shadow .3s,background .3s;}
+.s-rate svg{width:13px;height:13px;}
+.sbox h4{font:700 17px var(--ui);margin:0 0 12px;}
+.s-amt{border:1.3px solid #E7E7E7;border-radius:16px;padding:12px 14px;transition:border-color .3s,box-shadow .3s,background .3s;}
+.s-amt small{display:block;font:500 11px var(--ui);color:#747474;letter-spacing:.02em;}
+.s-amt .r{display:flex;align-items:center;justify-content:space-between;margin-top:2px;}
+.s-amt .v{font:700 40px/1.1 var(--ui);letter-spacing:-.04em;font-variant-numeric:tabular-nums;white-space:nowrap;transition:color .3s;}
+.s-amt .v sup{font-size:15px;font-weight:500;color:#747474;vertical-align:top;position:relative;top:10px;margin-right:4px;letter-spacing:0;}
+.s-amt .cur{display:inline-flex;align-items:center;gap:5px;padding:4px 8px 4px 4px;border-radius:999px;background:#F7F7F7;font:700 12px var(--ui);color:#515151;}
+.s-amt .cur .flag{width:18px;height:18px;}
+.s-amt.focus{border-color:#61FF61;box-shadow:0 0 0 3px rgba(97,255,97,.25);}
+.s-amt.err{border-color:#D92D20;box-shadow:0 0 0 3px rgba(217,45,32,.14);}
+.s-amt.err .v{color:#D92D20;}
+.s-amt.rec{background:#F7F7F7;border-color:transparent;margin-top:6px;}
+.s-cursor{display:inline-block;width:2px;height:34px;background:#1CBF1C;margin-left:3px;vertical-align:middle;animation:blink 1s step-end infinite;}
+@keyframes blink{50%{opacity:0;}}
+.s-swap{position:relative;z-index:2;width:46px;height:46px;margin:-20px auto -20px;border-radius:50%;background:#005044;display:grid;place-items:center;box-shadow:0 0 0 4px #fff;}
+.s-swap svg{width:20px;height:20px;}
+.s-mm{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:12px;font:400 12.5px var(--ui);color:#515151;transition:color .3s,box-shadow .3s;border-radius:8px;padding:3px;}
+.s-mm.err{color:#D92D20;}
+.s-i{width:16px;height:16px;border-radius:50%;background:#A4A4A4;color:#fff;font:700 10px/16px var(--ui);text-align:center;font-style:italic;transition:background .3s,transform .3s;}
+.s-i.on{background:#005044;transform:scale(1.2);}
+.s-overlay{position:absolute;inset:-8px;z-index:4;border-radius:22px;background:rgba(4,4,4,.32);display:flex;align-items:flex-end;justify-content:center;opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s;}
+.s-overlay.on{opacity:1;visibility:visible;}
+.s-sheet{width:100%;background:#fff;border-radius:22px;padding:22px 18px 18px;text-align:center;transform:translateY(24px);transition:transform .45s cubic-bezier(.28,.11,.32,1);}
+.s-overlay.on .s-sheet{transform:none;}
+.s-sheet .ic{width:40px;height:40px;border-radius:50%;margin:0 auto 10px;background:#F0FFF0;display:grid;place-items:center;}
+.s-sheet .ic i{width:20px;height:20px;border-radius:50%;background:#005044;color:#fff;font:700 11px/20px var(--ui);font-style:italic;display:block;}
+.s-sheet h5{font:700 17px var(--ui);margin:0 0 8px;}
+.s-sheet p{font:400 12.5px/1.5 var(--ui);color:#515151;margin:0 0 12px;}
+.s-sheet .bx{background:#F7F7F7;border-radius:12px;padding:10px 12px;text-align:left;font:500 12.5px/1.6 var(--ui);color:#040404;margin-bottom:14px;}
+.s-sheet .bt{height:44px;border-radius:999px;background:#005044;color:#61FF61;font:700 15px/44px var(--ui);}
+
+/* ─── NAVIGATION DEMOS ─── */
+.nav-demos{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3vw,40px);margin-top:var(--stack);}
+.nd{background:var(--card);border-radius:var(--r-card);box-shadow:var(--sh-card);padding:clamp(1.75rem,3vw,2.5rem);display:flex;flex-direction:column;align-items:center;text-align:center;}
+.nd h3{font-size:1.125rem;font-weight:700;letter-spacing:-.015em;color:var(--paper);}
+.nd p{font-size:.875rem;line-height:1.6;color:var(--ash);max-width:36ch;margin:.5rem 0 2rem;}
+.nd-mock{width:100%;max-width:360px;background:#fff;border-radius:18px;box-shadow:0 0 0 1px rgba(0,0,0,.05),0 18px 40px -20px rgba(10,13,18,.25);overflow:hidden;position:relative;}
+.nd-mock .lp-nav{position:relative;height:76px;}
+.hd{padding:18px 18px 0;}
+.hd-row{display:flex;align-items:center;gap:14px;padding-bottom:16px;}
+.hd-row svg{width:20px;height:20px;}
+.hd-t{flex:1;text-align:left;font:700 22px var(--ui);letter-spacing:-.02em;color:#040404;transition:opacity .25s;}
+.hd-b{font:700 12px var(--ui);color:#005044;background:#F0FFF0;padding:4px 9px;border-radius:999px;transition:opacity .25s;}
+.hd-steps{display:flex;gap:6px;margin:0 -18px;}
+.hd-steps span{flex:1;height:4px;background:#D6D6D6;transition:background .5s;}
+.hd-steps span.on{background:#61FF61;}
+.hd-body{padding:16px 18px 20px;background:#FAFAFA;text-align:left;}
+.hd-body span{display:block;height:10px;border-radius:5px;background:#E7E7E7;margin-top:9px;}
+.hd-body span:nth-child(1){width:56%;margin-top:0;} .hd-body span:nth-child(2){width:88%;} .hd-body span:nth-child(3){width:72%;}
+
+/* ─── REVIEW DEMO ─── */
+
+/* ─── SCREENS ─── */
+.scr-grid{display:grid;gap:clamp(20px,2.5vw,40px);margin-top:var(--stack);align-items:start;}
+.scr-3{grid-template-columns:repeat(3,1fr);max-width:1040px;margin-left:auto;margin-right:auto;}
+.scr{margin:0;display:flex;flex-direction:column;gap:1.25rem;}
+.scr img{display:block;width:100%;max-width:280px;height:auto;aspect-ratio:406/860;object-fit:cover;object-position:center top;margin:0 auto;border:8px solid #0B0B10;border-radius:44px;box-shadow:var(--sh-ring),var(--sh-float);background:#fff;box-sizing:border-box;}
+.scr-3>.scr:last-child:nth-child(3n+1){grid-column:2;}
+.scr figcaption{display:grid;gap:.375rem;max-width:280px;margin:0 auto;width:100%;}
+.scr-n{font-size:.8125rem;font-weight:600;color:var(--accent);}
+.scr figcaption b{font-size:1rem;font-weight:700;letter-spacing:-.015em;color:var(--paper);}
+.scr figcaption span:last-child{font-size:.8438rem;line-height:1.6;color:var(--ash);}
+
+/* ─── TODAY (before boards) ─── */
+.today{margin-top:var(--stack);display:grid;grid-template-columns:1fr 1.2fr;gap:clamp(12px,1.5vw,20px);}
+.today figure{margin:0;border-radius:24px;overflow:hidden;box-shadow:var(--sh-card);background:#EFEFEF;display:flex;flex-direction:column;}
+.today img{display:block;width:100%;height:auto;flex:1 1 auto;min-height:0;object-fit:contain;}
+.today figcaption{margin-top:auto;}
+.today figcaption{padding:.875rem 1.25rem 1rem;font-size:.8125rem;color:var(--ash);background:var(--card);}
+
+/* ─── STEPS / GUARD / DECISIONS extras ─── */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,1.5vw,20px);margin-top:var(--stack);}
+.step{background:var(--card);border-radius:var(--r-card);box-shadow:var(--sh-card);padding:1.75rem 1.5rem;display:flex;flex-direction:column;gap:.5rem;}
+.step-n{font-size:.8125rem;font-weight:600;color:var(--accent);}
+.step-t{font-size:1.0625rem;font-weight:700;letter-spacing:-.015em;color:var(--paper);}
+.step-d{font-size:.8438rem;line-height:1.6;color:var(--ash);}
+.step.on{background:var(--grad-teal);}
+.step.on .step-n{color:var(--lime);} .step.on .step-t{color:#fff;} .step.on .step-d{color:rgba(255,255,255,.74);}
+.guard{display:grid;grid-template-columns:repeat(3,1fr);gap:16px 32px;margin-top:var(--stack);}
+.guard div{border-left:2px solid var(--accent);padding:6px 0 6px 18px;font-size:.9375rem;line-height:1.6;color:var(--paper);}
+.guard div b{display:block;font-weight:700;margin-bottom:.25rem;}
+.guard div span{color:var(--ash);}
+.dec-n{color:var(--accent)!important;}
+.principle-quote{margin-top:var(--stack);border-radius:24px;padding:clamp(36px,5vw,64px);background:var(--grad-teal);color:#fff;box-shadow:var(--sh-float);}
+.pq-lbl{font-size:.875rem;font-weight:500;color:var(--lime);margin-bottom:1rem;}
+.pq-t{font-size:clamp(2rem,4vw,3.25rem);font-weight:700;letter-spacing:-.035em;line-height:1.05;margin-bottom:1rem;}
+.pq-d{font-size:1.0625rem;line-height:1.65;color:rgba(255,255,255,.74);max-width:58ch;font-weight:300;}
+
+/* ─── CLOSING: layered screens ─── */
+.closing-visual{padding-top:clamp(48px,6vw,96px)!important;}
+.layers{position:relative;max-width:1080px;margin:0 auto;aspect-ratio:16/9;border-radius:28px;overflow:hidden;background:var(--grad-teal);box-shadow:var(--sh-float);}
+.layers::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 50% at 50% 0%,rgba(97,255,97,.2),transparent 70%);}
+.layers img{position:absolute;bottom:-6%;width:21%;aspect-ratio:406/860;object-fit:cover;object-position:center top;background:#fff;border:6px solid #0B0B10;border-radius:30px;box-sizing:border-box;box-shadow:0 40px 80px -30px rgba(0,0,0,.7);transition:transform 1.4s var(--ease-apple);}
+.layers .l1{left:7%;transform:translateY(10%) rotate(-4deg);}
+.layers .l2{left:24%;transform:translateY(3%) rotate(-2deg);}
+.layers .l3{left:39.5%;width:23%;z-index:2;transform:translateY(-2%);}
+.layers .l4{right:22%;transform:translateY(3%) rotate(2deg);z-index:1;}
+.layers .l5{right:6%;transform:translateY(10%) rotate(4deg);}
+.layers.in .l1{transform:translateY(6%) rotate(-4deg);} .layers.in .l5{transform:translateY(6%) rotate(4deg);}
+.layers.in .l3{transform:translateY(-6%);}
+
+@media(max-width:1100px){.steps{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:1024px){
+  .hero-band-in{grid-template-columns:1fr;}
+  .ba{grid-template-columns:1fr;}
+  .info-stage{min-height:0;display:flex;flex-direction:column;align-items:center;gap:14px;}
+  .info-stage .card-c{position:relative;left:auto;top:auto;transform:none;order:1;margin:1rem 0;}
+  .call{position:static;max-width:380px;width:100%;order:2;}
+  .call.c1{order:0;}
+}
+@media(max-width:900px){
+  .nav-demos,.guard,.today,.scr-3{grid-template-columns:1fr;}
+  .scr-3>.scr:last-child:nth-child(3n+1){grid-column:auto;}
+}
+@media(max-width:768px){
+  .hero-band{padding-left:1.25rem;padding-right:1.25rem;}
+  .ba-list{flex-direction:row;overflow-x:auto;scroll-snap-type:x mandatory;gap:.5rem;padding-bottom:.5rem;}
+  .ba-list li{flex:0 0 80%;scroll-snap-align:start;display:flex;}
+  .ba-item{height:100%;}
+  .ba-item .ba-d{max-height:none;opacity:.0;}
+  .ba-item.on .ba-d{opacity:1;}
+  .ba-stage{gap:12px;}
+  .ba-phone{border-radius:30px;}
+  .ba-phone img{inset:5px;width:calc(100% - 10px);height:calc(100% - 10px);border-radius:25px;}
+  .ba-live{inset:5px;border-radius:25px;}
+  .steps{grid-template-columns:1fr;}
+  .layers{aspect-ratio:4/3;}
+  .layers img{width:28%;} .layers .l3{width:31%;left:34.5%;} .layers .l1,.layers .l5{display:none;}
+  .layers .l2{left:6%;} .layers .l4{right:6%;}
+}
+@media(max-width:520px){
+  .hero-band{padding-left:.75rem;padding-right:.75rem;}
+  .hero-band-in{padding:28px 16px 32px;border-radius:24px;}
+  .lphone{transform:scale(.92);transform-origin:top center;margin-bottom:-55px;}
+  .sbox,.hbox.solo{width:min(340px,100%);}
+  .s-amt .v{font-size:30px;}
+  .s-cursor{height:26px;}
+  .scr img,.scr figcaption{max-width:100%;}
+}
+@media (prefers-reduced-motion:reduce){
+  .ba-phone img,.layers img,.lp-ind,.csheet,.call{transition:none;}
+  .s-cursor{animation:none;}
+}
+</style>
+<!-- WIPE TRANSITION: same behaviour as the other cases (reveal from the click point, cover on "Back to portfolio") -->
+<script>
+(function(){
+  function circle(x,y,r){return 'circle('+r+' at '+x+'px '+y+'px)';}
+  window.__wipe={
+    cover:function(x,y,cb){var o=document.getElementById('wipe-overlay');if(!o){cb();return;}o.classList.add('dark');o.classList.remove('animate');o.style.clipPath=circle(x,y,'0%');void o.offsetWidth;o.classList.add('animate');o.style.clipPath=circle(x,y,'150%');setTimeout(cb,600);}
+  };
+  document.addEventListener('DOMContentLoaded',function(){
+    var o=document.getElementById('wipe-overlay');
+    var e=null;try{e=JSON.parse(sessionStorage.getItem('wipeEntry'));sessionStorage.removeItem('wipeEntry');}catch(err){}
+    if(o&&e&&!matchMedia('(prefers-reduced-motion: reduce)').matches){o.style.clipPath=circle(e.x,e.y,'150%');void o.offsetWidth;o.classList.add('animate');requestAnimationFrame(function(){o.style.clipPath=circle(e.x,e.y,'0%');});}
+    var b=document.getElementById('back-to-portfolio');
+    if(b)b.addEventListener('click',function(ev){if(ev.metaKey||ev.ctrlKey||ev.shiftKey||ev.button!==0)return;ev.preventDefault();var r=b.getBoundingClientRect();var x=r.left+r.width/2,y=r.top+r.height/2;try{sessionStorage.setItem('wipeEntry',JSON.stringify({x:x,y:y}));}catch(err){}window.__wipe.cover(x,y,function(){location.href=b.getAttribute('href');});});
+  });
+})();
+</script>
+</head>
+<body>
+<div id="wipe-overlay"></div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <clipPath id="fc"><circle cx="11" cy="11" r="11"/></clipPath>
+    <symbol id="f-gt" viewBox="0 0 22 22"><g clip-path="url(#fc)"><rect width="22" height="22" fill="#fff"/><rect width="7.3" height="22" fill="#4997D0"/><rect x="14.7" width="7.3" height="22" fill="#4997D0"/><circle cx="11" cy="11" r="2.4" fill="#9CC28B"/></g></symbol>
+    <symbol id="f-co" viewBox="0 0 22 22"><g clip-path="url(#fc)"><rect width="22" height="11" fill="#FCD116"/><rect y="11" width="22" height="5.5" fill="#003893"/><rect y="16.5" width="22" height="5.5" fill="#CE1126"/></g></symbol>
+    <symbol id="f-mx" viewBox="0 0 22 22"><g clip-path="url(#fc)"><rect width="22" height="22" fill="#fff"/><rect width="7.3" height="22" fill="#006847"/><rect x="14.7" width="7.3" height="22" fill="#CE1126"/><circle cx="11" cy="11" r="2.2" fill="#8C5A2B"/></g></symbol>
+    <symbol id="f-us" viewBox="0 0 22 22"><g clip-path="url(#fc)"><rect width="22" height="22" fill="#fff"/><g fill="#B22234"><rect width="22" height="1.7"/><rect y="3.4" width="22" height="1.7"/><rect y="6.8" width="22" height="1.7"/><rect y="10.2" width="22" height="1.7"/><rect y="13.6" width="22" height="1.7"/><rect y="17" width="22" height="1.7"/><rect y="20.4" width="22" height="1.7"/></g><rect width="10" height="10.2" fill="#3C3B6E"/></g></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5V19a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 19v-8.5Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M9.5 16.5h5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path d="M6 18 18 6M8.5 6H18v9.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-req" viewBox="0 0 24 24"><path d="M15.2 11.6a5 5 0 1 0-8.9-1.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M10 18h2.4a2 2 0 0 0 0-4h-1.8c-.4 0-.7-.1-1-.3l-2-1.1a2 2 0 0 0-1-.3H6.3A1.8 1.8 0 0 0 4.5 14v3.4c0 .9.6 1.7 1.5 1.9l2 .5 3.4 1.3c.6.2 1.3.2 1.9-.2l5.8-3.6a1.3 1.3 0 0 0-1.4-2.2L15.4 17" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="10" r="2.8" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M6.8 18.2c1.2-2 3-3 5.2-3s4 1 5.2 3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="M10 3.5l1.6 4.4 4.4 1.6-4.4 1.6L10 15.5l-1.6-4.4L4 9.5l4.4-1.6L10 3.5ZM17.5 13.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8.8-2.2Z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 3 5 13.5h6L10 21l8-10.5h-6L13 3Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></symbol>
+    <symbol id="i-sync" viewBox="0 0 24 24"><path d="M19 8.5A7.5 7.5 0 0 0 5.6 7.4M5 15.5a7.5 7.5 0 0 0 13.4 1.1M19 4v4.5h-4.5M5 20v-4.5h4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-trend" viewBox="0 0 24 24"><path d="M4 16l5-5 4 4 7-7M15 8h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 5v14M6 13l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-replay" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.4-5.7L4 8.5M4 4v4.5h4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-wa" viewBox="0 0 24 24"><path d="M12 3.5a8.5 8.5 0 0 0-7.3 12.8L3.5 20.5l4.3-1.1A8.5 8.5 0 1 0 12 3.5Z" fill="none" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/><path d="M9.2 8.3c-.3 0-.7.1-.9.5-.3.5-.5 1.1-.3 1.9.4 1.4 1.7 3 3.4 3.9 1.1.6 2 .7 2.6.5.5-.2.8-.6.9-1 .1-.3 0-.5-.2-.6l-1.3-.7c-.2-.1-.5 0-.6.2l-.4.5c-.1.1-.3.2-.5.1-.7-.3-1.5-1-1.8-1.7-.1-.2 0-.4.1-.5l.4-.4c.2-.2.2-.4.1-.6l-.6-1.5c-.1-.3-.4-.5-.9-.5Z" fill="#fff"/></symbol>
+  </defs>
+</svg>
+
+<nav class="back-nav">
+  <a class="back-btn" id="back-to-portfolio" href="index.html"><span>←</span> Back to portfolio</a>
+  <div class="back-nav-title">SukuPay · New experience</div>
+  <div class="back-nav-right">Paula Elffman · Sr Product Designer</div>
+</nav>
+
+<!-- COVER -->
+<div class="cover">
+  <div>
+    <div class="eyebrow" style="margin-bottom:2rem;">Remittances · Fintech · SukuPay · 2026</div>
+    <div class="cover-title">sukupay<br><span class="dim">new experience</span></div>
+  </div>
+  <div class="cover-meta">
+    <div class="cm-row"><div class="cm-label">Company</div><div class="cm-val">SukuPay · web app (sukupay.app)</div></div>
+    <div class="cm-row"><div class="cm-label">Role</div><div class="cm-val">Sr Product Designer · UX, UI, design system & handoff</div></div>
+    <div class="cm-row"><div class="cm-label">Corridors</div><div class="cm-val">From the US to Guatemala and Colombia</div></div>
+    <div class="cm-row"><div class="cm-label">Scope</div><div class="cm-val">Home · Navigation · Send money · Review and send · Receipt</div></div>
+    <div class="cm-row"><div class="cm-label">Status</div><div class="cm-val">Handed off to engineering</div></div>
+  </div>
+</div>
+
+<!-- HERO BAND: the new home, live -->
+<div class="hero-band">
+  <div class="hero-band-in">
+    <div style="position:relative;z-index:1;">
+      <div class="hb-kicker"><i></i>The new SukuPay home, running</div>
+      <div class="hb-title">One home for every corridor. Two steps to send.</div>
+      <p class="hb-sub">The old web app was built for one corridor. The new experience starts with <strong>where the money goes</strong>, shows the rate and the promise of that corridor, and keeps everything else one tab away.</p>
+      <div class="hb-legend"><span>Country selector</span><span>Value prop per corridor</span><span>Bottom navigation</span><span>Repeat a send</span></div>
+    </div>
+    <div class="lphone ui" id="hero-phone" aria-label="Animated mockup of the new SukuPay home switching between Guatemala and Colombia" role="img">
+      <div class="lphone-in">
+        <div class="lp-island"></div>
+        <div class="lp-status"><span>9:41</span><span>●●● ▮</span></div>
+        <div class="lp-logo">sukupay<i></i></div>
+        <div class="hbox">
+          <div class="hbox-top">
+            <span class="hpill" id="hp-pill"><svg class="flag"><use href="#f-gt" id="hp-flag"/></svg><span id="hp-country">Guatemala</span><span class="caret"></span></span>
+            <span class="hvp" id="hp-vp"><svg><use href="#i-spark" id="hp-vp-ic"/></svg><span id="hp-vp-t">Sin comisiones</span></span>
+          </div>
+          <div class="hrate" id="hp-hero"><small><svg width="12" height="12"><use href="#i-sync"/></svg><span id="hp-lbl">Tipo de cambio</span></small><b id="hp-big">Q7.66</b><span id="hp-sub">Por cada 1 USD que envíes</span></div>
+          <div class="hcta" id="hp-cta">Enviar dinero <svg><use href="#i-arrow"/></svg></div>
+          <div class="hbal">Disponible <u id="hp-bal">5.00 USD</u></div>
+        </div>
+        <div class="hstack">
+          <div class="hrep" id="hp-rep" style="opacity:0">
+            <div class="hrep-h">Repetir envío <span>Ver envíos ›</span></div>
+            <div class="hrep-row"><span>Ma** R**<small>BRE-B · M***O@EXAMPLE.COM</small></span><span>100.00 USD</span><em>Repetir</em></div>
+            <div class="hrep-row"><span>Lu** F**<small>BRE-B · L***F@EXAMPLE.COM</small></span><span>50.00 USD</span><em>Repetir</em></div>
+          </div>
+          <div class="hempty" id="hp-empty">Sin envíos recientes<small>Tus últimas transferencias aparecerán aquí, para repetirlas rápido.</small></div>
+        </div>
+        <div class="wa"><svg><use href="#i-wa"/></svg></div>
+        <div class="lp-nav">
+          <span class="lp-ind" id="hp-ind"></span>
+          <span class="lp-tab on"><svg><use href="#i-home"/></svg>Home</span>
+          <span class="lp-tab"><svg><use href="#i-send"/></svg>Envíos</span>
+          <span class="lp-tab"><svg><use href="#i-req"/></svg>Solicitudes<i class="lp-badge">2</i></span>
+          <span class="lp-tab"><svg><use href="#i-user"/></svg>Cuenta</span>
+        </div>
+        <div class="csheet-dim"></div>
+        <div class="csheet">
+          <h5>Seleccionar país</h5>
+          <div class="crow" data-c="co"><svg class="flag"><use href="#f-co"/></svg>Colombia<small>+57</small></div>
+          <div class="crow sel" data-c="gt"><svg class="flag"><use href="#f-gt"/></svg>Guatemala<small>+502</small></div>
+          <div class="crow" data-c="mx"><svg class="flag"><use href="#f-mx"/></svg>México<small>+52</small></div>
+        </div>
+        <span class="tap" id="hp-tap"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 01 SITUATION -->
+<div class="section">
+  <div class="eyebrow">Situation & task</div>
+  <div class="overview-grid">
+    <div class="ov-left reveal">
+      <div class="ov-title">A web app made for one corridor, <span class="accent">asked to serve more.</span></div>
+      <p class="ov-body">SukuPay lets people in the US send money to family in Latin America from the browser, without downloading an app. It started with Guatemala, where it runs co-branded with Zigi and Banco Industrial. Colombia was next, and the web app had Guatemala written into its screens.<br><br><strong>The task:</strong> one experience that works for any corridor, shows what matters in each one, and makes a send easy to follow from the first tap to the receipt.<br><br><strong>My role.</strong> I audited the live flow, designed the new home, the navigation, the send flow and its states, built the components in the design system, and wrote the handoff and the user stories for engineering.</p>
+    </div>
+    <div class="stats-col reveal">
+      <div class="stat-item"><div class="stat-val">2</div><div class="stat-lbl">Corridors in one home today: Guatemala and Colombia, with room for the next</div></div>
+      <div class="stat-item"><div class="stat-val">2</div><div class="stat-lbl">Steps in the header of every send: 1/2 and 2/2</div></div>
+      <div class="stat-item"><div class="stat-val">4</div><div class="stat-lbl">Tabs with a label, instead of three icons without one</div></div>
+      <div class="stat-item"><div class="stat-val">60 s</div><div class="stat-lbl">The rate stays locked while you review and pay</div></div>
+    </div>
+    <div class="accent-card reveal">
+      <div class="ac-lbl">The bet</div>
+      <div class="ac-val">Lead with the country, not with the brand.</div>
+      <div class="ac-desc">Senders don't think "I'm using SukuPay". They think "I'm sending to my mom in Bogotá". The home starts there, and every number on it belongs to that corridor.</div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTEXT: BEFORE -->
+<div class="section" style="background:var(--bg2)">
+  <div class="eyebrow">Context · SukuPay before</div>
+  <div class="section-label">
+    <div class="sl-text">The flow that was live</div>
+    <div class="sl-line"></div>
+    <div class="sl-text">Guatemala, the first corridor</div>
+  </div>
+  <p class="ov-body" style="max-width:68ch;">A request link arrives, the sender lands on a page, logs in with a code, and sends from a home that only knows Guatemala. <strong>It worked for the first corridor. It had no room for the next one.</strong></p>
+  <div class="today">
+    <figure class="reveal"><img src="assets/sukupay-newxp/before-board-1.webp" alt="Before: the request landing ‘Lucas F. te ha solicitado una remesa de Q230.26’ on a dark green background, the phone login with the keypad and a country code picker, and the old home with ‘Envia dinero a Guatemala en segundos’, the balance, ‘Enviar ahora’ and a list of recent sends." loading="lazy" decoding="async" width="1600" height="1200"><figcaption>Landing, login and the old home</figcaption></figure>
+    <figure class="reveal"><img src="assets/sukupay-newxp/before-board-2.webp" alt="Before: four screens of the old send flow. Envía el dinero with recipient and amount in USD, Elige el método de pago with Apple Pay, debit card and cash, Detalles del pago, and the success screen with a large banner to download the iPhone app." loading="lazy" decoding="async" width="1600" height="972"><figcaption>The old send flow, from amount to success</figcaption></figure>
+  </div>
+</div>
+
+<!-- 02 AUDIT -->
+<div class="section">
+  <div class="eyebrow">Action · 01 What the old flow got wrong</div>
+  <div class="section-label">
+    <div class="sl-text">Eight findings from the live flow</div>
+    <div class="sl-line"></div>
+    <div class="sl-text">Read screen by screen</div>
+  </div>
+  <div class="audit-list" style="margin-top:var(--stack);">
+    <div class="audit-item"><div class="audit-t">One country, hard-coded</div><div class="audit-d">"Envia dinero a Guatemala en segundos" (send money to Guatemala in seconds) was the headline. There was nowhere to choose Colombia.</div></div>
+    <div class="audit-item"><div class="audit-t">Navigation without labels</div><div class="audit-d">History, balance and settings lived in three round icons in the header. Requests had no place of their own.</div></div>
+    <div class="audit-item"><div class="audit-t">You typed USD and never saw what arrives</div><div class="audit-d">The amount field only took dollars. What the family receives in quetzales showed up two screens later.</div></div>
+    <div class="audit-item"><div class="audit-t">No sense of progress</div><div class="audit-d">Amount, payment method, details and success were four screens with the same header. Nothing said how far you were.</div></div>
+    <div class="audit-item"><div class="audit-t">Math that reads like a discount</div><div class="audit-d">"Total a enviar $30.00", then "Dinero disponible $10.00", then "Total a pagar $20.00". The balance was applied without saying so.</div></div>
+    <div class="audit-item"><div class="audit-t">Payment that sends you away</div><div class="audit-d">Before paying, a note warned that a new screen would open for card details and asked you to come back to finish the send.</div></div>
+    <div class="audit-item"><div class="audit-t">The rate as fine print</div><div class="audit-d">On the home, the best rate sat in a small pill above the title. It is the number senders compare the most.</div></div>
+    <div class="audit-item"><div class="audit-t">Success sold the app</div><div class="audit-d">After the send, a large "Download SukuPay on your iPhone" banner competed with sharing the receipt, the one thing the family is waiting for.</div></div>
+  </div>
+</div>
+
+<!-- SHOWCASE: the whole new experience, full width -->
+<div class="section sc-head">
+  <div class="eyebrow">The new experience</div>
+  <div class="ov-title reveal" style="max-width:22ch;">Every screen, <span class="accent">from sign-in to receipt.</span></div>
+  <p class="ov-body reveal" style="max-width:60ch;">Sign in with a phone number, a home per corridor, a send in two steps, payment, review and success. Requests and account sit one tab away.</p>
+</div>
+<figure class="showcase" role="img" aria-label="The new SukuPay, end to end, laid out as rows of phones: the welcome screen, phone login and verification code, the privacy sheet, the home for Guatemala and the country sheet, step 1 with the sender box and the swapped amount, the daily limits, the payment method, review and send, the success screen, requests, sends and account.">
+  <div class="sc-stage">
+    <div class="sc-col sc-c1"><img class="sc-ph" fetchpriority="low" src="assets/sukupay-newxp/xp-splash.webp" alt="" decoding="async" width="390" height="844"><img class="sc-ph" fetchpriority="low" src="assets/sukupay-newxp/xp-review.webp" alt="" decoding="async" width="390" height="844"><img class="sc-ph" fetchpriority="low" src="assets/sukupay-newxp/xp-requests.webp" alt="" decoding="async" width="390" height="844"><img class="sc-ph" fetchpriority="low" src="assets/sukupay-newxp/xp-account.webp" alt="" decoding="async" width="390" height="844"></div>
+    <div class="sc-col sc-c2"><img class="sc-ph" fetchpriority="low" src="assets/sukupay-newxp/xp-login.webp" alt="" decoding="async" width="390" height="844"><img class="sc-ph" fetchpriority="low" src="assets/sukupay-newxp/xp-done.webp" alt="" decoding="async" width="390" height="844"><img class="sc-ph" fetchpriority="low" src="assets/sukupay-newxp/xp-pay.webp" alt="" decoding="async" width="390" height="844"><img class="sc-ph" fetchpriority="low" src="assets/sukupay-newxp/xp-sends.webp" alt="" decoding="async" width="390" height="844"></div>
+    <div class="sc-col sc-c3"><img class="sc-ph" fetchpriority="low" src="assets/sukupay-newxp/xp-otp.webp" alt="" decoding="async" width="390" height="844"><img class="sc-ph" fetchpriority="low" src="assets/sukupay-newxp/xp-home.webp" alt="" decoding="async" width="390" height="844"><img class="sc-ph" fetchpriority="low" src="assets/sukupay-newxp/xp-home-co.webp" alt="" decoding="async" width="390" height="844"><img class="sc-ph" fetchpriority="low" src="assets/sukupay-newxp/xp-cards.webp" alt="" decoding="async" width="390" height="844"></div>
+    <div class="sc-col sc-c4"><img class="sc-ph" fetchpriority="low" src="assets/sukupay-newxp/xp-privacy.webp" alt="" decoding="async" width="390" height="844"><img class="sc-ph" fetchpriority="low" src="assets/sukupay-newxp/xp-swap.webp" alt="" decoding="async" width="390" height="844"><img class="sc-ph" fetchpriority="low" src="assets/sukupay-newxp/xp-limits.webp" alt="" decoding="async" width="390" height="844"><img class="sc-ph" fetchpriority="low" src="assets/sukupay-newxp/xp-card-delete.webp" alt="" decoding="async" width="390" height="844"></div>
+    <div class="sc-col sc-c5"><img class="sc-ph" fetchpriority="low" src="assets/sukupay-newxp/xp-country.webp" alt="" decoding="async" width="390" height="844"><img class="sc-ph" fetchpriority="low" src="assets/sukupay-newxp/xp-send.webp" alt="" decoding="async" width="390" height="844"><img class="sc-ph" fetchpriority="low" src="assets/sukupay-newxp/xp-rejected.webp" alt="" decoding="async" width="390" height="844"><img class="sc-ph" fetchpriority="low" src="assets/sukupay-newxp/xp-sends-empty.webp" alt="" decoding="async" width="390" height="844"></div>
+  </div>
+</figure>
+
+<!-- 03 THREE CHANGES -->
+<div class="section" style="background:var(--bg2)">
+  <div class="eyebrow">Action · 02 Three changes</div>
+  <div class="section-label">
+    <div class="sl-text">What carries the new experience</div>
+    <div class="sl-line"></div>
+    <div class="sl-text">Each one in detail below</div>
+  </div>
+  <div class="ks" id="ks">
+    <div class="ks-phone" aria-hidden="true">
+      <div class="ks-screen">
+        <img class="on" src="assets/sukupay-newxp/xp-home.webp" alt="" decoding="async">
+        <img src="assets/sukupay-newxp/xp-send.webp" alt="" loading="lazy" decoding="async">
+        <span class="ks-spot" id="ks-spot"></span>
+      </div>
+    </div>
+    <ol class="ba-list ks-list">
+      <li><button class="ba-item on" data-i="0"><span class="ba-n">01</span><span class="ba-t">Home screen</span><span class="ba-d">A modular home: each market switches blocks on or off and picks the promise it can keep, from no fees to the best rate. Recent sends turn into "Repetir envío" (repeat a send).</span><span class="ba-bar"><i></i></span></button></li>
+      <li><button class="ba-item" data-i="1"><span class="ba-n">02</span><span class="ba-t">The sender box</span><span class="ba-d">What you send and what arrives, both visible while you type, with the rate on top and the limits explained in place.</span><span class="ba-bar"><i></i></span></button></li>
+      <li><button class="ba-item" data-i="2"><span class="ba-n">03</span><span class="ba-t">Navigation</span><span class="ba-d">Four tabs with a label instead of three icons. Requests get their own place, and the bar steps aside inside a send, where a "1/2" header takes over.</span><span class="ba-bar"><i></i></span></button></li>
+      <li class="ks-link"><a class="ks-more" id="ks-more" href="#home-box">See the home screen in detail ↓</a></li>
+    </ol>
+  </div>
+</div>
+
+<!-- 04 HOME BOX -->
+<div class="section" id="home-box">
+  <div class="eyebrow">Action · 03 Home screen · a modular home</div>
+  <!-- title hidden for now: <div class="ov-title reveal" style="max-width:20ch;">Modules that switch on and off, <span class="accent">not screens that get redesigned.</span></div> -->
+  <p class="ov-body reveal" style="max-width:62ch;">Every market builds its home from the same blocks. Each block switches on or off per corridor, and the badge says what that market can promise. When the promise is speed, speed goes to the front. <strong>A new corridor is a configuration, not a new home.</strong></p>
+  <div class="mh" id="mh">
+    <ol class="ba-list mh-list">
+      <li><button class="ba-item on" data-i="0"><span class="ba-n"><svg class="flag"><use href="#f-gt"/></svg>Guatemala</span><span class="ba-d"><span class="mh-def"><b>Badge</b>Sin comisiones (no fees)</span><span class="mh-def"><b>In front</b>The rate, Q7.66 per dollar</span><span class="mh-def"><b>Modules</b>Repeat a send, requests, WhatsApp</span></span><span class="ba-bar"><i></i></span></button></li>
+      <li><button class="ba-item" data-i="1"><span class="ba-n"><svg class="flag"><use href="#f-co"/></svg>Colombia</span><span class="ba-d"><span class="mh-def"><b>Badge</b>Instantáneo (instant)</span><span class="mh-def"><b>In front</b>"Menos de 30 segundos" (under 30 seconds). The rate moves up, smaller</span><span class="mh-def"><b>Modules</b>Repeat a send, requests, WhatsApp</span></span><span class="ba-bar"><i></i></span></button></li>
+    </ol>
+    <div class="lphone ui mh-phone" id="mh-phone" aria-label="The home switching between the Guatemala and Colombia configurations" role="img">
+      <div class="lphone-in">
+        <div class="lp-island"></div>
+        <div class="lp-status"><span>9:41</span><span>●●● ▮</span></div>
+        <div class="lp-logo">sukupay<i></i></div>
+        <div class="hbox">
+          <div class="hbox-top">
+            <span class="hpill"><svg class="flag"><use href="#f-gt" id="mx-flag"/></svg><span id="mx-country">Guatemala</span><span class="caret"></span></span>
+            <span class="hvp" id="mx-vp"><svg><use href="#i-spark" id="mx-vp-ic"/></svg><span id="mx-vp-t">Sin comisiones</span></span>
+          </div>
+          <div class="hrate" id="mx-hero"><small><svg width="12" height="12"><use href="#i-sync"/></svg><span id="mx-lbl">Tipo de cambio</span></small><b id="mx-big">Q7.66</b><span id="mx-sub">Por cada 1 USD que envíes</span></div>
+          <div class="hcta">Enviar dinero <svg><use href="#i-arrow"/></svg></div>
+          <div class="hbal">Disponible <u>5.00 USD</u></div>
+        </div>
+        <div class="hrep">
+          <div class="hrep-h">Repetir envío <span>Ver envíos ›</span></div>
+          <div class="hrep-row"><span>Lu** F**<small id="mx-r1s">+502 1234 5678</small></span><span>100.00 USD</span><em>Repetir</em></div>
+          <div class="hrep-row"><span>Ma** R**<small id="mx-r2s">+502 5555 0101</small></span><span>50.00 USD</span><em>Repetir</em></div>
+        </div>
+        <div class="wa"><svg><use href="#i-wa"/></svg></div>
+        <div class="lp-nav">
+          <span class="lp-ind"></span>
+          <span class="lp-tab on"><svg><use href="#i-home"/></svg>Home</span>
+          <span class="lp-tab"><svg><use href="#i-send"/></svg>Envíos</span>
+          <span class="lp-tab"><svg><use href="#i-req"/></svg>Solicitudes<i class="lp-badge">2</i></span>
+          <span class="lp-tab"><svg><use href="#i-user"/></svg>Cuenta</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="ba-note">Demo configuration of the same home. When the badge says Instantáneo, speed goes to the front. Which market turns on what is a business decision per corridor.</p>
+
+  <div class="section-label num-label">
+    <div class="sl-text">The home box, piece by piece</div>
+    <div class="sl-line"></div>
+    <div class="sl-text">What is fixed and what each country controls</div>
+  </div>
+  <div class="info-stage" id="hb-stage">
+    <div class="call c1"><b>1</b><span>Country pill, top left<em>Fixed and always visible. Guatemala and Colombia today; a new corridor is one more row in the sheet.</em></span></div>
+    <div class="call c2"><b>2</b><span>The promise of that corridor<em>Guatemala has no fees, so it says so. Colombia charges a fee, so it leads with speed, so the badge says Instantáneo and "Menos de 30 segundos" takes the front.</em></span></div>
+    <div class="call c3"><b>3</b><span>One action<em>"Enviar dinero" (send money). Never changes, never competes.</em></span></div>
+    <div class="call c4"><b>4</b><span>Balance under the action<em>"Disponible" (available) applies to the next send by default.</em></span></div>
+    <div class="card-c">
+      <div class="hbox solo ui" id="hb">
+        <div class="hbox-top">
+          <span class="hpill" id="hb-pill"><svg class="flag"><use href="#f-gt" id="hb-flag"/></svg><span id="hb-country">Guatemala</span><span class="caret"></span></span>
+          <span class="hvp" id="hb-vp"><svg><use href="#i-spark" id="hb-vp-ic"/></svg><span id="hb-vp-t">Sin comisiones</span></span>
+        </div>
+        <div class="hrate" id="hb-rate-w"><small><svg width="12" height="12"><use href="#i-sync"/></svg><span id="hb-lbl">Tipo de cambio</span></small><b id="hb-big">Q7.66</b><span id="hb-sub">Por cada 1 USD que envíes</span></div>
+        <div class="hcta" id="hb-cta">Enviar dinero <svg><use href="#i-arrow"/></svg></div>
+        <div class="hbal" id="hb-bal">Disponible <u>5.00 USD</u></div>
+      </div>
+    </div>
+  </div>
+  <div class="demo-row"><button class="replay" data-replay="hb"><svg><use href="#i-replay"/></svg>Replay</button></div>
+</div>
+
+<!-- 06 SENDER BOX -->
+<div class="section" id="sender-box" style="background:var(--bg2)">
+  <div class="eyebrow">Action · 04 The sender box</div>
+  <div class="section-label">
+    <div class="sl-text">How much, and how much arrives</div>
+    <div class="sl-line"></div>
+    <div class="sl-text">The part of the flow people touch the most</div>
+  </div>
+  <div class="info-stage" id="sb-stage">
+    <div class="call c1"><b>1</b><span>Rate on top, always<em>The quote sits in the header of the box, so the math below has a source.</em></span></div>
+    <div class="call c2"><b>2</b><span>Both amounts as you type<em>Dollars in, local currency out. The arrow swaps them, for people who need an exact amount to arrive.</em></span></div>
+    <div class="call c3"><b>3</b><span>Over the limit, it tells you right away<em>The amount and the limits line turn red before you can continue.</em></span></div>
+    <div class="call c4"><b>4</b><span>The ⓘ explains the limits<em>Per send and per day, in one sheet you close with "Entendido" (got it).</em></span></div>
+    <div class="card-c">
+      <div class="sbox ui" id="sb">
+        <div class="s-rate" id="sb-rate"><svg><use href="#i-sync"/></svg>1 USD = 7.62 GTQ</div>
+        <h4>¿Cuánto vas a enviar?</h4>
+        <div class="s-amt" id="sb-in"><small>ENVÍAS</small><div class="r"><span class="v"><sup>$</sup><span id="sb-usd">0.00</span><span class="s-cursor" id="sb-cur"></span></span><span class="cur"><svg class="flag"><use href="#f-us"/></svg>USD</span></div></div>
+        <div class="s-swap"><svg style="color:#61FF61"><use href="#i-down"/></svg></div>
+        <div class="s-amt rec"><small>RECIBE EN GUATEMALA</small><div class="r"><span class="v"><sup>$~</sup><span id="sb-gtq">0.00</span></span><span class="cur"><svg class="flag"><use href="#f-gt"/></svg>GTQ</span></div></div>
+        <div class="s-mm" id="sb-mm">Min 5 USD · Max 650 USD <span class="s-i" id="sb-i">i</span></div>
+        <div class="s-overlay" id="sb-ov"><div class="s-sheet"><div class="ic"><i>i</i></div><h5>Límites diarios</h5><p>Puedes hacer más de un envío al mes. Este monto es el máximo permitido por transacción individual.</p><div class="bx">Min: 5.00 USD<br>Máx. por transacción: 650.00 USD<br>Máx. por día: 1,300.00 USD</div><div class="bt">Entendido</div></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="demo-row"><button class="replay" data-replay="sb"><svg><use href="#i-replay"/></svg>Replay</button></div>
+</div>
+
+<!-- 05 NAVIGATION -->
+<div class="section" id="navigation">
+  <div class="eyebrow">Action · 05 Navigation</div>
+  <div class="section-label">
+    <div class="sl-text">Where you are in the app, and where you are in a send</div>
+    <div class="sl-line"></div>
+    <div class="sl-text">Two components, one job each</div>
+  </div>
+  <div class="nav-demos">
+    <div class="nd reveal">
+      <h3>Bottom navigation</h3>
+      <p>Four tabs with a word under each icon. Requests get their own tab and a badge. The bar shows on the four main sections and hides inside every flow.</p>
+      <div class="nd-mock ui">
+        <div class="hd-body"><span></span><span></span><span></span></div>
+        <div class="lp-nav" id="nb">
+          <span class="lp-ind" id="nb-ind"></span>
+          <span class="lp-tab on"><svg><use href="#i-home"/></svg>Home</span>
+          <span class="lp-tab"><svg><use href="#i-send"/></svg>Envíos</span>
+          <span class="lp-tab"><svg><use href="#i-req"/></svg>Solicitudes<i class="lp-badge">2</i></span>
+          <span class="lp-tab"><svg><use href="#i-user"/></svg>Cuenta</span>
+        </div>
+      </div>
+    </div>
+    <div class="nd reveal">
+      <h3>Header with progress</h3>
+      <p>Each step names itself, says "1/2" or "2/2", and fills its half of the bar. A send always has an end you can see.</p>
+      <div class="nd-mock ui">
+        <div class="hd">
+          <div class="hd-row"><svg viewBox="0 0 24 24"><path d="M19 12H5m6-6-6 6 6 6" fill="none" stroke="#040404" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="hd-t" id="hd-t">Envía dinero</span><span class="hd-b" id="hd-b">1/2</span></div>
+          <div class="hd-steps" id="hd-steps"><span class="on"></span><span></span></div>
+        </div>
+        <div class="hd-body"><span></span><span></span><span></span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 08 THE REST OF THE APP -->
+<div class="section">
+  <div class="eyebrow">Action · 06 Behind the tabs</div>
+  <div class="section-label">
+    <div class="sl-text">Every tab, every state that came with it</div>
+    <div class="sl-line"></div>
+    <div class="sl-text">From the handoff file</div>
+  </div>
+  <div class="scr-grid scr-3">
+    <figure class="scr reveal"><img src="assets/sukupay-newxp/xp-home-co-empty.webp" alt="Home for Colombia with no sends yet: Instantáneo, rate 3.950,50 COP, Enviar dinero, balance, Sin envíos recientes and a banner to download the app." loading="lazy" decoding="async" width="390" height="844"><figcaption><span class="scr-n">01</span><b>First visit</b><span>With no sends yet, the space for "Repetir envío" explains what will show up there, instead of staying blank.</span></figcaption></figure>
+    <figure class="scr reveal"><img src="assets/sukupay-newxp/xp-home-co.webp" alt="Home for Colombia with recent sends: Instantáneo, rate 3.950,50 COP, Enviar dinero, balance and a Repetir envío list with Repetir buttons." loading="lazy" decoding="async" width="390" height="844"><figcaption><span class="scr-n">02</span><b>Back for another send</b><span>After the first send, that same space lists the recent transfers, each with its own Repetir button.</span></figcaption></figure>
+    <figure class="scr reveal"><img src="assets/sukupay-newxp/xp-country.webp" alt="Country sheet over the home: Seleccionar país, with Colombia +57 selected, Guatemala +502 and México +52." loading="lazy" decoding="async" width="390" height="844"><figcaption><span class="scr-n">03</span><b>Choose the country</b><span>A sheet from the pill. Colombia is the default; the dialing code shows next to each one.</span></figcaption></figure>
+    <figure class="scr reveal"><img src="assets/sukupay-newxp/xp-limits.webp" alt="Límites diarios sheet over step 1: min 5 USD, max 650 USD per transaction, max 1,300 USD per day, and Entendido." loading="lazy" decoding="async" width="390" height="844"><figcaption><span class="scr-n">04</span><b>Limits, explained</b><span>The ⓘ next to min and max opens the daily limits. No dead end, no error page.</span></figcaption></figure>
+    <figure class="scr reveal"><img src="assets/sukupay-newxp/xp-sends-empty.webp" alt="Envíos tab with no sends yet: Aún no tienes envíos and a Hacer envío button." loading="lazy" decoding="async" width="390" height="844"><figcaption><span class="scr-n">05</span><b>No sends yet</b><span>The empty tab says what goes there and offers Hacer envío, so it never reads as broken.</span></figcaption></figure>
+    <figure class="scr reveal"><img src="assets/sukupay-newxp/xp-sends.webp" alt="Envíos tab with a send details sheet: 100 USD to José, received about Q762,58, the date, Enviar nuevamente and Ver comprobante." loading="lazy" decoding="async" width="390" height="844"><figcaption><span class="scr-n">06</span><b>Envíos (sends)</b><span>Each send opens its details: who, how much arrived and when. Enviar nuevamente and the receipt sit right below.</span></figcaption></figure>
+    <figure class="scr reveal"><img src="assets/sukupay-newxp/xp-requests.webp" alt="Solicitudes tab: María Rodriguez requests 100 USD and José Hernandes 20.00 USD, each with Revisar solicitud." loading="lazy" decoding="async" width="390" height="844"><figcaption><span class="scr-n">07</span><b>Solicitudes (requests)</b><span>Requests from family used to open as a separate landing page. Now they have a tab, a badge and one button each.</span></figcaption></figure>
+    <figure class="scr reveal"><img src="assets/sukupay-newxp/xp-account.webp" alt="Cuenta tab: phone number, language, settings, security, saved cards, other send methods, customer support, about us and log out." loading="lazy" decoding="async" width="390" height="844"><figcaption><span class="scr-n">08</span><b>Cuenta (account)</b><span>What used to hide behind a gear icon: cards, language, security and help, in one list.</span></figcaption></figure>
+    <figure class="scr reveal"><img src="assets/sukupay-newxp/xp-cards.webp" alt="Tarjetas guardadas: one Visa ending in 9875, expiring 11/30, with a delete button." loading="lazy" decoding="async" width="390" height="844"><figcaption><span class="scr-n">09</span><b>Saved cards</b><span>Cards saved at checkout live in Cuenta, each with its last four digits, expiry and a delete button.</span></figcaption></figure>
+    <figure class="scr reveal"><img src="assets/sukupay-newxp/xp-card-delete.webp" alt="Eliminar tarjeta sheet asking to confirm removing the card ending in 9875, with Sí, eliminar and Cancelar." loading="lazy" decoding="async" width="390" height="844"><figcaption><span class="scr-n">10</span><b>Deleting asks first</b><span>A red sheet confirms before anything is removed and names the card by its last four digits.</span></figcaption></figure>
+  </div>
+</div>
+
+<!-- 03 BEFORE / AFTER -->
+<div class="section" style="background:var(--bg2)">
+  <div class="eyebrow">Action · 07 Before and after</div>
+  <div class="section-label">
+    <div class="sl-text">All of it together: the same send, moment by moment</div>
+    <div class="sl-line"></div>
+    <div class="sl-text">Old flow on the left, new one on the right</div>
+  </div>
+  <div class="ba" id="ba">
+    <ol class="ba-list" id="ba-list">
+      <li><button class="ba-item on" data-i="0"><span class="ba-n">01</span><span class="ba-t">Home</span><span class="ba-d">The headline with "Guatemala" becomes a country selector. The rate is the biggest number on screen, and recent sends turn into "Repetir envío" (repeat a send).</span><span class="ba-bar"><i></i></span></button></li>
+      <li><button class="ba-item" data-i="1"><span class="ba-n">02</span><span class="ba-t">Send money · 1/2</span><span class="ba-d">A header with a two-step bar. The recipient is checked as you type, and the box shows what you send and what arrives, in both currencies.</span><span class="ba-bar"><i></i></span></button></li>
+      <li><button class="ba-item" data-i="2"><span class="ba-n">03</span><span class="ba-t">Payment method</span><span class="ba-d">Two methods with the same weight, both marked with no fees, and a quieter entry for people who pay from Coinbase. Still 1/2 in the header.</span><span class="ba-bar"><i></i></span></button></li>
+      <li><button class="ba-item" data-i="3"><span class="ba-n">04</span><span class="ba-t">Review and send · 2/2</span><span class="ba-d">Who, what arrives, and one clean sum. You pay right here, next to the summary. The rate stays locked for 60 seconds; if it runs out, you see the new amount before being charged.</span><span class="ba-bar"><i></i></span></button></li>
+      <li><button class="ba-item" data-i="4"><span class="ba-n">05</span><span class="ba-t">Done</span><span class="ba-d">The app banner goes. What stays is the amount, the receipt, and an offer to remind you to send again in 7 days.</span><span class="ba-bar"><i></i></span></button></li>
+      <li><button class="ba-item" data-i="5"><span class="ba-n">06</span><span class="ba-t">Receipt</span><span class="ba-d">The old receipt had the amount, the recipient and a number. The new one adds the status of the send, the fee and what was paid, with sharing as the main action.</span><span class="ba-bar"><i></i></span></button></li>
+    </ol>
+    <div class="ba-stage">
+      <div class="ba-col">
+        <span class="ba-tag b">Before</span>
+        <div class="ba-phone before" id="ba-before">
+          <img class="on" src="assets/sukupay-newxp/before-home.webp" alt="Old home: Envia dinero a Guatemala en segundos, the best rate in a small pill, balance $5.00, Enviar ahora and recent sends." decoding="async">
+          <img src="assets/sukupay-newxp/before-send.webp" alt="Old send screen: recipient phone and an amount field in USD only." loading="lazy" decoding="async">
+          <img src="assets/sukupay-newxp/before-pay.webp" alt="Old payment method screen: Apple Pay, debit card, and cash in stores." loading="lazy" decoding="async">
+          <img src="assets/sukupay-newxp/before-review.webp" alt="Old payment details: total to send $30, balance $10, total to pay $20, and a note that a new screen will open." loading="lazy" decoding="async">
+          <img src="assets/sukupay-newxp/before-done.webp" alt="Old success screen: you sent $30.00, share receipt, and a large banner to download the iPhone app." loading="lazy" decoding="async">
+          <img src="assets/sukupay-newxp/before-receipt.webp" alt="Old receipt: Comprobante de transferencia with the date, amount $30.00, what the recipient receives, the recipient and the transfer number." loading="lazy" decoding="async">
+        </div>
+      </div>
+      <div class="ba-col">
+        <span class="ba-tag a">After</span>
+        <div class="ba-phone" id="ba-after">
+          <img class="on" src="assets/sukupay-newxp/xp-home.webp" alt="New home: Guatemala selected, Sin comisiones, rate Q7.66, Enviar dinero, balance, Repetir envío and the bottom navigation." decoding="async">
+          <img src="assets/sukupay-newxp/xp-send.webp" alt="New step 1 of 2: recipient verified, envías 100 USD, recibe en Guatemala 764.07 GTQ, min and max, no fee, total and Continuar." loading="lazy" decoding="async">
+          <img src="assets/sukupay-newxp/xp-pay.webp" alt="New payment method: Apple Pay and debit card, both with no fees, and Cuenta en Coinbase below." loading="lazy" decoding="async">
+          <div class="ba-live ui" role="img" aria-label="New step 2 of 2, Revisa y envía, animated: recipient, amount received, envías, comisión, total a pagar, the locked rate and Pagar con Apple Pay. When the 60-second quote runs out, the rate row lights up and the new amount shows before paying.">
+            <div class="bl-scr" id="bl-scr">
+              <div class="bl-status"><span>9:41</span><i class="bl-island"></i><span class="bl-sig"><b></b><b></b><b></b><b></b><em></em></span></div>
+              <div class="bl-head"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5M11 5.5 4.5 12l6.5 6.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="bl-title">Revisa y envía</span><span class="bl-step">2/2</span></div>
+              <div class="bl-bars"><i></i><i></i></div>
+              <div class="bl-body">
+                <div class="bl-card bl-who"><div><b>+502 483 60496</b><small>+502 483 60496</small><small><strong>Número de cuenta</strong> ******6578 <u>Modificar</u></small></div><span class="bl-dot"></span></div>
+                <div class="bl-card bl-rec"><small>RECIBE EN GUATEMALA</small><div class="bl-amt"><sup>$</sup><span id="bl-gtq">764,07</span><span class="bl-cur"><svg class="flag"><use href="#f-gt"/></svg>GTQ</span></div></div>
+                <div class="bl-card bl-rows">
+                  <div><span>Envías</span><span>100.00 USD</span></div>
+                  <div><span>Comisión de envío <i class="bl-i">i</i></span><span>Gratis</span></div>
+                  <div class="tot"><span>Total a pagar</span><span>100.00 USD</span></div>
+                  <div class="bl-fx" id="bl-fx"><div class="bl-fx-r"><span>Tipo de cambio <i class="bl-i">i</i></span><span><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-sync"/></svg>1 USD &gt; <span id="bl-rate">7,62</span> GTQ</span></div><p>Este tipo de cambio está asegurado por 60 s. Si vence, te mostramos el nuevo monto antes de cobrarte.</p></div>
+                </div>
+              </div>
+              <span class="bl-wa"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg></span>
+              <div class="bl-pay">Pagar con <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="#fff" d="M16.4 12.6c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9-.7 0-1.8-.8-3-.8-1.5 0-3 .9-3.8 2.3-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.7 3-.7s1.8.7 3 .7c1.3 0 2.1-1.1 2.8-2.3.9-1.3 1.3-2.6 1.3-2.6s-2.5-1-2.5-3.8ZM14.1 5.8c.6-.8 1.1-1.8.9-2.8-.9 0-2 .6-2.7 1.4-.6.7-1.1 1.7-1 2.7 1 .1 2.1-.5 2.8-1.3Z"/></svg>Pay</div>
+            </div>
+          </div>
+          <img src="assets/sukupay-newxp/xp-done.webp" alt="New success: Enviaste 100.00 USD, Ver comprobante, Volver al inicio and a reminder to repeat the send in 7 days." loading="lazy" decoding="async">
+          <img src="assets/sukupay-newxp/xp-receipt.webp" alt="New receipt: Enviando status, the sukupay logo and date, amount sent, amount received, fee, amount paid, recipient, phone and transfer number, with Compartir comprobante and Volver al inicio." loading="lazy" decoding="async">
+        </div>
+        <div class="ba-lock" id="ba-lock" aria-hidden="true"><svg viewBox="0 0 64 64"><circle class="bg" cx="32" cy="32" r="28"/><circle class="fg" id="bl-ring" cx="32" cy="32" r="28" stroke-dasharray="175.9" stroke-dashoffset="0"/></svg><span><b id="bl-sec">60 s</b>quote lock, sped up</span></div>
+      </div>
+    </div>
+  </div>
+  <p class="ba-note">Plays on its own. Pick a moment to stop on it. Screens keep the Spanish copy of the product; figures are from the design files.</p>
+</div>
+
+<!-- 09 DECISIONS -->
+<div class="section">
+  <div class="eyebrow">Action · 08 Design decisions</div>
+  <div class="section-label">
+    <div class="sl-text">What shaped the screens</div>
+    <div class="sl-line"></div>
+    <div class="sl-text">And what we left out</div>
+  </div>
+  <div class="decisions-grid">
+    <div class="dec reveal"><div class="dec-n">01</div><div class="dec-t">The value prop is a setting, not a headline</div><div class="dec-d">Each corridor shows the promise it can keep. Writing "no fees" on a corridor with a fee would cost more trust than it wins.</div></div>
+    <div class="dec reveal"><div class="dec-n">02</div><div class="dec-t">Show what arrives, not only what leaves</div><div class="dec-d">Many senders need an exact amount to land: rent, a bill, a set figure. The swap lets them type that number and see the dollars.</div></div>
+    <div class="dec reveal"><div class="dec-n">03</div><div class="dec-t">The navigation hides inside a flow</div><div class="dec-d">Four tabs on the main sections, none while sending. A send has one way forward and one way back.</div></div>
+    <div class="dec reveal"><div class="dec-n">04</div><div class="dec-t">Two steps, even with a payment method</div><div class="dec-d">Choosing how to pay still reads 1/2 in the header. Paying happens on the review step, next to the summary, so the count never grows to three.</div></div>
+    <div class="dec reveal"><div class="dec-n">05</div><div class="dec-t">Success is for the family, not for the funnel</div><div class="dec-d">The receipt is what the family is waiting for. The app download banner went, and a reminder to send again took its place.</div></div>
+    <div class="dec reveal"><div class="dec-n">06</div><div class="dec-t">Built once, skinned per brand</div><div class="dec-d">Home box, sender box, header, navigation and summary card are components with tokens. The same pieces carry SukuPay and its co-branded partners.</div></div>
+  </div>
+</div>
+
+<!-- 10 DESIGN SYSTEM -->
+<div class="section" style="background:var(--bg2)">
+  <div class="eyebrow">Action · 09 From the design system to the handoff</div>
+  <div class="section-label">
+    <div class="sl-text">Five components carry the whole experience</div>
+    <div class="sl-line"></div>
+    <div class="sl-text">Each with its states, in one handoff file</div>
+  </div>
+  <div class="steps">
+    <div class="step reveal"><div class="step-n">01</div><div class="step-t">Home box</div><div class="step-d">Country pill, value prop slot, rate, one action, balance.</div></div>
+    <div class="step reveal"><div class="step-n">02</div><div class="step-t">Sender box</div><div class="step-d">Empty, typing, filled, over the limit, swapped currency.</div></div>
+    <div class="step reveal"><div class="step-n">03</div><div class="step-t">Header and bottom navigation</div><div class="step-d">Step title, "1/2" badge and bar; four tabs with an indicator and a badge.</div></div>
+    <div class="step on reveal"><div class="step-n">04</div><div class="step-t">Summary card</div><div class="step-d">One card, every payment case: card only, balance only, balance plus card, Apple Pay or Coinbase.</div></div>
+  </div>
+  <div class="principle-quote reveal">
+    <div class="pq-lbl">The handoff</div>
+    <div class="pq-t">One file, per corridor, every state.</div>
+    <p class="pq-d">Guatemala and Colombia laid out end to end, from home to receipt, including the edge cases: no balance, balance that covers part of the send, the minimum with Apple Pay or Coinbase. Each flow hangs from a user story in Notion, so engineering builds against the same map.</p>
+  </div>
+</div>
+
+<!-- WHAT WE'LL MEASURE -->
+<div class="section">
+  <div class="eyebrow">What we'll measure</div>
+  <div class="section-label">
+    <div class="sl-text">Written down before launch</div>
+    <div class="sl-line"></div>
+    <div class="sl-text">Results go here once the experience is live</div>
+  </div>
+  <div class="guard">
+    <div><b>Home to step 1</b><span>Share of sessions that tap "Enviar dinero". If the country selector adds doubt, this drops.</span></div>
+    <div><b>Step 1 to paid</b><span>How many sends that start get paid. The point of the two-step header and the rate lock.</span></div>
+    <div><b>Repeat sends</b><span>How often "Repetir envío" and the 7-day reminder start a send. If nobody uses them, the home is carrying dead weight.</span></div>
+  </div>
+</div>
+
+<!-- NEXT CASE -->
+<nav class="next-case" aria-label="Next case">
+  <div class="nc-in">
+    <a class="nc-link" href="muv-case.html">
+      <span class="nc-kicker">Next case</span>
+      <span class="nc-name">muv<span class="nc-arrow" aria-hidden="true">→</span></span>
+      <span class="nc-line">Ride-hailing in Paraguay. Onboarding cut from 21 steps to 6.</span>
+    </a>
+    <a class="nc-about" href="index.html#about">About me and contact</a>
+  </div>
+</nav>
+
+<footer class="footer">
+  <div class="footer-l">SukuPay · New experience · Remittances · 2026</div>
+  <div class="footer-r">Product design · Paula Elffman</div>
+</footer>
+
+<!-- Portfolio Navigation Dock -->
+<style id="portfolio-dock-css">
+#portfolio-dock{width:max-content;max-width:calc(100vw - 32px);white-space:nowrap;position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:9700;display:flex;align-items:center;gap:.25rem;padding:.375rem .5rem;border-radius:999px;background:rgba(240,239,236,.85);border:1px solid rgba(21,33,25,.12);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);box-shadow:0 8px 24px rgba(0,0,0,.08);}
+#portfolio-dock .pd-btn{white-space:nowrap;flex:none;display:inline-flex;align-items:center;min-height:44px;padding:0 1.25rem;border-radius:999px;font-family:'Inter',sans-serif;font-size:.9375rem;font-weight:500;color:rgba(21,33,25,.7);text-decoration:none;transition:background .2s,color .2s;}
+#portfolio-dock .pd-btn:hover{background:rgba(21,33,25,.06);color:#14141C;}
+#portfolio-dock .pd-sep{width:1px;height:24px;background:rgba(21,33,25,.16);margin:0 .25rem;}
+#portfolio-dock .pd-theme{display:grid;place-items:center;width:44px;height:44px;border:0;border-radius:50%;background:none;color:rgba(21,33,25,.7);cursor:pointer;}
+#portfolio-dock .pd-theme:hover{background:rgba(21,33,25,.06);}
+#portfolio-dock .pd-theme svg{width:20px;height:20px;}
+#portfolio-dock .icon-moon{display:none;}
+@media(max-width:420px){#portfolio-dock .pd-btn{padding:0 .875rem;font-size:.875rem;}}
+body.dark-mode #portfolio-dock{background:rgba(44,44,53,.85);border-color:rgba(244,244,246,.1);}
+body.dark-mode #portfolio-dock .pd-btn,body.dark-mode #portfolio-dock .pd-theme{color:rgba(244,244,246,.75);}
+body.dark-mode #portfolio-dock .pd-btn:hover,body.dark-mode #portfolio-dock .pd-theme:hover{background:rgba(244,244,246,.08);color:#F4F4F6;}
+body.dark-mode #portfolio-dock .pd-sep{background:rgba(244,244,246,.16);}
+body.dark-mode #portfolio-dock .icon-sun{display:none;}
+body.dark-mode #portfolio-dock .icon-moon{display:block;}
+</style>
+<nav id="portfolio-dock">
+  <a class="pd-btn" href="index.html" title="Back to Home">Home</a>
+  <a class="pd-btn" href="index.html#about" title="About Me">About Me</a>
+  <div class="pd-sep"></div>
+  <button class="pd-theme" onclick="document.body.classList.toggle('dark-mode');try{localStorage.setItem('pe-theme',document.body.classList.contains('dark-mode')?'dark':'light')}catch(e){}" aria-label="Toggle light/dark mode">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+</nav>
+<script>(function(){try{if(localStorage.getItem('pe-theme')==='dark')document.body.classList.add('dark-mode')}catch(e){}})()</script>
+
+<script>
+/* SUKUPAY NEW XP · demos. Each loop only runs while its block is on screen,
+   moves with a pause, and settles on a still frame with reduced motion. */
+(function(){
+  var RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function $(id){ return document.getElementById(id); }
+  function fmt(n){ return n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+  function Timeline(){ var t=[]; return { at:function(ms,fn){ t.push(setTimeout(fn,ms)); }, clear:function(){ t.forEach(clearTimeout); t=[]; } }; }
+  function whenVisible(el, start, stop){
+    if(!el) return;
+    if(!('IntersectionObserver' in window)){ start(); return; }
+    var on=false;
+    new IntersectionObserver(function(es){ es.forEach(function(e){
+      if(e.isIntersecting && !on){ on=true; start(); }
+      else if(!e.isIntersecting && on){ on=false; if(stop) stop(); }
+    }); },{threshold:.25}).observe(el);
+  }
+
+  /* reveal */
+  var rv=document.querySelectorAll('.reveal,#layers');
+  if('IntersectionObserver' in window && !RM){
+    var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); },{threshold:.15});
+    rv.forEach(function(el){ io.observe(el); });
+  } else rv.forEach(function(el){ el.classList.add('in'); });
+
+  var COUNTRY={
+    gt:{flag:'#f-gt',name:'Guatemala',vpIc:'#i-spark',vp:'Sin comisiones',rate:'Q7.66',bal:'5.00 USD',speed:false,r1:'+502 1234 5678',r2:'+502 5555 0101'},
+    co:{flag:'#f-co',name:'Colombia',vpIc:'#i-bolt',vp:'Instantáneo',rate:'3,950.50 COP',bal:'20.00 USD',speed:true,r1:'Bre-B · lu***@mail.com',r2:'Bre-B · ma***@mail.com'}
+  };
+  /* the rule: when the badge says Instantáneo, speed takes the front and the rate moves up, smaller */
+  function box(p,c){
+    var big=$(p+'-big'), lbl=$(p+'-lbl'), sub=$(p+'-sub');
+    big.textContent = c.speed ? 'Menos de 30 segundos' : c.rate;
+    big.classList.toggle('speed',c.speed);
+    lbl.textContent = c.speed ? '1 USD = '+c.rate : 'Tipo de cambio';
+    if(sub) sub.style.display = c.speed ? 'none' : '';
+  }
+
+  /* ── HERO PHONE ── */
+  (function(){
+    var ph=$('hero-phone'); if(!ph) return;
+    var inner=ph.querySelector('.lphone-in'), tap=$('hp-tap'), ind=$('hp-ind');
+    var tabs=ph.querySelectorAll('.lp-nav .lp-tab'), rows=ph.querySelectorAll('.crow');
+    var tl=Timeline();
+    function setC(k){
+      var c=COUNTRY[k];
+      $('hp-hero').style.opacity=0; $('hp-vp').style.opacity=0;
+      setTimeout(function(){
+        $('hp-flag').setAttribute('href',c.flag); $('hp-country').textContent=c.name;
+        $('hp-vp-ic').setAttribute('href',c.vpIc); $('hp-vp-t').textContent=c.vp;
+        box('hp',c); $('hp-bal').textContent=c.bal;
+        $('hp-hero').style.opacity=1; $('hp-vp').style.opacity=1;
+        $('hp-rep').style.opacity = k==='co'?1:0; $('hp-empty').style.opacity = k==='co'?0:1;
+      },220);
+    }
+    function sel(k){ rows.forEach(function(r){ r.classList.toggle('sel', r.dataset.c===k); }); }
+    function tapAt(el){
+      var a=el.getBoundingClientRect(), b=inner.getBoundingClientRect(), s=a.width? (b.width/inner.offsetWidth):1;
+      tap.style.left=((a.left-b.left)/s + a.width/s/2 - 17)+'px'; tap.style.top=((a.top-b.top)/s + a.height/s/2 - 17)+'px';
+      tap.classList.add('on'); setTimeout(function(){ tap.classList.remove('on'); },420);
+    }
+    function nav(i){ tabs.forEach(function(t,j){ t.classList.toggle('on',i===j); }); ind.style.transform='translateX('+(i*100)+'%)'; }
+    function swap(to,base){
+      tl.at(base,function(){ tapAt($('hp-pill')); });
+      tl.at(base+350,function(){ ph.classList.add('sheet-open'); });
+      tl.at(base+1300,function(){ tapAt(ph.querySelector('.crow[data-c="'+to+'"]')); sel(to); });
+      tl.at(base+1800,function(){ ph.classList.remove('sheet-open'); setC(to); });
+    }
+    function run(){
+      tl.clear(); setC('gt'); sel('gt'); nav(0); ph.classList.remove('sheet-open');
+      if(RM) return;
+      swap('co',2600);
+      tl.at(6600,function(){ nav(1); }); tl.at(7500,function(){ nav(2); }); tl.at(8400,function(){ nav(3); }); tl.at(9300,function(){ nav(0); });
+      swap('gt',10600);
+      tl.at(15000,run);
+    }
+    whenVisible(ph,run,tl.clear);
+  })();
+
+
+
+  /* ── MODULAR HOME: Guatemala and Colombia, one home, animated ── */
+  (function(){
+    var root=$('mh'); if(!root) return;
+    var items=root.querySelectorAll('.ba-item'), DUR=5200, idx=0, timer=null, paused=false, live=false;
+    root.style.setProperty('--ba-t',DUR+'ms');
+    var K=['gt','co'];
+    function show(i){
+      idx=i; var k=K[i], c=COUNTRY[k];
+      items.forEach(function(it,j){ it.classList.toggle('on',j===i); it.classList.remove('run'); });
+      $('mx-hero').style.opacity=0; $('mx-vp').style.opacity=0;
+      setTimeout(function(){
+        $('mx-flag').setAttribute('href',c.flag); $('mx-country').textContent=c.name;
+        $('mx-vp-ic').setAttribute('href',c.vpIc); $('mx-vp-t').textContent=c.vp;
+        box('mx',c);
+        $('mx-r1s').textContent=c.r1; $('mx-r2s').textContent=c.r2;
+        $('mx-hero').style.opacity=1; $('mx-vp').style.opacity=1;
+      },250);
+    }
+    function play(){
+      clearTimeout(timer); if(RM||!live||paused) return;
+      var it=items[idx]; void it.offsetWidth; it.classList.add('run');
+      timer=setTimeout(function(){ show((idx+1)%K.length); play(); },DUR);
+    }
+    items.forEach(function(it,j){ it.addEventListener('click',function(){ show(j); paused=true; root.classList.add('ba-paused'); clearTimeout(timer); }); });
+    root.addEventListener('mouseenter',function(){ if(!paused){ root.classList.add('ba-paused'); clearTimeout(timer); } });
+    root.addEventListener('mouseleave',function(){ if(!paused){ root.classList.remove('ba-paused'); play(); } });
+    show(0);
+    whenVisible(root,function(){ live=true; play(); },function(){ live=false; clearTimeout(timer); });
+  })();
+
+  /* ── THREE CHANGES ── */
+  (function(){
+    var root=$('ks'); if(!root) return;
+    var items=root.querySelectorAll('.ba-item'), imgs=root.querySelectorAll('.ks-screen img'), spot=$('ks-spot');
+    /* screen = 390x844; rects in % of the screen: [image, top, left, width, height, radius] */
+    var S=[[0,17.2,4.6,90.8,34.4,'18px'],[1,41.8,4.8,90.4,45.2,'18px'],[0,92.0,0,100,8.0,'0px']];
+    var L=[['#home-box','See the home screen in detail ↓'],['#sender-box','See the sender box in detail ↓'],['#navigation','See the navigation in detail ↓']], more=$('ks-more');
+    var DUR=5500, idx=0, timer=null, paused=false, live=false;
+    root.style.setProperty('--ba-t',DUR+'ms');
+    function show(i){
+      idx=i; var s=S[i];
+      items.forEach(function(it,j){ it.classList.toggle('on',j===i); it.classList.remove('run'); });
+      imgs.forEach(function(im,j){ im.classList.toggle('on',j===s[0]); });
+      more.setAttribute('href',L[i][0]); more.textContent=L[i][1];
+      spot.style.top=s[1]+'%'; spot.style.left=s[2]+'%'; spot.style.width=s[3]+'%'; spot.style.height=s[4]+'%'; spot.style.borderRadius=s[5];
+    }
+    function play(){
+      clearTimeout(timer); if(RM||!live||paused) return;
+      var it=items[idx]; void it.offsetWidth; it.classList.add('run');
+      timer=setTimeout(function(){ show((idx+1)%items.length); play(); },DUR);
+    }
+    items.forEach(function(it,j){ it.addEventListener('click',function(){ show(j); paused=true; root.classList.add('ba-paused'); clearTimeout(timer); }); });
+    root.addEventListener('mouseenter',function(){ if(!paused){ root.classList.add('ba-paused'); clearTimeout(timer); } });
+    root.addEventListener('mouseleave',function(){ if(!paused){ root.classList.remove('ba-paused'); play(); } });
+    show(0);
+    whenVisible(root,function(){ live=true; play(); },function(){ live=false; clearTimeout(timer); });
+  })();
+
+  /* ── BEFORE / AFTER ── */
+  (function(){
+    var root=$('ba'); if(!root) return;
+    var items=root.querySelectorAll('.ba-item'), b=$('ba-before').querySelectorAll('img'), a=$('ba-after').children;
+    var DUR=6000, LIVE_I=3, LIVE_DUR=10500, idx=0, timer=null, paused=false, live=false;
+    /* live review screen: scale the 390-wide screen to the phone, run the 60 s quote lock (sped up) */
+    var scr=$('bl-scr'), lock=$('ba-lock'), ring=$('bl-ring'), C=175.9, ltl=Timeline(), liv=null;
+    function fit(){ if(scr) scr.style.transform='scale('+(scr.parentNode.clientWidth/390)+')'; }
+    fit(); if(window.ResizeObserver) new ResizeObserver(fit).observe(scr.parentNode); else addEventListener('resize',fit);
+    function gtq(v){ $('bl-gtq').textContent=v.toFixed(2).replace('.',','); }
+    function lockReset(){ ltl.clear(); clearInterval(liv); $('bl-fx').classList.remove('flash'); $('bl-gtq').parentNode.classList.remove('chg'); $('bl-rate').textContent='7,62'; gtq(764.07); ring.style.strokeDashoffset=0; $('bl-sec').textContent='60 s'; }
+    function lockRun(){
+      lockReset(); if(RM) return;
+      var s=60;
+      liv=setInterval(function(){
+        s-=1; ring.style.strokeDashoffset=(C*(60-s)/60).toFixed(1); $('bl-sec').textContent=s+' s';
+        if(s<=0){ clearInterval(liv);
+          $('bl-fx').classList.add('flash'); $('bl-rate').textContent='7,61'; $('bl-gtq').parentNode.classList.add('chg');
+          var k=0, f=setInterval(function(){ k++; gtq(764.07-k/12); if(k>=12) clearInterval(f); },45);
+          ltl.at(2600,function(){ $('bl-fx').classList.remove('flash'); });
+          if(paused) ltl.at(3800,lockRun);
+        }
+      },115);
+    }
+    function show(i){
+      idx=i;
+      items.forEach(function(it,j){ it.classList.toggle('on',j===i); it.classList.remove('run'); });
+      b.forEach(function(im,j){ im.classList.toggle('on',j===i); });
+      [].forEach.call(a,function(im,j){ im.classList.toggle('on',j===i); });
+      lock.classList.toggle('on',i===LIVE_I);
+      if(i===LIVE_I) ltl.at(500,lockRun); else lockReset();
+    }
+    function play(){
+      clearTimeout(timer); if(RM||!live) return;
+      var it=items[idx], d=idx===LIVE_I?LIVE_DUR:DUR; it.style.setProperty('--ba-t',d+'ms'); void it.offsetWidth; it.classList.add('run');
+      timer=setTimeout(function(){ if(paused){ play(); return; } show((idx+1)%items.length); play(); },d);
+    }
+    items.forEach(function(it,j){ it.addEventListener('click',function(){ show(j); paused=true; root.classList.add('ba-paused'); clearTimeout(timer); }); });
+    root.addEventListener('mouseenter',function(){ if(!paused) root.classList.add('ba-paused'); });
+    root.addEventListener('mouseleave',function(){ if(!paused){ root.classList.remove('ba-paused'); } });
+    whenVisible(root,function(){ live=true; if(!paused) play(); },function(){ live=false; clearTimeout(timer); });
+    /* hover pauses the bar; the timer waits for it */
+    root.addEventListener('mouseenter',function(){ clearTimeout(timer); });
+    root.addEventListener('mouseleave',function(){ if(!paused && live) play(); });
+  })();
+
+  /* ── HOME BOX INFOGRAPHIC ── */
+  (function(){
+    var st=$('hb-stage'); if(!st) return;
+    var calls=st.querySelectorAll('.call'), tl=Timeline();
+    var parts=[$('hb-pill'),$('hb-vp'),$('hb-cta'),$('hb-bal')];
+    function hi(i){ calls.forEach(function(c,j){ c.classList.toggle('on',j===i); }); parts.forEach(function(p,j){ p.classList.toggle('hl',j===i && j!==2); p.classList.toggle('hl-lime',j===i && j===2); }); }
+    function setC(k){ var c=COUNTRY[k]; $('hb-rate-w').style.opacity=0; $('hb-vp').style.opacity=0;
+      setTimeout(function(){ $('hb-flag').setAttribute('href',c.flag); $('hb-country').textContent=c.name; $('hb-vp-ic').setAttribute('href',c.vpIc); $('hb-vp-t').textContent=c.vp;
+        box('hb',c); $('hb-rate-w').style.opacity=1; $('hb-vp').style.opacity=1; },220); }
+    function run(){
+      tl.clear(); hi(-1); setC('gt');
+      if(RM){ hi(1); return; }
+      tl.at(300,function(){ hi(0); });
+      tl.at(2000,function(){ hi(1); });
+      tl.at(3000,function(){ setC('co'); });
+      tl.at(4900,function(){ setC('gt'); });
+      tl.at(6000,function(){ hi(2); });
+      tl.at(7700,function(){ hi(3); });
+      tl.at(9600,run);
+    }
+    document.querySelector('[data-replay="hb"]').addEventListener('click',run);
+    whenVisible(st,run,tl.clear);
+  })();
+
+  /* ── NAVIGATION ── */
+  (function(){
+    var nb=$('nb'); if(!nb) return;
+    var tabs=nb.querySelectorAll('.lp-tab'), ind=$('nb-ind'), i=0, t1=null, t2=null, h=0;
+    var steps=[{t:'Envía dinero',n:1},{t:'Revisa y envía',n:2}];
+    var bars=$('hd-steps').querySelectorAll('span');
+    function nav(k){ tabs.forEach(function(t,j){ t.classList.toggle('on',j===k); }); ind.style.transform='translateX('+(k*100)+'%)'; }
+    function hd(s){ $('hd-t').style.opacity=0; $('hd-b').style.opacity=0;
+      setTimeout(function(){ $('hd-t').textContent=s.t; $('hd-b').textContent=s.n+'/2'; $('hd-t').style.opacity=1; $('hd-b').style.opacity=1; },180);
+      bars.forEach(function(b,j){ b.classList.toggle('on', j<s.n); }); }
+    if(RM){ nav(0); hd(steps[0]); return; }
+    whenVisible(nb.closest('.nav-demos'),function(){
+      clearInterval(t1); clearInterval(t2);
+      t1=setInterval(function(){ i=(i+1)%4; nav(i); },1200);
+      t2=setInterval(function(){ h=(h+1)%2; hd(steps[h]); },1800);
+    },function(){ clearInterval(t1); clearInterval(t2); });
+  })();
+
+  /* ── SENDER BOX ── */
+  (function(){
+    var st=$('sb-stage'); if(!st) return;
+    var calls=st.querySelectorAll('.call'), tl=Timeline(), R=7.62;
+    var inp=$('sb-in'), usd=$('sb-usd'), gtq=$('sb-gtq'), cur=$('sb-cur'), mm=$('sb-mm'), ov=$('sb-ov'), ii=$('sb-i'), rate=$('sb-rate');
+    function hi(i){ calls.forEach(function(c,j){ c.classList.toggle('on',j===i); }); }
+    function val(v){ usd.textContent=fmt(v); gtq.textContent=fmt(v*R); }
+    function reset(){ hi(-1); val(0); inp.classList.remove('focus','err'); mm.classList.remove('err'); ov.classList.remove('on'); ii.classList.remove('on'); rate.classList.remove('hl'); cur.style.visibility='visible'; }
+    function run(){
+      tl.clear(); reset();
+      if(RM){ hi(1); val(100); inp.classList.add('focus'); cur.style.visibility='hidden'; return; }
+      tl.at(300,function(){ hi(0); rate.classList.add('hl'); });
+      tl.at(2000,function(){ rate.classList.remove('hl'); hi(1); inp.classList.add('focus'); });
+      [1,10,100].forEach(function(v,k){ tl.at(2400+k*280,function(){ val(v); }); });
+      tl.at(3400,function(){ cur.style.visibility='hidden'; });
+      tl.at(4400,function(){ hi(2); cur.style.visibility='visible'; });
+      [1,10,100,1000].forEach(function(v,k){ tl.at(4700+k*260,function(){ val(v); }); });
+      tl.at(5800,function(){ cur.style.visibility='hidden'; inp.classList.add('err'); mm.classList.add('err'); });
+      tl.at(7400,function(){ inp.classList.remove('err'); mm.classList.remove('err'); val(100); });
+      tl.at(8000,function(){ inp.classList.remove('focus'); hi(3); ii.classList.add('on'); });
+      tl.at(8600,function(){ ov.classList.add('on'); });
+      tl.at(10800,function(){ ov.classList.remove('on'); ii.classList.remove('on'); });
+      tl.at(11800,run);
+    }
+    document.querySelector('[data-replay="sb"]').addEventListener('click',run);
+    whenVisible(st,run,tl.clear);
+  })();
+
+})();
+</script>
+
+<script>
+/* BFCACHE FIX: coming back with the browser's back button restores the page with the
+   wipe overlay still covering it. When the page returns from that cache, uncover it. */
+(function(){
+  var ov=document.getElementById('wipe-overlay');
+  if(!ov) return;
+  window.addEventListener('pageshow',function(e){
+    if(!e.persisted) return;
+    ov.classList.remove('animate');
+    ov.classList.remove('dark');
+    ov.style.clipPath='circle(0% at 50% 50%)';
+    try{ sessionStorage.removeItem('wipeEntry'); }catch(err){}
+  });
+})();
+</script>
+</body>
+</html>
