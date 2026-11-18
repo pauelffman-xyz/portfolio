@@ -800,6 +800,9 @@ body.dark-mode{
 .hrep-h span{color:#515151;font-weight:500;}
 .hrep-row{display:flex;justify-content:space-between;align-items:center;border:1px solid #E7E7E7;border-radius:10px;padding:8px 9px;margin-top:6px;font:700 12px var(--ui);}
 .hrep-row > span:first-child{min-width:0;flex:1;margin-right:8px;}
+.hrep-row b{font-weight:700;}
+.hrep-amt{text-align:left;margin-right:10px;white-space:nowrap;}
+.hrep-amt small{font-size:8.5px!important;letter-spacing:.01em;}
 .hrep-row small{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block;font:400 9.5px var(--ui);color:#747474;margin-top:2px;}
 .hrep-row em{font-style:normal;background:#F0FFF0;color:#005044;padding:5px 9px;border-radius:999px;font-size:11px;}
 .hempty{margin:22px 14px 0;text-align:center;font:600 13px var(--ui);color:#747474;transition:opacity .35s;}
@@ -1209,8 +1212,8 @@ body.dark-mode .sc-ph{box-shadow:0 0 0 1.5px #3A3A44,0 24px 48px -18px rgba(0,0,
         <div class="hstack">
           <div class="hrep" id="hp-rep" style="opacity:0">
             <div class="hrep-h">Repetir envío <span>Ver envíos ›</span></div>
-            <div class="hrep-row"><span>Ma** R**<small>BRE-B · M***O@EXAMPLE.COM</small></span><span>100.00 USD</span><em>Repetir</em></div>
-            <div class="hrep-row"><span>Lu** F**<small>BRE-B · L***F@EXAMPLE.COM</small></span><span>50.00 USD</span><em>Repetir</em></div>
+            <div class="hrep-row"><span>Fe** R**<small>BRE-B · @CB12...6789</small></span><span class="hrep-amt">100 USD<small>HOY, 10:23 AM</small></span><em>Repetir</em></div>
+            <div class="hrep-row"><span>Fe** R**<small>BRE-B · @CB12...6789</small></span><span class="hrep-amt">100 USD<small>HOY, 10:23 AM</small></span><em>Repetir</em></div>
           </div>
           <div class="hempty" id="hp-empty">Sin envíos recientes<small>Tus últimas transferencias aparecerán aquí, para repetirlas rápido.</small></div>
         </div>
@@ -1359,8 +1362,8 @@ body.dark-mode .sc-ph{box-shadow:0 0 0 1.5px #3A3A44,0 24px 48px -18px rgba(0,0,
         </div>
         <div class="hrep">
           <div class="hrep-h">Repetir envío <span>Ver envíos ›</span></div>
-          <div class="hrep-row"><span>Lu** F**<small id="mx-r1s">+502 1234 5678</small></span><span>100.00 USD</span><em>Repetir</em></div>
-          <div class="hrep-row"><span>Ma** R**<small id="mx-r2s">+502 5555 0101</small></span><span>50.00 USD</span><em>Repetir</em></div>
+          <div class="hrep-row"><span><b class="mx-rn">Maria</b><small class="mx-rs">TEL • +502 ***4678</small></span><span class="hrep-amt">100 USD<small>HOY, 10:23 AM</small></span><em>Repetir</em></div>
+          <div class="hrep-row"><span><b class="mx-rn">Maria</b><small class="mx-rs">TEL • +502 ***4678</small></span><span class="hrep-amt">100 USD<small>HOY, 10:23 AM</small></span><em>Repetir</em></div>
         </div>
         <div class="wa"><svg><use href="#i-wa"/></svg></div>
         <div class="lp-nav">
@@ -1677,8 +1680,8 @@ body.dark-mode #portfolio-dock .icon-moon{display:block;}
   } else rv.forEach(function(el){ el.classList.add('in'); });
 
   var COUNTRY={
-    gt:{flag:'#f-gt',name:'Guatemala',vpIc:'#i-spark',vp:'Sin comisiones',rate:'Q7.66',bal:'5.00 USD',speed:false,r1:'+502 1234 5678',r2:'+502 5555 0101'},
-    co:{flag:'#f-co',name:'Colombia',vpIc:'#i-bolt',vp:'Instantáneo',rate:'3,950.50 COP',bal:'20.00 USD',speed:true,r1:'Bre-B · lu***@mail.com',r2:'Bre-B · ma***@mail.com'}
+    gt:{flag:'#f-gt',name:'Guatemala',vpIc:'#i-spark',vp:'Sin comisiones',rate:'Q7.66',bal:'5.00 USD',speed:false,rn:'Maria',rs:'TEL • +502 ***4678'},
+    co:{flag:'#f-co',name:'Colombia',vpIc:'#i-bolt',vp:'Instantáneo',rate:'3.950,50 COP',bal:'5.00 USD',speed:true,rn:'Fe** R**',rs:'BRE-B · @CB12...6789'}
   };
   /* the rule: when the badge says Instantáneo, speed takes the front and the rate moves up, smaller */
   function box(p,c){
@@ -1746,7 +1749,7 @@ body.dark-mode #portfolio-dock .icon-moon{display:block;}
         $('mx-flag').setAttribute('href',c.flag); $('mx-country').textContent=c.name;
         $('mx-vp-ic').setAttribute('href',c.vpIc); $('mx-vp-t').textContent=c.vp;
         box('mx',c);
-        $('mx-r1s').textContent=c.r1; $('mx-r2s').textContent=c.r2;
+        document.querySelectorAll('.mx-rn').forEach(function(e){ e.textContent=c.rn; }); document.querySelectorAll('.mx-rs').forEach(function(e){ e.textContent=c.rs; });
         $('mx-hero').style.opacity=1; $('mx-vp').style.opacity=1;
       },250);
     }
