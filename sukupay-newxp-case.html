@@ -938,8 +938,10 @@ body.dark-mode{
 .mh-def{display:grid;grid-template-columns:5.5rem 1fr;gap:.75rem;padding:.5rem 0;border-top:1px solid var(--line);}
 .mh-def:first-child{margin-top:.5rem;}
 .mh-def b{font-weight:600;color:var(--paper);}
-.mh-phone .hrate,.mh-phone .hvp{transition:opacity .3s var(--ease-apple);}
-@media(max-width:1024px){.mh{grid-template-columns:1fr;justify-items:center;}.mh-list{width:100%;}.mh-phone{order:-1;}}
+.mh-shot{position:relative;justify-self:center;width:320px;max-width:100%;aspect-ratio:406/860;border-radius:48px;background:#0B0B10;box-shadow:var(--sh-ring),var(--sh-float);overflow:hidden;}
+.mh-shot img{position:absolute;inset:9px;width:calc(100% - 18px);height:calc(100% - 18px);border-radius:39px;object-fit:cover;object-position:center top;background:#fff;opacity:0;transform:scale(1.02);transition:opacity .7s var(--ease-apple),transform 1s var(--ease-apple);}
+.mh-shot img.on{opacity:1;transform:none;}
+@media(max-width:1024px){.mh{grid-template-columns:1fr;justify-items:center;}.mh-list{width:100%;}.mh-phone,.mh-shot{order:-1;}}
 @media(max-width:768px){.mh .mh-list{flex-direction:column;overflow:visible;scroll-snap-type:none;}.mh .mh-list li{flex:0 0 auto;width:100%;}.mh .ba-item .ba-d{max-height:0;opacity:0;}.mh .ba-item.on .ba-d{max-height:14rem;opacity:1;}}
 
 
@@ -1340,43 +1342,18 @@ body.dark-mode .sc-ph{box-shadow:0 0 0 1.5px #3A3A44,0 24px 48px -18px rgba(0,0,
 <div class="section" id="home-box">
   <div class="eyebrow">Action · 03 Home screen · a modular home</div>
   <!-- title hidden for now: <div class="ov-title reveal" style="max-width:20ch;">Modules that switch on and off, <span class="accent">not screens that get redesigned.</span></div> -->
-  <p class="ov-body reveal" style="max-width:62ch;">Every market builds its home from the same blocks. Each block switches on or off per corridor, and the badge says what that market can promise. When the promise is speed, speed goes to the front. <strong>A new corridor is a configuration, not a new home.</strong></p>
+  <p class="ov-body reveal" style="max-width:62ch;">Every market builds its home from the same blocks. Each block switches on or off per corridor, and the badge says what that market can promise. When the promise is speed, speed goes to the front and the rate moves up, smaller. <strong>A new corridor is a configuration, not a new home.</strong></p>
   <div class="mh" id="mh">
     <ol class="ba-list mh-list">
       <li><button class="ba-item on" data-i="0"><span class="ba-n"><svg class="flag"><use href="#f-gt"/></svg>Guatemala</span><span class="ba-d"><span class="mh-def"><b>Badge</b>Sin comisiones (no fees)</span><span class="mh-def"><b>In front</b>The rate, Q7.66 per dollar</span><span class="mh-def"><b>Modules</b>Repeat a send, requests, WhatsApp</span></span><span class="ba-bar"><i></i></span></button></li>
-      <li><button class="ba-item" data-i="1"><span class="ba-n"><svg class="flag"><use href="#f-co"/></svg>Colombia</span><span class="ba-d"><span class="mh-def"><b>Badge</b>Instantáneo (instant)</span><span class="mh-def"><b>In front</b>"Menos de 30 segundos" (under 30 seconds). The rate moves up, smaller</span><span class="mh-def"><b>Modules</b>Repeat a send, requests, WhatsApp</span></span><span class="ba-bar"><i></i></span></button></li>
+      <li><button class="ba-item" data-i="1"><span class="ba-n"><svg class="flag"><use href="#f-co"/></svg>Colombia</span><span class="ba-d"><span class="mh-def"><b>Badge</b>Instantáneo (instant)</span><span class="mh-def"><b>In front</b>"En segundos" (in seconds). The rate, 3.950,50 COP, moves up, smaller</span><span class="mh-def"><b>Modules</b>Repeat a send, requests, WhatsApp</span></span><span class="ba-bar"><i></i></span></button></li>
     </ol>
-    <div class="lphone ui mh-phone" id="mh-phone" aria-label="The home switching between the Guatemala and Colombia configurations" role="img">
-      <div class="lphone-in">
-        <div class="lp-island"></div>
-        <div class="lp-status"><span>9:41</span><span>●●● ▮</span></div>
-        <div class="lp-logo">sukupay<i></i></div>
-        <div class="hbox">
-          <div class="hbox-top">
-            <span class="hpill"><svg class="flag"><use href="#f-gt" id="mx-flag"/></svg><span id="mx-country">Guatemala</span><span class="caret"></span></span>
-            <span class="hvp" id="mx-vp"><svg><use href="#i-spark" id="mx-vp-ic"/></svg><span id="mx-vp-t">Sin comisiones</span></span>
-          </div>
-          <div class="hrate" id="mx-hero"><small><svg width="12" height="12"><use href="#i-sync"/></svg><span id="mx-lbl">Tipo de cambio</span></small><b id="mx-big">Q7.66</b><span id="mx-sub">Por cada 1 USD que envíes</span></div>
-          <div class="hcta">Enviar dinero <svg><use href="#i-arrow"/></svg></div>
-          <div class="hbal">Disponible <u>5.00 USD</u></div>
-        </div>
-        <div class="hrep">
-          <div class="hrep-h">Repetir envío <span>Ver envíos ›</span></div>
-          <div class="hrep-row"><span><b class="mx-rn">Maria</b><small class="mx-rs">TEL • +502 ***4678</small></span><span class="hrep-amt">100 USD<small>HOY, 10:23 AM</small></span><em>Repetir</em></div>
-          <div class="hrep-row"><span><b class="mx-rn">Maria</b><small class="mx-rs">TEL • +502 ***4678</small></span><span class="hrep-amt">100 USD<small>HOY, 10:23 AM</small></span><em>Repetir</em></div>
-        </div>
-        <div class="wa"><svg><use href="#i-wa"/></svg></div>
-        <div class="lp-nav">
-          <span class="lp-ind"></span>
-          <span class="lp-tab on"><svg><use href="#i-home"/></svg>Home</span>
-          <span class="lp-tab"><svg><use href="#i-send"/></svg>Envíos</span>
-          <span class="lp-tab"><svg><use href="#i-req"/></svg>Solicitudes<i class="lp-badge">2</i></span>
-          <span class="lp-tab"><svg><use href="#i-user"/></svg>Cuenta</span>
-        </div>
-      </div>
+    <div class="mh-shot" id="mh-phone" role="img" aria-label="The home switching between Guatemala and Colombia">
+      <img class="on" src="assets/sukupay-newxp/xp-home.webp" alt="Home for Guatemala: Sin comisiones, rate Q7.66, Enviar dinero, Disponible 5.00 USD and two Repetir envío rows for Maria, 100 USD." decoding="async" width="390" height="844">
+      <img src="assets/sukupay-newxp/xp-home-co.webp" alt="Home for Colombia: Instantáneo, En segundos in front with the rate 3.950,50 COP above, Enviar dinero, Disponible 5.00 USD, two Repetir envío rows for Fe** R** by Bre-B, 100 USD, and a banner to download the app." decoding="async" width="390" height="844">
     </div>
   </div>
-  <p class="ba-note">Demo configuration of the same home. When the badge says Instantáneo, speed goes to the front. Which market turns on what is a business decision per corridor.</p>
+  <p class="ba-note">The same home, configured for two markets. Screens from the design files. When the badge says Instantáneo, speed goes to the front. Which market turns on what is a business decision per corridor.</p>
 
   <div class="section-label num-label">
     <div class="sl-text">The home box, piece by piece</div>
@@ -1385,7 +1362,7 @@ body.dark-mode .sc-ph{box-shadow:0 0 0 1.5px #3A3A44,0 24px 48px -18px rgba(0,0,
   </div>
   <div class="info-stage" id="hb-stage">
     <div class="call c1"><b>1</b><span>Country pill, top left<em>Fixed and always visible. Guatemala and Colombia today; a new corridor is one more row in the sheet.</em></span></div>
-    <div class="call c2"><b>2</b><span>The promise of that corridor<em>Guatemala has no fees, so it says so. Colombia charges a fee, so it leads with speed, so the badge says Instantáneo and "Menos de 30 segundos" takes the front.</em></span></div>
+    <div class="call c2"><b>2</b><span>The promise of that corridor<em>Guatemala has no fees, so the badge says Sin comisiones and the rate leads. Colombia arrives in seconds, so it says Instantáneo and "En segundos" takes the front, with the rate above, smaller.</em></span></div>
     <div class="call c3"><b>3</b><span>One action<em>"Enviar dinero" (send money). Never changes, never competes.</em></span></div>
     <div class="call c4"><b>4</b><span>Balance under the action<em>"Disponible" (available) applies to the next send by default.</em></span></div>
     <div class="card-c">
@@ -1478,7 +1455,7 @@ body.dark-mode .sc-ph{box-shadow:0 0 0 1.5px #3A3A44,0 24px 48px -18px rgba(0,0,
   </div>
   <div class="scr-grid scr-3">
     <figure class="scr reveal"><img src="assets/sukupay-newxp/xp-home-co-empty.webp" alt="Home for Colombia with no sends yet: Instantáneo, rate 3.950,50 COP, Enviar dinero, balance, Sin envíos recientes and a banner to download the app." loading="lazy" decoding="async" width="390" height="844"><figcaption><span class="scr-n">01</span><b>First visit</b><span>With no sends yet, the space for "Repetir envío" explains what will show up there, instead of staying blank.</span></figcaption></figure>
-    <figure class="scr reveal"><img src="assets/sukupay-newxp/xp-home-co.webp" alt="Home for Colombia with recent sends: Instantáneo, rate 3.950,50 COP, Enviar dinero, balance and a Repetir envío list with Repetir buttons." loading="lazy" decoding="async" width="390" height="844"><figcaption><span class="scr-n">02</span><b>Back for another send</b><span>After the first send, that same space lists the recent transfers, each with its own Repetir button.</span></figcaption></figure>
+    <figure class="scr reveal"><img src="assets/sukupay-newxp/xp-home-co.webp" alt="Home for Colombia with recent sends: Instantáneo, En segundos in front with the rate 3.950,50 COP above, Enviar dinero, balance and a Repetir envío list with Repetir buttons." loading="lazy" decoding="async" width="390" height="844"><figcaption><span class="scr-n">02</span><b>Back for another send</b><span>After the first send, that same space lists the recent transfers, each with its own Repetir button.</span></figcaption></figure>
     <figure class="scr reveal"><img src="assets/sukupay-newxp/xp-country.webp" alt="Country sheet over the home: Seleccionar país, with Colombia +57 selected, Guatemala +502 and México +52." loading="lazy" decoding="async" width="390" height="844"><figcaption><span class="scr-n">03</span><b>Choose the country</b><span>A sheet from the pill. Colombia is the default; the dialing code shows next to each one.</span></figcaption></figure>
     <figure class="scr reveal"><img src="assets/sukupay-newxp/xp-limits.webp" alt="Límites diarios sheet over step 1: min 5 USD, max 650 USD per transaction, max 1,300 USD per day, and Entendido." loading="lazy" decoding="async" width="390" height="844"><figcaption><span class="scr-n">04</span><b>Limits, explained</b><span>The ⓘ next to min and max opens the daily limits. No dead end, no error page.</span></figcaption></figure>
     <figure class="scr reveal"><img src="assets/sukupay-newxp/xp-sends-empty.webp" alt="Envíos tab with no sends yet: Aún no tienes envíos and a Hacer envío button." loading="lazy" decoding="async" width="390" height="844"><figcaption><span class="scr-n">05</span><b>No sends yet</b><span>The empty tab says what goes there and offers Hacer envío, so it never reads as broken.</span></figcaption></figure>
@@ -1683,13 +1660,14 @@ body.dark-mode #portfolio-dock .icon-moon{display:block;}
     gt:{flag:'#f-gt',name:'Guatemala',vpIc:'#i-spark',vp:'Sin comisiones',rate:'Q7.66',bal:'5.00 USD',speed:false,rn:'Maria',rs:'TEL • +502 ***4678'},
     co:{flag:'#f-co',name:'Colombia',vpIc:'#i-bolt',vp:'Instantáneo',rate:'3.950,50 COP',bal:'5.00 USD',speed:true,rn:'Fe** R**',rs:'BRE-B · @CB12...6789'}
   };
-  /* the rule: when the badge says Instantáneo, speed takes the front and the rate moves up, smaller */
+  /* the value prop goes to the front (18 Nov 2026, final screens):
+     Guatemala (Sin comisiones) -> "Tipo de cambio" small, the rate big.
+     Colombia (Instantáneo)     -> the rate small, "En segundos" big. "Por cada 1 USD que envíes" stays in both. */
   function box(p,c){
     var big=$(p+'-big'), lbl=$(p+'-lbl'), sub=$(p+'-sub');
-    big.textContent = c.speed ? 'Menos de 30 segundos' : c.rate;
-    big.classList.toggle('speed',c.speed);
-    lbl.textContent = c.speed ? '1 USD = '+c.rate : 'Tipo de cambio';
-    if(sub) sub.style.display = c.speed ? 'none' : '';
+    big.textContent = c.speed ? 'En segundos' : c.rate;
+    lbl.textContent = c.speed ? c.rate : 'Tipo de cambio';
+    if(sub) sub.style.display = '';
   }
 
   /* ── HERO PHONE ── */
@@ -1740,18 +1718,11 @@ body.dark-mode #portfolio-dock .icon-moon{display:block;}
     var root=$('mh'); if(!root) return;
     var items=root.querySelectorAll('.ba-item'), DUR=5200, idx=0, timer=null, paused=false, live=false;
     root.style.setProperty('--ba-t',DUR+'ms');
-    var K=['gt','co'];
+    var K=['gt','co'], shots=$('mh-phone').querySelectorAll('img');
     function show(i){
       idx=i; var k=K[i], c=COUNTRY[k];
       items.forEach(function(it,j){ it.classList.toggle('on',j===i); it.classList.remove('run'); });
-      $('mx-hero').style.opacity=0; $('mx-vp').style.opacity=0;
-      setTimeout(function(){
-        $('mx-flag').setAttribute('href',c.flag); $('mx-country').textContent=c.name;
-        $('mx-vp-ic').setAttribute('href',c.vpIc); $('mx-vp-t').textContent=c.vp;
-        box('mx',c);
-        document.querySelectorAll('.mx-rn').forEach(function(e){ e.textContent=c.rn; }); document.querySelectorAll('.mx-rs').forEach(function(e){ e.textContent=c.rs; });
-        $('mx-hero').style.opacity=1; $('mx-vp').style.opacity=1;
-      },250);
+      shots.forEach(function(im,j){ im.classList.toggle('on',j===i); });
     }
     function play(){
       clearTimeout(timer); if(RM||!live||paused) return;
