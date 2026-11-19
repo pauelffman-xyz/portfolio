@@ -1,6 +1,6 @@
 # Paula Elffman — Portfolio OS · Design Bible
 
-*Última actualización: 18 de noviembre de 2026. **Nuevo case: SukuPay · New experience (Nueva XP).** `sukupay-newxp-case.html` es el caso 17. Va tercero en Selected work, después de belo y sukupay prototyper. Selected work queda con 4 casos grandes (2×2); vendor tool y sukupay home abren More work. Cuenta la nueva experiencia con antes y después: home de dos mercados animada, sender box, navegación, una banda con 20 pantallas, las pestañas y un antes/después con la pantalla de revisión en vivo. Tiene reglas de contenido propias: solo SukuPay, México fuera del copy, sin referidos y la regla "Instantáneo". Ver "SUKUPAY NEW EXPERIENCE CASE STUDY · Nueva XP".*
+*Última actualización: 18 de noviembre de 2026. **Nuevo case: SukuPay · New experience (Nueva XP).** `sukupay-newxp-case.html` es el caso 17. Va tercero en Selected work, después de belo y sukupay prototyper. Selected work queda con 4 casos grandes (2×2); vendor tool y sukupay home abren More work. Cuenta la nueva experiencia con antes y después: home de dos mercados animada, sender box, navegación, una banda con 20 pantallas, las pestañas y un antes/después con la pantalla de revisión en vivo. Tiene reglas de contenido propias: solo SukuPay, México fuera del copy, sin referidos y al frente la promesa de cada mercado (la tasa en Guatemala, "En segundos" en Colombia). Ver "SUKUPAY NEW EXPERIENCE CASE STUDY · Nueva XP".*
 
 *Última actualización previa: 29 de octubre de 2026 — **Nuevo case: belo · Rumbo (agentic banking).** `belo-case.html` es el caso 16. Va tercero en la home, entre sukupay prototyper y sukupay home. Tiene el prototipo navegable arriba de todo, secciones de pantallas reales, cover de card nuevo y su propio cierre "Next case" y dock. Se arregló el final del case, que había quedado roto (dock sin estilos, sin footer ni "Next case"). Ver "BELO CASE STUDY · Rumbo".*
 
@@ -3003,7 +3003,8 @@ Tomás Rosito y Marcos Senatori (con link a LinkedIn, ↗), Nahuel Namur, Giorgi
 - **Solo SukuPay. Nada de Elektra:** la experiencia también se aplica a Elektra, pero Elektra no salió todavía.
 - **México no aparece en el copy.** Solo se ve en la bottom sheet de países, porque es una pantalla real del producto. En textos, cifras y listas de corredores van Guatemala y Colombia: "2 corridors in one home today: Guatemala and Colombia, with room for the next".
 - **Sin referidos.** Se sacó todo lo de "invitá a un amigo", incluida la línea "Por cada amigo…".
-- **Regla "Instantáneo":** cuando el badge de la home dice "Instantáneo", al frente va "Menos de 30 segundos" y la tasa sube, más chica, como "1 USD = 3,950.50 COP". Cuando el badge es "Sin comisiones", al frente va la tasa (Q7.66) con "Tipo de cambio" arriba. Vale para todas las piezas animadas del case y para la card de la home. En el código la aplica una sola función, `box(p,c)`, que lee el mapa `COUNTRY` (`gt` / `co`). No escribir esta lógica a mano en otro lado.
+- **Al frente va la promesa de cada mercado (regla final, 18 de noviembre):** Guatemala ("Sin comisiones") muestra "Tipo de cambio" chico y la tasa grande, Q7.66. Colombia ("Instantáneo") muestra la tasa chica arriba, "3.950,50 COP" con el ícono de sincronizar, y **"En segundos"** grande. En los dos queda "Por cada 1 USD que envíes" debajo. Así son las pantallas finales de Paula. *Historial:* primero era "Menos de 30 segundos" con "1 USD = …" arriba y sin la línea de abajo; un rato del 18 de noviembre se probó la tasa al frente en los dos, y Paula volvió a la velocidad para Colombia con "En segundos". En el código lo aplica `box(p,c)` con el mapa `COUNTRY` (`speed:true` en Colombia). No escribir esta lógica a mano en otro lado.
+- **Formato de la tasa de Colombia:** "3.950,50 COP", como en la app (también en la card de la home).
 - **Cifras:** son las de los archivos de diseño y lo dice la nota del antes/después. No se publican métricas internas de la base de SukuPay (regla general, ver "Elektra: sin datos de la base de SukuPay"). Lo que se va a medir va rotulado como meta, en "What we'll measure · Written down before launch", nunca como resultado.
 - **Idioma:** el case va en inglés. Los textos de las pantallas quedan en español, con la traducción entre paréntesis la primera vez, por ejemplo "Sin comisiones (no fees)".
 - **Sin raya larga** en el texto visible y etiquetas en estilo Editorial, como todo el sitio.
@@ -3046,7 +3047,7 @@ Tomás Rosito y Marcos Senatori (con link a LinkedIn, ↗), Nahuel Namur, Giorgi
 5. **Action · 01 What the old flow got wrong:** 8 hallazgos en formato rojo de error.
 6. **The new experience:** "Every screen, from sign-in to receipt." y la banda de mockups a todo el ancho (ver abajo).
 7. **Action · 02 Three changes:** un solo slider (`#ks`) con Home screen, The sender box y Navigation. Un spotlight marca la zona de cada cambio sobre el teléfono.
-8. **Action · 03 Home screen · a modular home:** la home de dos mercados animada (`#mh`) y después la infografía "The home box, piece by piece" (`#hb-stage`). El título "Modules that switch on and off, not screens that get redesigned." **está oculto por ahora**, comentado en el HTML, a pedido de Paula (18 de noviembre).
+8. **Action · 03 Home screen · a modular home:** la home de dos mercados (`#mh`): desde el 18 de noviembre son **las dos pantallas reales** (`xp-home` y `xp-home-co`) en un marco de teléfono (`.mh-shot`), que se cruzan al cambiar de mercado; ya no es un mockup en HTML. A la izquierda, **dos cards de mercado** (19 de noviembre, pulido con /elite-ui-designer): las dos con el mismo formato, cabecera con bandera, nombre y el badge como chip (`.mk-chip`, en teal cuando está activa); la activa abre tres filas, "In front" (el valor grande en DM Sans: Q7.66 / En segundos), "Above it" y "Modules" en chips; la inactiva es una card con borde, no texto suelto. Barra de progreso de 2px dentro de la card. Lista de hasta 440px, centrada con el teléfono y después la infografía "The home box, piece by piece" (`#hb-stage`). El título "Modules that switch on and off, not screens that get redesigned." **está oculto por ahora**, comentado en el HTML, a pedido de Paula (18 de noviembre).
 9. **Action · 04 The sender box:** la animación del sender box (`#sb-stage`).
 10. **Action · 05 Navigation**
 11. **Action · 06 Behind the tabs:** grilla de 10 pantallas (ver abajo).
@@ -3117,7 +3118,7 @@ Orden pedido por Paula el 18 de noviembre:
 - **More work:** empieza con vendor tool y sigue con sukupay home. Son 13 casos; `.work-count` dice "13 cases".
 - **Rubro:** Fintech. **Nombre:** sukupay *new experience*. **Línea:** "Remittances from the US to Latin America. The old send flow and the new one, side by side."
 - **Cover sin imagen:** `.wc-cover--newxp` es un degradé teal oscuro (`linear-gradient(180deg,#00473B 0%,#00332A 50%,#001E18 100%)` con brillos lima) con el home box en CSS en el centro (`.nx-box`).
-  - Anima solo con CSS, en un ciclo de 10 s: Guatemala ("Sin comisiones", Q7.66, "Por cada 1 USD…") ↔ Colombia ("Instantáneo", "1 USD = 3,950.50 COP" arriba y "Menos de 30 segundos" al frente). Cumple la regla Instantáneo.
+  - Anima solo con CSS, en un ciclo de 10 s: Guatemala ("Sin comisiones", "Tipo de cambio", Q7.66 al frente) ↔ Colombia ("Instantáneo", 3.950,50 COP arriba y chico, "En segundos" al frente). En los dos, "Por cada 1 USD que envíes".
   - Se escala con container queries (`container-type:inline-size`, `--u:calc(66cqw / 340)`).
   - `index.html` suma DM Sans al link de Google Fonts (`&family=DM+Sans:wght@400;500;600;700`) para esta card.
 
@@ -3142,7 +3143,8 @@ Orden pedido por Paula el 18 de noviembre:
 - **En Figma (Paula):**
   - En Cuenta se ve un teléfono completo (+18483604962). Si es real, enmascararlo.
   - Cuenta: si se exporta con menos aire, se puede volver a meter sin recortar.
-- **Confirmar con Paula:** la cifra "Menos de 30 segundos" de Colombia y el teal oscuro de la card.
+- **Confirmar con Paula:** el teal oscuro de la card.
+- **First visit (`xp-home-co-empty`)** todavía muestra la tasa al frente en Colombia ("Tipo de cambio · 3.950,50 COP"). Hay que re-exportarla con "En segundos" para que coincida con la regla.
 - **Revisar al cerrar:** abrir el case a 390px y comprobar que `document.documentElement.scrollWidth` sea igual al ancho de la ventana, y que al final estén "Next case", footer y dock (regla de belo).
 
 
