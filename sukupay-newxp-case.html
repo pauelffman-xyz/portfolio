@@ -927,6 +927,14 @@ body.dark-mode{
 @media(max-width:768px){.ks .ks-list{flex-direction:column;overflow:visible;scroll-snap-type:none;}.ks .ks-list li,.ks .ks-list li.ks-link{flex:0 0 auto;width:100%;}.ks-list li.ks-link{padding-left:1.125rem;}.ks .ba-item .ba-d{max-height:0;opacity:0;}.ks .ba-item.on .ba-d{max-height:9rem;opacity:1;}}
 @media(max-width:520px){.ks-phone{width:min(280px,78vw);border-radius:40px;}.ks-screen{inset:6px;border-radius:34px;}}
 @media (prefers-reduced-motion:reduce){.ks-screen img,.ks-spot{transition:none;}}
+/* 19 Nov 2026: same treatment as the market cards: subtle border, no progress line */
+.ks .ks-list{gap:12px;}
+.ks .ba-item{padding:20px 24px;border-radius:20px;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--paper) 6%,transparent);}
+.ks .ba-item:hover{background:color-mix(in srgb,var(--paper) 3%,transparent);}
+.ks .ba-item.on{background:var(--card);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--paper) 4%,transparent),var(--sh-card);}
+.ks .ba-bar{display:none;}
+.ks .ks-link{padding:4px 24px 0;}
+@media(max-width:768px){.ks .ba-item{padding:16px;}.ks .ks-link{padding-left:16px;}}
 
 
 /* ─── MODULAR HOME: one home, two markets, animated ─── */
@@ -943,6 +951,31 @@ body.dark-mode{
 .mh-shot img.on{opacity:1;transform:none;}
 @media(max-width:1024px){.mh{grid-template-columns:1fr;justify-items:center;}.mh-list{width:100%;}.mh-phone,.mh-shot{order:-1;}}
 @media(max-width:768px){.mh .mh-list{flex-direction:column;overflow:visible;scroll-snap-type:none;}.mh .mh-list li{flex:0 0 auto;width:100%;}.mh .ba-item .ba-d{max-height:0;opacity:0;}.mh .ba-item.on .ba-d{max-height:14rem;opacity:1;}}
+
+/* ─── MODULAR HOME: market cards (polished 19 Nov 2026) ─── */
+.mh{grid-template-columns:minmax(0,440px) auto;justify-content:center;}
+.mh-list{gap:12px;}
+.mh .ba-item.mk{padding:20px 24px;border-radius:20px;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--paper) 6%,transparent);}
+.mh .ba-item.mk:hover{background:color-mix(in srgb,var(--paper) 3%,transparent);}
+.mh .ba-item.mk.on{background:var(--card);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--paper) 4%,transparent),var(--sh-card);}
+.mk-head{display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.mh .mk .ba-n{font-size:1.125rem;}
+.mk-chip{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;font:500 13px var(--ui);color:#515151;background:color-mix(in srgb,var(--paper) 5%,transparent);white-space:nowrap;transition:background .4s var(--ease-apple),color .4s var(--ease-apple);}
+.mk-chip svg{width:14px;height:14px;}
+.mk.on .mk-chip{background:color-mix(in srgb,var(--accent) 10%,transparent);color:var(--accent);}
+.mk-rows{display:block;margin-top:16px;}
+.mk-row{display:grid;grid-template-columns:5.5rem 1fr;gap:16px;align-items:baseline;padding:12px 0;border-top:1px solid color-mix(in srgb,var(--paper) 6%,transparent);font-size:.875rem;line-height:1.5;color:var(--ash);}
+.mk-k{color:var(--ash);font-weight:500;}
+.mk-v{color:var(--paper);}
+.mk-v b{display:block;font-size:1.5rem;font-weight:700;letter-spacing:-.03em;line-height:1.2;color:var(--paper);margin-bottom:2px;}
+.mk-row:last-child{padding-bottom:0;}
+.mk-tags{display:flex;flex-wrap:wrap;gap:6px;}
+.mk-tags i{font-style:normal;font-size:.8125rem;padding:3px 10px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--line-md);color:var(--paper);}
+.mh .mk .ba-bar{display:none;}
+.mh .ba-item.mk.on .ba-d{max-height:18rem;}
+body.dark-mode .mk-chip{color:var(--ash);}
+@media(max-width:1024px){.mh{grid-template-columns:1fr;}.mh-list{max-width:440px;}}
+@media(max-width:768px){.mh .ba-item.mk{padding:16px;}.mk-row{grid-template-columns:4.75rem 1fr;gap:12px;}}
 
 
 /* ─── SHOWCASE: every screen of the new experience, full width ─── */
@@ -1345,8 +1378,24 @@ body.dark-mode .sc-ph{box-shadow:0 0 0 1.5px #3A3A44,0 24px 48px -18px rgba(0,0,
   <p class="ov-body reveal" style="max-width:62ch;">Every market builds its home from the same blocks. Each block switches on or off per corridor, and the badge says what that market can promise. When the promise is speed, speed goes to the front and the rate moves up, smaller. <strong>A new corridor is a configuration, not a new home.</strong></p>
   <div class="mh" id="mh">
     <ol class="ba-list mh-list">
-      <li><button class="ba-item on" data-i="0"><span class="ba-n"><svg class="flag"><use href="#f-gt"/></svg>Guatemala</span><span class="ba-d"><span class="mh-def"><b>Badge</b>Sin comisiones (no fees)</span><span class="mh-def"><b>In front</b>The rate, Q7.66 per dollar</span><span class="mh-def"><b>Modules</b>Repeat a send, requests, WhatsApp</span></span><span class="ba-bar"><i></i></span></button></li>
-      <li><button class="ba-item" data-i="1"><span class="ba-n"><svg class="flag"><use href="#f-co"/></svg>Colombia</span><span class="ba-d"><span class="mh-def"><b>Badge</b>Instantáneo (instant)</span><span class="mh-def"><b>In front</b>"En segundos" (in seconds). The rate, 3.950,50 COP, moves up, smaller</span><span class="mh-def"><b>Modules</b>Repeat a send, requests, WhatsApp</span></span><span class="ba-bar"><i></i></span></button></li>
+      <li><button class="ba-item mk on" data-i="0" aria-pressed="true">
+        <span class="mk-head"><span class="ba-n"><svg class="flag"><use href="#f-gt"/></svg>Guatemala</span><span class="mk-chip ui"><svg aria-hidden="true"><use href="#i-spark"/></svg>Sin comisiones</span></span>
+        <span class="ba-d"><span class="mk-rows">
+          <span class="mk-row"><span class="mk-k">In front</span><span class="mk-v"><b class="ui">Q7.66</b>The rate per dollar. No fees, so price leads.</span></span>
+          <span class="mk-row"><span class="mk-k">Above it</span><span class="mk-v">"Tipo de cambio" (exchange rate)</span></span>
+          <span class="mk-row"><span class="mk-k">Modules</span><span class="mk-v mk-tags"><i>Repeat a send</i><i>Requests</i><i>WhatsApp</i></span></span>
+        </span></span>
+        <span class="ba-bar"><i></i></span>
+      </button></li>
+      <li><button class="ba-item mk" data-i="1" aria-pressed="false">
+        <span class="mk-head"><span class="ba-n"><svg class="flag"><use href="#f-co"/></svg>Colombia</span><span class="mk-chip ui"><svg aria-hidden="true"><use href="#i-bolt"/></svg>Instantáneo</span></span>
+        <span class="ba-d"><span class="mk-rows">
+          <span class="mk-row"><span class="mk-k">In front</span><span class="mk-v"><b class="ui">En segundos</b>In seconds. Speed is the promise, so it leads.</span></span>
+          <span class="mk-row"><span class="mk-k">Above it</span><span class="mk-v">The rate, 3.950,50 COP, smaller</span></span>
+          <span class="mk-row"><span class="mk-k">Modules</span><span class="mk-v mk-tags"><i>Repeat a send</i><i>Requests</i><i>WhatsApp</i></span></span>
+        </span></span>
+        <span class="ba-bar"><i></i></span>
+      </button></li>
     </ol>
     <div class="mh-shot" id="mh-phone" role="img" aria-label="The home switching between Guatemala and Colombia">
       <img class="on" src="assets/sukupay-newxp/xp-home.webp" alt="Home for Guatemala: Sin comisiones, rate Q7.66, Enviar dinero, Disponible 5.00 USD and two Repetir envío rows for Maria, 100 USD." decoding="async" width="390" height="844">
@@ -1723,6 +1772,7 @@ body.dark-mode #portfolio-dock .icon-moon{display:block;}
       idx=i; var k=K[i], c=COUNTRY[k];
       items.forEach(function(it,j){ it.classList.toggle('on',j===i); it.classList.remove('run'); });
       shots.forEach(function(im,j){ im.classList.toggle('on',j===i); });
+      items.forEach(function(it,j){ it.setAttribute('aria-pressed',j===i?'true':'false'); });
     }
     function play(){
       clearTimeout(timer); if(RM||!live||paused) return;
