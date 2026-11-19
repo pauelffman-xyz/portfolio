@@ -3046,8 +3046,8 @@ Tomás Rosito y Marcos Senatori (con link a LinkedIn, ↗), Nahuel Namur, Giorgi
 4. **Context · SukuPay before:** los dos boards del flujo viejo en cards de la misma altura, con el caption abajo.
 5. **Action · 01 What the old flow got wrong:** 8 hallazgos en formato rojo de error.
 6. **The new experience:** "Every screen, from sign-in to receipt." y la banda de mockups a todo el ancho (ver abajo).
-7. **Action · 02 Three changes:** un solo slider (`#ks`) con Home screen, The sender box y Navigation. Un spotlight marca la zona de cada cambio sobre el teléfono.
-8. **Action · 03 Home screen · a modular home:** la home de dos mercados (`#mh`): desde el 18 de noviembre son **las dos pantallas reales** (`xp-home` y `xp-home-co`) en un marco de teléfono (`.mh-shot`), que se cruzan al cambiar de mercado; ya no es un mockup en HTML. A la izquierda, **dos cards de mercado** (19 de noviembre, pulido con /elite-ui-designer): las dos con el mismo formato, cabecera con bandera, nombre y el badge como chip (`.mk-chip`, en teal cuando está activa); la activa abre tres filas, "In front" (el valor grande en DM Sans: Q7.66 / En segundos), "Above it" y "Modules" en chips; la inactiva es una card con borde, no texto suelto. Barra de progreso de 2px dentro de la card. Lista de hasta 440px, centrada con el teléfono y después la infografía "The home box, piece by piece" (`#hb-stage`). El título "Modules that switch on and off, not screens that get redesigned." **está oculto por ahora**, comentado en el HTML, a pedido de Paula (18 de noviembre).
+7. **Action · 02 Three changes:** un solo slider (`#ks`) con Home screen, The sender box y Navigation. Un spotlight marca la zona de cada cambio sobre el teléfono. Desde el 19 de noviembre la lista usa el mismo estilo que las cards de mercado: cada ítem es una card con borde sutil, la activa con fondo blanco y sombra, y sin línea de progreso.
+8. **Action · 03 Home screen · a modular home:** la home de dos mercados (`#mh`): desde el 18 de noviembre son **las dos pantallas reales** (`xp-home` y `xp-home-co`) en un marco de teléfono (`.mh-shot`), que se cruzan al cambiar de mercado; ya no es un mockup en HTML. A la izquierda, **dos cards de mercado** (19 de noviembre, pulido con /elite-ui-designer): las dos con el mismo formato, cabecera con bandera, nombre y el badge como chip (`.mk-chip`, en teal cuando está activa); la activa abre tres filas, "In front" (el valor grande en DM Sans: Q7.66 / En segundos), "Above it" y "Modules" en chips; la inactiva es una card con borde, no texto suelto. Sin barra de progreso (Paula la sacó el 19 de noviembre); el avance automático sigue igual. Bordes y separadores muy sutiles: `color-mix(in srgb,var(--paper) 6%,transparent)`, y la card activa se distingue por el fondo blanco y la sombra, no por el borde. Lista de hasta 440px, centrada con el teléfono y después la infografía "The home box, piece by piece" (`#hb-stage`). El título "Modules that switch on and off, not screens that get redesigned." **está oculto por ahora**, comentado en el HTML, a pedido de Paula (18 de noviembre).
 9. **Action · 04 The sender box:** la animación del sender box (`#sb-stage`).
 10. **Action · 05 Navigation**
 11. **Action · 06 Behind the tabs:** grilla de 10 pantallas (ver abajo).
@@ -3202,7 +3202,19 @@ Los 14 `.tile-arrow-label` dicen "View case study" sin flecha (↗ significa lin
 - `pe-hi-shown` (solo en la primera visita de la sesión) y `prefers-reduced-motion` (no se muestra) siguen igual.
 - Se probó también una variante "Línea" (Pau dibujado en trazo, los círculos de la P y la a pasan a ser ojos y la u la boca). Quedó para la pestaña.
 
-### Pestaña: carita pixelada que guiña (5 de octubre)
+### Pestaña: "pe" en blanco y negro (19 de noviembre de 2026) ✅ reemplaza a la carita
+
+*Decidido por Paula: sacar la carita del favicon. Primero se probó "PE" en píxeles y no le gustó. Entre cuatro alternativas eligió "pe" en minúscula, en negro y blanco.*
+
+- **Icono:** `assets/favicon.svg` es un cuadrado redondeado negro (`#000`, radio 22%) con "pe" en blanco (`#fff`), en Inter Display Bold. Las letras están convertidas a trazos (`<path>`), así que no depende de ninguna fuente instalada. Las letras ocupan el 62% del ancho y el centro de las minúsculas queda centrado en el cuadrado. **No se invierte** en modo oscuro: siempre negro y blanco.
+- **PNG:** `assets/favicon-32.png` (32×32, mismo dibujo, fondo transparente fuera del cuadrado) y `assets/apple-touch-icon.png` (180×180, fondo negro pleno; es el ícono al guardar el sitio en el celular).
+- **Sin animación.** `assets/tab.js` se reescribió: ya no dibuja ni hace guiñar la carita. Solo mantiene el color de la barra del navegador (`<meta name="theme-color">`) igual al fondo de la página y lo actualiza al cambiar entre claro y oscuro. Es ASCII puro.
+- **Los nombres de archivo no cambiaron**, así que los cases que apuntan a `assets/favicon.svg` y `assets/tab.js` toman el cambio sin tocar su HTML.
+- **Caché:** en `index.html` los cuatro links llevan `?v=pe2` para que el navegador no siga mostrando el ícono guardado. En los cases no se agregó: si alguno sigue mostrando la carita, sumarles `?v=pe2`.
+- **Sigue con la carita (no se tocó):** el loader de la primera visita ("PAU" → carita que guiña) y las 17 imágenes de link preview de `assets/og/`, que son las que muestra WhatsApp. Para sacarla de WhatsApp hay que regenerar esas imágenes.
+- **Descartados el mismo día:** "PE" en píxeles sobre `#24242C`, "P" en círculo, "PE" tipográfica y círculo liso.
+
+### Pestaña: carita pixelada que guiña (5 de octubre) · REEMPLAZADA el 19 de noviembre de 2026
 
 *Decidido por Paula: la carita de trazo sobre cuadrado oscuro (4 de octubre) no le gustó; prefiere el pixel, como el loader.*
 
