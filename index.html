@@ -1409,25 +1409,18 @@ body:not(.light-mode) .theme-toggle .icon-moon { display:none; }
   transition:opacity .6s var(--ease);
 }
 #page-loader.done{opacity:0;}
-#page-loader.done .loader-px{transform:scale(.96);}
-/* Oct 2026: pixel loader. 48 squares spell PAU, then every square travels to
-   its place in a pixel smiley, which winks once. Built by the inline script
-   right after #page-loader; without JS the overlay is simply empty. */
-.loader-px{
-  position:relative;
-  --c:clamp(10px,1.9vw,20px);
-  width:calc(var(--c)*17);height:calc(var(--c)*13);
-  transition:transform .6s var(--ease);
-}
-.loader-px i{
-  position:absolute;left:0;top:0;width:var(--c);height:var(--c);
-  background:var(--paper);
-  transform:translate(calc(var(--x)*var(--c)),calc(var(--y)*var(--c))) scale(var(--s,0));
-  transition:transform .62s var(--ease);
-  transition-delay:var(--d,0ms);
-}
-/* "snap": pixels appear and wink in hard steps, no easing */
-.loader-px.snap i{transition:none;}
+#page-loader.done .pe-mark{transform:scale(.94);}
+/* Nov 2026: "pe" loader (replaces the PAU -> pixel smiley loader). The same mark as the
+   favicon: a black rounded square with "pe" in white. The square makes a quarter turn
+   as it appears (it looks the same at the end), then p and e rise in, one after the other. */
+.pe-mark{position:relative;width:clamp(72px,8vw,104px);aspect-ratio:1;transition:transform .6s var(--ease);}
+.pe-bg{position:absolute;inset:0;border-radius:22%;background:#000;opacity:0;animation:pe-turn .9s cubic-bezier(.28,.11,.32,1) .05s forwards;}
+.pe-txt{position:absolute;inset:0;width:100%;height:100%;overflow:visible;}
+.pe-txt path{fill:#fff;opacity:0;transform-box:fill-box;transform-origin:50% 100%;animation:pe-rise .55s cubic-bezier(.28,.11,.32,1) forwards;}
+.pe-txt .pe-p{animation-delay:.42s;}
+.pe-txt .pe-e{animation-delay:.52s;}
+@keyframes pe-turn{0%{opacity:0;transform:scale(.55) rotate(-90deg);}55%{opacity:1;}100%{opacity:1;transform:none;}}
+@keyframes pe-rise{0%{opacity:0;transform:translateY(35%);}100%{opacity:1;transform:none;}}
 /* Char split animation */
 .char-wrap{display:inline-block;overflow:hidden;vertical-align:bottom;line-height:1.05;}
 .char{
@@ -3330,7 +3323,7 @@ body.light-mode .work{ --wc-muted:#5E5E6C; }
 </head>
 <body class="light-mode">
 <div id="wipe-overlay"></div>
-<div id="page-loader"><div class="loader-px snap" id="loader-px" role="img" aria-label="Pau"></div></div>
+<div id="page-loader"><div class="pe-mark" role="img" aria-label="Paula Elffman"><span class="pe-bg"></span><svg class="pe-txt" viewBox="0 0 64 64" aria-hidden="true"><g transform="translate(10.30 37.61) scale(0.01791)"><path class="pe-p" d="M104 418H399V-158H402C463 -39 570 22 709 22C985 22 1166 -198 1166 -529C1166 -853 981 -1078 711 -1078C574 -1078 463 -1023 398 -913H395V-1056H104ZM633 -218C484 -218 385 -340 385 -529C385 -717 484 -840 633 -840C776 -840 869 -727 869 -529C869 -331 776 -218 633 -218Z"/><path class="pe-e" d="M1810 24C2066 24 2270 -122 2309 -332H2040C2013 -250 1934 -197 1819 -197C1664 -197 1574 -298 1569 -454H2320V-533C2320 -855 2111 -1080 1800 -1080C1497 -1080 1282 -849 1282 -527C1282 -206 1490 24 1810 24ZM1571 -642C1587 -774 1674 -856 1806 -856C1939 -856 2027 -774 2042 -642Z"/></g></svg></div></div>
 <script>
 (function(){
   var l=document.getElementById('page-loader');
@@ -3344,50 +3337,6 @@ body.light-mode .work{ --wc-muted:#5E5E6C; }
   }catch(e){}
   if(seen){ l.style.display='none'; return; }
 
-  /* PIXEL LOADER */
-  var box=document.getElementById('loader-px');
-  if(!box) return;
-  /* whole-pixel cell size, so there are no hairline seams between squares */
-  box.style.setProperty('--c',Math.max(10,Math.min(20,Math.round(window.innerWidth*0.019)))+'px');
-  var FONT=[
-    ['11110','10001','10001','11110','10000','10000','10000'],
-    ['01110','10001','10001','11111','10001','10001','10001'],
-    ['10001','10001','10001','10001','10001','10001','01110']
-  ];
-  var FACE=['....xxxxx....','..xx.....xx..','.x.........x.','.x.........x.','x...x...x...x','x...x...x...x','x...........x','x..x.....x..x','x...xxxxx...x','.x.........x.','.x.........x.','..xx.....xx..','....xxxxx....'];
-  var from=[],to=[],x,y,i;
-  for(i=0;i<3;i++) for(y=0;y<7;y++) for(x=0;x<5;x++) if(FONT[i][y].charAt(x)==='1') from.push({x:x+i*6,y:y+3});
-  for(y=0;y<13;y++) for(x=0;x<13;x++) if(FACE[y].charAt(x)==='x') to.push({x:x+2,y:y});
-  function byCol(a,b){ return a.x-b.x||a.y-b.y; }
-  from.sort(byCol); to.sort(byCol);
-  var cells=[];
-  for(i=0;i<from.length;i++){
-    var el=document.createElement('i');
-    el.style.setProperty('--x',from[i].x); el.style.setProperty('--y',from[i].y);
-    box.appendChild(el); cells.push(el);
-  }
-  function show(el,ms){ setTimeout(function(){ el.style.setProperty('--s',1); },ms); }
-  /* 1. PAU appears pixel by pixel, left to right */
-  for(i=0;i<cells.length;i++) show(cells[i],80+i*8);
-  /* 2. every pixel travels to its place in the face (48 pixels, 47 places:
-        the last two share one) */
-  var winker=null;
-  setTimeout(function(){
-    box.classList.remove('snap');
-    for(var k=0;k<cells.length;k++){
-      var t=to[Math.min(k,to.length-1)];
-      cells[k].style.setProperty('--d',Math.round(k*3+Math.random()*80)+'ms');
-      cells[k].style.setProperty('--x',t.x); cells[k].style.setProperty('--y',t.y);
-      if(t.x===10&&t.y===4) winker=cells[k];
-    }
-  },800);
-  /* 3. wink: the top pixel of the right eye drops beside the bottom one */
-  setTimeout(function(){
-    if(!winker) return;
-    box.classList.add('snap');
-    winker.style.setProperty('--x',9); winker.style.setProperty('--y',5);
-    setTimeout(function(){ winker.style.setProperty('--x',10); winker.style.setProperty('--y',4); },220);
-  },1750);
 })();
 </script>
 
@@ -3479,6 +3428,28 @@ body.light-mode .work{ --wc-muted:#5E5E6C; }
           <p class="wc-line">An agent inside belo that brings one money move at the right moment. Nothing moves without your OK.</p>
         </div>
       </a>
+      <!-- sukupay new experience (Nov 2026): the home box switching market, CSS only -->
+      <a class="work-card" href="sukupay-newxp-case.html">
+        <div class="wc-cover wc-cover--newxp" aria-hidden="true">
+          <div class="nx-box">
+            <div class="nx-top">
+              <span class="nx-pill"><span class="nx-flag"><span class="nx-a"><svg viewBox="0 0 22 22"><clipPath id="nxc1"><circle cx="11" cy="11" r="11"/></clipPath><g clip-path="url(#nxc1)"><rect width="22" height="22" fill="#fff"/><rect width="7.3" height="22" fill="#4997D0"/><rect x="14.7" width="7.3" height="22" fill="#4997D0"/><circle cx="11" cy="11" r="2.2" fill="#9CC28B"/></g></svg></span><span class="nx-b"><svg viewBox="0 0 22 22"><clipPath id="nxc2"><circle cx="11" cy="11" r="11"/></clipPath><g clip-path="url(#nxc2)"><rect width="22" height="11" fill="#FCD116"/><rect y="11" width="22" height="5.5" fill="#003893"/><rect y="16.5" width="22" height="5.5" fill="#CE1126"/></g></svg></span></span><span class="nx-sw"><span class="nx-a">Guatemala</span><span class="nx-b">Colombia</span></span><span class="caret"></span></span>
+              <span class="nx-vp"><span class="nx-a"><svg viewBox="0 0 24 24"><path d="M10 3.5l1.6 4.4 4.4 1.6-4.4 1.6L10 15.5l-1.6-4.4L4 9.5l4.4-1.6L10 3.5ZM17.5 13.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8.8-2.2Z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>Sin comisiones</span><span class="nx-b"><svg viewBox="0 0 24 24"><path d="M13 3 5 13.5h6L10 21l8-10.5h-6L13 3Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>Instantáneo</span></span>
+            </div>
+            <div class="nx-rate">
+              <div class="nx-a"><small><svg viewBox="0 0 24 24"><path d="M19 8.5A7.5 7.5 0 0 0 5.6 7.4M5 15.5a7.5 7.5 0 0 0 13.4 1.1M19 4v4.5h-4.5M5 20v-4.5h4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Tipo de cambio</small><b>Q7.66</b><span>Por cada 1 USD que envíes</span></div>
+              <div class="nx-b"><small><svg viewBox="0 0 24 24"><path d="M19 8.5A7.5 7.5 0 0 0 5.6 7.4M5 15.5a7.5 7.5 0 0 0 13.4 1.1M19 4v4.5h-4.5M5 20v-4.5h4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>3.950,50 COP</small><b>En segundos</b><span>Por cada 1 USD que envíes</span></div>
+            </div>
+            <div class="nx-cta">Enviar dinero <svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="nx-bal">Disponible <u>5.00 USD</u></div>
+          </div>
+        </div>
+        <div class="wc-body">
+          <div class="wc-cat">Fintech</div>
+          <h3 class="wc-name">sukupay <span>new experience</span></h3>
+          <p class="wc-line">Sending money home from the US, rebuilt. One home for every country, two steps to send.</p>
+        </div>
+      </a>
       <a class="work-card" href="sukupay-proto-case.html">
         <div class="wc-cover wc-cover--demo">
           <div class="tp-demo" id="tp-sukuds-demo" aria-hidden="true">
@@ -3505,28 +3476,6 @@ body.light-mode .work{ --wc-muted:#5E5E6C; }
           <div class="wc-cat">Fintech</div>
           <h3 class="wc-name">sukupay <span>prototyper</span></h3>
           <p class="wc-line">One design system for three brands, built so AI works with the real components.</p>
-        </div>
-      </a>
-      <!-- sukupay new experience (Nov 2026): the home box switching market, CSS only -->
-      <a class="work-card" href="sukupay-newxp-case.html">
-        <div class="wc-cover wc-cover--newxp" aria-hidden="true">
-          <div class="nx-box">
-            <div class="nx-top">
-              <span class="nx-pill"><span class="nx-flag"><span class="nx-a"><svg viewBox="0 0 22 22"><clipPath id="nxc1"><circle cx="11" cy="11" r="11"/></clipPath><g clip-path="url(#nxc1)"><rect width="22" height="22" fill="#fff"/><rect width="7.3" height="22" fill="#4997D0"/><rect x="14.7" width="7.3" height="22" fill="#4997D0"/><circle cx="11" cy="11" r="2.2" fill="#9CC28B"/></g></svg></span><span class="nx-b"><svg viewBox="0 0 22 22"><clipPath id="nxc2"><circle cx="11" cy="11" r="11"/></clipPath><g clip-path="url(#nxc2)"><rect width="22" height="11" fill="#FCD116"/><rect y="11" width="22" height="5.5" fill="#003893"/><rect y="16.5" width="22" height="5.5" fill="#CE1126"/></g></svg></span></span><span class="nx-sw"><span class="nx-a">Guatemala</span><span class="nx-b">Colombia</span></span><span class="caret"></span></span>
-              <span class="nx-vp"><span class="nx-a"><svg viewBox="0 0 24 24"><path d="M10 3.5l1.6 4.4 4.4 1.6-4.4 1.6L10 15.5l-1.6-4.4L4 9.5l4.4-1.6L10 3.5ZM17.5 13.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8.8-2.2Z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>Sin comisiones</span><span class="nx-b"><svg viewBox="0 0 24 24"><path d="M13 3 5 13.5h6L10 21l8-10.5h-6L13 3Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>Instantáneo</span></span>
-            </div>
-            <div class="nx-rate">
-              <div class="nx-a"><small><svg viewBox="0 0 24 24"><path d="M19 8.5A7.5 7.5 0 0 0 5.6 7.4M5 15.5a7.5 7.5 0 0 0 13.4 1.1M19 4v4.5h-4.5M5 20v-4.5h4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Tipo de cambio</small><b>Q7.66</b><span>Por cada 1 USD que envíes</span></div>
-              <div class="nx-b"><small><svg viewBox="0 0 24 24"><path d="M19 8.5A7.5 7.5 0 0 0 5.6 7.4M5 15.5a7.5 7.5 0 0 0 13.4 1.1M19 4v4.5h-4.5M5 20v-4.5h4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>3.950,50 COP</small><b>En segundos</b><span>Por cada 1 USD que envíes</span></div>
-            </div>
-            <div class="nx-cta">Enviar dinero <svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <div class="nx-bal">Disponible <u>5.00 USD</u></div>
-          </div>
-        </div>
-        <div class="wc-body">
-          <div class="wc-cat">Fintech</div>
-          <h3 class="wc-name">sukupay <span>new experience</span></h3>
-          <p class="wc-line">Remittances from the US to Latin America. The old send flow and the new one, side by side.</p>
         </div>
       </a>
       <a class="work-card" href="muv-case.html">
@@ -5608,7 +5557,7 @@ body.light-mode .work{ --wc-muted:#5E5E6C; }
 
   /* the page loader covers the hero on the first visit: wait for it */
   function afterLoader(fn,extra){
-    var wait=document.getElementById('page-loader')&&getComputedStyle(document.getElementById('page-loader')).display!=='none'?3300:500;
+    var wait=document.getElementById('page-loader')&&getComputedStyle(document.getElementById('page-loader')).display!=='none'?2500:500;
     setTimeout(fn,wait+(extra||0));
   }
 
@@ -6167,9 +6116,9 @@ function filterProjects(cat,btn){
 window.addEventListener('load',function(){
   var l=document.getElementById('page-loader');
   if(l){
-    /* let the pixel loader finish (PAU, face, wink), then fade out */
+    /* let the "pe" mark finish (turn + letters, ~1.1s), hold it a beat, then fade out */
     var now=(window.performance&&performance.now)?performance.now():0;
-    var hold=Math.max(350,2250-now);
+    var hold=Math.max(350,1700-now);
     setTimeout(function(){l.classList.add('done');},hold);
     setTimeout(function(){if(l.parentNode)l.parentNode.removeChild(l);},hold+700);
   }

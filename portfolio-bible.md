@@ -3113,10 +3113,10 @@ Orden pedido por Paula el 18 de noviembre:
 
 ### Card en la home
 
-- **Lugar:** tercera en Selected work, después de belo y sukupay prototyper.
-- **Orden actual de Selected work (18 de noviembre, pedido de Paula):** belo, sukupay prototyper, sukupay new experience y muv. Son 4, todas grandes (2×2), así Selected work se ve más grande.
+- **Lugar:** segunda en Selected work, después de belo (20 de noviembre).
+- **Orden actual de Selected work (20 de noviembre, pedido de Paula):** belo, sukupay new experience, sukupay prototyper y muv. Son 4, todas grandes (2×2).
 - **More work:** empieza con vendor tool y sigue con sukupay home. Son 13 casos; `.work-count` dice "13 cases".
-- **Rubro:** Fintech. **Nombre:** sukupay *new experience*. **Línea:** "Remittances from the US to Latin America. The old send flow and the new one, side by side."
+- **Rubro:** Fintech. **Nombre:** sukupay *new experience*. **Línea (20 de noviembre):** "Sending money home from the US, rebuilt. One home for every country, two steps to send." Antes decía "Remittances from the US to Latin America. The old send flow and the new one, side by side."; Paula pidió algo más atractivo y sin "the old send flow".
 - **Cover sin imagen:** `.wc-cover--newxp` es un degradé teal oscuro (`linear-gradient(180deg,#00473B 0%,#00332A 50%,#001E18 100%)` con brillos lima) con el home box en CSS en el centro (`.nx-box`).
   - Anima solo con CSS, en un ciclo de 10 s: Guatemala ("Sin comisiones", "Tipo de cambio", Q7.66 al frente) ↔ Colombia ("Instantáneo", 3.950,50 COP arriba y chico, "En segundos" al frente). En los dos, "Por cada 1 USD que envíes".
   - Se escala con container queries (`container-type:inline-size`, `--u:calc(66cqw / 340)`).
@@ -3124,21 +3124,13 @@ Orden pedido por Paula el 18 de noviembre:
 
 ### Next case
 
-- `sukupay-newxp-case.html` → muv ("Ride-hailing in Paraguay. Onboarding cut from 21 steps to 6.").
-- La cadena correcta, siguiendo el orden de la home, es: belo → sukupay prototyper → **sukupay new experience** → muv → vendor tool → sukupay home. Faltan los pasos de prototyper, muv y vendor tool (ver Pendientes).
+- `sukupay-newxp-case.html` → sukupay prototyper ("One design system for three brands, built so AI works with the real components."), desde el 20 de noviembre.
+- La cadena correcta, siguiendo el orden de la home, es: belo → **sukupay new experience** → sukupay prototyper → muv → vendor tool → sukupay home. `belo-case.html` ya lleva a sukupay new experience, `muv-case.html` a vendor tool y `vendor-tool-case.html` a sukupay home (20 de noviembre). Falta revisar que `sukupay-case.html` lleve a hugo, el segundo de More work.
 
 ### Pendientes
 
-- `sukupay-proto-case.html`: cambiar su "Next case" para que lleve al case nuevo (hoy lleva a muv):
-  ```html
-  <a class="nc-link" href="sukupay-newxp-case.html">
-    <span class="nc-kicker">Next case</span>
-    <span class="nc-name">sukupay <span>new experience</span><span class="nc-arrow" aria-hidden="true">→</span></span>
-    <span class="nc-line">Remittances from the US to Latin America. The old send flow and the new one, side by side.</span>
-  </a>
-  ```
-- `muv-case.html`: hoy lleva a sukupay home. Con vendor tool primero en More work, tiene que llevar a vendor tool (línea: "Restaurants edit their own menu. 72 h of manual catalog work, down to zero.").
-- `vendor-tool-case.html`: revisar que su "Next case" lleve a sukupay home.
+- `sukupay-proto-case.html` ya lleva a muv: no hay que tocarlo.
+- `sukupay-case.html` (sukupay home): revisar que su "Next case" lleve a hugo ("An AI agent that answers customers on WhatsApp. Live after one hackathon."). Antes vendor tool llevaba a hugo; ahora ese paso le toca a sukupay home.
 - `og:image` apunta a `assets/og/og-sukupay-newxp.jpg`, que todavía no existe. Se puede hacer a 1200×630 con el home box sobre el teal.
 - **En Figma (Paula):**
   - En Cuenta se ve un teléfono completo (+18483604962). Si es real, enmascararlo.
@@ -3185,7 +3177,18 @@ Los 14 `.tile-arrow-label` dicen "View case study" sin flecha (↗ significa lin
 - Alts y titles: coma en vez de em dash.
 - **Regla:** no usar em dash en copy visible. El copy de los cases todavía tiene muchos; se limpian en la revisión de cada case.
 
-### Loader: pixel "PAU" → carita (4 de octubre)
+### Loader: "pe" (20 de noviembre de 2026) ✅ reemplaza a "PAU" → carita
+
+*Decidido por Paula: sacar "Pau" y la carita del inicio y usar el "pe" del favicon, con algo sutil.*
+
+- **Qué pasa (primera visita de la sesión):** sobre el fondo de la página aparece el cuadrado negro del favicon dando un cuarto de vuelta mientras crece (de 55% a 100%, de -90° a 0°; al ser cuadrado, termina igual que como se ve). Después suben la "p" y la "e", una tras otra. Queda quieto un momento y el overlay se va con un fade.
+- **Tiempos:** cuadrado 0,05–0,95 s · "p" desde 0,42 s y "e" desde 0,52 s (0,55 s cada una) · fade a los ~1,7 s (`hold` en el bloque `LOADER`, antes 2,25 s) · se remueve 700 ms después. El hero espera 2,5 s en vez de 3,3 s (`afterLoader`).
+- **Markup:** `<div id="page-loader"><div class="pe-mark">` con `.pe-bg` (el cuadrado) y un SVG `.pe-txt` con dos `<path>`, `.pe-p` y `.pe-e`. Las letras son Inter Display Bold convertidas a trazos, con la misma geometría que `assets/favicon.svg`.
+- **Solo CSS:** `@keyframes pe-turn` y `pe-rise`, con la curva `cubic-bezier(.28,.11,.32,1)`. El script inline quedó solo para el tema guardado y `pe-hi-shown`; el código de los píxeles (FONT, FACE, guiño) se borró.
+- **Tamaño:** `clamp(72px,8vw,104px)`. Negro y blanco en los dos modos.
+- Con `prefers-reduced-motion` no se muestra, igual que antes.
+
+### Loader: pixel "PAU" → carita (4 de octubre) · REEMPLAZADO el 20 de noviembre de 2026
 
 *Decidido por Paula. Reemplaza al loader de la P con el punto verde. Referencia: el inicio de oriol.design, donde las piezas del nombre se reacomodan en un dibujo.*
 
@@ -3211,7 +3214,7 @@ Los 14 `.tile-arrow-label` dicen "View case study" sin flecha (↗ significa lin
 - **Sin animación.** `assets/tab.js` se reescribió: ya no dibuja ni hace guiñar la carita. Solo mantiene el color de la barra del navegador (`<meta name="theme-color">`) igual al fondo de la página y lo actualiza al cambiar entre claro y oscuro. Es ASCII puro.
 - **Los nombres de archivo no cambiaron**, así que los cases que apuntan a `assets/favicon.svg` y `assets/tab.js` toman el cambio sin tocar su HTML.
 - **Caché:** en `index.html` los cuatro links llevan `?v=pe2` para que el navegador no siga mostrando el ícono guardado. En los cases no se agregó: si alguno sigue mostrando la carita, sumarles `?v=pe2`.
-- **Sigue con la carita (no se tocó):** el loader de la primera visita ("PAU" → carita que guiña) y las 17 imágenes de link preview de `assets/og/`, que son las que muestra WhatsApp. Para sacarla de WhatsApp hay que regenerar esas imágenes.
+- **Sigue con la carita (no se tocó):** las 17 imágenes de link preview de `assets/og/`, que son las que muestra WhatsApp. Para sacarla de WhatsApp hay que regenerar esas imágenes. (El loader ya no la usa desde el 20 de noviembre.)
 - **Descartados el mismo día:** "PE" en píxeles sobre `#24242C`, "P" en círculo, "PE" tipográfica y círculo liso.
 
 ### Pestaña: carita pixelada que guiña (5 de octubre) · REEMPLAZADA el 19 de noviembre de 2026
@@ -3312,6 +3315,8 @@ Los 14 `.tile-arrow-label` dicen "View case study" sin flecha (↗ significa lin
 
 ### Home: grilla de casos — ESTADO ACTUAL (4 de octubre de 2026)
 
+> **20 de noviembre de 2026:** nuevo orden de Selected work: **belo, sukupay new experience, sukupay prototyper y muv**.
+>
 > **18 de noviembre de 2026:** Selected work tiene ahora **4 casos**, todos grandes en una grilla de 2×2: belo, sukupay prototyper, sukupay new experience y muv. vendor tool bajó a More work y va primero, antes de sukupay home. More work tiene 13 casos ("13 cases"). En el CSS, `.work-grid--feat .work-card` es `span 3` para todas; se borraron las reglas `:nth-child(-n+2)` y `:nth-child(n+3)` de desktop (cover 4:3 y nombre más chico de la segunda fila). Con 13, la última fila de More work queda con una sola card. Ver "SUKUPAY NEW EXPERIENCE CASE STUDY → Card en la home".
 
 > **8 de octubre de 2026:** el rubro y la línea de cada card cambiaron. Las columnas de rubro y descripción de las tablas de acá abajo quedaron viejas; las vigentes están en "Home: aire entre casos en mobile y texto de las cards", punto 4. Covers, posiciones y orden no cambiaron.
