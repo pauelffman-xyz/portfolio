@@ -165,6 +165,18 @@ body{
 }
 .stat-val{font-size:2rem;font-weight:800;letter-spacing:-.04em;color:var(--paper);white-space:nowrap;}
 .stat-lbl{font-size:.8125rem;color:var(--ash);line-height:1.4;}
+
+/* ─── SITUATION STATS v2 (23 Nov 2026): value + short title + one line ─── */
+.stats-v2 .stat-val small{font-size:.5em;font-weight:700;letter-spacing:0;margin-left:3px;color:var(--ash);}
+.stat-txt{display:flex;flex-direction:column;gap:4px;}
+.stat-txt b{font-size:.9375rem;font-weight:600;color:var(--paper);letter-spacing:-.01em;line-height:1.35;}
+.stat-txt span{font-size:.8125rem;color:var(--ash);line-height:1.5;}
+/* Option B: 2x2 grid of stats, lines between them */
+.stats-v2.opt-b{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line);}
+.stats-v2.opt-b .stat-item{display:flex;flex-direction:column;align-items:flex-start;gap:12px;padding:24px 24px 24px 0;border-bottom:1px solid var(--line);}
+.stats-v2.opt-b .stat-item:nth-child(even){padding-left:24px;padding-right:0;border-left:1px solid var(--line);}
+.stats-v2.opt-b .stat-val{font-size:3rem;line-height:1;}
+@media(max-width:768px){.stats-v2.opt-b .stat-item{padding-right:16px;}.stats-v2.opt-b .stat-item:nth-child(even){padding-left:16px;}.stats-v2.opt-b .stat-val{font-size:2.5rem;}}
 .accent-card{
   background:var(--accent);
   border-radius:12px;padding:2rem;
@@ -1281,11 +1293,11 @@ body.dark-mode .sc-ph{box-shadow:0 0 0 1.5px #3A3A44,0 24px 48px -18px rgba(0,0,
       <div class="ov-title">A web app made for one corridor, <span class="accent">asked to serve more.</span></div>
       <p class="ov-body">SukuPay lets people in the US send money to family in Latin America from the browser, without downloading an app. It started with Guatemala, where it runs co-branded with Zigi and Banco Industrial. Colombia was next, and the web app had Guatemala written into its screens.<br><br><strong>The task:</strong> one experience that works for any corridor, shows what matters in each one, and makes a send easy to follow from the first tap to the receipt.<br><br><strong>My role.</strong> I audited the live flow, designed the new home, the navigation, the send flow and its states, built the components in the design system, and wrote the handoff and the user stories for engineering.</p>
     </div>
-    <div class="stats-col reveal">
-      <div class="stat-item"><div class="stat-val">2</div><div class="stat-lbl">Corridors in one home today: Guatemala and Colombia, with room for the next</div></div>
-      <div class="stat-item"><div class="stat-val">2</div><div class="stat-lbl">Steps in the header of every send: 1/2 and 2/2</div></div>
-      <div class="stat-item"><div class="stat-val">4</div><div class="stat-lbl">Tabs with a label, instead of three icons without one</div></div>
-      <div class="stat-item"><div class="stat-val">60 s</div><div class="stat-lbl">The rate stays locked while you review and pay</div></div>
+    <div class="stats-col stats-v2 opt-b reveal">
+      <div class="stat-item"><div class="stat-val">2</div><div class="stat-txt"><b>Corridors, one home</b><span>Guatemala and Colombia today, room for more</span></div></div>
+      <div class="stat-item"><div class="stat-val">2</div><div class="stat-txt"><b>Steps to send</b><span>1/2 and 2/2, always in the header</span></div></div>
+      <div class="stat-item"><div class="stat-val">4</div><div class="stat-txt"><b>Labeled tabs</b><span>Instead of three icons without a name</span></div></div>
+      <div class="stat-item"><div class="stat-val">60<small>s</small></div><div class="stat-txt"><b>Rate lock</b><span>While you review and pay</span></div></div>
     </div>
     <div class="accent-card reveal">
       <div class="ac-lbl">The bet</div>
