@@ -1004,19 +1004,19 @@ body.dark-mode .back-nav-title,body.dark-mode .back-nav-right{color:var(--accent
 .hood .ov-body{color:rgba(255,255,255,.72);}
 .hood .ov-body strong{color:#fff;}
 .pipe-wrap{position:relative;margin-top:var(--stack);}
-.pipe-track{position:absolute;left:10%;right:10%;top:7px;height:2px;background:rgba(255,255,255,.14);border-radius:2px;}
-.pipe-pulse{position:absolute;top:-3px;left:0;width:56px;height:8px;border-radius:8px;background:linear-gradient(90deg,transparent,var(--mint));filter:drop-shadow(0 0 6px var(--mint));animation:pipe-run 6s cubic-bezier(.45,0,.55,1) infinite;}
-@keyframes pipe-run{0%{left:-56px;opacity:0}8%{opacity:1}80%{left:calc(100% - 8px);opacity:1}88%,100%{left:calc(100% - 8px);opacity:0}}
+/* the track runs through the centre of the dots, from the first column's centre to the last one's */
+.pipe-track{position:absolute;top:7px;height:2px;left:calc((100% - 64px) / 10);right:calc((100% - 64px) / 10);background:rgba(255,255,255,.14);border-radius:2px;}
+.pipe-pulse{position:absolute;top:-3px;left:0;width:56px;height:8px;border-radius:8px;background:linear-gradient(90deg,transparent,var(--mint));filter:drop-shadow(0 0 6px var(--mint));animation:pipe-run 6s linear infinite;}
+@keyframes pipe-run{0%{left:-56px;opacity:0}6%{opacity:1}80%{left:calc(100% - 56px);opacity:1}88%,100%{left:calc(100% - 56px);opacity:0}}
 .pipe{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px;}
-.pn{display:flex;flex-direction:column;gap:8px;}
-.pn-dot{width:16px;height:16px;border-radius:50%;background:#0B0630;box-shadow:inset 0 0 0 2px rgba(255,255,255,.3);margin:0 auto 16px;animation:pn-ping 6s infinite;animation-delay:calc(var(--i) * 1.05s);}
-@keyframes pn-ping{0%,4%{box-shadow:inset 0 0 0 2px rgba(255,255,255,.3);background:#0B0630}8%,22%{box-shadow:inset 0 0 0 2px var(--mint),0 0 0 6px rgba(60,240,176,.18);background:var(--mint)}30%,100%{box-shadow:inset 0 0 0 2px rgba(255,255,255,.3);background:#0B0630}}
-.pn{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:0 20px 24px;}
-.pn .pn-dot{margin-top:-8px;}
+.pn{display:flex;flex-direction:column;align-items:stretch;}
+.pn-dot{position:relative;z-index:1;width:16px;height:16px;border-radius:50%;background:#0B0630;box-shadow:inset 0 0 0 2px rgba(255,255,255,.3);margin:0 auto 16px;animation:pn-ping 6s linear infinite;animation-delay:calc(var(--i) * 1.2s - .3s);}
+@keyframes pn-ping{0%{box-shadow:inset 0 0 0 2px var(--mint),0 0 0 6px rgba(60,240,176,.18);background:var(--mint)}14%{box-shadow:inset 0 0 0 2px var(--mint),0 0 0 6px rgba(60,240,176,.18);background:var(--mint)}22%,100%{box-shadow:inset 0 0 0 2px rgba(255,255,255,.3);background:#0B0630}}
+.pn-card{flex:1;display:flex;flex-direction:column;gap:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:20px 20px 24px;}
 .pn-k{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.75rem;color:var(--mint);letter-spacing:.02em;}
 .pn b{font-size:1.0625rem;font-weight:700;letter-spacing:-.015em;color:#fff;}
 .pn-d{font-size:.8438rem;line-height:1.6;color:rgba(255,255,255,.68);}
-.pn-you{background:rgba(60,240,176,.08);border-color:rgba(60,240,176,.45);}
+.pn-you .pn-card{background:rgba(60,240,176,.08);border-color:rgba(60,240,176,.45);}
 .tiers-lbl{margin-top:clamp(48px,6vw,72px);font-size:.875rem;font-weight:500;color:rgba(255,255,255,.5);}
 .tiers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:16px;}
 .tier{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:20px 24px 24px;display:flex;flex-direction:column;gap:8px;}
@@ -1028,7 +1028,7 @@ body.dark-mode .back-nav-title,body.dark-mode .back-nav-right{color:var(--accent
 .meter i.on{background:var(--mint);}
 .tier-ch{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.75rem;color:var(--mint);}
 .tier p{margin:0;font-size:.875rem;line-height:1.6;color:rgba(255,255,255,.7);}
-@media(max-width:1024px){.pipe{grid-template-columns:repeat(2,minmax(0,1fr));}.pipe-track{display:none;}.pn{padding-top:20px;}.pn .pn-dot{margin:0 0 4px;}}
+@media(max-width:1024px){.pipe{grid-template-columns:repeat(2,minmax(0,1fr));}.pipe-track,.pn-dot{display:none;}}
 @media(max-width:640px){.pipe,.tiers{grid-template-columns:minmax(0,1fr);}}
 @media (prefers-reduced-motion:reduce){.pipe-pulse{display:none;}.pn-dot{animation:none;}}
 
@@ -1329,7 +1329,7 @@ body.dark-mode .add{background:color-mix(in srgb,var(--accent) 12%,var(--card));
   <p class="ov-body" style="max-width:68ch;">The prototype shows the experience. Behind it, the team built a working version that reads a belo staging account and runs the moments on its own. <strong>The code does the math. The agent only decides whether it's worth telling you, and how.</strong></p>
   <div class="pipe-wrap">
     <div class="pipe-track" aria-hidden="true"><i class="pipe-pulse"></i></div>
-    <ol class="pipe"><li class="pn" style="--i:0"><span class="pn-dot" aria-hidden="true"></span><span class="pn-k">01 · jobs</span><b>Jobs watch the account</b><span class="pn-d">Salary coming in, travel purchases, pesos sitting still, USDT/ARS moves, spending habits.</span></li><li class="pn" style="--i:1"><span class="pn-dot" aria-hidden="true"></span><span class="pn-k">02 · math</span><b>Code does the math</b><span class="pn-d">What's free to save after fixed costs, inflation, belo's yield, how far each goal is.</span></li><li class="pn" style="--i:2"><span class="pn-dot" aria-hidden="true"></span><span class="pn-k">03 · agent</span><b>The agent decides</b><span class="pn-d">Claude, with read-only tools, picks the level and writes the message. Every number comes from a tool.</span></li><li class="pn" style="--i:3"><span class="pn-dot" aria-hidden="true"></span><span class="pn-k">04 · rules</span><b>Guardrails filter</b><span class="pn-d">Up to 3 urgent alerts a day, one per topic, quiet from 10 pm to 8 am. They can lower a level, never raise it.</span></li><li class="pn pn-you" style="--i:4"><span class="pn-dot" aria-hidden="true"></span><span class="pn-k">05 · you</span><b>You approve</b><span class="pn-d">Nothing executes from the agent. You tap, and belo returns the approval for the operation.</span></li></ol>
+    <ol class="pipe"><li class="pn" style="--i:0"><span class="pn-dot" aria-hidden="true"></span><div class="pn-card"><span class="pn-k">01 · jobs</span><b>Jobs watch the account</b><span class="pn-d">Salary coming in, travel purchases, pesos sitting still, USDT/ARS moves, spending habits.</span></div></li><li class="pn" style="--i:1"><span class="pn-dot" aria-hidden="true"></span><div class="pn-card"><span class="pn-k">02 · math</span><b>Code does the math</b><span class="pn-d">What's free to save after fixed costs, inflation, belo's yield, how far each goal is.</span></div></li><li class="pn" style="--i:2"><span class="pn-dot" aria-hidden="true"></span><div class="pn-card"><span class="pn-k">03 · agent</span><b>The agent decides</b><span class="pn-d">Claude, with read-only tools, picks the level and writes the message. Every number comes from a tool.</span></div></li><li class="pn" style="--i:3"><span class="pn-dot" aria-hidden="true"></span><div class="pn-card"><span class="pn-k">04 · rules</span><b>Guardrails filter</b><span class="pn-d">Up to 3 urgent alerts a day, one per topic, quiet from 10 pm to 8 am. They can lower a level, never raise it.</span></div></li><li class="pn pn-you" style="--i:4"><span class="pn-dot" aria-hidden="true"></span><div class="pn-card"><span class="pn-k">05 · you</span><b>You approve</b><span class="pn-d">Nothing executes from the agent. You tap, and belo returns the approval for the operation.</span></div></li></ol>
   </div>
   <div class="tiers-lbl">Three levels, so it never shouts</div>
   <div class="tiers"><div class="tier"><div class="tier-h"><b>Urgent</b><span class="meter" aria-label="Level 3 of 3"><i class="on"></i><i class="on"></i><i class="on"></i></span></div><span class="tier-ch">Push notification</span><p>Salary in, pesos about to lose value, a big jump in the dollar.</p></div><div class="tier"><div class="tier-h"><b>Feed</b><span class="meter" aria-label="Level 2 of 3"><i class="on"></i><i class="on"></i><i class=""></i></span></div><span class="tier-ch">Waits in the app</span><p>A trip to plan, a goal falling behind, a habit that changed a lot.</p></div><div class="tier"><div class="tier-h"><b>Daily digest</b><span class="meter" aria-label="Level 1 of 3"><i class="on"></i><i class=""></i><i class=""></i></span></div><span class="tier-ch">Once a day</span><p>Everything else. A coffee doesn't interrupt you. If you mark two alerts as not useful in a week, it waits.</p></div></div>
