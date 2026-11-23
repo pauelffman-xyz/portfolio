@@ -993,6 +993,21 @@ body.dark-mode .back-nav-title,body.dark-mode .back-nav-right{color:var(--accent
   .hero-proto .proto-frame{height:min(844px,calc(100svh - 120px));min-height:640px;border-radius:32px;}
 }
 @media (prefers-reduced-motion:reduce){.mb-spin{animation:none;}}
+/* MOBILE · screens breathe (23 Nov 2026): each screenshot and its caption read as one unit,
+   with clear air before the next one. Phones a bit narrower so the page frames them. */
+@media(max-width:900px){
+  .scr-grid{row-gap:64px;}
+  .scr{gap:24px;}
+  .scr figcaption{gap:8px;}
+}
+@media(max-width:520px){
+  .scr-grid{row-gap:72px;}
+  .scr img{max-width:min(300px,82%);border-radius:28px;}
+  .scr figcaption{max-width:min(300px,82%);}
+  .scr figcaption b{font-size:1.0625rem;}
+  .scr figcaption span:last-child{font-size:.9375rem;}
+  .pots-layout{gap:48px;}
+}
 
 /* ─── 08 UNDER THE HOOD · night panel + pipeline (23 Nov 2026) ─── */
 .hood{background:var(--grad-night)!important;color:#fff;position:relative;overflow:hidden;}
