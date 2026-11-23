@@ -705,6 +705,21 @@ body.dark-mode{--err:#FF8A8A;}
 .audit-list .audit-d{font-size:.8125rem;}
 body.dark-mode .audit-list .audit-item{background:color-mix(in srgb,var(--err) 10%,var(--bg));}
 @media(max-width:900px){.audit-list{grid-template-columns:minmax(0,1fr);}}
+
+/* ─── AUDIT v2 (23 Nov 2026) ─── */
+.aud h4{margin:0;font-size:1rem;font-weight:700;letter-spacing:-.015em;line-height:1.35;color:var(--paper);}
+.aud p{margin:6px 0 0;font-size:.875rem;line-height:1.6;color:var(--ash);}
+/* A: by moment of the send */
+.aud-a{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;}
+.aud-stage{display:flex;flex-direction:column;gap:12px;}
+.aud-sh{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:12px;border-bottom:2px solid var(--err);}
+.aud-st{font-size:1.125rem;font-weight:700;letter-spacing:-.02em;color:var(--paper);}
+.aud-ct{font-size:.8125rem;color:var(--err);font-weight:600;}
+.aud-a .aud-f{display:grid;grid-template-columns:28px 1fr;gap:12px;padding:16px;border-radius:16px;background:var(--card);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--paper) 6%,transparent);}
+.aud-a .aud-n{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-size:.75rem;font-weight:700;color:var(--err);background:color-mix(in srgb,var(--err) 10%,transparent);font-variant-numeric:tabular-nums;}
+.aud-fix{display:inline-block;margin-top:12px;font-size:.75rem;font-weight:600;color:var(--accent);}
+@media(max-width:1100px){.aud-a{grid-template-columns:repeat(2,minmax(0,1fr));}}
+@media(max-width:640px){.aud-a{grid-template-columns:minmax(0,1fr);}}
 </style>
 <!-- DOCK CLEARANCE: room under the footer so the floating dock never covers its text (Oct 2026). Same block in every case of the .section/.cover template; muv and vendor tool already have it in their own footer rule. -->
 <style id="dock-clear">
@@ -1330,15 +1345,23 @@ body.dark-mode .sc-ph{box-shadow:0 0 0 1.5px #3A3A44,0 24px 48px -18px rgba(0,0,
     <div class="sl-line"></div>
     <div class="sl-text">Read screen by screen</div>
   </div>
-  <div class="audit-list" style="margin-top:var(--stack);">
-    <div class="audit-item"><div class="audit-t">One country, hard-coded</div><div class="audit-d">"Envia dinero a Guatemala en segundos" (send money to Guatemala in seconds) was the headline. There was nowhere to choose Colombia.</div></div>
-    <div class="audit-item"><div class="audit-t">Navigation without labels</div><div class="audit-d">History, balance and settings lived in three round icons in the header. Requests had no place of their own.</div></div>
-    <div class="audit-item"><div class="audit-t">You typed USD and never saw what arrives</div><div class="audit-d">The amount field only took dollars. What the family receives in quetzales showed up two screens later.</div></div>
-    <div class="audit-item"><div class="audit-t">No sense of progress</div><div class="audit-d">Amount, payment method, details and success were four screens with the same header. Nothing said how far you were.</div></div>
-    <div class="audit-item"><div class="audit-t">Math that reads like a discount</div><div class="audit-d">"Total a enviar $30.00", then "Dinero disponible $10.00", then "Total a pagar $20.00". The balance was applied without saying so.</div></div>
-    <div class="audit-item"><div class="audit-t">Payment that sends you away</div><div class="audit-d">Before paying, a note warned that a new screen would open for card details and asked you to come back to finish the send.</div></div>
-    <div class="audit-item"><div class="audit-t">The rate as fine print</div><div class="audit-d">On the home, the best rate sat in a small pill above the title. It is the number senders compare the most.</div></div>
-    <div class="audit-item"><div class="audit-t">Success sold the app</div><div class="audit-d">After the send, a large "Download SukuPay on your iPhone" banner competed with sharing the receipt, the one thing the family is waiting for.</div></div>
+  <div class="aud aud-a" style="margin-top:var(--stack);">
+    <section class="aud-stage"><header class="aud-sh"><span class="aud-st">Home</span><span class="aud-ct">3 findings</span></header>
+      <article class="aud-f"><span class="aud-n">01</span><div><h4>One country, hard-coded</h4><p>"Envia dinero a Guatemala en segundos" (send money to Guatemala in seconds) was the headline. There was nowhere to choose Colombia.</p><span class="aud-fix">Fixed by · Home screen</span></div></article>
+      <article class="aud-f"><span class="aud-n">02</span><div><h4>The rate as fine print</h4><p>The best rate sat in a small pill above the title. It is the number senders compare the most.</p><span class="aud-fix">Fixed by · Home screen</span></div></article>
+      <article class="aud-f"><span class="aud-n">03</span><div><h4>Navigation without labels</h4><p>History, balance and settings lived in three round icons. Requests had no place of their own.</p><span class="aud-fix">Fixed by · Navigation</span></div></article>
+    </section>
+    <section class="aud-stage"><header class="aud-sh"><span class="aud-st">Send</span><span class="aud-ct">2 findings</span></header>
+      <article class="aud-f"><span class="aud-n">04</span><div><h4>You typed USD and never saw what arrives</h4><p>The amount field only took dollars. What the family receives in quetzales showed up two screens later.</p><span class="aud-fix">Fixed by · Sender box</span></div></article>
+      <article class="aud-f"><span class="aud-n">05</span><div><h4>No sense of progress</h4><p>Amount, payment method, details and success were four screens with the same header. Nothing said how far you were.</p><span class="aud-fix">Fixed by · 1/2 · 2/2 header</span></div></article>
+    </section>
+    <section class="aud-stage"><header class="aud-sh"><span class="aud-st">Pay</span><span class="aud-ct">2 findings</span></header>
+      <article class="aud-f"><span class="aud-n">06</span><div><h4>Math that reads like a discount</h4><p>"Total a enviar $30.00", then "Dinero disponible $10.00", then "Total a pagar $20.00". The balance was applied without saying so.</p><span class="aud-fix">Fixed by · Review step</span></div></article>
+      <article class="aud-f"><span class="aud-n">07</span><div><h4>Payment that sends you away</h4><p>A note warned that a new screen would open for card details and asked you to come back to finish.</p><span class="aud-fix">Fixed by · Review step</span></div></article>
+    </section>
+    <section class="aud-stage"><header class="aud-sh"><span class="aud-st">After</span><span class="aud-ct">1 finding</span></header>
+      <article class="aud-f"><span class="aud-n">08</span><div><h4>Success sold the app</h4><p>A large "Download SukuPay on your iPhone" banner competed with sharing the receipt, the one thing the family waits for.</p><span class="aud-fix">Fixed by · Success screen</span></div></article>
+    </section>
   </div>
 </div>
 
