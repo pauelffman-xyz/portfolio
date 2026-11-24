@@ -2435,6 +2435,10 @@ body.light-mode .dv-timeline { --tl-zebra:#F7F7F8; --tl-hover:#F0F0F3; --tl-num:
 .dv-role { font-family:'Geist',sans-serif; font-size:1.25rem; font-weight:700; color:var(--paper); letter-spacing:-.025em; margin-bottom:.875rem; }
 .dv-desc { font-family:'Muli',sans-serif; font-size:1rem; line-height:1.65; color:var(--tl-text); font-weight:400; max-width:44rem; margin-bottom:1rem; }
 .dv-desc + .dv-facts { margin-top:.5rem; }
+/* Nov 2026: SukuPay role as bullets */
+.dv-bullets { list-style:none; padding:0; display:flex; flex-direction:column; gap:.625rem; margin-bottom:1.5rem; }
+.dv-bullets li { position:relative; padding-left:1.25rem; }
+.dv-bullets li::before { content:""; position:absolute; left:0; top:.68em; width:6px; height:6px; border-radius:50%; background:var(--accent); }
 /* Experience facts: value on top, label below. Replaces the green .dv-tag pills (Oct 2026). */
 .dv-facts { list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(3,minmax(0,13rem)); gap:1rem 2rem; }
 .dv-fact { display:flex; flex-direction:column; gap:.125rem; padding-left:1rem; border-left:1px solid var(--line-md); }
@@ -3911,7 +3915,7 @@ body.light-mode .work{ --wc-muted:#5E5E6C; }
       <div class="dv-job-l"><div class="dv-period">Mar 2026 – Present</div><div class="dv-company">SukuPay</div><div class="dv-job-type">Full-time · Remote</div><div class="dv-job-loc">Miami Beach, FL</div></div>
       <div class="dv-job-r">
         <div class="dv-role">Senior Product Designer</div>
-        <p class="dv-desc">Leading product design for a Web3 remittance platform simplifying crypto payments from the US to Latin America. End-to-end design from discovery to delivery.</p>
+        <ul class="dv-desc dv-bullets"><li>Lead product design end to end for a Web3 remittance platform moving money from the US to Latin America: discovery, user research, UX and delivery across web and mobile.</li><li>Rebuilt the send-money experience: one home for every destination country, two steps to send, now going live.</li><li>Built and maintain one design system serving three brands, structured so AI tools prototype with real components and tokens.</li><li>Integrated AI into the design workflow (research synthesis, prototyping, copy exploration) with human judgment as the final filter.</li></ul>
         <ul class="dv-facts"><li class="dv-fact"><b>Web3</b><span>Fintech</span></li><li class="dv-fact"><b>Remittances</b><span>US to Latin America</span></li><li class="dv-fact"><b>USDC</b><span>Blockchain</span></li></ul>
       </div>
     </div>

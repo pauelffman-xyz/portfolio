@@ -3592,6 +3592,16 @@ Los 13 pills (`.dv-pills`) se reemplazaron por cuatro fortalezas. Cada una es un
 - **"My superpower · I bridge the gap"** no cambió.
 - **Regla:** una fortaleza solo entra si hay un case que la muestra. Siempre: nombre, una línea con el hecho, y el link.
 
+### About · Experience: SukuPay en bullets (24 de noviembre de 2026)
+
+- El rol de SukuPay en Experience dejó de ser un párrafo y pasó a ser una lista de 4 bullets (`ul.dv-desc.dv-bullets`), con el texto que escribió Paula:
+  1. Lead product design end to end for a Web3 remittance platform moving money from the US to Latin America: discovery, user research, UX and delivery across web and mobile.
+  2. Rebuilt the send-money experience: one home for every destination country, two steps to send, now going live.
+  3. Built and maintain one design system serving three brands, structured so AI tools prototype with real components and tokens.
+  4. Integrated AI into the design workflow (research synthesis, prototyping, copy exploration) with human judgment as the final filter.
+- Misma tipografía que `.dv-desc`; cada ítem lleva un punto de 6px en `var(--accent)`, 10px entre ítems y 24px antes de los datos (Web3 / Remittances / USDC), que no cambiaron.
+- Los otros trabajos siguen con párrafo.
+
 ### Imágenes de link preview: prefijo `og-`
 
 Las imágenes de `assets/og/` se llamaban igual que 10 covers de `assets/` (`muv.jpg`, `suku.jpg`, `vendor.jpg`, etc.). Al copiarlas sueltas dentro de `assets/` pisaron los covers y la home mostraba las tarjetas oscuras de link preview en el carrusel y en las grillas. Ahora se llaman `og-<slug>.jpg` y todas las metas apuntan a esos nombres. **Regla:** ningún archivo generado comparte nombre con un asset existente.
